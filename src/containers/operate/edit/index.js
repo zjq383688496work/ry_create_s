@@ -229,10 +229,10 @@ class TemplateListPageEditComponent extends React.Component {
         return (
             <div className="pg-template-edit-page-edit">
                 <div className="ui-left scrollbar">
-                    <RyTitle config="{
+                    <RyTitle config={{
                         sTitle: '页面组件',
                         sSubTitle: '点击或拖放来添加组件'
-                    }">
+                    }}> 
                     </RyTitle>
                     <RyComponentList
                         componmentList={this.state.componmentList}
