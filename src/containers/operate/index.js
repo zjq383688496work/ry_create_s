@@ -2,7 +2,7 @@
 * @Author: liaohui
 * @Date:   2017-06-26 17:06:16
  * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-18T19:00:50+08:00
+ * @Last modified time: 2018-04-24T16:33:06+08:00
 */
 
 'use strict';
@@ -17,19 +17,16 @@ import './index.less';
 class OperateComponent extends React.Component {
     constructor(props) {
         super(props)
-        debugger
     }
 
     componentWillMount() {
     }
 
     componentDidMount() {
-        debugger
         hashHistory.push('/operate/edit/1080*1920/home')
     }
 
     render() {
-        debugger
         return (
             <div className="pg-template">
                 { this.props.children }
