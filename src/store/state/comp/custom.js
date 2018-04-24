@@ -1,6 +1,6 @@
-// 图片
+// 自定义
 module.exports = {
-	name: 'picture',
+	name: 'custom',
 	// 样式管理
 	style: {
 		// 组件样式
