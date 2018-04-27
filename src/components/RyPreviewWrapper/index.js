@@ -157,6 +157,7 @@ class RyPreviewWrapper extends React.Component {
 	}
 
 	render() {
+
 		let { comp, layers, scaleVal, focusItem } = this.props
 		// if (!comp.curData.page.elements.length) return
 		layers[0]
@@ -168,6 +169,7 @@ class RyPreviewWrapper extends React.Component {
 				top:      _.layout.top    * scaleVal,
 				left:     _.layout.left   * scaleVal,
 			}
+
 			return (
 				<RyEditable
 					key={i}
@@ -194,7 +196,7 @@ class RyPreviewWrapper extends React.Component {
 					></EditElement>
 				</RyEditable>
 			)
-		})
+		}) 
 		return (
 			<section className="ry-roll-screen-preview-wrapper">
 				<RyPreview config={{
@@ -242,4 +244,4 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(RyPreviewWrapper)
-
+ 
