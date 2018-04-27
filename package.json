@@ -57,6 +57,7 @@
     "open": "0.0.5",
     "postcss-loader": "^2.1.4",
     "react-addons-test-utils": "^15.0.0",
+    "react-color": "^2.14.1",
     "react-hot-loader": "^1.2.9",
     "rimraf": "^2.4.3",
     "style-loader": "^0.13.0",

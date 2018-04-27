@@ -8,7 +8,8 @@
 import * as types from '../constants'
 import state from 'state'
 
-const comp = require('state/comp')
+const comp  = require('state/comp')
+const pagec = require('state/page/content')
 
 const initialState = state
 export default function editConfig(state = initialState, action) {
@@ -21,7 +22,8 @@ export default function editConfig(state = initialState, action) {
 		key      = action.key,
 		groupIdx = action.groupIdx,
 		idx      = action.idx,
-		data     = action.data
+		data     = action.data,
+		name     = action.name
 
 	switch (action.type) {
 		
@@ -39,24 +41,37 @@ export default function editConfig(state = initialState, action) {
 			pageC[curData.router].elements[curData.compIdx] = data
 			state.curPage = pageC[curData.router]
 			state.curComp = data
-			curData.compIdx = idx
+			curData.compIdx = idx || curData.compIdx
 			return Object.assign({}, state)
 
 
 		case types.DELETE_COMP:
-			state[action.router].elements.splice(action.idx, 1)
+			pageC[curData.router].elements.splice(idx, 1)
+			state.curPage = pageC[curData.router]
+			state.curComp = {}
+			curData.compIdx = -1
 			return Object.assign({}, state)
 
 
 		case types.SELECT_COMP:
-			return Object.assign({}, action.data)
+			state.curComp = data
+			return Object.assign({}, state)
 
 
 		// 页面操作
 		case types.ADD_PAGE:
-			state.group[groupIdx].pages.push({
-				router: `p_${++state.maxPageIdx}`,
-				title: name
+			var pageData = JSON.parse(JSON.stringify(pagec)),
+				route    = `p_${++state.pageList.maxPageIdx}`
+			pageData.router = route
+			pageData.title  = name
+			curData.router  = route
+			curData.compIdx = -1
+			pageC[route]    = pageData
+			state.curPage   = pageData
+			state.curComp   = {}
+			pageList.group[groupIdx].pages.push({
+				router: route,
+				title:  name
 			})
 			return Object.assign({}, state)
 		
@@ -67,12 +82,22 @@ export default function editConfig(state = initialState, action) {
 		
 
 		case types.DELETE_PAGE:
-			state.group[action.groupIdx].pages.splice(action.idx, 1)
+			delete pageC[router]
+			pageList.group[groupIdx].pages.splice(idx, 1)
+			state.curPage  = {}
+			state.curComp  = {}
+			curData.router  = ''
+			curData.compIdx = -1
 			return Object.assign({}, state)
 
 
 		case types.SELECE_PAGE:
-			state.group[action.groupIdx].pages.splice(action.idx, 1)
+			if (curData.router === router) return state
+			curData.router  = router
+			state.curPage   = pageC[router]
+			state.curComp   = {}
+			curData.router  = router
+			curData.compIdx = -1
 			return Object.assign({}, state)
 
 		case types.UPDATE_CUR:

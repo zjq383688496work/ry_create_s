@@ -26,10 +26,6 @@ class Header extends React.Component {
 	}
 
 	render() {
-		let { config } = this.props
-		console.log(this.props);
-		// debugger
-		// this.props.actions.addComp('picture')
 		return (
 			<div className="pe-header e-flex">
 				<div className="peh-left"></div>

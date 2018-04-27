@@ -6,15 +6,14 @@
  */
 
 import React from 'react'
-import classnames from 'classnames'
 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import Picture from 'components/EditContent/Picture'
-import Web     from 'components/EditContent/Web'
-import Text    from 'components/EditContent/Text'
+import Picture from './Picture'
+import Web     from './Web'
+import Text    from './Text'
 
 import './index.less'
 

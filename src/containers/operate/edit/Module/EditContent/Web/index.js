@@ -11,48 +11,38 @@ import './index.less'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
+
 import { Input } from 'antd'
 
-class Text extends React.Component {
+class Web extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
 
-	handleFocusBlurText(e) {
-		let { data, actions } = this.props
-		data.content.text = e.currentTarget.value
-		actions.updateComp(data)
-	}
+	componentWillUnmount() {}
+
 	handleFocusBlur(e) {
 		let { data, actions } = this.props
-		data.content.routerOption = e.currentTarget.value
-		actions.updateComp(data)
-	}  
+		data.content.url = e.currentTarget.value
+		actions.updateComp(null, data)
+	}
 
 	render() {
-		let { data } = this.props
+		let { comp, data, actions } = this.props
 		return (
-			<div className="c-text">
-				<h2>文本内容:</h2>
+			<div className="c-web">
 				<Input
 					type="textarea"
-					placeholder="请输入文本内容"
-					defaultValue={data.content.text}
-					onKeyUp={this.handleFocusBlurText.bind(this)} 
+					placeholder="请输入要打开的网址"
+					defaultValue={data.content.url}
+					onBlur={this.handleFocusBlur.bind(this)}
 				/>
-				<h2>跳转链接:</h2>
-				<Input 
-					type="textarea"
-					placeholder="请输入点击跳转链接可不写"
-					defaultValue={data.content.routerOption}
-					onKeyUp={this.handleFocusBlur.bind(this)} 
-				/> 
 			</div>
 		)
 	}
 }
 
-Text.defaultProps = {
+Web.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -64,4 +54,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Text)
+)(Web)

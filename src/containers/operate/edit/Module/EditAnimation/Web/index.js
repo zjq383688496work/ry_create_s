@@ -11,35 +11,26 @@ import './index.less'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
+
 import { Input } from 'antd'
 
-class Picture extends React.Component {
+class Web extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
 
-	handleFocusBlur(e) {
-		let { data, actions } = this.props
-		data.content.routerOption = e.currentTarget.value
-		actions.updateComp(data)
-	}
+	componentWillUnmount() {}
 
 	render() {
-		let { data } = this.props
+		let { comp, data, actions } = this.props
 		return (
-			<div className="c-picture">
-				<Input
-					type="textarea"
-					placeholder="请输入要跳转的网址"
-					defaultValue={data.content.routerOption}
-					onBlur={this.handleFocusBlur.bind(this)} 
-				/>
+			<div className="a-web">
 			</div>
 		)
 	}
 }
 
-Picture.defaultProps = {
+Web.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -51,4 +42,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Picture)
+)(Web)

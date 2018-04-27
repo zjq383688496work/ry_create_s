@@ -12,11 +12,12 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import EditHeader    from './Module/EditHeader'
-import EditContent   from './Module/EditContent'
-import EditElement   from './Module/EditElement'
-import EditStyle     from './Module/EditStyle'
-import EditAnimation from './Module/EditAnimation'
+import EditHeader     from 'compEdit/EditHeader'
+import EditPageManage from 'compEdit/EditPageManage'
+import EditContent    from 'compEdit/EditContent'
+import EditElement    from 'compEdit/EditElement'
+import EditStyle      from 'compEdit/EditStyle'
+import EditAnimation  from 'compEdit/EditAnimation'
 
 import RyTitle  from 'components/RyTitle'
 import RyBorder from 'components/RyBorder'
@@ -68,11 +69,7 @@ class TemplateListPageEditComponent extends React.Component {
 				<EditHeader/>
 				<div className="pg-body e-flex-box">
 					<div className="pg-left scrollbar">
-						<RyTitle config={{
-							sTitle: '页面组件',
-							sSubTitle: '点击或拖放来添加组件'
-						}}>
-						</RyTitle>
+						<EditPageManage data={editConfig.pageList} />
 					</div>
 					<div className="pg-center e-flex e-flex-box scrollbar">
 						<EditElement data={editConfig.curPage}></EditElement>

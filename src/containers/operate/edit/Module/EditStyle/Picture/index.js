@@ -29,23 +29,17 @@ var cssMap = {
 	lineHeight:        { name: '行高', type: 'number' },
 }
 
-class Web extends React.Component {
+class Picture extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
 
 	componentWillUnmount() {}
 
-	handleFocusBlur(e) {
-		let { data, actions, editConfig } = this.props
-		data.content.url = e.currentTarget.value
-		actions.updateComp(editConfig.curData.compIdx, data)
-	}
-
 	onChange(val, style, css) {
-		let { data, actions, editConfig } = this.props
+		let { data, actions } = this.props
 		data.style[style][css] = val
-		actions.updateComp(editConfig.curData.compIdx, data)
+		actions.updateComp(null, data)
 	}
 
 	render() {
@@ -83,7 +77,7 @@ class Web extends React.Component {
 	}
 }
 
-Web.defaultProps = {
+Picture.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -95,4 +89,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Web)
+)(Picture)
