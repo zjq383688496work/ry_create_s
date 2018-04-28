@@ -13,17 +13,18 @@ const pagec = require('state/page/content')
 
 const initialState = state
 export default function editConfig(state = initialState, action) {
-	let curComp  = state.curComp,
-		curData  = state.curData,
-		curPage  = state.curPage,
-		pageC    = state.pageContent,
-		pageList = state.pageList,
-		router   = action.router,
-		key      = action.key,
-		groupIdx = action.groupIdx,
-		idx      = action.idx,
-		data     = action.data,
-		name     = action.name
+	let curComp    = state.curComp,
+		curData    = state.curData,
+		curPage    = state.curPage,
+		globalData = state.globalData,
+		pageC      = state.pageContent,
+		pageList   = state.pageList,
+		router     = action.router,
+		key        = action.key,
+		groupIdx   = action.groupIdx,
+		idx        = action.idx,
+		data       = action.data,
+		name       = action.name
 
 	switch (action.type) {
 		
@@ -33,14 +34,15 @@ export default function editConfig(state = initialState, action) {
 			pageC[router].elements.push(compData)
 			state.curPage = pageC[router]
 			state.curComp = compData
-			curData.compIdx = state.curPage.elements.length - 1
+			curData.compIdx     = state.curPage.elements.length - 1
+			curData.contentType = 'comp'
 			return Object.assign({}, state)
 
 
 		case types.UPDATE_COMP:
 			pageC[curData.router].elements[curData.compIdx] = data
-			state.curPage = pageC[curData.router]
-			state.curComp = data
+			state.curPage   = pageC[curData.router]
+			state.curComp   = data
 			curData.compIdx = idx || curData.compIdx
 			return Object.assign({}, state)
 
@@ -54,7 +56,8 @@ export default function editConfig(state = initialState, action) {
 
 
 		case types.SELECT_COMP:
-			state.curComp = data
+			state.curComp       = data
+			curData.contentType = 'comp'
 			return Object.assign({}, state)
 
 
@@ -66,6 +69,7 @@ export default function editConfig(state = initialState, action) {
 			pageData.title  = name
 			curData.router  = route
 			curData.compIdx = -1
+			curData.contentType = 'page'
 			pageC[route]    = pageData
 			state.curPage   = pageData
 			state.curComp   = {}
@@ -77,7 +81,10 @@ export default function editConfig(state = initialState, action) {
 		
 
 		case types.UPDATE_PAGE:
-			state.group[action.groupIdx].pages[action.idx] = action.data
+			var pgp = pageList.group[groupIdx].pages[idx]
+			pgp.title = data.title
+			pageC[router] = data
+			state.curPage = data
 			return Object.assign({}, state)
 		
 
@@ -88,20 +95,26 @@ export default function editConfig(state = initialState, action) {
 			state.curComp  = {}
 			curData.router  = ''
 			curData.compIdx = -1
+			curData.contentType = ''
 			return Object.assign({}, state)
 
 
 		case types.SELECE_PAGE:
-			if (curData.router === router) return state
+			// if (curData.router === router) return state
 			curData.router  = router
 			state.curPage   = pageC[router]
 			state.curComp   = {}
 			curData.router  = router
 			curData.compIdx = -1
+			curData.contentType = 'page'
 			return Object.assign({}, state)
 
 		case types.UPDATE_CUR:
 			state.curData = data
+			return Object.assign({}, state)
+
+		case types.UPDATE_GLOBAL:
+			state.globalData = data
 			return Object.assign({}, state)
 
 		default:

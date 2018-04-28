@@ -6,6 +6,6 @@ module.exports = {
 	bottomNav: {},			// 底部组件对象 (预留)
 	// 页面特征 
 	feature: {
-		backgroundColor: '#fff',	// 页面背景色
+		backgroundColor: { type: 'custom', color: '#fff' },	// 页面背景色
 	},
 }

@@ -61,7 +61,14 @@ export const selectPage = (router) => ({
 	router
 })
 
+// 当前操作项
 export const updateCur = (data) => ({
 	type: types.UPDATE_CUR,
+	data
+})
+
+// 全局项
+export const updateGlobal = (data) => ({
+	type: types.UPDATE_GLOBAL,
 	data
 })

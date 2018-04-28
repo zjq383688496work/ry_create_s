@@ -67,11 +67,12 @@ class EditElement extends React.Component {
 
 	render() {
 		let { editConfig, data } = this.props
-		let eles = data.elements || []
+		let eles      = data.elements || []
+		let bgStyle   = data.feature? { backgroundColor: data.feature.backgroundColor }: {}
 		let childNode = eles.map((_, i) => {
 			var compName = _.name,
 				compCon,
-				isEdit = true
+				isEdit  = true
 			if (compName === 'picture')   compCon = (<Picture data={_}/>)
 			else if (compName === 'web')  compCon = (<Web     data={_}/>)
 			else if (compName === 'text') compCon = (<Text    data={_}></Text>) 
@@ -101,7 +102,7 @@ class EditElement extends React.Component {
 			)
 		})
 		return (
-			<section className="pg-element">
+			<section className="pg-element" style={bgStyle}>
 				{ childNode }
 			</section>
 		)

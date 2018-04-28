@@ -13,11 +13,13 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import EditHeader     from 'compEdit/EditHeader'
+import EditPage       from 'compEdit/EditPage'
 import EditPageManage from 'compEdit/EditPageManage'
 import EditContent    from 'compEdit/EditContent'
 import EditElement    from 'compEdit/EditElement'
 import EditStyle      from 'compEdit/EditStyle'
 import EditAnimation  from 'compEdit/EditAnimation'
+import EditTheme      from 'compEdit/EditTheme'
 
 import RyTitle  from 'components/RyTitle'
 import RyBorder from 'components/RyBorder'
@@ -26,6 +28,7 @@ import RyPreviewWrapper  from 'components/RyPreviewWrapper'
 import RyComponentConfig from 'components/RyComponentConfig'
 import * as actions from 'actions'
 
+import 'rc-color-picker/assets/index.css'
 import './index.less'
 
 import { Tabs } from 'antd'
@@ -63,6 +66,21 @@ class TemplateListPageEditComponent extends React.Component {
 
 	render() {
 		let { editConfig, scaleVal, actions } = this.props
+		let type = editConfig.curData.contentType,
+			editTab
+		if (type === 'page') {
+			editTab = (<EditPage data={editConfig.curPage} />)
+		} else if(type === 'comp') {
+			editTab = (
+				<Tabs defaultActiveKey="1" type="card">
+					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
+					<TabPane tab="样式" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
+					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
+				</Tabs>
+			)
+		} else if (type === 'theme') {
+			editTab = (<EditTheme data={editConfig.globalData.theme} />)
+		}
 
 		return (
 			<div className="pg-edit-box e-flex-fdc">
@@ -75,21 +93,7 @@ class TemplateListPageEditComponent extends React.Component {
 						<EditElement data={editConfig.curPage}></EditElement>
 					</div>
 					<div className="pg-right scrollbar">
-						<RyBorder config="{bBg: true}">
-							<div className="RyTitle">
-								<h3 className="ui-title">
-									<span>{this.state.caseName}</span>
-								</h3>
-								<p className="ui-desc">
-									{this.state.range.width + '*' + this.state.range.height}
-								</p>
-							</div>
-						</RyBorder>
-						<Tabs defaultActiveKey="1" type="card">
-							<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
-							<TabPane tab="样式" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
-							<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
-						</Tabs>
+						{ editTab }
 					</div>
 				</div>
 			</div>

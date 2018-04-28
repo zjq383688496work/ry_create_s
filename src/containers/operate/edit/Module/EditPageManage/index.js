@@ -11,8 +11,6 @@ import './index.less'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
-import EditCompList   from '../EditCompList'
-
 import * as actions from 'actions'
 
 import { Button, Icon } from 'antd'
@@ -27,11 +25,6 @@ class EditPageManage extends React.Component {
 	componentWillUnmount() {
 	}
 
-	selectPage(router) {
-		let { actions } = this.props
-		actions.selectPage(router)
-	}
-
 	addPage(groupIdx) {
 		let { actions, editConfig } = this.props
 		actions.addPage(groupIdx, `页面${editConfig.pageList.group[groupIdx].pages.length + 1}`)
@@ -42,6 +35,14 @@ class EditPageManage extends React.Component {
 		actions.deletePage(router, groupIdx, idx)
 	}
 
+	selectPage(router, groupIdx, idx) {
+		let { actions, editConfig } = this.props
+		editConfig.curData.pageGroupIdx = groupIdx
+		editConfig.curData.pageIdx  = idx
+		actions.updateCur(editConfig.curData)
+		actions.selectPage(router)
+	}
+
 	render() {
 		let { data, editConfig } = this.props
 		let childNode = data.group[0].pages.map((_, i) => {
@@ -50,9 +51,12 @@ class EditPageManage extends React.Component {
 					key={i}
 					className={`page-li${_.router === editConfig.curData.router? ' s-active': ''}`}
 				>
-					<div className="pl-name" onClick={this.selectPage.bind(this, _.router)}>{ _.title }</div>
+					<div className="pl-name" onClick={this.selectPage.bind(this, _.router, 0, i)}>{ _.title }</div>
 					<div className="pl-ctrl">
-						<a style={{ display: data.group[0].pages.length > 1? 'block': 'none' }} onClick={this.deletePage.bind(this, _.router, 0, i)}><Icon type="delete" /></a>
+						<a
+							style={{ display: data.group[0].pages.length > 1? 'block': 'none' }}
+							onClick={this.deletePage.bind(this, _.router, 0, i)}
+						><Icon type="delete" /></a>
 					</div>
 				</li>
 			)
