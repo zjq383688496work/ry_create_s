@@ -17,7 +17,7 @@ import EditPage       from 'compEdit/EditPage'
 import EditPageManage from 'compEdit/EditPageManage'
 import EditContent    from 'compEdit/EditContent'
 import EditElement    from 'compEdit/EditElement'
-import EditStyle      from 'compEdit/EditStyle'
+import EditStyle      from 'compEdit/EditStyle2'
 import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEdit/EditTheme'
 

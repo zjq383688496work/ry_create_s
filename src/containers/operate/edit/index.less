@@ -49,16 +49,19 @@
 	// }
 	.pg-left,
 	.pg-right {
-		width: 300px;
+		background-color: #ececec;
 	}
 	.pg-left {
-
+		width: 200px;
+		border-right: 1px solid #c1c1c1;
 	}
 	.pg-center {
 		justify-content: center;
-		background-color: #f1f1f1;
+		background-color: #f2f2f2;
 	}
 	.pg-right {
+		width: 260px;
+		border-left: 1px solid #c1c1c1;
 		.edit-img{
 			display: inline-block;
 			width: 16px;
@@ -73,7 +76,44 @@
 			margin-bottom: 0;
 		}
 		.ant-tabs-content {
-			padding: 10px;
+		}
+		.ant-collapse {
+			border: 0;
+			border-radius: 0;
+			& > .ant-collapse-item {
+				border-bottom: 1px solid #ccc;
+				& > .ant-collapse-header {
+					padding: 0 10px;
+					color: #333;
+					font-size: 12px;
+					line-height: 24px;
+					font-weight: bold;
+					background-color: #d8d8d8;
+					& > .arrow {
+						right: 10px;
+						left: initial;
+						line-height: 24px;
+						transform: rotate(180deg);
+					}
+					&[aria-expanded='true'] > .arrow {
+						transform: rotate(90deg);
+					}
+				}
+				& > .ant-collapse-content {
+					padding: 0 10px;
+					background-color: #ececec;
+					& > .ant-collapse-content-box {
+						padding: 4px 0;
+					}
+				}
+				&:last-child {
+					border-radius: 0;
+					& > .ant-collapse-header,
+					& > .ant-collapse-content {
+						border-radius: 0;
+					}
+				}
+			}
 		}
 	}
 	.ui-btn-default {
@@ -110,34 +150,6 @@
 			border: 1px solid #2383F0;
 		}
 	}
-	// &.simpleV {
-	// 	.ui-left {
-	// 		width: 275px;
-	// 		padding: 20px 11px;
-	// 	}
-	// 	.ui-center {
-	// 		left: 275px;
-	// 	}
-	// 	.temp-item {
-	// 		width: 112.5px;
-	// 		height: 200px;
-	// 		&:nth-child(2n+1) {
-	// 			margin-right: 10px;
-	// 		}
-	// 	}
-	// }
-	// &.simpleH {
-	// 	.ui-left {
-	// 		width: 240px;
-	// 	}
-	// 	.ui-center {
-	// 		left: 240px;
-	// 	}
-	// 	.temp-item {
-	// 		height: 112.5px;
-	// 		width: 200px;
-	// 	}
-	// }
 	.ui-center {
 		position: absolute;
 		top: 0;

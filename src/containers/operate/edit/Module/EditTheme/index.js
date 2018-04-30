@@ -12,7 +12,9 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import ColorPicker from 'rc-color-picker'
-import { Input } from 'antd'
+import { Input, Radio } from 'antd'
+const RadioButton = Radio.Button
+const RadioGroup  = Radio.Group
 
 import './index.less'
 
@@ -49,7 +51,7 @@ class EditTheme extends React.Component {
 			)
 		})
 		return (
-			<section className="ry-roll-screen-config">
+			<section className="pge-theme">
 				{ childNode }
 			</section>
 		)
