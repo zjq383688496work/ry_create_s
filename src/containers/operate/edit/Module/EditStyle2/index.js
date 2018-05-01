@@ -15,7 +15,7 @@ import Color from 'compEdit/EditCommon/Color'
 
 import {
 	Row, Col,
-	Button, Card, Collapse, InputNumber ,Radio, Select, Slider
+	Button, Card, Checkbox, Collapse, InputNumber ,Radio, Select, Slider, Switch
 } from 'antd'
 const Option      = Select.Option
 const Panel       = Collapse.Panel
@@ -38,7 +38,9 @@ var cssMap = {
 	fontSize:          { name: '字号',    type: 'Number', min: 12, max: 90, step: 2 },
 	textAlign:         { name: '对齐方式', type: 'TextAlign' },
 	color:             { name: '字体颜色', type: 'Color' },
-	// fontWeight:        { name: '粗细',    type: 'two' },
+	fontWeight:        { name: '粗细',    type: 'Switch', true: 'bold',      false: 'normal' },
+	fontStyle:         { name: '斜体',    type: 'Switch', true: 'italic',    false: 'normal' },
+	textDecoration:    { name: '下划线',  type: 'Switch', true: 'underline', false: 'none' },
 	opacity:           { name: '透明度',  type: 'Slider', min: 0, max: 1, step: 0.01 },
 }
 
@@ -91,10 +93,10 @@ class EditStyle extends React.Component {
 	}
 	renderTextAlign(cfg, data, val, cls, key) {
 		return (
-			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, cls, key)} defaultValue="left">
-				<RadioButton value="left">居左</RadioButton>
-				<RadioButton value="center">居中</RadioButton>
-				<RadioButton value="right">居右</RadioButton>
+			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, cls, key)} value={val}>
+				<RadioButton value="left">左</RadioButton>
+				<RadioButton value="center">中</RadioButton>
+				<RadioButton value="right">右</RadioButton>
 			</RadioGroup>
 		)
 	}
@@ -106,6 +108,21 @@ class EditStyle extends React.Component {
 				path={`style.${cls}.${key}`}
 				action={'updateComp'}
 				placement="bottomLeft"
+			/>
+		)
+	}
+	renderCheckbox(cfg, data, val, cls, key) {
+		return (
+			<Checkbox
+				checked={val === cfg.true} onChange={v => this.onChange(v.target.checked? cfg.true: cfg.false, cls, key)}
+			/>
+		)
+	}
+	renderSwitch(cfg, data, val, cls, key) {
+		return (
+			<Switch
+				size="small"
+				checked={val === cfg.true} onChange={v => this.onChange(v? cfg.true: cfg.false, cls, key)}
 			/>
 		)
 	}
