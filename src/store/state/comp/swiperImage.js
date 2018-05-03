@@ -4,10 +4,9 @@ var style = {
 	layout: {
 		position: 'absolute',
 		top:      0,
-		left:     0,
-		width:    120,
-		height:   120,
-	},
+		left:     0, 
+		height:   200,  
+	},    
 	box: {
 		transform: '',
 		animation: '0s 0s 1',			// 动画 (0: 开始时间, 1: 持续时间, 2: 循环次数)
@@ -30,10 +29,18 @@ module.exports = {
 	content: [
 		{
 			img: '',			// 图片url
-			text: '图片1',		// 图片标题
-			routerType: 0,		// 链接类型
-			router: '',			// 路由
-			routerOption: {},	// 链接设置
+			title: '图片1',		// 图片标题
+			router: {},			// 路由
+		},
+		{
+			img: '',			// 图片url
+			title: '图片2',		// 图片标题
+			router: {},			// 路由
+		},
+		{
+			img: '',			// 图片url
+			title: '图片3',		// 图片标题
+			router: {},			// 路由
 		},
 	],
 	// 动画设置
