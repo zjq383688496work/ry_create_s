@@ -28,17 +28,17 @@ module.exports = {
 	// 内容管理
 	content: [
 		{
-			img: '',			// 图片url
+			img: { type: 'custom', img: '' },			// 图片url
 			title: '图片1',		// 图片标题
 			router: {},			// 路由
 		},
 		{
-			img: '',			// 图片url
+			img: { type: 'custom', img: '' },			// 图片url
 			title: '图片2',		// 图片标题
 			router: {},			// 路由
 		},
 		{
-			img: '',			// 图片url
+			img: { type: 'custom', img: '' },			// 图片url
 			title: '图片3',		// 图片标题
 			router: {},			// 路由
 		},

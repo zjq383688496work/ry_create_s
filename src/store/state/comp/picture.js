@@ -20,7 +20,7 @@ module.exports = {
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: {
-		img:    '',	// 图片url
+		img:    { type: 'custom', img: '' },	// 图片url
 		router: {},	// 路由
 	}, 
 	// 动画设置
