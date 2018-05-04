@@ -10,7 +10,6 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 import { Input } from 'antd'
-import PictureList from '../PictureList'   
 
  
 class SwiperImage extends React.Component {
@@ -25,8 +24,8 @@ class SwiperImage extends React.Component {
 	}; 
 	handleTextFocusBlur = (e,index) => {
 		let { data, actions } = this.props;
-		data.content[index].text = e.currentTarget.value;
-		actions.updateComp(null, data); 
+		data.content[index].title = e.currentTarget.value;
+		actions.updateComp(null, data);  
 	}; 
 	add_img = index => {
 		this.setState({index:index});
@@ -40,7 +39,6 @@ class SwiperImage extends React.Component {
 				{
 					data.content.map((item,index) => <ContentEvery item={item} key={index} index={index} handleFocusBlur={this.handleFocusBlur} handleTextFocusBlur={this.handleTextFocusBlur} add_img={this.add_img}></ContentEvery>)
 				}
-				<PictureList ref={com => { this.addImgModal = com; }} data={this.props} index={this.state.index} /> 
 			</div>   
 		)
 	}

@@ -9,7 +9,7 @@ var style = {
 		height:   30, 
 	},
 	text: { 
-		textAlign:      'left',
+		textAlign:      'center',  
 		fontSize:       12, 
 		fontStyle:      'normal', 
 		fontWeight:     'normal',
@@ -23,6 +23,7 @@ var style = {
 
 module.exports = {
 	name: 'text',
+	type: 'base',
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理

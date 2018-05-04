@@ -59,17 +59,21 @@ class EditStyle extends React.Component {
 	onChange(val, style, css) {
 		console.clear()
 		console.log(val)
-		let { data, actions } = this.props
+		let { data, actions, editConfig } = this.props
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
 		style == 'feature' ? data[style][css] = val : data.style[style][css] = val;
-		actions.updateComp(null, data)
+		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, style, css) {
 		console.clear()
 		console.log(val)
-		let { data, actions } = this.props
+		let { data, actions, editConfig } = this.props
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
 		data.auth[style][css] = val
-		actions.updateComp(null, data)
+		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	cb(key) {
@@ -149,7 +153,7 @@ class EditStyle extends React.Component {
 	}
 
 	render() {
-		let { data, actions } = this.props
+		let { data, actions, editConfig } = this.props
 		if (!data.style) return false
 		let styleList = data.styleList				// 样式列表
 		let styles    = Object.keys(data.style)		// 具体样式
@@ -209,7 +213,10 @@ class EditStyle extends React.Component {
 				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 					{ childNode }
 				</Collapse>
-				<StyleManageSwiper feature={data} onChange={this.onChange.bind(this)} onChangeAuth={this.onChangeAuth.bind(this)} ></StyleManageSwiper>
+				{
+					data.name == 'swiperImage' ? <StyleManageSwiper feature={data} onChange={this.onChange.bind(this)} onChangeAuth={this.onChangeAuth.bind(this)} ></StyleManageSwiper> : null
+				}
+				
 			</section>
 		)
 	}

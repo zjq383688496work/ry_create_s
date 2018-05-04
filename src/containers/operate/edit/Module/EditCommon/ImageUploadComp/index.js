@@ -34,10 +34,26 @@ class ImageUploadComp extends React.Component {
 		this.addImgModal.show()
 	}
 
-	enter(imgUrl) {
+	enter(imgUrl,index) { 
 		let { data, img, name, action, content, actions, editConfig } = this.props
-		content[name].img = imgUrl
-		actions[action](null, data)
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
+		let imgList = imgUrl;
+		const length = content.length;
+		if(data.name == 'swiperImage'){
+			if(name == 'first') {
+				imgList = imgList.map((item,index)=>{
+					var obj = {img:{img:item.url,type:'custom'},title:`图片${index+1}`,router: {}};
+					return obj;   
+				})
+				data.content = imgList;
+			}else{     
+				data.content[index][name].img = imgUrl[0].url;
+			}    
+		}else{ 
+			data.content[name].img = imgUrl[0].url
+		}
+		actions[action](null, parentComp? parentComp: data)
 	}
 
 	cb(key) {
@@ -46,20 +62,44 @@ class ImageUploadComp extends React.Component {
 
 	changeImgType(val) {
 		let { data, img, action, actions, editConfig }  = this.props
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
 		img.type  = val
-		if (action === 'updateComp') return actions[action](null, data)
+		if (action === 'updateComp') return actions[action](null, parentComp? parentComp: data)
 	}
 
 	render() {
-		let { typeSelect = false, data, img, name, content, actions, editConfig } = this.props
+		let { typeSelect = false, data, img, name, content, actions, editConfig,index } = this.props
 		let btnNode
-		let imgVal = img.img
+		let imgVal = img&&img.img
 		let theme   = editConfig.globalData.theme
 		let colors  = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
 		let selectNode
 		colors.custom = {
 			name:  '自定义',
 			img: imgVal,
+		}  
+		if(name == 'first'){
+			return (
+					<div className="pg-img-upload">
+						<Row type="flex" align="middle" style={{ width: '100%' }}>
+							<Col span={9}>
+								<div className="add_img" onClick={this.showList.bind(this)}>
+									<div className="add_text"><Icon type="plus" /></div>
+								</div>
+							</Col>
+						</Row>
+						<PictureList
+							ref={com => { this.addImgModal = com }}
+							props={this.props}
+							data={this.props} 
+							actions={actions} 
+							index={0}
+							firstAdd={true} 
+							enter={this.enter}     
+						/>
+					</div>
+				)
 		}
 		let options = Object.keys(colors).map((_, i) => {
 			let col = colors[_]
@@ -111,11 +151,12 @@ class ImageUploadComp extends React.Component {
 				<PictureList
 					ref={com => { this.addImgModal = com }}
 					props={this.props}
-					data={this.props}
-					actions={actions}
-					enter={this.enter.bind(this)}
+					data={this.props} 
+					actions={actions} 
 					index={0}
-				/>
+					enter={this.enter}
+					index={index} 
+				/> 
 			</div>
 		)
 	}

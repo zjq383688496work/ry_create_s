@@ -19,7 +19,7 @@ class Text extends React.Component {
 	renderStyle2(props, style) {
 		let { data } = props
 		return (
-			<div style={cssColorFormat(props, style)}>{data.content.text}哇哈哈😁</div>
+			<div style={cssColorFormat(props, style)}>{data.content.text}</div>
 		)
 	}
 	

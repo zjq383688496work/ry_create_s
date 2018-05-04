@@ -13,7 +13,7 @@ import * as actions from 'actions'
 
 import {
 	Row, Col,
-	Button, Card, Checkbox, Collapse, Input, InputNumber, Radio, Select, Slider, Switch
+	Button, Card, Checkbox, Collapse, Input,Icon, InputNumber, Radio, Select, Slider, Switch
 } from 'antd'
 const { TextArea } = Input
 const { Panel }    = Collapse
@@ -30,6 +30,7 @@ var conMap = {
 	text:  { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 }, },
 	title: { name: '标题',    type: 'Title',    max: 30, },
 	img:   { name: '图片',    type: 'Image', },
+	url:   { name: '网址',    type: 'Url', },
 }
 
 import './index.less'
@@ -44,17 +45,21 @@ class EditContent extends React.Component {
 	onChange(val, key) {
 		console.clear()
 		console.log(val)
-		let { data, actions } = this.props
-		data.content[key] = val
-		actions.updateComp(null, data)
+		let { data, actions, editConfig } = this.props
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
+		data.content[key]  = val
+		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, key) {
 		console.clear()
 		console.log(val)
-		let { data, actions } = this.props
+		let { data, actions, editConfig } = this.props
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
 		data.auth.content[key] = val
-		actions.updateComp(null, data)
+		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	cb(key) {
@@ -84,7 +89,7 @@ class EditContent extends React.Component {
 		)
 	}
 	// 上传图片
-	renderImage(cfg, data, val, key, content) {
+	renderImage(cfg, data, val, key, content,index) {
 		return (
 			<ImageUploadComp
 				data={data}
@@ -93,11 +98,22 @@ class EditContent extends React.Component {
 				content={content}
 				action={'updateComp'}
 				style={{ width: '100%' }}
+				index={index}
+			/>
+		)
+	}
+	// 网址
+	renderUrl(cfg, data, val, key) {
+		return (
+			<Input
+				min={cfg.min || 0} max={cfg.max || 100}
+				defaultValue={val} onBlur={v => this.onChange(v.target.value, key)}
+				style={{ width: '100%' }}
 			/>
 		)
 	}
 
-	renObj(data, content) {
+	renObj(data, content,index) {
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
 			let cm     = conMap[p]
@@ -105,7 +121,7 @@ class EditContent extends React.Component {
 			let render = this[`render${cm.type}`]
 			if (!render) return false
 			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, content)()
+			let dom = this[`render${cm.type}`].bind(this, cm, data, val, p, content,index)()
 			return (
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">{ cm.name }</div>
@@ -120,8 +136,8 @@ class EditContent extends React.Component {
 	}
 
 	render() {
-		let { data, actions } = this.props
-
+		let { data, actions, editConfig } = this.props
+		let { curData } = editConfig
 		let compName = data.name
 		let content  = data.content
 		let compCon
@@ -131,13 +147,13 @@ class EditContent extends React.Component {
 		// if (compName === 'picture')           compCon = (<Picture data={data}></Picture>)
 		// else if (compName === 'web')          compCon = (<Web data={data}></Web>)
 		// else if (compName === 'text')         compCon = (<Text data={data}></Text>)
-		// else if (compName === 'swiper-image') compCon = (<SwiperImage data={data}></SwiperImage>)
+		// else if (compName === 'swiperImage')  compCon = (<SwiperImage data={data}></SwiperImage>)
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return (
 					<Panel header={`内容${i + 1}`} key={i}>
-						{ this.renObj(data, _) }
+						{ this.renObj(data, _, i) }
 					</Panel>
 				)
 			})
@@ -157,7 +173,26 @@ class EditContent extends React.Component {
 		return (
 			<section className="ry-roll-screen-config">
 				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
-					{ childNode }
+					{
+						data.name == 'swiperImage' ? <Panel header={`内容`} key={0}>
+							<div className="pgs-row" key={0}>
+								<div className="pgsr-name">内容</div>
+								<div className="pgsr-ctrl">
+									<ImageUploadComp
+										data={data}
+										img={{}}
+										name={`first`} 
+										content={data.content} 
+										action={'updateComp'}
+										style={{ width: '100%' }}
+									/>
+								</div>
+							</div>   
+					</Panel> : null
+					}
+					{  
+						!(data.name == 'swiperImage'&& data.content.length==1&&data.content[0].img.img == '') ? childNode : null
+					 } 
 				</Collapse>
 				{ routerJump }
 				{ compCon }
