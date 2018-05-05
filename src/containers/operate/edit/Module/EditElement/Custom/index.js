@@ -71,7 +71,6 @@ class Custom extends React.Component {
 		console.log(1, this.props)
 		let childNode = comp.map((_, i) => {
 			var compName = _.name,
-				compSty  = _.styleList,
 				isEdit   = true,
 				compCon
 			if (compName === 'picture')          compCon = (<Picture     data={_} actions={actions} type={`Style${i + 1}`} />)

@@ -40,9 +40,8 @@ class EditElement extends React.Component {
 	}
 
 	resizeFn(ref, delta, pos, item, idx) {
-		let { actions, curData, curPage, pageContent } = this.props
+		let { actions } = this.props
 		let lay = item.style.layout
-		console.log(curPage)
 		lay.left   = pos.x
 		lay.top    = pos.y
 		lay.width  = ref.offsetWidth
@@ -56,8 +55,6 @@ class EditElement extends React.Component {
 		let lay  = item.style.layout
 		lay.left = d.x
 		lay.top  = d.y
-		console.clear()
-		console.log(item.style.layout)
 
 		actions.updateComp(idx, item)
 	}
@@ -82,7 +79,6 @@ class EditElement extends React.Component {
 		let bgStyle   = data.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
 		let childNode = eles.map((_, i) => {
 			var compName = _.name,
-				compSty  = _.styleList,
 				csn      = `handle-drag-${Math.floor(Math.random()*1e9)}`,
 				compCon,
 				isEdit  = true

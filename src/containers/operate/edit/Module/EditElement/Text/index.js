@@ -5,7 +5,6 @@
  */
 
 import React from 'react'
-import classnames from 'classnames'
 import './index.less'
 
 class Text extends React.Component {
@@ -24,15 +23,14 @@ class Text extends React.Component {
 	}
 	
 	render() {
-		let { data, type } = this.props
-		console.log(1, this.props)
+		let { type } = this.props
 		let dom = this[`render${type}`](this.props, 'text')
 		return (
 			<div className={`e-text ${type}`}>
 				{ dom }
-			</div>   
+			</div>
 		)
 	}
-} 
+}
 
-export default Text 
+export default Text

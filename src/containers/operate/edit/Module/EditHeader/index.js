@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import './index.less' 
+import './index.less'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
@@ -29,7 +29,7 @@ class Header extends React.Component {
 
 	addComp(item) {
 		let { actions, editConfig } = this.props
-		let { curData, curComp } = editConfig
+		let { curComp } = editConfig
 		if (curComp.type === 'advanced') {
 			var compData = JSON.parse(JSON.stringify(comp[item.key]))
 			if (compData.type === 'base') {
@@ -50,23 +50,21 @@ class Header extends React.Component {
 	}
 
 	createData() {
-		let { actions, editConfig } = this.props
-		console.clear()
+		let { editConfig } = this.props
 		let cfg = JSON.parse(JSON.stringify(editConfig))
-		console.log(cfg)
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,
 				pageList:    cfg.pageList,
-				globalData:  cfg.globalData,
+				globalData:  cfg.globalData
 			},
 			configTerminal: {
 				pageContent: cfg.pageContent,
 				pageList:    cfg.pageList,
-				globalData:  cfg.globalData,
-			},
+				globalData:  cfg.globalData
+			}
 		}
-		console.log(JSON.stringify(config))
+		console.log(config)
 	}
 
 	render() {

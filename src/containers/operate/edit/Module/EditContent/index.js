@@ -12,8 +12,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import {
-	Row, Col,
-	Button, Card, Checkbox, Collapse, Input,Icon, InputNumber, Radio, Select, Slider, Switch
+	Checkbox, Collapse, Input
 } from 'antd'
 const { TextArea } = Input
 const { Panel }    = Collapse
@@ -21,16 +20,16 @@ const { Panel }    = Collapse
 import RouterJump  from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 
-import Picture     from './Picture'
-import Web         from './Web'
-import Text        from './Text'
-import SwiperImage from './SwiperImage'
+// import Picture     from './Picture'
+// import Web         from './Web'
+// import Text        from './Text'
+// import SwiperImage from './SwiperImage'
 
 var conMap = {
-	text:  { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 }, },
-	title: { name: '标题',    type: 'Title',    max: 30, },
-	img:   { name: '图片',    type: 'Image', },
-	url:   { name: '网址',    type: 'Url', },
+	text:  { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
+	title: { name: '标题',    type: 'Title',    max: 30 },
+	img:   { name: '图片',    type: 'Image' },
+	url:   { name: '网址',    type: 'Url' }
 }
 
 import './index.less'
@@ -43,27 +42,23 @@ class EditContent extends React.Component {
 	componentWillUnmount() {}
 
 	onChange(val, key) {
-		console.clear()
-		console.log(val)
 		let { data, actions, editConfig } = this.props
-		let { curData, curComp } = editConfig
+		let { curData } = editConfig
 		let { parentComp } = curData
 		data.content[key]  = val
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, key) {
-		console.clear()
-		console.log(val)
 		let { data, actions, editConfig } = this.props
-		let { curData, curComp } = editConfig
+		let { curData } = editConfig
 		let { parentComp } = curData
 		data.auth.content[key] = val
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	cb(key) {
-		console.log(key)
+		// console.log(key)
 	}
 
 	/* 渲染组件开始 */
@@ -136,9 +131,8 @@ class EditContent extends React.Component {
 	}
 
 	render() {
-		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
-		let compName = data.name
+		let { data, actions } = this.props
+		// let compName = data.name
 		let content  = data.content
 		let compCon
 		let childNode
@@ -172,7 +166,7 @@ class EditContent extends React.Component {
 		}
 		return (
 			<section className="ry-roll-screen-config">
-				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
+				<Collapse activeKey={activeKey} onChange={this.cb}>
 					{
 						data.name == 'swiperImage' ? <Panel header={`内容`} key={0}>
 							<div className="pgs-row" key={0}>
@@ -181,18 +175,18 @@ class EditContent extends React.Component {
 									<ImageUploadComp
 										data={data}
 										img={{}}
-										name={`first`} 
-										content={data.content} 
+										name={`first`}
+										content={data.content}
 										action={'updateComp'}
 										style={{ width: '100%' }}
 									/>
 								</div>
-							</div>   
+							</div>
 					</Panel> : null
 					}
-					{  
+					{
 						!(data.name == 'swiperImage'&& data.content.length==1&&data.content[0].img.img == '') ? childNode : null
-					 } 
+					}
 				</Collapse>
 				{ routerJump }
 				{ compCon }

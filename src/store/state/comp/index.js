@@ -19,7 +19,7 @@ function authInit(data) {
 	else handleObj(content)
 	data.auth = {
 		style: style,
-		content: content,
+		content: content
 	}
 	return data
 }
@@ -36,5 +36,5 @@ module.exports = {
 	text:        authInit(require('./text')),
 	// 自定义
 	web:         authInit(require('./web')),
-	storeList:   authInit(require('./storeList')),
+	storeList:   authInit(require('./storeList'))
 }

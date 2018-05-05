@@ -13,14 +13,10 @@ const pagec = require('state/page/content')
 
 const initialState = state
 export default function editConfig(state = initialState, action) {
-	let curComp    = state.curComp,
-		curData    = state.curData,
-		curPage    = state.curPage,
-		globalData = state.globalData,
+	let curData    = state.curData,
 		pageC      = state.pageContent,
 		pageList   = state.pageList,
 		router     = action.router,
-		key        = action.key,
 		groupIdx   = action.groupIdx,
 		idx        = action.idx,
 		data       = action.data,

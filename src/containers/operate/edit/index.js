@@ -41,8 +41,8 @@ class EditComponent extends React.Component {
 			ryRollScreenDataIndex: 1,
 			range: {
 				width: parseInt(resolution[0]),
-				height: parseInt(resolution[1]),
-			},
+				height: parseInt(resolution[1])
+			}
 		}
 	}
 
@@ -53,7 +53,7 @@ class EditComponent extends React.Component {
 	}
 
 	render() {
-		let { editConfig, scaleVal, actions } = this.props
+		let { editConfig } = this.props
 		let theme   = editConfig.globalData.theme
 		let colors  = theme.list[theme.idx].colors
 		let type = editConfig.curData.contentType
@@ -73,7 +73,7 @@ class EditComponent extends React.Component {
 			editTab = (<EditTheme data={editConfig.globalData.theme} />)
 		}
 		return (
-			<div className="pg-edit-box e-flex-fdc">
+			<div className="pg-edit-box">
 				<EditHeader/>
 				<div className="pg-body e-flex-box">
 					<div className="pg-left scrollbar">

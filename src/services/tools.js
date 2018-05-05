@@ -26,7 +26,7 @@ const formatPxMap = {
 }
 const formatColorMap = {
 	color: 1,
-	backgroundColor: 1,
+	backgroundColor: 1
 }
 const tools = function() {
 (function (window) {
@@ -75,7 +75,7 @@ window.cssColorFormat = function(props, key) {
 		data.style[key] = obj
 		return actions.updateComp(null, data)
 	}
-	console.log(`耗时${Date.now() - st}ms`)
+	// console.log(`耗时${Date.now() - st}ms`)
 	return obj
 }
 
