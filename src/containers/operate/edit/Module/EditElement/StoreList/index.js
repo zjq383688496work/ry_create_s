@@ -19,7 +19,7 @@ class StoreList extends React.Component {
 
 	render() {
 		let { data, actions, idx, csn } = this.props
-		console.log(1, this.props)
+		// console.log(1, this.props)
 		return (
 			<Custom
 				data={data}

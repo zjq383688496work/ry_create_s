@@ -54,7 +54,7 @@ String.prototype.colorRGB = function(){
 }
 
 // 组件样式格式化
-window.cssColorFormat = function(props, key) {
+window.cssColorFormat = (props, key) => {
 	let { data, actions } = props
 	let obj = JSON.parse(JSON.stringify(data.style[key]))
 	let st  = Date.now()
@@ -80,7 +80,7 @@ window.cssColorFormat = function(props, key) {
 }
 
 // 组件图片格式化
-window.compImgFormat = function(props, content) {
+window.compImgFormat = (props, content) => {
 	let { data, actions } = props
 	let imgChange = 0
 	let type = content.type
@@ -94,6 +94,11 @@ window.compImgFormat = function(props, content) {
 		return actions.updateComp(null, data)
 	}
 	return content
+}
+
+// 文本换行
+window.textBreak = (str = '') => {
+	return str.replace(/\n|\r\n/g, '<br/>').replace(/ /g, '&nbsp;')
 }
 
 window.Ajax = Fetch.default

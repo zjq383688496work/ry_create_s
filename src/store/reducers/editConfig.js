@@ -58,6 +58,10 @@ export default function editConfig(state = initialState, action) {
 
 
 		case types.SELECT_COMP:
+			let { parentComp } = curData
+			console.log('更新')
+			if (!parentComp) curData.cusCompIdx  = -1
+			// console.log(parentComp.type, data.type)
 			state.curComp       = data
 			curData.contentType = 'comp'
 			return Object.assign({}, state)

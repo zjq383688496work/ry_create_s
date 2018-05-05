@@ -29,12 +29,14 @@ class Header extends React.Component {
 
 	addComp(item) {
 		let { actions, editConfig } = this.props
-		let { curComp } = editConfig
-		if (curComp.type === 'advanced') {
-			var compData = JSON.parse(JSON.stringify(comp[item.key]))
+		let { curComp, curData } = editConfig
+		let { parentComp } = curData
+		if (curComp.type === 'advanced' || parentComp) {
+			let compData = JSON.parse(JSON.stringify(comp[item.key]))
+			let Comp = parentComp || curComp
 			if (compData.type === 'base') {
-				curComp.components.push(compData)
-				actions.updateComp(null, curComp)
+				Comp.components.push(compData)
+				actions.updateComp(null, Comp)
 			} else {
 				message.info('高级组件内只能添加基础组件!')
 			}

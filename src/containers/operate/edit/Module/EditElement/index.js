@@ -31,15 +31,19 @@ class EditElement extends React.Component {
 
 	componentWillUnmount() {}
 
-	selectComp(data, idx) {
+	selectComp(e, data, idx) {
+		e.stopPropagation()
 		let { actions, editConfig } = this.props
-		editConfig.curData.compIdx = idx
-		editConfig.curData.parentComp = null
-		actions.updateCur(editConfig.curData)	// 更新 当前数据
+		let { curData } = editConfig
+		if (curData.compIdx === idx && curData.cusCompIdx < 0) return
+		curData.compIdx    = idx
+		curData.parentComp = null
+		actions.updateCur(curData)	// 更新 当前数据
 		actions.selectComp(data)
 	}
 
-	resizeFn(ref, delta, pos, item, idx) {
+	resizeFn(e, ref, delta, pos, item, idx) {
+		e.stopPropagation()
 		let { actions } = this.props
 		let lay = item.style.layout
 		lay.left   = pos.x
@@ -50,16 +54,18 @@ class EditElement extends React.Component {
 		//针对轮播图的单独处理，每次更改大小时都要重新初始化swiper
 	}
 	
-	dragStop(d, item, idx) {
+	dragStop(e, d, item, idx) {
+		e.stopPropagation()
 		let { actions } = this.props
 		let lay  = item.style.layout
+		if (lay.left === d.x && lay.top  === d.y) return
 		lay.left = d.x
 		lay.top  = d.y
-
 		actions.updateComp(idx, item)
 	}
 
-	removeComp(idx) {
+	removeComp(e, idx) {
+		e.stopPropagation()
 		let { actions } = this.props
 		actions.deleteComp(idx)
 	}
@@ -101,14 +107,14 @@ class EditElement extends React.Component {
 						x: _.style.layout.left,
 						y: _.style.layout.top
 					}}
-					onDragStart={this.selectComp.bind(this, _, i)}
-					onDragStop={(e, d) => this.dragStop(d, _, i)}
-					onResizeStart={this.selectComp.bind(this, _, i)}
-					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(ref, delta, pos, _, i)}
+					onDragStart={e => this.selectComp(e, _, i)}
+					onDragStop={(e, d) => this.dragStop(e, d, _, i)}
+					onResizeStart={e => this.selectComp(e, _, i)}
+					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i)}
 				>
-					<div className="pge-layout" onClick={this.selectComp.bind(this, _, i)} style={!isEdit? _.style.layout: {}}>{ compCon }</div>
-					<a className="pge-remove" onClick={this.removeComp.bind(this, i)}><Icon type="cross-circle" /></a>
-					<div className="handle-drag"></div>
+					<div className="pge-layout" onClick={e => this.selectComp(e, _, i)} style={!isEdit? _.style.layout: {}}>{ compCon }</div>
+					<a className="pge-remove" onClick={e => this.removeComp(e, i)}><Icon type="cross-circle" /></a>
+					<div className="handle-drag" onClick={e => e.stopPropagation()}></div>
 				</Rnd>
 			)
 		})

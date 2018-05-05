@@ -28,12 +28,15 @@ class Custom extends React.Component {
 
 	componentWillUnmount() {}
 
-	selectComp(e, data, idx, parent) {
+	selectComp(e, data, idx, parentIdx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
-		editConfig.curData.cusCompIdx = idx
-		editConfig.curData.parentComp = parent
-		actions.updateCur(editConfig.curData)	// 更新 当前数据
+		let { curData } = editConfig
+		if (curData.compIdx === parentIdx && curData.cusCompIdx === idx) return
+		curData.compIdx    = parentIdx
+		curData.cusCompIdx = idx
+		curData.parentComp = parent
+		actions.updateCur(curData)		// 更新 当前数据
 		actions.selectComp(data)
 	}
 
@@ -51,11 +54,10 @@ class Custom extends React.Component {
 	dragStop(e, d, item, idx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
-		let lay  = item.style.layout
+		let lay = item.style.layout
+		if (lay.left === d.x && lay.top  === d.y) return
 		lay.left = d.x
 		lay.top  = d.y
-		console.clear()
-		console.log(item.style.layout)
 		actions.updateComp(editConfig.curData.compIdx, parent)
 	}
 
@@ -67,8 +69,8 @@ class Custom extends React.Component {
 	}
 
 	render() {
-		let { data, comp, actions, csn, editConfig } = this.props
-		console.log(1, this.props)
+		let { data, comp, actions, idx, csn, editConfig } = this.props
+		// console.log(1, this.props)
 		let childNode = comp.map((_, i) => {
 			var compName = _.name,
 				isEdit   = true,
@@ -92,14 +94,14 @@ class Custom extends React.Component {
 						x: _.style.layout.left,
 						y: _.style.layout.top
 					}}
-					onDragStart={e => this.selectComp(e, _, i, data)}
+					onDragStart={e => this.selectComp(e, _, i, idx, data)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i, data)}
-					onResizeStart={e => this.selectComp(e, _, i, data)}
+					onResizeStart={e => this.selectComp(e, _, i, idx, data)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i, data)}
 				>
-					<div className="pge-layout" onClick={e => this.selectComp(e, _, i, data)} style={!isEdit? _.style.layout: {}}>{ compCon }</div>
+					<div className="pge-layout" onClick={e => this.selectComp(e, _, i, idx, data)} style={!isEdit? _.style.layout: {}}>{ compCon }</div>
 					<a className="pge-remove" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a>
-					<div className="handle-drag-custom"></div>
+					<div className="handle-drag-custom" onClick={e => e.stopPropagation()}></div>
 				</Rnd>
 			)
 		})
