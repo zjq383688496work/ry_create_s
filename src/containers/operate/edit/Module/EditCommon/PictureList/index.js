@@ -159,6 +159,7 @@ class ImgModule extends React.Component {
 		this.props.save(choosed_img)
 	}
 	upload_img = () => {
+	   // alert('上传本地图片')
 	} 
 	getTypes = () => {
 		const UrlType = 'http://manage.preview.rongyi.com/easy-smart/ySourceGroupManage/query';

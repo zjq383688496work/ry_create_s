@@ -39,6 +39,5 @@ module.exports = {
 	},
 	// 功能特性
 	feature: {
-		api: ''		// 依赖API
 	}
 }

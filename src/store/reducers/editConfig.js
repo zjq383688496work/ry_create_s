@@ -11,6 +11,16 @@ import state from 'state'
 const comp  = require('state/comp')
 const pagec = require('state/page/content')
 
+let startTime = Date.now()
+function saveData() {
+	var diffTime = Date.now() - startTime
+	// if (diffTime > 1000) {
+		// 保存步骤
+	// }
+	startTime = Date.now()
+	console.log(`操作间隔: ${diffTime} ms`)
+}
+
 const initialState = state
 export default function editConfig(state = initialState, action) {
 	let curData    = state.curData,
@@ -32,6 +42,8 @@ export default function editConfig(state = initialState, action) {
 			state.curComp       = compData
 			curData.compIdx     = state.curPage.elements.length - 1
 			curData.contentType = 'comp'
+			console.log('添加组件!')
+			saveData()
 			return Object.assign({}, state)
 
 
@@ -42,8 +54,9 @@ export default function editConfig(state = initialState, action) {
 			delete sd.data.layout
 			pageC[curData.router].elements[curData.compIdx] = data
 			state.curPage   = pageC[curData.router]
-			// state.curComp   = data
 			curData.compIdx = idx || curData.compIdx
+			console.log('更新组件!')
+			saveData()
 			return Object.assign({}, state)
 
 
@@ -53,17 +66,22 @@ export default function editConfig(state = initialState, action) {
 			state.curComp = {}
 			curData.compIdx     = -1
 			curData.cusCompIdx  = -1
+			curData.parentComp  = null
 			curData.contentType = 'page'
+			console.log('删除组件!')
+			saveData()
 			return Object.assign({}, state)
 
 
 		case types.SELECT_COMP:
 			let { parentComp } = curData
-			console.log('更新')
-			if (!parentComp) curData.cusCompIdx  = -1
-			// console.log(parentComp.type, data.type)
+			if (!parentComp) {
+				console.log('选择组件!')
+				curData.cusCompIdx  = -1
+			} else console.log('选择子组件!')
 			state.curComp       = data
 			curData.contentType = 'comp'
+			saveData()
 			return Object.assign({}, state)
 
 
@@ -84,6 +102,8 @@ export default function editConfig(state = initialState, action) {
 				router: route,
 				title:  name
 			})
+			console.log('创建页面!')
+			saveData()
 			return Object.assign({}, state)
 		
 
@@ -92,6 +112,8 @@ export default function editConfig(state = initialState, action) {
 			pgp.title          = data.title
 			pageC[data.router] = data
 			state.curPage      = data
+			console.log('更新页面!')
+			saveData()
 			return Object.assign({}, state)
 		
 
@@ -104,6 +126,8 @@ export default function editConfig(state = initialState, action) {
 			curData.compIdx     = -1
 			curData.cusCompIdx  = -1
 			curData.contentType = ''
+			console.log('删除页面!')
+			saveData()
 			return Object.assign({}, state)
 
 
@@ -116,14 +140,20 @@ export default function editConfig(state = initialState, action) {
 			curData.compIdx     = -1
 			curData.cusCompIdx  = -1
 			curData.contentType = 'page'
+			console.log('选择页面!')
+			saveData()
 			return Object.assign({}, state)
 
 		case types.UPDATE_CUR:
 			state.curData = data
+			console.log('更新当前数据!')
+			saveData()
 			return Object.assign({}, state)
 
 		case types.UPDATE_GLOBAL:
 			state.globalData = data
+			console.log('更新全局数据!')
+			saveData()
 			return Object.assign({}, state)
 
 		default:

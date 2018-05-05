@@ -26,7 +26,17 @@ module.exports = [
 			icon: 'date-control',
 			name: '天气日期',
 			key:  'date'
-		}, 
+		},
+		{
+			icon: 'navigation-control',
+			name: '导航',
+			key:  'navigation', 
+		},
+		{
+			icon: 'letter-control',
+			name: '字母',
+			key:  'letter'
+		},
 		{
 			icon: 'store-control',
 			name: '店铺列表',

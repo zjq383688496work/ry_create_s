@@ -17,6 +17,7 @@ import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Text         from 'compEdit/EditElement/Text'
 import SwiperImage  from 'compEdit/EditElement/SwiperImage'
+import Letter       from 'compEdit/EditElement/Letter'
 import StoreList    from 'compEdit/EditElement/StoreList'
 
 import './index.less'
@@ -73,13 +74,15 @@ class Custom extends React.Component {
 		// console.log(1, this.props)
 		let childNode = comp.map((_, i) => {
 			var compName = _.name,
+				styleIdx = _.styleList.idx,
 				isEdit   = true,
 				compCon
-			if (compName === 'picture')          compCon = (<Picture     data={_} actions={actions} type={`Style${i + 1}`} />)
-			else if (compName === 'web')         compCon = (<Web         data={_} actions={actions} type={`Style${i + 1}`} />)
-			else if (compName === 'text')        compCon = (<Text        data={_} actions={actions} type={`Style${i + 1}`} />)
-			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} actions={actions} type={`Style${i + 1}`} />)
-			else if (compName === 'storeList')   compCon = (<StoreList   data={_} actions={actions} type={`Style${i + 1}`} />)
+			if (compName === 'picture')          compCon = (<Picture     data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
+			else if (compName === 'web')         compCon = (<Web         data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
+			else if (compName === 'text')        compCon = (<Text        data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
+			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
+			else if (compName === 'letter')      compCon = (<Letter      data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
+			else if (compName === 'storeList')   compCon = (<StoreList   data={_} parent={data} actions={actions} type={`Style${styleIdx + 1}`} />)
 			return (
 				<Rnd
 					key={i}

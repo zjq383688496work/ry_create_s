@@ -66,7 +66,7 @@ class Header extends React.Component {
 				globalData:  cfg.globalData
 			}
 		}
-		console.log(config)
+		console.log(JSON.stringify(config))
 	}
 
 	render() {

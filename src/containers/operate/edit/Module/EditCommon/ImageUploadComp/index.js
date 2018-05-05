@@ -38,7 +38,8 @@ class ImageUploadComp extends React.Component {
 		let { curData } = editConfig
 		let { parentComp } = curData
 		let imgList = imgUrl;
-		if(data.name == 'swiperImage'){
+		const length = content.length;
+		if(data.name == 'swiperImage'||data.name == 'navigation'){
 			if(name == 'first') {
 				imgList = imgList.map((item,index)=>{
 					var obj = {img:{img:item.url,type:'custom'},title:`图片${index+1}`,router: {}};
