@@ -1,27 +1,23 @@
-// 自定义
+// 字母排序
 var style = {
 }
 
 module.exports = {
-	name: 'custom',
-	type: 'advanced',
+	name: 'floor',
+	type: 'base',
 	// 位置大小
 	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    120,
-		height:   120
+		width:    200,
+		height:   200
 	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: {
 	},
-	// 组件管理
-	components: [{
-		
-	}],
 	// 动画设置
 	animation: {
 		className: '',	// 动画样式
@@ -29,6 +25,7 @@ module.exports = {
 		duration: 1,				// 持续时间
 		iterationCount: 'infinite'	// 循环次数
 	},
+	// 样式列表
 	styleList: {
 		idx:  0,
 		list: [{

@@ -19,7 +19,6 @@ import SwiperImage from 'compEdit/EditElement/SwiperImage'
 import DateShow    from 'compEdit/EditElement/Date'
 import StoreList   from 'compEdit/EditElement/StoreList'
 import Navigation  from 'compEdit/EditElement/Navigation'
-// import Letter       from 'compEdit/EditElement/Letter'
 
 import * as actions from 'actions'
 
@@ -48,7 +47,7 @@ class EditElement extends React.Component {
 	resizeFn(e, ref, delta, pos, item, idx) {
 		e.stopPropagation()
 		let { actions } = this.props
-		let lay = item.style.layout
+		let lay = item.layout
 		lay.left   = pos.x
 		lay.top    = pos.y
 		lay.width  = ref.offsetWidth
@@ -60,7 +59,7 @@ class EditElement extends React.Component {
 	dragStop(e, d, item, idx) {
 		e.stopPropagation()
 		let { actions } = this.props
-		let lay  = item.style.layout
+		let lay  = item.layout
 		if (lay.left === d.x && lay.top  === d.y) return
 		lay.left = d.x
 		lay.top  = d.y
@@ -96,10 +95,10 @@ class EditElement extends React.Component {
 			else if (compName === 'web')         compCon = (<Web         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'text')        compCon = (<Text        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'letter')      compCon = (<Letter      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'date')        compCon = (<DateShow    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
  			else if (compName === 'navigation')  compCon = (<Navigation  data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeList')   compCon = (<StoreList   data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			if (!compCon) return false
 			return (
 				<Rnd
 					key={i}
@@ -107,19 +106,19 @@ class EditElement extends React.Component {
 					className={i === editConfig.curData.compIdx? 's-active': ''}
 					dragHandleClassName={'.handle-drag'}
 					size={{
-						width:  _.style.layout.width || '100%',
-						height: _.style.layout.height
+						width:  _.layout.width || '100%',
+						height: _.layout.height
 					}}
 					position={{
-						x: _.style.layout.left,
-						y: _.style.layout.top
+						x: _.layout.left,
+						y: _.layout.top
 					}}
 					onDragStart={e => this.selectComp(e, _, i)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i)}
 					onResizeStart={e => this.selectComp(e, _, i)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i)}
 				>
-					<div className="pge-layout" onClick={e => this.selectComp(e, _, i)} style={!isEdit? _.style.layout: {}}>{ compCon }</div>
+					<div className="pge-layout" onClick={e => this.selectComp(e, _, i)} style={!isEdit? _.layout: {}}>{ compCon }</div>
 					<a className="pge-remove" onClick={e => this.removeComp(e, i)}><Icon type="cross-circle" /></a>
 					<div className="handle-drag" onClick={e => e.stopPropagation()}></div>
 				</Rnd>

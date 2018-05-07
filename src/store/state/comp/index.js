@@ -34,7 +34,7 @@ module.exports = {
 	// 图片
 	picture:     authInit(require('./picture')),
 	// 天气日期
-	date:   authInit(require('./date')),
+	date:        authInit(require('./date')),
 	// 轮播图
 	swiperImage: authInit(require('./swiperImage')),
 	// 文本
@@ -42,9 +42,11 @@ module.exports = {
 	// 自定义
 	web:         authInit(require('./web')),
 	// 导航
-	navigation:         authInit(require('./navigation')),
+	navigation:  authInit(require('./navigation')),
 	// 字母
 	letter:      authInit(require('./letter')),
+	// 楼层
+	floor:       authInit(require('./floor')),
 
 	/* 业务组件 */
 	// 店铺列表

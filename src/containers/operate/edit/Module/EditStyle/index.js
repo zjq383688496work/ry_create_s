@@ -154,9 +154,26 @@ class EditStyle extends React.Component {
 	render() {
 		let { data } = this.props
 		if (!data.style) return false
-		let styleList = data.styleList				// 样式列表
-		let styles    = Object.keys(data.style)		// 具体样式
-		let activeKey = Array.from(new Array(styles.length), (_, i) => `${i}`)
+		let styleList  = data.styleList				// 样式列表
+		let styles     = Object.keys(data.style)	// 具体样式
+		let activeKey  = Array.from(new Array(styles.length), (_, i) => `${i}`)
+		// 位置大小
+		let layoutNode = Object.keys(data.layout).map((q, j) => {
+				if (!cssMap[q]) return
+				let cm     = cssMap[q],
+					val    = data.layout[q],
+					render = this[`render${cm.type}`]
+				if (!render) return
+				// 根据样式类型渲染对应组件
+				let dom = this[`render${cm.type}`].bind(this, cm, data, val, 'layout', q)()
+				return (
+					<div className="pgs-row" key={j}>
+						<div className="pgsr-name">{ cm.name }</div>
+						<div className="pgsr-ctrl">{ dom }</div>
+						<div className="pgsr-auth"></div>
+					</div>
+				)
+			})
 		// 子组件循环渲染
 		let childNode = styles.map((p, i) => {
 			if (!styleMap[p]) return
@@ -199,6 +216,11 @@ class EditStyle extends React.Component {
 		// />
 		return (
 			<section className="pg-style">
+				<Collapse defaultActiveKey={['0']} onChange={this.cb}>
+					<Panel header={'组件样式'} key={0}>
+						{ layoutNode }
+					</Panel>
+				</Collapse>
 				<StyleManage
 					data={data}
 					add={false}

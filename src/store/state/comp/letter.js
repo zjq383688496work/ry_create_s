@@ -1,23 +1,23 @@
-// 图片
+// 字母排序
 var style = {
-	// 组件样式
+}
+
+module.exports = {
+	name: 'letter',
+	type: 'base',
+	// 位置大小
 	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
 		width:    200,
 		height:   200
-	}
-}
-
-module.exports = {
-	name: 'letter',
-	type: 'base',
+	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理
 	content: {
-	}, 
+	},
 	// 动画设置
 	animation: {
 		className: '',	// 动画样式

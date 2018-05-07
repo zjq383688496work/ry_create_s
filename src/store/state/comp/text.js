@@ -1,13 +1,5 @@
 // 文本
 var style = {
-	// 组件样式
-	layout: {
-		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    120,
-		height:   30
-	},
 	text: { 
 		textAlign:      'center',  
 		fontSize:       12, 
@@ -24,6 +16,14 @@ var style = {
 module.exports = {
 	name: 'text',
 	type: 'base',
+	// 位置大小
+	layout: {
+		position: 'absolute',
+		top:      0,
+		left:     0,
+		width:    120,
+		height:   30
+	},
 	// 样式管理
 	style: JSON.parse(JSON.stringify(style)),
 	// 内容管理

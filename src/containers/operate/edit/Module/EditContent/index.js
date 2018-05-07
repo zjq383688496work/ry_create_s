@@ -22,7 +22,7 @@ import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 // import Web         from './Web'
 // import Text        from './Text'
 // import SwiperImage from './SwiperImage'
-// import Letter      from './Letter'
+import Floor       from './Floor'
 import StoreList   from './StoreList'
 import Navigation  from './Navigation'
 import Date        from './Date'
@@ -31,7 +31,8 @@ var conMap = {
 	text:  { name: '文本内容', type: 'Textarea', max: 1000, autosize: { minRows: 1, maxRows: 6 } },
 	title: { name: '标题',    type: 'Title',    max: 30 },
 	img:   { name: '图片',    type: 'Image' },
-	url:   { name: '网址',    type: 'Url' }
+	url:   { name: '网址',    type: 'Url' },
+	floor: { name: '楼层',    type: 'Checkbox', defaultVlaue: true }
 }
 
 import './index.less'
@@ -119,6 +120,17 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	// 楼层
+	renderCheckbox(cfg, data, val, key) {
+		return (
+			<div>
+				<span style={{ marginRight: 10 }}>{val.value}</span>
+				<Checkbox
+					value={cfg.defaultValue} onChange={v => this.onChange({ value: val.value, checked: v.target.checked }, key)}
+				/>
+			</div>
+		)
+	}
 
 	renObj(data, content,index) {
 		let childNode = Object.keys(content).map((p, i) => {
@@ -137,7 +149,7 @@ class EditContent extends React.Component {
 						<Checkbox checked={data.auth.content[p]} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
 					</div>
 					{  
-						cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
+						data.name !='picture'&&cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
 					} 
 				</div> 
 			)
@@ -153,13 +165,13 @@ class EditContent extends React.Component {
 		let childNode
 		let activeKey
 		let routerJump
-		if (compName === 'navigation')           compCon = (<Navigation data={this.props}/>)
-		else if (compName === 'date')            compCon = (<Date       data={this.props}/>)
-		else if (compName === 'storeList')       compCon = (<StoreList  data={data}/>)
-		// else if (compName === 'letter')       compCon = (<Letter data={data}/>)
-		// if (compName === 'picture')           compCon = (<Picture data={data}/>)
-		// else if (compName === 'web')          compCon = (<Web data={data}/>)
-		// else if (compName === 'text')         compCon = (<Text data={data}/>)
+		if (compName === 'navigation')           compCon = (<Navigation  data={this.props}/>)
+		else if (compName === 'date')            compCon = (<Date        data={this.props}/>)
+		else if (compName === 'storeList')       compCon = (<StoreList   data={data}/>)
+		else if (compName === 'floor')           compCon = (<Floor       data={data}/>)
+		// if (compName === 'picture')           compCon = (<Picture     data={data}/>)
+		// else if (compName === 'web')          compCon = (<Web         data={data}/>)
+		// else if (compName === 'text')         compCon = (<Text        data={data}/>)
 		// else if (compName === 'swiperImage')  compCon = (<SwiperImage data={data}/>)
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
@@ -177,15 +189,20 @@ class EditContent extends React.Component {
 					<RouterJump data={data} content={content} idx={-1} actions={actions} />
 				)
 			}
+			let con = this.renObj(data, content)
 			childNode = (
+				con.length
+				? 
 				<Panel header={'内容编辑'} key={0}>
-					{ this.renObj(data, content) }
+					{ con }
 				</Panel>
+				:
+				false
 			)
 		}
 		return (
 			<section className="ry-roll-screen-config">
-				{ compCon } 
+				{ compCon }
 				<Collapse activeKey={activeKey} onChange={this.cb}>
 					{
 						data.name == 'swiperImage' ? <Panel header={`内容`} key={0}>
@@ -202,7 +219,7 @@ class EditContent extends React.Component {
 									/>
 								</div>
 							</div>
-					</Panel> : null
+						</Panel> : null
 					}
 					{
 						!(data.name == 'swiperImage'&& data.content.length==1&&data.content[0].img.img == '') ? childNode : null

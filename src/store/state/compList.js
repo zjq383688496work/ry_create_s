@@ -29,13 +29,23 @@ module.exports = [
 		},
 		{
 			icon: 'navigation-control',
-			name: '导航',
+			name: '导航列表',
 			key:  'navigation', 
 		},
+		{
+			icon: 'navigationFloat-control',
+			name: '悬浮导航', 
+			key:  'navigationFloat', 
+		}, 
 		{
 			icon: 'letter-control',
 			name: '字母',
 			key:  'letter'
+		},
+		{
+			icon: 'floor-control',
+			name: '楼层',
+			key:  'floor'
 		},
 		{
 			icon: 'store-control',
