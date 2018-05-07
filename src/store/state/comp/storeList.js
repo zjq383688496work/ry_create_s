@@ -19,8 +19,7 @@ module.exports = {
 	content: {
 	},
 	// 组件管理
-	components: [
-	],
+	components: [],
 	// 动画设置
 	animation: {
 		className: '',	// 动画样式

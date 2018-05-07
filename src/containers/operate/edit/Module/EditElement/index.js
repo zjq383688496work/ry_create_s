@@ -12,13 +12,15 @@ import { connect }  from 'react-redux'
 
 import Rnd from 'react-rnd'
 
-import Picture     from 'compEdit/EditElement/Picture'
-import Web         from 'compEdit/EditElement/Web'
-import Text        from 'compEdit/EditElement/Text'
-import SwiperImage from 'compEdit/EditElement/SwiperImage'
-import DateShow    from 'compEdit/EditElement/Date'
-import StoreList   from 'compEdit/EditElement/StoreList'
-import Navigation  from 'compEdit/EditElement/Navigation'
+import Picture         from 'compEdit/EditElement/Picture'
+import Web             from 'compEdit/EditElement/Web'
+import Text            from 'compEdit/EditElement/Text'
+import Button          from 'compEdit/EditElement/Button'
+import SwiperImage     from 'compEdit/EditElement/SwiperImage'
+import DateShow        from 'compEdit/EditElement/Date'
+import StoreList       from 'compEdit/EditElement/StoreList'
+import Navigation      from 'compEdit/EditElement/Navigation'
+import NavigationFloat from 'compEdit/EditElement/NavigationFloat'
 
 import * as actions from 'actions'
 
@@ -91,13 +93,15 @@ class EditElement extends React.Component {
 				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
 				isEdit    = true,
 				compCon
-			if (compName === 'picture')          compCon = (<Picture     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'web')         compCon = (<Web         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'text')        compCon = (<Text        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'swiperImage') compCon = (<SwiperImage data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'date')        compCon = (<DateShow    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
- 			else if (compName === 'navigation')  compCon = (<Navigation  data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
-			else if (compName === 'storeList')   compCon = (<StoreList   data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			if (compName === 'picture')              compCon = (<Picture         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'web')             compCon = (<Web             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'text')            compCon = (<Text            data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'button')          compCon = (<Button          data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'swiperImage')     compCon = (<SwiperImage     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'date')            compCon = (<DateShow        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+ 			else if (compName === 'navigation')      compCon = (<Navigation      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+ 			else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			if (!compCon) return false
 			return (
 				<Rnd
