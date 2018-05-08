@@ -33,12 +33,11 @@ class ImageUploadComp extends React.Component {
 		this.addImgModal.show()
 	}
 
-	enter(imgUrl,index) {
+	enter(imgList, index) {
 		let { data, name, action, actions, editConfig } = this.props
 		let { content }    = data
 		let { curData }    = editConfig
 		let { parentComp } = curData
-		let imgList = imgUrl;
 		const length = content.length;
 		if (getAttr(content) === 'Array') {
 			if (name == 'first') { 
@@ -52,10 +51,12 @@ class ImageUploadComp extends React.Component {
 				})
 				data.content = imgList
 			} else {
-				content[i][name].img = imgUrl[0].url
+				content[i][name].img = imgList[0].url
 			}
+		} else if (data.name == 'video'){
+			data.content[name] = imgList[0].url
 		} else {
-			content[name].img = imgUrl[0].url
+			content[name].img = imgList[0].url
 		}
 		actions[action](null, parentComp? parentComp: data)
 	}
@@ -73,9 +74,9 @@ class ImageUploadComp extends React.Component {
 	}
 
 	render() {
-		let { img, name, actions, editConfig, index } = this.props
+		let { img, name, actions, editConfig, index, data } = this.props
 		let btnNode
-		let imgVal = img&&img.img
+		let imgVal = img && img.img
 		let theme   = editConfig.globalData.theme
 		let colors  = JSON.parse(JSON.stringify(theme.list[theme.idx].colors))
 		let selectNode
@@ -83,7 +84,7 @@ class ImageUploadComp extends React.Component {
 			name:  '自定义',
 			img: imgVal
 		}
-		if(name == 'first'){
+		if(name == 'first'||name == 'src'){ 
 			return (
 					<div className="pg-img-upload">
 						<Row type="flex" align="middle" style={{ width: '100%' }}>
@@ -99,6 +100,7 @@ class ImageUploadComp extends React.Component {
 							data={this.props}
 							actions={actions}
 							index={0}
+							type={data.name}
 							firstAdd={true}
 							enter={this.enter}
 						/>

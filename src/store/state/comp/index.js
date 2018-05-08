@@ -1,6 +1,6 @@
-function handleArray(arr) {
-	arr.map(obj => handleObj(obj))
-}
+// function handleArray(arr) {
+// 	arr.map(obj => handleObj(obj))
+// }
 function handleObj(obj) {
 	for (var p in obj) {
 		obj[p] = false
@@ -16,14 +16,14 @@ function authInit(data) {
 			style[p][q] = false
 		}
 	}
-	if (content.length) handleArray(content)
+	if (content.length) handleObj(content[0])
 	else handleObj(content)
 
 	handleObj(feature)
 	data.auth = {
-		style: style,
+		style:   style,
 		content: content,
-		feature:feature
+		feature: feature
 	}
 	return data
 }
@@ -51,7 +51,8 @@ module.exports = {
 	letter:          authInit(require('./letter')),
 	// 楼层
 	floor:           authInit(require('./floor')),
-
+	// 视频
+	video:      authInit(require('./video')),
 	/* 业务组件 */
 	// 店铺列表
 	storeList:       authInit(require('./storeList'))

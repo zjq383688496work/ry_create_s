@@ -17,6 +17,11 @@ module.exports = [
 			key:  'picture'
 		},
 		{
+			icon: 'video-control',
+			name: '视频', 
+			key:  'video'
+		},
+		{
 			icon: 'carouse-control',
 			name: '轮播',
 			key:  'swiperImage'

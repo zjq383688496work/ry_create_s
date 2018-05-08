@@ -16,6 +16,7 @@ import Picture         from 'compEdit/EditElement/Picture'
 import Web             from 'compEdit/EditElement/Web'
 import Text            from 'compEdit/EditElement/Text'
 import Button          from 'compEdit/EditElement/Button'
+import Video      from 'compEdit/EditElement/Video'
 import SwiperImage     from 'compEdit/EditElement/SwiperImage'
 import DateShow        from 'compEdit/EditElement/Date'
 import StoreList       from 'compEdit/EditElement/StoreList'
@@ -95,6 +96,7 @@ class EditElement extends React.Component {
 				compCon
 			if (compName === 'picture')              compCon = (<Picture         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'web')             compCon = (<Web             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'video')           compCon = (<Video           data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'text')            compCon = (<Text            data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'button')          compCon = (<Button          data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'swiperImage')     compCon = (<SwiperImage     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
