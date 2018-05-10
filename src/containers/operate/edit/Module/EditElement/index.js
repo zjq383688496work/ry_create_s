@@ -18,8 +18,10 @@ import Text            from 'compEdit/EditElement/Text'
 import Button          from 'compEdit/EditElement/Button'
 import Video           from 'compEdit/EditElement/Video'
 import SwiperImage     from 'compEdit/EditElement/SwiperImage'
+import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 import DateShow        from 'compEdit/EditElement/Date'
 import StoreList       from 'compEdit/EditElement/StoreList'
+import StoreDetails    from 'compEdit/EditElement/StoreDetails'
 import Navigation      from 'compEdit/EditElement/Navigation'
 import NavigationFloat from 'compEdit/EditElement/NavigationFloat'
 
@@ -50,7 +52,7 @@ class EditElement extends React.Component {
 	resizeFn(e, ref, delta, pos, item, idx) {
 		e.stopPropagation()
 		let { actions } = this.props
-		let lay = item.layout
+		let lay = item.data.layout
 		lay.left   = pos.x
 		lay.top    = pos.y
 		lay.width  = ref.offsetWidth
@@ -62,7 +64,7 @@ class EditElement extends React.Component {
 	dragStop(e, d, item, idx) {
 		e.stopPropagation()
 		let { actions } = this.props
-		let lay  = item.layout
+		let lay  = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
 		lay.left = d.x
 		lay.top  = d.y
@@ -90,6 +92,7 @@ class EditElement extends React.Component {
 		let bgStyle   = data.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
 		let childNode = eles.map((_, i) => {
 			var compName  = _.name,
+				layout    = _.data.layout,
 				styleIdx  = _.styleList.idx,
 				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
 				isEdit    = true,
@@ -100,10 +103,12 @@ class EditElement extends React.Component {
 			else if (compName === 'text')            compCon = (<Text            data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'button')          compCon = (<Button          data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'swiperImage')     compCon = (<SwiperImage     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'wonderfulActivity')     compCon = (<WonderfulActivity     data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'date')            compCon = (<DateShow        data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
  			else if (compName === 'navigation')      compCon = (<Navigation      data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
  			else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'storeList')       compCon = (<StoreList       data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
+			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			if (!compCon) return false
 			return (
 				<Rnd
@@ -112,12 +117,12 @@ class EditElement extends React.Component {
 					className={i === editConfig.curData.compIdx? 's-active': ''}
 					dragHandleClassName={'.handle-drag'}
 					size={{
-						width:  _.layout.width || '100%',
-						height: _.layout.height
+						width:  layout.width || '100%',
+						height: layout.height
 					}}
 					position={{
-						x: _.layout.left,
-						y: _.layout.top
+						x: layout.left,
+						y: layout.top
 					}}
 					onDragStart={e => this.selectComp(e, _, i)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i)}
@@ -131,9 +136,11 @@ class EditElement extends React.Component {
 			)
 		})
 		return (
-			<section className="pg-element" style={bgStyle}>
-				{ childNode }
-			</section>
+			<div className="pg-element-parent e-flex-box">
+				<section className="pg-element" style={bgStyle}>
+					{ childNode }
+				</section>
+			</div>
 		)
 	}
 }

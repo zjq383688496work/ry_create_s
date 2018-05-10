@@ -27,6 +27,11 @@ module.exports = [
 			key:  'swiperImage'
 		},
 		{
+			icon: 'wonderfulActivity-control',
+			name: '精彩活动',
+			key:  'wonderfulActivity'
+		},
+		{
 			icon: 'web-control',
 			name: '网页',
 			key:  'web'
@@ -68,6 +73,11 @@ module.exports = [
 			key:  'page'
 		},
 		{
+			icon: 'reset-control',
+			name: '重置',
+			key:  'reset'
+		},
+		{
 			icon: 'list-control',
 			name: '列表',
 			key:  'listByStore'
@@ -76,6 +86,11 @@ module.exports = [
 			icon: 'store-control',
 			name: '店铺列表',
 			key:  'storeList'
+		},
+		{
+			icon: 'storeDetails-control',
+			name: '店铺详情',
+			key:  'storeDetails'
 		}
 	// ],
 ]

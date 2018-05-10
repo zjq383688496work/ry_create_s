@@ -7,25 +7,28 @@ function handleObj(obj) {
 	}
 }
 
-function authInit(data) {
-	var style   = JSON.parse(JSON.stringify(data.style)),
-		content = JSON.parse(JSON.stringify(data.content)),
-		feature = JSON.parse(JSON.stringify(data.feature))
+function authInit(da) {
+	let { data, feature } = da
+	let style     = JSON.parse(JSON.stringify(data.style)),
+		content   = JSON.parse(JSON.stringify(data.content)),
+		animation = JSON.parse(JSON.stringify(data.animation)),
+		fture     = JSON.parse(JSON.stringify(feature))
+
 	for (var p in style) {
-		for (var q in style[p]) {
-			style[p][q] = false
-		}
+		handleObj(style[p])
 	}
 	if (content.length) handleObj(content[0])
 	else handleObj(content)
 
-	handleObj(feature)
-	data.auth = {
-		style:   style,
-		content: content,
-		feature: feature
+	handleObj(fture)
+	handleObj(animation)
+	da.auth = {
+		style:     style,
+		content:   content,
+		animation: animation,
+		feature:   fture
 	}
-	return data
+	return da
 }
 
 // 组件元素数据
@@ -37,6 +40,8 @@ module.exports = {
 	date:            authInit(require('./date')),
 	// 轮播图
 	swiperImage:     authInit(require('./swiperImage')),
+	// 精彩活动
+	wonderfulActivity:     authInit(require('./wonderfulActivity')),
 	// 文本
 	text:            authInit(require('./text')),
 	//按钮
@@ -55,6 +60,8 @@ module.exports = {
 	catg:            authInit(require('./catg')),
 	// 分页
 	page:            authInit(require('./page')),
+	// 重置
+	reset:           authInit(require('./reset')),
 	// 列表 (店铺)
 	listByStore:     authInit(require('./listByStore')),
 	// 视频
@@ -62,5 +69,7 @@ module.exports = {
 	
 	/* 业务组件 */
 	// 店铺列表
-	storeList:       authInit(require('./storeList'))
+	storeList:       authInit(require('./storeList')),
+	// 店铺详情
+	storeDetails:       authInit(require('./storeDetails'))
 }
