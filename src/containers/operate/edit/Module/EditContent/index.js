@@ -202,7 +202,7 @@ class EditContent extends React.Component {
 		else if (compName === 'storeList')         compCon = (<StoreList         data={data}/>)
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
 		else if (compName === 'swiperImage' && content.length > 1) compCon = (<SwiperImage data={this.props}/>)
-		if (content.length) {
+		if (content.length && compName != 'wonderfulActivity') {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return (

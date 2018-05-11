@@ -92,6 +92,8 @@ window.cssColorFormat = (props, key) => {
 		}
 		else if (formatPxMap2[p]) {
 			obj[p] += 'px'
+		}else if(p == 'transformRotate'){
+			obj['transform'] = `rotate(${obj[p]}deg)`
 		}
 	}
 	if (colorChange) {

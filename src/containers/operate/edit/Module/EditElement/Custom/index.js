@@ -95,11 +95,11 @@ class Custom extends React.Component {
 				compCon
 			if(this.state.storeDetails){ 
 				if(compName == 'text' && i != 0){
-					_.content.text = this.state.storeDetails.text;
+					_.data.content.text = this.state.storeDetails.text;
 				}else if(compName == 'wonderfulActivity'){
-					_.content = this.state.storeDetails.images; 
+					_.data.content = this.state.storeDetails.images; 
 				}
-			} 
+			}
 			if (compName === 'picture')          compCon = (<Picture     data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'web')         compCon = (<Web         data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
 			else if (compName === 'text')        compCon = (<Text        data={_} parent={data} editConfig={editConfig} actions={actions} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />)
