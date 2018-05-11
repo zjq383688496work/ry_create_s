@@ -22,11 +22,11 @@ import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
 // import Picture     from './Picture'
 // import Web         from './Web'
 // import Text        from './Text'
-import SwiperImage from './SwiperImage'
-import StoreList       from './StoreList'
-import Navigation      from './Navigation'
-import NavigationFloat from './NavigationFloat'
-import Date            from './Date'
+import SwiperImage       from './SwiperImage'
+import StoreList         from './StoreList'
+import Navigation        from './Navigation'
+import NavigationFloat   from './NavigationFloat'
+import Date              from './Date'
 import WonderfulActivity from './WonderfulActivity'
 
 var conMap = {
@@ -78,7 +78,7 @@ class EditContent extends React.Component {
 		let { curData, curComp } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
-		if(getAttr(data.content) === 'Array') {
+		if(getAttr(content) === 'Array') {
 			content = content.filter((item,i) => i!=index)
 			data.data.content = content
 			actions.updateComp(null, parentComp? parentComp: data)
@@ -191,16 +191,12 @@ class EditContent extends React.Component {
 		let compCon
 		let childNode
 		let activeKey
-		if (compName === 'navigation')           compCon = (<Navigation      data={this.props}/>)
-		else if (compName === 'navigationFloat') compCon = (<NavigationFloat data={this.props}/>)
-		else if (compName === 'date')            compCon = (<Date            data={this.props}/>)
-		else if (compName === 'storeList')       compCon = (<StoreList       data={data}/>)
-		else if (compName === 'wonderfulActivity')       compCon = (<WonderfulActivity       data={this.props}/>) 
-		else if (compName === 'floor')           compCon = (<Floor           data={data}/>)
-		// if (compName === 'picture')           compCon = (<Picture         data={data}/>)
-		// else if (compName === 'web')          compCon = (<Web             data={data}/>)
-		// else if (compName === 'text')         compCon = (<Text            data={data}/>)
-		 else if (compName === 'swiperImage' && content.length > 1)  compCon = (<SwiperImage     data={this.props}/>)
+		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
+		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
+		else if (compName === 'date')              compCon = (<Date              data={this.props}/>)
+		else if (compName === 'storeList')         compCon = (<StoreList         data={data}/>)
+		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
+		else if (compName === 'swiperImage' && content.length > 1) compCon = (<SwiperImage data={this.props}/>)
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {

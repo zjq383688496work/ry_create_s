@@ -18,7 +18,7 @@ import EditPageManage from 'compEdit/EditPageManage'
 import EditContent    from 'compEdit/EditContent'
 import EditElement    from 'compEdit/EditElement'
 import EditStyle      from 'compEdit/EditStyle'
-import EditAnimation  from 'compEdit/EditAnimation'
+// import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEdit/EditTheme'
 
 import tools from 'services/tools'
@@ -55,7 +55,7 @@ class EditComponent extends React.Component {
 		this.state = {
 			ryRollScreenDataIndex: 1,
 			range: {
-				width: parseInt(resolution[0]),
+				width:  parseInt(resolution[0]),
 				height: parseInt(resolution[1])
 			}
 		}
@@ -69,13 +69,14 @@ class EditComponent extends React.Component {
 
 	selectPage() {
 		let { actions, editConfig } = this.props
-		actions.selectPage(editConfig.curData.router)
+		let { curData } = editConfig
+		actions.selectPage(curData.router)
 	}
 
 	render() {
 		let { editConfig } = this.props
-		let theme   = editConfig.globalData.theme
-		let colors  = theme.list[theme.idx].colors
+		let theme  = editConfig.globalData.theme
+		let colors = theme.list[theme.idx].colors
 		let { curData } = editConfig
 		let type = curData.contentType
 		let editTab
@@ -87,9 +88,9 @@ class EditComponent extends React.Component {
 				<Tabs defaultActiveKey="1" type="card">
 					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
 					<TabPane tab="样式" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
-					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 				</Tabs>
 			)
+			// <TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 		} else if (type === 'theme') {
 			editTab = (<EditTheme data={editConfig.globalData.theme} />)
 		}

@@ -28,28 +28,31 @@ class Date extends React.Component {
 		console.log(key)
 	};
 	handleChange = value => {
-		let {data,actions,editConfig} = this.props.data; 
+		let { data, actions, editConfig } = this.props.data
+		let { content } = data.data
 		let { curData, curComp } = editConfig 
 		let { parentComp } = curData
-		data.content.type = value;
+		content.type = value;
 		data.style.layout.width = value != 2 ? '100%' : 250; 
 		data.style.layout.height = value == 3 ? 100 : 150;    
 		console.log(value);    
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
 	handleChangeDate = value => {
-		let {data,actions,editConfig} = this.props.data; 
+		let {data,actions,editConfig} = this.props.data
+		let { content } = data.data
 		let { curData, curComp } = editConfig 
 		let { parentComp } = curData
-		data.content.format_date = value;
+		content.format_date = value;
 		console.log(value);    
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
 	handleChangeTime = value => {
-		let {data,actions,editConfig} = this.props.data; 
+		let {data,actions,editConfig} = this.props.data
+		let { content } = data.data
 		let { curData, curComp } = editConfig 
 		let { parentComp } = curData
-		data.content.format_time = value;
+		content.format_time = value;
 		console.log(value);    
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};      

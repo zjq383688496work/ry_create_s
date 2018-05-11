@@ -12,18 +12,18 @@ import { connect }  from 'react-redux'
 
 import Rnd from 'react-rnd'
 
-import Picture         from 'compEdit/EditElement/Picture'
-import Web             from 'compEdit/EditElement/Web'
-import Text            from 'compEdit/EditElement/Text'
-import Button          from 'compEdit/EditElement/Button'
-import Video           from 'compEdit/EditElement/Video'
-import SwiperImage     from 'compEdit/EditElement/SwiperImage'
+import Picture           from 'compEdit/EditElement/Picture'
+import Web               from 'compEdit/EditElement/Web'
+import Text              from 'compEdit/EditElement/Text'
+import Button            from 'compEdit/EditElement/Button'
+import Video             from 'compEdit/EditElement/Video'
+import SwiperImage       from 'compEdit/EditElement/SwiperImage'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
-import DateShow        from 'compEdit/EditElement/Date'
-import StoreList       from 'compEdit/EditElement/StoreList'
-import StoreDetails    from 'compEdit/EditElement/StoreDetails'
-import Navigation      from 'compEdit/EditElement/Navigation'
-import NavigationFloat from 'compEdit/EditElement/NavigationFloat'
+import DateShow          from 'compEdit/EditElement/Date'
+import StoreList         from 'compEdit/EditElement/StoreList'
+import StoreDetails      from 'compEdit/EditElement/StoreDetails'
+import Navigation        from 'compEdit/EditElement/Navigation'
+import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 
 import * as actions from 'actions'
 
@@ -42,7 +42,8 @@ class EditElement extends React.Component {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
 		let { curData } = editConfig
-		if (curData.compIdx === idx && curData.cusCompIdx < 0) return
+		let { compIdx, cusCompIdx, contentType } = curData
+		if (compIdx === idx && cusCompIdx < 0 && contentType === 'comp') return
 		curData.compIdx    = idx
 		curData.parentComp = null
 		actions.updateCur(curData)	// 更新 当前数据

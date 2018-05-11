@@ -102,7 +102,7 @@ class OperateComponent extends React.Component {
 		}
 	}
 	componentWillMount() {
-		this.getUserInfo(() => {
+		// this.getUserInfo(() => {
 			let { type, actions, editConfig } = this.props
 			let { globalData } = editConfig
 			let arr = ['getFloor', 'getCatg', 'getStoreList']
@@ -113,7 +113,7 @@ class OperateComponent extends React.Component {
 			}).catch(e => {
 				console.log(e)
 			})
-		})
+		// })
 	}
 
 	componentDidMount() {
