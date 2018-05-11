@@ -69,9 +69,6 @@ export default function editConfig(state = initialState, action) {
 				sd = sl.list[sl.idx]
 			console.clear()
 			if (parentComp) {
-			// if (!parentComp) {
-			// 	console.log(sd.data)
-			// } else {
 				var da = data.data.components[cusCompIdx]
 				if (da) {
 					let csl = da.styleList,

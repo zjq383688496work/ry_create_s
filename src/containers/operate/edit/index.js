@@ -51,14 +51,6 @@ const cTypeMap = {
 class EditComponent extends React.Component {
 	constructor(props) {
 		super(props)
-		let resolution = props.routeParams.resolution.split('*')
-		this.state = {
-			ryRollScreenDataIndex: 1,
-			range: {
-				width:  parseInt(resolution[0]),
-				height: parseInt(resolution[1])
-			}
-		}
 	}
 
 	componentWillMount() {
@@ -74,7 +66,7 @@ class EditComponent extends React.Component {
 	}
 
 	render() {
-		let { editConfig } = this.props
+		let { editConfig, location } = this.props
 		let theme  = editConfig.globalData.theme
 		let colors = theme.list[theme.idx].colors
 		let { curData } = editConfig
@@ -98,18 +90,17 @@ class EditComponent extends React.Component {
 			<div className="pg-edit-box">
 				<EditHeader/>
 				<div className="pg-body e-flex-box">
-					<div className="pg-left">
+					<div className="pg-left scrollbar">
 						<EditPageManage data={editConfig.pageList} />
 					</div>
-					<div className="pg-center e-flex-box" onClick={this.selectPage.bind(this)}>
-						<EditElement data={editConfig.curPage}></EditElement>
+					<div className="pg-center e-flex-box scrollbar" onClick={this.selectPage.bind(this)}>
+						<EditElement data={editConfig.curPage} location={location}></EditElement>
 					</div>
-					<div className="pg-right">
+					<div className="pg-right scrollbar">
 						{ editTab }
 					</div>
 
-
-					<div className="pg-float e-flex-box">
+					<div className="pg-float e-flex-box scrollbar">
 						{ Object.keys(curData).map((_, i) => {
 							var im = curData[_]
 							return (

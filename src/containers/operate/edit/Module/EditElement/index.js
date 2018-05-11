@@ -32,6 +32,9 @@ import { Icon } from 'antd'
 import './index.less'
 
 class EditElement extends React.Component {
+	constructor(props) {
+		super(props)
+	}
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -54,10 +57,10 @@ class EditElement extends React.Component {
 		e.stopPropagation()
 		let { actions } = this.props
 		let lay = item.data.layout
-		lay.left   = pos.x
-		lay.top    = pos.y
-		lay.width  = ref.offsetWidth
-		lay.height = ref.offsetHeight
+		lay.left   = ~~pos.x
+		lay.top    = ~~pos.y
+		lay.width  = ~~ref.offsetWidth
+		lay.height = ~~ref.offsetHeight
 		actions.updateComp(idx, item)
 		//针对轮播图的单独处理，每次更改大小时都要重新初始化swiper
 	}
@@ -67,8 +70,8 @@ class EditElement extends React.Component {
 		let { actions } = this.props
 		let lay  = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
-		lay.left = d.x
-		lay.top  = d.y
+		lay.left = ~~d.x
+		lay.top  = ~~d.y
 		actions.updateComp(idx, item)
 	}
 
@@ -79,8 +82,9 @@ class EditElement extends React.Component {
 	}
 
 	render() {
-		let { data, actions, editConfig } = this.props
-		let eles   = data.elements || [],
+		let { data, actions, editConfig, location } = this.props
+		let ct     = location.query.ct - 0 || 2,
+			eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
 			color  = data.feature.backgroundColor,
@@ -137,7 +141,7 @@ class EditElement extends React.Component {
 			)
 		})
 		return (
-			<div className="pg-element-parent e-flex-box">
+			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
 				<section className="pg-element" style={bgStyle}>
 					{ childNode }
 				</section>

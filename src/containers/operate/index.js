@@ -117,7 +117,9 @@ class OperateComponent extends React.Component {
 	}
 
 	componentDidMount() {
-		hashHistory.push('/operate/edit/1080*1920/home')
+		// this.props
+		// debugger
+		// hashHistory.push('/operate/edit')
 	}
 
 	render() {
