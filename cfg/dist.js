@@ -16,7 +16,8 @@ let BowerWebpackPlugin = require('bower-webpack-plugin');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
-    entry: path.join(__dirname, '../src/index'),
+    // entry: path.join(__dirname, '../src/index'),
+    entry: [ './src/index', './src/business', './src/view' ],
     output: {
         path: path.join(__dirname, '/../dist'),
         filename: '[name]_[hash:8].js',

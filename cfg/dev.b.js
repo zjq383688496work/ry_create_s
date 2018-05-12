@@ -16,7 +16,7 @@ let config = Object.assign({}, baseConfig, {
 	// 	business: './src/business',
 	// 	view:     './src/view'
 	// },
-	entry: [ './src/index' ],
+	entry: [ './src/business' ],
 	cache: true,
 	devtool: 'eval-source-map',
 	plugins: [
