@@ -63,7 +63,8 @@ export default class Fetch {
 				body: JSON.stringify(config),
 				headers: {
 					'Content-Type': 'application/json;charset=UTF-8'
-				}
+				},
+				credentials: 'include'
 			}, resolve, reject)
 		})
 	}
@@ -102,9 +103,10 @@ export default class Fetch {
 		return new Promise((resolve, reject) => {
 			const newConfig = Object.assign({}, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${common.getAccessToken()}` },
-				body: JSON.stringify(data)
-			});
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data),
+				credentials: 'include'
+			})
 			Fetch.remote(url, newConfig, resolve, reject);
 		});
 	}

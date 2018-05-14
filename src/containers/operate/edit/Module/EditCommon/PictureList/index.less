@@ -81,8 +81,9 @@
 		.left {
 			width:80px;
 			margin-right: 10px;
-			max-height: 150px;
-			&>div {
+			 height: 450px;
+    		overflow-y: auto;
+			&>div { 
 				height:30px;
 				line-height: 30px;
 				width:100%;
@@ -104,7 +105,14 @@
 			flex:1;
 			display: flex;
 			flex-wrap: wrap;
-		    &>div {
+			position: relative; 
+			height:450px; 
+			justify-content: flex-start;
+			.Pagination {
+				position: absolute;
+				bottom: -43px; 
+			}
+		    &>div { 
 		    	margin:10px 0 0 10px; 
 		    	position: relative;
 			    display: inline-block;
@@ -182,6 +190,7 @@
 	}
 	.bottom {
 		height:32px;
+		margin-top: 10px; 
 		button {
 			float:right;
 			margin-left: 10px;

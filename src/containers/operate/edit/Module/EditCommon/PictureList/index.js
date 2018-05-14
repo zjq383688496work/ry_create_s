@@ -8,7 +8,7 @@
 import React from 'react';
 import SkyLight from 'react-skylight';
 import './index.less'
-import { Button, Upload, message,Modal } from 'antd'
+import { Button, Upload, message,Modal,Pagination } from 'antd'
 const commonCss = {
 	dialogStyles: {
 		height: 'auto',
@@ -45,42 +45,52 @@ export default class PictureList extends React.Component {
 	state = {
 		choosed_img:[],
 		imgTypes:[],
-		videoTypes:[],
 		imgList:[],
-		videoList:[]
-	}
+		page_img:{},
+		currentPage:1,
+		page:1,
+		page_size:10,
+		pageSize:10,
+		name:'',
+		groupId:39
+	} 
 	componentDidMount(){ 
-		const {type} = this.props;
-		if(type == 'video'){
-			Ajax.get('/store/videoListType').then(res => {
-				this.setState({
-					videoTypes:res.data
-				})
-			})
-			this.getVideoList();
-		}else{
-			Ajax.get('/store/imgListType').then(res => {
-				this.setState({
-					imgTypes:res.data
-				})
-			})
-			this.getImgList();
-		}
-	}
-	getImgList = () => {
-		Ajax.get('/store/imgList').then(res => {
-				this.setState({
-					imgList:res.data
-				})
-			})
+		Ajax.postJSON('/easy-smart/ySourceGroupManage/query',{type:1}).then(res => {
+			this.setState({ 
+				imgTypes:res.data
+			}) 
+		})
+		this.getImgList();  
 	};
-	getVideoList = () => {
-		Ajax.get('/store/videoList').then(res => {
-				this.setState({
-					videoList:res.data
-				}) 
-			})  
-	}
+	 
+	getImgList = (str,id) => {
+		if(str == 'page'){
+			this.setState({
+				page:id
+			}) 
+		}else if(str == 'groupId'){
+			this.setState({
+				groupId:id
+			}) 
+		}     
+		setTimeout(()=>{
+			let postData = { 
+				page:this.state.page,
+				name:this.state.name,
+				currentPage:this.state.currentPage,
+				pageSize:this.state.pageSize,
+				page_size:this.state.page_size,
+				groupId:this.state.groupId,
+				type:1
+			};
+			Ajax.postJSON('/easy-smart/ySourceManage/query',postData).then(res => {
+				this.setState({ 
+					imgList:res.data,
+					page_img:res.page 
+				})  
+			})   
+		},10) 
+	};   
 	cancelClick = () => {
 		this.addImgModal.hide()
 	}
@@ -99,7 +109,7 @@ export default class PictureList extends React.Component {
 		this.setState({choosed_img:url});
 	}
 	render() {
-		let { firstAdd,type } = this.props
+		let { firstAdd } = this.props
 		return (
 			<div>
 				<SkyLight
@@ -113,18 +123,12 @@ export default class PictureList extends React.Component {
 				<div className="outer">
 					<div className="add_title">
 						<ul>
-							{
-								type == 'video' ? <li className='active'>视频</li> :
-								<li className='active'>图片</li>
-							}
+							<li className='active'>图片</li>
 						</ul>
 						<div className="input_search"><input placeholder="搜索" /></div>
-						<div className="search">搜索</div>
+						<div className="search" onClick={this.getList}>搜索</div>
 					</div>
-					{
-						type == 'video' ? <VideoModule save={this.save_img} getVideoList={this.getVideoList} videoTypes={this.state.videoTypes} videoList={this.state.videoList} type={type} /> :
-						<ImgModule save={this.save_img} getImgList={this.getImgList} firstAdd={firstAdd} imgTypes={this.state.imgTypes} imgList={this.state.imgList} type={type} />
-					} 
+					<ImgModule save={this.save_img} page_img={this.state.page_img} getImgList={this.getImgList} firstAdd={firstAdd} imgTypes={this.state.imgTypes} imgList={this.state.imgList} />
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
 						<Button onClick={this.close}>取消</Button>
@@ -150,10 +154,10 @@ class ImgModule extends React.Component {
 				imgTypes:imgTypes
 			}) 
 	}
-	chooseType(id) {
-		this.props.getImgList();
+	chooseType(str,id) {
+		this.props.getImgList(str,id);
 	}
-	chooseImg(img) {
+	chooseImg(img) { 
 		let firstAdd = this.props.firstAdd
 		let img_list = this.state.imgList
 		if(firstAdd){
@@ -180,8 +184,10 @@ class ImgModule extends React.Component {
 	render() {
 		const Upload_props = {
 			name: 'file',
-			action: '/chaoyue/uploadImage',
+			action: '/mcp-gateway/utility/uploadImage ',
 			data: {
+				mallId:123,
+				name:'along' 
 			},
 			headers: {
 				authorization: 'authorization-text',
@@ -197,6 +203,7 @@ class ImgModule extends React.Component {
 				}
 			},
 			 beforeUpload(file) {
+			 	debugger; 
 				  const isJPG = file.type === 'image/jpeg'||file.type === 'image/png'; 
 				  if (!isJPG) {
 				    message.error('You can only upload JPG file!');
@@ -206,8 +213,9 @@ class ImgModule extends React.Component {
 				    message.error('Image must smaller than 2MB!');
 				  }
 				  return isJPG && isLt2M;
-				}
-		}
+				}  
+		} 
+		const { page_img } = this.props;
 		return (
 			<div className="content">
 				<div className="left">
@@ -222,118 +230,26 @@ class ImgModule extends React.Component {
 					{
 						this.state.imgList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseImg.bind(this)}></List> )
 					}
+					<Pagination className="Pagination" onChange={page=>{this.chooseType('page',page)}} defaultCurrent={page_img.currentPage} total={page_img.totalPage} pageSize={page_img.pageSize} />
 				</div>
-			</div>
-		)
-	}
-}
-
-class VideoModule extends React.Component {
-	state = {
-		videoTypes:[
-			
-		],
-		videoList:[
-			
-		]
-	}
-	
-	componentWillReceiveProps(props){
-		let videoList = props.videoList;
-		let videoTypes = props.videoTypes;
-		 this.setState({
-				videoList:videoList,
-				videoTypes:videoTypes
-			})
-	}
-	chooseType(id) {
-		this.props.getVideoList();  
-	}
-	chooseVideo = id => { 
-		let videoList = this.state.videoList
-		videoList = videoList.map(item=>{
-			item.id == id ? item.isClicked = !item.isClicked : item.isClicked = false;
-			return item
-		});
-		this.setState({
-				videoList:videoList
-			})
-		let choosed_video = videoList.filter(item => item.isClicked == true);
-		this.props.save(choosed_video)
-	}
-	upload_img = () => {
-	   // alert('上传本地图片')
-	} 
-	render() {
-		/*const Upload_props = {
-			name: 'file',
-			action: '/chaoyue/uploadImage',
-			data: {
-			},
-			headers: {
-				authorization: 'authorization-text',
-			},
-			onChange(info) {
-				if (info.file.status !== 'uploading') {
-					console.log(info.file, info.fileList);
-				}
-				if (info.file.status === 'done') {
-					message.success(`${info.file.name} file uploaded successfully`);
-				} else if (info.file.status === 'error') {
-					message.error(`${info.file.name} file upload failed.`);
-				}
-			},
-			 beforeUpload(file) {
-			  const isVIDEO = file.type === 'video/mp4'; 
-			  if (!isJPG) { 
-			    message.error('You can only upload MP4 file!');
-			  }  
-			  const isLt2M = file.size / 1024 / 1024 < 20;
-			  if (!isLt2M) {
-			    message.error('Image must smaller than 20MB!'); 
-			  }
-			  return isVIDEO && isLt20M;
-			} 
-		} */
-		/*<Upload {...Upload_props}>
-						<div className="add_img"><div className="add_text">+</div><div>上传视频</div></div>
-					</Upload>*/ 
-		return (
-			<div className="content">
-				<div className="left">
-					{
-						this.state.videoTypes.map((item,index) => <Type key={index} item={item} choose_one={this.chooseType}></Type>)
-					}
-				</div> 
-				<div className="right">
-					
-					{ 
-						this.state.videoList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseVideo}></List> )
-					}
-				</div>
-			</div>
+			</div> 
 		)
 	}
 }
 
 function Type({item,choose_one}){
 	return (
-		<div onClick={()=>{choose_one(item.id)}}>{item.name}</div> 
+		<div onClick={()=>{choose_one('groupId',item.id)}}>{item.name}</div> 
 	)
 }
 
-function List({item,choose_one,type}){
-	return (
+function List({item,choose_one}){
+	return ( 
 		<div onClick={()=>{choose_one(item.id)}} className={item.isClicked?'choosed':''}>
 			<div className={item.isClicked?'icon':''}>
 				<div className="right-symbol"></div>
 			</div>
-			{
-				type == 'video' ? <video src={item.url} controls="controls">
-						您的浏览器不支持 video 标签。
-					</video> :
-					<img src={item.url} />
-			}  
-		</div> 
+			<img src={item.url} />
+		</div>  
 	)
 }
