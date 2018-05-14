@@ -14,8 +14,10 @@ import reducer      from 'store/reducers'
 import { createStore, applyMiddleware }         from 'redux'
 import { Router, Route, hashHistory, Redirect } from 'react-router'
 
-import Operate     from 'operate'
-import OperateEdit from 'operate/edit'
+import Operate      from 'operate'
+import OperateEdit  from 'operate/edit'
+import Business     from 'business'
+import BusinessEdit from 'business/edit'
 import View from 'view'
 
 import NoMatch     from './containers/NoMatch'
@@ -31,15 +33,18 @@ const store = createStore(
 )
 
 // Render the main component into the dom
-            // <Redirect from="/" to="operate" />
+			// <Redirect from="/" to="operate" />
 ReactDOM.render((
-    <Provider store={store}>
-        <Router history={hashHistory}>
-            <Route path="operate" component={Operate}>
-                <Route path="edit" component={OperateEdit} />
-            </Route>
-            <Route path="view" component={View} />
-            <Route path="*" component={NoMatch} />
-        </Router>
-    </Provider>
+	<Provider store={store}>
+		<Router history={hashHistory}>
+			<Route path="operate" component={Operate}>
+				<Route path="edit" component={OperateEdit} />
+			</Route>
+			<Route path="business" component={Business}>
+				<Route path="edit" component={BusinessEdit} />
+			</Route>
+			<Route path="view" component={View} />
+			<Route path="*" component={NoMatch} />
+		</Router>
+	</Provider>
 ), document.getElementById('app'))

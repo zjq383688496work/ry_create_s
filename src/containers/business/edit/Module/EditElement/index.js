@@ -25,29 +25,35 @@ import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 
 import * as actions from 'actions'
 
-import { Icon } from 'antd'
-
 import './index.less'
 
-class Element extends React.Component {
-	constructor(props) {
-		super(props)
-	}
+class EditElement extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
 
 	componentWillUnmount() {}
 
+	selectComp(e, data, idx) {
+		e.stopPropagation()
+		let { actions, editConfig } = this.props
+		let { curData } = editConfig
+		let { compIdx, cusCompIdx, contentType } = curData
+		if (compIdx === idx && cusCompIdx < 0 && contentType === 'comp') return
+		curData.compIdx    = idx
+		curData.parentComp = null
+		actions.updateCur(curData)	// 更新 当前数据
+		actions.selectComp(data)
+	}
+
 	render() {
 		let { data, actions, editConfig, time, location } = this.props
-		let ct     = location.query.ct || 2,
+		let ct     = location.query.ct - 0 || 2,
 			eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
 			color  = data.feature.backgroundColor,
 			type   = color.type
-		window.curThemeColor = colors
 		if (!colors[type] && type !== 'custom') {
 			let curData = editConfig.curData
 			color.type = 'custom'
@@ -58,8 +64,7 @@ class Element extends React.Component {
 			var compName  = _.name,
 				layout    = _.data.layout,
 				styleIdx  = _.styleList.idx,
-				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
-				isEdit    = true,
+				csn       = `ry-jimmy`,
 				compCon
 			if (compName === 'picture')              compCon = (<Picture         data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			else if (compName === 'web')             compCon = (<Web             data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
@@ -75,11 +80,18 @@ class Element extends React.Component {
 			else if (compName === 'storeDetails')    compCon = (<StoreDetails    data={_} actions={actions} type={`Style${styleIdx + 1}`} idx={i} csn={csn} />)
 			if (!compCon) return false
 			return (
-				<div key={i} className="pge-layout" style={layout}>{ compCon }</div>
+				<div
+					key={i}
+					className={`pge-layout${i === editConfig.curData.compIdx? ' s-active': ''}`}
+					style={layout}
+					onClick={e => this.selectComp(e, _, i)}
+				>
+					{ compCon }
+				</div>
 			)
 		})
 		return (
-			<div className={`pg-element-view e-flex-box pg-element-${ct}`}>
+			<div className={`pg-element-business e-flex-box pg-element-${ct}`}>
 				<section className="pg-element" style={bgStyle}>
 					{ childNode }
 				</section>
@@ -88,7 +100,7 @@ class Element extends React.Component {
 	}
 }
 
-Element.defaultProps = {
+EditElement.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -100,4 +112,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Element)
+)(EditElement)

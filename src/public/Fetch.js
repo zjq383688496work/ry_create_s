@@ -1,7 +1,7 @@
-import 'whatwg-fetch';
+import 'whatwg-fetch'
 import { message } from 'antd'
 
-const common = {};
+const common = {}
 
 common.getAccessToken = function () {
 	function getQueryString(name) {
@@ -105,6 +105,18 @@ export default class Fetch {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(data),
+				credentials: 'include'
+			})
+			Fetch.remote(url, newConfig, resolve, reject);
+		});
+	} 
+	//图片上传 
+	static postJSONIMG(url, data) {
+		return new Promise((resolve, reject) => {
+			const newConfig = Object.assign({}, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
+				body: new URLSearchParams(data), 
 				credentials: 'include'
 			})
 			Fetch.remote(url, newConfig, resolve, reject);

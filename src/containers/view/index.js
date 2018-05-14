@@ -71,6 +71,7 @@ class ViewComponent extends React.Component {
 
 	render() {
 		let { location, editConfig } = this.props
+		window.envType = 'view'
 		return this.state.load
 		?
 		(
