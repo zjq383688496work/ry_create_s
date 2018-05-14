@@ -11,18 +11,19 @@ import ReactDOM     from 'react-dom'
 import { Provider } from 'react-redux'
 import thunk        from 'redux-thunk'
 import reducer      from 'store/reducers'
-import { createStore, applyMiddleware }         from 'redux'
-import { Router, Route, hashHistory, Redirect } from 'react-router'
+import { createStore, applyMiddleware } from 'redux'
+import { Router, Route, hashHistory }   from 'react-router'
 
-import Operate     from 'operate'
-import OperateEdit from 'operate/edit'
-import View from 'view'
+import View        from 'view'
 
 import NoMatch     from './containers/NoMatch'
+import tools       from 'services/tools'
 
 import 'styles/common.less'
 import 'styles/animate.less'
 import 'antd/dist/antd.less'
+
+tools()
 
 const store = createStore(
 	reducer,
@@ -30,16 +31,14 @@ const store = createStore(
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+debugger
+
 // Render the main component into the dom
-            // <Redirect from="/" to="operate" />
 ReactDOM.render((
-    <Provider store={store}>
-        <Router history={hashHistory}>
-            <Route path="operate" component={Operate}>
-                <Route path="edit" component={OperateEdit} />
-            </Route>
-            <Route path="view" component={View} />
-            <Route path="*" component={NoMatch} />
-        </Router>
-    </Provider>
+	<Provider store={store}>
+		<Router history={hashHistory}>
+			<Route path="view" component={View}>
+			<Route path="*" component={NoMatch}>
+		</Router>
+	</Provider>
 ), document.getElementById('app'))
