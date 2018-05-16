@@ -10,9 +10,11 @@ module.exports = {
 		reset:       1,
 		listByStore: 1
 	},
+	storeInstro: {
+		text:        	   1, 
+		wonderfulActivity: 1    
+	},   
 	storeDetails: {
-		picture:     1,
-		text:        1,
-		wonderfulActivity: 1
+		 
 	}
 }

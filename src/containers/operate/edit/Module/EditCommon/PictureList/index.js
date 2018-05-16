@@ -70,11 +70,11 @@ export default class PictureList extends React.Component {
 			}) 
 		}else if(str == 'groupId'){
 			this.setState({
-				groupId:id
-			}) 
-		}     
-		setTimeout(()=>{
-			let postData = { 
+				groupId: id
+			})
+		}
+		setTimeout(() => {
+			let postData = {
 				page:this.state.page,
 				name:this.state.name,
 				currentPage:this.state.currentPage,
@@ -83,14 +83,33 @@ export default class PictureList extends React.Component {
 				groupId:this.state.groupId,
 				type:1
 			};
-			Ajax.postJSON('/easy-smart/ySourceManage/query',postData).then(res => {
-				this.setState({ 
-					imgList:res.data,
-					page_img:res.page 
-				})  
-			})   
-		},10) 
-	};   
+			// Ajax.postJSON('/easy-smart/ySourceManage/query',postData).then(res => {
+				this.setState({
+					// imgList:res.data,
+					// page_img:res.page
+					imgList: [
+						{
+							id: 1,
+							url: 'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+						},
+						{
+							id: 2,
+							url: 'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041093.png'
+						},
+						{
+							id: 3,
+							url: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
+						}
+					],
+					page_img: {
+						currentPage: 1,
+						totalPage: 2,
+						pageSize: 10
+					}
+				})
+			// })
+		}, 10)
+	}
 	cancelClick = () => {
 		this.addImgModal.hide()
 	}
@@ -205,7 +224,7 @@ class ImgModule extends React.Component {
 			        };
 			    })(info.file);
 				 reader.readAsDataURL(info.file);
-			}, 
+			},
 			onChange(info) {
 				if (info.file.status !== 'uploading') {
 					console.log(info.file, info.fileList);
@@ -216,18 +235,18 @@ class ImgModule extends React.Component {
 					message.error(`${info.file.name} file upload failed.`);
 				}
 			},
-			 beforeUpload(file) {
-			 	 const isJPG = file.type === 'image/jpeg'||file.type === 'image/png'; 
-				  if (!isJPG) {
-				    message.error('You can only upload JPG file!');
-				  } 
-				  const isLt2M = file.size / 1024 / 1024 < 2;
-				  if (!isLt2M) {
-				    message.error('Image must smaller than 2MB!');
-				  }
-				  return isJPG && isLt2M;
-				}  
-		} 
+			beforeUpload(file) {
+				const isJPG = file.type === 'image/jpeg'||file.type === 'image/png';
+				if (!isJPG) {
+					message.error('You can only upload JPG file!');
+				}
+				const isLt2M = file.size / 1024 / 1024 < 2;
+				if (!isLt2M) {
+					message.error('Image must smaller than 2MB!');
+				}
+					return isJPG && isLt2M;
+				}
+		}
 		const { page_img } = this.props;
 		return (
 			<div className="content">

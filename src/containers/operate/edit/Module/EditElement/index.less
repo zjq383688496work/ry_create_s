@@ -110,6 +110,7 @@
 		}
 	}
 	&.s-active {
+		z-index: 100;
 		&:after {
 			border: 1px solid #000;
 		}
@@ -127,9 +128,15 @@
 			display: block;
 		}
 	}
-	.react-draggable:hover {
-		.handle-drag-custom {
-			display: block;
+	.react-draggable {
+		.pge-remove {
+			display: none;
+		}
+		&:hover {
+			.handle-drag-custom,
+			.pge-remove-custom {
+				display: block;
+			}
 		}
 	}
 }

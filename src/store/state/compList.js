@@ -90,6 +90,27 @@ module.exports = [
 			]
 		},
 		{
+			icon: 'storeInstro-control',
+			name: '店铺简介',
+			key:  'storeInstro',
+			child: [
+				{
+					icon: 'text-control',
+					name: '店铺简介',
+					key:  'text'
+				},
+				{
+					icon: 'text-control',
+					name: '店铺详情',
+					key:  'text'
+				},{
+					icon: 'wonderfulActivity-control',
+					name: '轮播图片',
+					key:  'wonderfulActivity'
+				}
+			]
+		},
+		{
 			icon: 'storeDetails-control',
 			name: '店铺详情',
 			key:  'storeDetails'
