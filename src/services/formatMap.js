@@ -28,7 +28,12 @@ const formatMap = {
 		borderRadius: 1,
 		boxShadow:    1,
 		textShadow:   1,
-		transform:    1
+		transform:    1,
+		border:       1,
+		borderTop:    1,
+		borderRight:  1,
+		borderBottom: 1,
+		borderLeft:   1
 	},
 	color: {
 		color:           1,

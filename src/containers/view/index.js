@@ -47,10 +47,9 @@ class ViewComponent extends React.Component {
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },
-					curPage: cfg.pageContent[cur.router],
-					java: res.data,
-					isView: true
+					curPage: cfg.pageContent[cur.router]
 				}
+				window.tempCfg = res.data
 				actions.updateConfig({ ...newCfg, ...cfg })
 				resolve('模板数据')
 			}).catch(e => reject(e))
@@ -63,7 +62,6 @@ class ViewComponent extends React.Component {
 		let arr = ['getConfig']
 		let promises = arr.map(key => new Promise(this[key](globalData)))
 		Promise.all(promises).then((o) => {
-			actions.updateGlobal(globalData)
 			this.setState({ load: true })
 		// }).catch(e => {
 		// 	console.log(e)

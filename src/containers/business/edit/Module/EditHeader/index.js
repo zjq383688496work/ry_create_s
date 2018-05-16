@@ -39,19 +39,17 @@ class Header extends React.Component {
 	}
 
 	formatStyle(data) {
+		let { style, layout } = data
 		Object.keys(data.style).map(_ => style[_] = cssFormatByTerm(style[_]))
-		debugger
-		data.layout = cssFormatByTerm(data.layout)
-		console.log(style)
+		data.layout = cssFormatByTerm(layout)
 	}
 	formatEle(obj) {
 		let { type, data, styleList } = obj
 		if (type === 'base') {
 			this.formatStyle(data)
-			// delete obj.styleList.list
 			delete obj.auth
-			// styleList.list.map(_ => this.formatStyle(_.data.style))
 		} else if (type === 'advanced') {
+			data.layout = cssFormatByTerm(data.layout)
 			data.components.map(_ => this.formatEle(_))
 		}
 	}
@@ -90,7 +88,7 @@ class Header extends React.Component {
 			name:         this.state.name,
 			templateId:   templateId,
 			templateThemeId: editConfig.globalData.theme.idx || 0,
-			mallId: uif.userInfo.mallId
+			mallId: uif.userInfo.mallMid
 		}
 		if (id) da.id = id
 		Ajax.post(`/mcp-gateway/case/${query.id? 'update': 'save'}`, da).then(res => {
