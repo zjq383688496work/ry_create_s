@@ -37,13 +37,15 @@ module.exports = {
 	// 图片
 	picture:           authInit(require('./picture')),
 	// 天气日期
-	date:              authInit(require('./date')),
+	time:              authInit(require('./time')),
 	// 轮播图
 	swiperImage:       authInit(require('./swiperImage')),
 	// 精彩活动
 	wonderfulActivity: authInit(require('./wonderfulActivity')),
 	// 文本
 	text:              authInit(require('./text')),
+	// 天气
+	weather:           authInit(require('./weather')),
 	// 地址和电话
 	address:           authInit(require('./address')),
 	//按钮
@@ -77,5 +79,7 @@ module.exports = {
 	// 店铺详情
 	storeDetails:      authInit(require('./storeDetails')),
 	// 店铺简介
-	storeInstro:      authInit(require('./storeInstro'))
+	storeInstro:      authInit(require('./storeInstro')),
+	// 2d地图组件
+	map2D:      authInit(require('./map2D'))
 }

@@ -73,6 +73,11 @@ class RouterJump extends React.Component {
 				</OptGroup>
 			)
 		})
+		let featureNode = (
+			<OptGroup label={'功能'}>
+				<Option value="back">返回</Option>
+			</OptGroup>
+		)
 		return (
 			<Select
 				value={content.url || ''}
@@ -80,7 +85,11 @@ class RouterJump extends React.Component {
 				onChange={this.onChange.bind(this)}
 			>
 				<Option value={''}>无</Option>
+				{ 
+					data.name == 'button' ? <Option value={'back'}>返回上一级</Option> : null
+				}     
 				{ selectNode }
+				{ featureNode }
 			</Select>
 		)
 	}
