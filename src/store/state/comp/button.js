@@ -54,7 +54,7 @@ const data = {
 		}
 	},
 	content: {
-		text:   '文字内容',	// 文字内容
+		text:   '按钮',	// 文字内容
 		router: {} 			// 路由
 	},	
 	animation: {
