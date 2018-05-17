@@ -207,8 +207,8 @@ class OperateComponent extends React.Component {
 						url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
 					}
 				],
-				text: '发斯蒂芬斯蒂芬斯蒂芬和法国恢复'
-			}
+					text: '优衣库/UNIQLO'
+				}
 			resolve('店铺详情')
 		}
 	}
