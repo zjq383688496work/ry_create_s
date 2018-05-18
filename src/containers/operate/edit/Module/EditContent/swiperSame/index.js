@@ -42,7 +42,7 @@ const setOptions = {
 	]},
 
  
-	pagination:{name:'分页显示',type:'Switch',true:true,false:false},
+	/*pagination:{name:'分页显示',type:'Switch',true:true,false:false},
 	type :{name:'显示类型',type:'Select',option: [
 		{ name: '圆点', value: 'bullets' },
 		{ name: '分布式', value: 'fraction' },
@@ -54,8 +54,8 @@ const setOptions = {
 	]}, 
 	dynamicBullets:{name:'动态隐藏',type:'Switch',true:true,false:false},
 	clickable:{name:'点击切隐藏分页器',type:'Switch',true:true,false:false},
-	hideOnClick:{name:'点击切换轮播',type:'Switch',true:true,false:false},
-
+	hideOnClick:{name:'点击切换轮播',type:'Switch',true:true,false:false},*/
+ 
 	layout :{name:'布局选择',type:'Select',option: [
 		{ name: '方式一', value: 1 },
 		{ name: '方式二', value: 2 },
@@ -71,15 +71,11 @@ class SwiperSame extends React.Component {
 		let { parentComp } = curData 
 		if(key == 'delay'||key=='reverseDirection'){
 			data.feature['swiperOptions']['autoplayOptions'][key] = val
-		}else if(key == 'type'||key=='progressbarOpposite'||key=='dynamicBullets'||key=='clickable'||key=='hideOnClick'){
-			data.feature['swiperOptions']['paginationOptions'][key] = val
-		}else if(key != 'layout'){
-			 data.feature['swiperOptions'][key] = val
-		}   
-		if(key == 'progressbarOpposite'){
-			data.feature['swiperOptions']['paginationOptions'][key] = Boolean(val); 
-		} 
-		    
+		}else if(key == 'spaceBetween'||key=='slidesPerView'||key=='centeredSlides'){
+			data.feature['swiperOptions']['slideOptions'][key] = val
+		}else{ 
+			data.feature['swiperOptions'][key] = val 
+		}
 		actions.updateComp(null, parentComp? parentComp: data)
 	}; 
 	onChangeAuth(val, key) {
@@ -162,18 +158,18 @@ class SwiperSame extends React.Component {
 		let dom_show_2 = null,dom_show_3 = null;
 		if(swiperOptions['autoplay']){
 			dom_show_2 = this.renObj(data,swiperOptions['autoplayOptions'])
-		}   
-		if(swiperOptions['pagination']){
-			dom_show_3 = this.renObj(data,swiperOptions['paginationOptions'])
-		}   
-		return (  
+		}
+		if(swiperOptions['effect'] == 'slide'){ 
+			dom_show_3 = this.renObj(data,swiperOptions['slideOptions'])
+		}
+		return (
 			<Collapse activeKey={['0']} onChange={this.cb}>
 				<Panel header='轮播设置' key={0}>
 					{ dom_show_1 }{ dom_show_2 }{ dom_show_3 }
-				</Panel>   
-			</Collapse>	 
+				</Panel>
+			</Collapse>
 		)
 	}
-} 
+}
 
 export default SwiperSame

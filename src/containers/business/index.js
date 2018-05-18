@@ -29,6 +29,23 @@ class BusinessComponent extends React.Component {
 		let { actions } = this.props
 		actions.updateTime()
 	}
+	getWeather() {
+		return (resolve, reject) => {
+			// Ajax.post(`/easy-smart-service/member/pm25`, { area: '021' }).then(res => {
+				window.weather = {
+					temp: '33℃',
+					type: '小雨',
+					iconName: '07.png',
+					humidity: null,
+					direct: '西南风',
+					power: '<3级',
+					aqi: '108',
+					aqiInfo: '轻度污染'
+				}
+				resolve('天气数据')
+			// }).catch(e => reject(e))
+		}
+	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
 		let { query } = location
@@ -121,7 +138,7 @@ class BusinessComponent extends React.Component {
 		this.getUserInfo(() => {
 			let { actions, editConfig } = this.props
 			let { globalData } = editConfig
-			let arr = ['getConfig']
+			let arr = ['getConfig', 'getWeather']
 			let promises = arr.map(key => new Promise(this[key](globalData)))
 			Promise.all(promises).then((o) => {
 				this.setState({ load: true })
