@@ -98,7 +98,7 @@ export default class PictureList extends React.Component {
 						},
 						{
 							id: 3,
-							url: 'http://img.weiye.me/zcimgdir/headimg/32d7529d24439f8c4a22f753c918326e_o.jpg'
+							url: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191205157047.png'
 						}
 					],
 					page_img: {

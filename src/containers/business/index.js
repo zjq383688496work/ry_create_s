@@ -155,6 +155,7 @@ class BusinessComponent extends React.Component {
 
 	render() {
 		window.envType = 'business'
+		document.title = '作品编辑器'
 		return this.state.load
 		?
 		(
