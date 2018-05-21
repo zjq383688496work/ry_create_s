@@ -2,6 +2,7 @@
 const data = {
 	style:    {
 		text: {
+			display:        'none',
 			color:          { type: 'custom', color: '#000' },
 			fontSize:       12,
 			fontStyle:      'normal',
@@ -13,8 +14,8 @@ const data = {
 			borderRadius:    {
 				topLeft:     6,
 				topRight:    6,
-				bottomRight:  6,
-				bottomLeft: 6
+				bottomRight: 6,
+				bottomLeft:  6
 			},
 		}
 	},

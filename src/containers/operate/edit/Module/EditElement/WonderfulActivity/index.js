@@ -75,8 +75,9 @@ class WonderfulActivity extends React.Component {
 		return new_obj  
 	}
 	render() {
-		let { data } = this.props 
-		const content = data.data.content
+		let { data } = this.props
+		let type = getAttr(data.data.content)
+		const content = type === 'Array'? data.data.content: data.data.content.list
 		return ( 
 			<div className="e-WonderfulActivity">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
