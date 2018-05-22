@@ -16,15 +16,15 @@ class Video extends React.Component {
 
 	render() {
 		let { data } = this.props
-		// console.log(1, this.props)
+		const content = data.data.content
 		return (
 			<div className="e-video">
-				<video src={data.data.content.video || data.data.content.src} controls="controls">
+				<video src={content.src || content.video.video} controls={false} autoPlay loop>
 					您的浏览器不支持 video 标签。
 				</video>
-			</div>    
-		) 
+			</div>
+		)
 	}
-} 
+}
 
 export default Video
