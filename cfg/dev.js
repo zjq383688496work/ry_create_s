@@ -28,7 +28,8 @@ let config = Object.assign({}, baseConfig, {
 			searchResolveModulesDirectories: false
 		})
 	],
-	module: defaultSettings.getDevModules(),
+	module: defaultSettings.getDevModules()
+	// module: defaultSettings.getDefaultModules()
 });
 
 let target = 'http://java1.rongyi.com'
