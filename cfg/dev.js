@@ -71,6 +71,7 @@ config.devServer = {
 		// 保存&编辑
 		'/mcp-gateway': {
 			target: 'http://192.168.1.52:10078',
+			// target: 'http://192.168.1.224:10330',
 			secure: false,
 			changeOrigin: 'true',
 		},
