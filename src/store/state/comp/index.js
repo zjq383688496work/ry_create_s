@@ -24,7 +24,7 @@ const address = extend(deepCopy(require('./address')), {
 		type:'address',  
 		content: { 
 			text: 'L2  2817',
-			img: {type:'custom',img:'http://rongyi.b0.upaiyun.com/commodity/text/201805191128322385.png'}
+			img:{type:'custom',img:'http://rongyi.b0.upaiyun.com/commodity/text/201805191128322385.png'}
 		}  
 	}
 }) 
