@@ -76,6 +76,7 @@ export default class PictureList extends React.Component {
 	getImgList = (str, id) => {
 		let currentPage = this.state.currentPage
 		if (str == 'page') {
+			currentPage = id
 			this.setState({ currentPage: id })
 		} else if (str == 'groupId') {
 			currentPage = 1
