@@ -73,57 +73,51 @@ export default class PictureList extends React.Component {
 	}
 	componentDidMount(){}
 
-	getImgList = (str,id) => {
-		if(str == 'page'){
-			this.setState({
-				currentPage:id
-			})
-		}else if(str == 'groupId'){
-			this.setState({
-				groupId: id
-			})
+	getImgList = (str, id, currentPage = this.state.currentPage) => {
+		if (str == 'page') {
+			this.setState({ currentPage: id })
+		} else if (str == 'groupId') {
+			this.setState({ groupId: id })
 		}
-		setTimeout(() => {
-			let postData = {
-				page:this.state.page,
-				name:this.state.name,
-				currentPage:this.state.currentPage,
-				pageSize:this.state.pageSize,
-				page_size:this.state.page_size,
-				groupId:this.state.groupId,
-				type:1
-			}
-			var ty = 'ySourceManage'
-			if (getEnv() === 'business') {
-				postData.mallId = uif.userInfo.mallMid
-				ty = 'sourceManage'
-			}
-			// Ajax.postJSON(`/easy-smart/${ty}/query`,postData).then(res => {
-				this.setState({
-					// imgList:res.data,
-					// page_img:res.page
-					imgList: [
-						{
-							id: 1,
-							url: 'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
-						},
-						{
-							id: 2,
-							url: 'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041093.png'
-						},
-						{
-							id: 3,
-							url: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191205157047.png'
-						}
-					],
-					page_img: {
-						currentPage: 1,
-						totalPage: 2,
-						pageSize: 10
+		let postData = {
+			page:this.state.page,
+			name:this.state.name,
+			currentPage: currentPage,
+			pageSize:this.state.pageSize,
+			page_size:this.state.page_size,
+			groupId:this.state.groupId,
+			type:1
+		}
+		var ty = 'ySourceManage'
+		if (getEnv() === 'business') {
+			postData.mallId = uif.userInfo.mallMid
+			ty = 'sourceManage'
+		}
+		// Ajax.postJSON(`/easy-smart/${ty}/query`,postData).then(res => {
+			this.setState({
+				// imgList:res.data,
+				// page_img:res.page
+				imgList: [
+					{
+						id: 1,
+						url: 'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+					},
+					{
+						id: 2,
+						url: 'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041093.png'
+					},
+					{
+						id: 3,
+						url: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191205157047.png'
 					}
-				})
-			// })
-		}, 10)
+				],
+				page_img: {
+					currentPage: 1,
+					totalPage: 2,
+					pageSize: 10
+				}
+			})
+		// })
 	}
 	cancelClick = () => {
 		this.addImgModal.hide()
@@ -184,9 +178,9 @@ class ImgModule extends React.Component {
 	}
 	chooseType(str,id) {
 		this.setState({
-			current: id
+			current: 1
 		})
-		this.props.getImgList(str,id);
+		this.props.getImgList(str, id, 1)
 	}
 	chooseImg(img) {
 		let img_list = this.state.imgList
