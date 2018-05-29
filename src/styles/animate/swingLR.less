@@ -1,0 +1,12 @@
+/* 摇摆 */
+.swingLR {
+	transform-origin: center top !important;
+	animation-name:   swingLR !important;
+	animation-timing-function: linear !important;
+}
+@keyframes swingLR {
+	0%  { transform: rotateZ(0); opacity: 1 }
+	33% { transform: rotateZ(20deg); }
+	66% { transform: rotateZ(-20deg); }
+	100%{ transform: rotateZ(0); opacity: 1 }
+}
