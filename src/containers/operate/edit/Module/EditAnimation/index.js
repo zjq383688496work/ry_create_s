@@ -119,9 +119,9 @@ class EditAnimation extends React.Component {
 		let sTime = this.renderSlider({ max: 20, step: .1 }, delay,     'delay')
 		let dTime = this.renderSlider({ max: 20, step: .1 }, duration,  'duration')
 		let iCountSwitch = this.renderSwitch({ option: [
-			{ name: '数字', value: 0 },
+			{ name: '数字', value: 1 },
 			{ name: '无限', value: 'infinite' }
-		] }, iterationCount === 'infinite'? 'infinite': 0, 'iterationCount')
+		] }, iterationCount === 'infinite'? 'infinite': 1, 'iterationCount')
 		let iCount = iterationCount !== 'infinite'? this.renderSlider({ min: 1, max: 100, step: 1 }, iterationCount, 'iterationCount'): false
 		return (
 			<section className="pg-anime">
