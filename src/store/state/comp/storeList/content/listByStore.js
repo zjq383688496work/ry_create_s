@@ -1,30 +1,55 @@
 // 字母排序
 const data = {
+	layout: {
+		position: 'absolute',
+		top:  75,
+		left: 40,
+		width:    440,
+		height:   300
+	},
 	style:     {
+		image: {
+			width:  40,
+			height: 40
+		},
+		posIcon: {
+			width:  8,
+			height: 8,
+			marginRight: 2,
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191128322385.png' },
+			backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000' },
+		},
+		title: {
+			color: { type: 'title', color: '#333' },
+		},
+		text: {
+			color: { type: 'main', color: '#333' },
+		},
 		filterBox: {
-			fontSize:       8, 
+			fontSize:       8,
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textDecoration: 'none',
 		},
 		filter: {
-			width:  20,
-			height: 20,
+			width:  100,
+			height: 90,
 			justifyContent: 'center',
+			borderWidth:  1,
+			borderStyle: 'solid',
+			borderColor: { type: 'main', color: '#fff' },
+			color: { type: 'text', color: '#666' },
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000' },
 			margin: {
 				top:     0,
-				right:   8,
+				right:   10,
 				bottom:  10,
 				left:    0,
 			},
-			borderWidth:  1,
-			borderStyle: 'solid',
-			borderColor: { type: 'auxiliary', color: '#fff' },
-			color: { type: 'custom', color: '#666' },
-			background: 'center no-repeat',
-			backgroundSize: 'contain',
-			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'custom', color: '#fff' },
 			borderRadius:    {
 				topLeft:     10,
 				topRight:    10,
@@ -38,24 +63,7 @@ const data = {
 				spread_dis: 0,
 				color:      { type: 'custom', color: '#000' }
 			}
-		},
-		filterActive: {
-			justifyContent: 'center',
-			borderWidth: 2,
-			borderStyle: 'solid',
-			backgroundImage: { type: 'custom', img: '' },
-			borderColor: { type: 'auxiliary', color: '#a240ec' },
-			color: { type: 'textHigh', color: '#fff' },
-			background: 'center no-repeat',
-			backgroundColor: { type: 'main', color: '#a240ec' }
 		}
-	},
-	layout:    {
-		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    364,
-		height:   60
 	},
 	content: {
 	},
@@ -65,12 +73,13 @@ const data = {
 		delay: 0,					// 开始时间
 		duration: 1,				// 持续时间
 		iterationCount: 1			// 循环次数
-	}
+	},
 }
 
 module.exports = {
-	name: 'letter',
+	name: 'listByStore',
 	type: 'base',
+	// 位置大小
 	data: JSON.parse(JSON.stringify(data)),
 	// 样式列表
 	styleList: {

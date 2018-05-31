@@ -2,10 +2,10 @@
 const data = {
 	layout: {
 		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    364,
-		height:   60
+		top:  374,
+		left: 40,
+		width:  430,
+		height: 20
 	},
 	style:     {
 		filterBox: {
@@ -92,9 +92,9 @@ const data = {
 	},
 	content: {
 		pageSwitch:   true,
-		prevSwitch:   true,
-		nextSwitch:   true,
-		numberSwitch: false,
+		prevSwitch:   false,
+		nextSwitch:   false,
+		numberSwitch: false
 	},
 	animation: {
 		className: '',	// 动画样式
