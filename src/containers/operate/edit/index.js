@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 import EditHeader     from 'compEdit/EditHeader'
 import EditPage       from 'compEdit/EditPage'
 import EditPageManage from 'compEdit/EditPageManage'
+import EditCompLayout from 'compEdit/EditCompLayout'
 import EditContent    from 'compEdit/EditContent'
 import EditElement    from 'compEdit/EditElement'
 import EditStyle      from 'compEdit/EditStyle'
@@ -53,13 +54,11 @@ class EditComponent extends React.Component {
 		super(props)
 	}
 
-	componentWillMount() {
-	}
+	componentWillMount() {}
 
-	componentDidMount() {
-	}
+	componentDidMount() {}
 
-	selectPage() {
+	selectPage = (e) => {
 		let { actions, editConfig } = this.props
 		let { curData } = editConfig
 		actions.selectPage(curData.router)
@@ -93,14 +92,21 @@ class EditComponent extends React.Component {
 					<div className="pg-left scrollbar">
 						<EditPageManage data={editConfig.pageList} />
 					</div>
-					<div className="pg-center e-flex-box scrollbar" onClick={this.selectPage.bind(this)}>
+					<div className="pg-left scrollbar">
+						<EditCompLayout data={editConfig.curPage} />
+					</div>
+					<div
+						className="pg-center e-flex-box scrollbar"
+						onClick={this.selectPage.bind(this)}
+						onContextMenu={this.selectPage}
+					>
 						<EditElement data={editConfig.curPage} location={location}></EditElement>
 					</div>
 					<div className="pg-right scrollbar">
 						{ editTab }
 					</div>
 
-					{/*<div className="pg-float e-flex-box scrollbar">
+					{<div className="pg-float e-flex-box scrollbar">
 						{ Object.keys(curData).map((_, i) => {
 							var im = curData[_]
 							return (
@@ -110,7 +116,7 @@ class EditComponent extends React.Component {
 								</p>
 							)
 						}) }
-					</div>*/}
+					</div>}
 				</div>
 			</div>
 		);
