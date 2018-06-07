@@ -91,6 +91,13 @@ class ContextMenu extends React.Component {
 		return actions.updatePage(curData.pageGroupIdx, curData.pageIdx, curPage)
 	}
 
+	removeComp = (e) => {
+		e.stopPropagation()
+		let { actions, editConfig }  = this.props
+		let { curData } = editConfig
+		actions.deleteComp(curData.compIdx)
+	}
+
 	render() {
 		const { visible } = this.state
 
@@ -109,6 +116,9 @@ class ContextMenu extends React.Component {
 				</div>
 				<div className={`cm-li${!copyComp? ' s-disabled': ''}`} onClick={this.pasteComp}>
 					<Icon type="file-text" /> 粘贴
+				</div>
+				<div className={`cm-li${par.name === undefined? ' s-disabled': ''}`} onClick={this.removeComp}>
+					<Icon type="delete" /> 删除
 				</div>
 			</div>
 	}
