@@ -28,16 +28,16 @@ class EditCompLayout extends React.Component {
 
 	removeComp(e, idx) {
 		e.stopPropagation()
-		let { actions } = this.props
+		let { actions, data } = this.props
+		message.success(`删除组件: ${compMap[data.elements[idx].name]}!`)
 		actions.deleteComp(idx)
-		message.success(`删除组件成功!`)
 	}
 
 	copyComp(e, item) {
 		e.stopPropagation()
 		let { actions } = this.props
 		actions.updateCopyComp(deepCopy(item))
-		message.success(`复制 ${compMap[item.name]} 组件成功!`)
+		message.success(`复制组件: ${compMap[item.name]}!`)
 	}
 
 	selectComp(e, data, idx) {
@@ -71,8 +71,9 @@ class EditCompLayout extends React.Component {
 	render() {
 		let { data, editConfig } = this.props
 		let map  = deepCopy(compNum)
-		let eles = deepCopy(data.elements)
-		if (!eles.length) return false
+		let eles = data.elements
+		if (!eles) return false
+		eles = deepCopy(eles)
 		let len  = eles.length - 1
 		eles.reverse()
 		let names = new Array(eles.length).fill().map((_, i) => {

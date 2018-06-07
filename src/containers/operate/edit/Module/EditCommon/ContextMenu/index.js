@@ -11,12 +11,16 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Icon, Select } from 'antd'
+import { Row, Col, Icon, Select, message } from 'antd'
 const { Option } = Select
 
 import PictureList from '../PictureList'
 
 import './index.less'
+import * as variable from 'var'
+var styleMap = variable.styleMap.name,
+	compMap  = variable.compMap.name,
+	compNum  = variable.compMap.num
 
 class ContextMenu extends React.Component {
 	constructor(props) {
@@ -79,6 +83,8 @@ class ContextMenu extends React.Component {
 		let { parentComp } = curData
 		let { copyComp } = globalData
 		let par = parentComp? parentComp: curComp
+
+		message.success(`复制组件: ${compMap[par.name]}!`)
 		actions.updateCopyComp(deepCopy(par))
 	}
 
@@ -88,13 +94,15 @@ class ContextMenu extends React.Component {
 		let { curData, curPage, globalData } = editConfig
 		let { copyComp } = globalData
 		curPage.elements.push(deepCopy(copyComp))
-		return actions.updatePage(curData.pageGroupIdx, curData.pageIdx, curPage)
+		message.success(`粘贴组件: ${compMap[copyComp.name]}!`)
+		actions.updatePage(curData.pageGroupIdx, curData.pageIdx, curPage)
 	}
 
 	removeComp = (e) => {
 		e.stopPropagation()
 		let { actions, editConfig }  = this.props
-		let { curData } = editConfig
+		let { curData, curComp } = editConfig
+		message.success(`删除组件: ${compMap[curComp.name]}!`)
 		actions.deleteComp(curData.compIdx)
 	}
 
