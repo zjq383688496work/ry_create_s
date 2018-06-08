@@ -55,9 +55,11 @@ class ShortcutKey extends React.Component {
 	_handleKeyDown = e => {
 		let active = this.state.active
 		if (!active) return
-		let key  = e.key.toLocaleLowerCase()
-		let ctrl = e.ctrlKey? 'ctrl_': ''
-		let Fn   = this[`key_${ctrl}${key}`]
+		let key   = e.key.toLocaleLowerCase()
+		let ctrl  = e.ctrlKey? 'ctrl_': ''
+		let shift = e.shiftKey? 'shift_': ''
+		let Fn   = this[`key_${ctrl}${shift}${key}`]
+		console.log(key)
 		if (!Fn) return
 		Fn(e)
 	}
