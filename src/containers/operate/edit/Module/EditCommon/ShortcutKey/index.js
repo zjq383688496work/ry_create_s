@@ -11,16 +11,11 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Icon, Select, message } from 'antd'
-const { Option } = Select
-
-import PictureList from '../PictureList'
+import { Icon, message } from 'antd'
 
 import './index.less'
 import * as variable from 'var'
-let styleMap = variable.styleMap.name,
-	compMap  = variable.compMap.name,
-	compNum  = variable.compMap.num
+let compMap = variable.compMap.name
 
 class ShortcutKey extends React.Component {
 	constructor(props) {
@@ -77,6 +72,16 @@ class ShortcutKey extends React.Component {
 	// 删除
 	key_delete = (e) => {
 		this.removeComp(e)
+	}
+	// 撤销
+	key_ctrl_z = (e) => {
+		var doc = document.querySelector('#btnRevoke')
+		doc.click()
+	}
+	// 恢复
+	key_ctrl_y = (e) => {
+		var doc = document.querySelector('#btnRecovery')
+		doc.click()
 	}
 
 	copyComp = (e) => {

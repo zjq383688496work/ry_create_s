@@ -11,16 +11,11 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Icon, Select, message } from 'antd'
-const { Option } = Select
-
-import PictureList from '../PictureList'
+import { Icon, message } from 'antd'
 
 import './index.less'
 import * as variable from 'var'
-var styleMap = variable.styleMap.name,
-	compMap  = variable.compMap.name,
-	compNum  = variable.compMap.num
+var compMap  = variable.compMap.name
 
 class ContextMenu extends React.Component {
 	constructor(props) {
