@@ -169,7 +169,7 @@ class EditElement extends React.Component {
 						className={`pge-layout ${aniCls? aniCls: ''}`}
 						style={aniSty}
 						onClick={e => this.selectComp(e, _, i)}
-						onContextMenu={e => this.selectComp(e, _, i, false)}
+						onContextMenu={e => this.selectComp(e, _, i)}
 					>{ compCon }</div>
 				</Rnd>
 			)

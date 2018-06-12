@@ -85,6 +85,61 @@ class ShortcutKey extends React.Component {
 		var doc = document.querySelector('#btnRecovery')
 		doc.click()
 	}
+	// 移动 1px
+	key_arrowup = (e) => {
+		this.moveComp(e, -1, 0)
+	}
+	key_arrowright = (e) => {
+		this.moveComp(e, 0, 1)
+	}
+	key_arrowdown = (e) => {
+		this.moveComp(e, 1, 0)
+	}
+	key_arrowleft = (e) => {
+		this.moveComp(e, 0, -1)
+	}
+	// 移动 10px
+	key_shift_arrowup = (e) => {
+		this.moveComp(e, -10, 0)
+	}
+	key_shift_arrowright = (e) => {
+		this.moveComp(e, 0, 10)
+	}
+	key_shift_arrowdown = (e) => {
+		this.moveComp(e, 10, 0)
+	}
+	key_shift_arrowleft = (e) => {
+		this.moveComp(e, 0, -10)
+	}
+
+	moveComp = (e, top, left) => {
+		e.preventDefault()
+		e.stopPropagation()
+		let { actions, editConfig }  = this.props
+		let { curData, curComp } = editConfig
+		let { parentComp, compIdx, cusCompIdx } = curData
+		let cl  = curComp.data.layout
+		let par = parentComp? parentComp: curComp
+		if (!par.name) return message.success(`组件未选中!`)
+		// 子组件限制移动边界
+		if (parentComp) {
+			let pl      = parentComp.data.layout,
+				minTop  = 0,
+				minLeft = 0,
+				maxTop  = pl.height - cl.height,
+				maxLeft = pl.width  - cl.width,
+				ctop    = cl.top  + top,
+				cleft   = cl.left + left
+			if (ctop < minTop)        top = top - ctop
+			else if (ctop > maxTop)   top = maxTop - cl.top
+
+			if (cleft < minLeft)      left = left - cleft
+			else if (cleft > maxLeft) left = maxLeft - cl.left
+		}
+		cl.top  += top
+		cl.left += left
+		actions.updateComp(compIdx, par)
+	}
 
 	copyComp = (e) => {
 		e.stopPropagation()
@@ -113,9 +168,23 @@ class ShortcutKey extends React.Component {
 		e.stopPropagation()
 		let { actions, editConfig }  = this.props
 		let { curData, curComp } = editConfig
-		if (!curComp.name) return message.success(`组件未选中!`)
-		message.success(`删除组件: ${compMap[curComp.name]}!`)
-		actions.deleteComp(curData.compIdx)
+		let { parentComp, compIdx, cusCompIdx } = curData
+		let par = parentComp? parentComp: curComp
+		if (!par.name) return message.success(`组件未选中!`)
+		if (parentComp) {
+			editConfig.curComp = {}
+			curData.cusCompIdx = -1
+			curData.parentComp = null
+			let comp = parentComp.data.components
+			comp.splice(cusCompIdx, 1)
+			message.success(`删除组件: ${compMap[parentComp.name]} - ${compMap[curComp.name]}!`)
+			actions.updateComp(compIdx, parentComp)
+			actions.updateCur(curData)
+			actions.selectComp(parentComp)
+		} else {
+			message.success(`删除组件: ${compMap[curComp.name]}!`)
+			actions.deleteComp(curData.compIdx)
+		}
 	}
 
 	render() {

@@ -161,12 +161,17 @@ class Custom extends React.Component {
 					onResizeStart={e => this.selectComp(e, _, i, idx, data)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i, data)}
 				>
-					<div className={`pge-layout ${aniCls? aniCls: ''}`} style={aniSty} onClick={e => this.selectComp(e, _, i, idx, data)}>{ compCon }</div>
-					{
-						name != 'storeInstro' ? <a className="pge-remove pge-remove-custom" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a> : null
-					} 
+					<div
+						className={`pge-layout ${aniCls? aniCls: ''}`}
+						style={aniSty}
+						onClick={e => this.selectComp(e, _, i, idx, data)}
+						onContextMenu={e => this.selectComp(e, _, i, idx, data)}
+					>{ compCon }</div>
 				</Rnd>
 			)
+					// {
+					// 	name != 'storeInstro' ? <a className="pge-remove pge-remove-custom" onClick={e => this.removeComp(e, i, data)}><Icon type="cross-circle" /></a> : null
+					// } 
 					// <div className="handle-drag-custom" onClick={e => e.stopPropagation()}></div>
 		})
 		return (

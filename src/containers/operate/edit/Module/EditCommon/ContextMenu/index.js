@@ -95,10 +95,29 @@ class ContextMenu extends React.Component {
 
 	removeComp = (e) => {
 		e.stopPropagation()
+		// let { actions, editConfig }  = this.props
+		// let { curData, curComp } = editConfig
+		// message.success(`删除组件: ${compMap[curComp.name]}!`)
+		// actions.deleteComp(curData.compIdx)
 		let { actions, editConfig }  = this.props
 		let { curData, curComp } = editConfig
-		message.success(`删除组件: ${compMap[curComp.name]}!`)
-		actions.deleteComp(curData.compIdx)
+		let { parentComp, compIdx, cusCompIdx } = curData
+		let par = parentComp? parentComp: curComp
+		if (!par.name) return message.success(`组件未选中!`)
+		if (parentComp) {
+			editConfig.curComp = {}
+			curData.cusCompIdx = -1
+			curData.parentComp = null
+			let comp = parentComp.data.components
+			comp.splice(cusCompIdx, 1)
+			message.success(`删除组件: ${compMap[parentComp.name]} - ${compMap[curComp.name]}!`)
+			actions.updateComp(compIdx, parentComp)
+			actions.updateCur(curData)
+			actions.selectComp(parentComp)
+		} else {
+			message.success(`删除组件: ${compMap[curComp.name]}!`)
+			actions.deleteComp(curData.compIdx)
+		}
 	}
 
 	render() {
@@ -109,12 +128,12 @@ class ContextMenu extends React.Component {
 		let { parentComp } = curData
 		let { copyComp } = globalData
 		let par = parentComp? parentComp: curComp
-		console.log(par.name)
-		console.log(copyComp)
+		// console.log(par.name)
+		// console.log(copyComp)
 
 		return (visible || null) && 
 			<div ref={ref => {this.root = ref}} className="context-menu">
-				<div className={`cm-li${par.name === undefined? ' s-disabled': ''}`} onClick={this.copyComp}>
+				<div className={`cm-li${parentComp || par.name === undefined? ' s-disabled': ''}`} onClick={this.copyComp}>
 					<Icon type="copy" /> 复制
 				</div>
 				<div className={`cm-li${!copyComp? ' s-disabled': ''}`} onClick={this.pasteComp}>
