@@ -43,7 +43,7 @@ import './index.less'
 import * as variable from 'var'
 
 const ctMap  = variable.composeTypeMap
-var animeMap = variable.animeMap,
+var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
 class EditElement extends React.Component {
@@ -178,7 +178,7 @@ class EditElement extends React.Component {
 		})
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
-				<section className="pg-element" style={bgStyle}>
+				<section id="pgElement" className="pg-element" style={bgStyle}>
 					{ childNode }
 				</section>
 				<ContextMenu />

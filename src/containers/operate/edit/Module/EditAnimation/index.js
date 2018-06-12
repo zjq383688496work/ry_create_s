@@ -20,7 +20,7 @@ const RadioButton = Radio.Button
 const RadioGroup  = Radio.Group
 
 import * as variable from 'var'
-var animeMap = variable.animeMap,
+var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style,
 	aGroup   = animeMap.group,
 	aMap     = animeMap.map
@@ -55,6 +55,7 @@ class EditAnimation extends React.Component {
 			return actions.updateComp(null, parentComp? parentComp: data)
 		}
 		if (!direction || !item.list) ani.direction = item.list? item.list[0] || '': ''
+		debugger
 		ani.className = cls
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
