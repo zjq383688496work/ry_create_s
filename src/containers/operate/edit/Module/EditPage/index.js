@@ -12,8 +12,8 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import {
-	Row, Col,
-	Collapse, Input, InputNumber, Slider
+	// Row, Col,
+	Collapse, Input//, InputNumber, Slider
 } from 'antd'
 const Panel = Collapse.Panel
 
@@ -56,26 +56,26 @@ class EditPage extends React.Component {
 	}
 
 	// 滑块
-	renderSlider(cfg, val, key) {
-		return (
-			<Row>
-				<Col span={12}>
-					<Slider
-						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={val} onChange={v => this.intervalChange(v, key)}
-					/>
-				</Col>
-				<Col span={3}></Col>
-				<Col span={9}>
-					<InputNumber
-						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={val} onChange={v => this.intervalChange(v, key)}
-						style={{ width: '100%' }}
-					/>
-				</Col>
-			</Row>
-		)
-	}
+	// renderSlider(cfg, val, key) {
+	// 	return (
+	// 		<Row>
+	// 			<Col span={12}>
+	// 				<Slider
+	// 					min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+	// 					value={val} onChange={v => this.intervalChange(v, key)}
+	// 				/>
+	// 			</Col>
+	// 			<Col span={3}></Col>
+	// 			<Col span={9}>
+	// 				<InputNumber
+	// 					min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+	// 					value={val} onChange={v => this.intervalChange(v, key)}
+	// 					style={{ width: '100%' }}
+	// 				/>
+	// 			</Col>
+	// 		</Row>
+	// 	)
+	// }
 
 	render() {
 		let ani = {
@@ -91,12 +91,12 @@ class EditPage extends React.Component {
 			data.animation = {
 				in: deepCopy(ani),
 				out: deepCopy(ani),
-				interval: 1
+				interval: 0
 			}
 		}
 		let activeKey = ['0', '1']
 
-		let iTime = this.renderSlider({ max: 20, step: .1 }, data.animation.interval,  'interval')
+		// let iTime = this.renderSlider({ max: 20, step: .1 }, data.animation.interval,  'interval')
 
 		return (
 			<section className="pg-page">
@@ -130,18 +130,18 @@ class EditPage extends React.Component {
 				</Collapse>
 				<PageAnime data={data} type={'in'} />
 				<PageAnime data={data} type={'out'} />
-				<Collapse defaultActiveKey={['0']}>
-					<Panel header={'下一页间隔时间'} key="0">
-						<div className="pgs-row">
-							<div className="pgsr-name">间隔时间</div>
-							<div className="pgsr-ctrl">
-								{ iTime }
-							</div>
-						</div>
-					</Panel>
-				</Collapse>
 			</section>
 		)
+				// <Collapse defaultActiveKey={['0']}>
+				// 	<Panel header={'下一页间隔时间'} key="0">
+				// 		<div className="pgs-row">
+				// 			<div className="pgsr-name">间隔时间</div>
+				// 			<div className="pgsr-ctrl">
+				// 				{ iTime }
+				// 			</div>
+				// 		</div>
+				// 	</Panel>
+				// </Collapse>
 	}
 }
 

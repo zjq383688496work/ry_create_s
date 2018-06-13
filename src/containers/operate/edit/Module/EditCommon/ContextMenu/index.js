@@ -133,15 +133,27 @@ class ContextMenu extends React.Component {
 
 		return (visible || null) && 
 			<div ref={ref => {this.root = ref}} className="context-menu">
-				<div className={`cm-li${parentComp || par.name === undefined? ' s-disabled': ''}`} onClick={this.copyComp}>
-					<Icon type="copy" /> 复制
-				</div>
+				{
+					parentComp || par.name === undefined
+					?
+					null
+					:
+					(<div className={`cm-li${parentComp || par.name === undefined? ' s-disabled': ''}`} onClick={this.copyComp}>
+						复制
+					</div>)
+				}
 				<div className={`cm-li${!copyComp? ' s-disabled': ''}`} onClick={this.pasteComp}>
-					<Icon type="file-text" /> 粘贴
+					粘贴
 				</div>
-				<div className={`cm-li${par.name === undefined? ' s-disabled': ''}`} onClick={this.removeComp}>
-					<Icon type="delete" /> 删除
-				</div>
+				{
+					parentComp || par.name === undefined
+					?
+					null
+					:
+					(<div className={`cm-li${par.name === undefined? ' s-disabled': ''}`} onClick={this.removeComp}>
+						删除
+					</div>)
+				}
 			</div>
 	}
 }

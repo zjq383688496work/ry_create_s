@@ -47,6 +47,7 @@ var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
 class EditElement extends React.Component {
+	state = {}
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -69,11 +70,22 @@ class EditElement extends React.Component {
 		e.stopPropagation()
 		let { actions } = this.props
 		let lay = item.data.layout
-		lay.left   = ~~pos.x
-		lay.top    = ~~pos.y
-		lay.width  = ~~ref.offsetWidth
-		lay.height = ~~ref.offsetHeight
+		lay.left   = +pos.x
+		lay.top    = +pos.y
+		lay.width  = +ref.offsetWidth
+		lay.height = +ref.offsetHeight
 		actions.updateComp(idx, item)
+	}
+
+	dragResize(e, ref, delta, pos, item, idx) {
+		var o = {}
+		o[idx] = {
+			left:   +pos.x,
+			top:    +pos.y,
+			width:  +ref.offsetWidth,
+			height: +ref.offsetHeight
+		}
+		this.setState(o)
 	}
 	
 	dragStop(e, d, item, idx) {
@@ -81,8 +93,8 @@ class EditElement extends React.Component {
 		let { actions } = this.props
 		let lay  = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
-		lay.left = ~~d.x
-		lay.top  = ~~d.y
+		lay.left = +d.x
+		lay.top  = +d.y
 		actions.updateComp(idx, item)
 	}
 
@@ -94,6 +106,8 @@ class EditElement extends React.Component {
 
 	render() {
 		let { data, actions, editConfig, location } = this.props
+		let compIdx = editConfig.curData.compIdx
+		let state = this.state
 		let ct     = tempCfg.composeType || 'PORTRAIT'
 		if (!data || data.title === undefined) return (<div className={`pg-element-parent e-flex-box pg-element-${ct}`}><section className="pg-element"></section></div>)
 		let eles   = data.elements || [],
@@ -109,7 +123,7 @@ class EditElement extends React.Component {
 		}
 		let bgStyle   = data.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
 		let childNode = eles.map((_, i) => {
-			var compName  = _.name,
+			let compName  = _.name,
 				layout    = _.data.layout,
 				styleIdx  = _.styleList.idx,
 				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
@@ -148,21 +162,25 @@ class EditElement extends React.Component {
 			}
 					// bounds={'.pg-center'}
 					// dragHandleClassName={'.handle-drag'}
+			
+			let lay = i === compIdx? state[i]: layout
+			state[i] = layout
 			return (
 				<Rnd
 					key={i}
-					className={i === editConfig.curData.compIdx? 's-active': ''}
+					className={i === compIdx? 's-active': ''}
 					size={{
-						width:  layout.width || '100%',
-						height: layout.height
+						width:  lay.width || '100%',
+						height: lay.height
 					}}
 					position={{
-						x: layout.left,
-						y: layout.top
+						x: lay.left,
+						y: lay.top
 					}}
 					onDragStart={e => this.selectComp(e, _, i)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i)}
 					onResizeStart={e => this.selectComp(e, _, i)}
+					onResize={(e, dir, ref, delta, pos) => this.dragResize(e, ref, delta, pos, _, i)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i)}
 				>
 					<div
@@ -178,8 +196,11 @@ class EditElement extends React.Component {
 		})
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
-				<section id="pgElement" className="pg-element" style={bgStyle}>
-					{ childNode }
+				<section id="pgElement" className="pg-element">
+					<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
+						{ childNode }
+					</div>
+					<div id="pgElementNext" className="pg-element-next"></div>
 				</section>
 				<ContextMenu />
 				<ShortcutKey />

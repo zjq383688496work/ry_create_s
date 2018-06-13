@@ -3,87 +3,39 @@ module.exports = {
 	group: {
 		in: {
 			name: '进入类',
-			list: ['fadeIn', 'bounceIn', 'translateIn', 'rotateIn', 'lightSpeedIn', 'zoomIn', 'pullIn', 'rollIn', 'scaleIn', 'flipIn']
+			list: ['pageTranZoomIn', 'pageScaleIn', 'pageTranIn']
 		},
 		out: {
 			name: '离开类',
-			list: ['fadeOut', 'bounceOut', 'translateOut', 'lightSpeedOut', 'rollOut', 'scaleOut', 'flipOut', 'hingeOut']
+			list: ['pageTranZoomOut', 'pageScaleOut', 'pageTranOut']
 		}
 	},
 	style: {
 		// 进入
-		fadeIn: {
-			name: '淡入',
-			list: ['Center', 'Left', 'Right', 'Top', 'Bottom']
+		pageTranZoomIn: {
+			name: '平移缩放',
+			list: ['Left', 'Right', 'Top', 'Bottom']
 		},
-		bounceIn: {
-			name: '弹入',
-			list: ['Center', 'Left', 'Right', 'Top', 'Bottom']
+		pageScaleIn: {
+			name: '缩放',
+			list: ['ZoomIn', 'ZoomOut']
 		},
-		translateIn: {
+		pageTranIn: {
 			name: '平移',
 			list: ['Left', 'Right', 'Top', 'Bottom']
 		},
-		rotateIn: {
-			name: '旋转',
-			list: ['Center', 'Left', 'Right', 'RightTop', 'LeftTop']
-		},
-		lightSpeedIn: {
-			name: '光速',
-			list: ['Left', 'Right', 'Top', 'Bottom']
-		},
-		zoomIn: {
-			name: '飞入',
-			list: ['Left', 'Right', 'Top', 'Bottom']
-		},
-		pullIn: {
-			name: '展开',
-			list: ['Left', 'Right', 'Top', 'Bottom']
-		},
-		rollIn: {
-			name: '翻滚',
-			list: ['Left', 'Right', 'Top', 'Bottom']
-		},
-		scaleIn: {
-			name: '缩放',
-			list: ['ZoomIn', 'ZoomOut', 'X', 'Y']
-		},
-		flipIn: {
-			name: '翻转',
-			list: ['X', 'Y']
-		},
 		// 离开
-		fadeOut: {
-			name: '淡出',
-			list: ['Center', 'Left', 'Right', 'Top', 'Bottom']
+		pageTranZoomOut: {
+			name: '缩放平移',
+			list: ['Right', 'Left', 'Bottom', 'Top']
 		},
-		bounceOut: {
-			name: '弹出',
-			list: ['Center', 'Left', 'Right', 'Top', 'Bottom']
-		},
-		translateOut: {
-			name: '移出',
-			list: ['Left', 'Right', 'Top', 'Bottom']
-		},
-		lightSpeedOut: {
-			name: '光速',
-			list: ['Left', 'Right', 'Top', 'Bottom']
-		},
-		rollOut: {
-			name: '翻滚',
-			list: ['Left', 'Right', 'Top', 'Bottom']
-		},
-		scaleOut: {
+		pageScaleOut: {
 			name: '缩放',
-			list: ['ZoomIn', 'ZoomOut', 'X', 'Y']
+			list: ['ZoomIn', 'ZoomOut']
 		},
-		flipOut: {
-			name: '翻转',
-			list: ['X', 'Y']
-		},
-		hingeOut: {
-			name: '脱落',
-			list: ['Left', 'Right']
+		pageTranOut: {
+			name: '平移',
+			list: ['Right', 'Left', 'Bottom', 'Top']
 		}
 	},
 	map: {

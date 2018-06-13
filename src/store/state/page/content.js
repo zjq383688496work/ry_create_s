@@ -23,6 +23,6 @@ module.exports = {
 			duration: 1,				// 持续时间
 			iterationCount: 1			// 循环次数
 		},
-		interval: 1		// 下一页间隔时间
+		interval: 0		// 下一页间隔时间
 	}
 }

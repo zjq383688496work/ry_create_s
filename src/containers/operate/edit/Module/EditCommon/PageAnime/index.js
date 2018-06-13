@@ -30,6 +30,7 @@ import './index.less'
 class PageAnime extends React.Component {
 	state = {
 		aid:  `seeEffect_${Math.floor(Math.random()*1e9)}`,
+		click: true,
 		time: null
 	}
 	componentWillMount() {}
@@ -72,27 +73,52 @@ class PageAnime extends React.Component {
 	}
 	// 查看效果
 	addEffect = () => {
+		if (!this.state.click) return
+		this.setState({ click: false })
 		clearTimeout(this.state.time)
 		let { data, type } = this.props
-		let ani = data.animation[type]
-		let { direction, duration } = ani
-		let doc = document.querySelector('#pgElement')
-		doc.className = 'pg-element'
+		let type2 = type === 'in'? 'out': 'in'
+		let cn  = type === 'in'? 'Next': 'Child'
+		let nn  = type === 'in'? 'Child': 'Next'
+		let cnn = cn.toLocaleLowerCase()
+		let nnn = nn.toLocaleLowerCase()
+		let anime = data.animation
+		let ani   = anime[type === 'in'? type2: type]
+		let ani2  = anime[type === 'in'? type: type2]
+		let par   = document.querySelector('#pgElement')
+		let doc   = document.querySelector(`#pgElement${cn}`)
+		let nxt   = document.querySelector(`#pgElement${nn}`)
+		par.className = 'pg-element animate'
+		doc.className = `pg-element-${cnn}`
 		doc.style     = ''
-		let item = aStyle[ani.className]
-		if (!direction || !item.list) ani.direction = item.list? item.list[0] || '': ''
-		let aniCls = `pg-element animate ${ani.className}${ani.direction}`
-		let aniSty = `animation-duration: ${ani.duration}s`
-		setTimeout(() => {
+		nxt.className = `pg-element-${nnn}`
+		nxt.style     = ''
+		let aniCls  = `pg-element-${cnn} animate ${ani.className}${ani.direction}`
+		let aniSty  = `animation-duration: ${ani.duration}s; animation-delay: ${ani.delay}s;`
+		let aniCls2 = `pg-element-${nnn} animate ${ani2.className}${ani2.direction}`
+		let aniSty2 = `animation-duration: ${ani2.duration}s; animation-delay: ${ani2.delay}s;`
+		ani.className && setTimeout(() => {
+			// par.className = 'pg-element animate'
 			doc.className = aniCls
 			doc.style     = aniSty
-		}, 60)
+			nxt.style     = 'opacity: 0'
+		}, 10)
+		ani2.className && setTimeout(() => {
+			nxt.className = aniCls2
+			nxt.style     = aniSty2
+		// }, anime.interval * 1e3)
+		}, 10)
 		this.setState({
 			time: setTimeout(() => {
-				doc.className = 'pg-element'
+				par.className = 'pg-element'
+				doc.className = `pg-element-${cnn}`
 				doc.style     = ''
+				nxt.className = `pg-element-${nnn}`
+				nxt.style     = ''
 				clearTimeout(this.state.time)
-			}, duration * 1e3 + 200)
+				this.setState({ click: true })
+			// }, (anime.interval + ani2.duration) * 1e3 + 500)
+			}, (ani2.delay + ani2.duration) * 1e3 + 500)
 		})
 	}
 
@@ -149,7 +175,7 @@ class PageAnime extends React.Component {
 		let sTime = this.renderSlider({ max: 20, step: .1 }, delay,     'delay')
 		let dTime = this.renderSlider({ max: 20, step: .1 }, duration,  'duration')
 		return (
-			<section className="pg-anime">
+			<section className="pg-anime pg-anime-page">
 				<Collapse defaultActiveKey={'0'}>
 					<Panel header={`${headerName}动画`}>
 						<ul className="pga-style">{ styleChild }</ul>
@@ -157,6 +183,15 @@ class PageAnime extends React.Component {
 							<div className="pgsr-name">持续时间</div>
 							<div className="pgsr-ctrl">{ dTime }</div>
 						</div>
+						{
+							// type === 'in'
+							// ?
+							(<div className="pgs-row">
+								<div className="pgsr-name">开始时间</div>
+								<div className="pgsr-ctrl">{ sTime }</div>
+							</div>)
+							// : null
+						}
 						{
 							dir
 							?
@@ -179,10 +214,6 @@ class PageAnime extends React.Component {
 				</Collapse>
 			</section>
 		)
-						// <div className="pgs-row">
-						// 	<div className="pgsr-name">延迟时间</div>
-						// 	<div className="pgsr-ctrl">{ sTime }</div>
-						// </div>
 	}
 }
 

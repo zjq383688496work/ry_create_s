@@ -11,7 +11,8 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Icon, message, Tooltip } from 'antd'
+import { message, Tooltip } from 'antd'
+import Iconf from 'compEdit/EditCommon/Iconf'
 
 import './index.less'
 
@@ -90,10 +91,10 @@ class RevokeRecovery extends React.Component {
 		return	(
 			<div className="revoke-recovery">
 				<Tooltip placement="right" title={'撤销'}>
-					<div id="btnRevoke" className={idx >= len? 's-disabled': ''} onClick={this.handleRevoke}><Icon type="caret-left"/></div>
+					<div id="btnRevoke" className={idx >= len? 's-disabled': ''} onClick={this.handleRevoke}><Iconf type="undo"/></div>
 				</Tooltip>
 				<Tooltip placement="right" title={'恢复'}>
-					<div id="btnRecovery" className={!idx? 's-disabled': ''} onClick={this.handleRecovery}><Icon type="caret-right"/></div>
+					<div id="btnRecovery" className={!idx? 's-disabled': ''} onClick={this.handleRecovery}><Iconf type="redo"/></div>
 				</Tooltip>
 			</div>
 			)
