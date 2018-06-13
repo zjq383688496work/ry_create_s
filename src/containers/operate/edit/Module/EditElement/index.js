@@ -163,8 +163,8 @@ class EditElement extends React.Component {
 					// bounds={'.pg-center'}
 					// dragHandleClassName={'.handle-drag'}
 			
-			let lay = i === compIdx? state[i]: layout
 			state[i] = layout
+			let lay = i === compIdx? state[i]: layout
 			return (
 				<Rnd
 					key={i}

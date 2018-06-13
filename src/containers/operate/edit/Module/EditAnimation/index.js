@@ -55,7 +55,6 @@ class EditAnimation extends React.Component {
 			return actions.updateComp(null, parentComp? parentComp: data)
 		}
 		if (!direction || !item.list) ani.direction = item.list? item.list[0] || '': ''
-		debugger
 		ani.className = cls
 		actions.updateComp(null, parentComp? parentComp: data)
 	}

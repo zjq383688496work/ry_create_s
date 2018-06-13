@@ -67,13 +67,58 @@ const data = {
 				bottom:  5,
 				left:    0,
 			}
+		},
+		filterPage: {
+			width:  50,
+			height: 50,
+			justifyContent: 'center',
+			borderWidth:  0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#fff' },
+			color: { type: 'custom', color: '#666' },
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundColor: { type: 'main', color: '#fff' },
+			borderRadius:    {
+				topLeft:     15,
+				topRight:    15,
+				bottomLeft:  15,
+				bottomRight: 15
+			},
+			boxShadow: {
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
+				spread_dis: 0,
+				color:      { type: 'custom', color: '#000' }
+			}
+		},
+		PagePrev: {
+			backgroundImage: { type: 'custom', img: '' }
+		},
+		PageNext: {
+			backgroundImage: { type: 'custom', img: '' }
+		},
+		mainTable: {
+			height:60,
+			width:60,
+			borderRadius:    {
+				topLeft:     15,
+				topRight:    15,
+				bottomLeft:  15,
+				bottomRight: 15
+			},
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundColor: { type: 'main', color: '#fff' },
+			backgroundImage: { type: 'custom', img: '' }
 		}
 	},
 	layout: {
 		position: 'absolute',
 		top:      220,
 		left:     0,
-		width:    60,
+		width:    80,
 		height:   400
 	},
 	content: [
@@ -100,17 +145,6 @@ const data = {
 			title: '导航4',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
-		},{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505125551.png' },
-			title: '导航5',		// 图片标题
-			highSwitch: false,
-			router: {},			// 路由
-		},
-		{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505126509.png' },
-			title: '导航6',		// 图片标题
-			highSwitch: false,
-			router: {},			// 路由
 		}
 	],
 	animation: {
@@ -129,8 +163,9 @@ module.exports = {
 	data: JSON.parse(JSON.stringify(data)),
 	//布局方式的选择
 	layout:{
-		type:1,
-		position:'left'
+		type: 1,
+		position: 'left',
+		size: 3
 	},
 	// 内容管理
 	// 样式列表

@@ -197,7 +197,7 @@ function saveData() {
 	var diffTime = Date.now() - startTime
 	if (diffTime > 1000) {
 		// 保存步骤
-		console.log(diffTime)
+		// console.log(diffTime)
 		window.storeState.saveHistory = true
 	}
 	startTime = Date.now()

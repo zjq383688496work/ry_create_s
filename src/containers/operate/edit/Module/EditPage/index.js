@@ -11,10 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import {
-	// Row, Col,
-	Collapse, Input//, InputNumber, Slider
-} from 'antd'
+import { Collapse, Input } from 'antd'
 const Panel = Collapse.Panel
 
 import Color     from 'compEdit/EditCommon/Color'
@@ -46,37 +43,6 @@ class EditPage extends React.Component {
 		actions.updatePage(curData.pageGroupIdx, curData.pageIdx, data)
 	}
 
-	intervalChange(val, key) {
-		let { data, type, actions, editConfig } = this.props
-		let { curData } = editConfig
-		let { pageIdx, pageGroupIdx } = curData
-		let ani = data.animation
-		ani[key] = val
-		actions.updatePage(pageGroupIdx, pageIdx, data)
-	}
-
-	// 滑块
-	// renderSlider(cfg, val, key) {
-	// 	return (
-	// 		<Row>
-	// 			<Col span={12}>
-	// 				<Slider
-	// 					min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-	// 					value={val} onChange={v => this.intervalChange(v, key)}
-	// 				/>
-	// 			</Col>
-	// 			<Col span={3}></Col>
-	// 			<Col span={9}>
-	// 				<InputNumber
-	// 					min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-	// 					value={val} onChange={v => this.intervalChange(v, key)}
-	// 					style={{ width: '100%' }}
-	// 				/>
-	// 			</Col>
-	// 		</Row>
-	// 	)
-	// }
-
 	render() {
 		let ani = {
 			className: '',
@@ -95,9 +61,6 @@ class EditPage extends React.Component {
 			}
 		}
 		let activeKey = ['0', '1']
-
-		// let iTime = this.renderSlider({ max: 20, step: .1 }, data.animation.interval,  'interval')
-
 		return (
 			<section className="pg-page">
 				<Collapse defaultActiveKey={activeKey}>
@@ -132,16 +95,6 @@ class EditPage extends React.Component {
 				<PageAnime data={data} type={'out'} />
 			</section>
 		)
-				// <Collapse defaultActiveKey={['0']}>
-				// 	<Panel header={'下一页间隔时间'} key="0">
-				// 		<div className="pgs-row">
-				// 			<div className="pgsr-name">间隔时间</div>
-				// 			<div className="pgsr-ctrl">
-				// 				{ iTime }
-				// 			</div>
-				// 		</div>
-				// 	</Panel>
-				// </Collapse>
 	}
 }
 

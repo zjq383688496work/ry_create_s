@@ -8,7 +8,7 @@
 import React from 'react'
 import {
 	Row, Col,
-	Button, Card, Checkbox, Collapse, Select,message,Icon } from 'antd' 
+	Button, Card, Checkbox, Collapse, Select,message,Icon,InputNumber } from 'antd' 
 
 const { Panel }    = Collapse
 const Option = Select.Option;
@@ -49,24 +49,9 @@ class NavigationFoat extends React.Component {
 		let { curData, curComp } = editConfig
 		let { parentComp } = curData
 		data.layout.type = value;
-		switch (value) {
-			case 1 : data.data.layout.width = 80;
-			break;
-			case 2 : data.data.layout.width = 120; 
-			break;
-			case 3 : data.data.layout.width = 300;
-			break;
-			default:;
-			break
-		}
 		if(data.layout.position == 'right'){
-			if(data.layout.type == 1){
-				data.data.layout.left = 460;
-			}else if(data.layout.type == 2){
-				data.data.layout.left = 420; 
-			}  
+			data.data.layout.left = 460;
 		}  
-		console.log(value); 
 		actions['updateComp'](null, parentComp? parentComp: data)
 	};
 	handleChangePosition = value => {
@@ -78,19 +63,21 @@ class NavigationFoat extends React.Component {
 			case 'left' : data.data.layout.left = 0;data.data.layout.top = 220;
 			break;
 			case 'right' : 
-					if(data.layout.type == 1){
-						data.data.layout.left = 460;
-					}else if(data.layout.type == 2){
-						data.data.layout.left = 420; 
-					} 
+					data.data.layout.left = 460;
 					data.data.layout.top = 220;
 			break;   
 			default:;   
 			break
 		}
-		console.log(value); 
 		actions['updateComp'](null, parentComp? parentComp: data)
-	};    
+	}; 
+	onChangeSize = val =>{
+		let {data,actions,editConfig} = this.props.data
+		let { curData, curComp } = editConfig
+		let { parentComp } = curData
+		data.layout.size = val
+		actions['updateComp'](null, parentComp? parentComp: data)
+	}   
 	render() {  
 		let { data } = this.props.data      
 		const options = [2,3,4,5,6,7,8,9,10,11,12,13,14,15];
@@ -100,6 +87,9 @@ class NavigationFoat extends React.Component {
 			},{
 				type:2,
 				show:'布局样式二'
+			},{
+				type:3,
+				show:'布局样式三'
 			}];
 		const options_position = [{type:'left',show:'左'},{type:'right',show:'右'}/*,{type:'top',show:'上'},{type:'bottom',show:'下'}*/];
 		return ( 
@@ -134,7 +124,17 @@ class NavigationFoat extends React.Component {
      							} 
    							 </Select>
    						</div>
-					</Panel>
+   						{
+   							data.layout.type == 2 ? <div key={3} className="pgs-row">
+	   							<div className="pgsr-name">数量</div> 
+	   							<InputNumber
+									min={0} max={100} step={1}
+									value={data.layout.size} onChange={v => this.onChangeSize(v)}
+									style={{ width: '120px' }}
+								/> 
+							</div> : null
+   						}
+   					</Panel>
 				</Collapse>	
 			</div>  
 		) 

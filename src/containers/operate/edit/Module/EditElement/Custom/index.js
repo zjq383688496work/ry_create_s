@@ -158,8 +158,8 @@ class Custom extends React.Component {
 			}
 					// dragHandleClassName={'.handle-drag-custom'}
 
-			let lay = compIdx === idx && i === cusCompIdx? state[i]: layout
 			state[i] = layout
+			let lay = compIdx === idx && i === cusCompIdx? state[i]: layout
 			return (
 				<Rnd
 					key={i}
