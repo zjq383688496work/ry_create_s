@@ -11,6 +11,7 @@ import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
+const pageC    = require('state/page')
 const comp     = require('state/comp')
 const compC    = require('state/compChild')
 const compP    = require('state/compParent')
@@ -20,9 +21,13 @@ import * as actions from 'actions'
 
 import { Input, message, Spin } from 'antd'
 import * as variable from 'var'
-var styleMap = variable.styleMap.name,
-	compMap  = variable.compMap.name,
+let compMap  = variable.compMap.name,
 	compNum  = variable.compMap.num
+
+let typeMap  = {
+	base: 1,
+	advanced: 1
+}
  
 class Header extends React.Component {
 	constructor(props) {
@@ -62,18 +67,107 @@ class Header extends React.Component {
 			message.info('该组件内只能添加在高级组件中!')
 		} 
 	}
-
 	selectTheme() {
 		let { actions, editConfig } = this.props
 		editConfig.curData.contentType = 'theme'
 		actions.updateCur(editConfig.curData)
 	}
-
+	dataSlim(da, org) {
+		if (!org) return da
+		Object.keys(da).map(_ => {
+			if (_ === 'name' && compMap[da[_]]) return
+			let p1 = da[_]
+			let p2 = org[_]
+			if (getAttr(p1) !== getAttr(p2)) {
+				// if (getAttr(p1) === 'Object' && p2 === undefined) {
+				// 	debugger
+				// }
+				return
+			} else if (getAttr(p1) === 'Object') {
+				if (isEmptyObject(p1) && isEmptyObject(p2)) {
+					delete da[_]
+				} else {
+					// if (p1 === undefined || p2 === undefined) {
+					// 	debugger
+					// }
+					var o = this.dataSlim(p1, p2)
+					if (!o) {
+						delete da[_]
+					} else {
+						da[_] = o
+					}
+				}
+			} else if (getAttr(p1) === 'Array') {
+				if (!p1.length) {
+					delete da[_]
+				} else {
+					p1.map((p, i) => {
+						let t = p.type
+						if (typeMap[t]) {
+							p1[i] = this.dataSlim(p, comp[p.name])
+						} else {
+							try {
+								p1[i] = this.dataSlim(p, p2[i])
+							} catch(e) {
+								console.log(e)
+							}
+						}
+					})
+				}
+			} else if (p1 === p2) {
+				delete da[_]
+			}
+		})
+		return isEmptyObject(da)? false: da
+	}
+	pageSlim(da, org = pageC) {
+		if (!org) return da
+		Object.keys(da).map(_ => {
+			let p1 = da[_]
+			let p2 = org[_]
+			if (getAttr(p1) === 'Object') {
+				if (isEmptyObject(p1) && isEmptyObject(p2)) {
+					delete da[_]
+				} else {
+					var o = this.pageSlim(p1, p2)
+					if (!o) {
+						delete da[_]
+					} else {
+						da[_] = o
+					}
+				}
+			} else if (getAttr(p1) === 'Array') {
+				if (!p1.length) {
+					delete da[_]
+				}
+			} else if (p1 === p2) {
+				delete da[_]
+			}
+		})
+		return isEmptyObject(da)? false: da
+	}
+	pageEach(da) {
+		let st = JSON.stringify(da).length
+		Object.keys(da).map(_ => {
+			let pa  = da[_]
+			// da[_] = this.pageSlim(pa)
+			let pae = pa.elements
+			pae.map((p, i) => {
+				pae[i] = this.dataSlim(p, comp[p.name])
+			})
+		})
+		let ed = JSON.stringify(da).length
+		console.clear()
+		console.log(st, ed, ed/st)
+		console.log(da)
+		console.log(JSON.stringify(da))
+		return da
+	}
 	saveData() {
 		let { editConfig, location } = this.props
 		let { query } = location
 		let { templateType, id, composeType, adsFlag } = tempCfg
-		let cfg = JSON.parse(JSON.stringify(editConfig))
+		let cfg = deepCopy(editConfig)
 
 		let gd = cfg.globalData
 		cfg.globalData = {
@@ -81,13 +175,17 @@ class Header extends React.Component {
 			theme:   gd.theme,
 			feature: gd.feature
 		}
+		// this.setState({ loading: true })
 		let config = {
 			configPC: {
-				pageContent: cfg.pageContent,
+				pageContent: this.pageEach(cfg.pageContent),
+				// pageContent: cfg.pageContent,
 				pageList:    cfg.pageList,
 				globalData:  cfg.globalData
 			}
 		}
+		// this.setState({ loading: false })
+		// return false
 		let da = {
 			adsFlag: adsFlag || 0,
 			config: JSON.stringify(config),
@@ -119,7 +217,6 @@ class Header extends React.Component {
 		}).catch(e => { this.setState({ loading: false }) })
 		// console.log(JSON.stringify(config))
 	}
-
 	tNameChange(name) {
 		this.setState({ name: name })
 		tempCfg.name = name
