@@ -69,10 +69,7 @@ class OperateComponent extends React.Component {
 				idx2 = org.styleList.idx
 			}
 			if (idx1 !== undefined && idx2 !== undefined) {
-				if (idx1 !== idx2 && (_ === 'content' || _ === 'style')) {
-					// debugger
-					return
-				}
+				if (idx1 !== idx2 && (_ === 'content' || _ === 'style')) return
 			}
 			if (p1 === undefined && p2 !== undefined) {
 				da[_] = p2
@@ -84,11 +81,9 @@ class OperateComponent extends React.Component {
 				p2.map((p, i) => {
 					let t = p.type
 					if (typeMap[t]) {
-						// debugger
 						p1[i] = this.dataPlus(p, comp[p.name], idx1, idx2)
 					} else {
 						try {
-							// debugger
 							p1[i] = this.dataPlus(p, p2[i], idx1, idx2)
 						} catch(e) {
 							console.log(e)

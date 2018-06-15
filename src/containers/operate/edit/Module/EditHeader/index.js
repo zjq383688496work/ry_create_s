@@ -72,25 +72,29 @@ class Header extends React.Component {
 		editConfig.curData.contentType = 'theme'
 		actions.updateCur(editConfig.curData)
 	}
-	dataSlim(da, org) {
+	dataSlim(da, org, idx1, idx2) {
 		if (!org) return da
 		Object.keys(da).map(_ => {
 			if (_ === 'name' && compMap[da[_]]) return
 			let p1 = da[_]
 			let p2 = org[_]
+			let t1 = getAttr(p1)
+			let t2 = getAttr(p2)
+			if (org.styleList) {
+				idx1 = da.styleList.idx
+				idx2 = org.styleList.idx
+			}
+			if (idx1 !== undefined && idx2 !== undefined) {
+				if (idx1 !== idx2 && (_ === 'content' || _ === 'style')) return
+			}
 			if (getAttr(p1) !== getAttr(p2)) {
-				// if (getAttr(p1) === 'Object' && p2 === undefined) {
-				// 	debugger
-				// }
+				debugger
 				return
 			} else if (getAttr(p1) === 'Object') {
 				if (isEmptyObject(p1) && isEmptyObject(p2)) {
 					delete da[_]
 				} else {
-					// if (p1 === undefined || p2 === undefined) {
-					// 	debugger
-					// }
-					var o = this.dataSlim(p1, p2)
+					var o = this.dataSlim(p1, p2, idx1, idx2)
 					if (!o) {
 						delete da[_]
 					} else {
@@ -104,10 +108,10 @@ class Header extends React.Component {
 					p1.map((p, i) => {
 						let t = p.type
 						if (typeMap[t]) {
-							p1[i] = this.dataSlim(p, comp[p.name])
+							p1[i] = this.dataSlim(p, comp[p.name], idx1, idx2)
 						} else {
 							try {
-								p1[i] = this.dataSlim(p, p2[i])
+								p1[i] = this.dataSlim(p, p2[i], idx1, idx2)
 							} catch(e) {
 								console.log(e)
 							}
@@ -120,40 +124,40 @@ class Header extends React.Component {
 		})
 		return isEmptyObject(da)? false: da
 	}
-	pageSlim(da, org = pageC) {
-		if (!org) return da
-		Object.keys(da).map(_ => {
-			let p1 = da[_]
-			let p2 = org[_]
-			if (getAttr(p1) === 'Object') {
-				if (isEmptyObject(p1) && isEmptyObject(p2)) {
-					delete da[_]
-				} else {
-					var o = this.pageSlim(p1, p2)
-					if (!o) {
-						delete da[_]
-					} else {
-						da[_] = o
-					}
-				}
-			} else if (getAttr(p1) === 'Array') {
-				if (!p1.length) {
-					delete da[_]
-				}
-			} else if (p1 === p2) {
-				delete da[_]
-			}
-		})
-		return isEmptyObject(da)? false: da
-	}
+	// pageSlim(da, org = pageC) {
+	// 	if (!org) return da
+	// 	Object.keys(da).map(_ => {
+	// 		let p1 = da[_]
+	// 		let p2 = org[_]
+	// 		if (getAttr(p1) === 'Object') {
+	// 			if (isEmptyObject(p1) && isEmptyObject(p2)) {
+	// 				delete da[_]
+	// 			} else {
+	// 				var o = this.pageSlim(p1, p2)
+	// 				if (!o) {
+	// 					delete da[_]
+	// 				} else {
+	// 					da[_] = o
+	// 				}
+	// 			}
+	// 		} else if (getAttr(p1) === 'Array') {
+	// 			if (!p1.length) {
+	// 				delete da[_]
+	// 			}
+	// 		} else if (p1 === p2) {
+	// 			delete da[_]
+	// 		}
+	// 	})
+	// 	return isEmptyObject(da)? false: da
+	// }
 	pageEach(da) {
 		let st = JSON.stringify(da).length
 		Object.keys(da).map(_ => {
-			let pa  = da[_]
+			let pe = da[_].elements
 			// da[_] = this.pageSlim(pa)
-			let pae = pa.elements
-			pae.map((p, i) => {
-				pae[i] = this.dataSlim(p, comp[p.name])
+			pe.map((p, i) => {
+				// debugger
+				pe[i] = this.dataSlim(p, comp[p.name], p.styleList.idx, 0)
 			})
 		})
 		let ed = JSON.stringify(da).length
@@ -185,7 +189,7 @@ class Header extends React.Component {
 			}
 		}
 		// this.setState({ loading: false })
-		// return false
+		return false
 		let da = {
 			adsFlag: adsFlag || 0,
 			config: JSON.stringify(config),
