@@ -58,13 +58,17 @@ class BusinessComponent extends React.Component {
 			return resolve('模板数据')
 		}
 		let api = `/mcp-gateway/${type}/get?${type}Id=${id}`
-		if (type === 'template') api += '&phase=RELEASE'
+		// if (type === 'template') api += '&phase=RELEASE'
+		if (type === 'template') api += '&phase=DEV'
 
 		return function(resolve, reject) {
 			Ajax.get(api).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
+
+				dataFormat.get.pageEach(cfg.pageContent)
+				// debugger
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },
