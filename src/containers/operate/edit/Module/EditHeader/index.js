@@ -124,39 +124,11 @@ class Header extends React.Component {
 		})
 		return isEmptyObject(da)? false: da
 	}
-	// pageSlim(da, org = pageC) {
-	// 	if (!org) return da
-	// 	Object.keys(da).map(_ => {
-	// 		let p1 = da[_]
-	// 		let p2 = org[_]
-	// 		if (getAttr(p1) === 'Object') {
-	// 			if (isEmptyObject(p1) && isEmptyObject(p2)) {
-	// 				delete da[_]
-	// 			} else {
-	// 				var o = this.pageSlim(p1, p2)
-	// 				if (!o) {
-	// 					delete da[_]
-	// 				} else {
-	// 					da[_] = o
-	// 				}
-	// 			}
-	// 		} else if (getAttr(p1) === 'Array') {
-	// 			if (!p1.length) {
-	// 				delete da[_]
-	// 			}
-	// 		} else if (p1 === p2) {
-	// 			delete da[_]
-	// 		}
-	// 	})
-	// 	return isEmptyObject(da)? false: da
-	// }
 	pageEach(da) {
 		let st = JSON.stringify(da).length
 		Object.keys(da).map(_ => {
 			let pe = da[_].elements
-			// da[_] = this.pageSlim(pa)
 			pe.map((p, i) => {
-				// debugger
 				pe[i] = this.dataSlim(p, comp[p.name], p.styleList.idx, 0)
 			})
 		})
@@ -189,7 +161,7 @@ class Header extends React.Component {
 			}
 		}
 		// this.setState({ loading: false })
-		return false
+		// return false
 		let da = {
 			adsFlag: adsFlag || 0,
 			config: JSON.stringify(config),
