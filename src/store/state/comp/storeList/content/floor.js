@@ -89,6 +89,7 @@ const data = {
 		}
 	},
 	content: {
+		switch:   true,
 		size: 4
 	},
 	animation: {
