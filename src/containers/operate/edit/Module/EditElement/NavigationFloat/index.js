@@ -14,7 +14,8 @@ class NavigationFloat extends React.Component {
 	
 	state = {
 		realIndex:0,
-		showTable:false
+		showTable:false,
+		id: `swiperContainerNav_${Math.floor(Math.random()*1e9)}`
 	}
 
 	componentDidMount() {
@@ -53,7 +54,7 @@ class NavigationFloat extends React.Component {
 			observeParents : true//修改swiper的父元素时，自动初始化swiper 
 		}
 		this.myNavgSwiper && this.myNavgSwiper.destroy(false)
-		setTimeout(()=>{this.myNavgSwiper = new Swiper(`.swiper-container_navg`, swiperOptions)},5)
+		setTimeout(()=>{this.myNavgSwiper = new Swiper(`#${this.state.id}`, swiperOptions)},5)
 	}
 	to = event => {
 		event.preventDefault()
@@ -91,7 +92,7 @@ class NavigationFloat extends React.Component {
 					{
 						data.data.content.length > size ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={this.toPageFloor.bind(this, page-1)}></div> : null
 					}
-					<div className={`swiper-container swiper-container_navg`}>
+					<div id={this.state.id} className={`swiper-container`}>
 						<div className="swiper-wrapper"> 
 							{ 
 								data.data.content.map((_, i) => { 
@@ -121,7 +122,7 @@ class NavigationFloat extends React.Component {
 					{
 						this.state.showTable ? content.map((item,index) => {
 							if(index == 0){
-								return <OnlyNavigation props={props} data={item} key={index} height={mainCss.height}></OnlyNavigation>
+								return <OnlyNavigation props={props} data={item} key={index} rysty={{marginTop:mainCss.height}}></OnlyNavigation>
 							}else{
 								return <OnlyNavigation props={props} data={item} key={index}></OnlyNavigation>
 							}
@@ -131,6 +132,42 @@ class NavigationFloat extends React.Component {
 				</div>
 			)
 	} 
+	//布局样式四
+	renderDomFour(props) {
+		const { data } = props,
+		      content = data.data.content,
+			  mainCss = cssColorFormat(props,"mainTable"),
+			  css = cssColorFormat(props, 'filter'),
+			  pos_style = {...mainCss,left:0,marginTop:-(mainCss.height/2),top:"50%"},
+			  layout = data.data.layout,
+			  layWidth = layout.width,
+			  layHeight = parseInt(layout.height/2),
+			  deg = parseInt(180/(content.length-1)),
+			  number = content.length,
+			  defaultStyle = content.map((item,index)=>{
+		 	  	let t,l,degSelf = (90-deg*index)*Math.PI/180;
+		 	  	if(index < number/2){
+		 	  		t = Math.sin(degSelf)*layHeight + mainCss.height/2-css.height/2;
+					l =  Math.cos(degSelf)*layWidth;
+		 	  	}else{
+		 	  		t = Math.sin(degSelf)*layHeight + mainCss.height/2-css.height/2;
+					l =  Math.cos(degSelf)*layWidth;
+		 	  	}
+					
+				return {position:"absolute",top:t,left:l}
+			  })
+		return (
+				<div className="navigation_box">
+					<div className="mainTable" onClick={this.mainTab.bind(this)} style={pos_style}>
+						{
+							this.state.showTable ? content.map((item,index) => {
+								return <OnlyNavigation props={props} data={item} key={index} rysty={defaultStyle[index]}></OnlyNavigation>
+							}) : null
+						}
+					</div>
+				</div>
+			)
+	}
 	render() {
 		let { data } = this.props
 		const layout_style = data.layout.type
@@ -141,6 +178,8 @@ class NavigationFloat extends React.Component {
 			chooseDom = this.renderDom.bind(this,this.props)();
 		}else if(layout_style == 3){
 			chooseDom = this.renderDomThree.bind(this,this.props)();
+		}else if(layout_style == 4){
+			chooseDom = this.renderDomFour.bind(this,this.props)();
 		}
 		return (
 			<div className="e-navigationFloat">
@@ -152,10 +191,10 @@ class NavigationFloat extends React.Component {
 	}
 }
 
-function OnlyNavigation({data,props,height}) {
+function OnlyNavigation({data,props,rysty}) {
 	let css = cssColorFormat(props, 'filter')
 	if (data.highSwitch) css = { ...css, ...cssColorFormat(props, 'filterActive') }
-	if(height) css = {...css,marginTop:height}
+	if(rysty) css = {...css,...rysty}
 	return (
 		<div className="only" style={css}>  
 			<img src={getImg(data.img)} />
