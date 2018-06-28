@@ -96,7 +96,7 @@ class Catg extends React.Component {
 function NoShow({arr,css,nowVal,props,selectVal}) {
 
 	return (
-		<div className="ShowDirection">
+		<div className="ShowDirection" style={cssColorFormat(props, 'filterBox')}>
 			{ arr.map((_, i) => { 
 					let nCss = css,
 						name = _.name
@@ -124,8 +124,9 @@ function ShowDirection({id, page,css,props,arr,nowVal,toPageFloor,selectVal}) {
 		  cssp = cssColorFormat(props, 'filterPage'),
 		  cssn = cssColorFormat(props, 'filterPage');
 	const allPages = arr.length-size;
+
 	return (
-		<div className="ShowDirection">
+		<div className="ShowDirection" style={cssColorFormat(props, 'filterBox')}>
 			{
 				ioInput.floors.length > size ? <div className={page < 1? 's-disabled': ''} style={{ ...cssp, ...cssColorFormat(props, 'PagePrev') }} onClick={()=>{toPageFloor(page-1)}}></div> : null
 			}
