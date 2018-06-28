@@ -22,22 +22,20 @@ class NavigationFloat extends React.Component {
 		let { data } = this.props
 		const size = data.layout.size;
 		const that = this;
-		this.initSwiper(size)
-		document.addEventListener('click',function(){
-			that.setState({
-				showTable:false
-			})
-		},true)
+		data.layout.type == 1 ? this.initSwiper(size) : null
 	}
 	componentWillReceiveProps(props) {
 		let { data } = props
 		const size = data.layout.size;
 		if(data.layout.type == 1){
-			this.initSwiper(size)
+			setTimeout(()=>{this.initSwiper(size)},10)
 		}
 	}
 	componentWillUnmount() {
-		this.myNavgSwiper.destroy(false)
+		let { data } = this.props
+		if(data.layout.type == 1){
+			this.myNavgSwiper&&this.myNavgSwiper.destroy(false)
+		}
 	}
 	initSwiper = size => {
 		let that = this,
