@@ -31,7 +31,7 @@ const dataFormat = {
 		// comp数据处理
 		comp: {
 			// 更新
-			plus: function(da, org, key, daParent, cs) {
+			plus: function(da, org, key, daParent) {
 				let dType = getAttr(da),
 					oType = getAttr(org)
 				if (da === undefined || dType !== oType) {
@@ -43,7 +43,7 @@ const dataFormat = {
 							case 'feature':
 								Object.keys(org).map(_ => {
 									if (!featureMap[_]) {
-										this.plus(da[_], org[_], _, da, cs? cs: key === 'components')
+										this.plus(da[_], org[_], _, da)
 									}
 								})
 								break
@@ -64,7 +64,7 @@ const dataFormat = {
 								// break
 							default:
 								Object.keys(org).map(_ => {
-									this.plus(da[_], org[_], _, da, cs? cs: key === 'components')
+									this.plus(da[_], org[_], _, da)
 								})
 						}
 						
@@ -73,12 +73,12 @@ const dataFormat = {
 						switch(key) {
 							case 'components':
 								da.map((_, i) => {
-									this.plus(da[_], comp[_.name], i, da, cs? cs: key === 'components')
+									this.plus(da[_], comp[_.name], i, da)
 								})
 								break
 							default:
 								da.map((_, i) => {
-									this.plus(_, org[i] || org[0], i, da, cs? cs: key === 'components')
+									this.plus(_, org[i] || org[0], i, da)
 								})
 						}
 						break
@@ -86,7 +86,7 @@ const dataFormat = {
 				}
 			},
 			// 去旧
-			slim: function(da, org, key, daParent, cs) {
+			slim: function(da, org, key, daParent) {
 				let dType = getAttr(da),
 					oType = getAttr(org),
 					kType = getAttr(key)
@@ -99,13 +99,13 @@ const dataFormat = {
 							case 'feature':
 								Object.keys(da).map(_ => {
 									if (!featureMap[_]) {
-										this.slim(da[_], org[_], _, da, cs? cs: key === 'components')
+										this.slim(da[_], org[_], _, da)
 									}
 								})
 								break
 							default:
 								Object.keys(da).map(_ => {
-									this.slim(da[_], org[_], _, da, cs? cs: key === 'components')
+									this.slim(da[_], org[_], _, da)
 								})
 						}
 						break
@@ -113,12 +113,12 @@ const dataFormat = {
 						switch(key) {
 							case 'components':
 								da.map((_, i) => {
-									this.slim(da[_], comp[_.name], i, da, cs? cs: key === 'components')
+									this.slim(da[_], comp[_.name], i, da)
 								})
 								break
 							default:
 								da.map((_, i) => {
-									this.slim(_, org[_], i, da, cs? cs: key === 'components')
+									this.slim(_, org[_], i, da)
 								})
 						}
 						break
