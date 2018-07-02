@@ -32,9 +32,6 @@ const dataFormat = {
 		comp: {
 			// 更新
 			plus: function(da, org, key, daParent, cs) {
-				// if (key === 'filterBox') {
-				// 	debugger
-				// }
 				let dType = getAttr(da),
 					oType = getAttr(org)
 				if (da === undefined || dType !== oType) {
@@ -94,7 +91,6 @@ const dataFormat = {
 					oType = getAttr(org),
 					kType = getAttr(key)
 				if (org === undefined) {
-					// if (cs) debugger
 					delete daParent[key]; return
 				}
 				switch(dType) {
@@ -173,9 +169,7 @@ const dataFormat = {
 			})
 			Object.keys(da).map(_ => {
 				if (!eleMap[_]) return
-				// debugger
 				this.comp.slim(da[_], org[_], _, da)
-				// debugger
 			})
 		},
 		// page数据比对
