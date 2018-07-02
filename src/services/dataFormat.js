@@ -32,6 +32,9 @@ const dataFormat = {
 		comp: {
 			// 更新
 			plus: function(da, org, key, daParent, cs) {
+				// if (key === 'filterBox') {
+				// 	debugger
+				// }
 				let dType = getAttr(da),
 					oType = getAttr(org)
 				if (da === undefined || dType !== oType) {
@@ -70,9 +73,17 @@ const dataFormat = {
 						
 						break
 					case 'Array':
-						da.map((_, i) => {
-							this.plus(_, org[i] || org[0], i, da, cs? cs: key === 'components')
-						})
+						switch(key) {
+							case 'components':
+								da.map((_, i) => {
+									this.plus(da[_], comp[_.name], i, da, cs? cs: key === 'components')
+								})
+								break
+							default:
+								da.map((_, i) => {
+									this.plus(_, org[i] || org[0], i, da, cs? cs: key === 'components')
+								})
+						}
 						break
 					default:
 				}
@@ -92,20 +103,28 @@ const dataFormat = {
 							case 'feature':
 								Object.keys(da).map(_ => {
 									if (!featureMap[_]) {
-										this.plus(da[_], org[_], _, da, cs? cs: key === 'components')
+										this.slim(da[_], org[_], _, da, cs? cs: key === 'components')
 									}
 								})
 								break
 							default:
 								Object.keys(da).map(_ => {
-									this.plus(da[_], org[_], _, da, cs? cs: key === 'components')
+									this.slim(da[_], org[_], _, da, cs? cs: key === 'components')
 								})
 						}
 						break
 					case 'Array':
-						da.map((_, i) => {
-							this.plus(_, org[_], i, da, cs? cs: key === 'components')
-						})
+						switch(key) {
+							case 'components':
+								da.map((_, i) => {
+									this.slim(da[_], comp[_.name], i, da, cs? cs: key === 'components')
+								})
+								break
+							default:
+								da.map((_, i) => {
+									this.slim(_, org[_], i, da, cs? cs: key === 'components')
+								})
+						}
 						break
 					default:
 				}
@@ -154,7 +173,9 @@ const dataFormat = {
 			})
 			Object.keys(da).map(_ => {
 				if (!eleMap[_]) return
+				// debugger
 				this.comp.slim(da[_], org[_], _, da)
+				// debugger
 			})
 		},
 		// page数据比对
@@ -171,15 +192,17 @@ const dataFormat = {
 		pageEach: function(da) {
 			let st = JSON.stringify(da).length
 			Object.keys(da).map(_ => {
+				if (_ !== 'p_1001') return
 				let pa  = da[_]
 				let pae = pa.elements
 				this.pageComp(pa, deepCopy(page))
 				pae.map((p, i) => {
+					console.log()
 					this.compComp(p, comp[p.name])
 				})
 			})
 			// let ed = JSON.stringify(da).length
-			console.clear()
+			// console.clear()
 			// console.log(st, ed, ed/st)
 			// console.log(da)
 			// console.log(JSON.stringify(da))
