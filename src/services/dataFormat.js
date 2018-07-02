@@ -186,12 +186,10 @@ const dataFormat = {
 		pageEach: function(da) {
 			let st = JSON.stringify(da).length
 			Object.keys(da).map(_ => {
-				if (_ !== 'p_1001') return
 				let pa  = da[_]
 				let pae = pa.elements
 				this.pageComp(pa, deepCopy(page))
 				pae.map((p, i) => {
-					console.log()
 					this.compComp(p, comp[p.name])
 				})
 			})
