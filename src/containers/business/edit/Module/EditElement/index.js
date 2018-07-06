@@ -10,7 +10,6 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
-
 import Picture           from 'compEdit/EditElement/Picture'
 import Web               from 'compEdit/EditElement/Web'
 import Text              from 'compEdit/EditElement/Text'

@@ -16,7 +16,6 @@ import { Icon } from 'antd'
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Button       from 'compEdit/EditElement/Button'
-import SplitLine    from 'compEdit/EditElement/SplitLine'
 import Text         from 'compEdit/EditElement/Text'
 import Time         from 'compEdit/EditElement/Time'
 import Weather      from 'compEdit/EditElement/Weather'
@@ -27,6 +26,7 @@ import Address      from 'compEdit/EditElement/Address'
 import Catg         from 'compEdit/EditElement/Catg'
 import Page         from 'compEdit/EditElement/Page'
 import Reset        from 'compEdit/EditElement/Reset'
+import FloorMap     from 'compEdit/EditElement/FloorMap'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 
@@ -39,7 +39,6 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
-		splitLine:         <SplitLine         {...props} />,
 		button:            <Button            {...props} />,
 		text:              <Text              {...props} />,
 		time:              <Time              {...props} />,
@@ -51,6 +50,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		wonderfulActivity: <WonderfulActivity {...props} />,
 		catg:              <Catg              {...props} />,
 		page:              <Page              {...props} />,
+		floorMap:          <FloorMap          {...props} />,
 		reset:             <Reset             {...props} />,
 		listByStore:       <ListByStore       {...props} />
 	}

@@ -26,6 +26,7 @@ import Address      from 'compEdit/EditElement/Address'
 import Catg         from 'compEdit/EditElement/Catg'
 import Page         from 'compEdit/EditElement/Page'
 import Reset        from 'compEdit/EditElement/Reset'
+import FloorMap     from 'compEdit/EditElement/FloorMap'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 
@@ -48,6 +49,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		wonderfulActivity: <WonderfulActivity {...props} />,
 		catg:              <Catg              {...props} />,
 		page:              <Page              {...props} />,
+		floorMap:          <FloorMap          {...props} />,
 		reset:             <Reset             {...props} />,
 		listByStore:       <ListByStore       {...props} />
 	}
