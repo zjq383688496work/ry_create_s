@@ -247,5 +247,4 @@ const dataFormat = {
 	save: {
 	}
 }
-
 module.exports = dataFormat
