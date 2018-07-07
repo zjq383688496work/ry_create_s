@@ -8,7 +8,7 @@ const data = {
 				color: { type: 'custom', color: '#000' }
 			}
 		}  
-	}, 
+	},
 	layout: {
 		position: 'absolute',
 		top:      0,

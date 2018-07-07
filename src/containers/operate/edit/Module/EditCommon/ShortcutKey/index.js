@@ -56,6 +56,7 @@ class ShortcutKey extends React.Component {
 		this.setState({ active: false })
 	}
 	_handleKeyDown = e => {
+		let { keyDown } = this.props
 		let { active, meta, os } = this.state
 		if (!active) return
 		let key   = e.key.toLocaleLowerCase(),
@@ -64,12 +65,15 @@ class ShortcutKey extends React.Component {
 			shift = e.shiftKey? 'shift_': '',
 			Fn   = this[`key_${os === 'mac'? comd: ctrl}${shift}${key}`]
 		console.log(`keydown: ${key}`)
+		keyDown(key)
 		if (!Fn) return
 		Fn(e)
 	}
 	_handleKeyUp = e => {
+		let { keyUp } = this.props
 		let key = e.key.toLocaleLowerCase()
 		console.log(`keyup: ${key}`)
+		keyUp(key)
 		if (key === 'meta') this.setState({ meta: false })
 	}
 	// OSX 下的command取代ctrl
@@ -150,9 +154,9 @@ class ShortcutKey extends React.Component {
 		let { actions, editConfig }  = this.props
 		let { curData, curComp } = editConfig
 		let { parentComp, compIdx, cusCompIdx } = curData
-		let cl  = curComp.data.layout
 		let par = parentComp? parentComp: curComp
 		if (!par.name) return message.success(`组件未选中!`)
+		let cl  = curComp.data.layout
 		// 子组件限制移动边界
 		if (parentComp) {
 			let pl      = parentComp.data.layout,

@@ -17,8 +17,7 @@ const globalData = {
 	floors:    [],	// 楼层数据
 	catgs:     [],	// 分类数据
 	storeList: [],	// 店铺数据
-	copyComp: null,	// 复制组件
-	cutComp:  null,	// 剪切组件
+	copyComp:  null,	// 复制组件
 	// 全局特征 
 	feature: {
 	}

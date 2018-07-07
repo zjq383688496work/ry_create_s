@@ -63,28 +63,33 @@ class Custom extends React.Component {
 	constructor(props) {
 		super(props)
 		let state = {}
-		let comp = props.data.data.components || []
-		comp.map((_, i) => {
-			state[i] = _.data.layout
-		})
+		// let comp = props.data.data.components || []
+		// comp.map((_, i) => {
+		// 	state[i] = _.data.layout
+		// })
 		this.state = state
 	}
 	componentWillMount() {}
 
 	componentDidMount() {}
-	// componentWillReceiveProps() {
-	// 	let state = {}
-	// 	let comp  = this.props.data.data.components || []
-	// 	comp.map((_, i) => {
-	// 		state[i] = _.data.layout
-	// 	})
-	// 	this.setState(state)
-	// 	console.log('更新Props')
-	// }
+	componentWillReceiveProps() {
+		let { data, editConfig } = this.props
+		let { cusCompIdx } = editConfig.curData
+		let state = {}
+		let comp  = data.data.components || []
+		if (cusCompIdx < 0 || !comp[cusCompIdx]) return
+		state[cusCompIdx] = comp[cusCompIdx].data.layout
+		// comp.map((_, i) => {
+		// 	state[i] = _.data.layout
+		// })
+		this.setState(state)
+		console.log('更新ChildProps')
+	}
 
 	selectComp(e, data, idx, parentIdx, parent) {
 		e.stopPropagation()
 		e.preventDefault()
+		this.state[idx] = deepCopy(data.data.layout)
 		let { actions, editConfig } = this.props
 		let { curData } = editConfig
 		if (curData.compIdx === parentIdx && curData.cusCompIdx === idx) return
@@ -182,7 +187,9 @@ class Custom extends React.Component {
 				}
 			}
 
-			let lay = compIdx === idx && i === cusCompIdx? state[i]: layout
+			let sl  = state[i]
+			// let lay = layout
+			let lay = compIdx === idx && i === cusCompIdx? sl? sl: layout: layout
 
 			return (
 				<Rnd

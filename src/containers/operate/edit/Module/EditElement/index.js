@@ -35,7 +35,7 @@ import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
 
 import * as actions from 'actions'
 
-import { Icon } from 'antd'
+import { Icon, message } from 'antd'
 
 import * as variable from 'var'
 
@@ -43,8 +43,8 @@ const ctMap  = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, actions, type, idx, csn) => {
-	var props  = { data, actions, type, idx, csn }
+const compContent = (name, data, actions, type, idx, csn, keyShift) => {
+	var props  = { data, actions, type, idx, csn, keyShift }
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -72,11 +72,15 @@ import './index.less'
 class EditElement extends React.Component {
 	constructor(props) {
 		super(props)
-		let state = {}
-		let eles = props.data.elements || []
-		eles.map((_, i) => {
-			state[i] = _.data.layout
-		})
+		let state = {
+			data: deepCopy(props.data),
+			keyShift: false,
+			compGroup: { index: {}, list: [] }
+		}
+		// let eles = props.data.elements || []
+		// eles.map((_, i) => {
+		// 	state[i] = _.data.layout
+		// })
 		this.state = state
 	}
 	componentWillMount() {}
@@ -84,17 +88,45 @@ class EditElement extends React.Component {
 	componentDidMount() {}
 
 	componentWillUnmount() {}
+
 	componentWillReceiveProps() {
+		// let eles  = this.props.data.elements || [],
+		// 	eles2 = this.state.data.elements || []
+
+		// if (eles.length === eles2.length) return
+		// let state = {
+		// 	data: deepCopy(this.props.data),
+		// 	keyShift: false,
+		// 	compGroup: { index: {}, list: [] }
+		// }
+		// eles.map((_, i) => {
+		// 	state[i] = _.data.layout
+		// })
+		// this.setState(state)
+		let { data, editConfig } = this.props
+		let { compIdx } = editConfig.curData
+		console.log(compIdx)
 		let state = {}
-		let eles  = this.props.data.elements || []
-		eles.map((_, i) => {
-			state[i] = _.data.layout
-		})
+		let eles  = data.elements || []
+		if (compIdx < 0 || !eles[compIdx]) return
+		state[compIdx] = eles[compIdx].data.layout
+		// eles.map((_, i) => {
+		// 	state[i] = _.data.layout
+		// })
 		this.setState(state)
+		console.log('更新Props')
 	}
 
+	keyDown = k => {
+		if (k === 'shift') this.setState({ keyShift: true })
+	}
+	keyUp = k => {
+		if (k === 'shift') this.setState({ keyShift: false })
+	}
+	
 	selectComp(e, data, idx) {
 		e.stopPropagation()
+		this.state[idx] = deepCopy(data.data.layout)
 		let { actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { compIdx, cusCompIdx, contentType } = curData
@@ -103,6 +135,29 @@ class EditElement extends React.Component {
 		curData.parentComp = null
 		actions.updateCur(curData)	// 更新 当前数据
 		actions.selectComp(data)
+	}
+
+	selectMulti(e, idx) {
+		e.stopPropagation()
+		let { keyShift, compGroup } = this.state
+		let { index, list } = compGroup
+		message.success(keyShift? 'true': 'false')
+		if (keyShift) {
+			if (index[idx]) {
+				delete index[idx]
+				list.remove(idx)
+			} else {
+				index[idx] = true
+				list.unshift(idx)
+			}
+		} else {
+			var s = {}
+			s[idx] = true
+			compGroup.index = s
+			compGroup.list  = [idx]
+		}
+		this.setState({ compGroup })
+		console.log(JSON.stringify(compGroup.list))
 	}
 
 	resizeFn(e, ref, delta, pos, item, idx) {
@@ -129,6 +184,7 @@ class EditElement extends React.Component {
 	
 	dragStop(e, d, item, idx) {
 		e.stopPropagation()
+		// e.preventDefault()
 		let { actions } = this.props
 		let s   = this.state[idx]
 		let lay = item.data.layout
@@ -170,7 +226,7 @@ class EditElement extends React.Component {
 				ani       = _.data.animation,
 				aniCls    = '',
 				aniSty    = {},
-				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn)
+				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyShift)
 
 			if (!compCon) return false
 
@@ -187,6 +243,10 @@ class EditElement extends React.Component {
 			}
 
 			let sl  = state[i]
+			// let lay = layout
+			// if (i === compIdx) {
+			// 	debugger
+			// }
 			let lay = i === compIdx? sl? sl: layout: layout
 
 			return (
@@ -210,11 +270,12 @@ class EditElement extends React.Component {
 					<div
 						className={`pge-layout ${aniCls? aniCls: ''}`}
 						style={aniSty}
-						onClick={e => this.selectComp(e, _, i)}
+						onClick={e => {this.selectComp(e, _, i);this.selectMulti(e, i)}}
 						onContextMenu={e => this.selectComp(e, _, i)}
 					>{ compCon }</div>
 				</Rnd>
 			)
+						// onClick={e => e.preventDefault();this.selectComp(e, _, i)}
 		})
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct} ${ads}`}>
@@ -231,7 +292,7 @@ class EditElement extends React.Component {
 					</section>
 				</div>
 				<ContextMenu />
-				<ShortcutKey />
+				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} />
 				<RevokeRecovery />
 			</div>
 		)
