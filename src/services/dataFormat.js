@@ -82,6 +82,7 @@ const dataFormat = {
 											s = o.styleList
 										if (dn === n) {
 											on = o
+											_.styleList.idx = _.styleList.idx || 0
 											if (_.styleList.idx === s.idx) break
 										}
 									}
