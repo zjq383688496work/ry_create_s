@@ -43,8 +43,8 @@ const ctMap  = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, actions, type, idx, csn, keyShift) => {
-	var props  = { data, actions, type, idx, csn, keyShift }
+const compContent = (name, data, actions, type, idx, csn, keyCtrl) => {
+	var props  = { data, actions, type, idx, csn, keyCtrl }
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -72,16 +72,7 @@ import './index.less'
 class EditElement extends React.Component {
 	constructor(props) {
 		super(props)
-		let state = {
-			data: deepCopy(props.data),
-			keyShift: false,
-			compGroup: { index: {}, list: [] }
-		}
-		// let eles = props.data.elements || []
-		// eles.map((_, i) => {
-		// 	state[i] = _.data.layout
-		// })
-		this.state = state
+		this.state = { keyCtrl: false }
 	}
 	componentWillMount() {}
 
@@ -90,19 +81,6 @@ class EditElement extends React.Component {
 	componentWillUnmount() {}
 
 	componentWillReceiveProps() {
-		// let eles  = this.props.data.elements || [],
-		// 	eles2 = this.state.data.elements || []
-
-		// if (eles.length === eles2.length) return
-		// let state = {
-		// 	data: deepCopy(this.props.data),
-		// 	keyShift: false,
-		// 	compGroup: { index: {}, list: [] }
-		// }
-		// eles.map((_, i) => {
-		// 	state[i] = _.data.layout
-		// })
-		// this.setState(state)
 		let { data, editConfig } = this.props
 		let { compIdx } = editConfig.curData
 		console.log(compIdx)
@@ -110,27 +88,27 @@ class EditElement extends React.Component {
 		let eles  = data.elements || []
 		if (compIdx < 0 || !eles[compIdx]) return
 		state[compIdx] = eles[compIdx].data.layout
-		// eles.map((_, i) => {
-		// 	state[i] = _.data.layout
-		// })
 		this.setState(state)
 		console.log('更新Props')
 	}
 
-	keyDown = k => {
-		if (k === 'shift') this.setState({ keyShift: true })
+	keyDown = (k, e) => {
+		if (k === 'meta' || k === 'control') this.setState({ keyCtrl: true })
 	}
-	keyUp = k => {
-		if (k === 'shift') this.setState({ keyShift: false })
+	keyUp = (k, e) => {
+		if (k === 'meta' || k === 'control') this.setState({ keyCtrl: false })
 	}
 	
 	selectComp(e, data, idx) {
 		e.stopPropagation()
-		this.state[idx] = deepCopy(data.data.layout)
+		let { keyCtrl } = this.state
 		let { actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { curData, globalData } = editConfig
+		let { type } = globalData.multiComp
 		let { compIdx, cusCompIdx, contentType } = curData
+		if (keyCtrl && type === 'child') return
 		if (compIdx === idx && cusCompIdx < 0 && contentType === 'comp') return
+		this.state[idx] = deepCopy(data.data.layout)
 		curData.compIdx    = idx
 		curData.parentComp = null
 		actions.updateCur(curData)	// 更新 当前数据
@@ -139,25 +117,29 @@ class EditElement extends React.Component {
 
 	selectMulti(e, idx) {
 		e.stopPropagation()
-		let { keyShift, compGroup } = this.state
-		let { index, list } = compGroup
-		message.success(keyShift? 'true': 'false')
-		if (keyShift) {
+		let { keyCtrl } = this.state
+		let { actions, editConfig } = this.props
+		let { globalData } = editConfig
+		let { multiComp }  = globalData
+		let { index, list, type } = multiComp
+		if (keyCtrl) {
+			if (type === 'child') return message.success('不能跨级选组件!')
 			if (index[idx]) {
-				delete index[idx]
+				// delete index[idx]
 				list.remove(idx)
-			} else {
-				index[idx] = true
-				list.unshift(idx)
 			}
+			index[idx] = true
+			list.unshift(idx)
 		} else {
 			var s = {}
 			s[idx] = true
-			compGroup.index = s
-			compGroup.list  = [idx]
+			multiComp.index = s
+			multiComp.list  = [idx]
 		}
-		this.setState({ compGroup })
-		console.log(JSON.stringify(compGroup.list))
+		multiComp.type = 'parent'
+		delete multiComp.parentIdx
+		actions.updateGlobal(globalData)
+		console.log(JSON.stringify(multiComp.list))
 	}
 
 	resizeFn(e, ref, delta, pos, item, idx) {
@@ -202,7 +184,10 @@ class EditElement extends React.Component {
 
 	render() {
 		let { data, actions, editConfig, location } = this.props
-		let { pageGroupIdx, pageIdx, compIdx } = editConfig.curData
+		let { globalData, curData } = editConfig
+		let { pageGroupIdx, pageIdx, compIdx } = curData
+		let { multiComp } = globalData
+		let { index } = multiComp
 		let state  = this.state
 		let ct     = tempCfg.composeType || 'PORTRAIT'
 		let ads    = tempCfg.adsFlag? 'ads': ''
@@ -226,7 +211,7 @@ class EditElement extends React.Component {
 				ani       = _.data.animation,
 				aniCls    = '',
 				aniSty    = {},
-				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyShift)
+				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyCtrl)
 
 			if (!compCon) return false
 
@@ -243,16 +228,12 @@ class EditElement extends React.Component {
 			}
 
 			let sl  = state[i]
-			// let lay = layout
-			// if (i === compIdx) {
-			// 	debugger
-			// }
 			let lay = i === compIdx? sl? sl: layout: layout
 
 			return (
 				<Rnd
 					key={i}
-					className={i === compIdx? 's-active': ''}
+					className={`${i in index? 's-select': ''} ${i === compIdx? 's-active': ''}`}
 					size={{
 						width:  lay.width || '100%',
 						height: lay.height

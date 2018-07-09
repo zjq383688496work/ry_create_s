@@ -33,8 +33,15 @@ module.exports = (function (window) {
 	/* Array */
 	extend(Array.prototype, {
 		remove(val) {
-			var index = this.indexOf(val)
-			if (index > -1) this.splice(index, 1)
+			return this.filter(_ => _ !== val)
+		},
+		removeByIdx(idx) {
+			var attr = getAttr(idx)
+			if (attr === 'Number') {
+				return this.filter((_, i) => i !== idx)
+			} else if (attr === 'Array') {
+				return this.filter((_, i) => idx.indexOf(i) < 0)
+			}
 		}
 	})
 
