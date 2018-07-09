@@ -83,7 +83,6 @@ class EditElement extends React.Component {
 	componentWillReceiveProps() {
 		let { data, editConfig } = this.props
 		let { compIdx } = editConfig.curData
-		console.log(compIdx)
 		let state = {}
 		let eles  = data.elements || []
 		if (compIdx < 0 || !eles[compIdx]) return
