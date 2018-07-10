@@ -69,9 +69,21 @@ config.devServer = {
 			}
 		},
 		// 保存&编辑
-		'/mcp-gateway': {
+		'/mcp-gateway/case': {
 			// target: 'http://192.168.1.52:10078',
-			target: 'http://192.168.1.224:10330',
+			target: 'http://192.168.1.224:10330',	// QA
+			secure: false,
+			changeOrigin: 'true',
+		},
+		'/mcp-gateway/template': {
+			// target: 'http://192.168.1.52:10078',
+			target: 'http://192.168.1.224:10330',	// QA
+			secure: false,
+			changeOrigin: 'true',
+		},
+		'/mcp-gateway/mall': {
+			target: 'http://192.168.1.52:10078',	// DEV
+			// target: 'http://192.168.1.224:10330',	// QA
 			secure: false,
 			changeOrigin: 'true',
 		},
