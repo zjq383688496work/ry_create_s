@@ -103,7 +103,7 @@ module.exports = [
 					key:  'listByStore'
 				},
 				{
-					icon: 'list',
+					icon: 'floorMap',
 					name: '楼层地图',
 					key:  'floorMap'
 				}
@@ -194,6 +194,11 @@ module.exports = [
 			icon: '2DMap',
 			name: '2D地图',
 			key:  'map2D'
+		},
+		{
+			icon: 'html',
+			name: '组件上传',
+			key:  'html'
 		}
 	// ],
 ]
