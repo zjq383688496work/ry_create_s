@@ -55,14 +55,20 @@ const dataFormat = {
 									dlen = list.length,
 									olen = oli.length
 								if (idx === undefined || !org[idx]) da.idx = org.idx
-								if (dlen !== olen) {
-									// 老 > 新: 删老
-									if (dlen > olen) {
-										list.splice(olen, dlen - olen)
-									} else {
-										da.list = list.concat(oli.slice(dlen, olen - dlen))
-									}
-								}
+								// if (dlen !== olen) {
+								// 	// 老 > 新: 删老
+								// 	if (dlen > olen) {
+								// 		list.splice(olen, dlen - olen)
+								// 	} else {
+								// 		da.list = list.concat(oli.slice(dlen, olen - dlen))
+								// 	}
+								// }
+
+								// 除styleList代码 START
+								if (da.list) delete da.list
+								break
+								// 除styleList代码 END
+
 								// break
 							default:
 								Object.keys(org).map(_ => {
@@ -236,9 +242,9 @@ const dataFormat = {
 					this.compComp(p, c)
 				})
 			})
-			// let ed = JSON.stringify(da).length
+			let ed = JSON.stringify(da).length
 			// console.clear()
-			// console.log(st, ed, ed/st)
+			console.log(st, ed, ed/st)
 			// console.log(da)
 			// console.log(JSON.stringify(da))
 			// return da
