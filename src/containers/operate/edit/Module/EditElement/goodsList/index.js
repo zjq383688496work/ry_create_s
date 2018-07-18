@@ -17,7 +17,7 @@ let cusMap = {
 	business: CustomB
 }
 
-class StoreList extends React.Component {
+export default class GoodsList extends React.Component {
 	constructor(props) {
 		super(props)
 	}
@@ -26,29 +26,21 @@ class StoreList extends React.Component {
 	componentDidMount() {}
 
 	componentWillUnmount() {}
-	componentWillReceiveProps() {
-		let { data } = this.props
-		let { feature } = data
-		let { content } = data.data
-		feature.body.size = content.size
-		this.state = { ioInput: feature }
-		this.ioOuter(feature)
-	}
 
 	ioOuter(ipt) {
 		let { data, actions, idx, csn } = this.props
 		let body = ipt.body
 		let keys = []
-		ipt.list = new Array(data.data.content.size || 12).fill().map((_, i) => {
-			var m = Math.floor(Math.random() * 1e2)
+		ipt.list = new Array(12).fill().map((_, i) => {
+			var m  = Math.floor(Math.random() * 1e2),
+				m2 = m + Math.floor(Math.random() * 50)
 			return {
 				id: i + 1,
 				name:  '康帅傅',
 				price: `${m}.99`,
-				floor: `L1=1${('00' + m).substr(-2)}`,
-				no:    `1${('00' + m).substr(-2)}`,
-				mall_id: '54f403eae4b002000cf63762',
-				pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191209037272.png'
+				oldPrice: `${m2}.99`,
+				pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191209037272.png',
+				QRCodePic: 'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
 			}
 		})
 		this.setState({ ioInput: ipt })
@@ -79,5 +71,3 @@ class StoreList extends React.Component {
 		)
 	}
 }
-
-export default StoreList

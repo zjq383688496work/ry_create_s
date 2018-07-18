@@ -1,0 +1,52 @@
+.e-list-by-store {
+	&>div {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	.ep-item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		opacity: 0;
+		i {
+			display: block;
+		}
+	}
+	.ep-item-two {
+		height:100%;
+		width:100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		opacity: 0;
+		i {
+			display: block;
+		}
+	}
+	&.Style1 {
+		.ep-item {
+			flex-direction: column;
+			opacity: 0;
+			p {
+				display: flex;
+				margin-bottom: 0;
+				align-items: center;
+			}
+		}
+		.ep-item-two {
+			height:100%;
+			width:100%;
+			flex-direction: column;
+			opacity: 0;
+			p {
+				display: flex;
+				margin-bottom: 0;
+				align-items: center;
+			}
+		}
+		.ani_add {
+			opacity: 1
+		}
+	}
+}

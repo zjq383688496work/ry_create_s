@@ -77,5 +77,11 @@ module.exports = {
 	// 2d地图组件
 	map2D:             authInit(require('./map2D')),
 	// 组件上传
-	html:              authInit(require('./html'))
+	html:              authInit(require('./html')),
+	// 图片-绑定
+	pictureBind:       authInit(require('./pictureBind')),
+	// 商品列表
+	goodsList:         authInit(require('./goodsList/index')),
+	// 列表 (店铺)
+	listByGoods:       authInit(require('./goodsList/content/listByGoods'))
 }
