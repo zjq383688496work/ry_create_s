@@ -221,14 +221,18 @@ class EditContent extends React.Component {
 	}
 
 	render() {
-		let { data, actions } = this.props
+		let { data, actions, editConfig } = this.props
 		let compName = data.name
 		if (!compName) return false
-		let content = data.data.content
-		let compLay = data.data.componentLayout
+		let { curData } = editConfig
+		let { parentComp } = curData
+		let da = data.data
+		let { content } = da
+		let compLay = da.componentLayout
 		let compCon
 		let childNode
 		let activeKey
+		let feature
 		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
 		else if (compName === 'weather')           compCon = (<Weather           data={this.props}/>)
@@ -257,7 +261,10 @@ class EditContent extends React.Component {
 				: null
 			)
 		}
-
+		if (parentComp) {
+			var { filter } = da.style
+			feature = parentComp.feature
+		}
 		return (
 			<section className="ry-roll-screen-config">
 				{ compCon }
@@ -266,7 +273,7 @@ class EditContent extends React.Component {
 					?
 					<Collapse activeKey={['0', '1']}>
 						<Panel header={`编辑布局`} key={0}>
-							<CompLayout layout={compLay} updateComp={this.updateComp} />
+							<CompLayout list={feature.list} map={feature.map} layout={compLay} parentLayout={filter} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
 							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} />

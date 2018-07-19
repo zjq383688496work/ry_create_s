@@ -12,20 +12,23 @@ import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 
 export default class ListByStore extends React.Component {
-	state = {
-
+	constructor(props) {
+		super(props)
+		this.state = {}
 	}
-	renderList = (item) => {
-		let props = this.props
-		return <Layout data={item} />
+	renderList = (item, i) => {
+		let { data } = this.props,
+			{ componentLayout, layout } = data.data
+		return <Layout key={i} data={item} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filter')} />
 	}
 	render() {
-		let { type, ioInput } = this.props
-		let dom = ioInput.list.map((_, i) => {
-			return this.renderList(_)
+		let { ioInput } = this.props
+		let { list } = ioInput
+		let dom = list.map((_, i) => {
+			return this.renderList(_, i)
 		})
 		return (
-			<section className={`e-list-by-goods`} style={cssColorFormat(props, 'filterBox')}>
+			<section className={`e-list-by-goods`} style={cssColorFormat(this.props, 'filterBox')}>
 				{ dom }
 			</section>
 		)

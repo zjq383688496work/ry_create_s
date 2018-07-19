@@ -9,7 +9,7 @@ import './index.less'
 
 import Custom from 'compEdit/EditContent/Custom'
 
-import { Collapse, Checkbox, Input, Select } from 'antd'
+import { Collapse, Checkbox, Icon, Input, Select } from 'antd'
 const  { TextArea } = Input
 const  { Option, OptGroup } = Select
 const  { Panel }  = Collapse
@@ -34,8 +34,8 @@ var dataMap = {
 	price:     '价格',
 	oldPrice:  '原价',
 	name:      '商品名称',
-	img:       '图片',
-	QRImg:     '二维码',
+	pic:       '图片',
+	QRPic:     '二维码',
 }
 
 export default class ChildElement extends React.Component {
@@ -58,6 +58,11 @@ export default class ChildElement extends React.Component {
 		layout.push(deepCopy(comp[key]))
 		updateComp()
 	}
+	removeElement = idx => {
+		let { layout, updateComp } = this.props
+		layout.splice(idx, 1)
+		updateComp()
+	}
 	selList(comps) {
 		let { key } = this.state
 		if (key && !comps[key]) return this.setState({ key: '' })
@@ -69,21 +74,6 @@ export default class ChildElement extends React.Component {
 				value={this.state.key}
 				style={{ width: '60%', marginRight: 10 }}
 				onChange={this.onChange}
-			>
-				<Option value={''}>无</Option>
-				{ opts }
-			</Select>
-		)
-	}
-	fieldList(val) {
-		let opts = Object.keys(dataMap).map((_, i) => {
-			return <Option key={i} value={_}>{dataMap[_]}</Option>
-		})
-		return (
-			<Select
-				value={val}
-				style={{ width: '100%' }}
-				onChange={v => { ; this.update() }}
 			>
 				<Option value={''}>无</Option>
 				{ opts }
@@ -103,7 +93,7 @@ export default class ChildElement extends React.Component {
 				let val    = content[p]
 				let render = this[`render${cm.type}`]
 				if (!render) return false
-				let dom = render.bind(this, cm, content, val, p)()
+				let dom = render.bind(this, cm, content, val, p, i)()
 				return <div key={j}>{dom}</div>
 			})
 			return (
@@ -139,19 +129,22 @@ export default class ChildElement extends React.Component {
 		)
 	}
 	// 绑定
-	renderBind(cfg, con, val, key) {
+	renderBind(cfg, con, val, key, idx) {
 		let opts = Object.keys(dataMap).map((_, i) => {
 			return <Option key={i} value={_}>{dataMap[_]}</Option>
 		})
 		return (
-			<Select
-				value={val}
-				style={{ width: '60%' }}
-				onChange={v => { con[key] = v; this.update() }}
-			>
-				<Option value={''}>无</Option>
-				{ opts }
-			</Select>
+			<div>
+				<Select
+					value={val}
+					style={{ width: '60%', marginRight: 10 }}
+					onChange={v => { con[key] = v; this.update() }}
+				>
+					<Option value={''}>无</Option>
+					{ opts }
+				</Select>
+				<span onClick={() => { this.removeElement(idx) }}><Icon type="close" /></span>
+			</div>
 		)
 	}
 
@@ -165,7 +158,7 @@ export default class ChildElement extends React.Component {
 				<div className="pgsr-name">添加元素</div>
 				<div className="pgsr-ctrl">
 					{ selList }
-					<a onClick={this.addElement} disabled={!key}>添加</a>
+					<a onClick={this.addElement} disabled={!key || layout.length > 19}>添加</a>
 				</div>
 			</div>
 		)

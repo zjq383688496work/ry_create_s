@@ -6,15 +6,15 @@ const list = authInit(require('./content/listByGoods'))
 const dataStyle_1 = {
 	layout: {
 		position: 'absolute',
-		top:      100,
+		top:      0,
 		left:     0,
 		width:    540,
-		height:   500
+		height:   800
 	},
 	style: {
 	},
 	content: {
-		size: 12
+		size: 6
 	},
 	animation: {
 		className: '',	// 动画样式
@@ -43,9 +43,10 @@ module.exports = {
 	feature: {
 		body: {
 			page:   1,
-			size:   12,
+			size:   6,
 			total:  0
 		},
-		list: []		// 商品
+		list: [],		// 商品
+		map: {}			// 映射
 	}
 }

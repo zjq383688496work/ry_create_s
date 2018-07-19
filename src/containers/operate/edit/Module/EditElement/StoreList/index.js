@@ -20,55 +20,55 @@ let cusMap = {
 class StoreList extends React.Component {
 	constructor(props) {
 		super(props)
+		this.init()
 	}
 	componentWillMount() {}
 
 	componentDidMount() {}
 
 	componentWillUnmount() {}
-	componentWillReceiveProps() {
-		let { data } = this.props
-		let { feature } = data
-		let { content } = data.data
-		feature.body.size = content.size
-		this.state = { ioInput: feature }
-		this.ioOuter(feature)
-	}
+	// componentWillReceiveProps() {
+	// 	let { data } = this.props
+	// 	let { feature } = data
+	// 	let ipt = deepCopy(feature)
+	// 	this.getList(ipt)
+	// 	this.state = { ioInput: ipt }
+	// 	this.ioOuter(ipt)
+	// }
 
 	ioOuter(ipt) {
-		let { data, actions, idx, csn } = this.props
-		let body = ipt.body
-		let keys = []
-		ipt.list = new Array(data.data.content.size || 12).fill().map((_, i) => {
+		this.getList(ipt)
+		this.setState({ ioInput: ipt })
+		console.clear()
+	}
+	getList = (ipt) => {
+		let { data } = this.props
+		let { content } = data.data
+		let size = ipt.body.size = content.size
+		ipt.list = new Array(size).fill().map((_, i) => {
 			var m = Math.floor(Math.random() * 1e2)
 			return {
 				id: i + 1,
-				name:  '康帅傅',
+				name:  'UNIQLO',
 				price: `${m}.99`,
 				floor: `L1=1${('00' + m).substr(-2)}`,
 				no:    `1${('00' + m).substr(-2)}`,
 				mall_id: '54f403eae4b002000cf63762',
-				pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191209037272.png'
+				pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805311433385479.png'
 			}
 		})
-		this.setState({ ioInput: ipt })
-		console.clear()
-		console.log(body)
 	}
 
-	init() {
+	init = () => {
 		let { data } = this.props
 		let { feature } = data
-		let { content } = data.data
-		feature.body.size = content.size
-		this.state = {
-			ioInput: feature
-		}
+		let ipt = deepCopy(feature)
+		this.getList(ipt)
+		this.state = { ioInput: ipt }
 	}
 
 	render() {
 		let Custom = cusMap[envType] || CustomV
-		this.init.bind(this)()
 
 		return (
 			<Custom

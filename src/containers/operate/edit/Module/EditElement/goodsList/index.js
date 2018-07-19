@@ -20,48 +20,74 @@ let cusMap = {
 export default class GoodsList extends React.Component {
 	constructor(props) {
 		super(props)
+		this.init()
 	}
 	componentWillMount() {}
 
 	componentDidMount() {}
 
 	componentWillUnmount() {}
-
-	ioOuter(ipt) {
-		let { data, actions, idx, csn } = this.props
-		let body = ipt.body
-		let keys = []
-		ipt.list = new Array(12).fill().map((_, i) => {
-			var m  = Math.floor(Math.random() * 1e2),
-				m2 = m + Math.floor(Math.random() * 50)
-			return {
-				id: i + 1,
-				name:  '康帅傅',
-				price: `${m}.99`,
-				oldPrice: `${m2}.99`,
-				pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191209037272.png',
-				QRCodePic: 'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
-			}
-		})
-		this.setState({ ioInput: ipt })
-		console.clear()
-		console.log(body)
+	componentWillReceiveProps() {
+		let { data } = this.props
+		let { feature } = data
+		let ipt = deepCopy(feature)
+		this.getList(ipt)
+		this.state = { ioInput: ipt }
+		this.ioOuter(ipt)
 	}
 
-	init() {
+	ioOuter(ipt) {
+		this.getList(ipt)
+		this.setState({ ioInput: ipt })
+		console.clear()
+	}
+
+	getChs() {
+		// return String.fromCodePoint(Math.round(Math.random() * 20901) + 19968)
+		var str = ['好', '太', '非常', '无与伦比的', '超级'][Math.floor(Math.random() * 5)]
+		return `庄家琪${str}帅!`
+	}
+
+	getList = (ipt) => {
 		let { data } = this.props
 		let { feature } = data
 		let { content } = data.data
-		feature.body.size = content.size
-		this.state = {
-			ioInput: feature
+		let size = ipt.body.size = content.size
+		ipt.list = new Array(size).fill().map((_, i) => {
+			var m   = Math.floor(Math.random() * 1e3),
+				m2  = m + Math.floor(Math.random() * 50),
+				chs = new Array(5).fill().map(() => this.getChs()).join('')
+			return {
+				id:       i + 1,
+				price:    `${m}.99`,
+				oldPrice: `${m2}.99`,
+				// name:     '康帅傅' + chs,
+				name:     chs,
+				pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg',
+				QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
+			}
+		})
+		feature.list = [ipt.list[0]]
+	}
+
+	init = () => {
+		let { data } = this.props
+		let { feature } = data
+		let ipt = deepCopy(feature)
+		this.getList(ipt)
+		feature.map = {
+			price:     '价格',
+			oldPrice:  '原价',
+			name:      '商品名称',
+			pic:       '图片',
+			QRPic:     '二维码',
 		}
+		this.state = { ioInput: ipt }
 	}
 
 	render() {
 		let Custom = cusMap[envType] || CustomV
-		this.init.bind(this)()
-
+		// this.init()
 		return (
 			<Custom
 				{...this.props}

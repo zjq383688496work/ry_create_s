@@ -6,15 +6,11 @@
  */
 
 import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect }  from 'react-redux'
-import * as actions from 'actions'
 import './index.less'
 
 import Color       from 'compEdit/EditCommon/Color'
 import ImageUpload from 'compEdit/EditCommon/ImageUpload'
-import StyleManage from 'compEdit/EditCommon/StyleManage'
-import StyleFilter from './StyleFilter'
+import StyleFilter from 'compEdit/EditStyle/StyleFilter'
 import {
 	Row, Col,
 	Checkbox, Collapse, InputNumber, Radio, Slider, Switch
@@ -28,40 +24,25 @@ import * as variable from 'var'
 
 var styleMap = variable.styleMap.name
 var cssMap   = variable.styleMap.style
-   
 
-class EditStyle extends React.Component {
+export default class EditStyle extends React.Component {
 	componentWillMount() {}
 
 	componentDidMount() {}
 
 	componentWillUnmount() {}
 
-	onChange(val, css, obj, node, attribute) { 
-		let { data, actions, editConfig } = this.props
-		data = StyleFilter.lineHightAdaptation(data,val,css)
-		data = StyleFilter.imageAdaptation(data,attribute)
+	onChange(val, css, obj, node, attribute) {
+		let { data, updateComp } = this.props
+		data = StyleFilter.lineHightAdaptation(data, val, css)
+		data = StyleFilter.imageAdaptation(data, attribute)
 		let da = data.data
-		let { curData } = editConfig
-		let { parentComp } = curData
 		if (node) {
 			obj[css][node] = val
 		} else {
 			obj[css] = val
 		}
-		actions.updateComp(null, parentComp? parentComp: data)
-	}
-
-	onChangeAuth(val, style, css) {
-		let { data, actions, editConfig } = this.props
-		let { curData }    = editConfig
-		let { parentComp } = curData
-		data.auth.style[style][css] = val
-		actions.updateComp(null, parentComp? parentComp: data)
-	}
-
-	cb(key) {
-		console.log(key)
+		updateComp()
 	}
 
 	/* 渲染组件开始 */
@@ -176,30 +157,12 @@ class EditStyle extends React.Component {
 			</Row>
 		)
 	}
-	// 背景图
-	renderBGImage(cfg, data, obj, val, key, node) {
-		let onImage = (url, attribute) => {
-			obj[key].img = url
-			this.onChange.bind(this, url, key, obj, 'img', attribute)()
-		}
-		return (
-			<ImageUpload
-				data={this.props.data}
-				enter={onImage}
-				img={val}
-			/>
-		)
-	}
 
 	render() {
 		let { data } = this.props
 		let da       = data.data
 		let { style, layout } = da
 		if (!style) return false
-		// let styleList  = data.styleList				// 样式列表
-		// 除styleList代码 START
-		let styleList  = comp[data.name].styleList		// 样式列表
-		// 除styleList代码 END
 		let styles     = Object.keys(style)	// 具体样式
 		let activeKey  = Array.from(new Array(styles.length), (_, i) => `${i}`)
 		// 位置大小
@@ -243,9 +206,6 @@ class EditStyle extends React.Component {
 					<div className="pgs-row" key={j}>
 						<div className="pgsr-name">{ cm.name }</div>
 						<div className="pgsr-ctrl">{ dom }</div>
-						<div className="pgsr-auth">
-							<Checkbox checked={data.auth.style[p][q]} onChange={_ => this.onChangeAuth(_.target.checked, p, q)}></Checkbox>
-						</div>
 					</div>
 				)
 			})
@@ -263,16 +223,6 @@ class EditStyle extends React.Component {
 						{ layoutNode }
 					</Panel>
 				</Collapse>
-				<StyleManage
-					data={data}
-					add={false}
-					edit={false}
-					list={styleList.list}
-					idx={data.styleList.idx}
-					parentKey={'styleList'}
-					action={'updateComp'}
-					name={'样式'}
-				/>
 				<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 					{ childNode }
 				</Collapse>
@@ -280,17 +230,3 @@ class EditStyle extends React.Component {
 		)
 	}
 }
-
-EditStyle.defaultProps = {
-}
-
-const mapStateToProps = state => state
-
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(actions, dispatch)
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(EditStyle)

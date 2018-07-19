@@ -74,7 +74,6 @@ class ViewComponent extends React.Component {
 					curPage: cfg.pageContent[cur.router]
 				}
 				window.tempCfg = res.data
-				debugger
 				actions.updateConfig({ ...newCfg, ...cfg })
 				resolve('模板数据')
 			}).catch(e => reject(e))
