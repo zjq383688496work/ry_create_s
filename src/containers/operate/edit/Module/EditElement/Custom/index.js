@@ -9,6 +9,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
+import './index.less'
 
 import Rnd from 'react-rnd'
 import { Icon, message } from 'antd'
@@ -60,8 +61,6 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 	}
 	return render[name]
 }
-
-import './index.less'
 
 class Custom extends React.Component {
 	constructor(props) {
