@@ -213,6 +213,38 @@ module.exports = [
 			]
 		},
 		{
+			icon: 'store',
+			name: '商品详情',
+			key: 'goodsDetails',
+			child: [
+				{
+					icon: 'text',
+					name: '文本',
+					key:  'text'
+				},
+				{
+					icon: 'image',
+					name: '图片',
+					key:  'picture'
+				},
+				{
+					icon: 'text',
+					name: '文本绑定',
+					key:  'textBind'
+				},
+				{
+					icon: 'image',
+					name: '图片绑定',
+					key:  'pictureBind'
+				},
+				{
+					icon: 'carousel',
+					name: '轮播图绑定',
+					key:  'swiperBind'
+				}
+			]
+		},
+		{
 			icon: '2DMap',
 			name: '2D地图',
 			key:  'map2D'

@@ -4,6 +4,7 @@ module.exports = {
 		picture:     1,
 		text:        1,
 		pictureBind: 1,
-		textBind:    1
+		textBind:    1,
+		swiperBind:  1
 	}
 }

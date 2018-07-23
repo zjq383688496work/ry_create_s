@@ -16,15 +16,19 @@ export default class PictureBind extends React.Component {
 	componentWillUnmount() {}
 
 	render() {
-		let { data, item } = this.props,
-			{ bind } = data.data.content
-		let img = bind? item[bind]: ''
+		let props = this.props,
+			{ ioInput } = props,
+			ipt = ioInput? ioInput: props,
+			{ data } = props,
+			{ item } = ipt,
+			{ bind } = data.data.content,
+			img = bind? item[bind]: ''
 		return envType === 'business' && !img
 			?
 			false
 			:
 			(
-			<div className="e-picture" style={cssColorFormat(this.props, 'image')}>
+			<div className="e-picture" style={cssColorFormat(props, 'image')}>
 				<img src={img} />
 			</div>
 			)

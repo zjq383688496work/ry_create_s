@@ -12,6 +12,7 @@ import Picture      from 'compEdit/EditElement/Picture'
 import Text         from 'compEdit/EditElement/Text'
 import PictureBind  from 'compEdit/EditElement/PictureBind'
 import TextBind     from 'compEdit/EditElement/TextBind'
+import SwiperBind   from 'compEdit/EditElement/SwiperBind'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -24,6 +25,7 @@ const compContent = (name, data, item, editConfig, actions, type, ioInput, ioOut
 		text:        <Text        {...props} />,
 		pictureBind: <PictureBind {...props} />,
 		textBind:    <TextBind    {...props} />,
+		swiperBind:  <SwiperBind  {...props} />
 	}
 	return render[name]
 }

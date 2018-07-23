@@ -32,6 +32,9 @@ import ListByStore  from 'compEdit/EditElement/ListByStore'
 import ListByGoods  from 'compEdit/EditElement/goodsList/ListByGoods'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
+import PictureBind       from 'compEdit/EditElement/PictureBind'
+import TextBind          from 'compEdit/EditElement/TextBind'
+import SwiperBind        from 'compEdit/EditElement/SwiperBind'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -57,7 +60,10 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		splitLine:         <SplitLine         {...props} />,
 		reset:             <Reset             {...props} />,
 		listByStore:       <ListByStore       {...props} />,
-		listByGoods:       <ListByGoods       {...props} />
+		listByGoods:       <ListByGoods       {...props} />,
+		pictureBind:       <PictureBind       {...props} />,
+		textBind:          <TextBind          {...props} />,
+		swiperBind:        <SwiperBind        {...props} />
 	}
 	return render[name]
 }

@@ -190,6 +190,27 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	// 绑定
+	renderBind(cfg, con, val, key, index) {
+		let { editConfig } = this.props
+		let { parentComp } = editConfig.curData
+		let { item, map }  = parentComp.feature
+		let opts = Object.keys(map).map((_, i) => {
+			return <Option key={i} value={_}>{map[_]}</Option>
+		})
+		return (
+			<div>
+				<Select
+					value={val}
+					style={{ width: '100%' }}
+					onChange={v => { this.onChange(v, con, key, index) }}
+				>
+					<Option value={''}>无</Option>
+					{ opts }
+				</Select>
+			</div>
+		)
+	}
 
 	renObj(data, content, index) {
 		content = filterContent(data,content)

@@ -17,7 +17,7 @@ let cusMap = {
 	business: CustomB
 }
 
-export default class GoodsList extends React.Component {
+export default class GoodsDetails extends React.Component {
 	constructor(props) {
 		super(props)
 		this.init()
@@ -31,13 +31,13 @@ export default class GoodsList extends React.Component {
 		let { data } = this.props
 		let { feature } = data
 		let ipt = deepCopy(feature)
-		this.getList(ipt)
+		this.getItem(ipt)
 		this.state = { ioInput: ipt }
 		this.ioOuter(ipt)
 	}
 
 	ioOuter(ipt) {
-		this.getList(ipt)
+		this.getItem(ipt)
 		this.setState({ ioInput: ipt })
 		console.clear()
 	}
@@ -48,34 +48,30 @@ export default class GoodsList extends React.Component {
 		return `庄家琪${str}帅!`
 	}
 
-	getList = (ipt) => {
+	getItem = (ipt) => {
 		let { data } = this.props
 		let { feature } = data
 		let { content } = data.data
-		let size = ipt.body.size = content.size
-		ipt.list = new Array(size).fill().map((_, i) => {
-			var m   = Math.floor(Math.random() * 1e3),
-				m2  = m + Math.floor(Math.random() * 50),
-				chs = new Array(5).fill().map(() => this.getChs()).join('')
-			return {
-				id:       i + 1,
-				price:    `${m}.99`,
-				oldPrice: `${m2}.99`,
-				// name:     '康帅傅' + chs,
-				name:     chs,
-				pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg',
-				pics:     'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg',
-				QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
-			}
-		})
-		feature.list = [ipt.list[0]]
+		let m    = Math.floor(Math.random() * 1e3),
+			m2   = m + Math.floor(Math.random() * 50),
+			chs  = new Array(5).fill().map(() => this.getChs()).join('')
+		ipt.item = {
+			id:       1,
+			price:    `9925.0`,
+			oldPrice: `9799.9`,
+			name:     'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
+			pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg',
+			pics:     'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg',
+			QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
+		}
+		feature.item = ipt.item
 	}
 
 	init = () => {
 		let { data } = this.props
 		let { feature } = data
 		let ipt = deepCopy(feature)
-		this.getList(ipt)
+		this.getItem(ipt)
 		feature.map = {
 			price:     '价格',
 			oldPrice:  '原价',
@@ -89,7 +85,6 @@ export default class GoodsList extends React.Component {
 
 	render() {
 		let Custom = cusMap[envType] || CustomV
-		// this.init()
 		return (
 			<Custom
 				{...this.props}

@@ -82,8 +82,12 @@ module.exports = {
 	pictureBind:       authInit(require('./pictureBind')),
 	// 文本-绑定
 	textBind:          authInit(require('./textBind')),
+	// 轮播-绑定
+	swiperBind:        authInit(require('./swiperBind')),
 	// 商品列表
-	goodsList:         authInit(require('./goodsList/index')),
+	goodsList:         authInit(require('./goodsList')),
 	// 列表 (店铺)
-	listByGoods:       authInit(require('./goodsList/content/listByGoods'))
+	listByGoods:       authInit(require('./goodsList/content/listByGoods')),
+	// 商品详情
+	goodsDetails:      authInit(require('./goodsDetails')),
 }
