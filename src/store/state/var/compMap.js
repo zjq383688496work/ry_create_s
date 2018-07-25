@@ -39,7 +39,10 @@ module.exports = {
 		pictureBind:       '图片绑定',
 		textBind:          '文本绑定',
 		swiperBind:        '轮播绑定',
-		goodsDetails:      '商品详情'
+		goodsDetails:      '商品详情',
+		area:              '区域色块',
+		pictureListBind:   '图片列表绑定',
+		goodsBar:          '商品条'
 	},
 	num: {
 		address:           0,
@@ -81,6 +84,9 @@ module.exports = {
 		pictureBind:       0,
 		textBind:          0,
 		swiperBind:        0,
-		goodsDetails:      0
+		goodsDetails:      0,
+		area:              0,
+		pictureListBind:   0,
+		goodsBar:          0
 	}
 }

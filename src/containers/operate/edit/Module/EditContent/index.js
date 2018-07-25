@@ -30,7 +30,7 @@ import Weather           from './Weather'
 import WonderfulActivity from './WonderfulActivity'
 import Page              from './Page'
 import ListByStore       from './ListByStore'
-import Map2D             from './Map2D'
+import ThemeColor        from './ThemeColor'
 import filterContent     from './filter'
 
 import * as variable from 'var'
@@ -53,11 +53,12 @@ class EditContent extends React.Component {
 		let { parentComp } = curData
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
-	onChange(val, con, key, index) {
+	onChange(val, con, key, cfg, index) {
 		let { data, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
+		val = val > cfg.max ? cfg.max : val 
 		con[key] = val
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
@@ -93,7 +94,7 @@ class EditContent extends React.Component {
 				min={cfg.min || 0} max={cfg.max || 100}
 				placeholder={cfg.placeholder || '右侧编辑内容'}
 				autosize={cfg.autosize || false}
-				value={val} onChange={v => this.onChange(v.target.value, con, key, index)}
+				value={val} onChange={v => this.onChange(v.target.value, con, key,cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -103,7 +104,7 @@ class EditContent extends React.Component {
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, con, key, index)}
+				value={val} onChange={v => this.onChange(v, con, key,cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -113,7 +114,7 @@ class EditContent extends React.Component {
 		return (
 			<Input
 				min={cfg.min || 0} max={cfg.max || 100}
-				value={val} onChange={v => this.onChange(v.target.value, con, key, index)}
+				value={val} onChange={v => this.onChange(v.target.value, con, key,cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -158,7 +159,7 @@ class EditContent extends React.Component {
 			<HtmlUpload
 				data={val}
 				style={{ width: '100%' }}
-				onChange={v => this.onChange(v, con, key, index)}
+				onChange={v => this.onChange(v, con, key,cfg, index)}
 			/>
 		)
 	}
@@ -167,7 +168,7 @@ class EditContent extends React.Component {
 		return (
 			<Input
 				minLength={cfg.min || 0} maxLength={cfg.max || 100}
-				defaultValue={val} onBlur={v => this.onChange(v.target.value, con, key, index)}
+				defaultValue={val} onBlur={v => this.onChange(v.target.value, con, key,cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -177,7 +178,7 @@ class EditContent extends React.Component {
 		return (
 			<Input
 				minLength={cfg.min || 0} maxLength={cfg.max || 100}
-				defaultValue={val} onChange={v => this.onChange(v.target.value, con, key, index)}
+				defaultValue={val} onChange={v => this.onChange(v.target.value, con, key,cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -186,7 +187,7 @@ class EditContent extends React.Component {
 	renderCheckbox(cfg, con, val, key, index) {
 		return (
 			<Checkbox
-				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, con, key, index)}
+				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, con, key,cfg, index)}
 			/>
 		)
 	}
@@ -203,7 +204,7 @@ class EditContent extends React.Component {
 				<Select
 					value={val}
 					style={{ width: '100%' }}
-					onChange={v => { this.onChange(v, con, key, index) }}
+					onChange={v => { this.onChange(v, con, key, cfg, index) }}
 				>
 					<Option value={''}>无</Option>
 					{ opts }
@@ -260,7 +261,8 @@ class EditContent extends React.Component {
 		else if (compName === 'wonderfulActivity') compCon = (<WonderfulActivity data={this.props}/>)
 		else if (compName === 'swiperImage')       compCon = (<SwiperImage       data={this.props}/>)
 		else if (compName === 'listByStore')       compCon = (<ListByStore       data={this.props}/>)
-		else if (compName === 'map2D')             compCon = (<Map2D             data={this.props}/>)	
+		else if (compName === 'map2D')             compCon = (<ThemeColor        data={this.props}/>)
+		else if (compName === 'floorMap')          compCon = (<ThemeColor        data={this.props}/>)	
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
@@ -294,7 +296,7 @@ class EditContent extends React.Component {
 					?
 					<Collapse activeKey={['0', '1']}>
 						<Panel header={`编辑布局`} key={0}>
-							<CompLayout list={feature.list} map={feature.map} layout={compLay} parentLayout={filter} updateComp={this.updateComp} />
+							<CompLayout list={feature.list} item={feature.item} map={feature.map} layout={compLay} parentLayout={filter} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
 							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} />

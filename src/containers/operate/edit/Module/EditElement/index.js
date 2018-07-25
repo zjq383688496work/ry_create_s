@@ -31,6 +31,7 @@ import SplitLine         from 'compEdit/EditElement/SplitLine'
 import Map2D             from 'compEdit/EditElement/Map2D'
 import Html              from 'compEdit/EditElement/Html'
 import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
+import Area              from 'compEdit/EditElement/Area'
 
 import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
 import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
@@ -69,7 +70,8 @@ const compContent = (name, data, actions, type, idx, csn, keyCtrl) => {
 		dateWeather:       <DateWeather       {...props} />,
 		map2D:             <Map2D             {...props} />,
 		html:              <Html              {...props} />,
-		goodsDetails:      <GoodsDetails      {...props} />
+		goodsDetails:      <GoodsDetails      {...props} />,
+		area:              <Area              {...props} />
 	}
 	return render[name]
 }
@@ -256,7 +258,7 @@ class EditElement extends React.Component {
 				>
 					<div
 						className={`pge-layout ${aniCls? aniCls: ''}`}
-						style={{...aniSty, ...cssColorFormat({ data: _ }, 'filterBox')}}
+						style={aniSty}
 						onClick={e => {this.selectComp(e, _, i);this.selectMulti(e, i)}}
 						onContextMenu={e => this.selectComp(e, _, i)}
 					>{ compCon }</div>

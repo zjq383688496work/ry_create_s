@@ -21,6 +21,11 @@ module.exports = [
 					key:  'picture'
 				},
 				{
+					icon: 'image',
+					name: '区域色块',
+					key:  'area'
+				},
+				{
 					icon: 'splitLine',
 					name: '分割线',
 					key:  'splitLine'
@@ -241,6 +246,21 @@ module.exports = [
 					icon: 'carousel',
 					name: '轮播图绑定',
 					key:  'swiperBind'
+				},
+				{
+					icon: 'image',
+					name: '区域色块',
+					key:  'area'
+				},
+				{
+					icon: 'carousel',
+					name: '图片列表绑定',
+					key:  'pictureListBind'
+				},
+				{
+					icon: 'carousel',
+					name: '商品条',
+					key:  'goodsBar'
 				}
 			]
 		},

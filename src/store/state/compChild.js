@@ -40,6 +40,9 @@ module.exports = {
 		text:        1,
 		pictureBind: 1,
 		textBind:    1,
-		swiperBind:  1
+		swiperBind:  1,
+		area:        1,
+		goodsBar:    1,
+		pictureListBind: 1
 	}
 }

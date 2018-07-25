@@ -11,12 +11,12 @@ const data = {
 		top:      340,
 		left:     0,
 		width:    540,
-		height:   400
+		height:   540
 	}, 
 	style: {
 		
 	},
-	content: {},
+	content: {themeColor:{type:'background',color:'#666'}},
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向

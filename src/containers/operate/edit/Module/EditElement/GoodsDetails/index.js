@@ -24,16 +24,42 @@ export default class GoodsDetails extends React.Component {
 	}
 	componentWillMount() {}
 
-	componentDidMount() {}
+	componentDidMount() {
+		let csn = this.props.csn
+		if (!csn) return false
+		let doc = document.querySelector(`.${csn}`)
+		doc.addEventListener('scroll', throttle(this._handleScroll, 500, 500))
+		// doc.addEventListener('scroll', this._handleScroll)
+	}
 
-	componentWillUnmount() {}
+	componentWillUnmount() {
+		let csn = this.props.csn
+		if (!csn) return false
+		let doc = document.querySelector(`.${csn}`)
+		doc.removeEventListener('scroll', throttle(this._handleScroll, 500, 500))
+		// doc.removeEventListener('scroll', this._handleScroll)
+	}
+
 	componentWillReceiveProps() {
 		let { data } = this.props
 		let { feature } = data
 		let ipt = deepCopy(feature)
+		ipt.scrollTop = 0
 		this.getItem(ipt)
 		this.state = { ioInput: ipt }
 		this.ioOuter(ipt)
+	}
+
+	_handleScroll = e => {
+		let { ioInput } = this.state
+		let doc = document.querySelector(`.${this.props.csn}`),
+			st = doc.scrollTop
+		this.setState({
+			ioInput: {
+				...ioInput,
+				scrollTop: st
+			}
+		})
 	}
 
 	ioOuter(ipt) {
@@ -59,10 +85,16 @@ export default class GoodsDetails extends React.Component {
 			id:       1,
 			price:    `9925.0`,
 			oldPrice: `9799.9`,
+			brand:    'TELEFLORA',
 			name:     'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
 			pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg',
 			pics:     'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg',
-			QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png'
+			QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png',
+			sTime:    '2016年秋季',
+			catg:     '野兽干花',
+			pType:    '桶装',
+			artNo:    '367687980898',
+			spec:     '72米色 09黑色'
 		}
 		feature.item = ipt.item
 	}
@@ -71,14 +103,21 @@ export default class GoodsDetails extends React.Component {
 		let { data } = this.props
 		let { feature } = data
 		let ipt = deepCopy(feature)
+		ipt.scrollTop = 0
 		this.getItem(ipt)
 		feature.map = {
 			price:     '价格',
 			oldPrice:  '原价',
+			brand:     '品牌',
 			name:      '商品名称',
 			pic:       '图片',
 			pics:      '图片列表',
 			QRPic:     '二维码',
+			sTime:     '上架时间',
+			catg:      '产品分类',
+			pType:     '包装种类',
+			artNo:     '货号',
+			spec:      '颜色规格'
 		}
 		this.state = { ioInput: ipt }
 	}

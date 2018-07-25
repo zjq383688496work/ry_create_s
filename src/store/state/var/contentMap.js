@@ -24,5 +24,6 @@ module.exports = {
 	switch:        { name: '滑动开关', type: 'Checkbox' },
 	pageSwitch:    { name: '翻页开关', type: 'Checkbox' },
 	size:          { name: '显示数量', type: 'Number', min: 1, max: 20 },
-	file:          { name: '文档',    type: 'File' }
+	file:          { name: '文档',    type: 'File' },
+	showTop:       { name: '滚动高度', type: 'Number', min: 0, max: 1000 }
 }

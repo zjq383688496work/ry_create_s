@@ -90,4 +90,10 @@ module.exports = {
 	listByGoods:       authInit(require('./goodsList/content/listByGoods')),
 	// 商品详情
 	goodsDetails:      authInit(require('./goodsDetails')),
+	// 区域色块
+	area:              authInit(require('./area')),
+	// 图片列表-绑定
+	pictureListBind:   authInit(require('./pictureListBind')),
+	// 商品条
+	goodsBar:          authInit(require('./goodsDetails/content/goodsBar'))
 }

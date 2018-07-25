@@ -6,5 +6,12 @@ module.exports = {
 		pictureBind: 1,
 		textBind:    1,
 		swiperBind:  1
+	},
+	goodsBar: {
+		picture:     1,
+		text:        1,
+		pictureBind: 1,
+		textBind:    1,
+		swiperBind:  1
 	}
 }
