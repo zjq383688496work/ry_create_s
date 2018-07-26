@@ -24,7 +24,7 @@
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
     "serve:dist": "node server.js --env=dist",
-    "start": "node server.js --env=dev",
+    "start": "webpack-dev-server --inline --config ./cfg/dev.js",
     "dev": "node server.js --env=dev"
   },
   "repository": "",

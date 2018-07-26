@@ -92,7 +92,7 @@ class EditComponent extends React.Component {
 					</div>
 					{
 						curData.router &&
-						<div className="pg-left pg-left-fixed scrollbar">
+						<div className="pg-left scrollbar">
 							<EditCompLayout data={editConfig.curPage} />
 						</div>
 					}
