@@ -13,7 +13,7 @@ const tb  = authInit(require('../textBind'))
 const sb  = authInit(require('../swiperBind'))
 const gb  = authInit(require('./content/goodsBar'))
 
-const Bg1 = extend(deepCopy(a), {
+/*const Bg1 = extend(deepCopy(a), {
 	data: {
 		layout: {
 			top:      10,
@@ -33,7 +33,7 @@ const Bg1 = extend(deepCopy(a), {
 			}
 		}
 	}
-})
+})*/
 const Bg2 = extend(deepCopy(a), {
 	data: {
 		layout: {
@@ -55,7 +55,8 @@ const Bg2 = extend(deepCopy(a), {
 		}
 	}
 })
-const Spr = extend(deepCopy(sb), {
+
+/*const Spr = extend(deepCopy(sb), {
 	data: {
 		layout: {
 			top:  24,
@@ -205,7 +206,7 @@ const QRT = extend(deepCopy(t), {
 			text: '扫码即可购买'
 		}
 	}
-})
+})*/
 
 const Title = extend(deepCopy(p), {
 	data: {
@@ -507,7 +508,9 @@ const data = {
 	},
 	// 组件管理
 	components: [
-		Bg1, Bg2, Spr, Name, PIcon, Price, OPT, OPrice, QR, QRT,
+		// Bg1,
+		Bg2,
+		// Spr, Name, PIcon, Price, OPT, OPrice, QR, QRT,
 		Title, Name1, Name2, Name3, Name4, Name5, Name6, Name7, Name8,
 		Con1, Con2, Con3, Con4, Con5, Con6, Con7, Con8,
 		GoodsPic, GB

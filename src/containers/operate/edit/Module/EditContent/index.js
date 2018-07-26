@@ -255,6 +255,7 @@ class EditContent extends React.Component {
 		let childNode
 		let activeKey
 		let feature
+		let filter = {}
 		if (compName === 'navigation')             compCon = (<Navigation        data={this.props}/>)
 		else if (compName === 'navigationFloat')   compCon = (<NavigationFloat   data={this.props}/>)
 		else if (compName === 'weather')           compCon = (<Weather           data={this.props}/>)
@@ -285,7 +286,7 @@ class EditContent extends React.Component {
 			)
 		}
 		if (parentComp) {
-			var { filter } = da.style
+			filter = da.layout
 			feature = parentComp.feature
 		}
 		return (

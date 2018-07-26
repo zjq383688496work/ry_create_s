@@ -248,11 +248,6 @@ module.exports = [
 					key:  'swiperBind'
 				},
 				{
-					icon: 'image',
-					name: '背景色块',
-					key:  'area'
-				},
-				{
 					icon: 'carousel',
 					name: '图片列表-绑定',
 					key:  'pictureListBind'
@@ -261,6 +256,11 @@ module.exports = [
 					icon: 'carousel',
 					name: '详情浮动条',
 					key:  'goodsBar'
+				},
+				{
+					icon: 'carousel',
+					name: '商品信息',
+					key:  'goodsBlock'
 				}
 			]
 		},

@@ -11,7 +11,7 @@ import './index.less'
 import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 
-export default class GoodsBar extends React.Component {
+export default class ChildElement extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {}
