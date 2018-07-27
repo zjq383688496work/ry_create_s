@@ -1,17 +1,17 @@
 const common = require('state/common')
 let { authInit, deepCopy, extend } = common
-const t  = authInit(require('../../text'))
-const pb = authInit(require('../../pictureBind'))
-const tb = authInit(require('../../textBind'))
-const sb = authInit(require('../../swiperBind'))
+const t  = authInit(require('state/comp/text'))
+const pb = authInit(require('state/comp/pictureBind'))
+const tb = authInit(require('state/comp/textBind'))
+const sb = authInit(require('state/comp/swiperBind'))
 
 const Spr = extend(deepCopy(sb), {
 	data: {
 		layout: {
-			top:  14,
-			left: 33,
-			width:  153,
-			height: 168
+			top:  10,
+			left: 10,
+			width:  200,
+			height: 200
 		},
 		content: {
 			bind: 'pics'
@@ -158,7 +158,7 @@ const QRT = extend(deepCopy(t), {
 })
 
 // 字母排序
-const data = {
+module.exports = {
 	layout: {
 		position: 'absolute',
 		top:  0,
@@ -195,24 +195,5 @@ const data = {
 		delay: 0,			// 开始时间
 		duration: 1,		// 持续时间
 		iterationCount: 1	// 循环次数
-	}
-}
-
-module.exports = {
-	name: 'goodsBlock',
-	type: 'layout',
-	// 位置大小
-	data: deepCopy(data),
-	// 样式列表
-	styleList: {
-		idx:  0,
-		list: [{
-			name: '样式1',
-			img:  '',
-			data: deepCopy(data)
-		}]
-	},
-	// 功能特性
-	feature: {
 	}
 }

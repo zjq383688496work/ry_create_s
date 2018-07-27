@@ -223,6 +223,16 @@ module.exports = [
 			key: 'goodsDetails',
 			child: [
 				{
+					icon: 'carousel',
+					name: '详情浮动条',
+					key:  'goodsBar'
+				},
+				{
+					icon: 'carousel',
+					name: '商品信息',
+					key:  'goodsBlock'
+				},
+				{
 					icon: 'text',
 					name: '文本',
 					key:  'text'
@@ -251,16 +261,6 @@ module.exports = [
 					icon: 'carousel',
 					name: '图片列表-绑定',
 					key:  'pictureListBind'
-				},
-				{
-					icon: 'carousel',
-					name: '详情浮动条',
-					key:  'goodsBar'
-				},
-				{
-					icon: 'carousel',
-					name: '商品信息',
-					key:  'goodsBlock'
 				}
 			]
 		},

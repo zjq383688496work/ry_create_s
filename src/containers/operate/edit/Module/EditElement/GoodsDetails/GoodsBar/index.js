@@ -23,7 +23,7 @@ export default class GoodsBar extends React.Component {
 			{ item, scrollTop } = ioInput,
 			{ showTop } = content
 		return (
-			<section className={`e-goods-bar${scrollTop > showTop? ' s-show': ''}`} style={cssColorFormat(props, 'filterBox')}>
+			<section className={`e-goods-bar${scrollTop >= showTop? ' s-show': ''}`} style={cssColorFormat(props, 'filterBox')}>
 				<Layout data={item} layout={layout} components={componentLayout} styleObj={cssColorFormat(props, 'filter')} />
 			</section>
 		)

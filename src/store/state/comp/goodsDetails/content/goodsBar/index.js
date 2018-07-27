@@ -1,8 +1,8 @@
 const common = require('state/common')
 let { authInit, deepCopy, extend } = common
-const pb = authInit(require('../../pictureBind'))
-const t  = authInit(require('../../text'))
-const tb = authInit(require('../../textBind'))
+const pb = authInit(require('state/comp/pictureBind'))
+const t  = authInit(require('state/comp/text'))
+const tb = authInit(require('state/comp/textBind'))
 
 const Name = extend(deepCopy(tb), {
 	data: {
