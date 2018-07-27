@@ -91,6 +91,7 @@ config.devServer = {
 		// 素材库&天气
 		'/easy-smart': {
 			target: 'http://192.168.1.206',
+			// target: 'http://java1.rongyi.com',
 			secure: false,
 			changeOrigin: 'true'
 		},

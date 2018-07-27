@@ -224,7 +224,7 @@ module.exports = [
 			child: [
 				{
 					icon: 'carousel',
-					name: '详情浮动条',
+					name: '信息浮动条',
 					key:  'goodsBar'
 				},
 				{
@@ -258,7 +258,7 @@ module.exports = [
 					key:  'swiperBind'
 				},
 				{
-					icon: 'carousel',
+					icon: 'classifyNav',
 					name: '图片列表-绑定',
 					key:  'pictureListBind'
 				}
