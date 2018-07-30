@@ -1,15 +1,18 @@
 /**
- * @Author: Along
- * @Date:   2018-05-03
+ * @Author: Liao Hui
+ * @Date:   2018-04-21T17:21:39+08:00
+ * @Last modified by:   Liao Hui
+ * @Last modified time: 2018-04-24T13:47:49+08:00
  */
-
 
 import React from 'react'
 import Swiper from 'swiper'
 import './index.less'
 
+import { Icon, Pagination } from 'antd'
+import Layout from 'compEdit/EditElement/Layout'
 
-export default class SwiperBind extends React.Component {
+export default class SwiperByGoods extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -51,9 +54,21 @@ export default class SwiperBind extends React.Component {
 		this.swiper = new Swiper(`.swiper-container_${random}`, params) 
 	}
 	renderDom = (list) => {
-		let { random } = this.state
+		if (!list) return null
+		let { random } = this.state,
+			{ data }   = this.props,
+			{ componentLayout, layout } = data.data
 		let slide = list.map((_, i) => {
-			return <div className="swiper-slide" key={i}><img src={_}  style={cssColorFormat(this.props, 'swiperImage')} /></div>
+			return (
+				<div className="swiper-slide" key={i}>
+					<Layout
+						data={_}
+						layout={layout}
+						components={componentLayout}
+						styleObj={cssColorFormat(this.props, 'filterBox')}
+					/>
+				</div>
+			)
 		})
 		return (
 			<div className={`swiper-container swiper-container_${random}`}>
@@ -65,17 +80,11 @@ export default class SwiperBind extends React.Component {
 		)
 	}
 	render() {
-		let props = this.props,
-			{ ioInput } = props,
-			ipt = ioInput? ioInput: props,
-			{ data } = props,
-			{ item } = ipt,
-			{ bind } = data.data.content,
-			imgs = bind? item[bind].split(','): [null]
-		let dom = this.renderDom(imgs)
-
+		let { ioInput } = this.props
+		let { list } = ioInput
+		let dom = this.renderDom(list)
 		return (
-			<section className="e-swiper-bind" style={cssColorFormat(this.props, 'swiperImage')}>
+			<section className={`e-swiper-by-goods`}>
 				{ dom }
 			</section>
 		)

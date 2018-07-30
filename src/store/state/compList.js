@@ -214,6 +214,11 @@ module.exports = [
 					icon: 'list',
 					name: '列表',
 					key:  'listByGoods'
+				},
+				{
+					icon: 'list',
+					name: '推荐列表',
+					key:  'swiperByGoods'
 				}
 			]
 		},
@@ -264,6 +269,23 @@ module.exports = [
 				}
 			]
 		},
+		// {
+		// 	icon: 'store',
+		// 	name: '标签切换',
+		// 	key: 'tabs',
+		// 	child: [
+		// 		{
+		// 			icon: 'carousel',
+		// 			name: '标签',
+		// 			key:  'catgByTabs'
+		// 		},
+		// 		{
+		// 			icon: 'carousel',
+		// 			name: '子元素',
+		// 			key:  'childElement'
+		// 		}
+		// 	]
+		// },
 		{
 			icon: '2DMap',
 			name: '2D地图',
