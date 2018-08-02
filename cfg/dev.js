@@ -4,6 +4,7 @@ let path = require('path');
 let webpack = require('webpack');
 let baseConfig = require('./base');
 let defaultSettings = require('./defaults');
+let srcPath = path.join(__dirname, '/../src');
 
 // Add needed plugins here
 let BowerWebpackPlugin = require('bower-webpack-plugin');
@@ -105,12 +106,14 @@ config.devServer = {
 
 // Add needed loaders to the defaults here
 config.module.loaders.push({
-	test: /\.(js|jsx)$/,
+	test: /\.jsx?$/,
 	loader: 'react-hot!babel-loader',
-	include: [].concat(
-		config.additionalPaths,
-		[ path.join(__dirname, '/../src') ]
-	)
+	include: srcPath,
+	exclude: /node_modules/
+	// include: [].concat(
+	// 	config.additionalPaths,
+	// 	[ path.join(__dirname, '/../src') ]
+	// )
 });
 
 module.exports = config;

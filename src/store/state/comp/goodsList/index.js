@@ -1,5 +1,6 @@
 let { authInit, deepCopy, extend, styleIdxChange } = require('state/common')
-const list = authInit(require('./content/listByGoods'))
+const list   = authInit(require('./content/listByGoods'))
+const swiper = authInit(require('./content/swiperByGoods'))
 
 // 店铺列表
 const dataStyle_1 = {
@@ -22,7 +23,7 @@ const dataStyle_1 = {
 		duration: 1,				// 持续时间
 		iterationCount: 1			// 循环次数
 	},
-	components: [list] 
+	components: [swiper] 
 }
 
 module.exports = {

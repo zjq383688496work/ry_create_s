@@ -4,134 +4,260 @@ const p  = authInit(require('../../picture'))
 const pb = authInit(require('../../pictureBind'))
 const t  = authInit(require('../../text'))
 const tb = authInit(require('../../textBind'))
+const sb = authInit(require('state/comp/swiperBind'))
 
-const gPic = extend(deepCopy(pb), {
+const Name = extend(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  12,
-			left: 12,
-			width:  152,
-			height: 152
-		},
-		content: {
-			bind: 'pic'
-		}
-	}
-})
-const gName = extend(deepCopy(tb), {
-	data: {
-		layout: {
-			top:  166,
-			left: 12,
-			width:  152,
-			height: 36
+			top:  25,
+			left: 25,
+			width:  210,
+			height: 42
 		},
 		content: {
 			bind: 'name'
 		},
 		style: {
 			text: {
+				fontSize:   15,
+				lineHeight: 20,
 				textAlign: 'left',
 				color: { type: 'custom', color: '#666' }
 			}
 		}
 	}
 })
-const rmbIcon = extend(deepCopy(t), {
+const PIcon = extend(deepCopy(t), {
 	data: {
 		layout: {
-			top:  230,
-			left: 12,
+			top:  114,
+			left: 25,
 			width:  20,
-			height: 30
+			height: 28
+		},
+		style:     {
+			text: {
+				// textAlign:  'left',
+				fontSize:   23,
+				lineHeight: 28,
+				color: { type: 'custom', color: '#da2339' }
+			}
 		},
 		content: {
 			text: '¥'
-		},
-		style: {
-			text: {
-				textAlign: 'left',
-				color: { type: 'custom', color: '#ee3852' }
-			}
 		}
 	}
 })
-const gPrice = extend(deepCopy(tb), {
+const Price = extend(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  224,
-			left: 20,
-			width:  100,
-			height: 30
+			top:  101,
+			left: 45,
+			width:  155,
+			height: 43
+		},
+		style:     {
+			text: {
+				textAlign:  'left',
+				fontSize:   35,
+				lineHeight: 43,
+				color: { type: 'custom', color: '#da2339' }
+			}
 		},
 		content: {
 			bind: 'price'
-		},
-		style: {
-			text: {
-				textAlign:  'left',
-				fontSize:   22,
-				lineHeight: 24,
-				color: { type: 'custom', color: '#ee3852' }
-			}
 		}
 	}
 })
-const gBuy = extend(deepCopy(p), {
+const PriceT = extend(deepCopy(t), {
 	data: {
 		layout: {
-			top:  205,
-			left: 124,
-			width:  40,
-			height: 40
+			top:  106,
+			left: 154.5,
+			width:  70,
+			height: 17
+		},
+		style:     {
+			text: {
+				lineHeight: 16,
+				color: { type: 'custom', color: '#da2339' }
+			}
 		},
 		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201807191930194263.png' }
+			text: '现场专享价'
 		}
 	}
 })
+const OPT = extend(deepCopy(t), {
+	data: {
+		layout: {
+			top:  122.5,
+			left: 150,
+			width:  30,
+			height: 16
+		},
+		style:     {
+			text: {
+				lineHeight: 16,
+				color: { type: 'custom', color: '#999' }
+			}
+		},
+		content: {
+			text: '原价:'
+		}
+	}
+})
+const OPrice = extend(deepCopy(tb), {
+	data: {
+		layout: {
+			top:  120,
+			left: 181.5,
+			width:  50,
+			height: 20
+		},
+		style:     {
+			text: {
+				textAlign:  'left',
+				textDecoration: 'line-through',
+				fontSize:   15,
+				lineHeight: 20,
+				color: { type: 'custom', color: '#999' }
+			}
+		},
+		content: {
+			bind: 'oldPrice'
+		}
+	}
+})
+const QR = extend(deepCopy(pb), {
+	data: {
+		layout: {
+			top:  26.5,
+			left: 274,
+			width:  95,
+			height: 95
+		},
+		content: {
+			bind: 'QRPic'
+		}
+	}
+})
+const QRT = extend(deepCopy(t), {
+	data: {
+		layout: {
+			top:  123.5,
+			left: 275,
+			width:  94,
+			height: 14
+		},
+		style:     {
+			text: {
+				lineHeight: 14,
+				color: { type: 'custom', color: '#999' }
+			}
+		},
+		content: {
+			text: '扫码即可购买'
+		}
+	}
+})
+const Spr = extend(deepCopy(sb), {
+	data: {
+		layout: {
+			top:  154,
+			left: 25,
+			width:  344,
+			height: 344
+		},
+		content: {
+			bind: 'pics'
+		}
+	}
+})
+const DescT = extend(deepCopy(tb), {
+	data: {
+		layout: {
+			top:  75,
+			left: 25,
+			width:  200,
+			height: 24
+		},
+		style:     {
+			text: {
+				lineHeight: 12,
+				color: { type: 'custom', color: '#da2339' },
+				padding: {
+					top:    1,
+					right:  8,
+					bottom: 1,
+					left:   8,
+				},
+				borderRadius:    {
+					topLeft:     4,
+					topRight:    4,
+					bottomRight: 4,
+					bottomLeft:  4
+				},
+				borderWidth:     1,
+				borderStyle:     'solid',
+				borderColor: 	 { type: 'custom', color: '#da2339' },
+			}
+		},
+		content: {
+			bind: 'desc'
+		}
+	}
+})
+
 
 // 字母排序
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  10,
-		left: 5,
-		width:  535,
-		height: 540
+		top:  0,
+		left: 0,
+		width:  540,
+		height: 600
 	},
 	style: {
 		filterBox: {
-			width:  174,
-			height: 260,
+			width:  394,
+			height: 523,
 			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'main', color: '#fff' },
 			backgroundColor: { type: 'custom', color: '#fff' },
-			margin: {
-				top:     0,
-				right:   4,
-				bottom:  4,
-				left:    0,
-			},
 			borderRadius:    {
-				topLeft:     0,
-				topRight:    0,
-				bottomLeft:  0,
-				bottomRight: 0
+				topLeft:     20,
+				topRight:    20,
+				bottomLeft:  20,
+				bottomRight: 20
 			},
 			boxShadow: {
 				h_shadow:   0,
 				v_shadow:   0,
-				blur_dis:   0,
+				blur_dis:   60,
 				spread_dis: 0,
-				color:      { type: 'custom', color: '#000' }
+				color:      { type: 'custom', color: 'rgba(0,0,0,.24)' }
 			}
 		}
 	},
-	componentLayout: [ gPic, gName, rmbIcon, gPrice, gBuy ],
+	componentLayout: [ Name, DescT, PIcon, Price, PriceT, OPT, OPrice, QR, QRT, Spr ],
 	content: {
-		router: {}
+		swiperOptions: {
+			direction: 'horizontal',
+			effect:  'slide',
+			autoplay: true,
+			loop:  true,
+			speed: 500,
+			delay: 3000,
+			spaceBetween:   150,
+			slidesPerView:  2,
+			slidesPerGroup: 1,
+			slidesOffsetBefore: 0,
+			centeredSlides: true
+		},
+		recommendGoods: []
 	},
 	animation: {
 		className: '',		// 动画样式

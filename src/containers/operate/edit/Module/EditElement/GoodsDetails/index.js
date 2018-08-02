@@ -43,7 +43,6 @@ export default class GoodsDetails extends React.Component {
 		if (!csn) return false
 		let doc = document.querySelector(`.${csn}`)
 		doc.addEventListener('scroll', throttle(this._handleScroll, 500, 500))
-		// doc.addEventListener('scroll', this._handleScroll)
 	}
 
 	componentWillUnmount() {
@@ -51,7 +50,6 @@ export default class GoodsDetails extends React.Component {
 		if (!csn) return false
 		let doc = document.querySelector(`.${csn}`)
 		doc.removeEventListener('scroll', throttle(this._handleScroll, 500, 500))
-		// doc.removeEventListener('scroll', this._handleScroll)
 	}
 
 	componentWillReceiveProps() {
@@ -83,36 +81,13 @@ export default class GoodsDetails extends React.Component {
 		console.clear()
 	}
 
-	getChs() {
-		// return String.fromCodePoint(Math.round(Math.random() * 20901) + 19968)
-		var str = ['好', '太', '非常', '无与伦比的', '超级'][Math.floor(Math.random() * 5)]
-		return `庄家琪${str}帅!`
-	}
-
 	getItem = (ipt) => {
 		let { data } = this.props
 		let { feature } = data
 		let { content } = data.data
-		let m    = Math.floor(Math.random() * 1e3),
-			m2   = m + Math.floor(Math.random() * 50),
-			chs  = new Array(5).fill().map(() => this.getChs()).join('')
-		ipt.item = {
-			id:       1,
-			price:    `9925.0`,
-			oldPrice: `9799.9`,
-			brand:    'TELEFLORA',
-			name:     'TELEFLORA 11朵粉紫玫瑰七夕花束预定当天自提',
-			pic:      'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg',
-			pics:     'http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/176/79c5de67-8f8f-4463-a82d-364d3dcd92e5_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/62/bacab0f7-7b39-4631-b6ff-029e65ae5339_420x420_90.jpg,http://a.vpimg3.com/upload/merchandise/pdcvis/2018/07/04/115/51673b5a-f7ac-47f2-8dc3-ad6f8560631e_420x420_90.jpg',
-			QRPic:    'http://rongyi.b0.upaiyun.com/commodity/text/201807181419502662.png',
-			sTime:    '2016年秋季',
-			catg:     '野兽干花',
-			pType:    '桶装',
-			artNo:    '367687980898',
-			spec:     '72米色 09黑色'
-		}
-		feature.item = ipt.item
-		feature.map  = featureMap
+		ipt.item = mock.item.goods()
+		delete feature.item
+		delete feature.map
 	}
 
 	init = () => {

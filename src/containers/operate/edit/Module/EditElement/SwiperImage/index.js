@@ -20,7 +20,7 @@ class SwiperImage extends React.Component {
 		this.init(this.props)
 	} 
 	state = {
-		random: parseInt(Math.random()*1000),
+		random: Date.now() + parseInt(Math.random()*1000),
 		realIndex: 0
 	}
 	to = event => {
