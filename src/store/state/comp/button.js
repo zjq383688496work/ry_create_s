@@ -23,7 +23,7 @@ const data = {
 			fontWeight:      'normal',
 			textDecoration:  'none',
 			transform:       { rotate: 0 },
-			opacity:         1, 
+			opacity:         1,
 			color:           { type: 'custom', color: '#000' },
 			background: 'center no-repeat',
 			backgroundSize: 'cover',
@@ -36,7 +36,7 @@ const data = {
 				bottomLeft:  0
 			},
 			borderWidth:     1,
-			borderStyle:     'solid',  
+			borderStyle:     'solid',
 			borderColor: 	 { type: 'custom', color: '#333' },
 			boxShadow:       {
 				h_shadow:    0,
@@ -55,7 +55,7 @@ const data = {
 	},
 	content: {
 		text:   '按钮',	// 文字内容
-		router: {} 			// 路由
+		router: {}			// 路由
 	},	
 	animation: {
 		className: '',	// 动画样式
