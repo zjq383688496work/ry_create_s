@@ -99,6 +99,7 @@ export default class CompLayout extends React.Component {
 		let isActive = activeMap[name]
 		let renderDom = this.renderDom(layout, isActive)
 		let data = idx > -1? layout[idx]: false
+		let css = styleName? cssColorFormat(props, styleName): {}
 		return (
 			<div className="comp-layout">
 				<a className="btn-edit-layout" onClick={this.showModal}>编辑布局</a>
@@ -132,7 +133,7 @@ export default class CompLayout extends React.Component {
 								}
 							</div>
 							<div className="cl-element" style={pLay}>
-								<div className="cl-element-child" id={id} style={{ ...cssColorFormat(props, styleName), width, height }}>
+								<div className="cl-element-child" id={id} style={{ ...css, width, height }}>
 									{ renderDom }
 								</div>
 							</div>

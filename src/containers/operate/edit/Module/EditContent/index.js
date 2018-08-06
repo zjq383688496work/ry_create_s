@@ -40,7 +40,8 @@ var conMap = variable.contentMap
 var plMap  = {
 	catgByGoods:   'filter',
 	listByGoods:   'filter',
-	swiperByGoods: 'filterBox'
+	swiperByGoods: 'filterBox',
+	goodsBar:      'filter'
 }
 var mockMap  = {
 	listByGoods: { type: 'list', name: 'goods', field: 'size' },
