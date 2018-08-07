@@ -84,8 +84,8 @@ config.devServer = {
 			changeOrigin: 'true',
 		},
 		'/mcp-gateway/mall': {
-			target: 'http://192.168.1.52:10078',	// DEV
-			// target: 'http://192.168.1.224:10330',	// QA
+			// target: 'http://192.168.1.52:10078',	// DEV
+			target: 'http://192.168.1.224:10330',	// QA
 			secure: false,
 			changeOrigin: 'true',
 		},
