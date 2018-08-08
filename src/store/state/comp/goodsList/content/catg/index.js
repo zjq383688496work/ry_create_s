@@ -72,9 +72,6 @@ const gLineAV = extendRmSL(deepCopy(a), {
 			left: 26,
 			width:  60,
 			height: 4
-		},
-		content: {
-			bind: 'name'
 		}
 	},
 	feature: { active: true }

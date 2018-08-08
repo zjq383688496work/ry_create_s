@@ -117,6 +117,7 @@ export default class Fetch {
 			:
 			ENV === 'dev'
 			?
+			// '186.rongyi.com'
 			'localhost:4090'
 			:
 			ENV === 'dist'
@@ -126,6 +127,7 @@ export default class Fetch {
 			'manage.w.rongyi.com'
 
 		var API = `http://${host}/api/screen/create`
+		// config.source = 'store'
 		return new Promise((resolve, reject) => {
 			Fetch.remote(API, {
 				method: 'POST',

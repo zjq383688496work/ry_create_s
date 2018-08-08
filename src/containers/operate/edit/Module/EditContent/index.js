@@ -41,6 +41,7 @@ var plMap  = {
 	catgByGoods:   'filter',
 	listByGoods:   'filter',
 	swiperByGoods: 'filterBox',
+	// resetByGoods:  'filter',
 	goodsBar:      'filter'
 }
 var mockMap  = {
@@ -49,7 +50,8 @@ var mockMap  = {
 	goodsBar:    { type: 'item', name: 'goods' },
 	pictureListBind: { type: 'item', name: 'goods' },
 	swiperByGoods:   { type: 'item', name: 'goods' },
-	catgByGoods:     { type: 'item', name: 'goodsCatg' }
+	catgByGoods:     { type: 'item', name: 'goodsCatg' },
+	resetByGoods:    { type: 'item', name: 'goodsCatg' }
 }
 
 import './index.less'
@@ -328,8 +330,8 @@ class EditContent extends React.Component {
 			mk  = mockMap[cn]
 		if (!mk) return {}
 		var { type, name, field } = mk
-		obj[type]  = mock[type][name]()
-		obj.map    = mock.map[name]()
+		obj[type] = mock[type][name]()
+		obj.map   = mock.map[name]()
 		if (da) obj.layout = plMap[cn]? da.style[plMap[cn]]: da.layout
 		return obj
 	}
@@ -344,8 +346,7 @@ class EditContent extends React.Component {
 		let { content } = da
 		let compLay = da.componentLayout
 		let mockData = {}
-		let parentLayout,
-			childNode,
+		let childNode,
 			activeKey,
 			feature,
 			compCon = compContent(compName, this.props, this.updateComp)

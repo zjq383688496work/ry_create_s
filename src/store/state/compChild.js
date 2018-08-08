@@ -32,7 +32,8 @@ module.exports = {
 	goodsList: {
 		listByGoods:   1,
 		swiperByGoods: 1,
-		catgByGoods:   1
+		catgByGoods:   1,
+		resetByGoods:  1
 	},
 	goodsDetails: {
 		goodsBar:    1,
