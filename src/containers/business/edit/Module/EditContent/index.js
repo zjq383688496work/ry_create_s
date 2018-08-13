@@ -25,7 +25,8 @@ import SwiperImage       from 'compEdit/EditContent/SwiperImage'
 import Navigation        from 'compEdit/EditContent/Navigation'
 import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
-// import SwiperByGoods     from 'compEdit/EditContent/SwiperByGoods'
+import CatgByGoods       from 'compEdit/EditContent/CatgByGoods'
+import SwiperByGoods     from 'compEdit/EditContent/SwiperByGoods'
 
 import * as variable from 'var'
 
@@ -42,7 +43,8 @@ const compContent = (name, data, updateComp) => {
 		navigationFloat:   <NavigationFloat   {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
 		swiperImage:       <SwiperImage       {...props} />,
-		// swiperByGoods:     <SwiperByGoods     {...props} />
+		catgByGoods:       <CatgByGoods       {...props} />,
+		swiperByGoods:     <SwiperByGoods     {...props} />
 	}
 	return render[name]
 }
@@ -245,7 +247,6 @@ class EditContent extends React.Component {
 			let v  = val[_],
 				cm = conMap[_],
 				fn = this[`render${cm.type}`]
-			debugger
 			let dom = fn.bind(this, cm, data, val, v, _)()
 			return (
 				<div className="pgs-row" key={i}>
