@@ -12,7 +12,7 @@ module.exports = {
 		floorMap:    1
 	},
 	storeInstro: { 
-		storeSplitLine:         1, 
+		storeSplitLine:        1, 
 		storeInstroInstroduce: 1, 
 		storeInstroTitle:      1,
 		storeWonderful:     1    
