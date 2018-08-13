@@ -42,6 +42,7 @@ import GoodsBlock    from 'compEdit/EditElement/GoodsDetails/GoodsBlock'
 import ChildElement  from 'compEdit/EditElement/ChildElement'
 import SwiperByGoods from 'compEdit/EditElement/GoodsList/SwiperByGoods'
 import CatgByGoods   from 'compEdit/EditElement/GoodsList/CatgByGoods'
+import ResetByGoods  from 'compEdit/EditElement/GoodsList/ResetByGoods'
 
 
 const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter) => {
@@ -74,7 +75,8 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		goodsBlock:        <GoodsBlock        {...props} />,
 		childElement:      <ChildElement      {...props} />,
 		swiperByGoods:     <SwiperByGoods     {...props} />,
-		catgByGoods:       <CatgByGoods       {...props} />
+		catgByGoods:       <CatgByGoods       {...props} />,
+		resetByGoods:      <ResetByGoods      {...props} />
 	}
 	return render[name]
 }
