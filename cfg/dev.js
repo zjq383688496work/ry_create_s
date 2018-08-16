@@ -77,15 +77,27 @@ config.devServer = {
 			secure: false,
 			changeOrigin: 'true',
 		},
+		'/mcp-gateway/mall': {
+			// target: 'http://192.168.1.52:10078',
+			target: 'http://192.168.1.224:10330',	// QA
+			secure: false,
+			changeOrigin: 'true',
+		},
 		'/mcp-gateway/template': {
 			// target: 'http://192.168.1.52:10078',
 			target: 'http://192.168.1.224:10330',	// QA
 			secure: false,
 			changeOrigin: 'true',
 		},
-		'/mcp-gateway/mall': {
-			// target: 'http://192.168.1.52:10078',	// DEV
-			target: 'http://192.168.1.224:10330',	// QA
+		// 分类列表
+		'/mcp-gateway/terminalCategory': {
+			target: 'http://192.168.1.222:8052',
+			secure: false,
+			changeOrigin: 'true',
+		},
+		// (推荐)商品列表
+		'/mcp-gateway/commodity': {
+			target: 'http://192.168.1.222:8052',
 			secure: false,
 			changeOrigin: 'true',
 		},

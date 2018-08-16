@@ -37,7 +37,7 @@ export default class SwiperBind extends React.Component {
 			{ data } = props,
 			{ item } = ipt,
 			{ bind, swiperOptions } = data.data.content,
-			imgs = bind? item[bind].split(','): [null]
+			imgs = bind? item[bind]: [null]
 		let dom = this.renderDom(imgs, swiperOptions)
 
 		return (
