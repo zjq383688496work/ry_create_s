@@ -79,8 +79,8 @@ export default class GoodsDetails extends React.Component {
 		let item = mock.item.goods()
 		let { feature } = data
 		let { content } = data.data
-		ipt.item = envType === 'operate'? item: {}
-		if (envType !== 'operate') this.getData(ipt)
+		ipt.item = envType !== 'business'? item: {}
+		if (envType === 'business') this.getData(ipt)
 		delete feature.item
 		delete feature.map
 	}

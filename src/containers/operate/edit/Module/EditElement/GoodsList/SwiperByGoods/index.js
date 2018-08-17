@@ -10,9 +10,9 @@ export default class SwiperByGoods extends React.Component {
 		super(props)
 		var { relist } = props.ioInput
 		this.state = {
-			list: envType === 'operate'? relist: []
+			list: envType !== 'business'? relist: []
 		}
-		if (envType !== 'operate') this.getData()
+		if (envType === 'business') this.getData()
 	}
 
 	componentWillReceiveProps(props) {}

@@ -133,7 +133,7 @@ module.exports = extend(window, {
 					categoryName: '分类名称',
 					url:          '分类图片'
 				}
-			},
+			}
 		},
 		list: {
 			goods(num = 1) {

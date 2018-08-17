@@ -10,9 +10,9 @@ export default class ListByStore extends React.Component {
 		super(props)
 		var { list } = props.ioInput
 		this.state = {
-			list: envType === 'operate'? list: []
+			list: envType !== 'business'? list: []
 		}
-		if (envType !== 'operate') this.getData(1)
+		if (envType === 'business') this.getData(1)
 	}
 	componentWillReceiveProps(props) {
 		var { catg } = props.ioInput.body,

@@ -10,9 +10,9 @@ export default class CatgByGoods extends React.Component {
 		super(props)
 		var { catg } = props.ioInput
 		this.state = {
-			list: envType === 'operate'? catg: []
+			list: envType !== 'business'? catg: []
 		}
-		if (envType !== 'operate') this.getData()
+		if (envType === 'business') this.getData()
 	}
 	onChange = (e, item) => {
 		e.stopPropagation()
