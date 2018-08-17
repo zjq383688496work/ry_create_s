@@ -16,9 +16,7 @@ export default class SwiperByGoods extends React.Component {
 	}
 
 	componentWillReceiveProps(props) {}
-
 	componentDidMount() {}
-
 	componentWillUnmount() {}
 
 	getData = cb => {

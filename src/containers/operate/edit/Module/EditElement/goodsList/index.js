@@ -21,7 +21,6 @@ let cusMap = {
 export default class GoodsList extends React.Component {
 	constructor(props) {
 		super(props)
-		// this.state = { has: this.stateInit(props) }
 		this.init()
 	}
 	componentWillMount() {}
@@ -34,54 +33,16 @@ export default class GoodsList extends React.Component {
 		ipt.body = ioInput.body
 		this.getList(ipt)
 		this.state = {
-			// has: this.stateInit(props),
 			ioInput: ipt
 		}
-		// this.ioOuter(ipt)
 	}
-
-	// stateInit = props => {
-	// 	var { components } = props.data.data,
-	// 		has = {
-	// 			list:   false,
-	// 			relist: false,
-	// 			catg:   false
-	// 		}
-	// 	components.map(_ => {
-	// 		var { name } = _
-	// 		switch (name) {
-	// 			case 'catgByGoods':
-	// 				has.catg = true
-	// 			case 'listByGoods':
-	// 				has.list = true
-	// 			case 'swiperByGoods':
-	// 				has.relist = true
-	// 		}
-	// 	})
-	// 	return has
-	// }
-	// getData = (ipt, cb) => {
-	// 	var { has } = this.state
-	// 	Server.goods.getCategoryList(catg => {
-	// 		ipt.catg = catg
-	// 		if (has.list) {
-	// 			Server.goods.getGoodsList(1, list => {
-	// 				ipt.list = list
-	// 			})
-	// 		}
-	// 		if (has.relist) {
-	// 			Server.goods.getRecGoodsList(relist => {
-	// 				ipt.relist = relist
-	// 			})
-	// 		}
-	// 	})
-	// }
 
 	ioOuter = ipt => {
 		let { data } = this.props
 		this.getList(ipt)
 		this.setState({ ioInput: ipt })
 		console.clear()
+		console.log(ipt.body)
 	}
 
 	getList = ipt => {
@@ -91,16 +52,9 @@ export default class GoodsList extends React.Component {
 		delete feature.list
 		delete feature.map
 		let size = ipt.body.size = content.size
-		// if (envType === 'business') {
-		// 	this.getData(ipt, nipt => {
-
-		// 	})
-		// } else {
-			ipt.list = mock.list.goods(size)
-			ipt.relist = mock.list.reGoods(size)
-			ipt.catg = mock.list.goodsCatg(10)
-			// cb(ipt)
-		// }
+		ipt.list = mock.list.goods(size)
+		ipt.relist = mock.list.reGoods(size)
+		ipt.catg = mock.list.goodsCatg(10)
 	}
 
 	init = () => {
@@ -113,7 +67,6 @@ export default class GoodsList extends React.Component {
 
 	render() {
 		let Custom = cusMap[envType] || CustomV
-		// this.init()
 		return (
 			<Custom
 				{...this.props}

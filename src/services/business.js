@@ -111,7 +111,7 @@ module.exports = extend(window, {
 		map: {
 			goods() {
 				return {
-					currentPrice:     '当前价格',
+					currentPrice:     '现价',
 					originalPrice:    '原价',
 					commodityName:    '商品名称',
 					commodityPicList: '商品图片',
@@ -120,7 +120,7 @@ module.exports = extend(window, {
 			},
 			reGoods() {
 				return {
-					currentPrice:    '当前价格',
+					currentPrice:    '现价',
 					originalPrice:   '原价',
 					name:            '商品名称',
 					recommendReason: '推荐理由',
