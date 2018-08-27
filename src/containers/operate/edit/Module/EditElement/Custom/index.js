@@ -44,6 +44,9 @@ import ChildElement  from 'compEdit/EditElement/ChildElement'
 import SwiperByGoods from 'compEdit/EditElement/GoodsList/SwiperByGoods'
 import CatgByGoods   from 'compEdit/EditElement/GoodsList/CatgByGoods'
 import ResetByGoods  from 'compEdit/EditElement/GoodsList/ResetByGoods'
+import ListByStore2  from 'compEdit/EditElement/StoreList2/List'
+import CatgByStore2  from 'compEdit/EditElement/StoreList2/Catg'
+import ResetByStore2 from 'compEdit/EditElement/StoreList2/Reset'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -81,7 +84,10 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		childElement:      <ChildElement      {...props} />,
 		swiperByGoods:     <SwiperByGoods     {...props} />,
 		catgByGoods:       <CatgByGoods       {...props} />,
-		resetByGoods:      <ResetByGoods      {...props} />
+		resetByGoods:      <ResetByGoods      {...props} />,
+		listByStore2:      <ListByStore2      {...props} />,
+		catgByStore2:      <CatgByStore2      {...props} />,
+		resetByStore2:     <ResetByStore2     {...props} />
 	}
 	return render[name]
 }

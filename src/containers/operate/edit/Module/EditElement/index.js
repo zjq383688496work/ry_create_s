@@ -75,7 +75,9 @@ const compContent = (name, data, actions, type, idx, csn, keyCtrl) => {
 		html:              <Html              {...props} />,
 		goodsDetails:      <GoodsDetails      {...props} />,
 		area:              <Area              {...props} />,
-		tabs:              <Tabs              {...props} />
+		tabs:              <Tabs              {...props} />,
+		storeList2:        <StoreList2        {...props} />,
+		storeDetails2:     <StoreDetails2     {...props} />
 	}
 	return render[name]
 }

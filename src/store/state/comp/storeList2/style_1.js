@@ -1,17 +1,20 @@
 let { authInit, deepCopy, extendRmSL } = require('state/common')
 const list = authInit(require('./content/list'))
 const catg = authInit(require('./content/catg'))
+const reset  = authInit(require('./content/reset'))
 
-const goodsList = extendRmSL(deepCopy(list), {
+const storeList = extendRmSL(deepCopy(list), {
 	data: {
 		layout: {
-			top:  90,
-			left: 5
+			top:  75,
+			left: 40
 		}
 	}
 })
 
-const goodsCatg = extendRmSL(deepCopy(catg), {})
+const storeCatg = extendRmSL(deepCopy(catg), {})
+
+const storeReset = deepCopy(reset)
 
 // 商品列表
 module.exports = {
@@ -24,7 +27,7 @@ module.exports = {
 	},
 	style: {},
 	content: {
-		size: 6
+		size: 12
 	},
 	animation: {
 		className: '',		// 动画样式
@@ -33,5 +36,5 @@ module.exports = {
 		duration: 1,		// 持续时间
 		iterationCount: 1	// 循环次数
 	},
-	components: [ goodsCatg, goodsList ]
+	components: [ storeCatg, storeList, storeReset ]
 }

@@ -36,6 +36,49 @@ const gName = extendRmSL(deepCopy(tb), {
 		}
 	}
 })
+const OPT = extendRmSL(deepCopy(t), {
+	data: {
+		layout: {
+			top:  208,
+			left: 12,
+			width:  30,
+			height: 16
+		},
+		style:     {
+			text: {
+				// textAlign:  'left',
+				// fontSize:   12,
+				lineHeight: 16,
+				color: { type: 'custom', color: '#999' }
+			}
+		},
+		content: {
+			text: '原价:'
+		}
+	}
+})
+const OPrice = extendRmSL(deepCopy(tb), {
+	data: {
+		layout: {
+			top:  208,
+			left: 46,
+			width:  50,
+			height: 16
+		},
+		style:     {
+			text: {
+				textAlign:  'left',
+				// fontSize:   12,
+				lineHeight: 16,
+				textDecoration: 'line-through',
+				color: { type: 'custom', color: '#999' }
+			}
+		},
+		content: {
+			bind: 'originalPrice'
+		}
+	}
+})
 const rmbIcon = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
@@ -85,7 +128,7 @@ const gBuy = extendRmSL(deepCopy(p), {
 			height: 40
 		},
 		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201807191930194263.png' }
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201808271717186978.png' }
 		}
 	}
 })
@@ -128,7 +171,7 @@ const data = {
 			}
 		}
 	},
-	componentLayout: [ gPic, gName, rmbIcon, gPrice, gBuy ],
+	componentLayout: [ gPic, gName, OPT, OPrice, rmbIcon, gPrice, gBuy ],
 	content: {
 		router: {},
 	},

@@ -52,9 +52,8 @@ export default class GoodsList extends React.Component {
 		delete feature.list
 		delete feature.map
 		let size = ipt.body.size = content.size
-		ipt.list = mock.list.goods(size)
-		ipt.relist = mock.list.reGoods(size)
-		ipt.catg = mock.list.goodsCatg(10)
+		ipt.list = mock.list.store(size)
+		ipt.catg = mock.list.storeCatg(10)
 	}
 
 	init = () => {

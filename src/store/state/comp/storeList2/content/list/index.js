@@ -4,88 +4,71 @@ const pb = authInit(require('state/comp/pictureBind'))
 const t  = authInit(require('state/comp/text'))
 const tb = authInit(require('state/comp/textBind'))
 
-const gPic = extendRmSL(deepCopy(pb), {
+const LOGO = extendRmSL(deepCopy(pb), {
 	data: {
 		layout: {
-			top:  12,
-			left: 12,
-			width:  152,
-			height: 152
+			top:  10,
+			left: 29,
+			width:  40,
+			height: 40
 		},
 		content: {
-			bind: 'commodityPicList'
+			bind: 'logo'
 		}
 	}
 })
-const gName = extendRmSL(deepCopy(tb), {
+const Name = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  166,
-			left: 12,
-			width:  152,
-			height: 36
+			top:  50,
+			left: 0,
+			width:  100,
+			height: 14
 		},
 		content: {
-			bind: 'commodityName'
+			bind: 'name'
 		},
 		style: {
 			text: {
-				textAlign: 'left',
+				fontSize:   8,
+				lineHeight: 14,
+				textAlign: 'center',
 				color: { type: 'custom', color: '#666' }
 			}
 		}
 	}
 })
-const rmbIcon = extendRmSL(deepCopy(t), {
+const Ico = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
-			top:  230,
-			left: 12,
-			width:  20,
-			height: 30
+			top:  66,
+			left: 30,
+			width:  8,
+			height: 8
 		},
 		content: {
-			text: '¥'
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191128322385.png' }
+		}
+	}
+})
+const Pos = extendRmSL(deepCopy(tb), {
+	data: {
+		layout: {
+			top:  63,
+			left: 40,
+			width:  60,
+			height: 14
+		},
+		content: {
+			bind: 'position'
 		},
 		style: {
 			text: {
+				fontSize:   8,
+				lineHeight: 14,
 				textAlign: 'left',
-				color: { type: 'custom', color: '#ee3852' }
+				color: { type: 'main', color: '#333' }
 			}
-		}
-	}
-})
-const gPrice = extendRmSL(deepCopy(tb), {
-	data: {
-		layout: {
-			top:  224,
-			left: 20,
-			width:  100,
-			height: 30
-		},
-		content: {
-			bind: 'currentPrice'
-		},
-		style: {
-			text: {
-				textAlign:  'left',
-				fontSize:   22,
-				lineHeight: 24,
-				color: { type: 'custom', color: '#ee3852' }
-			}
-		}
-	}
-})
-const gBuy = extendRmSL(deepCopy(p), {
-	data: {
-		layout: {
-			top:  205,
-			left: 124,
-			width:  40,
-			height: 40
-		},
-		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201807191930194263.png' }
 		}
 	}
 })
@@ -96,28 +79,28 @@ const data = {
 		position: 'absolute',
 		top:  0,
 		left: 0,
-		width:  535,
-		height: 540
+		width:  440,
+		height: 300
 	},
 	style: {
 		filter: {
-			width:  174,
-			height: 260,
-			borderWidth:  0,
+			width:  100,
+			height: 90,
+			borderWidth:  1,
 			borderStyle: 'solid',
 			borderColor: { type: 'main', color: '#fff' },
 			backgroundColor: { type: 'custom', color: '#fff' },
 			margin: {
 				top:     0,
-				right:   4,
-				bottom:  4,
+				right:   10,
+				bottom:  10,
 				left:    0,
 			},
 			borderRadius:    {
-				topLeft:     0,
-				topRight:    0,
-				bottomLeft:  0,
-				bottomRight: 0
+				topLeft:     10,
+				topRight:    10,
+				bottomLeft:  10,
+				bottomRight: 10
 			},
 			boxShadow: {
 				h_shadow:   0,
@@ -128,7 +111,7 @@ const data = {
 			}
 		}
 	},
-	componentLayout: [ gPic, gName, rmbIcon, gPrice, gBuy ],
+	componentLayout: [ LOGO, Name, Ico, Pos ],
 	content: {
 		router: {},
 	},

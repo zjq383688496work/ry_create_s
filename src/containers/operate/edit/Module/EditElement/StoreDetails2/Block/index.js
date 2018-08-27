@@ -4,7 +4,7 @@ import './index.less'
 import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 
-export default class GoodsBlock extends React.Component {
+export default class StoreBlock extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {}

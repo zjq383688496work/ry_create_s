@@ -3,7 +3,7 @@ import './index.less'
 
 import Layout from 'compEdit/EditElement/Layout'
 
-export default class ResetByGoods extends React.Component {
+export default class ResetByStore2 extends React.Component {
 	constructor(props) {
 		super(props)
 	}

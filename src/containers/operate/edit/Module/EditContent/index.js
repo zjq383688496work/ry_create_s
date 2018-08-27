@@ -43,7 +43,8 @@ var plMap  = {
 	listByGoods:   'filter',
 	swiperByGoods: 'filterBox',
 	// resetByGoods:  'filterBox',
-	goodsBar:      'filter'
+	goodsBar:      'filter',
+	listByStore2:  'filter',
 }
 var mockMap  = {
 	listByGoods: { type: 'list', name: 'goods', size: 6 },
@@ -52,7 +53,9 @@ var mockMap  = {
 	pictureListBind: { type: 'item', name: 'goods' },
 	swiperByGoods:   { type: 'list', name: 'reGoods', size: 6 },
 	catgByGoods:     { type: 'list', name: 'goodsCatg' },
-	resetByGoods:    { type: 'item', name: 'goodsCatg' }
+	resetByGoods:    { type: 'item', name: 'goodsCatg' },
+	listByStore2:    { type: 'list', name: 'store', size: 6 },
+	catgByStore2:    { type: 'list', name: 'storeCatg' },
 }
 
 import './index.less'

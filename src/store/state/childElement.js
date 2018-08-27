@@ -44,5 +44,21 @@ module.exports = {
 		area:    1,
 		picture: 1,
 		text:    1
-	}
+	},
+	listByStore2: {
+		picture:     1,
+		text:        1,
+		pictureBind: 1,
+		textBind:    1
+	},
+	catgByStore2: {
+		picture:     1,
+		text:        1,
+		pictureBind: 1,
+		textBind:    1
+	},
+	resetByGoods: {
+		picture: 1,
+		text:    1
+	},
 }

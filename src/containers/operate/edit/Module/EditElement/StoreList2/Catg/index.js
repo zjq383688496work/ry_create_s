@@ -5,7 +5,7 @@ import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 import * as Server from 'server'
 
-export default class CatgByGoods extends React.Component {
+export default class CatgByStore2 extends React.Component {
 	constructor(props) {
 		super(props)
 		var { catg } = props.ioInput

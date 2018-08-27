@@ -5,7 +5,7 @@ import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 import * as Server from 'server'
 
-export default class ListByStore extends React.Component {
+export default class ListByStore2 extends React.Component {
 	constructor(props) {
 		super(props)
 		var { list } = props.ioInput
@@ -25,7 +25,7 @@ export default class ListByStore extends React.Component {
 			this.setState({ list: o })
 		})
 	}
-	renderList = (item, i) => {
+	renderList = e => {
 		let { data, ioInput } = this.props,
 			{ list } = this.state,
 			{ componentLayout, layout } = data.data

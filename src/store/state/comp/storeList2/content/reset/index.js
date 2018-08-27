@@ -3,34 +3,27 @@ const a = authInit(require('state/comp/area'))
 const p = authInit(require('state/comp/picture'))
 const t = authInit(require('state/comp/text'))
 
-const gPic = extendRmSL(deepCopy(p), {
+const Name = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
-			top:  5,
-			left: 30,
-			width:  40,
-			height: 40
-		},
-		style: {
-			image: {
-				opacity: 0.2
-			}
-		},
-		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg' }
-		}
-	}
-})
-const gName = extendRmSL(deepCopy(t), {
-	data: {
-		layout: {
-			top:  45,
-			width:  100,
-			height: 16
+			top:  0,
+			width:  60,
+			height: 24
 		},
 		style: {
 			text: {
-				opacity: 0.2
+				lineHeight:      24,
+				backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
+				borderWidth: 0,
+				borderStyle:     'solid',
+				borderColor: 	 { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
+				borderRadius:    {
+					topLeft:     20,
+					topRight:    20,
+					bottomRight: 20,
+					bottomLeft:  20
+				},
+				color:           { type: 'custom', color: '#666' }
 			}
 		},
 		content: {
@@ -38,60 +31,58 @@ const gName = extendRmSL(deepCopy(t), {
 		}
 	}
 })
-const gPicAV = extendRmSL(deepCopy(p), {
+const NameAV = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
-			top:  5,
-			left: 30,
-			width:  40,
-			height: 40
+			top:  0,
+			width:  60,
+			height: 24
 		},
-		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201807191807420161.jpg' }
-		}
-	},
-	feature: { active: true }
-})
-const gNameAV = extendRmSL(deepCopy(t), {
-	data: {
-		layout: {
-			top:  45,
-			width:  100,
-			height: 16
+		style: {
+			text: {
+				lineHeight:      20,
+				backgroundColor: { type: 'main', color: '#a240ec' },
+				borderWidth: 2,
+				borderStyle: 'solid',
+				borderColor: { type: 'auxiliary', color: '#a240ec' },
+				borderRadius:    {
+					topLeft:     20,
+					topRight:    20,
+					bottomRight: 20,
+					bottomLeft:  20
+				},
+				color: { type: 'textHigh', color: '#fff' },
+			}
 		},
 		content: {
 			text: '全部'
-		}
-	},
-	feature: { active: true }
-})
-const gLineAV = extendRmSL(deepCopy(a), {
-	data: {
-		layout: {
-			top:  74,
-			left: 20,
-			width:  60,
-			height: 4
 		}
 	},
 	feature: { active: true }
 })
 
+
 // 字母排序
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  0,
-		left: 0,
-		width:  100,
-		height: 80
+		top:  36,
+		left: 40,
+		width:  60,
+		height: 24
 	},
 	style: {
 		filterBox: {
 			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'main', color: '#fff' },
-			backgroundColor: { type: 'custom', color: '#fff' },
+			backgroundColor: { type: 'custom', color: 'rgba(255, 255, 255, 0)', rgb: '#fff', alpha: 0 },
+			padding: {
+				top:    0,
+				right:  0,
+				bottom: 0,
+				left:   0
+			},
 			borderRadius: {
 				topLeft:     0,
 				topRight:    0,
@@ -107,7 +98,7 @@ const data = {
 			}
 		}
 	},
-	componentLayout: [ gPic, gName, gPicAV, gNameAV, gLineAV ],
+	componentLayout: [ Name, NameAV ],
 	content: {
 	},
 	animation: {
