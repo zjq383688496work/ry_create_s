@@ -24,6 +24,13 @@ module.exports = {
 		instroButton:  1, 
 		instroPicture: 1
 	},
+	storeList2: {
+		listByStore2:   1,
+		catgByStore2:   1
+	},
+	storeDetails2: {
+		storeBlock:   1
+	},
 	dateWeather: {
 		weatherLogo: 1,
 		time:    1,

@@ -174,6 +174,23 @@ module.exports = [
 			]
 		},
 		{
+			icon: 'store',
+			name: '店铺列表(新)',
+			key:  'storeList2',
+			child: [
+				{
+					icon: 'classifyNav',
+					name: '分类',
+					key:  'catgByStore2'
+				},
+				{
+					icon: 'list',
+					name: '列表',
+					key:  'listByStore2'
+				}
+			]
+		},
+		{
 			icon: 'dateWeather',
 			name: '日期天气',
 			key:  'dateWeather',

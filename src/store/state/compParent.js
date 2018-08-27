@@ -18,8 +18,10 @@ module.exports = {
 	dateWeather:       1,
 	map2D:             1,
 	html:              1,
+	area:              1,
+	tabs:              1,
 	goodsList:         1,
 	goodsDetails:      1,
-	area:              1,
-	tabs:              1
+	storeList2:        1,
+	storeDetails2:     1
 }

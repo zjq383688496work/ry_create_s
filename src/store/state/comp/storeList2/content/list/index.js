@@ -142,7 +142,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'listByGoods',
+	name: 'listByStore2',
 	type: 'layout',
 	// 位置大小
 	data: deepCopy(data),

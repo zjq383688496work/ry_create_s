@@ -83,6 +83,8 @@ module.exports = {
 	textBind:          authInit(require('./textBind')),
 	// 轮播-绑定
 	swiperBind:        authInit(require('./swiperBind')),
+
+	/* 商品 开始 */
 	// 商品列表
 	goodsList:         authInit(require('./goodsList')),
 	// 列表&轮播&分类 (商品)
@@ -92,18 +94,34 @@ module.exports = {
 	resetByGoods:      authInit(require('./goodsList/content/reset')),
 	// 商品详情
 	goodsDetails:      authInit(require('./goodsDetails')),
-	// 背景色块
-	area:              authInit(require('./area')),
-	// 图片列表-绑定
-	pictureListBind:   authInit(require('./pictureListBind')),
 	// 商品条
 	goodsBar:          authInit(require('./goodsDetails/content/goodsBar')),
 	// 商品信息
 	goodsBlock:        authInit(require('./goodsDetails/content/goodsBlock')),
+	/* 商品 结束 */
+
+	/* 店铺 开始 */
+	// 店铺列表
+	storeList2:        authInit(require('./storeList2')),
+	// 列表&轮播&分类 (店铺)
+	listByStore2:      authInit(require('./storeList2/content/list')),
+	catgByStore2:      authInit(require('./storeList2/content/catg')),
+	// 店铺详情
+	storeDetails2:      authInit(require('./storeDetails2')),
+	// 店铺信息
+	storeBlock2:        authInit(require('./storeDetails2/content/storeBlock')),
+	/* 店铺 结束 */
+
+	// 背景色块
+	area:              authInit(require('./area')),
+	// 图片列表-绑定
+	pictureListBind:   authInit(require('./pictureListBind')),
 	// 切换标签
 	tabs:              authInit(require('./tabs')),
 	// 标签分类
 	catgByTabs:        authInit(require('./tabs/content/catgByTabs')),
 	// 子元素
-	childElement:      authInit(require('./childElement'))
+	childElement:      authInit(require('./childElement')),
+	// 二维码绑定
+	qrcodeBind:        authInit(require('./qrcodeBind'))
 }
