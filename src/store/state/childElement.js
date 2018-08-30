@@ -53,8 +53,10 @@ module.exports = {
 	},
 	catgByStore2: {
 		picture:     1,
-		text:        1,
-		pictureBind: 1,
+		textBind:    1
+	},
+	floorByStore2: {
+		picture:     1,
 		textBind:    1
 	},
 	resetByGoods: {

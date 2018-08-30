@@ -4,4 +4,5 @@ module.exports = {
 	resetByGoods:  1,
 	catgByStore2:  1,
 	resetByStore2: 1,
+	floorByStore2: 1
 }

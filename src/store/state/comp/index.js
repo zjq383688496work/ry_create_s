@@ -103,9 +103,11 @@ module.exports = {
 	/* 店铺 开始 */
 	// 店铺列表
 	storeList2:        authInit(require('./storeList2')),
-	// 列表&轮播&分类 (店铺)
-	listByStore2:      authInit(require('./storeList2/content/list')),
-	catgByStore2:      authInit(require('./storeList2/content/catg')),
+	listByStore2:      authInit(require('./storeList2/content/list')),		// 列表
+	catgByStore2:      authInit(require('./storeList2/content/catg')),		// 分类
+	pageByStore2:      authInit(require('./storeList2/content/page')),		// 分页
+	floorByStore2:     authInit(require('./storeList2/content/floor')),		// 楼层
+	letterByStore2:    authInit(require('./storeList2/content/letter')),	// 字母
 	// 店铺详情
 	storeDetails2:      authInit(require('./storeDetails2')),
 	// 店铺信息

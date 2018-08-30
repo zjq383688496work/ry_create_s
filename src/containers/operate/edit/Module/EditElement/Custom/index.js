@@ -47,6 +47,7 @@ import ResetByGoods  from 'compEdit/EditElement/GoodsList/ResetByGoods'
 import ListByStore2  from 'compEdit/EditElement/StoreList2/List'
 import CatgByStore2  from 'compEdit/EditElement/StoreList2/Catg'
 import ResetByStore2 from 'compEdit/EditElement/StoreList2/Reset'
+import FloorByStore2 from 'compEdit/EditElement/StoreList2/Floor'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -87,7 +88,8 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		resetByGoods:      <ResetByGoods      {...props} />,
 		listByStore2:      <ListByStore2      {...props} />,
 		catgByStore2:      <CatgByStore2      {...props} />,
-		resetByStore2:     <ResetByStore2     {...props} />
+		resetByStore2:     <ResetByStore2     {...props} />,
+		floorByStore2:     <FloorByStore2     {...props} />
 	}
 	return render[name]
 }

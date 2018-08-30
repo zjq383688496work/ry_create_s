@@ -23,7 +23,7 @@ const gName = extendRmSL(deepCopy(tb), {
 			}
 		},
 		content: {
-			bind: 'name'
+			bind: 'categoryName'
 		}
 	}
 })
@@ -50,7 +50,7 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 			}
 		},
 		content: {
-			bind: 'name'
+			bind: 'categoryName'
 		}
 	},
 	feature: { active: true }
@@ -121,7 +121,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'catgByStore2',
+	name: 'letterByStore2',
 	type: 'layout',
 	// 位置大小
 	data: deepCopy(data),

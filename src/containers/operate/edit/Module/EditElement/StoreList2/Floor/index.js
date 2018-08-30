@@ -5,12 +5,12 @@ import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 import * as Server from 'server'
 
-export default class CatgByStore2 extends React.Component {
+export default class FloorByStore2 extends React.Component {
 	constructor(props) {
 		super(props)
-		var { catg } = props.ioInput
+		var { floor } = props.ioInput
 		this.state = {
-			list: envType !== 'business'? catg: []
+			list: envType !== 'business'? floor: []
 		}
 		this.getData()
 	}
@@ -18,7 +18,7 @@ export default class CatgByStore2 extends React.Component {
 		e.stopPropagation()
 		let { ioInput, ioOuter } = this.props,
 			{ body } = ioInput
-		body.catg = item.id
+		body.floor = item.id
 		ioOuter(ioInput)
 	}
 	getData = cb => {
@@ -26,15 +26,15 @@ export default class CatgByStore2 extends React.Component {
 		let { ioInput, ioOuter } = this.props
 		Server.goods.getCategoryList(o => {
 			this.setState({ list: o })
-			ioInput.catg = o
+			ioInput.floor = o
 			ioOuter(ioInput)
 		})
 	}
-	renderItem = (item, catg) => {
+	renderItem = (item, floor) => {
 		let { data } = this.props,
 			{ id } = item,
 			{ componentLayout, layout } = data.data
-		let isAV = id === catg,
+		let isAV = id === floor,
 			cl   = []
 		componentLayout.map(_ => {
 			var { active } = _.feature
@@ -53,14 +53,14 @@ export default class CatgByStore2 extends React.Component {
 		let { body } = this.props.ioInput,
 			{ list } = this.state
 		return list.map((_, i) => {
-			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.catg)}</div>
+			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.floor)}</div>
 		})
 	}
 	render() {
 		let dom = this.renderList()
 		return (
-			<section className={`e-catg-by-goods scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>
-				<div className="e-catg-by-goods-box" style={cssColorFormat(this.props, 'filterFlex')}>
+			<section className={`e-floor-by-goods scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>
+				<div className="e-floor-by-goods-box" style={cssColorFormat(this.props, 'filterFlex')}>
 					{ dom }
 				</div>
 			</section>

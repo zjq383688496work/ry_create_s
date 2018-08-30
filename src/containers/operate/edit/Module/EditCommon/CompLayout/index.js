@@ -45,7 +45,7 @@ export default class CompLayout extends React.Component {
 		super(props)
 		this.state = {
 			visible: false,
-			id: `lay_${Math.floor(Math.random()*1e9)}`,
+			id: `lay_${rn(1e9)}`,
 			idx: -1,
 			active: false
 		}
@@ -98,6 +98,7 @@ export default class CompLayout extends React.Component {
 			width:  width * 2,
 			height: height * 2
 		}
+		debugger
 		let isActive = activeMap[name]
 		let renderDom = this.renderDom(layout, isActive)
 		let data = idx > -1? layout[idx]: false

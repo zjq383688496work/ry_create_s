@@ -152,7 +152,12 @@ module.exports = extend(window, {
 			},
 			storeCatg() {
 				return {
-					categoryName: '分类名称'
+					name: '店铺类型'
+				}
+			},
+			storeFloor() {
+				return {
+					name: '楼层名称'
 				}
 			}
 		},
@@ -222,12 +227,22 @@ module.exports = extend(window, {
 				})
 			},
 			storeCatg(num = 1) {
+				var catg  = ['餐饮', '潮流', '儿童', '美发', '生活'],
+					floor = ['B2', 'B1', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6']
 				return Array.apply(null, { length: num }).map((_, i) => {
-					var m   = 1e3 + i * 1.2 >> 0,
-						m2  = m + i * 1.6 >> 0
 					return {
-						categoryId:   i,
-						categoryName: `母婴`
+						id:   i,
+						name: catg[rn(5)]
+					}
+				})
+			},
+			storeFloor(num = 1) {
+				var catg  = ['餐饮', '潮流', '儿童', '美发', '生活'],
+					floor = ['B2', 'B1', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6']
+				return Array.apply(null, { length: num }).map((_, i) => {
+					return {
+						id:   i,
+						name: floor[rn(8)]
 					}
 				})
 			},
@@ -279,8 +294,14 @@ module.exports = extend(window, {
 			},
 			storeCatg() {
 				return {
-					categoryId:   1,
-					categoryName: `运动`
+					id:   1,
+					name: `运动`
+				}
+			},
+			storeFloor() {
+				return {
+					id:   1,
+					name: `L1`
 				}
 			}
 		}

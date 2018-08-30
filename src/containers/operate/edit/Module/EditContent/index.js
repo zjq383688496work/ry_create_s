@@ -56,6 +56,7 @@ var mockMap  = {
 	resetByGoods:    { type: 'item', name: 'goodsCatg' },
 	listByStore2:    { type: 'list', name: 'store', size: 6 },
 	catgByStore2:    { type: 'list', name: 'storeCatg' },
+	floorByStore2:   { type: 'list', name: 'storeFloor' },
 }
 
 import './index.less'
@@ -335,13 +336,8 @@ class EditContent extends React.Component {
 			mk  = mockMap[cn]
 		if (!mk) return {}
 		var { type, name, size } = mk
-		// if (type = 'content') {
-		// 	obj.list = da.content[field]
-		// 	obj.map  = mock.map[name]()
-		// } else {
-			obj[type] = mock[type][name](size)
-			obj.map   = mock.map[name]()
-		// }
+		obj[type] = mock[type][name](size)
+		obj.map   = mock.map[name]()
 		if (da) obj.layout = plMap[cn]? da.style[plMap[cn]]: da.layout
 		return obj
 	}

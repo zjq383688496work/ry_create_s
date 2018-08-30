@@ -4,13 +4,14 @@ const tb = authInit(require('state/comp/textBind'))
 const gName = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  0,
-			width:  60,
+			top:  25,
+			left: 8,
+			width:  24,
 			height: 24
 		},
 		style: {
 			text: {
-				lineHeight:      24,
+				lineHeight:      22,
 				backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 				borderRadius:    {
 					topLeft:     20,
@@ -18,7 +19,8 @@ const gName = extendRmSL(deepCopy(tb), {
 					bottomRight: 20,
 					bottomLeft:  20
 				},
-				borderColor: 	 { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
+				borderWidth:     1,
+				borderColor: 	 { type: 'main', color: '#fff' },
 				color:           { type: 'custom', color: '#666' }
 			}
 		},
@@ -30,13 +32,14 @@ const gName = extendRmSL(deepCopy(tb), {
 const gNameAV = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  0,
-			width:  60,
+			top:  25,
+			left: 8,
+			width:  24,
 			height: 24
 		},
 		style: {
 			text: {
-				lineHeight:      20,
+				lineHeight:      24,
 				backgroundColor: { type: 'main', color: '#a240ec' },
 				borderRadius:    {
 					topLeft:     20,
@@ -44,9 +47,9 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 					bottomRight: 20,
 					bottomLeft:  20
 				},
-				borderWidth:     2,
-				borderColor: { type: 'auxiliary', color: '#a240ec' },
-				color: { type: 'textHigh', color: '#fff' },
+				borderWidth:     0,
+				borderColor: 	 { type: 'main', color: '#fff' },
+				color: { type: 'custom', color: '#fff' },
 			}
 		},
 		content: {
@@ -67,7 +70,7 @@ const data = {
 	},
 	style: {
 		filterFlex: {
-			flexDirection: 'row',
+			flexDirection: 'column',
 			flexWrap: 'nowrap',
 		},
 		filterBox: {
@@ -96,14 +99,8 @@ const data = {
 			}
 		},
 		filter: {
-			width:  60,
-			height: 24,
-			margin: {
-				top:    0,
-				right:  20,
-				bottom: 0,
-				left:   20
-			}
+			width:  24,
+			height: 75,
 		}
 	},
 	componentLayout: [ gName, gNameAV ],
@@ -121,7 +118,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'catgByStore2',
+	name: 'floorByStore2',
 	type: 'layout',
 	// 位置大小
 	data: deepCopy(data),
