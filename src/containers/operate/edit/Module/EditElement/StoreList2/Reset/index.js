@@ -44,7 +44,7 @@ export default class ResetByStore2 extends React.Component {
 
 		return (
 			<section
-				className={`e-reset-by-goods`}
+				className={`e-reset-by-store2`}
 				style={cssColorFormat(this.props, 'filterBox')}
 				onClick={e => this.onChange(e)}
 			>

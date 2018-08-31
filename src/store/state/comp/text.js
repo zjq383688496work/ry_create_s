@@ -11,6 +11,7 @@ const data = {
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textDecoration: 'none',
+			textIndent:     0,
 			opacity:        1,
 			textShadow:     {
 				h_shadow:   0,

@@ -30,11 +30,12 @@ export default class FloorByStore2 extends React.Component {
 			ioOuter(ioInput)
 		})
 	}
-	renderItem = (item, floor) => {
+	renderItem = (item, floor, idx) => {
 		let { data } = this.props,
 			{ id } = item,
-			{ componentLayout, layout } = data.data
-		let isAV = id === floor,
+			{ componentLayout, layout } = data.data,
+			// isAV = id === floor,
+			isAV = !idx,
 			cl   = []
 		componentLayout.map(_ => {
 			var { active } = _.feature
@@ -53,14 +54,14 @@ export default class FloorByStore2 extends React.Component {
 		let { body } = this.props.ioInput,
 			{ list } = this.state
 		return list.map((_, i) => {
-			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.floor)}</div>
+			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.floor, i)}</div>
 		})
 	}
 	render() {
 		let dom = this.renderList()
 		return (
-			<section className={`e-floor-by-goods scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>
-				<div className="e-floor-by-goods-box" style={cssColorFormat(this.props, 'filterFlex')}>
+			<section className={`e-floor-by-store2 scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>
+				<div className="e-floor-by-store2-box" style={cssColorFormat(this.props, 'filterFlex')}>
 					{ dom }
 				</div>
 			</section>

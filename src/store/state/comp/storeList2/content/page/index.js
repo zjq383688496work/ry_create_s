@@ -1,56 +1,48 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const tb = authInit(require('state/comp/textBind'))
+const a  = authInit(require('state/comp/area'))
+// const tb = authInit(require('state/comp/textBind'))
 
-const gName = extendRmSL(deepCopy(tb), {
+const Point = extendRmSL(deepCopy(a), {
 	data: {
 		layout: {
-			top:  0,
-			width:  60,
-			height: 24
+			top:  5,
+			left: 5,
+			width:  8,
+			height: 8
 		},
 		style: {
-			text: {
-				lineHeight:      24,
-				backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
-				borderRadius:    {
-					topLeft:     20,
-					topRight:    20,
-					bottomRight: 20,
-					bottomLeft:  20
+			filterBox: {
+				opacity: 0.2,
+				borderRadius: {
+					topLeft:     8,
+					topRight:    8,
+					bottomRight: 8,
+					bottomLeft:  8
 				},
-				borderColor: 	 { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
-				color:           { type: 'custom', color: '#666' }
+				backgroundColor: { type: 'main', color: '#666' }
 			}
-		},
-		content: {
-			bind: 'categoryName'
 		}
 	}
 })
-const gNameAV = extendRmSL(deepCopy(tb), {
+const PointAV = extendRmSL(deepCopy(a), {
 	data: {
 		layout: {
-			top:  0,
-			width:  60,
-			height: 24
+			top:  5,
+			left: 5,
+			width:  8,
+			height: 8
 		},
 		style: {
-			text: {
-				lineHeight:      20,
-				backgroundColor: { type: 'main', color: '#a240ec' },
-				borderRadius:    {
-					topLeft:     20,
-					topRight:    20,
-					bottomRight: 20,
-					bottomLeft:  20
+			filterBox: {
+				opacity: 1,
+				borderRadius: {
+					topLeft:     8,
+					topRight:    8,
+					bottomRight: 8,
+					bottomLeft:  8
 				},
-				borderWidth:     2,
-				borderColor: { type: 'auxiliary', color: '#a240ec' },
-				color: { type: 'textHigh', color: '#fff' },
+				backgroundColor: { type: 'main', color: '#666' }
 			}
-		},
-		content: {
-			bind: 'categoryName'
 		}
 	},
 	feature: { active: true }
@@ -60,13 +52,14 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  36,
-		left: 104,
+		top:  0,
+		left: 0,
 		width:  370,
 		height: 30
 	},
 	style: {
 		filterFlex: {
+			justifyContent: 'center',
 			flexDirection: 'row',
 			flexWrap: 'nowrap',
 		},
@@ -96,17 +89,17 @@ const data = {
 			}
 		},
 		filter: {
-			width:  60,
-			height: 24,
+			width:  18,
+			height: 18,
 			margin: {
 				top:    0,
-				right:  20,
+				right:  0,
 				bottom: 0,
-				left:   20
+				left:   0
 			}
 		}
 	},
-	componentLayout: [ gName, gNameAV ],
+	componentLayout: [ Point, PointAV ],
 	content: {
 		rel: 0,
 		router: {}
@@ -128,11 +121,13 @@ module.exports = {
 	// 样式列表
 	styleList: {
 		idx:  0,
-		list: [{
-			name: '样式1',
+		list: [
+		{
+			name: '原点',
 			img:  '',
 			data: deepCopy(data)
-		}]
+		}
+		]
 	},
 	// 功能特性
 	feature: {

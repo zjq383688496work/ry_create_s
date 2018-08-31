@@ -88,16 +88,14 @@ module.exports = {
 	// 商品列表
 	goodsList:         authInit(require('./goodsList')),
 	// 列表&轮播&分类 (商品)
-	listByGoods:       authInit(require('./goodsList/content/list')),
-	swiperByGoods:     authInit(require('./goodsList/content/swiper')),
-	catgByGoods:       authInit(require('./goodsList/content/catg')),
-	resetByGoods:      authInit(require('./goodsList/content/reset')),
+	listByGoods:       authInit(require('./goodsList/content/list')),		// 列表
+	swiperByGoods:     authInit(require('./goodsList/content/swiper')),		// 轮播
+	catgByGoods:       authInit(require('./goodsList/content/catg')),		// 分类
+	resetByGoods:      authInit(require('./goodsList/content/reset')),		// 重置
 	// 商品详情
 	goodsDetails:      authInit(require('./goodsDetails')),
-	// 商品条
-	goodsBar:          authInit(require('./goodsDetails/content/goodsBar')),
-	// 商品信息
-	goodsBlock:        authInit(require('./goodsDetails/content/goodsBlock')),
+	goodsBar:          authInit(require('./goodsDetails/content/goodsBar')),	// 商品条
+	goodsBlock:        authInit(require('./goodsDetails/content/goodsBlock')),	// 商品信息
 	/* 商品 结束 */
 
 	/* 店铺 开始 */
@@ -108,10 +106,10 @@ module.exports = {
 	pageByStore2:      authInit(require('./storeList2/content/page')),		// 分页
 	floorByStore2:     authInit(require('./storeList2/content/floor')),		// 楼层
 	letterByStore2:    authInit(require('./storeList2/content/letter')),	// 字母
+	resetByStore2:     authInit(require('./storeList2/content/reset')),	// 重置
 	// 店铺详情
-	storeDetails2:      authInit(require('./storeDetails2')),
-	// 店铺信息
-	storeBlock2:        authInit(require('./storeDetails2/content/storeBlock')),
+	storeDetails2:     authInit(require('./storeDetails2')),
+	storeBlock:        authInit(require('./storeDetails2/content/storeBlock')),	// 信息
 	/* 店铺 结束 */
 
 	// 背景色块

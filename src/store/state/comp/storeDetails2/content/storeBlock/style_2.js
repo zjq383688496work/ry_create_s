@@ -1,62 +1,57 @@
 let { authInit, deepCopy, extendRmSL } = require('state/common')
-const p  = authInit(require('state/comp/picture'))
+const a  = authInit(require('state/comp/area'))
 const t  = authInit(require('state/comp/text'))
 const tb = authInit(require('state/comp/textBind'))
 
-const Title = extendRmSL(deepCopy(p), {
+const Line = extendRmSL(deepCopy(a), {
 	data: {
 		layout: {
-			top:  7,
-			left: 0,
-			width:  520,
-			height: 18
+			top:  16,
+			left: 30,
+			width:  2,
+			height: 12
 		},
-		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201807251208278441.png' }
+		style: {
+			filterBox: {
+				backgroundColor: { type: 'main', color: '#666' }
+			}
 		}
 	}
 })
-
-// 退换货政策
-const Name1 = extendRmSL(deepCopy(t), {
+const Title = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
-			top:  44,
-			left: 10,
-			width:  72,
-			height: 16
+			top:  12,
+			left: 40,
+			width:  100,
+			height: 20
 		},
-		style: {
+		style:     {
 			text: {
 				textAlign:  'left',
-				lineHeight: 14,
-				color: { type: 'custom', color: '#666' }
+				lineHeight: 20
 			}
 		},
 		content: {
-			text: '退换货政策:'
+			text: '店铺介绍'
 		}
 	}
 })
-
-// 退换货政策
-const Con1 = extendRmSL(deepCopy(t), {
+const Desc = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  44,
-			left: 82,
-			width:  300,
-			height: 16
+			top:  60,
+			left: 30,
+			width:  480,
+			height: 110
 		},
-		style: {
+		style:     {
 			text: {
-				textAlign:  'left',
-				lineHeight: 14,
-				color: { type: 'custom', color: '#1375aa' }
+				textAlign:  'left'
 			}
 		},
 		content: {
-			text: '非商品质量问题不支持退货'
+			bind: 'description'
 		}
 	}
 })
@@ -67,8 +62,8 @@ module.exports = {
 		position: 'absolute',
 		top:  0,
 		left: 0,
-		width:  520,
-		height: 100
+		width:  540,
+		height: 170
 	},
 	style: {
 		filterBox: {
@@ -91,11 +86,7 @@ module.exports = {
 			}
 		}
 	},
-	componentLayout: [
-		Title,
-		Name1,
-		Con1
-	],
+	componentLayout: [ Line, Title, Desc ],
 	content: {},
 	animation: {
 		className: '',		// 动画样式

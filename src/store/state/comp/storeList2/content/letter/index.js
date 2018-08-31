@@ -4,53 +4,57 @@ const tb = authInit(require('state/comp/textBind'))
 const gName = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  0,
-			width:  60,
-			height: 24
+			top:   5,
+			left:  8,
+			width:  20,
+			height: 20
 		},
 		style: {
 			text: {
-				lineHeight:      24,
+				fontSize:        8,
+				lineHeight:      18,
 				backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 				borderRadius:    {
-					topLeft:     20,
-					topRight:    20,
-					bottomRight: 20,
-					bottomLeft:  20
+					topLeft:     10,
+					topRight:    10,
+					bottomRight: 10,
+					bottomLeft:  10
 				},
-				borderColor: 	 { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
+				borderWidth:     1,
+				borderColor:     { type: 'main', color: '#666' },
 				color:           { type: 'custom', color: '#666' }
 			}
 		},
 		content: {
-			bind: 'categoryName'
+			bind: 'name'
 		}
 	}
 })
 const gNameAV = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  0,
-			width:  60,
-			height: 24
+			top:   5,
+			left:  8,
+			width:  20,
+			height: 20
 		},
 		style: {
 			text: {
 				lineHeight:      20,
 				backgroundColor: { type: 'main', color: '#a240ec' },
 				borderRadius:    {
-					topLeft:     20,
-					topRight:    20,
-					bottomRight: 20,
-					bottomLeft:  20
+					topLeft:     10,
+					topRight:    10,
+					bottomRight: 10,
+					bottomLeft:  10
 				},
-				borderWidth:     2,
-				borderColor: { type: 'auxiliary', color: '#a240ec' },
+				// borderWidth:     0,
+				// borderColor: { type: 'auxiliary', color: '#a240ec' },
 				color: { type: 'textHigh', color: '#fff' },
 			}
 		},
 		content: {
-			bind: 'categoryName'
+			bind: 'name'
 		}
 	},
 	feature: { active: true }
@@ -60,15 +64,15 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  36,
-		left: 104,
+		top:  0,
+		left: 0,
 		width:  370,
-		height: 30
+		height: 60
 	},
 	style: {
 		filterFlex: {
 			flexDirection: 'row',
-			flexWrap: 'nowrap',
+			flexWrap: 'wrap',
 		},
 		filterBox: {
 			borderWidth:  0,
@@ -96,13 +100,13 @@ const data = {
 			}
 		},
 		filter: {
-			width:  60,
-			height: 24,
+			width:  28,
+			height: 30,
 			margin: {
 				top:    0,
-				right:  20,
+				right:  0,
 				bottom: 0,
-				left:   20
+				left:   0
 			}
 		}
 	},
@@ -128,11 +132,23 @@ module.exports = {
 	// 样式列表
 	styleList: {
 		idx:  0,
-		list: [{
-			name: '样式1',
+		list: [
+		{
+			name: '字母',
 			img:  '',
 			data: deepCopy(data)
-		}]
+		},
+		{
+			name: '数字',
+			img:  '',
+			data: deepCopy(data)
+		},
+		{
+			name: '字母+数字',
+			img:  '',
+			data: deepCopy(data)
+		}
+		]
 	},
 	// 功能特性
 	feature: {

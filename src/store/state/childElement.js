@@ -52,11 +52,27 @@ module.exports = {
 		textBind:    1
 	},
 	catgByStore2: {
-		picture:     1,
-		textBind:    1
+		picture:  1,
+		textBind: 1
 	},
 	floorByStore2: {
+		picture:  1,
+		textBind: 1
+	},
+	letterByStore2: {
+		picture:  1,
+		textBind: 1
+	},
+	pageByStore2: {
+		area:     1,
+		picture:  1,
+		textBind: 1
+	},
+	storeBlock: {
+		area:        1,
 		picture:     1,
+		pictureBind: 1,
+		text:        1,
 		textBind:    1
 	},
 	resetByGoods: {

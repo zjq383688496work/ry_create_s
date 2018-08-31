@@ -30,11 +30,12 @@ export default class CatgByStore2 extends React.Component {
 			ioOuter(ioInput)
 		})
 	}
-	renderItem = (item, catg) => {
+	renderItem = (item, catg, idx) => {
 		let { data } = this.props,
 			{ id } = item,
-			{ componentLayout, layout } = data.data
-		let isAV = id === catg,
+			{ componentLayout, layout } = data.data,
+			// isAV = id === catg,
+			isAV = !idx,
 			cl   = []
 		componentLayout.map(_ => {
 			var { active } = _.feature
@@ -53,14 +54,14 @@ export default class CatgByStore2 extends React.Component {
 		let { body } = this.props.ioInput,
 			{ list } = this.state
 		return list.map((_, i) => {
-			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.catg)}</div>
+			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.catg, i)}</div>
 		})
 	}
 	render() {
 		let dom = this.renderList()
 		return (
-			<section className={`e-catg-by-goods scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>
-				<div className="e-catg-by-goods-box" style={cssColorFormat(this.props, 'filterFlex')}>
+			<section className={`e-catg-by-store2 scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>
+				<div className="e-catg-by-store2-box" style={cssColorFormat(this.props, 'filterFlex')}>
 					{ dom }
 				</div>
 			</section>

@@ -63,10 +63,10 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  36,
-		left: 104,
-		width:  370,
-		height: 30
+		top:  0,
+		left: 0,
+		width:  40,
+		height: 300
 	},
 	style: {
 		filterFlex: {
@@ -99,7 +99,7 @@ const data = {
 			}
 		},
 		filter: {
-			width:  24,
+			width:  40,
 			height: 75,
 		}
 	},

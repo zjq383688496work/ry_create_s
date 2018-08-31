@@ -60,7 +60,7 @@ const Pos = extendRmSL(deepCopy(tb), {
 			height: 14
 		},
 		content: {
-			bind: 'position'
+			bind: 'berthNumber'
 		},
 		style: {
 			text: {

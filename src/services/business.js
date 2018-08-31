@@ -117,50 +117,6 @@ module.exports = extend(window, {
 		return content
 	},
 	mock: {
-		map: {
-			goods() {
-				return {
-					currentPrice:     '现价',
-					originalPrice:    '原价',
-					commodityName:    '商品名称',
-					commodityPicList: '商品图片',
-					qrcode:           '二维码',
-				}
-			},
-			reGoods() {
-				return {
-					currentPrice:    '现价',
-					originalPrice:   '原价',
-					commodityName:   '商品名称',
-					recommendReason: '推荐理由',
-					showPicList:     '轮播图列表',
-					qrcode:          '二维码'
-				}
-			},
-			goodsCatg() {
-				return {
-					categoryName: '分类名称',
-					url:          '分类图片'
-				}
-			},
-			store() {
-				return {
-					logo:     'LOGO',
-					name:     '店铺名称',
-					position: '位置',
-				}
-			},
-			storeCatg() {
-				return {
-					name: '店铺类型'
-				}
-			},
-			storeFloor() {
-				return {
-					name: '楼层名称'
-				}
-			}
-		},
 		list: {
 			goods(num = 1) {
 				return Array.apply(null, { length: num }).map((_, i) => {
@@ -246,64 +202,6 @@ module.exports = extend(window, {
 					}
 				})
 			},
-		},
-		item: {
-			goods() {
-				return {
-					id:       1,
-					currentPrice:  `9925.0`,
-					originalPrice: `9799.9`,
-					commodityName: 'TELEFLORA 11朵粉紫玫瑰七夕花束预定',
-					commodityPicList: [
-						`${cdnUrl}/${pics[rn(5)]}.png`,
-						`${cdnUrl}/${pics[rn(5)]}.png`,
-						`${cdnUrl}/${pics[rn(5)]}.png`
-					],
-					qrcode: `${cdnUrl}/201808271756227480.png`
-				}
-			},
-			reGoods() {
-				return {
-					id: 1,
-					currentPrice:  `9925.0`,
-					originalPrice: `9799.9`,
-					commodityName: `商品-1`,
-					showPicList: [
-						`${cdnUrl}/${pics[rn(5)]}.png`,
-						`${cdnUrl}/${pics[rn(5)]}.png`,
-						`${cdnUrl}/${pics[rn(5)]}.png`
-					],
-					recommendReason: `推荐理由`,
-					qrcode: `${cdnUrl}/201808271756227480.png`
-				}
-			},
-			goodsCatg() {
-				return {
-					categoryId:   -1,
-					categoryName: `运动`,
-					url:  `${cdnUrl}/201807191807420161.jpg`
-				}
-			},
-			store() {
-				return {
-					id:       1,
-					logo:     `${cdnUrl}/201805311433385479.png`,
-					name:     `UNIQLO`,
-					position: 'L1=199'
-				}
-			},
-			storeCatg() {
-				return {
-					id:   1,
-					name: `运动`
-				}
-			},
-			storeFloor() {
-				return {
-					id:   1,
-					name: `L1`
-				}
-			}
 		}
 	}
 })

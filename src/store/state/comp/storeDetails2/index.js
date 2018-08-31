@@ -1,54 +1,39 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const a   = authInit(require('../area'))
-const p   = authInit(require('../picture'))
-const pb  = authInit(require('../pictureBind'))
-const plb = authInit(require('../pictureListBind'))
-const t   = authInit(require('../text'))
-const tb  = authInit(require('../textBind'))
-const sb = authInit(require('./content/storeBlock'))
+const sb  = authInit(require('./content/storeBlock'))
+const swb = authInit(require('state/comp/swiperBind'))
 
 /* 店铺详情 */
-const GBINFO2 = extendRmSL(styleIdxChange(1, deepCopy(sb)), {
+const INFO = extendRmSL(styleIdxChange(0, deepCopy(sb)), {
 	data: {
 		layout: {
-			top:  240,
-			left: 10
+			// top:  0,
+			// left: 0
 		}
 	}
 })
 
-/* 店铺图 */
-const GoodsPic = extendRmSL(deepCopy(plb), {
+const Swiper = extendRmSL(styleIdxChange(0, deepCopy(swb)), {
 	data: {
 		layout: {
-			top:  320,
-			left: 10,
-			width:  520,
-			height: 120
-		},
-		style:     {
-			filterBox: {
-				width: 520,
-				padding: {
-					left: 125
-				},
-				borderRadius: {
-					topLeft:     6,
-					topRight:    6,
-					bottomRight: 6,
-					bottomLeft:  6
-				}
-			},
-			image: {
-				width:  270,
-				height: 270,
-				margin: {
-					bottom: 10
-				}
-			}
+			top:    150,
+			height: 216
 		},
 		content: {
-			bind: 'commodityPicList'
+			bind: 'pictures',
+			swiperOptions: {
+				direction: 'horizontal',
+				effect:  'slide',
+				autoplay: true,
+				loop:  true,
+				speed: 300,
+				delay: 2000,
+				spaceBetween:   0,
+				slidesPerView:  1,
+				slidesPerGroup: 1,
+				slidesOffsetBefore: 0,
+				centeredSlides: true,
+				pagination: false
+			}
 		}
 	}
 })
@@ -72,8 +57,7 @@ const data = {
 	},
 	// 组件管理
 	components: [
-		GBINFO2,
-		GoodsPic
+		INFO, Swiper
 	]
 }
 

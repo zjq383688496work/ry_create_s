@@ -11,11 +11,11 @@ module.exports = {
 	styleList: {
 		idx:  0,
 		list: [{
-			name: '商品描述',
+			name: '详情',
 			img:  '',
 			data: deepCopy(style_1)
 		}, {
-			name: '商品详情',
+			name: '简介',
 			img:  '',
 			data: deepCopy(style_2)
 		}]

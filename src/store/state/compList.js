@@ -133,7 +133,7 @@ module.exports = [
 					icon: 'carousel',
 					name: '轮播图片',
 					key:  'storeWonderful'
-				}, 
+				},
 				{
 					icon: 'splitLine2',
 					name: '图案装饰',
@@ -179,14 +179,61 @@ module.exports = [
 			key:  'storeList2',
 			child: [
 				{
+					icon: 'characterNav',
+					name: '字母',
+					key:  'letterByStore2'
+				},
+				{
+					icon: 'floorNav',
+					name: '楼层',
+					key:  'floorByStore2'
+				},
+				{
 					icon: 'classifyNav',
 					name: '分类',
 					key:  'catgByStore2'
 				},
 				{
+					icon: 'sorter',
+					name: '分页',
+					key:  'pageByStore2'
+				},
+				{
+					icon: 'reset',
+					name: '重置',
+					key:  'resetByStore2'
+				},
+				{
 					icon: 'list',
 					name: '列表',
 					key:  'listByStore2'
+				},
+				// {
+				// 	icon: 'floorMap',
+				// 	name: '楼层地图',
+				// 	key:  'floorMap'
+				// },
+			]
+		},
+		{
+			icon: 'storeDetails',
+			name: '店铺详情(新)',
+			key:  'storeDetails2',
+			child: [
+				{
+					icon: 'aboutStore',
+					name: '信息',
+					key:  'storeBlock'
+				},
+				{
+					icon: 'carousel',
+					name: '轮播图片',
+					key:  'storeWonderful'
+				},
+				{
+					icon: 'carousel',
+					name: '轮播图片',
+					key:  'swiperBind'
 				}
 			]
 		},

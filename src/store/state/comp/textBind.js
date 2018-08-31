@@ -11,6 +11,7 @@ const data = {
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textDecoration: 'none',
+			textIndent:     0,
 			opacity:        1,
 			backgroundColor: { type: 'custom', color: 'rgba(0,0,0,0)' },
 			borderRadius:    {

@@ -36,7 +36,7 @@ export default class ListByStore2 extends React.Component {
 	render() {
 		let dom = this.renderList()
 		return (
-			<section className={`e-list-by-goods`}>
+			<section className={`e-list-by-store2`}>
 				{ dom }
 			</section>
 		)

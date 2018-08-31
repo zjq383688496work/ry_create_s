@@ -1,156 +1,114 @@
 let { authInit, deepCopy, extendRmSL } = require('state/common')
-const t  = authInit(require('state/comp/text'))
+const p  = authInit(require('state/comp/picture'))
 const pb = authInit(require('state/comp/pictureBind'))
 const tb = authInit(require('state/comp/textBind'))
-const sb = authInit(require('state/comp/swiperBind'))
 
-const Spr = extendRmSL(deepCopy(sb), {
+const Logo = extendRmSL(deepCopy(pb), {
 	data: {
 		layout: {
-			top:  10,
-			left: 10,
-			width:  200,
-			height: 200
+			top:  30,
+			left: 30,
+			width:  40,
+			height: 40
 		},
 		content: {
-			bind: 'commodityPicList'
+			bind: 'logo'
 		}
 	}
 })
 const Name = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  10,
-			left: 225,
-			width:  285,
-			height: 42
-		},
-		style:     {
-			text: {
-				textAlign:  'left',
-				fontSize:   15,
-				lineHeight: 20,
-				color: { type: 'custom', color: '#666' }
-			}
-		},
-		content: {
-			bind: 'commodityName'
-		}
-	}
-})
-const PIcon = extendRmSL(deepCopy(t), {
-	data: {
-		layout: {
-			top:  80,
-			left: 226,
-			width:  20,
-			height: 28
-		},
-		style:     {
-			text: {
-				// textAlign:  'left',
-				fontSize:   23,
-				lineHeight: 28,
-				color: { type: 'custom', color: '#da2339' }
-			}
-		},
-		content: {
-			text: '¥'
-		}
-	}
-})
-const Price = extendRmSL(deepCopy(tb), {
-	data: {
-		layout: {
-			top:  68,
-			left: 246,
-			width:  155,
-			height: 43
-		},
-		style:     {
-			text: {
-				textAlign:  'left',
-				fontSize:   35,
-				lineHeight: 43,
-				color: { type: 'custom', color: '#da2339' }
-			}
-		},
-		content: {
-			bind: 'currentPrice'
-		}
-	}
-})
-const OPT = extendRmSL(deepCopy(t), {
-	data: {
-		layout: {
-			top:  114,
-			left: 228,
-			width:  30,
-			height: 16
-		},
-		style:     {
-			text: {
-				// textAlign:  'left',
-				// fontSize:   12,
-				lineHeight: 16,
-				color: { type: 'custom', color: '#999' }
-			}
-		},
-		content: {
-			text: '原价:'
-		}
-	}
-})
-const OPrice = extendRmSL(deepCopy(tb), {
-	data: {
-		layout: {
-			top:  111,
-			left: 260,
-			width:  50,
+			top:  30,
+			left: 88,
+			width:  120,
 			height: 20
 		},
 		style:     {
 			text: {
 				textAlign:  'left',
-				fontSize:   15,
+				fontSize:   12,
 				lineHeight: 20,
-				color: { type: 'custom', color: '#999' }
+				color: { type: 'custom', color: '#666' }
 			}
 		},
 		content: {
-			bind: 'originalPrice'
+			bind: 'name'
 		}
 	}
 })
-const QR = extendRmSL(deepCopy(pb), {
+const Pos = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
-			top:  99,
-			left: 416,
-			width:  94,
-			height: 94
+			top:  54,
+			left: 88,
+			width:  16,
+			height: 16
 		},
 		content: {
-			bind: 'qrcode'
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191128322385.png' }
 		}
 	}
 })
-const QRT = extendRmSL(deepCopy(t), {
+const PosT = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  194,
-			left: 416,
-			width:  94,
-			height: 14
+			top:  54,
+			left: 110,
+			width:  60,
+			height: 20
 		},
 		style:     {
 			text: {
-				lineHeight: 14,
-				color: { type: 'custom', color: '#999' }
+				textAlign:  'left'
 			}
 		},
 		content: {
-			text: '扫码即可购买'
+			bind: 'berthNumber'
+		}
+	}
+})
+const Phone = extendRmSL(deepCopy(p), {
+	data: {
+		layout: {
+			top:  54,
+			left: 172,
+			width:  16,
+			height: 16
+		},
+		content: {
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/e49fe7db-78c7-4dc6-9abd-d2198b8b4ffb.png' }
+		}
+	}
+})
+const PhoneT = extendRmSL(deepCopy(tb), {
+	data: {
+		layout: {
+			top:  54,
+			left: 192,
+			width:  120,
+			height: 20
+		},
+		style:     {
+			text: {
+				textAlign:  'left'
+			}
+		},
+		content: {
+			bind: 'contact'
+		}
+	}
+})
+const Go = extendRmSL(deepCopy(p), {
+	data: {
+		layout: {
+			top:  30,
+			left: 467,
+			width:  40,
+			height: 40
+		},
+		content: {
+			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/136c4156-08c9-4d37-8ffc-da00c7b5af7b.png' }
 		}
 	}
 })
@@ -161,8 +119,8 @@ module.exports = {
 		position: 'absolute',
 		top:  0,
 		left: 0,
-		width:  520,
-		height: 220
+		width:  540,
+		height: 120
 	},
 	style: {
 		filterBox: {
@@ -185,7 +143,7 @@ module.exports = {
 			}
 		}
 	},
-	componentLayout: [ Spr, Name, PIcon, Price, OPT, OPrice, QR, QRT ],
+	componentLayout: [ Logo, Name, Pos, PosT, Phone, PhoneT, Go ],
 	content: {},
 	animation: {
 		className: '',		// 动画样式
