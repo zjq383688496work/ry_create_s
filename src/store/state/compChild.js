@@ -54,10 +54,10 @@ module.exports = {
 		floorByStore2:  1,
 		letterByStore2: 1,
 		resetByStore2:  1,
+		mapByStore2:    1
 	},
 	storeDetails2: {
 		storeBlock: 1,
-		storeWonderful: 1,
 		swiperBind: 1
 	},
 	tabs: {

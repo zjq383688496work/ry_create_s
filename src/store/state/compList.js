@@ -22,6 +22,11 @@ module.exports = [
 				},
 				{
 					icon: 'image',
+					name: '二维码',
+					key:  'qrcode'
+				},
+				{
+					icon: 'image',
 					name: '背景色块',
 					key:  'area'
 				},
@@ -208,11 +213,11 @@ module.exports = [
 					name: '列表',
 					key:  'listByStore2'
 				},
-				// {
-				// 	icon: 'floorMap',
-				// 	name: '楼层地图',
-				// 	key:  'floorMap'
-				// },
+				{
+					icon: 'floorMap',
+					name: '楼层地图',
+					key:  'mapByStore2'
+				}
 			]
 		},
 		{
@@ -224,11 +229,6 @@ module.exports = [
 					icon: 'aboutStore',
 					name: '信息',
 					key:  'storeBlock'
-				},
-				{
-					icon: 'carousel',
-					name: '轮播图片',
-					key:  'storeWonderful'
 				},
 				{
 					icon: 'carousel',

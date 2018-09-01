@@ -18,21 +18,17 @@ const Swiper = extendRmSL(styleIdxChange(0, deepCopy(swb)), {
 			top:    150,
 			height: 216
 		},
+		style: {
+			paginationBox: {
+				backgroundColor: { type: 'custom', color: 'rgba(255,255,255,0)', rgb: '#fff', alpha: 0 }
+			}
+		},
 		content: {
 			bind: 'pictures',
 			swiperOptions: {
-				direction: 'horizontal',
-				effect:  'slide',
-				autoplay: true,
-				loop:  true,
-				speed: 300,
-				delay: 2000,
-				spaceBetween:   0,
-				slidesPerView:  1,
-				slidesPerGroup: 1,
-				slidesOffsetBefore: 0,
-				centeredSlides: true,
-				pagination: false
+				spaceBetween:  10,
+				slidesPerView: 2,
+				pagination: true
 			}
 		}
 	}

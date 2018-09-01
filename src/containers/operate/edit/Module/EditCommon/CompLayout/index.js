@@ -69,7 +69,6 @@ export default class CompLayout extends React.Component {
 		let { updateComp, props } = this.props,
 			{ name } = props.data
 		let da = mockMap[name] || {}
-		// debugger
 		return layout.map((_, i) => {
 			var { name, data } = _,
 				lay = data.layout,
@@ -97,8 +96,8 @@ export default class CompLayout extends React.Component {
 		let { visible, id, idx, active } = this.state
 		let { width = 0, height = 0 } = parentLayout
 		let pLay = {
-			width:  width  * 2,
-			height: height * 2
+			width:  width,
+			height: height
 		}
 		let isActive  = activeMap[name]
 		let renderDom = this.renderDom(layout, isActive)

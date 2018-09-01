@@ -13,7 +13,7 @@ const data = {
 			textDecoration: 'none',
 			textIndent:     0,
 			opacity:        1,
-			backgroundColor: { type: 'custom', color: 'rgba(0,0,0,0)' },
+			backgroundColor: { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0 },
 			borderRadius:    {
 				topLeft:     0,
 				topRight:    0,
@@ -33,7 +33,7 @@ const data = {
 				h_shadow:   0,
 				v_shadow:   0,
 				blur_dis:   0,
-				color:      { type: 'custom', color: '#000', alpha: 0 }
+				color:      { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0 }
 			},
 			color:          { type: 'custom', color: '#333' }
 		}

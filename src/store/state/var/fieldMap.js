@@ -50,10 +50,12 @@ module.exports = {
 	goodsBar:        deepCopy(Map.goods),
 	goodsBlock:      deepCopy(Map.goods),
 	pictureListBind: deepCopy(Map.goods),
+	listByStore2:    deepCopy(Map.store),
 	catgByStore2:    deepCopy(Map.storeCatg),
 	floorByStore2:   deepCopy(Map.storeFloor),
 	letterByStore2:  deepCopy(Map.storeLetter),
 	pageByStore2:    deepCopy(Map.storePage),
 	storeBlock:      deepCopy(Map.store),
+	storeDetails2:   deepCopy(Map.store),
 	// swiperBind:      deepCopy(Map.store),
 }

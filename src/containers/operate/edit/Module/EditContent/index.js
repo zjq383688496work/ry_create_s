@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
+import Color       from 'compEdit/EditCommon/Color'
 import { Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
@@ -208,6 +209,18 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	// 颜色
+	renderColor = (cfg, con, val, key, index) => {
+		let { data } = this.props
+		return (
+			<Color
+				data={data}
+				color={val}
+				action={'updateComp'}
+				placement="bottomLeft"
+			/>
+		)
+	}
 	// 开关
 	renderCheckbox(cfg, con, val, key, index) {
 		return (
@@ -251,8 +264,11 @@ class EditContent extends React.Component {
 	}
 	// 绑定
 	renderBind(cfg, con, val, key, index) {
-		let { data } = this.props
-		let map  = fieldMap[data.name]
+		let { data, editConfig } = this.props
+		let { parentComp } = editConfig.curData
+		if (!parentComp) return
+		let map = fieldMap[parentComp.name]
+		// debugger
 		if (!map) return
 		let opts = Object.keys(map).map((_, i) => {
 			return <Option key={i} value={_}>{map[_]}</Option>

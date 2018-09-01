@@ -106,7 +106,8 @@ module.exports = {
 	pageByStore2:      authInit(require('./storeList2/content/page')),		// 分页
 	floorByStore2:     authInit(require('./storeList2/content/floor')),		// 楼层
 	letterByStore2:    authInit(require('./storeList2/content/letter')),	// 字母
-	resetByStore2:     authInit(require('./storeList2/content/reset')),	// 重置
+	resetByStore2:     authInit(require('./storeList2/content/reset')),		// 重置
+	mapByStore2:       authInit(require('./storeList2/content/map')),		// 导航
 	// 店铺详情
 	storeDetails2:     authInit(require('./storeDetails2')),
 	storeBlock:        authInit(require('./storeDetails2/content/storeBlock')),	// 信息
@@ -122,6 +123,8 @@ module.exports = {
 	catgByTabs:        authInit(require('./tabs/content/catgByTabs')),
 	// 子元素
 	childElement:      authInit(require('./childElement')),
+	// 二维码
+	qrcode:            authInit(require('./qrcode')),
 	// 二维码绑定
 	qrcodeBind:        authInit(require('./qrcodeBind'))
 }

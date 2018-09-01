@@ -12,6 +12,8 @@ import CustomO from 'compEdit/EditElement/Custom'
 import CustomB from 'compEditB/EditElement/Custom'
 import CustomV from 'view/Element/Custom'
 import * as Server from 'server'
+import * as variable from 'var'
+let mockMap = variable.mockMap.list
 
 let cusMap = {
 	operate:  CustomO,
@@ -50,9 +52,9 @@ export default class GoodsList extends React.Component {
 		let { feature } = data
 		let { content } = data.data
 		let size = ipt.body.size = content.size
-		ipt.list  = mock.list.store(size)
-		ipt.catg  = mock.list.storeCatg(10)
-		ipt.floor = mock.list.storeFloor(10)
+		ipt.list  = mockMap.store(size)
+		ipt.catg  = mockMap.storeCatg(10)
+		ipt.floor = mockMap.storeFloor(10)
 	}
 
 	init = () => {
