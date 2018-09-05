@@ -7,17 +7,10 @@ import * as Server from 'server'
 
 const numArr = Array.from(new Array(10), (_, i) => { return {name: `${i+1}`}})
 
-export default class LetterByStore2 extends React.Component {
+export default class PageByStore2 extends React.Component {
 	// constructor(props) {
 	// 	super(props)
 	// }
-	onChange = (e, item) => {
-		e.stopPropagation()
-		let { ioInput, ioOuter } = this.props,
-			{ body } = ioInput
-		body.page = item.name
-		ioOuter(ioInput)
-	}
 	renderItem = (item, page, idx) => {
 		let { data } = this.props,
 			{ name } = item,
@@ -42,7 +35,7 @@ export default class LetterByStore2 extends React.Component {
 		let { body } = this.props.ioInput
 		let list = numArr
 		return list.map((_, i) => {
-			return <div key={i} onClick={e => this.onChange(e, _)}>{this.renderItem(_, body.page, i)}</div>
+			return <div key={i}>{this.renderItem(_, body.page, i)}</div>
 		})
 	}
 	render() {
