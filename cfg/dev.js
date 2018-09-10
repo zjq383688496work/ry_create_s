@@ -51,25 +51,25 @@ config.devServer = {
 			secure: false,
 			changeOrigin: 'true',
 		},
-		'^/(bsoms)/user/**': {
-			target: target,
-			secure: false,
-			changeOrigin: 'true',
-			onProxyRes:function(proxyRes, req, res) {
-				//登录处理
-				let cookies  =  proxyRes.headers['set-cookie']
-				var newCookies = []
-				console.log('========== 登录成功 ==========')
-				if (cookies) {
-					cookies.forEach(function(cookie,index){
-						newCookies.push(cookie.replace(/\.rongyi\.com/,'localhost'))
-					})
-					proxyRes.headers['set-cookie']=newCookies
-				} else {
-					console.log('========== 登录失败 ==========')
-				}
-			}
-		},
+		// '^/(bsoms)/user/**': {
+		// 	target: target,
+		// 	secure: false,
+		// 	changeOrigin: 'true',
+		// 	onProxyRes:function(proxyRes, req, res) {
+		// 		//登录处理
+		// 		let cookies  =  proxyRes.headers['set-cookie']
+		// 		var newCookies = []
+		// 		console.log('========== 登录成功 ==========')
+		// 		if (cookies) {
+		// 			cookies.forEach(function(cookie,index){
+		// 				newCookies.push(cookie.replace(/\.rongyi\.com/,'localhost'))
+		// 			})
+		// 			proxyRes.headers['set-cookie']=newCookies
+		// 		} else {
+		// 			console.log('========== 登录失败 ==========')
+		// 		}
+		// 	}
+		// },
 		// 保存&编辑
 		'/mcp-gateway/case': {
 			// target: 'http://192.168.1.52:10078',
