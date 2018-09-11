@@ -166,7 +166,7 @@ class BusinessComponent extends React.Component {
 		}
 	}
 	componentWillMount() {
-		this.getUserInfo(() => {
+		// this.getUserInfo(() => {
 			let { editConfig } = this.props
 			let { globalData } = editConfig
 			let arr = ['getConfig', 'getWeather', 'getFloor', 'getCatg']
@@ -176,7 +176,7 @@ class BusinessComponent extends React.Component {
 			})//.catch(e => {
 			// 	console.log(e)
 			// })
-		})
+		// })
 		// window.onbeforeunload = (e) => {
 		// 	e.returnValue = '确定离开当前页面吗, 离开的话会丢失未保存的数据哦?'
 		// }
