@@ -16,7 +16,9 @@ import Text              from 'compEdit/EditElement/Text'
 import Button            from 'compEdit/EditElement/Button'
 import Video             from 'compEdit/EditElement/Video'
 import SwiperImage       from 'compEdit/EditElement/SwiperImage'
+import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
+import WonderfulActivity2 from 'compEdit/EditElement/WonderfulActivity2'
 import Time              from 'compEdit/EditElement/Time'
 import Weather           from 'compEdit/EditElement/Weather'
 import StoreList         from 'compEdit/EditElement/StoreList'
@@ -47,8 +49,8 @@ const ctMap = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, actions, type, idx, csn) => {
-	var props  = { data, actions, type, idx, csn },
+const compContent = (name, data, actions, type, idx, csn,contentEditable) => {
+	var props  = { data, actions, type, idx, csn ,contentEditable},
 		render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -56,7 +58,9 @@ const compContent = (name, data, actions, type, idx, csn) => {
 		text:              <Text              {...props} />,
 		button:            <Button            {...props} />,
 		swiperImage:       <SwiperImage       {...props} />,
+		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
+		wonderfulActivity2: <WonderfulActivity2 {...props} />,
 		time:              <Time              {...props} />,
 		weather:           <Weather           {...props} />,
 		navigation:        <Navigation        {...props} />,
@@ -96,7 +100,11 @@ class EditElement extends React.Component {
 		actions.updateCur(curData)	// 更新 当前数据
 		actions.selectComp(data)
 	}
-
+	changeEditable = (item, idx) => {
+		let { actions } = this.props
+		item['feature'].editStatus != undefined ? item['feature'].editStatus = true : null
+		actions.updateComp(idx, item)
+	} 
 	render() {
 		let { data, actions, editConfig, location } = this.props
 		let { pageGroupIdx, pageIdx, compIdx } = editConfig.curData
@@ -122,7 +130,9 @@ class EditElement extends React.Component {
 				ani       = _.data.animation,
 				aniCls    = '',
 				aniSty    = {},
-				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn)
+				editStatus = _.feature&&_.feature.editStatus,
+				disableDragging = i === compIdx ? editStatus : false, 
+				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn,disableDragging)
 			
 			if (!compCon) return false
 
@@ -144,6 +154,7 @@ class EditElement extends React.Component {
 					className={`pge-layout${i === compIdx? ' s-active': ''} ${aniCls? aniCls: ''}`}
 					style={{ ...layout, ...aniSty }}
 					onClick={e => this.selectComp(e, _, i)}
+					onDoubleClick={()=>this.changeEditable(_,i)}
 				>
 					{ compCon }
 				</div>

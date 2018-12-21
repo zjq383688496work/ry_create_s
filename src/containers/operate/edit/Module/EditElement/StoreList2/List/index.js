@@ -18,6 +18,13 @@ export default class ListByStore2 extends React.Component {
 			size2 = this.state.size
 		if (size2 != size) this.getData()
 	}
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	getData = e => {
 		var { size } = this.props.ioInput.body
 		Server.store.getList(size, o => {
@@ -29,6 +36,7 @@ export default class ListByStore2 extends React.Component {
 			{ list = [] } = this.state,
 			{ componentLayout, layout } = data.data
 		return list.map((_, i) => {
+			if(i >= 6 ){_.featuredShop = false}
 			return <Layout key={i} data={_} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filter')} />
 		})
 	}

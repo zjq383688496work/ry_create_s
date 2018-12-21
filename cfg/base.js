@@ -47,6 +47,7 @@ module.exports = {
             business:   `${defaultSettings.srcPath}/containers/business`,
             operate:    `${defaultSettings.srcPath}/containers/operate`,
             view:       `${defaultSettings.srcPath}/containers/view`,
+            reviewTem:  `${defaultSettings.srcPath}/containers/reviewTem`,
             actions:    `${defaultSettings.srcPath}/store/actions`,
             components: `${defaultSettings.srcPath}/components`,
             compEdit:   `${defaultSettings.srcPath}/containers/operate/edit/Module`,

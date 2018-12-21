@@ -3,7 +3,7 @@ let { deepCopy } = require('state/common')
 // 轮播图
 const data = {
 	style:    {
-		text: {
+		/*text: {
 			display:        'none',
 			color:          { type: 'custom', color: '#000' },
 			fontSize:       12,
@@ -11,7 +11,7 @@ const data = {
 			fontWeight:     'normal',
 			textAlign:      'center',
 			textDecoration: 'none'
-		},
+		},*/
 		swiperImage:{
 			borderRadius:    {
 				topLeft:     0,
@@ -30,7 +30,7 @@ const data = {
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
 			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'high', color: '#fff' },
+			backgroundColor: { type: 'high', color: '#f6efe5' },
 			borderRadius:    {
 				topLeft:     10,
 				topRight:    10,
@@ -55,33 +55,34 @@ const data = {
 			borderColor: { type: 'custom', color: '#a240ec' },
 			background: 'center no-repeat',
 			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'main', color: '#a240ec' }
+			backgroundColor: { type: 'custom', color: '#cfad81' }
 		}
 	},
-	layout: {
+	layout: { 
 		position: 'absolute',
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   200
-	},
+		height:   304,
+		lockAspectRatio:true
+	}, 
 	content: [
 		{
 			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506216176.jpg' },
-			title: '图片1',		// 图片标题
-			router: {}			// 路由
-		},
-		{
+			//title: '图片1',		// 图片标题
+			router: {},			// 路由
+		}, 
+		{ 
 			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506213816.jpg' },
-			title: '图片2',		// 图片标题
-			router: {}			// 路由
-		},
+			//title: '图片2',		// 图片标题
+			router: {},			// 路由
+		}, 
 		{   
 			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506215219.jpg' },
-			title: '图片3',		// 图片标题
-			router: {}			// 路由
+			//title: '图片3',		// 图片标题
+			router: {},			// 路由
 		}
-	],
+	], 
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向

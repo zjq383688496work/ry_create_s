@@ -12,6 +12,16 @@ const LOGO = extendRmSL(deepCopy(pb), {
 			width:  40,
 			height: 40
 		},
+		style: {
+			image: {
+				borderRadius: {
+					topLeft:     20,
+					topRight:    20,
+					bottomRight: 20,
+					bottomLeft:  20
+				}
+			}
+		}, 
 		content: {
 			bind: 'logo'
 		}
@@ -34,6 +44,29 @@ const Name = extendRmSL(deepCopy(tb), {
 				lineHeight: 14,
 				textAlign: 'center',
 				color: { type: 'custom', color: '#666' }
+			}
+		}
+	}
+})
+const Recom = extendRmSL(deepCopy(t), {
+	data: {
+		layout: {
+			top:  0,
+			left: 70,
+			width:  20,
+			height: 20
+		},
+		content: {
+			text: '荐'
+		},
+		style: {
+			text: {
+				fontSize:   12,
+				lineHeight: 20,
+				textAlign: 'center',
+				color: { type: 'custom', color: '#fff' },
+				backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201811271625344267.png' },
+				backgroundSize: 'cover'
 			}
 		}
 	}
@@ -67,7 +100,7 @@ const Pos = extendRmSL(deepCopy(tb), {
 				fontSize:   8,
 				lineHeight: 14,
 				textAlign: 'left',
-				color: { type: 'main', color: '#333' }
+				color: { type: 'custom', color: '#cfad81' }
 			}
 		}
 	}
@@ -79,7 +112,7 @@ const data = {
 		position: 'absolute',
 		top:  0,
 		left: 0,
-		width:  440,
+		width:  441,
 		height: 300
 	},
 	style: {
@@ -88,7 +121,7 @@ const data = {
 			height: 90,
 			borderWidth:  1,
 			borderStyle: 'solid',
-			borderColor: { type: 'main', color: '#fff' },
+			borderColor: { type: 'custom', color: '#cfad81' },
 			backgroundColor: { type: 'custom', color: '#fff' },
 			margin: {
 				top:     0,
@@ -111,7 +144,7 @@ const data = {
 			}
 		}
 	},
-	componentLayout: [ LOGO, Name, Ico, Pos ],
+	componentLayout: [ LOGO, Name, Ico, Pos, Recom ],
 	content: {
 		router: {},
 	},

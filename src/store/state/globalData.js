@@ -4,7 +4,15 @@ const globalData = {
 	// 全局数据
 	data: {
 		homepage: 'p_1000',			// 首页路由
-		backgroundColor: '#fff'		// 全局背景色
+		backgroundColor: '#fff',		// 全局背景色
+		music:{
+			url:'',
+			volume:50
+		},
+		advert:{
+			switch:{auth:false,value:false},
+			time:{auth:false,value:30}
+		}
 	},
 	theme: {
 		idx: 0,
@@ -23,8 +31,10 @@ const globalData = {
 		index:  {},
 		list:   []
 	},
+
 	// 全局特征 
-	feature: {
+	feature: { 
+		reviewRouter:'p_1000'
 	}
 }
 

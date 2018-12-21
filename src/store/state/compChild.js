@@ -29,8 +29,11 @@ module.exports = {
 		catgByStore2:   1
 	},
 	dateWeather: {
-		weatherLogo: 1,
-		time:    1,
+		kongQi:  1,
+		feng:    1,
+		shiDu:   1,
+		line:    1, 
+		time:    1,  
 		weather: 1
 	},
 	goodsList: {
@@ -62,4 +65,9 @@ module.exports = {
 		catgByTabs:   1,
 		childElement: 1
 	},
+	wonderfulActivity2: {
+		catgByActivity2:   1,
+		listByActivity2:   1,
+		resetByActivity2:  1
+	}
 }

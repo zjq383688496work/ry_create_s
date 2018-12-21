@@ -19,6 +19,7 @@ import OperateEdit  from 'operate/edit'
 import Business     from 'business'
 import BusinessEdit from 'business/edit'
 import View         from 'view'
+import ReviewTem    from 'reviewTem'
 import NoMatch      from './containers/NoMatch'
 
 import 'services/tools'
@@ -45,6 +46,7 @@ ReactDOM.render((
 				<Route path="edit" component={BusinessEdit} />
 			</Route>
 			<Route path="view" component={View} />
+			<Route path="review" component={ReviewTem} />
 			<Route path="*" component={NoMatch} />
 		</Router>
 	</Provider>

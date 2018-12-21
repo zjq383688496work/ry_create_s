@@ -41,10 +41,10 @@ const NameAV = extendRmSL(deepCopy(t), {
 		style: {
 			text: {
 				lineHeight:      20,
-				backgroundColor: { type: 'main', color: '#a240ec' },
+				backgroundColor: { type: 'custom', color: '#cfad81' },
 				borderWidth: 2,
 				borderStyle: 'solid',
-				borderColor: { type: 'auxiliary', color: '#a240ec' },
+				borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 				borderRadius:    {
 					topLeft:     20,
 					topRight:    20,
@@ -75,7 +75,7 @@ const data = {
 		filterBox: {
 			borderWidth:  0,
 			borderStyle: 'solid',
-			borderColor: { type: 'main', color: '#fff' },
+			borderColor: { type: 'custom', color: '#cfad81' },
 			backgroundColor: { type: 'custom', color: 'rgba(255, 255, 255, 0)', rgb: '#fff', alpha: 0 },
 			padding: {
 				top:    0,

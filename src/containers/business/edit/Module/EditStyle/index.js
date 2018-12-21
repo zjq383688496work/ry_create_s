@@ -64,7 +64,7 @@ class EditStyle extends React.Component {
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, key, obj, node)}
+				value={val*2} onChange={v => {v=v/2;this.onChange(v, key, obj, node)}}
 				style={{ width: '100%' }}
 			/>
 		)

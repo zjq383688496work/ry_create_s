@@ -32,7 +32,13 @@ export default class GoodsList extends React.Component {
 	componentWillReceiveProps() {
 		this.getData()
 	}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	ioOuter = ipt => {
 		console.clear()
 	}

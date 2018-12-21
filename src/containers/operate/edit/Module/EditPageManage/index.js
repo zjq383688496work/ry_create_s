@@ -24,13 +24,13 @@ class EditPageManage extends React.Component {
 	addPage(groupIdx) {
 		let { actions, editConfig } = this.props
 		actions.addPage(groupIdx, `页面${editConfig.pageList.group[groupIdx].pages.length + 1}`)
-		message.success('添加页面!')
+		message.success('添加页面!',1)
 	}
 
 	deletePage(router, groupIdx, idx) {
 		let { data, actions, editConfig } = this.props
 		let { pageContent, globalData }   = editConfig
-		message.success(`删除页面: ${pageContent[router].title}!`)
+		message.success(`删除页面: ${pageContent[router].title}!`,1)
 		actions.deletePage(router, groupIdx, idx)
 		let da    = globalData.data
 		let group = data.group[0]
@@ -39,6 +39,7 @@ class EditPageManage extends React.Component {
 			da.homepage = li.router
 			actions.updateGlobal(globalData)
 		}
+		this.selectPage( data.group[0].pages[idx-1].router,0,idx-1)
 	}
 
 	selectPage(router, groupIdx, idx) {
@@ -53,7 +54,7 @@ class EditPageManage extends React.Component {
 		let { actions, editConfig } = this.props
 		let { pageContent }   = editConfig
 		actions.copyPage(router, groupIdx)
-		message.success(`复制页面: ${pageContent[router].title}!`)
+		message.success(`复制页面: ${pageContent[router].title}!`,1)
 	}
 
 	setIndex(router, idx) {

@@ -11,12 +11,13 @@ import './index.less'
 
 class Navigation extends React.Component {
 	
-	componentWillReceiveProps(props) {
-		
-	}; 
-	componentDidMount() {
-		
-	};
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
  
 	to = event => {
 		event.preventDefault()

@@ -14,9 +14,13 @@ const listMap = {
 }
 
 export default class LetterByStore2 extends React.Component {
-	// constructor(props) {
-	// 	super(props)
-	// }
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	renderItem = (item, letter, idx) => {
 		let { data } = this.props,
 			{ name } = item,

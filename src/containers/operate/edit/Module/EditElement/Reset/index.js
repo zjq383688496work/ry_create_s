@@ -16,12 +16,13 @@ const initMap = {
 }
 
 class Reset extends React.Component {
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	selectVal(body) {
 		let { parent, actions, ioInput, ioOuter } = this.props
 		for (let p in body) {

@@ -21,7 +21,7 @@ const gName = extendRmSL(deepCopy(tb), {
 					bottomLeft:  10
 				},
 				borderWidth:     1,
-				borderColor:     { type: 'main', color: '#666' },
+				borderColor:     { type: 'custom', color: '#cfad81' },
 				color:           { type: 'custom', color: '#666' }
 			}
 		},
@@ -41,7 +41,7 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 		style: {
 			text: {
 				lineHeight:      20,
-				backgroundColor: { type: 'main', color: '#a240ec' },
+				backgroundColor: { type: 'custom', color: '#cfad81' },
 				borderRadius:    {
 					topLeft:     10,
 					topRight:    10,
@@ -113,7 +113,7 @@ const data = {
 	componentLayout: [ gName, gNameAV ],
 	content: {
 		rel: 0,
-		router: {}
+		/*router: {}*/
 	},
 	animation: {
 		className: '',		// 动画样式

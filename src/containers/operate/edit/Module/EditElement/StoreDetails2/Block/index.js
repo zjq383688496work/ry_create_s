@@ -9,6 +9,13 @@ export default class StoreBlock extends React.Component {
 		super(props)
 		this.state = {}
 	}
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	render() {
 		let props = this.props,
 			{ data, ioInput } = props,

@@ -8,9 +8,13 @@ import * as Server from 'server'
 const numArr = Array.from(new Array(10), (_, i) => { return {name: `${i+1}`}})
 
 export default class PageByStore2 extends React.Component {
-	// constructor(props) {
-	// 	super(props)
-	// }
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	renderItem = (item, page, idx) => {
 		let { data } = this.props,
 			{ name } = item,

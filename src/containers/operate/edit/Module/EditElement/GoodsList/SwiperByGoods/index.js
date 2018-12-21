@@ -22,9 +22,13 @@ export default class SwiperByGoods extends React.Component {
 		if (!rebuild && rebuild === state.rebuild) return false
 		this.setState({ ...s })
 	}
-	componentDidMount() {}
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	init = (props, state) => {
 		var { data } = props.data,
 			{ content, componentLayout, layout } = data,

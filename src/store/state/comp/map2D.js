@@ -12,12 +12,13 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   540
+		height:   540,
+		lockAspectRatio:true
 	}, 
 	style: {
 		text: {}
 	},
-	content: {themeColor:{type:'main',color:'#cfad81'}},
+	content: {themeColor:{ type: 'custom', color: '#cfad81' }},
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向

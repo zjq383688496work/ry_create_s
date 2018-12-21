@@ -56,23 +56,21 @@ class ShortcutKey extends React.Component {
 		this.setState({ active: false })
 	}
 	_handleKeyDown = e => {
-		let { keyDown } = this.props
+		let { keyDown, disableDragging } = this.props
 		let { active, meta, os } = this.state
-		if (!active) return
+		if (!active || disableDragging) return
 		let key   = e.key.toLocaleLowerCase(),
 			ctrl  = e.ctrlKey? 'ctrl_': '',
 			comd  = meta? 'meta_': '',
 			shift = e.shiftKey? 'shift_': '',
 			str   = `key_${os === 'mac'? comd: ctrl}${shift}${key}`,
 			Fn    = this[str]
-		console.log(`keydown: ${key}`)
 		keyDown(key, e)
 		Fn && Fn(e)
 	}
 	_handleKeyUp = e => {
 		let { keyUp } = this.props
 		let key = e.key.toLocaleLowerCase()
-		console.log(`keyup: ${key}`)
 		keyUp(key, e)
 		if (key === 'meta') this.setState({ meta: false })
 	}

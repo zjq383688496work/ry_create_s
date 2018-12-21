@@ -11,6 +11,13 @@ export default class FloorByStore2 extends React.Component {
 		var { floor = [] } = props.ioInput
 		this.state = { list: floor }
 	}
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	renderItem = (item, floor, idx) => {
 		let { data } = this.props,
 			{ id } = item,

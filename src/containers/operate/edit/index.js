@@ -62,7 +62,7 @@ class EditComponent extends React.Component {
 		actions.selectPage(curData.router)
 	}
 
-	render() {
+	render() { 
 		let { editConfig, location } = this.props
 		let theme  = editConfig.globalData.theme
 		let colors = theme.list[theme.idx].colors
@@ -76,7 +76,7 @@ class EditComponent extends React.Component {
 			editTab = (
 				<Tabs defaultActiveKey="1" type="card">
 					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
-					<TabPane tab="样式" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
+					<TabPane tab="展示" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
 					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 				</Tabs>
 			)

@@ -21,7 +21,7 @@ const data = {
 			},
 			borderWidth:  1,
 			borderStyle: 'solid',
-			borderColor: { type: 'auxiliary', color: '#fff' },
+			borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 			color: { type: 'custom', color: '#666' },
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
@@ -46,10 +46,10 @@ const data = {
 			borderWidth: 2,
 			borderStyle: 'solid',
 			backgroundImage: { type: 'custom', img: '' },
-			borderColor: { type: 'auxiliary', color: '#a240ec' },
+			borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
-			backgroundColor: { type: 'main', color: '#a240ec' }
+			backgroundColor: { type: 'main', color: '#cfad81' }
 		}
 	},
 	layout:    {
@@ -62,11 +62,11 @@ const data = {
 	content: {
 	},
 	animation: {
-		className: '',		// 动画样式
-		direction: '',		// 方向
-		delay: 0,			// 开始时间
-		duration: 1,		// 持续时间
-		iterationCount: 1	// 循环次数
+		className: '',	// 动画样式
+		direction: '',				// 方向
+		delay: 0,					// 开始时间
+		duration: 1,				// 持续时间
+		iterationCount: 1			// 循环次数
 	}
 }
 

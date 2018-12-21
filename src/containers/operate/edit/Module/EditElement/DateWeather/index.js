@@ -21,12 +21,13 @@ class DateWeather extends React.Component {
 	constructor(props) {
 		super(props)
 	}
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	ioOuter(ipt) {
 		// let { data, actions, idx, csn } = this.props
 	}

@@ -7,11 +7,13 @@ export default class ResetByStore2 extends React.Component {
 	constructor(props) {
 		super(props)
 	}
-
-	componentWillReceiveProps(props) {}
-	componentDidMount() {}
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	renderDom = e => {
 		let { data, ioInput } = this.props,
 			{ catg } = ioInput.body,

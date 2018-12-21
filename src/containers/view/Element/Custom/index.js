@@ -32,6 +32,9 @@ import ListByStore  from 'compEdit/EditElement/ListByStore'
 import ListByGoods  from 'compEdit/EditElement/GoodsList/ListByGoods'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
+import CatgByActivity2   from 'compEdit/EditElement/WonderfulActivity2/Catg'
+import ListByActivity2   from 'compEdit/EditElement/WonderfulActivity2/List'
+import ResetByActivity2  from 'compEdit/EditElement/WonderfulActivity2/Reset'
 import PictureBind       from 'compEdit/EditElement/PictureBind'
 import TextBind          from 'compEdit/EditElement/TextBind'
 import SwiperBind        from 'compEdit/EditElement/SwiperBind'
@@ -67,6 +70,9 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		letter:            <Letter            {...props} />,
 		floor:             <Floor             {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
+		catgByActivity2:   <CatgByActivity2   {...props} />,
+		listByActivity2:   <ListByActivity2   {...props} />,
+		resetByActivity2:  <ResetByActivity2  {...props} />,
 		catg:              <Catg              {...props} />,
 		page:              <Page              {...props} />,
 		floorMap:          <FloorMap          {...props} />,

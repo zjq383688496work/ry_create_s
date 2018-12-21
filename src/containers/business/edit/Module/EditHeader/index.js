@@ -10,7 +10,7 @@ import './index.less'
 import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
-
+import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate' 
 const comp     = require('state/comp')
 const compC    = require('state/compChild')
 const compP    = require('state/compParent')
@@ -25,14 +25,20 @@ class Header extends React.Component {
 		super(props)
 
 		this.state = {
-			name: tempCfg.name || '',
-			loading: false
+			name: tempCfg.name.substr(0,16) || '',
+			loading: false,
+			isInput:this.props.isClick
 		}
 	}
 	componentWillMount() {}
-	componentDidMount() {}
-	componentWillUnmount() {}
-
+	componentDidMount() {
+		
+	}
+	componentWillReceiveProps(props){
+		if(props.isClick != this.props.isClick){
+			this.setState({isInput:props.isClick})
+		}
+	}
 	selectTheme() {
 		let { actions, editConfig } = this.props
 		editConfig.curData.contentType = 'theme'
@@ -51,28 +57,29 @@ class Header extends React.Component {
 			delete obj.auth
 		} else if (type === 'advanced') {
 			data.layout = cssFormatByTerm(data.layout)
-			data.components.map(_ => this.formatEle(_))
+			data.components&&data.components.map(_ => this.formatEle(_))
 		} else if (type === 'layout') {
 			this.formatStyle(data)
-			data.componentLayout.map(_ => this.formatEle(_))
+			data.componentLayout&&data.componentLayout.map(_ => this.formatEle(_))
 		}
 	}
 	formatPage(obj) {
 		obj.elements.map(_ => this.formatEle(_))
 	}
-
+	//预览模板
+	review(){
+		this.reviewModal.show()
+	}
 	saveData() {
+		if(!this.state.name){
+			return message.warning(`请输入作品名称！`,1)
+		}
 		let { editConfig, location } = this.props
 		let { query } = location
-		let { caseType, id, composeType, templateId, templateThemeId } = tempCfg
+		let { caseType, id, composeType, templateId } = tempCfg
 		let cfg = deepCopy(editConfig)
-
-		// cfg.pageContent = dataFormat.save.pageEach(cfg.pageContent)
-
 		let newCon = deepCopy(cfg.pageContent)
 		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))
-
-		// console.log(newCon)
 		let gd = cfg.globalData
 		cfg.globalData = {
 			data:    gd.data,
@@ -91,7 +98,6 @@ class Header extends React.Component {
 				globalData:  cfg.globalData
 			}
 		}
-		editConfig.globalData.theme.idx
 		let da = {
 			config: JSON.stringify(config),
 			coverImgUrl:  '',
@@ -99,11 +105,24 @@ class Header extends React.Component {
 			composeType:  composeType,
 			name:         this.state.name,
 			templateId:   templateId,
-			templateThemeId: editConfig.globalData.theme.idx || 0,
+			templateThemeId:  0,
 			mallId: uif.userInfo.mallMid
 		}
+		if (id) {
+			da.id = id
+			this.post_save(query,da)
+		}else{
+			Ajax.post(`/mcp-gateway/case/nameCheck`, {caseName:this.state.name,userId:uif.userInfo.id}).then(res => {
+				if(res.data){
+					this.post_save(query,da)
+				}else{
+					return message.warning(`作品名称已存在，请重新输入！`,1)
+				}
+			})	
+		}
+	}
+	post_save(query,da){
 		this.setState({ loading: true })
-		if (id) da.id = id
 		Ajax.post(`/mcp-gateway/case/${query.id? 'update': 'save'}`, da).then(res => {
 			if (!query.id) {
 				tempCfg.id = res.data
@@ -120,25 +139,36 @@ class Header extends React.Component {
 					coverImgUrl: cover.data
 				}).then(() => {
 					this.setState({ loading: false })
-					message.success(`${query.id? '更新': '保存'}成功!`)
+					message.success(`${query.id? '更新': '保存'}成功!`,1)
 				}).catch(e => { this.setState({ loading: false }) })
 			}).catch(e => { this.setState({ loading: false }) })
 		}).catch(e => { this.setState({ loading: false }) })
-		// console.log(JSON.stringify(config))
-	}
-
-	tNameChange(name) {
-		this.setState({ name: name })
-		tempCfg.name = name
 	}
 	closeWin() {
 		window.location.href = 'about:blank'
 		window.close()
 	}
+	saveCaseName(e){
+		let name = e.target.value
+		if(name.length > 16){
+			name = name.substr(0,16)
+		}
+		this.setState({name:name})
+	}
+	changeInput(e){
+		e.stopPropagation()
+		this.props.clickFun(!this.state.isInput)
+		this.setState({isInput:!this.state.isInput})
+	}
+	stopChange(e){
+		e.stopPropagation()
+	}
 	render() {
+		let { location } = this.props
+		let { query } = location
 		let loading = this.state.loading? (<div className="spin-mask"><Spin /></div>): false
 		return (
-			<div className="pe-header e-flex">
+			<div className="pe-header pe-header-business e-flex">
 				{ loading }
 				<div className="peh-left">
 					<div className="logo"></div>
@@ -148,11 +178,26 @@ class Header extends React.Component {
 
 				<div className="peh-right">
 					<section className="comp-list comp-list-b">
+						{
+							!query.id ? <div className="cl-item cl-item-business" onClick={this.stopChange.bind(this)} >
+								{
+									this.state.isInput ? <Input placeholder="请输入作品名称" onChange={this.saveCaseName.bind(this)} defaultValue={this.state.name} value={this.state.name} /> : 
+									<div>{this.state.name}</div>
+								}
+								<Icon type="edit" style={{fontSize:'30px'}} onClick={this.changeInput.bind(this)} />
+							</div> : null
+						}
+						<div className="cl-item" onClick={this.review.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/reviewTem.png`)}/>
+							</div>
+							预览
+						</div>
 						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
 							<div className="cl-item-icon">
 								<img src={require(`images/icon/theme.png`)}/>
 							</div>
-							主题
+							全局配置
 						</div>
 						<div className="cl-item" onClick={this.saveData.bind(this)}>
 							<div className="cl-item-icon">
@@ -168,6 +213,10 @@ class Header extends React.Component {
 						</div>
 					</section>
 				</div>
+				<ReviewTemplate 
+					ref={com => { this.reviewModal = com }} 
+					editConfig={this.props.editConfig}
+					actions={this.props.actions} />
 			</div>
 		)
 	}

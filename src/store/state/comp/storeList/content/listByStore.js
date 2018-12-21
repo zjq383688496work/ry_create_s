@@ -41,7 +41,7 @@ const data = {
 			justifyContent: 'center',
 			borderWidth:  1,
 			borderStyle: 'solid',
-			borderColor: { type: 'main', color: '#fff' },
+			borderColor: { type: 'main', color: '#cfad81' },
 			color: { type: 'text', color: '#666' },
 			background: 'center no-repeat',
 			backgroundSize: 'contain',

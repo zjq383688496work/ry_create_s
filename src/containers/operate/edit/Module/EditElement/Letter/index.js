@@ -9,12 +9,13 @@ import React from 'react'
 import './index.less'
 
 class Letter extends React.Component {
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	selectVal(str) {
 		let { parent, actions, ioInput, ioOuter } = this.props
 		if (ioInput.body.letter === str || !parent) return

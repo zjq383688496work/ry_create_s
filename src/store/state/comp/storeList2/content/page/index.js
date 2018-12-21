@@ -19,7 +19,7 @@ const Point = extendRmSL(deepCopy(a), {
 					bottomRight: 8,
 					bottomLeft:  8
 				},
-				backgroundColor: { type: 'main', color: '#666' }
+				backgroundColor: { type: 'custom', color: '#cfad81' }
 			}
 		}
 	}
@@ -41,7 +41,7 @@ const PointAV = extendRmSL(deepCopy(a), {
 					bottomRight: 8,
 					bottomLeft:  8
 				},
-				backgroundColor: { type: 'main', color: '#666' }
+				backgroundColor: { type: 'custom', color: '#cfad81' }
 			}
 		}
 	},
@@ -66,7 +66,7 @@ const data = {
 		filterBox: {
 			borderWidth:  0,
 			borderStyle: 'solid',
-			borderColor: { type: 'main', color: '#fff' },
+			borderColor: { type: 'custom', color: '#cfad81' },
 			backgroundColor: { type: 'custom', color: 'rgba(255, 255, 255, 0)', rgb: '#fff', alpha: 0 },
 			padding: {
 				top:    0,
@@ -102,7 +102,7 @@ const data = {
 	componentLayout: [ Point, PointAV ],
 	content: {
 		rel: 0,
-		router: {}
+		/*router: {}*/
 	},
 	animation: {
 		className: '',		// 动画样式

@@ -13,7 +13,7 @@ import './index.less'
 
 import Rnd from 'react-rnd'
 import { Icon, message } from 'antd'
-
+import { InductionLine,nearPosSty }     from 'compEdit/EditElement/InductionLine'
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Button       from 'compEdit/EditElement/Button'
@@ -32,6 +32,9 @@ import ListByStore  from 'compEdit/EditElement/ListByStore'
 import ListByGoods  from 'compEdit/EditElement/GoodsList/ListByGoods'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
+import CatgByActivity2   from 'compEdit/EditElement/WonderfulActivity2/Catg'
+import ListByActivity2   from 'compEdit/EditElement/WonderfulActivity2/List'
+import ResetByActivity2  from 'compEdit/EditElement/WonderfulActivity2/Reset'
 import PictureBind       from 'compEdit/EditElement/PictureBind'
 import TextBind          from 'compEdit/EditElement/TextBind'
 import SwiperBind        from 'compEdit/EditElement/SwiperBind'
@@ -57,8 +60,8 @@ import * as variable from 'var'
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter) => {
-	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter }
+const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter,drag) => {
+	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter,drag }
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -71,6 +74,9 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		letter:            <Letter            {...props} />,
 		floor:             <Floor             {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
+		catgByActivity2:   <CatgByActivity2   {...props} />,
+		listByActivity2:   <ListByActivity2   {...props} />,
+		resetByActivity2:   <ResetByActivity2 {...props} />,
 		catg:              <Catg              {...props} />,
 		page:              <Page              {...props} />,
 		floorMap:          <FloorMap          {...props} />,
@@ -105,7 +111,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 class Custom extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {v:false,h:false,vPosition:{left:0},hPosition:{top:0},nearPos:false,dragAxis:'both',drag:true}
 	}
 	componentWillMount() {}
 
@@ -117,13 +123,13 @@ class Custom extends React.Component {
 		let comp  = data.data.components || []
 		if (cusCompIdx < 0 || !comp[cusCompIdx]) return
 		state[cusCompIdx] = comp[cusCompIdx].data.layout
-		this.setState(state)
-		console.log('更新ChildProps')
+		this.state.drag ? this.setState(state) : null
 	}
-
+	
 	selectComp(e, data, idx, parentIdx, parent) {
 		e.stopPropagation()
 		e.preventDefault()
+		this.setState({v:false,h:false,nearPos:false})
 		this.state[idx] = deepCopy(data.data.layout)
 		let { actions, editConfig, keyCtrl } = this.props
 		let { globalData, curData } = editConfig
@@ -162,7 +168,6 @@ class Custom extends React.Component {
 		multiComp.type = 'child'
 		multiComp.parentIdx = parentIdx
 		actions.updateGlobal(globalData)
-		console.log(JSON.stringify(multiComp.list))
 	}
 
 	resizeFn(e, ref, delta, pos, item, idx, parent) {
@@ -173,6 +178,7 @@ class Custom extends React.Component {
 		lay.top    = +pos.y
 		lay.width  = +ref.offsetWidth
 		lay.height = +ref.offsetHeight
+		this.setState({v:false,h:false,nearPos:false}) 
 		actions.updateComp(editConfig.curData.compIdx, parent)
 	}
 
@@ -184,17 +190,61 @@ class Custom extends React.Component {
 			width:  +ref.offsetWidth,
 			height: +ref.offsetHeight
 		}
+		this.showLine(pos,item,idx,{width:ref.offsetWidth,height:ref.offsetHeight})
 		this.setState(o)
 	}
-
+	//显示提示线
+	showLine = (param,_,i,obj) => {
+		let { data, actions } = this.props,
+			eles   = data.data.components || [], 
+			bodySty = {...data.data.layout,...{left:0,top:0}}, 
+			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
+			InductionLineObj = InductionLine(param,eles,layout,i,bodySty,eleKnock),
+			v= InductionLineObj.v,h=InductionLineObj.h,eleKnock = InductionLineObj.eleKnock
+		if(v){   
+			this.setState({v:true,vPosition:{left:`${v.left}px`,p_left:v.p_left}})
+		}else{
+			this.setState({v:false,vPosition:{p_left:param.x}})
+		} 
+		if(h){
+			this.setState({h:true,hPosition:{top:`${h.top}px`,p_top:h.p_top}})
+		}else{ 
+			this.setState({h:false,hPosition:{p_top:param.y}})
+		}
+		if(eleKnock){
+			this.setState({nearPos:nearPosSty(eleKnock)})
+		}else{
+			this.setState({nearPos:false})
+		}   
+	}  
+	//拖拽
+	dragMove(e,param,_,i) {
+		e.stopPropagation()
+		let stateLay = {},lay = deepCopy(_.data.layout)
+		if(this.props.shift){
+			if(Math.abs(lay.top-param.y) > Math.abs(lay.left-param.x)){
+				let layout = deepCopy(_.data.layout),
+					pos = {x:param.x,y:param.y}
+				pos.x = layout.left
+				this.setState({...stateLay,dragAxis:'y',drag:false},()=>{ this.showLine(pos,_,i) })
+			}else{
+				let layout = deepCopy(_.data.layout),
+					pos = {x:param.x,y:param.y}
+				pos.y = layout.top
+				this.setState({...stateLay,dragAxis:'x',drag:false},()=>{ this.showLine(pos,_,i) })
+			}
+		}else{
+			this.setState({dragAxis:'both',drag:false},()=>{ this.showLine(param,_,i) })
+		} 
+	}  
 	dragStop(e, d, item, idx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
-		let s   = this.state[idx]
 		let lay = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
-		s.left = lay.left = +d.x
-		s.top  = lay.top  = +d.y
+		lay.left = this.state.vPosition.p_left
+		lay.top  = this.state.hPosition.p_top
+		this.setState({v:false,h:false,nearPos:false,drag:true})
 		actions.updateComp(editConfig.curData.compIdx, parent)
 	}
 
@@ -210,7 +260,6 @@ class Custom extends React.Component {
 		actions.updateCur(curData)
 		actions.selectComp(parent)
 	}
-
 	render() {
 		let { data, actions, idx, csn, editConfig, ioInput, ioOuter, name } = this.props
 		let { globalData, curData } = editConfig
@@ -227,7 +276,7 @@ class Custom extends React.Component {
 				ani      = _.data.animation,
 				aniCls   = '',
 				aniSty   = {},
-				compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter)
+				compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter,state.drag)
 
 			if (icomp && icomp[compName]) {
 				let v   = icomp[compName],
@@ -269,8 +318,10 @@ class Custom extends React.Component {
 						x: lay.left,
 						y: lay.top
 					}}
+					dragAxis={state.dragAxis}
 					style={{ position: lay.position }}
 					onDragStart={e => this.selectComp(e, _, i, idx, data)}
+					onDrag={(e,param) => this.dragMove(e,param,_,i)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i, data)}
 					onResizeStart={e => this.selectComp(e, _, i, idx, data)}
 					onResize={(e, dir, ref, delta, pos) => this.dragResize(e, ref, delta, pos, _, i)}
@@ -284,10 +335,20 @@ class Custom extends React.Component {
 					>{ compCon }</div>
 				</Rnd>
 			)
-		})
+		})  
 		return (
-			<section className={`pg-custom ele-${data.name} ${csn} scrollbar`}>
+			<section className={`pg-custom ele-${data.name} ${csn} scrollbar`} id="pg-custom">
 				{ childNode }
+				{state.h ? <div className="inductionLine-h" style={state.hPosition}></div> : null}
+				{state.v ? <div className="inductionLine-v" style={state.vPosition}></div> : null}
+				{
+					state.nearPos ? <div>
+						<div className="lineNear_0" style={state.nearPos[0]}></div>
+						<div className="lineNear_1" style={state.nearPos[1]}></div>
+						<div className="lineNear_2" style={state.nearPos[2]}></div>
+						<div className="lineNear_3" style={state.nearPos[3]}></div>
+					</div> : null
+				}  
 			</section>
 		)
 	}

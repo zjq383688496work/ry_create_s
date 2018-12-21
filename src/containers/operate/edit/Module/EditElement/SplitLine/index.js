@@ -9,12 +9,13 @@ import React from 'react'
 import './index.less'
 
 class SplitLine extends React.Component {
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	render() {
 		let { data, type } = this.props
 		return (

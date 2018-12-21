@@ -13,6 +13,8 @@ import * as actions from 'actions'
 
 import ColorPicker from 'rc-color-picker'
 import ThemeManage from 'compEdit/EditCommon/ThemeManage'
+import BackMusic from 'compEdit/EditCommon/BackMusic'
+import Advert from 'compEdit/EditCommon/Advertisement'
 import { Collapse, Icon, Input, Select } from 'antd'
 const Panel  = Collapse.Panel
 const Option = Select.Option
@@ -186,7 +188,7 @@ class EditTheme extends React.Component {
 		})
 		return (
 			<section className="pg-theme">
-				<ThemeManage
+				{/*<ThemeManage
 					data={editConfig.globalData}
 					list={data.list}
 					idx={data.idx}
@@ -200,7 +202,15 @@ class EditTheme extends React.Component {
 					<Panel header={'主题编辑'}>
 						{ childNode }
 					</Panel>
-				</Collapse>
+				</Collapse>*/}
+				<BackMusic
+					data={editConfig.globalData}
+					action={'updateGlobal'}
+				/> 
+				<Advert 
+					data={editConfig.globalData}
+					action={'updateGlobal'}
+				/>
 			</section>
 		)
 	}

@@ -35,7 +35,13 @@ class StoreList extends React.Component {
 		this.state = { ioInput: ipt }
 		this.ioOuter(ipt)
 	}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	ioOuter(ipt) {
 		this.getList(ipt)
 		this.setState({ ioInput: ipt })

@@ -70,11 +70,39 @@
 		box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
 	}
 	.pg-element {
-		// height:  100%;
-		// width:   100%;
 		position: relative;
-		// background-color: #fff;
-		// box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+		.inductionLine-h {
+			height: 0;
+			width:100%;
+		    left: 0;
+		    right: 0;
+		    position: absolute;
+		    border-top: 1px solid #66FF00;
+		    z-index: 1000;
+		}
+		.inductionLine-v {
+			width: 0;
+			height:100%;
+		    top: 0;
+		    bottom: 0;
+		    position: absolute;
+		    border-right: 1px solid #66FF00;
+		    z-index: 1000;
+		}
+		.lineNear_0,.lineNear_1 {
+			position: absolute;
+			width: 0;
+			height:100%;
+		    border-right: 2px dotted #1890ff;
+			z-index: 1000;
+		} 
+		.lineNear_2,.lineNear_3 {
+			position: absolute;
+			height: 0; 
+			width:100%;  
+		    border-top: 2px dotted #1890ff;
+			z-index: 1000;
+		} 
 		.pge-layout {
 			& > div {
 				pointer-events: none;
@@ -156,6 +184,8 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				width: 8px!important;
+				height: 8px!important;
 				&:after {
 					content: '';
 					display: none;
@@ -165,6 +195,38 @@
 					border: 0 solid #333;
 					box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .15);
 				}
+			}
+			&:nth-child(1) {
+				    height: 5px!important;
+    				top: -5px!important;
+			}
+			&:nth-child(2) {
+				    width: 5px!important;
+    				right: -5px!important;
+			}
+			&:nth-child(3) {
+				    height: 5px!important;
+    				bottom: -5px!important;
+			}
+			&:nth-child(4) {
+				    width: 5px!important;
+    				left: -5px!important;
+			}
+			&:nth-child(5) {
+				       right: -7px!important;
+    				   top: -7px!important;
+			}
+			&:nth-child(6) {
+				       right: -7px!important;
+    				   bottom: -7px!important;
+			}
+			&:nth-child(7) {
+				       left: -7px!important;
+    				   bottom: -7px!important;
+			}
+			&:nth-child(8) {
+				       left: -7px!important;
+    				   top: -7px!important;
 			}
 		}
 	}
@@ -208,6 +270,11 @@
 	.react-draggable {
 		.pge-remove {
 			display: none;
+		}
+		&.s-active {
+			&:after {
+				border: 1px solid #43bffe;
+			}
 		}
 		&:hover {
 			&:after {

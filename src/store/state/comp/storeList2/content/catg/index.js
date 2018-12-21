@@ -37,7 +37,7 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 		style: {
 			text: {
 				lineHeight:      20,
-				backgroundColor: { type: 'main', color: '#a240ec' },
+				backgroundColor: { type: 'custom', color: '#cfad81' },
 				borderRadius:    {
 					topLeft:     20,
 					topRight:    20,
@@ -45,7 +45,7 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 					bottomLeft:  20
 				},
 				borderWidth:     2,
-				borderColor: { type: 'auxiliary', color: '#a240ec' },
+				borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 				color: { type: 'textHigh', color: '#fff' },
 			}
 		},
@@ -73,7 +73,7 @@ const data = {
 		filterBox: {
 			borderWidth:  0,
 			borderStyle: 'solid',
-			borderColor: { type: 'main', color: '#fff' },
+			borderColor: { type: 'custom', color: '#cfad81' },
 			backgroundColor: { type: 'custom', color: 'rgba(255, 255, 255, 0)', rgb: '#fff', alpha: 0 },
 			padding: {
 				top:    0,
@@ -109,7 +109,7 @@ const data = {
 	componentLayout: [ gName, gNameAV ],
 	content: {
 		rel: 0,
-		router: {}
+		/*router: {}*/
 	},
 	animation: {
 		className: '',		// 动画样式

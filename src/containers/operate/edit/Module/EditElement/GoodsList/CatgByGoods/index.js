@@ -13,6 +13,13 @@ export default class CatgByGoods extends React.Component {
 	componentWillMount() {
 		this.getData()
 	}
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	getData = e => {
 		Server.goods.getCategoryList(o => {
 			this.setState({ list: o })

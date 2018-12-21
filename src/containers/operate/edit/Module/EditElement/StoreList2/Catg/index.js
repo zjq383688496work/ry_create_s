@@ -11,6 +11,13 @@ export default class CatgByStore2 extends React.Component {
 		var { catg = [] } = props.ioInput
 		this.state = { list: catg }
 	}
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	renderItem = (item, catg, idx) => {
 		let { data } = this.props,
 			{ id } = item,

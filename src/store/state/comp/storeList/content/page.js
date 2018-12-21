@@ -57,7 +57,7 @@ const data = {
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
 			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'main', color: '#a240ec' }
+			backgroundColor: { type: 'main', color: '#cfad81' }
 		},
 		filterPage: {
 			width:  32,
@@ -69,7 +69,7 @@ const data = {
 			color: { type: 'custom', color: '#666' },
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
-			backgroundColor: { type: 'main', color: '#fff' },
+			backgroundColor: { type: 'main', color: '#cfad81' },
 			borderRadius:    {
 				topLeft:     10,
 				topRight:    10,

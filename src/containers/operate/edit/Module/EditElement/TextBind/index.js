@@ -13,6 +13,13 @@ const typeMap = {
 }
 
 export default class TextBind extends React.Component {
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	render() {
 		let props = this.props,
 			{ ioInput, type } = props,
@@ -32,10 +39,10 @@ export default class TextBind extends React.Component {
 		}
 		text += ''
 		if (bind !== 'recommendReason') {
-			dom = <div
+			dom = text ? <div
 				style={cssColorFormat(this.props, 'text')}
 				dangerouslySetInnerHTML={{__html: textBreak(text)}}
-			></div>
+			></div> : null
 		} else {
 			dom = text
 			?

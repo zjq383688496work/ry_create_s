@@ -39,7 +39,13 @@ export default class GoodsDetails extends React.Component {
 		ipt.scrollTop = doc? doc.scrollTop: 0
 		this.state = { ioInput: ipt }
 	}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	getData = e => {
 		let ipt = this.state.ioInput
 		Server.goods.getGoodsDetails(o => {

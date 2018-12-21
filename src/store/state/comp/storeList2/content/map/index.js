@@ -7,11 +7,11 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   540
-	}, 
+		height:   300
+	},  
 	style: {},
 	content: {
-		mapThemeColor: { type: 'background', color: '#666' }
+		mapThemeColor: { type: 'custom', color: '#cfad81' }
 	},
 	animation: {
 		className: '',		// 动画样式

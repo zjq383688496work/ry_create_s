@@ -10,7 +10,7 @@ import './index.less'
 
 import Color       from 'compEdit/EditCommon/Color'
 import ImageUpload from 'compEdit/EditCommon/ImageUpload'
-import StyleFilter from 'compEdit/EditStyle/StyleFilter'
+import { lineHightAdaptation,imageAdaptation } from 'compEdit/EditStyle/StyleFilter'
 import {
 	Row, Col,
 	Checkbox, Collapse, InputNumber, Radio, Slider, Switch
@@ -34,8 +34,8 @@ export default class EditStyle extends React.Component {
 
 	onChange(val, css, obj, node, attribute) {
 		let { data, updateComp } = this.props
-		data = StyleFilter.lineHightAdaptation(data, val, css)
-		data = StyleFilter.imageAdaptation(data, attribute)
+		data = lineHightAdaptation(data, val, css)
+		data = imageAdaptation(data, attribute)
 		let da = data.data
 		if (node) {
 			obj[css][node] = val
@@ -51,7 +51,7 @@ export default class EditStyle extends React.Component {
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, key, obj, node)}
+				value={val*2} onChange={v => {v=v/2;this.onChange(v, key, obj, node)}}
 				style={{ width: '100%' }}
 			/>
 		)

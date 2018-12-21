@@ -9,12 +9,13 @@ import React from 'react'
 import './index.less'
 
 export default class PictureListBind extends React.Component {
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	renderImage = imgs => {
 		let props = this.props,
 			{ style } = props.data.data,

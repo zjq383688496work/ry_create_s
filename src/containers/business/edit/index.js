@@ -20,7 +20,7 @@ import EditElement    from 'compEditB/EditElement'
 import EditStyle      from 'compEditB/EditStyle'
 import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEditB/EditTheme'
-
+import { setSwiperImgAndVideo } from 'compEdit/EditContent/filter'
 import * as actions from 'actions'
 
 import 'rc-color-picker/assets/index.css'
@@ -34,21 +34,23 @@ class EditComponent extends React.Component {
 	constructor(props) {
 		super(props)
 	}
-
-	componentWillMount() {
+	state = {
+		isClick:false
 	}
-
-	componentDidMount() {
-	}
-
 	selectPage() {
 		let { actions, editConfig } = this.props
 		let { curData } = editConfig
 		actions.selectPage(curData.router)
 	}
-
+	pgClick = () => {
+		this.setState({isClick:false})
+	}
+	headerClick = isClick => {
+		this.setState({isClick:isClick})
+	}
 	render() {
 		let { editConfig, location } = this.props
+		setSwiperImgAndVideo(editConfig)
 		let theme  = editConfig.globalData.theme
 		let colors = theme.list[theme.idx].colors
 		let { curData } = editConfig
@@ -61,7 +63,7 @@ class EditComponent extends React.Component {
 			editTab = (
 				<Tabs defaultActiveKey="1" type="card">
 					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
-					<TabPane tab="样式" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
+					<TabPane tab="展示" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
 					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 				</Tabs>
 			)
@@ -69,8 +71,8 @@ class EditComponent extends React.Component {
 			editTab = (<EditTheme data={editConfig.globalData.theme} />)
 		}
 		return (
-			<div className="pg-edit-box">
-				<EditHeader location={location}/>
+			<div className="pg-edit-box" onClick={this.pgClick} >
+				<EditHeader location={location} isClick={this.state.isClick} clickFun={this.headerClick} />
 				<div className="pg-body e-flex-box">
 					<div className="pg-left scrollbar">
 						<EditPageManage data={editConfig.pageList} />

@@ -55,7 +55,7 @@ export default class VideoList extends React.Component {
 		groupId:42,
 		attribute:''
 	} 
-	componentDidMount(){
+	componentWillMount(){
 		var getData = {
 			type: 2
 		}
@@ -230,6 +230,7 @@ function Type({item, choose_one, groupId}) {
 }
 
 function List({item,choose_one}){
+	!item.preview ? item.preview = 'http://rongyi.b0.upaiyun.com/commodity/text/201811081000076071.png' : null
 	return (
 		<div onClick={()=>{choose_one(item.id,item.attribute)}} className={item.isClicked?'choosed':''}>
 			<div className={item.isClicked?'icon_img':''}>

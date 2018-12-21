@@ -42,6 +42,9 @@ var Map = {
 	},
 	storePage: {
 		name: '名称'
+	},
+	activityCatg: {
+		name: '活动分类'
 	}
 }
 module.exports = {
@@ -59,4 +62,5 @@ module.exports = {
 	storeBlock:      deepCopy(Map.store),
 	storeDetails2:   deepCopy(Map.store),
 	// swiperBind:      deepCopy(Map.store),
+	catgByActivity2: deepCopy(Map.activityCatg)
 }

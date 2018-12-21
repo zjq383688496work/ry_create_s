@@ -22,7 +22,7 @@ const data = {
 			height: 136,
 			borderWidth:  0,
 			borderStyle: 'solid',
-			borderColor: { type: 'auxiliary', color: '#fff' },
+			borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 			borderRadius:    {
 				topLeft:     0,
 				topRight:    0,

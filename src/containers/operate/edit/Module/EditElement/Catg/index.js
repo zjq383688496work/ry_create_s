@@ -30,6 +30,13 @@ class Catg extends React.Component {
 		let { data } = this.props
 		data.data.content.switch ? this.myCatgSwiper.destroy(false) : null
 	}
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	initSwiper = size => {
 		let that = this,
 			realIndex = this.state.realIndex;

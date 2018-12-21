@@ -9,12 +9,13 @@ import React from 'react'
 import './index.less'
 
 export default class Qrcode extends React.Component {
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	render() {
 		let { data } = this.props
 		let url = data.data.content.url

@@ -12,7 +12,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import Color       from 'compEdit/EditCommon/Color'
-import { Card, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
+import {Row, Col,  Card, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch,Slider } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
 const Option = Select.Option
@@ -21,8 +21,10 @@ const RadioGroup  = Radio.Group
 
 import RouterJump      from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
-
+import ImageAndVideoComp   from 'compEdit/EditCommon/ImageAndVideoComp'
+import DatePickerRY      from 'compEdit/EditContent/DatePickerRY'
 import SwiperImage       from 'compEdit/EditContent/SwiperImage'
+import SwiperImgAndVideo from 'compEdit/EditContent/SwiperImgAndVideo'
 import Navigation        from 'compEdit/EditContent/Navigation'
 import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
@@ -39,12 +41,13 @@ var conMap   = variable.contentMap,
 import './index.less'
 
 const compContent = (name, data, updateComp) => {
-	var props  = { data: { data }, updateComp }
+	var props  = { data, updateComp }
 	var render = {
 		navigation:        <Navigation        {...props} />,
 		navigationFloat:   <NavigationFloat   {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
 		swiperImage:       <SwiperImage       {...props} />,
+		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		catgByGoods:       <CatgByGoods       {...props} />,
 		swiperByGoods:     <SwiperByGoods     {...props} />
 	}
@@ -132,6 +135,11 @@ class EditContent extends React.Component {
 			/>
 		)
 	} 
+	//日期范围
+	renderDate(cfg, data, obj, val, key, index){
+		let defaultValue = val ? JSON.parse(val) : ''
+		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,key,obj,index)}></DatePickerRY>)
+	}    
 	// 跳转路由
 	renderRouter(cfg, data, obj, val, key, index) {
 		let { actions } = this.props
@@ -164,6 +172,19 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	//图片视频
+	renderImgAndVideo(cfg, data,obj, val, key, index) {
+		return (
+				<ImageAndVideoComp
+					data={data}
+					action={'updateComp'}
+					img={val}
+					con={obj}
+					style={{ width: '100%' }}
+					index={index}
+				/>
+			)
+	}
 	// 网址
 	renderUrl(cfg, data, obj, val, key, index) {
 		return (
@@ -186,6 +207,27 @@ class EditContent extends React.Component {
 				defaultValue={val} onChange={v => this.onChange(v.target.value, key, obj, index)}
 				style={{ width: '100%' }}
 			/>
+		)
+	}
+	// 滑块
+	renderSlider(cfg,data, obj, val, key, index) {
+		return (
+			<Row>
+				<Col span={12}>
+					<Slider
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={val} onChange={v => this.onChange(v, key, obj, index)}
+					/>
+				</Col> 
+				<Col span={3}></Col>
+				<Col span={9}>
+					<InputNumber
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={val} onChange={v => this.onChange(v, key, obj, index)}
+						style={{ width: '100%' }}
+					/>
+				</Col>
+			</Row>
 		)
 	}
 	// 颜色
@@ -285,20 +327,24 @@ class EditContent extends React.Component {
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
-			let cm     = conMap[p]
+			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p],
+				type = data.name == 'swiperImgAndVideo'&&p=="img" ? 'ImgAndVideo' : cm.type
 			let val    = content[p]
 			let auth   = data.auth.content[p]
-			let render = me[`render${cm.type}`]
+			let render = me[`render${type}`]
+			if(p == 'date' || p == 'delayOnly') {
+				auth = true // 商家轮播设置时间段显示
+			} 
 			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm, parent, content, val, p, index)()
+			let dom = this[`render${type}`].bind(this, cm,parent, content, val, p, index)()
 			ci++
 			return (
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 					{
-						data.name !='picture'&&cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
+						(data.name !='picture'&&cm.name=='图片') || (p == 'img'&&cm.name=='视频') ? <div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
 					}
 				</div>
 			)

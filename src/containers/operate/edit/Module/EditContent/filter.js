@@ -5,7 +5,7 @@
  */
  
 
-const filterContent = (data,con) => {
+export function filterContent(data,con) {
 	let content = data.data.content;
 	const t = data.data.type;
 	if( t == "storeInstroInstroduce"||t == "storeInstroTitle"||t == "instroPicture"||t == "instroTitle"){
@@ -22,4 +22,25 @@ const filterContent = (data,con) => {
 	return content
 } 
 
-export default filterContent
+//轮播设置的过滤--商家--大运营
+export function setSwiperImgAndVideo(editConfig){
+	let { pageContent } = editConfig
+	Object.keys(pageContent).map(_=>{
+		let page = pageContent[_],elements =  page.elements;
+		elements.map(val=>{
+			if(val.name === "swiperImgAndVideo"){
+				let contentList = deepCopy(val.data.content)
+				if(getAttr(contentList) != 'Array') return
+				contentList.forEach(e=>{
+					!e.delayOnly&&e.type=='image' ? e.delayOnly = 5 : null
+					!e.date ? e.date = '' : null
+				})
+				val.data.content = contentList
+			}
+			return val
+		})
+	})
+}
+
+
+

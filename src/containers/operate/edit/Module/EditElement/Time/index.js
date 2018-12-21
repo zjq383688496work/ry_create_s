@@ -8,7 +8,13 @@ import React from 'react'
 import './index.less'
 
 class Time extends React.Component {
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 
 	// 时间1 HH:MM:SS
 	renderStyle1(props, con, type, time) {

@@ -17,6 +17,7 @@ const picsS = [
 	'78d75e81-40af-4eda-814f-a03c266417dc',
 	'9d5a73db-8a29-48c6-8bc2-bc456bf7ad0c'
 ]
+const catgActivity = ['进行中','未开始','已过期']
 // 高级组件对应添加子组件
 var Item = {
 	goods: {
@@ -48,9 +49,10 @@ var Item = {
 		pictures: new Array(5).fill().map(_ => `${cdnSUrl}/${picsS[rn(4)]}.png`),
 		praiseAmount: rn(1e4),
 		name:      `优衣库/UNIQLO`,
-		qrcode:    'http://www.rongyi.com',
+		qrcode:    'http://rongyi.b0.upaiyun.com/commodity/text/201808271756227480.png',
 		berthNumber: 'L1=199',
 		contact:   '021-88888888',
+		featuredShop:true,
 		description: 'A|X Armani Exchange是全球主导时尚和高级消费品的Armani集团旗下品牌。 A|X Armani Exchange代表都会年青及时尚品味，不论剪裁、衣料、感觉和轮廓，都尽显Armani的时装智慧，展现都会的时尚。'
 	},
 	storeCatg: {
@@ -66,6 +68,10 @@ var Item = {
 	},
 	storePage: {
 		name: `1`
+	},
+	storeActivityCatg: {
+		id:   1,
+		name: `已开始`
 	}
 }
 module.exports = {
@@ -122,6 +128,14 @@ module.exports = {
 				}
 			})
 		},
+		storeActivityCatg() {
+			return Array.apply(null, { length: catgActivity.length }).map((_, i) => {
+				return {
+					id:   i + 1,
+					name: catgActivity[i]
+				}
+			})
+		}
 	},
 	item: {
 		listByGoods:     deepCopy(Item.goods),
@@ -139,5 +153,6 @@ module.exports = {
 		storeDetails2:   deepCopy(Item.store),
 		storeBlock:      deepCopy(Item.store),
 		// swiperBind:      deepCopy(Item.store),
+		catgByActivity2: deepCopy(Item.storeActivityCatg),
 	}
 }

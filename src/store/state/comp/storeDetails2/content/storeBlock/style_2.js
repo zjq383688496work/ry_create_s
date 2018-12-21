@@ -13,7 +13,7 @@ const Line = extendRmSL(deepCopy(a), {
 		},
 		style: {
 			filterBox: {
-				backgroundColor: { type: 'main', color: '#666' }
+				backgroundColor: { type: 'main', color: '#cfad81' }
 			}
 		}
 	}
@@ -69,7 +69,7 @@ module.exports = {
 		filterBox: {
 			borderWidth:  0,
 			borderStyle: 'solid',
-			borderColor: { type: 'main', color: '#fff' },
+			borderColor: { type: 'main', color: '#cfad81' },
 			backgroundColor: { type: 'custom', color: '#fff' },
 			borderRadius: {
 				topLeft:     6,

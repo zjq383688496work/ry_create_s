@@ -21,10 +21,13 @@ export default class GoodsDetails extends React.Component {
 	componentWillMount() {
 		this.getData()
 	}
-	componentDidMount() {}
-	componentWillUnmount() {}
-	componentWillReceiveProps() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	ioOuter(ipt) {
 		this.setState({ ioInput: ipt })
 		console.clear()

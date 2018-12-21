@@ -13,6 +13,13 @@ export default class ListByGoods extends React.Component {
 	componentWillMount() {
 		this.getData()
 	}
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	componentWillReceiveProps(props) {
 		var { size } = props.ioInput.body,
 			size2 = this.state.size

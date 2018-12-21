@@ -14,7 +14,7 @@ import './index.less'
 import Color       from 'compEdit/EditCommon/Color'
 import ImageUpload from 'compEdit/EditCommon/ImageUpload'
 import StyleManage from 'compEdit/EditCommon/StyleManage'
-import StyleFilter from './StyleFilter'
+import { imageAdaptation,bigStyle,lineHightAdaptation } from './StyleFilter'
 import {
 	Row, Col,
 	Checkbox, Collapse, InputNumber, Radio, Slider, Switch
@@ -37,10 +37,10 @@ class EditStyle extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, css, obj,cfg,node, attribute) { 
+	onChange(val, css, obj,cfg,node, attribute) {
 		let { data, actions, editConfig } = this.props
-		data = StyleFilter.lineHightAdaptation(data,val,css)
-		data = StyleFilter.imageAdaptation(data,attribute)
+		data = lineHightAdaptation(data,val,css)
+		data = imageAdaptation(data,attribute)
 		let da = data.data
 		let { curData } = editConfig
 		let { parentComp } = curData
@@ -70,10 +70,11 @@ class EditStyle extends React.Component {
 	/* 渲染组件开始 */
 	// 数字
 	renderNumber(cfg, data, obj, val, key, node) {
+		//let bigDa = bigStyle(deepCopy(da))
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, key, obj,cfg, node)}
+				value={val*2} onChange={v => {v=v/2;this.onChange(v, key, obj,cfg, node)}}
 				style={{ width: '100%' }}
 			/>
 		)

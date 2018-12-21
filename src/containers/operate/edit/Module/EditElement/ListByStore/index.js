@@ -12,8 +12,12 @@ import './index.less'
 
 
 class ListByStore extends React.Component {
-	state = {
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
 	}
 	render() {
 		let props = this.props

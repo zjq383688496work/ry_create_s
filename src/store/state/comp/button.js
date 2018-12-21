@@ -12,7 +12,7 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    100,
-		height:   40
+		height:   40 
 	},
 	style: {
 		text: {
@@ -23,10 +23,10 @@ const data = {
 			fontWeight:      'normal',
 			textDecoration:  'none',
 			transform:       { rotate: 0 },
-			opacity:         1,
+			opacity:         1, 
 			color:           { type: 'custom', color: '#000' },
 			background: 'center no-repeat',
-			backgroundSize: 'cover',
+			backgroundSize: 'contain',
 			backgroundColor: { type: 'custom', color: '#F58F8F' },
 			backgroundImage: { type: 'custom', img: '' },
 			borderRadius:    {
@@ -36,7 +36,7 @@ const data = {
 				bottomLeft:  0
 			},
 			borderWidth:     1,
-			borderStyle:     'solid',
+			borderStyle:     'solid',  
 			borderColor: 	 { type: 'custom', color: '#333' },
 			boxShadow:       {
 				h_shadow:    0,
@@ -55,8 +55,8 @@ const data = {
 	},
 	content: {
 		text:   '按钮',	// 文字内容
-		router: {}		// 路由
-	},
+		router: {} 			// 路由
+	},	
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向

@@ -50,10 +50,10 @@ const data = {
 			borderWidth: 2,
 			borderStyle: 'solid',
 			backgroundImage: { type: 'custom', img: '' },
-			borderColor: { type: 'auxiliary', color: '#a240ec' },
+			borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
-			backgroundColor: { type: 'main', color: '#a240ec' }
+			backgroundColor: { type: 'main', color: '#cfad81' }
 		}
 	},
 	content: {

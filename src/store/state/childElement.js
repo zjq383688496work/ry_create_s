@@ -83,4 +83,12 @@ module.exports = {
 		picture: 1,
 		text:    1
 	},
+	catgByActivity2: {
+		picture:  1,
+		textBind: 1
+	},
+	resetByActivity2: {
+		picture:  1,
+		text:     1
+	},
 }

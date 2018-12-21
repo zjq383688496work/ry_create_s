@@ -32,27 +32,27 @@ class BusinessComponent extends React.Component {
 	}
 	getFloor() {
 		return (resolve, reject) => {
-			// let { mallMid } = window.uif.userInfo
-			// Ajax.get(`/mcp-gateway/mall/getFloorList?mallId=${mallMid}`).then(res => {
-			// 	storeData.floorList = res.data.list
-			// 	return resolve('楼层数据')
-			// }, err => {
+			 let { mallMid } = window.uif.userInfo
+			 Ajax.get(`/mcp-gateway/mall/getFloorList?mallId=${mallMid}`).then(res => {
+			 	storeData.floorList = res.data.list
+			 	return resolve('楼层数据')
+			 }, err => {
 				storeData.floorList = []
 				return resolve('楼层数据')
-			// })
+			 })
 		}
 	}
 	getCatg() {
 		return (resolve, reject) => {
-			// let { mallMid } = window.uif.userInfo
-			// Ajax.get(`/mcp-gateway/mall/getShopCustomCategoryList?mallId=${mallMid}`).then(res => {
-			// 	storeData.catgList = res.data.list
-			// 	return resolve('业态数据')
-			// }, err => {
+			 let { mallMid } = window.uif.userInfo
+			 Ajax.get(`/mcp-gateway/mall/getShopCustomCategoryList?mallId=${mallMid}`).then(res => {
+			 	storeData.catgList = res.data.list
+			 	return resolve('业态数据')
+			 }, err => {
 				storeData.catgList = []
 				return resolve('业态数据')
-			// })
-		}
+			 })
+		} 
 	}
 	getWeather() {
 		return (resolve) => {
@@ -72,7 +72,7 @@ class BusinessComponent extends React.Component {
 	getConfig() {
 		let { location, actions } = this.props
 		let { query } = location
-		let { name, templateId, templateThemeId, caseType, composeType } = query
+		let { /*name,*/ templateId, /*templateThemeId, */caseType, composeType } = query
 		let tid  = templateId,
 			cid  = query.id,
 			type = cid? 'case': 'template',
@@ -82,8 +82,7 @@ class BusinessComponent extends React.Component {
 			return resolve('模板数据')
 		}
 		let api = `/mcp-gateway/${type}/get?${type}Id=${id}`
-		// if (type === 'template') api += '&phase=RELEASE'
-		if (type === 'template') api += '&phase=DEV'
+		if (type === 'template') api += '&phase=RELEASE'
 
 		return (resolve, reject) => {
 			Ajax.get(api).then(res => {
@@ -91,7 +90,7 @@ class BusinessComponent extends React.Component {
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
 
-				dataFormat.get.pageEach(cfg.pageContent)
+				//dataFormat.get.pageEach(cfg.pageContent)
 				// debugger
 				let newCfg = {
 					curComp: {},
@@ -102,16 +101,16 @@ class BusinessComponent extends React.Component {
 				if (type === 'template') {
 					delete tempCfg.id
 					tempCfg.caseType        = caseType        || ''
-					tempCfg.templateThemeId = templateThemeId || ''
+					//tempCfg.templateThemeId = templateThemeId || ''
 					tempCfg.templateId      = templateId      || ''
 					tempCfg.composeType     = composeType     || ''
-					tempCfg.name            = name            || ''
+					//tempCfg.name            = name            || ''
 				}
-				if (type === 'template') {
+				/*if (type === 'template') {
 					let theme = cfg.globalData.theme
 					if (theme.list[templateThemeId]) theme.idx = templateThemeId * 1
 					else theme.idx = 0
-				}
+				}*/
 				actions.updateConfig({ ...newCfg, ...cfg })
 				resolve('模板数据')
 			}).catch(e => reject(e))
@@ -166,7 +165,7 @@ class BusinessComponent extends React.Component {
 		}
 	}
 	componentWillMount() {
-		// this.getUserInfo(() => {
+		this.getUserInfo(() => {
 			let { editConfig } = this.props
 			let { globalData } = editConfig
 			let arr = ['getConfig', 'getWeather', 'getFloor', 'getCatg']
@@ -176,10 +175,10 @@ class BusinessComponent extends React.Component {
 			})//.catch(e => {
 			// 	console.log(e)
 			// })
-		// })
-		// window.onbeforeunload = (e) => {
-		// 	e.returnValue = '确定离开当前页面吗, 离开的话会丢失未保存的数据哦?'
-		// }
+		})
+		window.onbeforeunload = (e) => {
+			e.returnValue = '确定离开当前页面吗, 离开的话会丢失未保存的数据哦?'
+		}
 	}
 
 	componentDidMount() {

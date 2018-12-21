@@ -35,7 +35,13 @@ const wMap2 = [
 
 class Weather extends React.Component {
 
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	// 温度
 	renderStyle1(props, con, type) {
 		return (

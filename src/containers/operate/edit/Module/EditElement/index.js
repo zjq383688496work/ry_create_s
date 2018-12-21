@@ -17,7 +17,9 @@ import Text              from 'compEdit/EditElement/Text'
 import Button            from 'compEdit/EditElement/Button'
 import Video             from 'compEdit/EditElement/Video'
 import SwiperImage       from 'compEdit/EditElement/SwiperImage'
+import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
+import WonderfulActivity2 from 'compEdit/EditElement/WonderfulActivity2'
 import Time              from 'compEdit/EditElement/Time'
 import Weather           from 'compEdit/EditElement/Weather'
 import StoreList         from 'compEdit/EditElement/StoreList'
@@ -35,15 +37,14 @@ import Html              from 'compEdit/EditElement/Html'
 import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
 import Area              from 'compEdit/EditElement/Area'
 import Qrcode            from 'compEdit/EditElement/Qrcode'
-// import Tabs              from 'compEdit/EditElement/Tabs'
 
 import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
 import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
 import PostMessage       from 'compEdit/EditCommon/PostMessage'
 import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
-
+import { InductionLine,nearPosSty }     from 'compEdit/EditElement/InductionLine'
+ 
 import * as actions from 'actions'
-
 import { Icon, message } from 'antd'
 
 import * as variable from 'var'
@@ -52,8 +53,8 @@ const ctMap  = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, actions, type, idx, csn, keyCtrl) => {
-	var props  = { data, actions, type, idx, csn, keyCtrl }
+const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl,contentEditable,shift) => {
+	var props  = { data, actions, type, idx,drag, csn, keyCtrl,contentEditable,shift }
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -61,7 +62,9 @@ const compContent = (name, data, actions, type, idx, csn, keyCtrl) => {
 		text:              <Text              {...props} />,
 		button:            <Button            {...props} />,
 		swiperImage:       <SwiperImage       {...props} />,
+		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
+		wonderfulActivity2: <WonderfulActivity2 {...props} />,
 		time:              <Time              {...props} />,
 		weather:           <Weather           {...props} />,
 		navigation:        <Navigation        {...props} />,
@@ -89,15 +92,14 @@ import './index.less'
 class EditElement extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { keyCtrl: false }
+		this.state = { keyCtrl: false,shift:false,v:false,h:false,vPosition:{left:0},hPosition:{top:0},nearPos:false,dragAxis:'both',drag:true }
 	}
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	componentDidMount() {
+	}
 	componentWillReceiveProps() {
+		this.state.drag ?  this.stateLayout() : null
+	}
+	stateLayout = () => {
 		let { data, editConfig } = this.props
 		let { compIdx } = editConfig.curData
 		let state = {}
@@ -105,18 +107,25 @@ class EditElement extends React.Component {
 		if (compIdx < 0 || !eles[compIdx]) return
 		state[compIdx] = eles[compIdx].data.layout
 		this.setState(state)
-		console.log('更新Props')
 	}
-
 	keyDown = (k, e) => {
-		if (k === 'meta' || k === 'control') this.setState({ keyCtrl: true })
+		if (k === 'meta' || k === 'control') {
+			this.setState({ keyCtrl: true })
+		}else if(k === 'shift'){
+			this.setState({ shift: true })
+		}
 	}
 	keyUp = (k, e) => {
-		if (k === 'meta' || k === 'control') this.setState({ keyCtrl: false })
+		if (k === 'meta' || k === 'control') {
+			this.setState({ keyCtrl: false })
+		}else if(k === 'shift'){
+			this.setState({ shift: false })
+		}
 	}
 	
 	selectComp(e, data, idx) {
 		e.stopPropagation()
+		this.setState({v:false,h:false,nearPos:false}) 
 		let { keyCtrl } = this.state
 		let { actions, editConfig } = this.props
 		let { curData, globalData } = editConfig
@@ -127,6 +136,9 @@ class EditElement extends React.Component {
 		this.state[idx] = deepCopy(data.data.layout)
 		curData.compIdx    = idx
 		curData.parentComp = null
+		if(data.name == 'text' || data.name == 'web'){
+			data.feature.editStatus = false
+		} 
 		actions.updateCur(curData)	// 更新 当前数据
 		actions.selectComp(data)
 	}
@@ -155,9 +167,8 @@ class EditElement extends React.Component {
 		multiComp.type = 'parent'
 		delete multiComp.parentIdx
 		actions.updateGlobal(globalData)
-		console.log(JSON.stringify(multiComp.list))
 	}
-
+	//scale停止
 	resizeFn(e, ref, delta, pos, item, idx) {
 		e.stopPropagation()
 		let { actions } = this.props
@@ -166,9 +177,10 @@ class EditElement extends React.Component {
 		lay.top    = +pos.y
 		lay.width  = +ref.offsetWidth
 		lay.height = +ref.offsetHeight
+		this.setState({v:false,h:false,nearPos:false}) 
 		actions.updateComp(idx, item)
-	}
-
+	} 
+	//scale
 	dragResize(e, ref, delta, pos, item, idx) {
 		var o = {}
 		o[idx] = {
@@ -177,21 +189,75 @@ class EditElement extends React.Component {
 			width:  +ref.offsetWidth,
 			height: +ref.offsetHeight
 		}
+		this.showLine(pos,item,idx,{width:ref.offsetWidth,height:ref.offsetHeight})
 		this.setState(o)
+	} 
+	//拖拽
+	dragMove(e,param,_,i) {
+		e.stopPropagation()
+		let stateLay = {},lay = deepCopy(_.data.layout)
+		if(this.state.shift){
+			if(Math.abs(lay.top-param.y) > Math.abs(lay.left-param.x)){
+				let layout = deepCopy(_.data.layout),
+					pos = {x:param.x,y:param.y}
+				pos.x = layout.left
+				this.setState({...stateLay,dragAxis:'y',drag:false},()=>{ this.showLine(pos,_,i) })
+			}else{
+				let layout = deepCopy(_.data.layout),
+					pos = {x:param.x,y:param.y}
+				pos.y = layout.top
+				this.setState({...stateLay,dragAxis:'x',drag:false},()=>{ this.showLine(pos,_,i) })
+			}
+		}else{
+			this.setState({dragAxis:'both',drag:false},()=>{ this.showLine(param,_,i) })
+		} 
 	}
-	
+	//拖拽停止
 	dragStop(e, d, item, idx) {
 		e.stopPropagation()
 		// e.preventDefault()
 		let { actions } = this.props
-		let s   = this.state[idx]
 		let lay = item.data.layout
 		if (lay.left === d.x && lay.top  === d.y) return
-		s.left = lay.left = +d.x
-		s.top  = lay.top  = +d.y
+		lay.left = this.state.vPosition.p_left
+		lay.top  = this.state.hPosition.p_top
+		this.setState({v:false,h:false,nearPos:false,drag:true})   
+		actions.updateComp(idx, item)
+	} 
+	//显示提示线
+	showLine = (param,_,i,obj) => {
+		let { data, actions } = this.props,
+			eles   = data.elements || [],
+			bodySty = {width:540,height:960,left:0,top:0},
+			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
+			InductionLineObj = InductionLine(param,eles,layout,i,bodySty,eleKnock),
+			v= InductionLineObj.v,h=InductionLineObj.h,eleKnock = InductionLineObj.eleKnock
+		if(v){ 
+			this.setState({v:true,vPosition:{left:`${v.left}px`,p_left:v.p_left}})
+		}else{
+			this.setState({v:false,vPosition:{p_left:param.x}})
+		} 
+		if(h){
+			this.setState({h:true,hPosition:{top:`${h.top}px`,p_top:h.p_top}})
+		}else{ 
+			this.setState({h:false,hPosition:{p_top:param.y}})
+		}
+		if(eleKnock){
+			this.setState({nearPos:nearPosSty(eleKnock)})
+		}else{
+			this.setState({nearPos:false})
+		}   
+	}    
+	changeEditable = (item, idx) => {
+		let { actions } = this.props
+		if(item.name == 'web'){
+			let RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
+			if(RP.test(item.data.content.url)) return false
+		} 
+		this.setState({drag:true})  
+		item['feature'].editStatus != undefined ? item['feature'].editStatus = true : null
 		actions.updateComp(idx, item)
 	}
-
 	removeComp(e, idx) {
 		e.stopPropagation()
 		let { actions } = this.props
@@ -212,7 +278,8 @@ class EditElement extends React.Component {
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
 			color  = data.feature.backgroundColor,
-			type   = color.type
+			type   = color.type,
+			disableDragging = false
 		ct = ctMap[ct]? ct: 'PORTRAIT'
 		if (!colors[type] && type !== 'custom') {
 			color.type = 'custom'
@@ -227,11 +294,12 @@ class EditElement extends React.Component {
 				ani       = _.data.animation,
 				aniCls    = '',
 				aniSty    = {},
-				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, state.keyCtrl)
-
-			if (!compCon) return false
-
-			if (ani.className) {
+				lockAspectRatio = layout.lockAspectRatio,
+				editStatus = _.feature&&_.feature.editStatus;
+			i === compIdx ? disableDragging = editStatus : null
+			let compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i,state.drag, csn, state.keyCtrl,disableDragging,state.shift)
+			if (!compCon) return false 
+			if (ani.className) {  
 				let item = aStyle[ani.className]
 				let { direction, delay, iterationCount } = ani
 				if (!direction || !item.list) ani.direction = item.list? item.list[0] || '': ''
@@ -242,14 +310,12 @@ class EditElement extends React.Component {
 					animationIterationCount: iterationCount
 				}
 			}
-
 			let sl  = state[i]
 			let lay = i === compIdx? sl? sl: layout: layout
-			
 			return (
 				<Rnd
 					key={i}
-					className={`${i in index? 's-select': ''} ${i === compIdx? 's-active': ''}`}
+					className={`${i in index? 's-select': ''} ${i === compIdx? 's-active': ''} `}
 					size={{
 						width:  lay.width || '100%',
 						height: lay.height
@@ -258,7 +324,11 @@ class EditElement extends React.Component {
 						x: lay.left,
 						y: lay.top
 					}}
+					dragAxis={state.dragAxis}
+					disableDragging={disableDragging} 
+					lockAspectRatio={lockAspectRatio}
 					onDragStart={e => this.selectComp(e, _, i)}
+					onDrag={(e,param) => this.dragMove(e,param,_,i)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i)}
 					onResizeStart={e => this.selectComp(e, _, i)}
 					onResize={(e, dir, ref, delta, pos) => this.dragResize(e, ref, delta, pos, _, i)}
@@ -269,10 +339,10 @@ class EditElement extends React.Component {
 						style={aniSty}
 						onClick={e => {this.selectComp(e, _, i);this.selectMulti(e, i)}}
 						onContextMenu={e => this.selectComp(e, _, i)}
+						onDoubleClick={()=>this.changeEditable(_,i)}
 					>{ compCon }</div>
 				</Rnd>
 			)
-						// onClick={e => e.preventDefault();this.selectComp(e, _, i)}
 		})
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
@@ -285,11 +355,21 @@ class EditElement extends React.Component {
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }
 						</div>
+						{state.h ? <div className="inductionLine-h" style={state.hPosition}></div> : null}
+						{state.v ? <div className="inductionLine-v" style={state.vPosition}></div> : null}
+						{
+							state.nearPos ? <div>
+								<div className="lineNear_0" style={state.nearPos[0]}></div>
+								<div className="lineNear_1" style={state.nearPos[1]}></div>
+								<div className="lineNear_2" style={state.nearPos[2]}></div>
+								<div className="lineNear_3" style={state.nearPos[3]}></div>
+							</div> : null
+						} 
 						<div id="pgElementNext" className="pg-element-next"></div>
 					</section>
 				</div>
 				<ContextMenu />
-				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} />
+				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} disableDragging={disableDragging} />
 				<PostMessage />
 				<RevokeRecovery />
 			</div>
@@ -310,3 +390,5 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(EditElement)
+
+

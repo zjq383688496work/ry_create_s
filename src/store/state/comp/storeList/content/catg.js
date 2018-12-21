@@ -5,8 +5,8 @@ const data = {
 		position: 'absolute',
 		top:  36,
 		left: 104,
-		width:  400,
-		height: 24
+		width: 400,
+		height:   24
 	},
 	style: {
 		filterBox: {
@@ -58,10 +58,10 @@ const data = {
 			borderWidth: 2,
 			borderStyle: 'solid',
 			backgroundImage: { type: 'custom', img: '' },
-			borderColor: { type: 'auxiliary', color: '#a240ec' },
+			borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 			color: { type: 'textHigh', color: '#fff' },
 			background: 'center no-repeat',
-			backgroundColor: { type: 'main', color: '#a240ec' }
+			backgroundColor: { type: 'main', color: '#cfad81' }
 		},
 		filterPage: { 
 			width:  24,
@@ -73,7 +73,7 @@ const data = {
 			color: { type: 'custom', color: '#666' },
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
-			backgroundColor: { type: 'main', color: '#fff' },
+			backgroundColor: { type: 'main', color: '#cfad81' },
 			borderRadius:    {
 				topLeft:     10,
 				topRight:    10,

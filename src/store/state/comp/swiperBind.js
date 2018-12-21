@@ -21,7 +21,7 @@ const data = {
 				bottomLeft:  10,
 				bottomRight: 10
 			},
-			backgroundColor: { type: 'high', color: '#fff' }
+			backgroundColor: { type: 'high', color: '#f6efe5' }
 		},
 		pagination: {
 			width:  6,
@@ -35,7 +35,7 @@ const data = {
 				bottomLeft:  10,
 				bottomRight: 10
 			},
-			backgroundColor: { type: 'high', color: '#fff' },
+			backgroundColor: { type: 'high', color: '#f6efe5' },
 			margin: {
 				top:     10,
 				right:   5
@@ -52,7 +52,7 @@ const data = {
 			borderWidth: 0,
 			borderStyle: 'solid',
 			borderColor: { type: 'custom', color: '#a240ec' },
-			backgroundColor: { type: 'main', color: '#a240ec' }
+			backgroundColor: { type: 'custom', color: '#cfad81' }
 		}
 	},
 	layout: {

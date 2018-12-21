@@ -11,18 +11,22 @@ class FloorMap extends React.Component {
 	/**
 	 * 组件挂载完成
 	*/
-	componentDidMount(){
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
 	}
 
 	render() {
 		return (
 			<div className="e-map2d">
 				<div id="e_map2D" className="e_map2D">
-					<img src="http://rongyi.b0.upaiyun.com/system/mcp/V4/app/upload/e7c482d5-de5c-40de-b16c-f95a3b264a41.png" />
+					<img src="http://rongyi.b0.upaiyun.com/commodity/text/201811081800362935.png" />
 				</div>
 			</div>
-		)
+		) 
 	}
 }
 

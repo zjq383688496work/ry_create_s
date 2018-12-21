@@ -8,10 +8,13 @@ export default class ResetByGoods extends React.Component {
 		super(props)
 	}
 
-	componentWillReceiveProps(props) {}
-	componentDidMount() {}
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	renderDom = e => {
 		let { data, ioInput } = this.props,
 			{ catg } = ioInput.body,

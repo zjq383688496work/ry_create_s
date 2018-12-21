@@ -29,6 +29,13 @@ class WonderfulActivity extends React.Component {
 	to(e) {
 		e.preventDefault()
 	}
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	init(props) {
 		let swiperOptions = props.data.feature.swiperOptions
 		swiperOptions = this.formatObj(swiperOptions)

@@ -69,7 +69,7 @@ class ThemeColor extends React.Component {
 				</Option>
 			)
 		})
-		if (type === 'custom') {
+		//if (type === 'custom') {
 			cp = (
 				<Col span={6}>
 					<ColorPicker
@@ -80,7 +80,7 @@ class ThemeColor extends React.Component {
 					/>
 				</Col>
 			)
-		}
+		//}
 		return (
 			<div className="e-map2D-content">
 				<Collapse activeKey={['0']} onChange={this.cb}>
@@ -90,7 +90,7 @@ class ThemeColor extends React.Component {
 							<div className="pgsr-ctrl">
 								<Row>
 									{ cp }
-									<Col span={18}>
+									{/*<Col span={18}>
 										<Select
 											style={{ width: '100%' }}
 											value={type}
@@ -99,7 +99,7 @@ class ThemeColor extends React.Component {
 										>
 											{ options }
 										</Select>
-									</Col>
+									</Col>*/}
 								</Row>
 							</div>
 						</div> 

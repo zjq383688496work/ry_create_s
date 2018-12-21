@@ -16,7 +16,7 @@ const { Option } = Select
 
 import PictureList from '../PictureList'
 import VideoList from '../VideoList' 
-import StyleFilter from '../../EditStyle/StyleFilter'
+import { imageAdaptation } from '../../EditStyle/StyleFilter'
  
 import './index.less'
 
@@ -45,14 +45,14 @@ class ImageUploadComp extends React.Component {
 	enter(imgList, attribute, index) {
 		if (!imgList.length) return
 		let { data, img, name, action, actions, editConfig } = this.props
-		if (envType === 'operate') data = StyleFilter.imageAdaptation(data, attribute)
+		if (envType === 'operate') data = imageAdaptation(data, attribute)
 		let da = data.data
 		let { content }    = da
 		let { curData }    = editConfig
 		let { parentComp } = curData
 		const length = content.length
 		img[name] = imgList[0].url
-		name == "video" ? img.preview = imgList[0].preview : null
+		name == "video" ? (img.preview = imgList[0].preview,img.originalSizePreview = imgList[0].originalSizePreview) : null
 		actions[action](null, parentComp? parentComp: data)
 	}
 
@@ -88,7 +88,7 @@ class ImageUploadComp extends React.Component {
 		if (name === 'video') {
 			if (videoVal) {
 				btnNode = (
-					<div className="add_img add_video">
+					<div className="add_img add_video" style={{ backgroundImage: `url('${img.preview}')` }}>
 						<div className="shadow">
 							<div className="add_text_change" onClick={this.showList.bind(this)}><Icon type="reload" /></div>
 							<div className="add_text_remove" onClick={this.removeImg.bind(this)}><Icon type="close" /></div>
@@ -114,7 +114,7 @@ class ImageUploadComp extends React.Component {
 						props={this.props}
 						data={this.props}
 						actions={actions}
-						index={0}
+						index={index}
 						type={data.name}
 						enter={this.enter}
 					/>
@@ -168,14 +168,13 @@ class ImageUploadComp extends React.Component {
 						{ btnNode }
 						{ scaleNode }
 					</Col>
-					{ selectNode }
+					{ /*selectNode*/ }
 				</Row>
 				<PictureList
 					ref={com => { this.addImgModal = com }}
 					props={this.props}
 					data={this.props}
 					actions={actions}
-					index={0}
 					enter={this.enter}
 					index={index}
 				/>

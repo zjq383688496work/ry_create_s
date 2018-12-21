@@ -32,6 +32,13 @@ class NavigationFloat extends React.Component {
 			setTimeout(()=>{this.initSwiper(size)},10)
 		}
 	}
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	componentWillUnmount() {
 		let { data } = this.props
 		if(data.layout.type == 1){

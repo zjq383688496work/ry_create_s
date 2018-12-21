@@ -9,17 +9,18 @@ import React from 'react'
 import './index.less'
 
 export default class Area extends React.Component {
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	render() {
 		let { show = true } = this.props
 		return show
 		?
-		<div className="e-picture" style={cssColorFormat(this.props, 'filterBox')}></div>
+		<div className="e-area" style={cssColorFormat(this.props, 'filterBox')}></div>
 		: null
 	}
 }

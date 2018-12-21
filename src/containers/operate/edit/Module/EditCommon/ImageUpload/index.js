@@ -119,7 +119,7 @@ class ImageUpload extends React.Component {
 			<div>
 				<Row type="flex" align="middle" style={{ width: '100%' }}>
 					{ btnNode }
-					{ selectNode }
+					{ /*selectNode*/ }
 					{ scaleNode }
 				</Row>
 				<PictureList

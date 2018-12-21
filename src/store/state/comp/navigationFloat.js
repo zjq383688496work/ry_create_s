@@ -14,7 +14,7 @@ const data = {
 			height: 35,
 			borderWidth:  0,
 			borderStyle: 'solid',
-			borderColor: { type: 'auxiliary', color: '#fff' },
+			borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 			borderRadius:    {
 				topLeft:     0,
 				topRight:    0,
@@ -44,7 +44,7 @@ const data = {
 		filterActive: {
 			borderWidth:  0,
 			borderStyle: 'solid',
-			borderColor: { type: 'auxiliary', color: '#fff' },
+			borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 			boxShadow: {
 				h_shadow:   0,
 				v_shadow:   0,
@@ -79,7 +79,7 @@ const data = {
 			color: { type: 'custom', color: '#666' },
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
-			backgroundColor: { type: 'main', color: '#fff' },
+			backgroundColor: { type: 'custom', color: '#cfad81' },
 			borderRadius:    {
 				topLeft:     15,
 				topRight:    15,

@@ -14,10 +14,10 @@ import './index.less'
 class SwiperImage extends React.Component {
 	
 	componentWillReceiveProps(props) {
-		this.init(props);
+		this.getData(props);
 	}
 	componentDidMount() {
-		this.init(this.props)
+		this.getData(this.props)
 	} 
 	state = {
 		random: Date.now() + parseInt(Math.random()*1000),
@@ -31,11 +31,12 @@ class SwiperImage extends React.Component {
 		swiperOptions = this.formatObj(swiperOptions);
 		const type = props.data.feature.layout;
 		this.mySwiperImage && this.mySwiperImage.destroy(false);
+		clearTimeout(this.timer)
 		this.initSwiper(swiperOptions);  
 	};      
 	 initSwiper = (swiperOptions) => {
-	 	this.mySwiperImage = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions) 
-	}; 
+	 	this.timer = setTimeout(()=>{ this.mySwiperImage = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions)  },10) 
+	};  
 	formatObj = (obj) => {
 		let new_obj = {};
 		for(var key in obj){ 
@@ -62,8 +63,29 @@ class SwiperImage extends React.Component {
 		return new_obj  
 	};  
 	componentWillUnmount() {
-		this.mySwiperImage.destroy(false)
-	}
+		clearTimeout(this.timer)
+		this.mySwiperImage && this.mySwiperImage.destroy(false)
+	} 
+	getData = props => { 
+		let { data } = props,
+			{ feature} = data, 
+			swiperOptions = JSON.stringify(feature.swiperOptions),
+			content = JSON.stringify(data.data.content)
+		this.setState({content:content,swiperOptions:swiperOptions})
+	}  
+	shouldComponentUpdate(newProps, newState){
+		let { data } = newProps,
+			{ feature} = data, 
+			swiperOptions = JSON.stringify(feature.swiperOptions),
+			content = JSON.stringify(data.data.content)
+		if(this.state.content != content || this.state.swiperOptions != swiperOptions){
+			this.init(newProps)
+			return true
+		}else if(this.state.realIndex != newState.realIndex){
+			return true
+		}
+		return false
+	}    
 	render() {
 		let { data } = this.props
 		data = data.data
@@ -72,7 +94,7 @@ class SwiperImage extends React.Component {
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
 					<div className="swiper-wrapper">
 						{
-							data.content.map((item,index) => <div className="swiper-slide" key={index}><div className="text_show" style={cssColorFormat(this.props, 'text')}>{item.title}</div><img src={compImgFormat(this.props, item.img)} style={cssColorFormat(this.props, 'swiperImage')} /></div>)
+							data.content.map((item,index) => <div className="swiper-slide" key={index}><img src={compImgFormat(this.props, item.img)} style={cssColorFormat(this.props, 'swiperImage')} /></div>)
 						}
 					</div>
 				</div>

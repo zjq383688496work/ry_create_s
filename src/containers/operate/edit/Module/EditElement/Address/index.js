@@ -9,13 +9,14 @@ import React from 'react'
 import './index.less'
 
 class Address extends React.Component {
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
-	render() {
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
+	render() { 
 		let { data } = this.props
 		// console.log(1, this.props)
 		return (

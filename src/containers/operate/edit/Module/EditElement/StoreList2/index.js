@@ -28,8 +28,13 @@ export default class StoreList2 extends React.Component {
 	componentWillMount() {
 		this.getData()
 	}
-	componentDidMount() {}
-	componentWillUnmount() {}
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	componentWillReceiveProps() {
 		this.getData()
 	}

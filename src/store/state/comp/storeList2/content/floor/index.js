@@ -20,7 +20,7 @@ const gName = extendRmSL(deepCopy(tb), {
 					bottomLeft:  20
 				},
 				borderWidth:     1,
-				borderColor: 	 { type: 'main', color: '#fff' },
+				borderColor: 	 { type: 'custom', color: '#cfad81' },
 				color:           { type: 'custom', color: '#666' }
 			}
 		},
@@ -40,7 +40,7 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 		style: {
 			text: {
 				lineHeight:      24,
-				backgroundColor: { type: 'main', color: '#a240ec' },
+				backgroundColor: { type: 'custom', color: '#cfad81' },
 				borderRadius:    {
 					topLeft:     20,
 					topRight:    20,
@@ -48,7 +48,7 @@ const gNameAV = extendRmSL(deepCopy(tb), {
 					bottomLeft:  20
 				},
 				borderWidth:     0,
-				borderColor: 	 { type: 'main', color: '#fff' },
+				borderColor: 	 { type: 'custom', color: '#cfad81' },
 				color: { type: 'custom', color: '#fff' },
 			}
 		},
@@ -76,7 +76,7 @@ const data = {
 		filterBox: {
 			borderWidth:  0,
 			borderStyle: 'solid',
-			borderColor: { type: 'main', color: '#fff' },
+			borderColor: { type: 'custom', color: '#cfad81' },
 			backgroundColor: { type: 'custom', color: 'rgba(255, 255, 255, 0)', rgb: '#fff', alpha: 0 },
 			padding: {
 				top:    0,
@@ -106,7 +106,7 @@ const data = {
 	componentLayout: [ gName, gNameAV ],
 	content: {
 		rel: 0,
-		router: {}
+		/*router: {}*/
 	},
 	animation: {
 		className: '',		// 动画样式

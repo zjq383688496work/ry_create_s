@@ -12,7 +12,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import Color       from 'compEdit/EditCommon/Color'
-import { Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch } from 'antd'
+import { Row, Col, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch,Slider } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
 const RadioButton   = Radio.Button
@@ -21,21 +21,22 @@ const Option = Select.Option
 
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
+import ImageAndVideoComp   from 'compEdit/EditCommon/ImageAndVideoComp'
 import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
 import CompLayout        from 'compEdit/EditCommon/CompLayout'
 import ChildElement      from './ChildElement'
-
 import SwiperImage       from './SwiperImage'
+import SwiperImgAndVideo from './SwiperImgAndVideo'
 import Navigation        from './Navigation'
 import NavigationFloat   from './NavigationFloat'
 import Weather           from './Weather'
 import WonderfulActivity from './WonderfulActivity'
+import ListByActivity2 from './ListByActivity2'
 import ListByStore       from './ListByStore'
 import ThemeColor        from './ThemeColor'
-import filterContent     from './filter'
 import CatgByGoods       from './CatgByGoods'
 import SwiperByGoods     from './SwiperByGoods'
-
+import { filterContent }     from './filter'
 import * as variable from 'var'
 
 var conMap   = variable.contentMap
@@ -58,7 +59,9 @@ const compContent = (name, data, updateComp) => {
 		navigationFloat:   <NavigationFloat   {...props} />,
 		weather:           <Weather           {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
+		listByActivity2:   <ListByActivity2   {...props} />,
 		swiperImage:       <SwiperImage       {...props} />,
+		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		listByStore:       <ListByStore       {...props} />,
 		map2D:             <ThemeColor        {...props} />,
 		floorMap:          <ThemeColor        {...props} />,
@@ -182,8 +185,23 @@ class EditContent extends React.Component {
 				name={`video`}
 				action={'updateComp'}
 				style={{ width: '100%' }}
+				index={index}
 			/>
 		)
+	}
+	//图片视频
+	renderImgAndVideo(cfg, con, val, key, index) { 
+		let { data } = this.props
+		return (
+				<ImageAndVideoComp
+					data={data}
+					action={'updateComp'}
+					img={val}
+					con={con}
+					style={{ width: '100%' }}
+					index={index}
+				/>
+			)
 	}
 	// 上传组件
 	renderFile(cfg, con, val, key, index) {
@@ -200,7 +218,7 @@ class EditContent extends React.Component {
 		return (
 			<div>
 				<TextArea
-					minLength={cfg.min || 0} maxLength={cfg.max || 100}
+					minLength={cfg.min || 0} maxLength={cfg.max || 10000}
 					autosize={cfg.autosize || false}
 					defaultValue={val} onBlur={v => this.onChange(v.target.value, con, key,cfg, index)}
 					style={{ width: '100%' }}
@@ -238,7 +256,33 @@ class EditContent extends React.Component {
 				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, con, key, cfg, index)}
 			/>
 		)
-	}
+	} 
+	//日期范围
+	/*renderDate(cfg, con, val, key, index){
+		let defaultValue = val ? JSON.parse(val) : ''
+		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,con,key,cfg,index)}></DatePickerRY>)
+	} */
+	// 滑块
+	/*renderSlider(cfg, con, val, key, index) {
+		return (
+			<Row>
+				<Col span={12}>
+					<Slider
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={val} onChange={v => this.onChange(v, con, key, cfg, index)}
+					/>
+				</Col>
+				<Col span={3}></Col>
+				<Col span={9}>
+					<InputNumber
+						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+						value={val} onChange={v => this.onChange(v, con, key, cfg, index)}
+						style={{ width: '100%' }}
+					/>
+				</Col>
+			</Row>
+		)
+	}*/
 	renderSwitch(cfg, con, val, key, index) {
 		return (
 			<Switch
@@ -323,13 +367,14 @@ class EditContent extends React.Component {
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p] || contentFieldFilter[envType][p]) return false
-			let cm     = conMap[p]
-			let val    = content[p]
-			let render = this[`render${cm.type}`]
-			if (!render) return false
-			// 根据样式类型渲染对应组件
-			let dom = this[`render${cm.type}`].bind(this, cm, content, val, p, index)()
-			ci++
+			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p],
+				type = data.name == 'swiperImgAndVideo'&&p=="img" ? 'ImgAndVideo' : cm.type
+			let val    = content[p]      
+			let render = this[`render${type}`] 
+			if (!render) return false 
+			// 根据样式类型渲染对应组件 
+			let dom = this[`render${type}`].bind(this, cm, content, val, p, index)()
+			ci++ 
 			return (
 				<div className="pgs-row" key={i} style={{display:`${content.isShowDom&&(p=='size'||p=='pageSwitch') ? content.isShowDom :'flex'}`}}>
 					<div className="pgsr-name">{ cm.name }</div>
@@ -338,7 +383,7 @@ class EditContent extends React.Component {
 						<Checkbox checked={data.auth.content[p] || false} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
 					</div>
 					{  
-						data.name !='picture'&&cm.name=='图片'?<div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
+						(data.name !='picture'&&cm.name=='图片') || (p == 'img'&&cm.name=='视频') ? <div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
 					} 
 				</div> 
 			)
@@ -352,7 +397,9 @@ class EditContent extends React.Component {
 		if (da) obj.layout = plMap[cn]? da.style[plMap[cn]]: da.layout
 		return obj
 	}
-
+	cb = e => {
+		console.log(e)
+	}
 	render() {
 		let { data, actions, editConfig } = this.props
 		let compName = data.name
@@ -369,14 +416,14 @@ class EditContent extends React.Component {
 			compCon = compContent(compName, this.props, this.updateComp)
 
 		if (content.length) {
-			activeKey = Array.from(new Array(content.length + 1), (_, i) => `${i}`)
+			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
-				return (
-					<Panel header={`内容${i + 1}`} key={i + 1}>
-						{ this.renObj(data, _, i) }
-					</Panel>
-				)
-			})
+				return ( 
+					<Panel header={`内容${i + 1}`} key={`${i}`}> 
+						{ this.renObj(data, _, i) }       
+					</Panel>   
+				)  
+			})   
 		} else {
 			activeKey = ['0']
 			let con = this.renObj(data, content)
@@ -408,7 +455,7 @@ class EditContent extends React.Component {
 					: null
 				}
 				{ compCon }
-				<Collapse defaultActiveKey={activeKey}>
+				<Collapse defaultActiveKey={activeKey} activeKey={activeKey} onChange={this.cb}>
 					{ childNode }
 				</Collapse>
 			</section>

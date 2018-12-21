@@ -35,7 +35,7 @@ const data = {
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
 			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'high', color: '#fff' },
+			backgroundColor: { type: 'high', color: '#f6efe5' },
 			borderRadius:    {
 				topLeft:     10,
 				topRight:    10,
@@ -60,7 +60,7 @@ const data = {
 			borderColor: { type: 'custom', color: '#a240ec' },
 			background: 'center no-repeat',
 			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'main', color: '#a240ec' }
+			backgroundColor: { type: 'custom', color: '#cfad81' }
 		}
 	},
 	layout: {
@@ -68,7 +68,8 @@ const data = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   300
+		height:   300,
+		lockAspectRatio:true
 	},
 	content: {
 		list: [

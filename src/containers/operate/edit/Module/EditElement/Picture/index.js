@@ -9,12 +9,13 @@ import React from 'react'
 import './index.less'
 
 class Picture extends React.Component {
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	render() {
 		let { data } = this.props
 		let img = data.data.content.img
@@ -23,7 +24,7 @@ class Picture extends React.Component {
 			false
 			:
 			(
-			<div className="e-picture" style={cssColorFormat(this.props, 'image')}>
+			<div className="e-picture" id="e-picture" style={cssColorFormat(this.props, 'image')}>
 				<img src={compImgFormat(this.props, img)} />
 			</div>
 			)

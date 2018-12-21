@@ -12,12 +12,13 @@ import './index.less'
 
 
 class Page extends React.Component {
-	componentWillMount() {}
-
-	componentDidMount() {}
-
-	componentWillUnmount() {}
-
+	shouldComponentUpdate(newProps, newState){
+		if(newProps.drag != undefined){
+			return newProps.drag
+		}else{
+			return true
+		}
+	}
 	selectVal(str) {
 		let { parent, actions, ioInput, ioOuter } = this.props
 		if (ioInput.body.page === str || !parent) return

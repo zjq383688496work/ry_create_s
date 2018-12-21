@@ -138,14 +138,14 @@ const data = {
 			fontStyle:      'normal',
 			fontWeight:     'normal',
 			textDecoration: 'none',
-			color: { type: 'main', color: '#333' }
+			color: { type: 'main', color: '#cfad81' }
 		},
 		filter: {
 			width:  520,
 			height: 90,
 			borderWidth:  0,
 			borderStyle: 'solid',
-			borderColor: { type: 'main', color: '#fff' },
+			borderColor: { type: 'main', color: '#cfad81' },
 			backgroundColor: { type: 'custom', color: '#fff' },
 			margin: {
 				top:     0,

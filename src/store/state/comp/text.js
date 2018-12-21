@@ -13,7 +13,10 @@ const data = {
 			textDecoration: 'none',
 			textIndent:     0,
 			opacity:        1,
-			backgroundColor: { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0 },
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundColor: { type: 'custom', color: '#fff' },
+			backgroundImage: { type: 'custom', img: '' },
 			borderRadius:    {
 				topLeft:     0,
 				topRight:    0,
@@ -79,5 +82,6 @@ module.exports = {
 	},
 	// 功能特性
 	feature: {
+		editStatus:true
 	}
 }

@@ -21,7 +21,7 @@ module.exports = [
 					key:  'picture'
 				},
 				{
-					icon: 'image',
+					icon: 'qrcode',
 					name: '二维码',
 					key:  'qrcode'
 				},
@@ -45,11 +45,11 @@ module.exports = [
 					name: '轮播',
 					key:  'swiperImage'
 				},
-				{
+				/*{
 					icon: 'carousel',
 					name: '精彩活动',
 					key:  'wonderfulActivity'
-				},
+				},*/
 				{
 					icon: 'html',
 					name: '网页',
@@ -76,7 +76,33 @@ module.exports = [
 					key:  'navigationFloat', 
 				},
 			]
+		},{
+			icon: 'carousel',
+			name: '图片/视频',
+			key:  'swiperImgAndVideo'
 		},
+		{
+			icon: 'carousel',
+			name: '精彩活动',
+			key:  'wonderfulActivity2',
+			child: [
+				{
+					icon: 'classifyNav',
+					name: '活动分类',
+					key:  'catgByActivity2'
+				},
+				{
+					icon: 'list',
+					name: '活动列表',
+					key:  'listByActivity2'
+				},
+				{
+					icon: 'reset',
+					name: '重置',
+					key:  'resetByActivity2'
+				}
+			]
+		},/*,
 		{
 			icon: 'store',
 			name: '店铺列表',
@@ -177,10 +203,10 @@ module.exports = [
 					key:  'instroButton'
 				}
 			]
-		},
+		},*/
 		{
 			icon: 'store',
-			name: '店铺列表(新)',
+			name: '店铺列表',
 			key:  'storeList2',
 			child: [
 				{
@@ -222,7 +248,7 @@ module.exports = [
 		},
 		{
 			icon: 'storeDetails',
-			name: '店铺详情(新)',
+			name: '店铺详情',
 			key:  'storeDetails2',
 			child: [
 				{
@@ -259,13 +285,28 @@ module.exports = [
 				},
 				{
 					icon: 'image',
-					name: '图片',
-					key:  'weatherLogo'
+					name: '空气质量图标',
+					key:  'kongQi'
+				},
+				{
+					icon: 'image',
+					name: '风力图标',
+					key:  'feng'
+				}, 
+				{
+					icon: 'image',
+					name: '湿度图标',
+					key:  'shiDu'
+				},
+				{
+					icon: 'splitLine',  
+					name: '分割线',
+					key:  'line'
 				}
 			]
 		},
 		{
-			icon: 'store',
+			icon: 'shops',
 			name: '商品列表',
 			key:  'goodsList',
 			child: [
@@ -297,7 +338,7 @@ module.exports = [
 			]
 		},
 		{
-			icon: 'store',
+			icon: 'shopDetail',
 			name: '商品详情',
 			key: 'goodsDetails',
 			child: [
@@ -318,6 +359,7 @@ module.exports = [
 				}
 			]
 		},
+		
 		// {
 		// 	icon: 'store',
 		// 	name: '标签切换',

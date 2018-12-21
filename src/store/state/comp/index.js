@@ -7,8 +7,14 @@ module.exports = {
 	picture:           authInit(require('./picture')),
 	// 轮播图
 	swiperImage:       authInit(require('./swiperImage')),
+	// 轮播图片和视频
+	swiperImgAndVideo: authInit(require('./swiperImgAndVideo')),
 	// 精彩活动
-	wonderfulActivity: authInit(require('./wonderfulActivity')),
+	wonderfulActivity:  authInit(require('./wonderfulActivity')),
+	wonderfulActivity2: authInit(require('./wonderfulActivity2')),					// 新精彩活动
+	catgByActivity2:    authInit(require('./wonderfulActivity2/content/catg')),		// 活动分类
+	listByActivity2:    authInit(require('./wonderfulActivity2/content/list')),		// 活动列表
+	resetByActivity2:   authInit(require('./wonderfulActivity2/content/reset')),		// 重置
 	// 文本
 	text:              authInit(require('./text')), 
 	//按钮 
@@ -62,8 +68,11 @@ module.exports = {
 	time:              authInit(require('./dateWeather/content/time')),
 	// 天气 
 	weather:           authInit(require('./dateWeather/content/weather')),
-	//天气logo
-	weatherLogo:       authInit(require('./dateWeather/content/weatherLogo')),
+	//天气图标
+	kongQi:       authInit(require('./dateWeather/content/kongQi')),
+	feng:       authInit(require('./dateWeather/content/feng')),
+	shiDu:       authInit(require('./dateWeather/content/shiDu')),
+	
 	/* 业务组件 */
 	// 店铺列表
 	storeList:         authInit(require('./storeList/index')),

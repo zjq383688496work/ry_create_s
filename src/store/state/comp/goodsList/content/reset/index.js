@@ -90,7 +90,7 @@ const data = {
 		filterBox: {
 			borderWidth:  0,
 			borderStyle: 'solid',
-			borderColor: { type: 'main', color: '#fff' },
+			borderColor: { type: 'main', color: '#cfad81' },
 			backgroundColor: { type: 'custom', color: '#fff' },
 			borderRadius: {
 				topLeft:     0,

@@ -7,20 +7,20 @@ const data = {
 		top:      340,
 		left:     0,
 		width:    540,
-		height:   540
+		height:   300
 	}, 
 	style: {
 		
 	},
-	content: {themeColor:{type:'background',color:'#666'}},
+	content: {themeColor:{type:'background',color:'#f4f4f4'}},
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向
 		delay: 0,					// 开始时间
 		duration: 1,				// 持续时间
 		iterationCount: 1			// 循环次数
-	}
-}
+	} 
+} 
 
 module.exports = {
 	name: 'floorMap',

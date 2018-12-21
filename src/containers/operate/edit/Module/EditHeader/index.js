@@ -6,6 +6,8 @@
  */
 
 import React from 'react'
+import CommonQuestion from 'compEdit/EditCommon/CommonQuestion'
+import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate'  
 import './index.less'
 import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
@@ -51,19 +53,19 @@ class Header extends React.Component {
 				if (max != undefined) compData.feature.id = ++max
 				delete compData.styleList.list
 				Comp.data.components.push(compData)
-				message.success(`添加子组件: ${compMap[key]}!`)
+				//message.success(`添加子组件: ${compMap[key]}!`)
 				this.selectMulti(Comp.data.components.length - 1)
 				return actions.updateComp(null, Comp)
 			} else {
-				message.info('该高级组件内不能添加该基础组件!')
+				message.info('该高级组件内不能添加该基础组件!',1)
 			}
 		} else {
 			if (compP[key]) {
-				message.success(`添加组件: ${compMap[key]}!`)
+				//message.success(`添加组件: ${compMap[key]}!`)
 				this.selectMulti(curPage.elements.length)
 				return actions.addComp(curData.router, key)
 			}
-			message.info('该组件内只能添加在高级组件中!')
+			message.info('该组件内只能添加在高级组件中!',1)
 		} 
 	}
 	selectMulti(idx) {
@@ -84,7 +86,14 @@ class Header extends React.Component {
 			delete multiComp.parentIdx
 		}
 		actions.updateGlobal(globalData)
-		console.log(JSON.stringify(multiComp.list))
+	}
+	//预览模板
+	review(){
+		this.reviewModal.show()
+	}
+	//常见问题
+	question(){
+		this.questionModal.show()
 	}
 	selectTheme() {
 		let { actions, editConfig } = this.props
@@ -103,7 +112,6 @@ class Header extends React.Component {
 			theme:   gd.theme,
 			feature: gd.feature
 		}
-		// this.setState({ loading: true })
 		let config = {
 			configPC: {
 				// pageContent: dataFormat.save.pageEach(cfg.pageContent),
@@ -112,8 +120,6 @@ class Header extends React.Component {
 				globalData:  cfg.globalData
 			}
 		}
-		// this.setState({ loading: false })
-		// return false
 		let da = {
 			adsFlag: adsFlag || 0,
 			config: JSON.stringify(config),
@@ -208,11 +214,23 @@ class Header extends React.Component {
 
 				<div className="peh-right">
 					<section className="comp-list comp-list-b">
+						{/*<div className="cl-item" onClick={this.question.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/theme.png`)}/>
+							</div>
+							常见问题
+						</div>*/}
+						<div className="cl-item" onClick={this.review.bind(this)}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/reviewTem.png`)}/>
+							</div>
+							预览
+						</div>
 						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
 							<div className="cl-item-icon">
 								<img src={require(`images/icon/theme.png`)}/>
 							</div>
-							主题
+							全局配置
 						</div>
 						<div className="cl-item" onClick={this.saveData.bind(this)}>
 							<div className="cl-item-icon">
@@ -228,6 +246,11 @@ class Header extends React.Component {
 						</div>
 					</section>
 				</div>
+				<CommonQuestion ref={com => { this.questionModal = com }} /> 
+				<ReviewTemplate 
+					ref={com => { this.reviewModal = com }} 
+					editConfig={this.props.editConfig}
+					actions={this.props.actions} />
 			</div>
 		)
 	}

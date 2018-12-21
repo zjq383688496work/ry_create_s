@@ -29,6 +29,11 @@ module.exports = ({ host, mockList, mockItem, getMallId }) => {
 		// 店铺详情
 		getDetails(cb) {
 			cb && cb(mockItem.storeDetails2)
+		},
+		//精彩活动分类 
+		getActivityCatg(cb) {
+			var { storeActivityCatg } = mockList
+				cb && cb({ catg: storeActivityCatg() })
 		}
 		
 	}
