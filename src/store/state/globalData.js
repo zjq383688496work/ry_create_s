@@ -12,7 +12,8 @@ const globalData = {
 		advert:{
 			switch:{auth:false,value:false},
 			time:{auth:false,value:30}
-		}
+		},
+		composeType:'portrait'
 	},
 	theme: {
 		idx: 0,

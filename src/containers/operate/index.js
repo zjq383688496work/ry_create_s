@@ -14,7 +14,8 @@ import * as actions from 'actions'
 import curData from 'state/cur/curData'
 import { Spin } from 'antd'
 import './index.less'
-
+const comp  = require('state/comp')
+ 
 class OperateComponent extends React.Component {
 	constructor(props) {
 		super(props)
@@ -46,7 +47,7 @@ class OperateComponent extends React.Component {
 		let { location, actions, editConfig } = this.props
 		let { globalData } = editConfig
 		let { query } = location
-		let { templateType, composeType, adsFlag, name } = query
+		let { templateType, composeType, adsFlag, name, bannerAds, resolutionType } = query
 		let id = query.id
 		return (resolve, reject) => {
 			if (!id) {
@@ -54,16 +55,20 @@ class OperateComponent extends React.Component {
 					name: name || '',
 					templateType: templateType || 'MALL',
 					composeType:  composeType  || 'PORTRAIT',
-					adsFlag:      ~~adsFlag      || 0
-				}
-				return resolve('模板数据')
+					adsFlag:      ~~adsFlag      || 0,
+					bannerAds:   bannerAds  || 0,  //  无banner  1--有banner
+					resolutionType    :   resolutionType      || 1  //   1 2K ---- 2 4K
+ 				}
+ 				if(bannerAds == 1){
+ 					globalData.banner = comp["swiperImgAndVideo"]
+ 					actions.updateGlobal(globalData)
+ 				}
+ 				return resolve('模板数据')
 			}
 			Ajax.get(`/mcp-gateway/template/get?templateId=${id}&phase=DEV`).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
-				//dataFormat.get.pageEach(cfg.pageContent)
-				// debugger
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },

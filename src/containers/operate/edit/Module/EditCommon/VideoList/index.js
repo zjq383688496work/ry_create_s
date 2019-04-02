@@ -7,8 +7,9 @@
 
 import React from 'react';
 import SkyLight from 'react-skylight';
+import VideoCrop from '../VideoCrop'
+import { Button, message,Modal,Pagination,Input,Upload,Icon } from 'antd'
 import './index.less'
-import { Button, message,Modal,Pagination,Input } from 'antd'
 const commonCss = {
 	dialogStyles: {
 		height: 'auto',
@@ -163,7 +164,8 @@ class VideoModule extends React.Component {
 		videoTypes: [],
 		videoList:  [],
 		current:    1,
-		groupId:    this.props.groupId
+		groupId:    this.props.groupId,
+		loading:    false
 	}
 	
 	componentWillReceiveProps(props){
@@ -195,7 +197,31 @@ class VideoModule extends React.Component {
 		let choosed_video = videoList.filter(item => item.isClicked == true);
 		this.props.save(choosed_video,attribute)
 	}
-	
+	customRequest = info => {
+		const that = this
+		this.setState({loading:true})
+		let mallId = undefined
+		if (getEnv() === 'business') {
+			mallId = uif.userInfo.mallMid
+		}
+		VideoCrop(info.file,this.postEndFn,mallId)
+	}
+	//上传视频成功后的回调
+	postEndFn = () => {
+		message.info('上传成功!')
+        this.setState({loading:false})
+        this.props.getVideoList()
+	}
+	beforeUpload = file => {
+		let videoType = false;
+		if(file.type.indexOf('video/mp4') > -1){
+			videoType = true
+		}
+	  if (!videoType) {
+	   message.info('请上传mp4格式视频!')
+	  }
+	  return videoType;
+	}
 	render() {
 		const { page_video } = this.props;
 		return (
@@ -206,6 +232,22 @@ class VideoModule extends React.Component {
 					} 
 				</div> 
 				<div className="right">
+					<div>
+						<Upload
+								name= 'avatar'
+								className="avatar-uploader"
+								listType="picture-card"
+								showUploadList={false}
+								customRequest={this.customRequest}
+								beforeUpload={this.beforeUpload}
+								accept="video/*"
+							>
+							<div>
+								<Icon type={this.state.loading ? 'loading' : 'plus'} />
+								<div className="ant-upload-text">上传视频<br/>mp4格式,200MB大小以内</div>
+							</div>
+						</Upload>
+					</div>
 					{ 
 						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseVideo}></List> )
 					}
@@ -231,7 +273,7 @@ function Type({item, choose_one, groupId}) {
 
 function List({item,choose_one}){
 	!item.preview ? item.preview = 'http://rongyi.b0.upaiyun.com/commodity/text/201811081000076071.png' : null
-	return (
+	return ( 
 		<div onClick={()=>{choose_one(item.id,item.attribute)}} className={item.isClicked?'choosed':''}>
 			<div className={item.isClicked?'icon_img':''}>
 				<div className="right-symbol"></div>

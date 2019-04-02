@@ -176,9 +176,9 @@ class BusinessComponent extends React.Component {
 			// 	console.log(e)
 			// })
 		})
-		window.onbeforeunload = (e) => {
-			e.returnValue = '确定离开当前页面吗, 离开的话会丢失未保存的数据哦?'
-		}
+		// window.onbeforeunload = (e) => {
+		//	e.returnValue = '确定离开当前页面吗, 离开的话会丢失未保存的数据哦?'
+		// }
 	}
 
 	componentDidMount() {

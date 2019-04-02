@@ -70,7 +70,7 @@ const dataFormat = {
 									var dn = _.name,
 										cd = deepCopy(comp[dn]),
 										s1 = _.styleList
-									s1.idx = s1.idx || 0
+									s1.idx = s1.idx || 0 
 									var i1 = s1.idx,
 										l1 = s1.list,
 										s2 = cd.styleList,
@@ -119,7 +119,7 @@ const dataFormat = {
 						}
 						break
 					case 'Array':
-						switch(key) {
+						switch(key) { 
 							case 'components':
 							case 'componentLayout':
 								da.map((_, i) => {
@@ -145,7 +145,7 @@ const dataFormat = {
 								})
 						}
 						break
-					default:
+					default: 
 				}
 			}
 		},

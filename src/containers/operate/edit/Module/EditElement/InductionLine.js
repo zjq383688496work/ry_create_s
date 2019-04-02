@@ -120,8 +120,14 @@ function abs(num,origin){
 	return false 
 }
 
-export function nearPosSty(layout){
+export function nearPosSty(layout_this, bannerLayout){
 	let arr = new Array(4);
+	let layout = deepCopy(layout_this)
+	if(tempCfg.composeType == 'LANDSCAPE'){
+
+	}else{
+		tempCfg.bannerAds == 1 ? layout.top += bannerLayout.height : null
+	}
 	for(let i = 0;i<4;i++){
 		let objSty = {}
 		if(i == 0){
@@ -146,7 +152,7 @@ export function nearPosSty(layout){
 	return arr 
 }
    
-export function InductionLine(param,eles,layout,i,bodySty) {
+export function InductionLine(param, eles, layout, i, bodySty, bannerLayout) {
 	let lineObj,nearMax=99999,index=-1,eleObj = eles.filter((_,index)=>index != i)
 	let boxLine = boxObj(param,layout,bodySty,false)
 	if(eleObj.length == 0){

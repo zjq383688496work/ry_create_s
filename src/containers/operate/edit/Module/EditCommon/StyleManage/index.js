@@ -120,7 +120,7 @@ class StyleManage extends React.Component {
 					{ /*remDom*/ } 
 				</li>
 			)
-		})
+		}) 
 		let addNode
 		if (add && list.length < (max || 10)) {
 			addNode = (

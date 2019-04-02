@@ -1,4 +1,4 @@
 module.exports = {
-	PORTRAIT: 1,
+	PORTRAIT:  1,
 	LANDSCAPE: 1
 }

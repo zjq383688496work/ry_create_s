@@ -42,16 +42,20 @@ class EditStyle extends React.Component {
 	componentWillUnmount() {}
 
 	onChange(val, css, obj, node) { 
-		let { data, actions, editConfig } = this.props
+		let { data, actions, editConfig, from } = this.props
 		let da = data.data
-		let { curData } = editConfig
+		let { curData, globalData } = editConfig
 		let { parentComp } = curData
 		if (node) {
 			obj[css][node] = val
 		} else {
 			obj[css] = val
 		}
-		actions.updateComp(null, parentComp? parentComp: data)
+		if(from && from === 'banner'){
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	cb(key) {

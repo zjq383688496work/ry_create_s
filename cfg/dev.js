@@ -4,7 +4,6 @@ let path = require('path');
 let webpack = require('webpack');
 let baseConfig = require('./base');
 let defaultSettings = require('./defaults');
-let srcPath = path.join(__dirname, '/../src');
 
 // Add needed plugins here
 let BowerWebpackPlugin = require('bower-webpack-plugin');
@@ -40,17 +39,17 @@ config.devServer = {
 	historyApiFallback: true,
 	stats: 'errors-only',
 	hot: true,
-	disableHostCheck: true,
 	host: '0.0.0.0',
+	disableHostCheck: true,
 	port: defaultSettings.port,
 	publicPath: defaultSettings.publicPath,
 	noInfo: false,
 	proxy: {
-		'/easy-roa/v1/user': {
-			target: target,
-			secure: false,
-			changeOrigin: 'true',
-		},
+		// '/easy-roa/v1/user': {
+		// 	target: target,
+		// 	secure: false,
+		// 	changeOrigin: 'true',
+		// },
 		// '^/(bsoms)/user/**': {
 		// 	target: target,
 		// 	secure: false,
@@ -71,48 +70,48 @@ config.devServer = {
 		// 	}
 		// },
 		// 保存&编辑
-		'/mcp-gateway/case': {
-			// target: 'http://192.168.1.52:10078',
-			target: 'http://192.168.1.224:10330',	// QA
-			secure: false,
-			changeOrigin: 'true',
-		},
-		'/mcp-gateway/mall': {
-			// target: 'http://192.168.1.52:10078',
-			target: 'http://192.168.1.224:10330',	// QA
-			secure: false,
-			changeOrigin: 'true',
-		},
-		'/mcp-gateway/template': {
-			// target: 'http://192.168.1.52:10078',
-			target: 'http://192.168.1.224:10330',	// QA
-			secure: false,
-			changeOrigin: 'true',
-		},
-		// 分类列表
-		'/mcp-gateway/terminalCategory': {
-			target: 'http://192.168.1.222:8052',
-			secure: false,
-			changeOrigin: 'true',
-		},
-		// (推荐)商品列表
-		'/mcp-gateway/commodity': {
-			target: 'http://192.168.1.222:8052',
-			secure: false,
-			changeOrigin: 'true',
-		},
-		// 素材库&天气
-		'/easy-smart': {
-			target: 'http://192.168.1.221:8224',
-			// target: 'http://java1.rongyi.com',
-			secure: false,
-			changeOrigin: 'true'
-		},
-		'/easy-smart-service': {
-			target: 'http://192.168.1.206',
-			secure: false,
-			changeOrigin: 'true'
-		}
+		// '/mcp-gateway/case': {
+		// 	// target: 'http://192.168.1.52:10078',
+		// 	target: 'http://192.168.1.224:10330',	// QA
+		// 	secure: false,
+		// 	changeOrigin: 'true',
+		// },
+		// '/mcp-gateway/mall': {
+		// 	// target: 'http://192.168.1.52:10078',
+		// 	target: 'http://192.168.1.224:10330',	// QA
+		// 	secure: false,
+		// 	changeOrigin: 'true',
+		// },
+		// '/mcp-gateway/template': {
+		// 	// target: 'http://192.168.1.52:10078',
+		// 	target: 'http://192.168.1.224:10330',	// QA
+		// 	secure: false,
+		// 	changeOrigin: 'true',
+		// },
+		// // 分类列表
+		// '/mcp-gateway/terminalCategory': {
+		// 	target: 'http://192.168.1.222:8052',
+		// 	secure: false,
+		// 	changeOrigin: 'true',
+		// },
+		// // (推荐)商品列表
+		// '/mcp-gateway/commodity': {
+		// 	target: 'http://192.168.1.222:8052',
+		// 	secure: false,
+		// 	changeOrigin: 'true',
+		// },
+		// // 素材库&天气
+		// '/easy-smart': {
+		// 	target: 'http://192.168.1.221:8224',
+		// 	// target: 'http://java1.rongyi.com',
+		// 	secure: false,
+		// 	changeOrigin: 'true'
+		// },
+		// '/easy-smart-service': {
+		// 	target: 'http://192.168.1.206',
+		// 	secure: false,
+		// 	changeOrigin: 'true'
+		// }
 	}
 }
 
@@ -120,12 +119,10 @@ config.devServer = {
 config.module.loaders.push({
 	test: /\.jsx?$/,
 	loader: 'react-hot!babel-loader',
-	include: srcPath,
-	exclude: /node_modules/
-	// include: [].concat(
-	// 	config.additionalPaths,
-	// 	[ path.join(__dirname, '/../src') ]
-	// )
+	include: [].concat(
+		config.additionalPaths,
+		[ path.join(__dirname, '/../src') ]
+	)
 });
 
 module.exports = config;

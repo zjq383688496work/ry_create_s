@@ -65,6 +65,7 @@ class ReviewTem extends React.Component {
 					curData: { ...curData, ...cur },
 					curPage: cfg.pageContent[cur.router]
 				}
+				window.tempCfg = res.data
 				cfg.globalData = { ...globalData, ...cfg.globalData }
 				actions.updateConfig({ ...newCfg, ...cfg })
 				resolve('模板数据')

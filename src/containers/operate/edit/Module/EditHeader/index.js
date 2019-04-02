@@ -103,14 +103,25 @@ class Header extends React.Component {
 	saveData() {
 		let { editConfig, location } = this.props
 		let { query } = location
-		let { templateType, id, composeType, adsFlag } = tempCfg
-		let cfg = deepCopy(editConfig)
+		let { templateType, id, composeType, adsFlag, bannerAds, resolutionType } = tempCfg
+		let cfg = deepCopy(editConfig),cropWidth,cropHeight
 
 		let gd = cfg.globalData
+		//模板数据加入composeType
+		if(composeType === 'LANDSCAPE'){
+			gd.data.composeType = 'landscape'
+			cropWidth = 960
+			cropHeight = 540
+		}else{
+			gd.data.composeType = 'portrait'
+			cropWidth = 540
+			cropHeight = 960
+		}
 		cfg.globalData = {
 			data:    gd.data,
 			theme:   gd.theme,
-			feature: gd.feature
+			feature: gd.feature,
+			banner:  gd.banner
 		}
 		let config = {
 			configPC: {
@@ -126,7 +137,9 @@ class Header extends React.Component {
 			coverImgUrl:  '',
 			templateType: templateType,
 			composeType:  composeType,
-			name:         this.state.name
+			name:         this.state.name,
+			bannerAds: bannerAds || 0,
+			resolutionType: resolutionType || 1
 		}
 		this.setState({ loading: true })
 		if (id) da.id = id
@@ -137,8 +150,8 @@ class Header extends React.Component {
 			}
 			Ajax.createCrop({
 				url: `${window.location.origin}${window.location.pathname}#/view?id=${tempCfg.id}&s=template`,
-				w: 540,
-				h: 960,
+				w: cropWidth,
+				h: cropHeight,
 				t: 1000
 			}).then(cover => {
 				Ajax.post(`/mcp-gateway/template/updateCoverImgUrl`, {
@@ -251,7 +264,7 @@ class Header extends React.Component {
 					ref={com => { this.reviewModal = com }} 
 					editConfig={this.props.editConfig}
 					actions={this.props.actions} />
-			</div>
+			</div> 
 		)
 	}
 }

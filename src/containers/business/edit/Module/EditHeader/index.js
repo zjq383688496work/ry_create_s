@@ -44,7 +44,6 @@ class Header extends React.Component {
 		editConfig.curData.contentType = 'theme'
 		actions.updateCur(editConfig.curData)
 	}
-
 	formatStyle(data) {
 		let { style, layout } = data
 		Object.keys(data.style).map(_ => style[_] = cssFormatByTerm(style[_]))
@@ -80,11 +79,22 @@ class Header extends React.Component {
 		let cfg = deepCopy(editConfig)
 		let newCon = deepCopy(cfg.pageContent)
 		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))
-		let gd = cfg.globalData
+		let gd = cfg.globalData,cropWidth,cropHeight
+		//作品数据加入composeType
+		if(composeType === 'LANDSCAPE'){
+			gd.data.composeType = 'landscape'
+			cropWidth = 960
+			cropHeight = 540
+		}else{
+			gd.data.composeType = 'portrait'
+			cropWidth = 540
+			cropHeight = 960
+		}
 		cfg.globalData = {
 			data:    gd.data,
 			theme:   gd.theme,
-			feature: gd.feature
+			feature: gd.feature,
+			banner:  gd.banner
 		}
 		let config = {
 			configPC: {
@@ -110,18 +120,18 @@ class Header extends React.Component {
 		}
 		if (id) {
 			da.id = id
-			this.post_save(query,da)
+			this.post_save(query,da,cropWidth,cropHeight)
 		}else{
 			Ajax.post(`/mcp-gateway/case/nameCheck`, {caseName:this.state.name,userId:uif.userInfo.id}).then(res => {
 				if(res.data){
-					this.post_save(query,da)
+					this.post_save(query,da,cropWidth,cropHeight)
 				}else{
 					return message.warning(`作品名称已存在，请重新输入！`,1)
 				}
 			})	
 		}
 	}
-	post_save(query,da){
+	post_save(query,da,cropWidth,cropHeight){
 		this.setState({ loading: true })
 		Ajax.post(`/mcp-gateway/case/${query.id? 'update': 'save'}`, da).then(res => {
 			if (!query.id) {
@@ -130,8 +140,8 @@ class Header extends React.Component {
 			}
 			Ajax.createCrop({
 				url: `${window.location.origin}${window.location.pathname}#/view?id=${tempCfg.id}`,
-				w: 540,
-				h: 960,
+				w: cropWidth,
+				h: cropHeight,
 				t: 1000
 			}).then(cover => {
 				Ajax.post(`/mcp-gateway/case/updateCoverImgUrl`, {

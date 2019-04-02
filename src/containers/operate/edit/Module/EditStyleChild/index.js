@@ -36,7 +36,7 @@ export default class EditStyle extends React.Component {
 		let { data, updateComp } = this.props
 		data = lineHightAdaptation(data, val, css)
 		data = imageAdaptation(data, attribute)
-		let da = data.data
+		let da = data.data 
 		if (node) {
 			obj[css][node] = val
 		} else {

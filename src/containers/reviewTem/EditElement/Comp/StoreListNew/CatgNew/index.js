@@ -32,7 +32,7 @@ export default class CatgNew extends React.Component {
 			filterFlex = cssColorFormat(this.props, 'filterFlex');
 		let useCatgs = categories 
 		return (
-			<section className={`e-catg-by-store2 scrollbar`} style={filterBox}>
+			<section className={`e-catg-by-store2 scrollbar`} style={filterBox} id="e-catg">
 				<div className="e-catg-by-store2-box" style={filterFlex}>
 					{ 
 						useCatgs.map((_, i) => {

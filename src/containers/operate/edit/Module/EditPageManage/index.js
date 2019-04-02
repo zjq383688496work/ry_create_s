@@ -22,8 +22,10 @@ class EditPageManage extends React.Component {
 	componentWillUnmount() {}
 
 	addPage(groupIdx) {
-		let { actions, editConfig } = this.props
+		let { actions, editConfig,data } = this.props
+		let pages = data.group[0].pages;
 		actions.addPage(groupIdx, `页面${editConfig.pageList.group[groupIdx].pages.length + 1}`)
+		this.selectPage(pages[pages.length-1].router,0,pages.length-1)
 		message.success('添加页面!',1)
 	}
 
@@ -88,7 +90,7 @@ class EditPageManage extends React.Component {
 							onClick={this.copyPage.bind(this, _.router, 0, i)}
 						><Icon type="copy" /></a>
 						<a
-							style={{ display: data.group[0].pages.length > 1? 'block': 'none' }}
+							style={{ display: data.group[0].pages.length > 1&&i? 'block': 'none' }}
 							onClick={this.deletePage.bind(this, _.router, 0, i)}
 						><Icon type="delete" /></a>
 					</div>

@@ -31,10 +31,10 @@ module.exports = {
 	// 定义样式名称 & 渲染类型 & 相关配置
 	style: {
 		display:           { name: '显示',    type: 'Switch', true: 'block', false: 'none' },
-		top:               { name: '上',      type: 'Number', min: -1000, max: 1920 },
-		left:              { name: '左',      type: 'Number', min: -1000, max: 1080 },
-		width:             { name: '宽',      type: 'Number', min: 0, max: 1080 },
-		height:            { name: '高',      type: 'Number', min: 0, max: 1920 },
+		top:               { name: '上',      type: 'Number', min: -1000, max: 9999 },
+		left:              { name: '左',      type: 'Number', min: -1000, max: 9999 },
+		width:             { name: '宽',      type: 'Number', min: 0, max: 9999 },
+		height:            { name: '高',      type: 'Number', min: 0, max: 9999 },
 		lockAspectRatio: { name: '拉伸比例', type: 'Radio', option: [
 			{ name: '任意', value: false },
 			{ name: '等比', value: true }

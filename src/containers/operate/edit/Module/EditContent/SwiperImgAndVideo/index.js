@@ -25,21 +25,43 @@ class SwiperImage extends React.Component {
 		this.setState({init:true},()=>{this.addImgVideoModal.show()})
 	}
 	enter = list => { 
-		let props = this.props.data
+		let props = this.props.data,isContinue = true
 		if (!props.editConfig) props = props.data
 		if (!props.editConfig) return
-		let { data, actions, editConfig } = props
-		let { curData }    = editConfig
-		let { content }    = data.data
+		let { data, actions, editConfig,from } = props
+		let { curData,globalData }    = editConfig
+		let { content,layout }    = data.data
 		let { parentComp } = curData
 		let newContent =  this.do_content(list,content)
-		if(newContent.length > 40){
-			message.warning('最多只能添加40张素材！')
-			return false
-		} 
+		if(newContent.length > 20){
+			return message.warning('最多只能添加20张素材！')
+		}
+		if(getEnv() === 'business') {
+			isContinue = this.checkImg(list,layout)
+		}
+		if(!isContinue) return message.info("选择的图片不符合尺寸，请重新选择！")
+		this.setState({ init:false })
 		this.addImgVideoModal.hide() 
 		data.data.content = newContent
-		actions.updateComp(null, parentComp? parentComp: data)
+		if(from&&from === "banner"){
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
+		return actions.updateComp(null, parentComp? parentComp: data)
+	}
+	//检查素材大小
+	checkImg = (list,layout) => {
+		let { width,height } = layout,isOk = true
+		if(tempCfg.resolutionType == 2) { width *= 4;height *= 4 }
+		else { width *= 2;height *= 2 }
+		if(!list || list.length === 0) return
+		isOk = list.every(_=>{
+			if(_.type == 2) return true
+			let { attribute } = _
+			attribute = attribute&&attribute.split("*")
+			return Math.abs(+attribute[0] - width) < 100 && Math.abs(+attribute[1] - height) < 100
+		})
+		return isOk
 	}  
 	do_content = (list,content) => {
 		list = list.map(_=>{

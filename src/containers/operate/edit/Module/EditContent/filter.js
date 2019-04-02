@@ -24,7 +24,14 @@ export function filterContent(data,con) {
 
 //轮播设置的过滤--商家--大运营
 export function setSwiperImgAndVideo(editConfig){
-	let { pageContent } = editConfig
+	let { pageContent,globalData } = editConfig,
+		{ banner } = globalData
+	if(tempCfg.bannerAds == 1){
+		banner.data.content.forEach(e=>{
+			!e.delayOnly&&e.type=='image' ? e.delayOnly = 5 : null
+			!e.date ? e.date = '' : null
+		})
+	}
 	Object.keys(pageContent).map(_=>{
 		let page = pageContent[_],elements =  page.elements;
 		elements.map(val=>{

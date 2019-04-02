@@ -60,21 +60,23 @@ class EditElementCommon extends React.Component {
 	  	//homepage != pageContent.router ? funcIn() : null
 	} 
 	render() { 
-		let { globalData,categories,floors,pageList } = this.props,
+		let { globalData, categories, floors, pageList, actions, homePage } = this.props,
 			page  =this.state.page,     
 			eles   = page.elements.length > 0 ? page.elements : [],
-			theme  = globalData.theme, 
-			colors = theme.list[theme.idx].colors, 
-			feature = page.feature,     
-			color  = feature.backgroundColor, 
+			{ theme, banner, feature }  = globalData, 
+			{ colors } = theme.list[theme.idx], 
+			{ reviewRouter } = feature,
+			bannerLayout = banner&&banner.data.layout,
+			featurePage = page.feature,     
+			color  = featurePage.backgroundColor, 
 			type   = color.type, 
 			animateParams   =   page.animation 
 		window.curThemeColor = colors; 
- 		let bgStyle   = page.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
+ 		let bgStyle   = featurePage? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
  		const pageInAnimate = addAnimate(animateParams.in);
  		const pageOutAnimate = addAnimate(animateParams.out);
  		const pageInAnimateDelay = animateParams.in.className ? (animateParams.in.delay + animateParams.in.duration) : 0;
- 		const action = {updateGlobal:this.props.actions.updateGlobal,globalData:this.props.globalData};
+ 		const action = { updateGlobal: actions.updateGlobal, globalData: globalData };
  		let childNode = eles.map((element, i) => { 
  							const noFormatAni = element.data.animation;
 							const animateInfo = addAnimate(noFormatAni);
@@ -117,7 +119,19 @@ class EditElementCommon extends React.Component {
 						 )
 					  })
  		return ( 
-			<div className={`pg-element-parent-show ${this.state.name}`} style={pageOutAnimate.style}> 
+			<div className={`${tempCfg.composeType=='LANDSCAPE'?'pg-element-parent-show-l':'pg-element-parent-show-p'} ${this.state.name}`} style={pageOutAnimate.style}> 
+				{
+					tempCfg.bannerAds == 1 ? 
+					<div className="bannerBox" style={{height:`${tempCfg.composeType=="PORTRAIT"?bannerLayout.height+"px":"100%"}`,width:`${tempCfg.composeType=="LANDSCAPE"?bannerLayout.width+"px":"100%"}`}}>
+						<SwiperImgAndVideoShow 
+							name="swiperImgAndVideo"
+							data={banner}
+							action={action}
+							from="banner"
+							reviewRouter={reviewRouter}
+						/>
+					</div> : null
+				}
 				<section className={`pg-element ${pageInAnimate.name}`} style={{...bgStyle,...pageInAnimate.style}}>{ childNode }</section>
 			</div>
 		)

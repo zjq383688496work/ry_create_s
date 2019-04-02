@@ -60,7 +60,7 @@ export default class PictureList extends React.Component {
 		// this.getImgList()
 	}
 	state = {
-		choosed_img:[],
+		choosed_img: false,
 		imgTypes: [],
 		imgList:  [],
 		page_img: {},
@@ -113,11 +113,23 @@ export default class PictureList extends React.Component {
 		this.addImgModal.hide()
 	}
 	save = () => {
-		if (this.state.choosed_img) {
-			this.props.enter(this.state.choosed_img,this.state.attribute,this.props.index)
+		let { choosed_img,attribute } = this.state,
+				{ index } = this.props
+		if (choosed_img) {
+			let { type,data } = this.props;
+			data = data.data.data
+			let { layout } = data,
+				{ width,height } = layout
+			if(tempCfg.resolutionType == 2) { width *= 4;height *= 4 }
+			else { width *= 2;height *= 2 }
+			let new_attribute = attribute&&attribute.split("*")
+			if(type==="business"&&(Math.abs(+new_attribute[0] - width) >= 100 || Math.abs(+new_attribute[1] - height) >= 100)){
+				return message.info(`选择的图片尺寸不符合,请重新选择!`)
+			}	
+			this.props.enter(choosed_img,attribute,index)
 			this.addImgModal.hide()
 		} else {
-			message.info(`你还未选择图片!`)
+			return message.info(`你还未选择图片!`)
 		}
 	}
 	close = () => {
@@ -228,11 +240,11 @@ class ImgModule extends React.Component {
 	}
 	beforeUpload = file => {
 		let imgType = false;
-		if(file.type.indexOf('image/png') > -1 || file.type.indexOf('image/jpg')>-1 || file.type.indexOf('image/svg')>-1 || file.type.indexOf('image/jpeg')>-1){
+		if(file.type.indexOf('image/png') > -1 || file.type.indexOf('image/jpeg')>-1 || file.type.indexOf('image/gif')>-1){
 			imgType = true
 		}
 	  if (!imgType) {
-	   message.info('请上传png、jpg、svg格式图片!')
+	   message.info('请上传png、jpg、gif格式图片!')
 	  }
 	  return imgType;
 	}
@@ -255,11 +267,11 @@ class ImgModule extends React.Component {
 							showUploadList={false}
 							beforeUpload={this.beforeUpload}
 							customRequest={this.customRequest}
-							accept="image/*"
+							accept="image/png, image/jpeg, image/gif"
 						>
 						<div>
 							<Icon type={this.state.loading ? 'loading' : 'plus'} />
-							<div className="ant-upload-text">上传图片</div>
+							<div className="ant-upload-text">上传图片<br/>JPG PNG GIF格式,5MB大小以内</div>
 						</div>
 						</Upload>
 					</div>

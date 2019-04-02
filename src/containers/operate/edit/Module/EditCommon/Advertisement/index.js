@@ -54,6 +54,7 @@ class Advert extends React.Component {
 				<Col span={3}></Col>
 				<Col span={9}>
 					<InputNumber
+						disabled
 						min={cfg.min || 0} max={cfg.max || 600} step={cfg.step || 1}
 						value={val} onChange={v => this.onChange(v, key)}
 						style={{ width: '100%' }}

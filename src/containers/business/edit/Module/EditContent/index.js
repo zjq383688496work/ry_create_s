@@ -30,8 +30,7 @@ import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
 import CatgByGoods       from 'compEdit/EditContent/CatgByGoods'
 import SwiperByGoods     from 'compEdit/EditContent/SwiperByGoods'
-
-import * as variable from 'var'
+import * as variable from 'var'  
 
 var conMap   = variable.contentMap,
 	fieldMap = variable.fieldMap,
@@ -69,12 +68,17 @@ class EditContent extends React.Component {
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 	onChange = (val, key, obj, index) => {
-		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { data, actions, editConfig, from } = this.props
+		let { curData, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
 		obj[key] = val
-		actions.updateComp(null, parentComp? parentComp: data)
+		if(index != undefined && getAttr(content) == 'Array') content[index] = obj;
+		if(from&&from === "banner"){
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, key) {
@@ -124,7 +128,7 @@ class EditContent extends React.Component {
 				style={{ width: '100%' }}
 			/>
 		)
-	}
+	} 
 	// 标题
 	renderTitle(cfg, data, obj, val, key, index) {
 		return (
@@ -142,9 +146,9 @@ class EditContent extends React.Component {
 	}    
 	// 跳转路由
 	renderRouter(cfg, data, obj, val, key, index) {
-		let { actions } = this.props
+		let { actions, from } = this.props
 		return (
-			<RouterJump data={data} content={val} actions={actions} />
+			<RouterJump data={data} content={val} actions={actions} index={index} from={from} />
 		)
 	}
 	// 上传图片
@@ -157,6 +161,7 @@ class EditContent extends React.Component {
 				action={'updateComp'}
 				style={{ width: '100%' }}
 				index={index}
+				type="business"
 			/>
 		)
 	}
@@ -169,6 +174,7 @@ class EditContent extends React.Component {
 				name={`video`}
 				action={'updateComp'}
 				style={{ width: '100%' }}
+				type="business"
 			/>
 		)
 	}
@@ -182,6 +188,7 @@ class EditContent extends React.Component {
 					con={obj}
 					style={{ width: '100%' }}
 					index={index}
+					type="business"
 				/>
 			)
 	}
@@ -222,6 +229,7 @@ class EditContent extends React.Component {
 				<Col span={3}></Col>
 				<Col span={9}>
 					<InputNumber
+						disabled
 						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
 						value={val} onChange={v => this.onChange(v, key, obj, index)}
 						style={{ width: '100%' }}
@@ -320,7 +328,7 @@ class EditContent extends React.Component {
 
 		return (
 			<div>{ childNode }</div>
-		)
+		) 
 	}
 	renObj(parent, data, content, index) {
 		let me = this
@@ -348,7 +356,7 @@ class EditContent extends React.Component {
 					}
 				</div>
 			)
-		})
+		}) 
 		if (!ci) return false
 		return childNode
 	}
@@ -412,7 +420,7 @@ class EditContent extends React.Component {
 		if (content.length) {
 			childNode = content.map((_, i) => {
 				return (
-					<Panel header={`内容${i + 1}`} key={i + 1}>
+					<Panel header={`内容${i + 1}  ${compName==="swiperImgAndVideo"&&i===0?"(建议为图片)":""}`} key={i + 1}>
 						{ this.renObj(data, data, _, i) }
 					</Panel>
 				)

@@ -7,6 +7,7 @@
 
 import React from 'react';
 import SkyLight from 'react-skylight';
+import VideoCrop from '../VideoCrop'
 import './index.less'
 import { Button, Upload, message,Modal,Pagination,Icon,Input } from 'antd'
 import Url from 'public/Url'
@@ -163,8 +164,7 @@ export default class PictureAndVideo extends React.Component {
 		}
 	}
 	enter = () => { 
-		this.props.initFn()
-		if(this.state.list.length == 0) return
+		if(this.state.list.length == 0) return message.info(`请选择图片或视频!`)
 		this.props.enter(this.state.list,this.props.index)
 	} 
 	render() {
@@ -517,7 +517,7 @@ class ImgModule extends React.Component {
 		var reader = new FileReader()
 			reader.onload = (function (file) {
 				return function (e) {
-					console.info(this.result) //这个就是base64的数据了
+					// console.info(this.result) //这个就是base64的数据了
 					const img = this.result
 					const postData = {...paramsData,imageBase64:img}
 					Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage',postData).then(res=>{
@@ -531,11 +531,11 @@ class ImgModule extends React.Component {
 	}
 	beforeUpload = file => {
 		let imgType = false;
-		if(file.type.indexOf('image/png') > -1 || file.type.indexOf('image/jpg')>-1 || file.type.indexOf('image/svg')>-1 || file.type.indexOf('image/jpeg')>-1){
+		if(file.type.indexOf('image/png') > -1 || file.type.indexOf('image/gif')>-1 || file.type.indexOf('image/jpeg')>-1){
 			imgType = true
 		}
 	  if (!imgType) {
-	   message.info('请上传png、jpg、svg格式图片!')
+	   message.info('请上传png、jpg、gif格式图片!')
 	  }
 	  return imgType;
 	}
@@ -558,11 +558,11 @@ class ImgModule extends React.Component {
 							showUploadList={false}
 							customRequest={this.customRequest}
 							beforeUpload={this.beforeUpload}
-							accept="image/*"
+							accept="image/png, image/jpeg, image/gif"
 						>
 						<div>
 							<Icon type={this.state.loading ? 'loading' : 'plus'} />
-							<div className="ant-upload-text">上传图片</div>
+							<div className="ant-upload-text">上传图片<br/>JPG PNG GIF格式, 5MB大小以内</div>
 						</div>
 						</Upload>
 					</div>
@@ -588,7 +588,8 @@ class VideoModule extends React.Component {
 		videoTypes: [],
 		videoList:  [],
 		current:    this.props.currentPage,
-		groupId:    this.props.groupId
+		groupId:    this.props.groupId,
+		loading:    false
 	}
 	
 	componentWillReceiveProps(props){
@@ -638,7 +639,38 @@ class VideoModule extends React.Component {
 		let choosed_video = index ? videoList.filter(item => item.isClicked) : videoList.filter(item => item.id == id); 
 		this.props.save(choosed_video) 
 	} 
-	
+	customRequest = info => {
+		const that = this
+		this.setState({loading:true})
+		let id = window.uif.userInfo.id || '1'
+		let paramsData = {
+			userId:id,
+			mallId:'',
+			imageSourceType:'OPERATION'
+		} 
+		paramsData.imageName = info.file.name.split(".")[0];
+		if (getEnv() === 'business') {
+			paramsData.imageSourceType = 'BUSINESS'
+			paramsData.mallId = uif.userInfo.mallMid
+		}
+		VideoCrop(info.file,this.postEndFn,paramsData.mallId)
+	}
+	//上传视频成功后的回调
+	postEndFn = () => {
+		message.info('上传成功!')
+        this.setState({loading:false})
+        this.props.getVideoList()
+	}
+	beforeUpload = file => {
+		let videoType = false;
+		if(file.type.indexOf('video/mp4') > -1){
+			videoType = true
+		}
+	  if (!videoType) {
+	   message.info('请上传mp4格式视频!')
+	  }
+	  return videoType;
+	}
 	render() {
 		const { page_video } = this.props;
 		return (
@@ -649,6 +681,22 @@ class VideoModule extends React.Component {
 					} 
 				</div> 
 				<div className="right">
+					<div>
+						<Upload
+								name= 'avatar'
+								className="avatar-uploader"
+								listType="picture-card"
+								showUploadList={false}
+								customRequest={this.customRequest}
+								beforeUpload={this.beforeUpload}
+								accept="video/*"
+							>
+							<div>
+								<Icon type={this.state.loading ? 'loading' : 'plus'} />
+								<div className="ant-upload-text">上传视频<br/>mp4格式,200MB大小以内</div>
+							</div>
+						</Upload>
+					</div>
 					{ 
 						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseVideo}></List> )
 					}

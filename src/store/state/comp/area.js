@@ -4,7 +4,7 @@ let { deepCopy } = require('state/common')
 const data = {
 	style:     {
 		filterBox: {
-			transform: { rotate: 0 },
+			transform:    { rotate: 0 },
 			opacity: 1,
 			borderRadius: {
 				topLeft:     0,
@@ -17,11 +17,11 @@ const data = {
 	},
 	layout: {
 		position: 'absolute',
-		top:    0,
-		left:   0,
-		width:  120,
-		height: 120
-	},
+		top:      0,
+		left:     0,
+		width:    120,
+		height:   120 
+	}, 
 	content: {},
 	animation: {
 		className: '',	// 动画样式

@@ -43,7 +43,9 @@ import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
 import PostMessage       from 'compEdit/EditCommon/PostMessage'
 import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
 import { InductionLine,nearPosSty }     from 'compEdit/EditElement/InductionLine'
- 
+
+import Banner from 'compEdit/EditElement/Banner'
+
 import * as actions from 'actions'
 import { Icon, message } from 'antd'
 
@@ -56,47 +58,71 @@ var animeMap = variable.animeCompMap,
 const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl,contentEditable,shift) => {
 	var props  = { data, actions, type, idx,drag, csn, keyCtrl,contentEditable,shift }
 	var render = {
-		picture:           <Picture           {...props} />,
-		web:               <Web               {...props} />,
-		video:             <Video             {...props} />,
-		text:              <Text              {...props} />,
-		button:            <Button            {...props} />,
-		swiperImage:       <SwiperImage       {...props} />,
-		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
-		wonderfulActivity: <WonderfulActivity {...props} />,
+		picture:            <Picture            {...props} />,
+		web:                <Web                {...props} />,
+		video:              <Video              {...props} />,
+		text:               <Text               {...props} />,
+		button:             <Button             {...props} />,
+		swiperImage:        <SwiperImage        {...props} />,
+		swiperImgAndVideo:  <SwiperImgAndVideo  {...props} />,
+		wonderfulActivity:  <WonderfulActivity  {...props} />,
 		wonderfulActivity2: <WonderfulActivity2 {...props} />,
-		time:              <Time              {...props} />,
-		weather:           <Weather           {...props} />,
-		navigation:        <Navigation        {...props} />,
-		navigationFloat:   <NavigationFloat   {...props} />,
-		storeList:         <StoreList         {...props} />,
-		goodsList:         <GoodsList         {...props} />,
-		storeDetails:      <StoreDetails      {...props} />,
-		storeInstro:       <StoreInstro       {...props} />,
-		splitLine:         <SplitLine         {...props} />,
-		dateWeather:       <DateWeather       {...props} />,
-		map2D:             <Map2D             {...props} />,
-		html:              <Html              {...props} />,
-		goodsDetails:      <GoodsDetails      {...props} />,
-		area:              <Area              {...props} />,
-		qrcode:            <Qrcode            {...props} />,
-		// tabs:              <Tabs              {...props} />,
-		storeList2:        <StoreList2        {...props} />,
-		storeDetails2:     <StoreDetails2     {...props} />
+		time:               <Time               {...props} />,
+		weather:            <Weather            {...props} />,
+		navigation:         <Navigation         {...props} />,
+		navigationFloat:    <NavigationFloat    {...props} />,
+		storeList:          <StoreList          {...props} />,
+		goodsList:          <GoodsList          {...props} />,
+		storeDetails:       <StoreDetails       {...props} />,
+		storeInstro:        <StoreInstro        {...props} />,
+		splitLine:          <SplitLine          {...props} />,
+		dateWeather:        <DateWeather        {...props} />,
+		map2D:              <Map2D              {...props} />,
+		html:               <Html               {...props} />,
+		goodsDetails:       <GoodsDetails       {...props} />,
+		area:               <Area               {...props} />,
+		qrcode:             <Qrcode             {...props} />,
+		// tabs:               <Tabs               {...props} />,
+		storeList2:         <StoreList2         {...props} />,
+		storeDetails2:      <StoreDetails2      {...props} />
 	}
 	return render[name]
-}
-
+} 
+ 
 import './index.less'
 
 class EditElement extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { keyCtrl: false,shift:false,v:false,h:false,vPosition:{left:0},hPosition:{top:0},nearPos:false,dragAxis:'both',drag:true }
+		this.state = {
+			keyCtrl:   false,
+			shift:     false,
+			v:         false,
+			h:         false,
+			vPosition: { left: 0 },
+			hPosition: { top:  0 },
+			nearPos:   false,
+			dragAxis:  'both',
+			drag:      true,
+      editConfig:this.props.editConfig
+		}
 	}
-	componentDidMount() {
-	}
-	componentWillReceiveProps() {
+	componentWillReceiveProps(nextProps) {
+		let { editConfig } = nextProps,
+			{ curPage } = editConfig,
+			editConfigPrev = this.props.editConfig,
+			curPagePrev = editConfigPrev.curPage,
+			elements = deepCopy(curPage.elements)
+		if(curPagePrev.router === curPage.router){
+			this.setState({ editConfig:editConfig })
+		}else{
+			curPage.elements = []
+			this.setState({ editConfig:editConfig })
+			setTimeout(()=>{ 
+				curPage.elements = elements
+				this.setState({ editConfig:editConfig })
+			},1)
+		}
 		this.state.drag ?  this.stateLayout() : null
 	}
 	stateLayout = () => {
@@ -111,7 +137,7 @@ class EditElement extends React.Component {
 	keyDown = (k, e) => {
 		if (k === 'meta' || k === 'control') {
 			this.setState({ keyCtrl: true })
-		}else if(k === 'shift'){
+		} else if (k === 'shift'){
 			this.setState({ shift: true })
 		}
 	}
@@ -141,8 +167,8 @@ class EditElement extends React.Component {
 		} 
 		actions.updateCur(curData)	// 更新 当前数据
 		actions.selectComp(data)
-	}
-
+	} 
+ 
 	selectMulti(e, idx) {
 		e.stopPropagation()
 		let { keyCtrl } = this.state
@@ -152,10 +178,7 @@ class EditElement extends React.Component {
 		let { index, list, type } = multiComp
 		if (keyCtrl) {
 			if (type === 'child') return message.success('不能跨级选组件!')
-			if (index[idx]) {
-				// delete index[idx]
-				list.remove(idx)
-			}
+			if (index[idx]) list.remove(idx)
 			index[idx] = true
 			list.unshift(idx)
 		} else {
@@ -226,11 +249,15 @@ class EditElement extends React.Component {
 	} 
 	//显示提示线
 	showLine = (param,_,i,obj) => {
-		let { data, actions } = this.props,
+		let { data, actions,editConfig } = this.props,
+			{ globalData } = editConfig,
+			{ multiComp,banner } = globalData;
+		let bannerLayout = banner&&banner.data.layout,
 			eles   = data.elements || [],
-			bodySty = {width:540,height:960,left:0,top:0},
+			bodySty = tempCfg.composeType == 'LANDSCAPE' ? {height:539,width:959,left:0,top:0} : 
+			(tempCfg.bannerAds==1?{width:539,height:`${959-bannerLayout.height}`,left:0,top:0}:{width:539,height:959,left:0,top:0}),
 			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
-			InductionLineObj = InductionLine(param,eles,layout,i,bodySty,eleKnock),
+			InductionLineObj = InductionLine(param,eles,layout,i,bodySty),
 			v= InductionLineObj.v,h=InductionLineObj.h,eleKnock = InductionLineObj.eleKnock
 		if(v){ 
 			this.setState({v:true,vPosition:{left:`${v.left}px`,p_left:v.p_left}})
@@ -238,12 +265,12 @@ class EditElement extends React.Component {
 			this.setState({v:false,vPosition:{p_left:param.x}})
 		} 
 		if(h){
-			this.setState({h:true,hPosition:{top:`${h.top}px`,p_top:h.p_top}})
+			this.setState({h:true,hPosition:{top:`${tempCfg.bannerAds==1?h.top+bannerLayout.height:h.top}px`,p_top:h.p_top}})
 		}else{ 
 			this.setState({h:false,hPosition:{p_top:param.y}})
 		}
 		if(eleKnock){
-			this.setState({nearPos:nearPosSty(eleKnock)})
+			this.setState({nearPos:nearPosSty(eleKnock,bannerLayout)})
 		}else{
 			this.setState({nearPos:false})
 		}   
@@ -254,7 +281,7 @@ class EditElement extends React.Component {
 			let RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
 			if(RP.test(item.data.content.url)) return false
 		} 
-		this.setState({drag:true})  
+		this.setState({drag:true})
 		item['feature'].editStatus != undefined ? item['feature'].editStatus = true : null
 		actions.updateComp(idx, item)
 	}
@@ -268,7 +295,8 @@ class EditElement extends React.Component {
 		let { data, actions, editConfig, location } = this.props
 		let { globalData, curData } = editConfig
 		let { pageGroupIdx, pageIdx, compIdx } = curData
-		let { multiComp } = globalData
+		let { multiComp, banner } = globalData
+		let bannerLayout = banner&&banner.data.layout
 		let { index } = multiComp
 		let state  = this.state
 		let ct     = tempCfg.composeType || 'PORTRAIT'
@@ -309,7 +337,7 @@ class EditElement extends React.Component {
 					animationDelay:    `${delay}s`,
 					animationIterationCount: iterationCount
 				}
-			}
+			} 
 			let sl  = state[i]
 			let lay = i === compIdx? sl? sl: layout: layout
 			return (
@@ -352,6 +380,12 @@ class EditElement extends React.Component {
 						: null*/
 					}
 					<section id="pgElement" className="pg-element">
+						{
+							tempCfg.bannerAds == 1 ? 
+							<div className="bannerBox" style={{height:`${ct=="PORTRAIT"?bannerLayout.height+"px":"100%"}`,width:`${ct=="LANDSCAPE"?bannerLayout.width+"px":"100%"}`}}>
+								<Banner {...this.props} />
+							</div> : null
+						}
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }
 						</div>
@@ -367,18 +401,17 @@ class EditElement extends React.Component {
 						} 
 						<div id="pgElementNext" className="pg-element-next"></div>
 					</section>
-				</div>
+					<RevokeRecovery />
+				</div> 
 				<ContextMenu />
 				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} disableDragging={disableDragging} />
 				<PostMessage />
-				<RevokeRecovery />
 			</div>
 		)
 	}
 }
 
-EditElement.defaultProps = {
-}
+EditElement.defaultProps = {}
 
 const mapStateToProps = state => state
 

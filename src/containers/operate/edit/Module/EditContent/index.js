@@ -52,8 +52,8 @@ var plMap  = {
 
 import './index.less'
 
-const compContent = (name, data, updateComp) => {
-	var props  = { data, updateComp }
+const compContent = (name, data, updateComp, from) => {
+	var props  = { data, updateComp, from }
 	var render = {
 		navigation:        <Navigation        {...props} />,
 		navigationFloat:   <NavigationFloat   {...props} />,
@@ -67,7 +67,7 @@ const compContent = (name, data, updateComp) => {
 		floorMap:          <ThemeColor        {...props} />,
 		catgByGoods:       <CatgByGoods       {...props} />,
 		swiperByGoods:     <SwiperByGoods     {...props} />
-	}
+	} 
 	return render[name]
 }
 
@@ -79,41 +79,56 @@ class EditContent extends React.Component {
 	componentWillUnmount() {}
 
 	updateComp = () => {
-		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { data, actions, editConfig,from } = this.props
+		let { curData, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
-		actions.updateComp(null, parentComp? parentComp: data)
+		if(from&&from === "banner"){
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 	onChange = (val, con, key, cfg, index) => {
-		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { data, actions, editConfig,from } = this.props
+		let { curData, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
 		val = val > cfg.max ? cfg.max : val 
 		con[key] = val
-		actions.updateComp(null, parentComp? parentComp: data)
+		if(from&&from === "banner"){
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		} 
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, key) {
-		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { data, actions, editConfig,from } = this.props
+		let { curData,globalData } = editConfig
 		let { parentComp } = curData
 		data.auth.content[key] = val
-		actions.updateComp(null, parentComp? parentComp: data)
+		if(from&&from === "banner"){
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	deleteCom(index) { 
-		let { data, actions, editConfig } = this.props;
-		let { curData, curComp } = editConfig
+		let { data, actions, editConfig,from } = this.props;
+		let { curData, curComp, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
 		if(getAttr(content) === 'Array') {
 			content = content.filter((item,i) => i!=index)
 			data.data.content = content
-			actions.updateComp(null, parentComp? parentComp: data)
+			if(from&&from === "banner"){
+				globalData.banner = data;
+				return actions.updateGlobal(globalData)
+			}
+			return actions.updateComp(null, parentComp? parentComp: data)
 		}   
-		
 	}
 
 	urlCheck(val) {
@@ -156,11 +171,11 @@ class EditContent extends React.Component {
 	} 
 	// 跳转路由
 	renderRouter(cfg, con, val, key, index) {
-		let { data, actions } = this.props
+		let { data, actions, from } = this.props
 		return (
-			<RouterJump data={data} content={val} actions={actions} />
+			<RouterJump data={data} content={val} actions={actions} from={from} />
 		)
-	}
+	} 
 	// 上传图片
 	renderImage(cfg, con, val, key, index) {
 		let { data } = this.props
@@ -191,7 +206,7 @@ class EditContent extends React.Component {
 	}
 	//图片视频
 	renderImgAndVideo(cfg, con, val, key, index) { 
-		let { data } = this.props
+		let { data, from } = this.props
 		return (
 				<ImageAndVideoComp
 					data={data}
@@ -200,6 +215,7 @@ class EditContent extends React.Component {
 					con={con}
 					style={{ width: '100%' }}
 					index={index}
+					from={from}
 				/>
 			)
 	}
@@ -401,7 +417,7 @@ class EditContent extends React.Component {
 		console.log(e)
 	}
 	render() {
-		let { data, actions, editConfig } = this.props
+		let { data, actions, editConfig, from } = this.props
 		let compName = data.name
 		if (!compName) return false
 		let { curData } = editConfig
@@ -413,13 +429,13 @@ class EditContent extends React.Component {
 		let childNode,
 			activeKey,
 			feature,
-			compCon = compContent(compName, this.props, this.updateComp)
+			compCon = compContent(compName, this.props, this.updateComp, from)
 
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return ( 
-					<Panel header={`内容${i + 1}`} key={`${i}`}> 
+					<Panel header={`内容${i + 1} ${compName === 'swiperImgAndVideo' && i === 0? '(建议为图片)': ''}`} key={`${i}`}> 
 						{ this.renObj(data, _, i) }       
 					</Panel>   
 				)  
@@ -438,7 +454,7 @@ class EditContent extends React.Component {
 		}
 		if (parentComp) {
 			mockData = this.createMock(compName, da)
-		}
+		}   
 		return (
 			<section className="ry-roll-screen-config">
 				{
@@ -456,8 +472,8 @@ class EditContent extends React.Component {
 				}
 				{ compCon }
 				<Collapse defaultActiveKey={activeKey} activeKey={activeKey} onChange={this.cb}>
-					{ childNode }
-				</Collapse>
+					{ childNode } 
+				</Collapse> 
 			</section>
 		)
 	}

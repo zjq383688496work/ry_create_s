@@ -89,7 +89,7 @@ class RevokeRecovery extends React.Component {
 		// return ENV === 'dev'
 			// ?
 		return	(
-			<div className="revoke-recovery">
+			<div className={`revoke-recovery ${tempCfg.composeType == 'PORTRAIT' ? 'portrait' : 'landscape'}`}>
 				<Tooltip placement="right" title={'撤销'}>
 					<div id="btnRevoke" className={idx >= len? 's-disabled': ''} onClick={this.handleRevoke}><Iconf type="undo"/></div>
 				</Tooltip>

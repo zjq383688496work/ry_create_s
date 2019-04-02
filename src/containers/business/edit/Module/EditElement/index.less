@@ -17,7 +17,6 @@
 		.pg-element {
 			width:  960px;
 			height: 540px;
-			overflow: hidden;
 		}
 	}
 	&.pg-element-PORTRAIT {
@@ -66,6 +65,7 @@
 		}
 	}
 	.pg-element-box {
+		position:relative;
 		background-color: #fff;
 		box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
 	}
@@ -111,4 +111,7 @@
 			display: none;
 		}
 	}
+}
+#pgElement {
+	overflow: hidden;
 }

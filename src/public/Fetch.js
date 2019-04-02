@@ -168,6 +168,22 @@ export default class Fetch {
 			}) 
 		});
 	}
+	//视频上传
+	static postVIDEO(url,data,mallId) {
+		return new Promise((resolve, reject) => {
+			const newConfig = mallId ? Object.assign({}, {
+				method: 'POST',
+				body:data,
+				headers: { mallId }
+			}) : Object.assign({}, {
+				method: 'POST',
+				body:data
+			});
+			fetch(url, newConfig).then(response => response.json()).then(result => {
+				resolve(result)
+			}) 
+		});
+	}
 	static putJSON(url, data) {
 		return new Promise((resolve, reject) => {
 			const newConfig = Object.assign({}, {
