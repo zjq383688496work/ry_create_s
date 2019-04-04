@@ -20,28 +20,17 @@ common.getAccessToken = function () {
 
 export default class Fetch {
 	static remote(url, config, success, failed) {
-		const defaultConfig = {
-			method: 'GET'
-		};
-		const newConfig = Object.assign({}, defaultConfig, config);
-
+		var newConfig = Object.assign({}, { method: 'GET' }, config);
 		fetch(url, newConfig).then(response => response.json()).then(result => {
 			if (result.meta.errno === 0) {
-				if (success) {
-					success(result.result);
-				}
+				success && success(result.result)
 			} else {
-				if (result.msg === '登录已过期,请重新登录!' || result.msg === 'access_token不正确，请退出后重试') {
-					// location.href = '#/login';
-					console.log('登录已过期,请重新登录!')
-				}
+				if (result.msg === '登录已过期,请重新登录!' || result.msg === 'access_token不正确，请退出后重试') console.log('登录已过期,请重新登录!')
 				throw new Error(result.meta.msg);
 			}
 		}).catch(error => {
 			message.error(error.message)
-			if (failed) {
-				failed(error)
-			}
+			failed && failed(error)
 		})
 	}
 

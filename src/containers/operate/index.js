@@ -25,7 +25,8 @@ class OperateComponent extends React.Component {
 	}
 
 	timeInit() {
-		let { actions } = this.props
+		var { actions } = this.props
+		window.Actions = actions
 		actions.updateTime()
 	}
 	getWeather() {

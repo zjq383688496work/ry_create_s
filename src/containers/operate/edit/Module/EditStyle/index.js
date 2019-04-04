@@ -52,7 +52,7 @@ class EditStyle extends React.Component {
 		} else {
 			obj[css] = val
 		}
-		if(from && from === "banner"){
+		if(from === "banner"){
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
 		}
@@ -64,7 +64,7 @@ class EditStyle extends React.Component {
 		let { curData, globalData }    = editConfig
 		let { parentComp } = curData
 		data.auth.style[style][css] = val
-		if(from && from === "banner"){
+		if(from === "banner"){
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
 		}
@@ -78,7 +78,6 @@ class EditStyle extends React.Component {
 	/* 渲染组件开始 */
 	// 数字
 	renderNumber(cfg, data, obj, val, key, node) {
-		//let bigDa = bigStyle(deepCopy(da))
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}

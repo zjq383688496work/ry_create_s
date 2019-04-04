@@ -499,45 +499,41 @@ class ImgModule extends React.Component {
 		})
 		let choosed_img = index ? img_list.filter(item => item.isClicked) : img_list.filter(item => item.id === img);
 		this.props.save(choosed_img)
-	};
-	customRequest = info => {
-		const that = this
-		this.setState({loading:true})
-		let id = window.uif.userInfo.id || '1'
-		let paramsData = {
-			userId:id,
-			mallId:'',
-			imageSourceType:'OPERATION'
-		} 
-		paramsData.imageName = info.file.name.split(".")[0];
+	}
+	customRequest = ({ file }) => {
+		this.setState({ loading: true })
+		var paramsData = {
+			userId: window.uif.userInfo.id || '1',
+			mallId: '',
+			imageSourceType: 'OPERATION',
+			imageName: file.name.split('.')[0]
+		}
 		if (getEnv() === 'business') {
 			paramsData.imageSourceType = 'BUSINESS'
 			paramsData.mallId = uif.userInfo.mallMid
 		}
 		var reader = new FileReader()
-			reader.onload = (function (file) {
-				return function (e) {
-					// console.info(this.result) //这个就是base64的数据了
-					const img = this.result
-					const postData = {...paramsData,imageBase64:img}
-					Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage',postData).then(res=>{
-						message.info('上传成功!')
-						that.setState({loading:false})
-						that.props.getImgList()
-					})
-				}
-			})(info.file)
-			reader.readAsDataURL(info.file)
-	}
-	beforeUpload = file => {
-		let imgType = false;
-		if(file.type.indexOf('image/png') > -1 || file.type.indexOf('image/gif')>-1 || file.type.indexOf('image/jpeg')>-1){
-			imgType = true
+		reader.onload = ({ target }) => {
+			Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage', { ...paramsData, imageBase64: target.result }).then(() => {
+				message.info('上传成功!')
+				this.setState({ loading: false })
+				this.props.getImgList()
+			}).catch(e => {
+				this.setState({ loading: false })
+			})
 		}
-	  if (!imgType) {
-	   message.info('请上传png、jpg、gif格式图片!')
-	  }
-	  return imgType;
+		reader.readAsDataURL(file)
+	}
+	beforeUpload = ({ size, type }) => {
+		if (!/(png|jpeg|gif)/.test(type)) {
+			message.info(`图片格式不正确!`)
+			return false
+		}
+		if (size > 5e6) {
+			message.info(`当前图片大小${(size / 1e6).toFixed(1)}mb, 请上传不超过5mb的图片!`)
+			return false
+		}
+		return true
 	}
 	render() {
 		let id = window.uif.userInfo.id || '1'
@@ -552,7 +548,7 @@ class ImgModule extends React.Component {
 				<div className="right">
 					<div>
 						<Upload
-							name= 'avatar'
+							name="avatar"
 							className="avatar-uploader"
 							listType="picture-card"
 							showUploadList={false}
@@ -661,15 +657,16 @@ class VideoModule extends React.Component {
         this.setState({loading:false})
         this.props.getVideoList()
 	}
-	beforeUpload = file => {
-		let videoType = false;
-		if(file.type.indexOf('video/mp4') > -1){
-			videoType = true
+	beforeUpload = ({ size, type }) => {
+		if (!/mp4$/.test(type)) {
+			message.info(`视频格式不正确!`)
+			return false
 		}
-	  if (!videoType) {
-	   message.info('请上传mp4格式视频!')
-	  }
-	  return videoType;
+		if (size > 2e8) {
+			message.info(`当前视频大小${(size / 1e6).toFixed(1)}mb, 请上传不超过20mb的图片!`)
+			return false
+		}
+		return true
 	}
 	render() {
 		const { page_video } = this.props;
@@ -683,16 +680,16 @@ class VideoModule extends React.Component {
 				<div className="right">
 					<div>
 						<Upload
-								name= 'avatar'
-								className="avatar-uploader"
-								listType="picture-card"
-								showUploadList={false}
-								customRequest={this.customRequest}
-								beforeUpload={this.beforeUpload}
-								accept="video/*"
-							>
+							name="avatar"
+							className="avatar-uploader"
+							listType="picture-card"
+							showUploadList={false}
+							customRequest={this.customRequest}
+							beforeUpload={this.beforeUpload}
+							accept="video/mp4"
+						>
 							<div>
-								<Icon type={this.state.loading ? 'loading' : 'plus'} />
+								<Icon type={this.state.loading? 'loading': 'plus'} />
 								<div className="ant-upload-text">上传视频<br/>mp4格式,200MB大小以内</div>
 							</div>
 						</Upload>
@@ -721,15 +718,17 @@ function Type({item, choose_one, groupId}) {
 	)
 }
 //图片
-function List({ item,choose_one }) {
+function List({ item, choose_one }) {
+	if (!item) return null
+	var { attribute, id, isClicked, name, preview, thumbnail } = item
 	return  (
-			<div onClick={()=>{choose_one(item.id)}} className={item.isClicked?'choosed':''}>
-				<div className={item.isClicked?'icon_img':''}>
-					<div className="right-symbol"></div>
-				</div>
-				<img src={item.preview || item.url} />
-				<div className="showName">{item.name}</div>
-				<div className="showSize">{item.attribute}</div>
+		<div onClick={()=>{choose_one(id)}} className={isClicked? 'choosed': ''}>
+			<div className={isClicked? 'icon_img': ''}>
+				<div className="right-symbol"></div>
 			</div>
-		)
+			{ (preview || thumbnail)? <img src={preview || thumbnail} />: null }
+			<div className="showName">{name}</div>
+			<div className="showSize">{attribute}</div>
+		</div>
+	)
 }

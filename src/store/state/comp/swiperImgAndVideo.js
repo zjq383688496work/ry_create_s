@@ -11,7 +11,7 @@ const data = {
 				bottomLeft:  0
 			}
 		},
-		pageSet: {
+		/*pageSet: {
 			display:'block',
 			width:  6,
 			height: 6,
@@ -39,7 +39,7 @@ const data = {
 				spread_dis: 0,
 				color:      { type: 'custom', color: '#000' }
 			}
-		},
+		},*/
 		filterActive: {
 			borderWidth: 0,
 			borderStyle: 'solid',

@@ -1,27 +1,18 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import ColorPicker from 'rc-color-picker'
-import ThemeManage from 'compEdit/EditCommon/ThemeManage'
+// import ColorPicker from 'rc-color-picker'
+// import ThemeManage from 'compEdit/EditCommon/ThemeManage'
 import BackMusic from 'compEdit/EditCommon/BackMusic'
 import Advert from 'compEdit/EditCommon/Advertisement'
-import { Collapse, Icon, Input, Select, Tabs } from 'antd'
-import EditContent    from 'compEdit/EditContent'
-import EditStyle      from 'compEdit/EditStyle'
+// import { Collapse, Icon, Input, Select, Tabs } from 'antd'
 
-const Panel  = Collapse.Panel
-const Option = Select.Option 
-const TabPane = Tabs.TabPane
+// const Panel  = Collapse.Panel
+// const Option = Select.Option
+// const TabPane = Tabs.TabPane
 
 import ImageUploadTheme from 'compEdit/EditCommon/ImageUploadTheme'
 
@@ -37,20 +28,17 @@ class EditTheme extends React.Component {
 		super(props)
 
 		this.state = {
-			keyType: 'color',
-			keyValue: '',
-			editKey: '',
-			cache: {}
+			// keyType:  'color',
+			// keyValue: '',
+			// editKey:  '',
+			// cache:    {}
 		}
 	}
-
 	componentWillMount() {}
-
 	componentDidMount() {}
-
 	componentWillUnmount() {}
 
-	changeColor(c, key) {
+	/*changeColor(c, key) {
 		var col = c.color.colorRGB()
 		col.push(c.alpha/100)
 		col = `rgba(${col.join(',')})`
@@ -182,14 +170,14 @@ class EditTheme extends React.Component {
 				</div>
 			</div>
 		)
-	}
+	}*/
 
 	render() {
 		let { data, editConfig }  = this.props
 		let activeKey = ['0', '1']
 		let state     = this.state
 		let colors    = data.list[data.idx].colors
-		let addNode
+		/*let addNode
 		if (Object.keys(colors).length < 50) {
 			addNode = (
 				<div className="pgs-row">
@@ -213,10 +201,8 @@ class EditTheme extends React.Component {
 		let childNode = Object.keys(colors).map((_) => {
 			let col = colors[_]
 			let dom = this[state.editKey === _? 'renderEdit': 'renderTheme'](_, col, data)
-			return (
-				<div key={_}>{ dom }</div>
-			)
-		})
+			return <div key={_}>{ dom }</div>
+		})*/
 		return (
 			<section className="pg-theme">
 				{/*<ThemeManage
@@ -243,39 +229,12 @@ class EditTheme extends React.Component {
 					data={editConfig.globalData}
 					action={'updateGlobal'}
 				/>
-				{
-					tempCfg.bannerAds == 1 ? 
-					<Collapse defaultActiveKey={['0']}>
-						<Panel header={`banner广告`} key={0}>
-							<Banner {...this.props} />
-						</Panel>
-					</Collapse> : null
-				}
 			</section>
 		)
 	}
 }
 
-
-//  banner广告配置选项
-class Banner extends React.Component {
-
-	render() {
-		let { data, actions, editConfig }  = this.props,
-			{ globalData } = editConfig,
-			{ banner } = globalData
-		return (
-				<div className="pg-right scrollbar" id="banner">
-					<Tabs defaultActiveKey="1" type="card">
-						<TabPane tab="内容" key="1"><EditContent   data={banner} from="banner" /></TabPane>
-						<TabPane tab="展示" key="2"><EditStyle     data={banner} from="banner"/></TabPane>
-					</Tabs>
-				</div>
-			)
-	}
-}
-EditTheme.defaultProps = {
-}
+EditTheme.defaultProps = {}
 
 const mapStateToProps = state => state
 

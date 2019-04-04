@@ -95,35 +95,36 @@ class EditElement extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			keyCtrl:   false,
-			shift:     false,
-			v:         false,
-			h:         false,
-			vPosition: { left: 0 },
-			hPosition: { top:  0 },
-			nearPos:   false,
-			dragAxis:  'both',
-			drag:      true,
-      editConfig:this.props.editConfig
+			keyCtrl:    false,
+			shift:      false,
+			v:          false,
+			h:          false,
+			vPosition:  { left: 0 },
+			hPosition:  { top:  0 },
+			nearPos:    false,
+			drag:       true,
+			dragAxis:   'both',
+			editConfig: props.editConfig,
 		}
 	}
 	componentWillReceiveProps(nextProps) {
 		let { editConfig } = nextProps,
-			{ curPage } = editConfig,
+			{ curPage }    = editConfig,
 			editConfigPrev = this.props.editConfig,
-			curPagePrev = editConfigPrev.curPage,
-			elements = deepCopy(curPage.elements)
-		if(curPagePrev.router === curPage.router){
-			this.setState({ editConfig:editConfig })
-		}else{
+			curPagePrev    = editConfigPrev.curPage,
+			elements       = deepCopy(curPage.elements)
+		if (curPagePrev.router === curPage.router){
+			this.setState({ editConfig })
+		} else {
 			curPage.elements = []
-			this.setState({ editConfig:editConfig })
-			setTimeout(()=>{ 
+			this.setState({ editConfig })
+			var t = setTimeout(() => {
+				clearTimeout(t)
 				curPage.elements = elements
-				this.setState({ editConfig:editConfig })
-			},1)
+				this.setState({ editConfig })
+			}, 1)
 		}
-		this.state.drag ?  this.stateLayout() : null
+		this.state.drag? this.stateLayout(): null
 	}
 	stateLayout = () => {
 		let { data, editConfig } = this.props
@@ -251,30 +252,30 @@ class EditElement extends React.Component {
 	showLine = (param,_,i,obj) => {
 		let { data, actions,editConfig } = this.props,
 			{ globalData } = editConfig,
-			{ multiComp,banner } = globalData;
-		let bannerLayout = banner&&banner.data.layout,
+			{ multiComp, banner } = globalData;
+		let bannerLayout = banner && banner.data.layout,
 			eles   = data.elements || [],
-			bodySty = tempCfg.composeType == 'LANDSCAPE' ? {height:539,width:959,left:0,top:0} : 
+			bodySty = tempCfg.composeType == 'LANDSCAPE' ? {height:539,width:959,left:0,top:0} :
 			(tempCfg.bannerAds==1?{width:539,height:`${959-bannerLayout.height}`,left:0,top:0}:{width:539,height:959,left:0,top:0}),
 			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
 			InductionLineObj = InductionLine(param,eles,layout,i,bodySty),
 			v= InductionLineObj.v,h=InductionLineObj.h,eleKnock = InductionLineObj.eleKnock
-		if(v){ 
+		if(v){
 			this.setState({v:true,vPosition:{left:`${v.left}px`,p_left:v.p_left}})
 		}else{
 			this.setState({v:false,vPosition:{p_left:param.x}})
-		} 
+		}
 		if(h){
 			this.setState({h:true,hPosition:{top:`${tempCfg.bannerAds==1?h.top+bannerLayout.height:h.top}px`,p_top:h.p_top}})
-		}else{ 
+		}else{
 			this.setState({h:false,hPosition:{p_top:param.y}})
 		}
 		if(eleKnock){
 			this.setState({nearPos:nearPosSty(eleKnock,bannerLayout)})
-		}else{
+		} else {
 			this.setState({nearPos:false})
-		}   
-	}    
+		}
+	}
 	changeEditable = (item, idx) => {
 		let { actions } = this.props
 		if(item.name == 'web'){
@@ -290,13 +291,23 @@ class EditElement extends React.Component {
 		let { actions } = this.props
 		actions.deleteComp(idx)
 	}
+	bannerDom = () => {
+		var { actions, editConfig } = this.props,
+			{ banner } = editConfig.globalData,
+			{ bannerAds, composeType = 'PORTRAIT' } = tempCfg
+		if (!banner || bannerAds != 1) return null
+		var { layout } = banner.data,
+			{ height, width } = layout,
+			h = composeType === 'PORTRAIT'? height: '100%',
+			w = composeType === 'LANDSCAPE'? width: '100%'
+		return <div className="bannerBox" style={{ height: h, width: w }}><Banner {...this.props} /></div>
+	}
 
 	render() {
 		let { data, actions, editConfig, location } = this.props
 		let { globalData, curData } = editConfig
 		let { pageGroupIdx, pageIdx, compIdx } = curData
-		let { multiComp, banner } = globalData
-		let bannerLayout = banner&&banner.data.layout
+		let { multiComp } = globalData
 		let { index } = multiComp
 		let state  = this.state
 		let ct     = tempCfg.composeType || 'PORTRAIT'
@@ -372,20 +383,12 @@ class EditElement extends React.Component {
 				</Rnd>
 			)
 		})
+		var bannerDom = this.bannerDom()
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
 				<div className="pg-element-box">
-					{ /*ads
-						? <div className="ads-placeholder"></div>
-						: null*/
-					}
-					<section id="pgElement" className="pg-element">
-						{
-							tempCfg.bannerAds == 1 ? 
-							<div className="bannerBox" style={{height:`${ct=="PORTRAIT"?bannerLayout.height+"px":"100%"}`,width:`${ct=="LANDSCAPE"?bannerLayout.width+"px":"100%"}`}}>
-								<Banner {...this.props} />
-							</div> : null
-						}
+					<section id="pgElement" className="pg-element pg-operate">
+						{ bannerDom }
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }
 						</div>
@@ -402,7 +405,7 @@ class EditElement extends React.Component {
 						<div id="pgElementNext" className="pg-element-next"></div>
 					</section>
 					<RevokeRecovery />
-				</div> 
+				</div>
 				<ContextMenu />
 				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} disableDragging={disableDragging} />
 				<PostMessage />

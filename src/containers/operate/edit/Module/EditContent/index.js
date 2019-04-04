@@ -79,24 +79,24 @@ class EditContent extends React.Component {
 	componentWillUnmount() {}
 
 	updateComp = () => {
-		let { data, actions, editConfig,from } = this.props
+		let { data, actions, editConfig, from } = this.props
 		let { curData, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
-		if(from&&from === "banner"){
+		if(from === "banner"){
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
 		}
 		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 	onChange = (val, con, key, cfg, index) => {
-		let { data, actions, editConfig,from } = this.props
+		let { data, actions, editConfig, from } = this.props
 		let { curData, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
 		val = val > cfg.max ? cfg.max : val 
 		con[key] = val
-		if(from&&from === "banner"){
+		if(from === "banner"){
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
 		} 
@@ -104,11 +104,11 @@ class EditContent extends React.Component {
 	}
 
 	onChangeAuth(val, key) {
-		let { data, actions, editConfig,from } = this.props
+		let { data, actions, editConfig, from } = this.props
 		let { curData,globalData } = editConfig
 		let { parentComp } = curData
 		data.auth.content[key] = val
-		if(from&&from === "banner"){
+		if(from === "banner"){
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
 		}
@@ -116,14 +116,14 @@ class EditContent extends React.Component {
 	}
 
 	deleteCom(index) { 
-		let { data, actions, editConfig,from } = this.props;
+		let { data, actions, editConfig, from } = this.props;
 		let { curData, curComp, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
 		if(getAttr(content) === 'Array') {
 			content = content.filter((item,i) => i!=index)
 			data.data.content = content
-			if(from&&from === "banner"){
+			if(from === "banner"){
 				globalData.banner = data;
 				return actions.updateGlobal(globalData)
 			}

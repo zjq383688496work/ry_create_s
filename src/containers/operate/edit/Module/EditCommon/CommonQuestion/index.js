@@ -70,10 +70,8 @@ export default class CommonQuestion extends React.Component {
 				<div className="outer">
 					<div className="content">
 						<div className="left">
-							 
 						</div> 
 						<div className="right">
-						
 						</div>  
 					</div>
 				</div>
