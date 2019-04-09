@@ -1,20 +1,19 @@
 import React from 'react'
-import './index.less'
+// import './index.less'
 
 import SwiperSame      from '../SwiperSame'
 import PictureAndVideo from 'compEdit/EditCommon/PictureAndVideo'
 import { Row, Col, Collapse, Icon, message } from 'antd'
 const  { Panel } = Collapse
 
-export default class SwiperImage extends React.Component {
-	state = {
-		init: false
-	}
+export default class Banner extends React.Component {
+	state = { init: false }
 	addImg = () => {
 		this.setState({ init: true }, () => { this.addImgVideoModal.show() })
 	}
-	enter = list => { 
-		let props = this.props.data,isContinue = true
+	enter = list => {
+		var props = this.props.data,
+			isContinue = true
 		if (!props.editConfig) props = props.data
 		if (!props.editConfig) return
 		let { data, actions, editConfig } = props
@@ -22,36 +21,34 @@ export default class SwiperImage extends React.Component {
 		let { content, layout }     = data.data
 		let { parentComp } = curData
 		let newContent =  this.do_content(list,content)
-		if(newContent.length > 20){
-			return message.warning('最多只能添加20张素材！')
-		}
-		if(envType === 'business') {
-			isContinue = this.checkImg(list,layout)
-		}
+		if (newContent.length > 20) return message.warning('最多只能添加20张素材！')
+		if (envType === 'business') isContinue = this.checkImg(list,layout)
 		if (!isContinue) return message.info("选择的图片不符合尺寸，请重新选择！")
 		this.setState({ init: false })
-		this.addImgVideoModal.hide() 
+		this.addImgVideoModal.hide()
 		data.data.content = newContent
-		return actions.updateComp(null, parentComp? parentComp: data)
+		globalData.banner = data
+		return actions.updateGlobal(globalData)
 	}
 	// 检查素材大小
 	checkImg = (list, layout) => {
-		let { width,height } = layout,isOk = true
-		if(tempCfg.resolutionType == 2) { width *= 4;height *= 4 }
-		else { width *= 2;height *= 2 }
-		if(!list || list.length === 0) return
-		isOk = list.every(_=>{
-			if(_.type == 2) return true
-			let { attribute } = _
-			attribute = attribute&&attribute.split("*")
+		var { width, height } = layout,
+			isOk = true
+		if (tempCfg.resolutionType == 2) { width *= 4;height *= 4 }
+		else { width *= 2; height *= 2 }
+		if (!list || list.length === 0) return
+		isOk = list.every(_ => {
+			if (_.type == 2) return true
+			var { attribute } = _
+			attribute = attribute && attribute.split('*')
 			return Math.abs(+attribute[0] - width) < 100 && Math.abs(+attribute[1] - height) < 100
 		})
 		return isOk
-	}  
+	}
 	do_content = (list, content) => {
-		list = list.map(({ attribute, originalSizePreview, preview, url }) => {
-			let item = '' 
-			if (_.type == 2) {
+		list = list.map(({ attribute, originalSizePreview, preview, type, url }) => {
+			let item = ''
+			if (type == 2) {
 				item = {
 					attribute,
 					img: { type: 'custom', video: url, preview, originalSizePreview },
@@ -68,7 +65,7 @@ export default class SwiperImage extends React.Component {
 				if (envType === 'business') item = { ...item, delayOnly: 5, date: '' }
 			}
 			return item
-		}) 
+		})
 		let newList = deepCopy(list)
 		content.map(_ => {
 			list.map(v => {
@@ -82,25 +79,25 @@ export default class SwiperImage extends React.Component {
 						newList = newList.filter(s => s.img.video != v.img.video)
 						return
 					}
-				} 
+				}
 			})
-		})    
-		let newContent = content.concat(newList)
+		})
+		var newContent = content.concat(newList)
 		return newContent
-	}  
+	}
 	initFn = () => {
 		this.setState({ init: false })
 	}
 	render() {
-		let props = this.props.data
+		var props = this.props.data
 		if (!props.editConfig) props = props.data
 		if (!props.editConfig) return
-		let { data, actions, editConfig } = props
-		let { curData }    = editConfig
-		let { content }    = data.data
+		var { data, actions, editConfig } = props,
+			{ curData } = editConfig,
+			{ content } = data.data
 		return (
 			<div>
-				{ content.length > 1? <SwiperSame data={props} />: false }
+				{ content.length? <SwiperSame data={props} />: null }
 				<Collapse activeKey={['0']} onChange={this.cb}>
 					<Panel header={`添加`} key={0}>
 						<div className="pgs-row" key={0}>
@@ -115,7 +112,7 @@ export default class SwiperImage extends React.Component {
 										</Col>
 									</Row>
 								</div>
-							</div> 
+							</div>
 						</div>
 					</Panel>
 				</Collapse>
@@ -127,8 +124,8 @@ export default class SwiperImage extends React.Component {
 						enter={this.enter}
 						init={this.state.init}
 						initFn={this.initFn}
-					/> : null
-				} 
+					/>: null
+				}
 			</div>
 		)
 	}

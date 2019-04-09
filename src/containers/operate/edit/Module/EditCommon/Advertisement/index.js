@@ -104,7 +104,7 @@ class Advert extends React.Component {
 			activeKey = Array.from(new Array(1), (_, i) => `${i}`),
 			advert = data.data.advert || { switch:{auth:false,value:false}, time:{auth:false,value:30} },
 			btnNode
-		if(getEnv() === 'business'){
+		if(envType === 'business'){
 			return this.renderBus.bind(this,advert)()
 		}else{
 			return (

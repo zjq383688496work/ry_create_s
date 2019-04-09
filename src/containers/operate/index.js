@@ -52,16 +52,17 @@ class OperateComponent extends React.Component {
 		let id = query.id
 		return (resolve, reject) => {
 			if (!id) {
+ 				var ct = composeType || 'PORTRAIT'
 				window.tempCfg = {
 					name: name || '',
-					templateType: templateType || 'MALL',
-					composeType:  composeType  || 'PORTRAIT',
-					adsFlag:      ~~adsFlag      || 0,
-					bannerAds:   bannerAds  || 0,  //  无banner  1--有banner
-					resolutionType    :   resolutionType      || 1  //   1 2K ---- 2 4K
+					templateType:   templateType   || 'MALL',
+					composeType:    ct,
+					adsFlag:        ~~adsFlag      || 0,
+					bannerAds:      ~~bannerAds    || 0,  //  0: 无  1: 有
+					resolutionType: resolutionType || 1,  //  1: 2K  2: 4K
  				}
- 				if(bannerAds == 1){
- 					globalData.banner = comp["swiperImgAndVideo"]
+ 				if (bannerAds == 1) {
+ 					globalData.banner = comp[`banner${composeType === 'PORTRAIT'? 'Vertical': 'Horizontal'}`]
  					actions.updateGlobal(globalData)
  				}
  				return resolve('模板数据')

@@ -61,7 +61,7 @@ export default class VideoList extends React.Component {
 			type: 2
 		}
 		var ty = 'ySourceGroupManage'
-		if (getEnv() === 'business') {
+		if (envType === 'business') {
 			getData.mallId = uif.userInfo.mallMid
 			ty = 'sourceGroupManage'
 		}
@@ -96,7 +96,7 @@ export default class VideoList extends React.Component {
 				type:        2
 			}
 			var ty = 'ySourceManage'
-			if (getEnv() === 'business') {
+			if (envType === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
@@ -201,12 +201,12 @@ class VideoModule extends React.Component {
 		const that = this
 		this.setState({loading:true})
 		let mallId = undefined
-		if (getEnv() === 'business') {
+		if (envType === 'business') {
 			mallId = uif.userInfo.mallMid
 		}
 		VideoCrop(info.file,this.postEndFn,mallId)
 	}
-	//上传视频成功后的回调
+	// 上传视频成功后的回调
 	postEndFn = () => {
 		message.info('上传成功!')
         this.setState({loading:false})

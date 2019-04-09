@@ -95,7 +95,7 @@ export default class PictureAndVideo extends React.Component {
 			type: type
 		}
 		var ty = 'ySourceGroupManage'
-		if (getEnv() === 'business') {
+		if (envType === 'business') {
 			getData.mallId = uif.userInfo.mallMid
 			ty = 'sourceGroupManage'
 		}
@@ -280,7 +280,7 @@ class ImgAndModule extends React.Component {
 				type:        1
 			}
 			var ty = 'ySourceManage'
-			if (getEnv() === 'business') {
+			if (envType === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
@@ -382,7 +382,7 @@ class VideoAndModule extends React.Component {
 				type:        2
 			}
 			var ty = 'ySourceManage'
-			if (getEnv() === 'business') {
+			if (envType === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
@@ -508,7 +508,7 @@ class ImgModule extends React.Component {
 			imageSourceType: 'OPERATION',
 			imageName: file.name.split('.')[0]
 		}
-		if (getEnv() === 'business') {
+		if (envType === 'business') {
 			paramsData.imageSourceType = 'BUSINESS'
 			paramsData.mallId = uif.userInfo.mallMid
 		}
@@ -645,7 +645,7 @@ class VideoModule extends React.Component {
 			imageSourceType:'OPERATION'
 		} 
 		paramsData.imageName = info.file.name.split(".")[0];
-		if (getEnv() === 'business') {
+		if (envType === 'business') {
 			paramsData.imageSourceType = 'BUSINESS'
 			paramsData.mallId = uif.userInfo.mallMid
 		}

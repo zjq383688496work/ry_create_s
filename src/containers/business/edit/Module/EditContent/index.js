@@ -331,12 +331,13 @@ class EditContent extends React.Component {
 		) 
 	}
 	renObj(parent, data, content, index) {
+		var { from } = this.props
 		let me = this
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
-			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p],
-				type = data.name == 'swiperImgAndVideo'&&p=="img" ? 'ImgAndVideo' : cm.type
+			let cm     = p == 'img' && content.type == 'video'? conMap.video: conMap[p],
+				type   = (data.name === 'swiperImgAndVideo' || from === 'banner') && p === 'img'? 'ImgAndVideo': cm.type
 			let val    = content[p]
 			let auth   = data.auth.content[p]
 			let render = me[`render${type}`]
@@ -420,7 +421,7 @@ class EditContent extends React.Component {
 		if (content.length) {
 			childNode = content.map((_, i) => {
 				return (
-					<Panel header={`内容${i + 1}  ${compName==="swiperImgAndVideo"&&i===0?"(建议为图片)":""}`} key={i + 1}>
+					<Panel header={`内容${i + 1}  ${compName === 'swiperImgAndVideo' && !i? '(建议为图片)': ''}`} key={i + 1}>
 						{ this.renObj(data, data, _, i) }
 					</Panel>
 				)

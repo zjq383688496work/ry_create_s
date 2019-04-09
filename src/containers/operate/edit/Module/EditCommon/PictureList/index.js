@@ -46,7 +46,7 @@ export default class PictureList extends React.Component {
 			type: 1
 		}
 		var ty = 'ySourceGroupManage'
-		if (getEnv() === 'business') {
+		if (envType === 'business') {
 			getData.mallId = uif.userInfo.mallMid
 			ty = 'sourceGroupManage'
 		}
@@ -97,7 +97,7 @@ export default class PictureList extends React.Component {
 				type:        1
 			}
 			var ty = 'ySourceManage'
-			if (getEnv() === 'business') {
+			if (envType === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
@@ -217,7 +217,7 @@ class ImgModule extends React.Component {
 			imageSourceType: 'OPERATION',
 			imageName: file.name.split('.')[0]
 		}
-		if (getEnv() === 'business') {
+		if (envType === 'business') {
 			paramsData.imageSourceType = 'BUSINESS'
 			paramsData.mallId = uif.userInfo.mallMid
 		}
