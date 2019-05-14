@@ -82,6 +82,10 @@ class ThemeManage extends React.Component {
 		)
 	}
 
+	cb(key) {
+		// console.log(key)
+	}
+
 	render() {
 		let { list, idx, name, max, isBusiness } = this.props
 		let activeKey = Array.from(new Array(2), (_, i) => `${i}`)
@@ -125,7 +129,7 @@ class ThemeManage extends React.Component {
 			)
 		}): false
 		return (
-			<Collapse defaultActiveKey={activeKey}>
+			<Collapse defaultActiveKey={activeKey} onChange={this.cb}>
 				<Panel header={`${name}管理`} key={0}>
 					<ul className="pgs-sl">
 						{ addNode }

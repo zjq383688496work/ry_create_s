@@ -38,7 +38,6 @@ import Area              from 'compEdit/EditElement/Area'
 import Qrcode            from 'compEdit/EditElement/Qrcode'
 
 import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
-import Banner            from 'compEdit/EditElement/Banner'
 
 import * as actions from 'actions'
 
@@ -84,26 +83,12 @@ const compContent = (name, data, actions, type, idx, csn,contentEditable) => {
 }
 
 class EditElement extends React.Component {
-	state = {
-		editConfig:this.props.editConfig
-	}
-	componentWillReceiveProps(nextProps) {
-		let { editConfig } = nextProps,
-			{ curPage } = editConfig,
-			editConfigPrev = this.props.editConfig,
-			curPagePrev = editConfigPrev.curPage,
-			elements = deepCopy(curPage.elements)
-		if(curPagePrev.router === curPage.router){
-			this.setState({ editConfig:editConfig })
-		}else{
-			curPage.elements = []
-			this.setState({ editConfig:editConfig })
-			setTimeout(()=>{ 
-				curPage.elements = elements
-				this.setState({ editConfig:editConfig })
-			},1)
-		}
-	}
+	componentWillMount() {}
+
+	componentDidMount() {}
+
+	componentWillUnmount() {}
+
 	selectComp(e, data, idx) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
@@ -121,12 +106,8 @@ class EditElement extends React.Component {
 		actions.updateComp(idx, item)
 	} 
 	render() {
-		let { data, actions, location } = this.props,
-			{ editConfig } = this.state,
-			{ curData,globalData } = editConfig,
-			{ pageGroupIdx, pageIdx, compIdx } = curData,
-			{ banner } = globalData,
-			bannerLayout    = banner&&banner.data.layout
+		let { data, actions, editConfig, location } = this.props
+		let { pageGroupIdx, pageIdx, compIdx } = editConfig.curData
 		let ct     = tempCfg.composeType || 'PORTRAIT'
 		let ads    = tempCfg.adsFlag? 'ads': ''
 		if (!data || data.title === undefined) return (<div className={`pg-element-parent e-flex-box pg-element-${ct} ${ads}`}><section className="pg-element"></section></div>)
@@ -187,12 +168,6 @@ class EditElement extends React.Component {
 						: null*/
 					}
 					<section id="pgElement" className="pg-element">
-						{
-							tempCfg.bannerAds == 1 ? 
-							<div className="bannerBox" style={{height:`${ct=="PORTRAIT"?bannerLayout.height+"px":"100%"}`,width:`${ct=="LANDSCAPE"?bannerLayout.width+"px":"100%"}`}}>
-								<Banner {...this.props} />
-							</div> : null
-						}
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }
 						</div>

@@ -72,10 +72,8 @@ class ImageUploadComp extends React.Component {
 	}
 
 	render() {
-		let { img, name, actions, editConfig, index, data, type } = this.props
+		let { img, name, actions, editConfig, index, data } = this.props
 		let { width, height } = this.state
-		if(tempCfg.resolutionType == 2) { width *= 4;height *= 4 }
-		else { width *= 2;height *= 2 }
 		let btnNode
 		let imgVal   = img && img.img
 		let videoVal = img && img.video
@@ -154,7 +152,7 @@ class ImageUploadComp extends React.Component {
 						</div>
 					</div>
 				)
-				scaleNode = <div className="img_scale">{  width } x { height }</div>
+				scaleNode = <div className="img_scale">{ width * 2 } x { height * 2 }</div>
 			} else {
 				btnNode = (
 					<div className="add_img" onClick={this.showList.bind(this)}>
@@ -179,7 +177,6 @@ class ImageUploadComp extends React.Component {
 					actions={actions}
 					enter={this.enter}
 					index={index}
-					type={type}
 				/>
 			</div>
 		)

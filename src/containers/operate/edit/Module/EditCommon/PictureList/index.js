@@ -8,7 +8,7 @@
 import React from 'react';
 import SkyLight from 'react-skylight';
 import './index.less'
-import { Button, Upload, message, Modal, Pagination, Icon, Input } from 'antd'
+import { Button, Upload, message,Modal,Pagination,Icon,Input } from 'antd'
 import Url from 'public/Url'
 const commonCss = {
 	dialogStyles: {
@@ -46,11 +46,11 @@ export default class PictureList extends React.Component {
 			type: 1
 		}
 		var ty = 'ySourceGroupManage'
-		if (envType === 'business') {
+		if (getEnv() === 'business') {
 			getData.mallId = uif.userInfo.mallMid
 			ty = 'sourceGroupManage'
 		}
-		Ajax.postJSON(`/easy-smart/${ty}/query`, getData).then(res => {
+		Ajax.postJSON(`/easy-smart-basic/${ty}/query`, getData).then(res => {
 			this.setState({ 
 				imgTypes: res.data
 			})
@@ -60,7 +60,7 @@ export default class PictureList extends React.Component {
 		// this.getImgList()
 	}
 	state = {
-		choosed_img: false,
+		choosed_img:[],
 		imgTypes: [],
 		imgList:  [],
 		page_img: {},
@@ -97,11 +97,11 @@ export default class PictureList extends React.Component {
 				type:        1
 			}
 			var ty = 'ySourceManage'
-			if (envType === 'business') {
+			if (getEnv() === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
-			Ajax.postJSON(`/easy-smart/${ty}/query`, postData).then(res => {
+			Ajax.postJSON(`/easy-smart-basic/${ty}/query`, postData).then(res => {
 				this.setState({
 					imgList:res.data,
 					page_img:res.page
@@ -113,23 +113,11 @@ export default class PictureList extends React.Component {
 		this.addImgModal.hide()
 	}
 	save = () => {
-		let { choosed_img,attribute } = this.state,
-				{ index } = this.props
-		if (choosed_img) {
-			let { type,data } = this.props;
-			data = data.data.data
-			let { layout } = data,
-				{ width,height } = layout
-			if(tempCfg.resolutionType == 2) { width *= 4;height *= 4 }
-			else { width *= 2;height *= 2 }
-			let new_attribute = attribute&&attribute.split("*")
-			if(type==="business"&&(Math.abs(+new_attribute[0] - width) >= 100 || Math.abs(+new_attribute[1] - height) >= 100)){
-				return message.info(`选择的图片尺寸不符合,请重新选择!`)
-			}	
-			this.props.enter(choosed_img,attribute,index)
+		if (this.state.choosed_img) {
+			this.props.enter(this.state.choosed_img,this.state.attribute,this.props.index)
 			this.addImgModal.hide()
 		} else {
-			return message.info(`你还未选择图片!`)
+			message.info(`你还未选择图片!`)
 		}
 	}
 	close = () => {
@@ -209,40 +197,44 @@ class ImgModule extends React.Component {
 		let choosed_img = img_list.filter(item => item.isClicked == true);
 		this.props.save(choosed_img,attribute)
 	};
-	customRequest = ({ file }) => {
+	customRequest = info => {
+		const that = this
 		this.setState({loading:true})
-		var paramsData = {
-			userId: window.uif.userInfo.id || '1',
-			mallId: '',
-			imageSourceType: 'OPERATION',
-			imageName: file.name.split('.')[0]
-		}
-		if (envType === 'business') {
+		let id = window.uif.userInfo.id || '1'
+		let paramsData = {
+			userId:id,
+			mallId:'',
+			imageSourceType:'OPERATION'
+		} 
+		paramsData.imageName = info.file.name.split(".")[0];
+		if (getEnv() === 'business') {
 			paramsData.imageSourceType = 'BUSINESS'
 			paramsData.mallId = uif.userInfo.mallMid
 		}
 		var reader = new FileReader()
-		reader.onload = ({ target }) => {
-			Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage', { ...paramsData, imageBase64: target.result }).then(() => {
-				message.info('上传成功!')
-				this.setState({ loading: false })
-				this.props.getImgList()
-			}).catch(e => {
-				this.setState({ loading: false })
-			})
-		}
-		reader.readAsDataURL(file)
+			reader.onload = (function (file) {
+				return function (e) {
+					console.info(this.result) //这个就是base64的数据了
+					const img = this.result
+					const postData = {...paramsData,imageBase64:img}
+					Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage',postData).then(res=>{
+						message.info('上传成功!')
+						that.setState({loading:false})
+						that.props.getImgList()
+					})
+				}
+			})(info.file)
+			reader.readAsDataURL(info.file)
 	}
-	beforeUpload = ({ size, type }) => {
-		if (!/(png|jpeg|gif)/.test(type)) {
-			message.info(`图片格式不正确!`)
-			return false
+	beforeUpload = file => {
+		let imgType = false;
+		if(file.type.indexOf('image/png') > -1 || file.type.indexOf('image/jpg')>-1 || file.type.indexOf('image/svg')>-1 || file.type.indexOf('image/jpeg')>-1){
+			imgType = true
 		}
-		if (size > 5e6) {
-			message.info(`当前图片大小${(size / 1e6).toFixed(1)}mb, 请上传不超过5mb的图片!`)
-			return false
-		}
-		return true
+	  if (!imgType) {
+	   message.info('请上传png、jpg、svg格式图片!')
+	  }
+	  return imgType;
 	}
 	render() {
 		let id = window.uif.userInfo.id || '1'
@@ -250,23 +242,25 @@ class ImgModule extends React.Component {
 		return (
 			<div className="content">
 				<div className="left">
-					{ this.state.imgTypes.map((item,index) => <Type groupId={this.state.groupId} key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>) }
+					{
+						this.state.imgTypes.map((item,index) => <Type groupId={this.state.groupId} key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
+					}
 				</div>
 				<div className="right">
 					<div>
 						<Upload
-							name="avatar"
+							name= 'avatar'
 							className="avatar-uploader"
 							listType="picture-card"
 							showUploadList={false}
 							beforeUpload={this.beforeUpload}
 							customRequest={this.customRequest}
-							accept="image/png, image/jpeg, image/gif"
+							accept="image/*"
 						>
-							<div>
-								<Icon type={this.state.loading ? 'loading' : 'plus'} />
-								<div className="ant-upload-text">上传图片<br/>JPG PNG GIF格式,5MB大小以内</div>
-							</div>
+						<div>
+							<Icon type={this.state.loading ? 'loading' : 'plus'} />
+							<div className="ant-upload-text">上传图片</div>
+						</div>
 						</Upload>
 					</div>
 					{
@@ -291,17 +285,15 @@ function Type({item, choose_one, groupId}) {
 		<div className={item.id === groupId? 's-active': ''} onClick={()=>{choose_one('groupId', item.id)}}>{item.name}</div>
 	)
 }
-function List({ item, choose_one }) {
-	if (!item) return null
-	var { attribute, id, isClicked, name, preview, thumbnail } = item
+function List({ item,choose_one }) {
 	return  (
-		<div onClick={() => choose_one(id, attribute)} className={ isClicked? 'choosed': '' }>
-			<div className={ isClicked? 'icon_img': '' }>
-				<div className="right-symbol"></div>
+			<div onClick={()=>{choose_one(item.id,item.attribute)}} className={item.isClicked?'choosed':''}>
+				<div className={item.isClicked?'icon_img':''}>
+					<div className="right-symbol"></div>
+				</div>
+				<img src={item.url} />
+				<div className="showName">{item.name}</div>
+				<div className="showSize">{item.attribute}</div>
 			</div>
-			{ (preview || thumbnail)? <img src={preview || thumbnail} />: null }
-			<div className="showName">{name}</div>
-			<div className="showSize">{attribute}</div>
-		</div>
-	)
+		)
 }

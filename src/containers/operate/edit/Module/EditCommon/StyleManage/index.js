@@ -68,20 +68,19 @@ class StyleManage extends React.Component {
 	onSelect(newIdx) {
 		// console.clear()
 		let { data, parentKey, list, action, idx, actions, editConfig } = this.props
-		let { curData, globalData } = editConfig
+		let { curData } = editConfig
 		let { parentComp } = curData
 		if (newIdx === idx) return
 		data[parentKey].idx = newIdx
 		if (action === 'updateComp') {
 			// 除styleList代码 START
-			// let layout = data.data.layout,
-			// 	position = {top:layout.top,left:layout.left},
-			// 	newData = deepCopy(list[newIdx].data),
-			// 	newLayout = {...newData.layout,...position}
-			// newData.layout = newLayout
-			// data.data = newData
+		/*	let layout = data.data.layout,
+				position = {top:layout.top,left:layout.left},
+				newData = deepCopy(list[newIdx].data),
+				newLayout = {...newData.layout,...position}
+			newData.layout = newLayout
+			data.data = newData */ 
 			data.data = deepCopy(list[newIdx].data)
-			compIdCreate(data, globalData)
 			// 除styleList代码 END
 			// data.data = data[parentKey].list[newIdx].data
 			return actions[action](null, parentComp? parentComp: data)
@@ -110,8 +109,8 @@ class StyleManage extends React.Component {
 		let curData   = list[idx]
 		let editNode
 		let listNode  = list.map((_, k) => {
-			// let remDom
-			// if (list.length > 1) remDom = (<a className="pgs-sl-remove" onClick={this.onRemove.bind(this, k)}><Icon type="close" /></a>)
+			/*let remDom
+			if (list.length > 1) remDom = (<a className="pgs-sl-remove" onClick={this.onRemove.bind(this, k)}><Icon type="close" /></a>)*/
 			return (
 				<li
 					key={k} title={_.name}

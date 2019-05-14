@@ -14,8 +14,7 @@ import * as actions from 'actions'
 import curData from 'state/cur/curData'
 import { Spin } from 'antd'
 import './index.less'
-const comp  = require('state/comp')
- 
+
 class OperateComponent extends React.Component {
 	constructor(props) {
 		super(props)
@@ -25,8 +24,7 @@ class OperateComponent extends React.Component {
 	}
 
 	timeInit() {
-		var { actions } = this.props
-		window.Actions = actions
+		let { actions } = this.props
 		actions.updateTime()
 	}
 	getWeather() {
@@ -48,29 +46,24 @@ class OperateComponent extends React.Component {
 		let { location, actions, editConfig } = this.props
 		let { globalData } = editConfig
 		let { query } = location
-		let { templateType, composeType, adsFlag, name, bannerAds, resolutionType } = query
+		let { templateType, composeType, adsFlag, name } = query
 		let id = query.id
 		return (resolve, reject) => {
 			if (!id) {
- 				var ct = composeType || 'PORTRAIT'
 				window.tempCfg = {
 					name: name || '',
-					templateType:   templateType   || 'MALL',
-					composeType:    ct,
-					adsFlag:        ~~adsFlag      || 0,
-					bannerAds:      ~~bannerAds    || 0,  //  0: 无  1: 有
-					resolutionType: resolutionType || 1,  //  1: 2K  2: 4K
- 				}
- 				if (bannerAds == 1) {
- 					globalData.banner = comp[`banner${composeType === 'PORTRAIT'? 'Vertical': 'Horizontal'}`]
- 					actions.updateGlobal(globalData)
- 				}
- 				return resolve('模板数据')
+					templateType: templateType || 'MALL',
+					composeType:  composeType  || 'PORTRAIT',
+					adsFlag:      ~~adsFlag      || 0
+				}
+				return resolve('模板数据')
 			}
 			Ajax.get(`/mcp-gateway/template/get?templateId=${id}&phase=DEV`).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
+				// dataFormat.get.pageEach(cfg.pageContent)
+				// debugger
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },
@@ -223,7 +216,7 @@ class OperateComponent extends React.Component {
 		Promise.all(promises).then(() => {
 			this.setState({ load: true })
 		})
-		// window.onbeforeunload = (e) => {
+		// window.onbeforeunload = e => {
 		// 	e.returnValue = '确定离开当前页面吗, 离开的话会丢失未保存的数据哦?'
 		// }
 	}

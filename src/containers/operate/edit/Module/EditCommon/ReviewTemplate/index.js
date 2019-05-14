@@ -69,20 +69,22 @@ const commonCssL = {
 
 export default class ReviewTemplate extends React.Component {
 	show() {
-		this.setState({ init: true }, () => this.reviewModal.show())
+		this.setState({init:true},()=>{this.reviewModal.show()})
 	}
 	state = {
-		init: false
+		init:false
 	} 
-	componentDidMount() {}
-
+	componentDidMount(){
+		
+	}
 	onOverlayClicked = () => {
-		this.setState({init: false})
+		this.setState({init:false})
 	}
 	render() {
-		var scale = tempCfg.composeType === 'LANDSCAPE'? 1: getClientScale(960, 80),
-			style = tempCfg.composeType === 'LANDSCAPE'? { height: ~~(540 * scale), width: ~~(960 * scale), margin:`-${~~(540 * scale) / 2}px auto 0`}: { height: ~~(960 * scale), width: ~~(540 * scale), margin:`-${~~(960 * scale) / 2}px auto 0`},
-			commonCss = tempCfg.composeType === 'LANDSCAPE'? commonCssL: commonCssP
+		let scale =tempCfg.composeType=='LANDSCAPE' ? 1 : getClientScale(960,80),
+		style=tempCfg.composeType=='LANDSCAPE' ? {height:parseInt(540*scale),width:parseInt(960*scale),margin:`-${parseInt(540*scale)/2}px auto 0`} :
+		{height:parseInt(960*scale),width:parseInt(540*scale),margin:`-${parseInt(960*scale)/2}px auto 0`}
+		let commonCss = tempCfg.composeType=='LANDSCAPE' ? commonCssL : commonCssP
 		return (
 			<div className="ReviewTemplateShadow">
 				<SkyLight
@@ -96,10 +98,7 @@ export default class ReviewTemplate extends React.Component {
 				>  
 				<div className={`${tempCfg.composeType=='LANDSCAPE'?'reviewTemplate-l':'reviewTemplate-p'}`} id="reviewTemplate" style={{transform:`scale(${scale})`}}> 
 					{
-						this.state.init
-						?
-						<RouterRY editConfig={this.props.editConfig} actions={this.props.actions}></RouterRY>
-						: null
+						this.state.init ?  <RouterRY editConfig={this.props.editConfig} actions={this.props.actions}></RouterRY> : null
 					}
 				</div>     
 				</SkyLight>  

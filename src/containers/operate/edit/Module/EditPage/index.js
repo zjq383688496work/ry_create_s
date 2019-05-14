@@ -15,7 +15,7 @@ import { Row, Col, Collapse, Input, InputNumber, Slider } from 'antd'
 const Panel = Collapse.Panel
 
 import Color     from 'compEdit/EditCommon/Color'
-// import PageAnime from 'compEdit/EditCommon/PageAnime'
+import PageAnime from 'compEdit/EditCommon/PageAnime'
 
 import './index.less'
 
@@ -130,12 +130,10 @@ class EditPage extends React.Component {
 						}
 					</Panel>
 				</Collapse>
-				{
-					/*<PageAnime data={data} type={'in'} />
-					<PageAnime data={data} type={'out'} />*/
-				}
 			</section>
 		)
+				// <PageAnime data={data} type={'in'} />
+				// <PageAnime data={data} type={'out'} />
 	}
 }
 

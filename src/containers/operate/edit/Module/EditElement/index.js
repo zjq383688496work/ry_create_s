@@ -11,41 +11,39 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import Rnd from 'react-rnd'
 
-import Picture            from 'compEdit/EditElement/Picture'
-import Web                from 'compEdit/EditElement/Web'
-import Text               from 'compEdit/EditElement/Text'
-import Button             from 'compEdit/EditElement/Button'
-import Video              from 'compEdit/EditElement/Video'
-import SwiperImage        from 'compEdit/EditElement/SwiperImage'
-import SwiperImgAndVideo  from 'compEdit/EditElement/SwiperImgAndVideo'
-import WonderfulActivity  from 'compEdit/EditElement/WonderfulActivity'
+import Picture           from 'compEdit/EditElement/Picture'
+import Web               from 'compEdit/EditElement/Web'
+import Text              from 'compEdit/EditElement/Text'
+import Button            from 'compEdit/EditElement/Button'
+import Video             from 'compEdit/EditElement/Video'
+import SwiperImage       from 'compEdit/EditElement/SwiperImage'
+import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
+import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 import WonderfulActivity2 from 'compEdit/EditElement/WonderfulActivity2'
-import Time               from 'compEdit/EditElement/Time'
-import Weather            from 'compEdit/EditElement/Weather'
-import StoreList          from 'compEdit/EditElement/StoreList'
-import StoreDetails       from 'compEdit/EditElement/StoreDetails'
-import StoreInstro        from 'compEdit/EditElement/StoreInstro'
-import StoreList2         from 'compEdit/EditElement/StoreList2'
-import StoreDetails2      from 'compEdit/EditElement/StoreDetails2'
-import GoodsList          from 'compEdit/EditElement/GoodsList'
-import DateWeather        from 'compEdit/EditElement/DateWeather'
-import Navigation         from 'compEdit/EditElement/Navigation'
-import NavigationFloat    from 'compEdit/EditElement/NavigationFloat'
-import SplitLine          from 'compEdit/EditElement/SplitLine'
-import Map2D              from 'compEdit/EditElement/Map2D'
-import Html               from 'compEdit/EditElement/Html'
-import GoodsDetails       from 'compEdit/EditElement/GoodsDetails'
-import Area               from 'compEdit/EditElement/Area'
-import Qrcode             from 'compEdit/EditElement/Qrcode'
+import Time              from 'compEdit/EditElement/Time'
+import Weather           from 'compEdit/EditElement/Weather'
+import StoreList         from 'compEdit/EditElement/StoreList'
+import StoreDetails      from 'compEdit/EditElement/StoreDetails'
+import StoreInstro       from 'compEdit/EditElement/StoreInstro'
+import StoreList2        from 'compEdit/EditElement/StoreList2'
+import StoreDetails2     from 'compEdit/EditElement/StoreDetails2'
+import GoodsList         from 'compEdit/EditElement/GoodsList'
+import DateWeather       from 'compEdit/EditElement/DateWeather'
+import Navigation        from 'compEdit/EditElement/Navigation'
+import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
+import SplitLine         from 'compEdit/EditElement/SplitLine'
+import Map2D             from 'compEdit/EditElement/Map2D'
+import Html              from 'compEdit/EditElement/Html'
+import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
+import Area              from 'compEdit/EditElement/Area'
+import Qrcode            from 'compEdit/EditElement/Qrcode'
 
-import ContextMenu        from 'compEdit/EditCommon/ContextMenu'
-import ShortcutKey        from 'compEdit/EditCommon/ShortcutKey'
-import PostMessage        from 'compEdit/EditCommon/PostMessage'
-import RevokeRecovery     from 'compEdit/EditCommon/RevokeRecovery'
-import { InductionLine, nearPosSty } from 'compEdit/EditElement/InductionLine'
-
-import Banner from 'compEdit/EditElement/Banner'
-
+import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
+import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
+import PostMessage       from 'compEdit/EditCommon/PostMessage'
+import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
+import { InductionLine,nearPosSty }     from 'compEdit/EditElement/InductionLine'
+ 
 import * as actions from 'actions'
 import { Icon, message } from 'antd'
 
@@ -58,33 +56,33 @@ var animeMap = variable.animeCompMap,
 const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl,contentEditable,shift) => {
 	var props  = { data, actions, type, idx,drag, csn, keyCtrl,contentEditable,shift }
 	var render = {
-		picture:            <Picture            {...props} />,
-		web:                <Web                {...props} />,
-		video:              <Video              {...props} />,
-		text:               <Text               {...props} />,
-		button:             <Button             {...props} />,
-		swiperImage:        <SwiperImage        {...props} />,
-		swiperImgAndVideo:  <SwiperImgAndVideo  {...props} />,
-		wonderfulActivity:  <WonderfulActivity  {...props} />,
+		picture:           <Picture           {...props} />,
+		web:               <Web               {...props} />,
+		video:             <Video             {...props} />,
+		text:              <Text              {...props} />,
+		button:            <Button            {...props} />,
+		swiperImage:       <SwiperImage       {...props} />,
+		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
+		wonderfulActivity: <WonderfulActivity {...props} />,
 		wonderfulActivity2: <WonderfulActivity2 {...props} />,
-		time:               <Time               {...props} />,
-		weather:            <Weather            {...props} />,
-		navigation:         <Navigation         {...props} />,
-		navigationFloat:    <NavigationFloat    {...props} />,
-		storeList:          <StoreList          {...props} />,
-		goodsList:          <GoodsList          {...props} />,
-		storeDetails:       <StoreDetails       {...props} />,
-		storeInstro:        <StoreInstro        {...props} />,
-		splitLine:          <SplitLine          {...props} />,
-		dateWeather:        <DateWeather        {...props} />,
-		map2D:              <Map2D              {...props} />,
-		html:               <Html               {...props} />,
-		goodsDetails:       <GoodsDetails       {...props} />,
-		area:               <Area               {...props} />,
-		qrcode:             <Qrcode             {...props} />,
-		// tabs:               <Tabs               {...props} />,
-		storeList2:         <StoreList2         {...props} />,
-		storeDetails2:      <StoreDetails2      {...props} />
+		time:              <Time              {...props} />,
+		weather:           <Weather           {...props} />,
+		navigation:        <Navigation        {...props} />,
+		navigationFloat:   <NavigationFloat   {...props} />,
+		storeList:         <StoreList         {...props} />,
+		goodsList:         <GoodsList         {...props} />,
+		storeDetails:      <StoreDetails      {...props} />,
+		storeInstro:       <StoreInstro       {...props} />,
+		splitLine:         <SplitLine         {...props} />,
+		dateWeather:       <DateWeather       {...props} />,
+		map2D:             <Map2D             {...props} />,
+		html:              <Html              {...props} />,
+		goodsDetails:      <GoodsDetails      {...props} />,
+		area:              <Area              {...props} />,
+		qrcode:            <Qrcode            {...props} />,
+		// tabs:              <Tabs              {...props} />,
+		storeList2:        <StoreList2        {...props} />,
+		storeDetails2:     <StoreDetails2     {...props} />
 	}
 	return render[name]
 } 
@@ -94,37 +92,13 @@ import './index.less'
 class EditElement extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			keyCtrl:    false,
-			shift:      false,
-			v:          false,
-			h:          false,
-			vPosition:  { left: 0 },
-			hPosition:  { top:  0 },
-			nearPos:    false,
-			drag:       true,
-			dragAxis:   'both',
-			editConfig: props.editConfig,
-		}
+		this.state = { keyCtrl: false,shift:false,v:false,h:false,vPosition:{left:0},hPosition:{top:0},nearPos:false,dragAxis:'both',drag:true }
 	}
-	componentWillReceiveProps(nextProps) {
-		let { editConfig } = nextProps,
-			{ curPage }    = editConfig,
-			editConfigPrev = this.props.editConfig,
-			curPagePrev    = editConfigPrev.curPage,
-			elements       = deepCopy(curPage.elements)
-		if (curPagePrev.router === curPage.router){
-			this.setState({ editConfig })
-		} else {
-			curPage.elements = []
-			this.setState({ editConfig })
-			var t = setTimeout(() => {
-				clearTimeout(t)
-				curPage.elements = elements
-				this.setState({ editConfig })
-			}, 1)
-		}
-		this.state.drag? this.stateLayout(): null
+	componentDidMount() {
+		
+	}
+	componentWillReceiveProps() {
+		this.state.drag ?  this.stateLayout() : null
 	}
 	stateLayout = () => {
 		let { data, editConfig } = this.props
@@ -138,7 +112,7 @@ class EditElement extends React.Component {
 	keyDown = (k, e) => {
 		if (k === 'meta' || k === 'control') {
 			this.setState({ keyCtrl: true })
-		} else if (k === 'shift'){
+		}else if(k === 'shift'){
 			this.setState({ shift: true })
 		}
 	}
@@ -179,7 +153,10 @@ class EditElement extends React.Component {
 		let { index, list, type } = multiComp
 		if (keyCtrl) {
 			if (type === 'child') return message.success('不能跨级选组件!')
-			if (index[idx]) list.remove(idx)
+			if (index[idx]) {
+				// delete index[idx]
+				list.remove(idx)
+			}
 			index[idx] = true
 			list.unshift(idx)
 		} else {
@@ -236,7 +213,7 @@ class EditElement extends React.Component {
 			this.setState({dragAxis:'both',drag:false},()=>{ this.showLine(param,_,i) })
 		} 
 	}
-	// 拖拽停止
+	//拖拽停止
 	dragStop(e, d, item, idx) {
 		e.stopPropagation()
 		// e.preventDefault()
@@ -248,63 +225,44 @@ class EditElement extends React.Component {
 		this.setState({v:false,h:false,nearPos:false,drag:true})   
 		actions.updateComp(idx, item)
 	} 
-	// 显示提示线
+	//显示提示线
 	showLine = (param,_,i,obj) => {
-		let { data, actions,editConfig } = this.props,
-			{ globalData } = editConfig,
-			{ multiComp, banner } = globalData;
-		let bannerLayout = banner && banner.data.layout,
+		let { data, actions } = this.props,
 			eles   = data.elements || [],
-			bodySty = tempCfg.composeType == 'LANDSCAPE'? { height: 539, width: 959, left: 0, top: 0 } :
-			(tempCfg.bannerAds == 1? { width: 539, height: `${959 - bannerLayout.height}`, left: 0, top: 0 }: { width: 539, height: 959, left: 0, top: 0 }),
-			layout = obj? { ..._.data.layout, ...obj }: _.data.layout,
-			InductionLineObj = InductionLine(param,eles,layout,i,bodySty),
+			bodySty = tempCfg.composeType == 'LANDSCAPE' ? {height:540,width:960,left:0,top:0} : {width:540,height:960,left:0,top:0},
+			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
+			InductionLineObj = InductionLine(param,eles,layout,i,bodySty,eleKnock),
 			v= InductionLineObj.v,h=InductionLineObj.h,eleKnock = InductionLineObj.eleKnock
-		if (v) {
+		if(v){ 
 			this.setState({v:true,vPosition:{left:`${v.left}px`,p_left:v.p_left}})
-		} else {
+		}else{
 			this.setState({v:false,vPosition:{p_left:param.x}})
+		} 
+		if(h){
+			this.setState({h:true,hPosition:{top:`${h.top}px`,p_top:h.p_top}})
+		}else{ 
+			this.setState({h:false,hPosition:{p_top:param.y}})
 		}
-		if (h) {
-			this.setState({ h: true, hPosition: { top: `${tempCfg.bannerAds == 1? h.top + bannerLayout.height: h.top}px`, p_top: h.p_top } })
-		} else {
-			this.setState({ h: false, hPosition: { p_top: param.y } })
-		}
-		if (eleKnock) {
-			this.setState({ nearPos: nearPosSty(eleKnock,bannerLayout) })
-		} else {
-			this.setState({ nearPos: false })
-		}
-	}
+		if(eleKnock){
+			this.setState({nearPos:nearPosSty(eleKnock)})
+		}else{
+			this.setState({nearPos:false})
+		}   
+	}    
 	changeEditable = (item, idx) => {
 		let { actions } = this.props
 		if(item.name == 'web'){
 			let RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
 			if(RP.test(item.data.content.url)) return false
 		} 
-		this.setState({drag:true})
-		item.feature.editStatus != undefined? itemfeature.editStatus = true: null
+		this.setState({drag:true})  
+		item['feature'].editStatus != undefined ? item['feature'].editStatus = true : null
 		actions.updateComp(idx, item)
 	}
 	removeComp(e, idx) {
 		e.stopPropagation()
 		let { actions } = this.props
 		actions.deleteComp(idx)
-	}
-	bannerDom = () => {
-		var { actions, editConfig } = this.props,
-			{ banner } = editConfig.globalData,
-			{ bannerAds, composeType = 'PORTRAIT' } = tempCfg
-		if (!banner || bannerAds != 1) return { position: 'top', DOM: null }
-		var { position } = banner.feature.swiperOptions,
-			{ layout } = banner.data,
-			{ height, width } = layout,
-			h = composeType === 'PORTRAIT'? height: '100%',
-			w = composeType === 'LANDSCAPE'? width: '100%'
-		return {
-			position,
-			DOM: <div className="bannerBox" style={{ height: h, width: w }}><Banner {...this.props} /></div>
-		}
 	}
 
 	render() {
@@ -330,17 +288,17 @@ class EditElement extends React.Component {
 		}
 		let bgStyle   = data.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
 		let childNode = eles.map((_, i) => {
-			let compName = _.name,
-				layout   = _.data.layout,
-				styleIdx = _.styleList.idx,
-				csn      = `handle-drag-${Math.floor(Math.random()*1e9)}`,
-				ani      = _.data.animation,
-				aniCls   = '',
-				aniSty   = {},
+			let compName  = _.name,
+				layout    = _.data.layout,
+				styleIdx  = _.styleList.idx,
+				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
+				ani       = _.data.animation,
+				aniCls    = '',
+				aniSty    = {},
 				lockAspectRatio = layout.lockAspectRatio,
 				editStatus = _.feature&&_.feature.editStatus;
 			i === compIdx ? disableDragging = editStatus : null
-			let compCon = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, state.drag, csn, state.keyCtrl, disableDragging, state.shift)
+			let compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i,state.drag, csn, state.keyCtrl,disableDragging,state.shift)
 			if (!compCon) return false 
 			if (ani.className) {  
 				let item = aStyle[ani.className]
@@ -387,12 +345,14 @@ class EditElement extends React.Component {
 				</Rnd>
 			)
 		})
-		var { position, DOM } = this.bannerDom()
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
 				<div className="pg-element-box">
-					<section id="pgElement" className="pg-element pg-operate">
-						{ (position === 'top' || position === 'left')? DOM: null }
+					{ /*ads
+						? <div className="ads-placeholder"></div>
+						: null*/
+					}
+					<section id="pgElement" className="pg-element">
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }
 						</div>
@@ -405,12 +365,11 @@ class EditElement extends React.Component {
 								<div className="lineNear_2" style={state.nearPos[2]}></div>
 								<div className="lineNear_3" style={state.nearPos[3]}></div>
 							</div> : null
-						}
-						{ (position === 'right' || position === 'bottom')? DOM: null }
+						} 
 						<div id="pgElementNext" className="pg-element-next"></div>
 					</section>
 					<RevokeRecovery />
-				</div>
+				</div> 
 				<ContextMenu />
 				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} disableDragging={disableDragging} />
 				<PostMessage />
@@ -419,7 +378,8 @@ class EditElement extends React.Component {
 	}
 }
 
-EditElement.defaultProps = {}
+EditElement.defaultProps = {
+}
 
 const mapStateToProps = state => state
 

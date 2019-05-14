@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Icon, Select, message } from 'antd'
+import { Row, Col, Icon, Select } from 'antd'
 const { Option } = Select
 
 import PictureAndVideo from '../PictureAndVideo'
@@ -31,17 +31,13 @@ class ImageAndVideoComp extends React.Component {
 		this.setState({init:true},()=>{this.addImgVideoModal.show()})
 	} 
 	enter = (list,index) => {
-		if (!list.length) return 
-		let { data, con  ,action, actions, editConfig,type,from } = this.props
-		let da = data.data,
-			{ layout } = da,
-			{ width,height } = layout
-		if(tempCfg.resolutionType == 2) { width *= 4;height *= 4 }
-		else { width *= 2;height *= 2 }
-		let { curData,globalData }    = editConfig
+		if(index != 'remove') {this.addImgVideoModal.hide()}
+		if (!list.length) return
+		let { data, con  ,action, actions, editConfig } = this.props
+		let da = data.data
+		let { content }    = da
+		let { curData }    = editConfig
 		let { parentComp } = curData
-		let { attribute } = list[0]
-		attribute = attribute && attribute.split('*')
 		if(list[0].type == 2){
 			delete con.img.img
 			delete con.router
@@ -49,25 +45,16 @@ class ImageAndVideoComp extends React.Component {
 			con.img.originalSizePreview = list[0].originalSizePreview
 			con.img.video = list[0].url
 			con.type = 'video'
-		} else {
-			if(index != 'remove' && type === 'business' && (Math.abs(+attribute[0] - width) >= 100 || Math.abs(+attribute[1] - height) >= 100)){
-				return message.info(`选择的图片尺寸不符合,请重新选择!`)
-			}    
+		}else{    
 			delete con.img.preview 
 			delete con.img.originalSizePreview
 			con.img.img = list[0].url
 			con.type = 'image'
 			con.router = {}
 		}      
-		this.setState({init:false})
 		con.attribute = list[0].attribute
-		if(index != 'remove') {this.addImgVideoModal.hide()}
 		data.data.content[index-1] = con
-		if(from && from === 'banner'){
-			globalData.banner = data
-			return actions.updateGlobal(globalData)
-		}
-		return actions[action](null, parentComp? parentComp: data)
+		actions[action](null, parentComp? parentComp: data)
 	}  
 	changeImgType = val => {
 		let { data, img, action, actions, editConfig }  = this.props
@@ -86,10 +73,8 @@ class ImageAndVideoComp extends React.Component {
 		return nextState.init || nextState.change
 	} */
 	render() {
-		let { img, editConfig,con, index, data, type } = this.props
+		let { img, editConfig,con, index, data } = this.props
 		let { width, height,init } = this.state
-		if (tempCfg.resolutionType == 2) { width *= 4;height *= 4 }
-		else { width *= 2; height *= 2 }
 		let btnNode
 		let imgVal   = img.img || img.preview
 		let theme  = editConfig.globalData.theme
@@ -132,7 +117,7 @@ class ImageAndVideoComp extends React.Component {
 						</div>
 					</div>
 				)
-				scaleNode = <div className="img_scale">{ width } x { height }</div>
+				scaleNode = <div className="img_scale">{ width*2 } x { height*2 }</div>
 			} else {
 				btnNode = (
 					<div className="add_img" onClick={this.changeImg}>
@@ -157,7 +142,6 @@ class ImageAndVideoComp extends React.Component {
 								init={this.state.init}
 								initFn={this.initFn}
 								index={index+1}
-								type={type}
 							/> : null
 				} 
 			</div>

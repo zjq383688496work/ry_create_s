@@ -70,9 +70,10 @@ class BusinessComponent extends React.Component {
 		}
 	}
 	getConfig() {
-		let { location, actions } = this.props
+		let { location, actions, editConfig } = this.props
+		let { globalData } = editConfig
 		let { query } = location
-		let { /*name,*/ templateId, /*templateThemeId, */caseType, composeType } = query
+		let { /*name,*/ templateId, /*templateThemeId,*/ caseType, composeType } = query
 		let tid  = templateId,
 			cid  = query.id,
 			type = cid? 'case': 'template',
@@ -81,7 +82,7 @@ class BusinessComponent extends React.Component {
 			message.error(`未选择模板!`)
 			return resolve('模板数据')
 		}
-		let api = `/mcp-gateway/${type}/get?${type}Id=${id}`
+        let api = `/mcp-gateway/${type}/get?${type}Id=${id}`
 		if (type === 'template') api += '&phase=RELEASE'
 
 		return (resolve, reject) => {
@@ -92,6 +93,7 @@ class BusinessComponent extends React.Component {
 
 				//dataFormat.get.pageEach(cfg.pageContent)
 				// debugger
+				cfg.globalData = { ...globalData, ...cfg.globalData }
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },
@@ -176,8 +178,8 @@ class BusinessComponent extends React.Component {
 			// 	console.log(e)
 			// })
 		})
-		// window.onbeforeunload = (e) => {
-		//	e.returnValue = '确定离开当前页面吗, 离开的话会丢失未保存的数据哦?'
+		// window.onbeforeunload = e => {
+		// 	e.returnValue = '确定离开当前页面吗, 离开的话会丢失未保存的数据哦?'
 		// }
 	}
 

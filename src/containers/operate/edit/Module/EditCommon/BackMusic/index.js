@@ -64,21 +64,21 @@ class BackMusic extends React.Component {
 		console.log(key)
 	}
 	customRequest = info => {
-		let that = this
-	  	this.setState({loading:true})
-	  	let filedata = new FormData();
-	    filedata.append('file', info.file, info.file.name);
-	   Ajax.postJSONAUDIO('/easy-smart-web/audioUpload/uploadBackgroundMusic',filedata).then(res=>{
-	   		if(res.success){
-	   			message.info('上传成功!')
+		var that = this
+		var filedata = new FormData()
+		this.setState({loading: true})
+		filedata.append('file', info.file, info.file.name);
+		Ajax.postJSONAUDIO('/easy-smart-web/audioUpload/uploadBackgroundMusic',filedata).then(res=>{
+			if(res.success){
+				message.info('上传成功!')
 				that.setState({loading:false})
 				that.onChange(res.result.data,'url')
-	   		}else{
-	   			that.setState({loading:false})
-	   			message.error(res.meta.msg)
-	   		}
-	   	}) 
-	  } 
+			} else {
+				that.setState({loading:false})
+				message.error(res.meta.msg)
+			}
+		})
+	}
 	render() {
 		let { data, action, actions } = this.props,
 			activeKey = Array.from(new Array(1), (_, i) => `${i}`),
@@ -86,7 +86,7 @@ class BackMusic extends React.Component {
 			btnNode
 		let defaultParams = {
 		  name: 'file', 
-		  customRequest:this.customRequest,
+		  customRequest: this.customRequest,
 		  accept:"audio/*"
 		}
 		if (music.url) {

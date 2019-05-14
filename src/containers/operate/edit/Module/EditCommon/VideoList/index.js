@@ -7,9 +7,8 @@
 
 import React from 'react';
 import SkyLight from 'react-skylight';
-import VideoCrop from '../VideoCrop'
-import { Button, message,Modal,Pagination,Input,Upload,Icon } from 'antd'
 import './index.less'
+import { Button, message,Modal,Pagination,Input } from 'antd'
 const commonCss = {
 	dialogStyles: {
 		height: 'auto',
@@ -61,11 +60,11 @@ export default class VideoList extends React.Component {
 			type: 2
 		}
 		var ty = 'ySourceGroupManage'
-		if (envType === 'business') {
+		if (getEnv() === 'business') {
 			getData.mallId = uif.userInfo.mallMid
 			ty = 'sourceGroupManage'
 		}
-		Ajax.postJSON(`/easy-smart/${ty}/query`, getData).then(res => {
+		Ajax.postJSON(`/easy-smart-basic/${ty}/query`, getData).then(res => {
 			this.setState({
 				videoTypes:res.data
 			})
@@ -96,11 +95,11 @@ export default class VideoList extends React.Component {
 				type:        2
 			}
 			var ty = 'ySourceManage'
-			if (envType === 'business') {
+			if (getEnv() === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
-			Ajax.postJSON(`/easy-smart/${ty}/query`, postData).then(res => {
+			Ajax.postJSON(`/easy-smart-basic/${ty}/query`, postData).then(res => {
 				this.setState({ 
 					videoList:res.data,
 					page_video:res.page
@@ -164,8 +163,7 @@ class VideoModule extends React.Component {
 		videoTypes: [],
 		videoList:  [],
 		current:    1,
-		groupId:    this.props.groupId,
-		loading:    false
+		groupId:    this.props.groupId
 	}
 	
 	componentWillReceiveProps(props){
@@ -197,31 +195,7 @@ class VideoModule extends React.Component {
 		let choosed_video = videoList.filter(item => item.isClicked == true);
 		this.props.save(choosed_video,attribute)
 	}
-	customRequest = info => {
-		const that = this
-		this.setState({loading:true})
-		let mallId = undefined
-		if (envType === 'business') {
-			mallId = uif.userInfo.mallMid
-		}
-		VideoCrop(info.file,this.postEndFn,mallId)
-	}
-	// 上传视频成功后的回调
-	postEndFn = () => {
-		message.info('上传成功!')
-        this.setState({loading:false})
-        this.props.getVideoList()
-	}
-	beforeUpload = file => {
-		let videoType = false;
-		if(file.type.indexOf('video/mp4') > -1){
-			videoType = true
-		}
-	  if (!videoType) {
-	   message.info('请上传mp4格式视频!')
-	  }
-	  return videoType;
-	}
+	
 	render() {
 		const { page_video } = this.props;
 		return (
@@ -232,22 +206,6 @@ class VideoModule extends React.Component {
 					} 
 				</div> 
 				<div className="right">
-					<div>
-						<Upload
-								name= 'avatar'
-								className="avatar-uploader"
-								listType="picture-card"
-								showUploadList={false}
-								customRequest={this.customRequest}
-								beforeUpload={this.beforeUpload}
-								accept="video/*"
-							>
-							<div>
-								<Icon type={this.state.loading ? 'loading' : 'plus'} />
-								<div className="ant-upload-text">上传视频<br/>mp4格式,200MB大小以内</div>
-							</div>
-						</Upload>
-					</div>
 					{ 
 						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseVideo}></List> )
 					}

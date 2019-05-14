@@ -1,18 +1,25 @@
+/**
+ * @Author: Liao Hui
+ * @Date:   2018-04-21T17:21:39+08:00
+ * @Last modified by:   Liao Hui
+ * @Last modified time: 2018-04-24T13:47:49+08:00
+ */
+
 import React from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-// import ColorPicker from 'rc-color-picker'
-// import ThemeManage from 'compEdit/EditCommon/ThemeManage'
-import BackMusic from 'compEdit/EditCommon/BackMusic'
-import Advert from 'compEdit/EditCommon/Advertisement'
-// import { Collapse, Icon, Input, Select, Tabs } from 'antd'
+import ColorPicker   from 'rc-color-picker'
+import ThemeManage   from 'compEdit/EditCommon/ThemeManage'
+import BackMusic     from 'compEdit/EditCommon/BackMusic'
+import Advert        from 'compEdit/EditCommon/Advertisement'
+import LoadingConfig from 'compEdit/EditCommon/LoadingConfig'
 
-// const Panel  = Collapse.Panel
-// const Option = Select.Option
-// const TabPane = Tabs.TabPane
+import { Collapse, Icon, Input, Select } from 'antd'
+const Panel  = Collapse.Panel
+const Option = Select.Option 
 
 import ImageUploadTheme from 'compEdit/EditCommon/ImageUploadTheme'
 
@@ -26,19 +33,21 @@ import './index.less'
 class EditTheme extends React.Component {
 	constructor(props) {
 		super(props)
-
 		this.state = {
-			// keyType:  'color',
-			// keyValue: '',
-			// editKey:  '',
-			// cache:    {}
+			keyType: 'color',
+			keyValue: '',
+			editKey: '',
+			cache: {}
 		}
 	}
+
 	componentWillMount() {}
+
 	componentDidMount() {}
+
 	componentWillUnmount() {}
 
-	/*changeColor(c, key) {
+	changeColor(c, key) {
 		var col = c.color.colorRGB()
 		col.push(c.alpha/100)
 		col = `rgba(${col.join(',')})`
@@ -170,14 +179,14 @@ class EditTheme extends React.Component {
 				</div>
 			</div>
 		)
-	}*/
+	}
 
 	render() {
-		let { data, editConfig }  = this.props
+		let { actions, data, editConfig }  = this.props
 		let activeKey = ['0', '1']
 		let state     = this.state
 		let colors    = data.list[data.idx].colors
-		/*let addNode
+		let addNode
 		if (Object.keys(colors).length < 50) {
 			addNode = (
 				<div className="pgs-row">
@@ -201,8 +210,10 @@ class EditTheme extends React.Component {
 		let childNode = Object.keys(colors).map((_) => {
 			let col = colors[_]
 			let dom = this[state.editKey === _? 'renderEdit': 'renderTheme'](_, col, data)
-			return <div key={_}>{ dom }</div>
-		})*/
+			return (
+				<div key={_}>{ dom }</div>
+			)
+		})
 		return (
 			<section className="pg-theme">
 				{/*<ThemeManage
@@ -229,12 +240,18 @@ class EditTheme extends React.Component {
 					data={editConfig.globalData}
 					action={'updateGlobal'}
 				/>
+				<LoadingConfig
+					data={editConfig.globalData}
+					action={'updateGlobal'}
+					actions={actions}
+				/>
 			</section>
 		)
 	}
 }
 
-EditTheme.defaultProps = {}
+EditTheme.defaultProps = {
+}
 
 const mapStateToProps = state => state
 

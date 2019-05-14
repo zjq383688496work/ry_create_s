@@ -7,7 +7,6 @@
 
 import React from 'react';
 import SkyLight from 'react-skylight';
-import VideoCrop from '../VideoCrop'
 import './index.less'
 import { Button, Upload, message,Modal,Pagination,Icon,Input } from 'antd'
 import Url from 'public/Url'
@@ -95,11 +94,11 @@ export default class PictureAndVideo extends React.Component {
 			type: type
 		}
 		var ty = 'ySourceGroupManage'
-		if (envType === 'business') {
+		if (getEnv() === 'business') {
 			getData.mallId = uif.userInfo.mallMid
 			ty = 'sourceGroupManage'
 		}
-		Ajax.postJSON(`/easy-smart/${ty}/query`, getData).then(res => {
+		Ajax.postJSON(`/easy-smart-basic/${ty}/query`, getData).then(res => {
 			this.setState({ 
 				types: res.data
 			},()=>{fn&&fn(res.data[0].id)})
@@ -164,7 +163,8 @@ export default class PictureAndVideo extends React.Component {
 		}
 	}
 	enter = () => { 
-		if(this.state.list.length == 0) return message.info(`请选择图片或视频!`)
+		this.props.initFn()
+		if(this.state.list.length == 0) return
 		this.props.enter(this.state.list,this.props.index)
 	} 
 	render() {
@@ -280,11 +280,11 @@ class ImgAndModule extends React.Component {
 				type:        1
 			}
 			var ty = 'ySourceManage'
-			if (envType === 'business') {
+			if (getEnv() === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
-			Ajax.postJSON(`/easy-smart/${ty}/query`, postData).then(res => {
+			Ajax.postJSON(`/easy-smart-basic/${ty}/query`, postData).then(res => {
 				this.setState({
 					imgList:res.data,
 					page_img:res.page
@@ -382,11 +382,11 @@ class VideoAndModule extends React.Component {
 				type:        2
 			}
 			var ty = 'ySourceManage'
-			if (envType === 'business') {
+			if (getEnv() === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
-			Ajax.postJSON(`/easy-smart/${ty}/query`, postData).then(res => {
+			Ajax.postJSON(`/easy-smart-basic/${ty}/query`, postData).then(res => {
 				this.setState({ 
 					videoList:res.data,
 					page_video:res.page
@@ -499,41 +499,45 @@ class ImgModule extends React.Component {
 		})
 		let choosed_img = index ? img_list.filter(item => item.isClicked) : img_list.filter(item => item.id === img);
 		this.props.save(choosed_img)
-	}
-	customRequest = ({ file }) => {
-		this.setState({ loading: true })
-		var paramsData = {
-			userId: window.uif.userInfo.id || '1',
-			mallId: '',
-			imageSourceType: 'OPERATION',
-			imageName: file.name.split('.')[0]
-		}
-		if (envType === 'business') {
+	};
+	customRequest = info => {
+		const that = this
+		this.setState({loading:true})
+		let id = window.uif.userInfo.id || '1'
+		let paramsData = {
+			userId:id,
+			mallId:'',
+			imageSourceType:'OPERATION'
+		} 
+		paramsData.imageName = info.file.name.split(".")[0];
+		if (getEnv() === 'business') {
 			paramsData.imageSourceType = 'BUSINESS'
 			paramsData.mallId = uif.userInfo.mallMid
 		}
 		var reader = new FileReader()
-		reader.onload = ({ target }) => {
-			Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage', { ...paramsData, imageBase64: target.result }).then(() => {
-				message.info('上传成功!')
-				this.setState({ loading: false })
-				this.props.getImgList()
-			}).catch(e => {
-				this.setState({ loading: false })
-			})
-		}
-		reader.readAsDataURL(file)
+			reader.onload = (function (file) {
+				return function (e) {
+					console.info(this.result) //这个就是base64的数据了
+					const img = this.result
+					const postData = {...paramsData,imageBase64:img}
+					Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage',postData).then(res=>{
+						message.info('上传成功!')
+						that.setState({loading:false})
+						that.props.getImgList()
+					})
+				}
+			})(info.file)
+			reader.readAsDataURL(info.file)
 	}
-	beforeUpload = ({ size, type }) => {
-		if (!/(png|jpeg|gif)/.test(type)) {
-			message.info(`图片格式不正确!`)
-			return false
+	beforeUpload = file => {
+		let imgType = false;
+		if(file.type.indexOf('image/png') > -1 || file.type.indexOf('image/jpg')>-1 || file.type.indexOf('image/svg')>-1 || file.type.indexOf('image/jpeg')>-1){
+			imgType = true
 		}
-		if (size > 5e6) {
-			message.info(`当前图片大小${(size / 1e6).toFixed(1)}mb, 请上传不超过5mb的图片!`)
-			return false
-		}
-		return true
+	  if (!imgType) {
+	   message.info('请上传png、jpg、svg格式图片!')
+	  }
+	  return imgType;
 	}
 	render() {
 		let id = window.uif.userInfo.id || '1'
@@ -548,17 +552,17 @@ class ImgModule extends React.Component {
 				<div className="right">
 					<div>
 						<Upload
-							name="avatar"
+							name= 'avatar'
 							className="avatar-uploader"
 							listType="picture-card"
 							showUploadList={false}
 							customRequest={this.customRequest}
 							beforeUpload={this.beforeUpload}
-							accept="image/png, image/jpeg, image/gif"
+							accept="image/*"
 						>
 						<div>
 							<Icon type={this.state.loading ? 'loading' : 'plus'} />
-							<div className="ant-upload-text">上传图片<br/>JPG PNG GIF格式, 5MB大小以内</div>
+							<div className="ant-upload-text">上传图片</div>
 						</div>
 						</Upload>
 					</div>
@@ -584,8 +588,7 @@ class VideoModule extends React.Component {
 		videoTypes: [],
 		videoList:  [],
 		current:    this.props.currentPage,
-		groupId:    this.props.groupId,
-		loading:    false
+		groupId:    this.props.groupId
 	}
 	
 	componentWillReceiveProps(props){
@@ -635,39 +638,7 @@ class VideoModule extends React.Component {
 		let choosed_video = index ? videoList.filter(item => item.isClicked) : videoList.filter(item => item.id == id); 
 		this.props.save(choosed_video) 
 	} 
-	customRequest = info => {
-		const that = this
-		this.setState({loading:true})
-		let id = window.uif.userInfo.id || '1'
-		let paramsData = {
-			userId:id,
-			mallId:'',
-			imageSourceType:'OPERATION'
-		} 
-		paramsData.imageName = info.file.name.split(".")[0];
-		if (envType === 'business') {
-			paramsData.imageSourceType = 'BUSINESS'
-			paramsData.mallId = uif.userInfo.mallMid
-		}
-		VideoCrop(info.file,this.postEndFn,paramsData.mallId)
-	}
-	//上传视频成功后的回调
-	postEndFn = () => {
-		message.info('上传成功!')
-        this.setState({loading:false})
-        this.props.getVideoList()
-	}
-	beforeUpload = ({ size, type }) => {
-		if (!/mp4$/.test(type)) {
-			message.info(`视频格式不正确!`)
-			return false
-		}
-		if (size > 2e8) {
-			message.info(`当前视频大小${(size / 1e6).toFixed(1)}mb, 请上传不超过20mb的图片!`)
-			return false
-		}
-		return true
-	}
+	
 	render() {
 		const { page_video } = this.props;
 		return (
@@ -678,22 +649,6 @@ class VideoModule extends React.Component {
 					} 
 				</div> 
 				<div className="right">
-					<div>
-						<Upload
-							name="avatar"
-							className="avatar-uploader"
-							listType="picture-card"
-							showUploadList={false}
-							customRequest={this.customRequest}
-							beforeUpload={this.beforeUpload}
-							accept="video/mp4"
-						>
-							<div>
-								<Icon type={this.state.loading? 'loading': 'plus'} />
-								<div className="ant-upload-text">上传视频<br/>mp4格式,200MB大小以内</div>
-							</div>
-						</Upload>
-					</div>
 					{ 
 						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseVideo}></List> )
 					}
@@ -718,17 +673,15 @@ function Type({item, choose_one, groupId}) {
 	)
 }
 //图片
-function List({ item, choose_one }) {
-	if (!item) return null
-	var { attribute, id, isClicked, name, preview, thumbnail } = item
+function List({ item,choose_one }) {
 	return  (
-		<div onClick={()=>{choose_one(id)}} className={isClicked? 'choosed': ''}>
-			<div className={isClicked? 'icon_img': ''}>
-				<div className="right-symbol"></div>
+			<div onClick={()=>{choose_one(item.id)}} className={item.isClicked?'choosed':''}>
+				<div className={item.isClicked?'icon_img':''}>
+					<div className="right-symbol"></div>
+				</div>
+				<img src={item.preview || item.url} />
+				<div className="showName">{item.name}</div>
+				<div className="showSize">{item.attribute}</div>
 			</div>
-			{ (preview || thumbnail)? <img src={preview || thumbnail} />: null }
-			<div className="showName">{name}</div>
-			<div className="showSize">{attribute}</div>
-		</div>
-	)
+		)
 }

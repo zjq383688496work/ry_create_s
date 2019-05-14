@@ -38,11 +38,11 @@ class EditStyle extends React.Component {
 	componentWillUnmount() {}
 
 	onChange(val, css, obj,cfg,node, attribute) {
-		let { data, actions, editConfig, from } = this.props
+		let { data, actions, editConfig } = this.props
 		data = lineHightAdaptation(data,val,css)
 		data = imageAdaptation(data,attribute)
 		let da = data.data
-		let { curData, globalData } = editConfig
+		let { curData } = editConfig
 		let { parentComp } = curData
 		if(getAttr(val) == 'Number'){
 			val = val > cfg.max ? cfg.max : val
@@ -52,23 +52,15 @@ class EditStyle extends React.Component {
 		} else {
 			obj[css] = val
 		}
-		if(from === "banner"){
-			globalData.banner = data
-			return actions.updateGlobal(globalData)
-		}
-		return actions.updateComp(null, parentComp? parentComp: data)
+		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, style, css) {
-		let { data, actions, editConfig, from } = this.props
-		let { curData, globalData }    = editConfig
+		let { data, actions, editConfig } = this.props
+		let { curData }    = editConfig
 		let { parentComp } = curData
 		data.auth.style[style][css] = val
-		if(from === "banner"){
-			globalData.banner = data
-			return actions.updateGlobal(globalData)
-		}
-		return actions.updateComp(null, parentComp? parentComp: data)
+		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	cb(key) {
@@ -78,6 +70,7 @@ class EditStyle extends React.Component {
 	/* 渲染组件开始 */
 	// 数字
 	renderNumber(cfg, data, obj, val, key, node) {
+		//let bigDa = bigStyle(deepCopy(da))
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
@@ -183,7 +176,7 @@ class EditStyle extends React.Component {
 	}
 
 	render() {
-		let { data, from } = this.props
+		let { data } = this.props
 		let da       = data.data
 		if (!da) return null
 		let { style, layout } = da
@@ -193,13 +186,6 @@ class EditStyle extends React.Component {
 		// 位置大小
 		let layoutNode = Object.keys(layout).map((q, j) => {
 				if (!cssMap[q]) return
-				if(from === "banner"){
-					if(tempCfg.composeType == 'LANDSCAPE'){
-						if(q != "width") return false
-					}else{
-						if(q != "height") return false
-					}
-				}
 				let cm     = cssMap[q],
 					val    = layout[q],
 					render = this[`render${cm.type}`]

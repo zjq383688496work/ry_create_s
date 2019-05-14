@@ -63,32 +63,25 @@ class EditComponent extends React.Component {
 	}
 
 	render() { 
-		let { editConfig, location } = this.props,
-			{ curData, globalData } = editConfig,
-			{ banner, theme } = globalData,
-			colors = theme.list[theme.idx].colors,
-			type   = curData.contentType,
-			editTab
+		let { editConfig, location } = this.props
+		let theme  = editConfig.globalData.theme
+		let colors = theme.list[theme.idx].colors
+		let { curData } = editConfig
+		let type = curData.contentType
+		let editTab
 		window.curThemeColor = colors
 		if (type === 'page') {
-			editTab = <EditPage data={editConfig.curPage} />
+			editTab = (<EditPage data={editConfig.curPage} />)
 		} else if(type === 'comp') {
 			editTab = (
 				<Tabs defaultActiveKey="1" type="card">
-					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} from={null}/></TabPane>
-					<TabPane tab="展示" key="2"><EditStyle     data={editConfig.curComp} from={null}/></TabPane>
-					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} from={null}/></TabPane>
-				</Tabs>
-			)
-		} else if (type === 'banner') {
-			editTab = (
-				<Tabs defaultActiveKey="1" type="card">
-					<TabPane tab="内容" key="1"><EditContent data={banner} from="banner"/></TabPane>
-					<TabPane tab="展示" key="2"><EditStyle   data={banner} from="banner"/></TabPane>
+					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
+					<TabPane tab="展示" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
+					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
 				</Tabs>
 			)
 		} else if (type === 'theme') {
-			editTab = <EditTheme data={editConfig.globalData.theme} />
+			editTab = (<EditTheme data={editConfig.globalData.theme} />)
 		}
 		return (
 			<div className="pg-edit-box">

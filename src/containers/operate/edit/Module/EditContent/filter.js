@@ -22,20 +22,13 @@ export function filterContent(data,con) {
 	return content
 } 
 
-// 轮播设置的过滤--商家--大运营
+//轮播设置的过滤--商家--大运营
 export function setSwiperImgAndVideo(editConfig){
-	let { pageContent, globalData } = editConfig,
-		{ banner } = globalData
-	if(tempCfg.bannerAds == 1){
-		banner.data.content.forEach(e=>{
-			!e.delayOnly&&e.type=='image' ? e.delayOnly = 5 : null
-			!e.date ? e.date = '' : null
-		})
-	}
+	let { pageContent } = editConfig
 	Object.keys(pageContent).map(_=>{
 		let page = pageContent[_],elements =  page.elements;
 		elements.map(val=>{
-			if (val.name === 'swiperImgAndVideo') {
+			if(val.name === "swiperImgAndVideo"){
 				let contentList = deepCopy(val.data.content)
 				if(getAttr(contentList) != 'Array') return
 				contentList.forEach(e=>{

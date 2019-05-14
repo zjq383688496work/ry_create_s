@@ -15,13 +15,9 @@ import ColorPicker from 'rc-color-picker'
 import ThemeManage from 'compEdit/EditCommon/ThemeManage'
 import BackMusic from 'compEdit/EditCommon/BackMusic'
 import Advert from 'compEdit/EditCommon/Advertisement'
-import EditContent    from 'compEditB/EditContent'
-import EditStyle      from 'compEditB/EditStyle'
-import { Collapse, Icon, Input, Select, Tabs } from 'antd'
-
-const Panel   = Collapse.Panel
-const Option  = Select.Option
-const TabPane = Tabs.TabPane
+import { Collapse, Icon, Input, Select } from 'antd'
+const Panel  = Collapse.Panel
+const Option = Select.Option
 
 import ImageUploadTheme from 'compEdit/EditCommon/ImageUploadTheme'
 
@@ -215,35 +211,11 @@ class EditTheme extends React.Component {
 					data={editConfig.globalData}
 					action={'updateGlobal'}
 				/>
-				{
-					tempCfg.bannerAds == 1 ? 
-					<Collapse defaultActiveKey={['0']}>
-						<Panel header={`banner广告`} key={0}>
-							<Banner {...this.props} />
-						</Panel>
-					</Collapse> : null
-				}
 			</section>
 		)
 	}
 }
-//  banner广告配置选项
-class Banner extends React.Component {
 
-	render() {
-		let { data, actions, editConfig }  = this.props,
-			{ globalData } = editConfig,
-			{ banner } = globalData
-		return (
-				<div className="pg-right scrollbar" id="banner">
-					<Tabs defaultActiveKey="1" type="card">
-						<TabPane tab="内容" key="1"><EditContent   data={banner} from="banner" /></TabPane>
-						<TabPane tab="展示" key="2"><EditStyle     data={banner} from="banner"/></TabPane>
-					</Tabs>
-				</div>
-			)
-	}
-}
 EditTheme.defaultProps = {
 }
 

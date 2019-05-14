@@ -44,6 +44,7 @@ class Header extends React.Component {
 		editConfig.curData.contentType = 'theme'
 		actions.updateCur(editConfig.curData)
 	}
+
 	formatStyle(data) {
 		let { style, layout } = data
 		Object.keys(data.style).map(_ => style[_] = cssFormatByTerm(style[_]))
@@ -93,8 +94,7 @@ class Header extends React.Component {
 		cfg.globalData = {
 			data:    gd.data,
 			theme:   gd.theme,
-			feature: gd.feature,
-			banner:  gd.banner
+			feature: gd.feature
 		}
 		let config = {
 			configPC: {
