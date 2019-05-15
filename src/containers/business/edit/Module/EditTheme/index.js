@@ -15,6 +15,8 @@ import ColorPicker from 'rc-color-picker'
 import ThemeManage from 'compEdit/EditCommon/ThemeManage'
 import BackMusic from 'compEdit/EditCommon/BackMusic'
 import Advert from 'compEdit/EditCommon/Advertisement'
+import LoadingConfig from 'compEdit/EditCommon/LoadingConfig'
+
 import { Collapse, Icon, Input, Select } from 'antd'
 const Panel  = Collapse.Panel
 const Option = Select.Option
@@ -175,7 +177,7 @@ class EditTheme extends React.Component {
 	}
 
 	render() {
-		let { data, editConfig }  = this.props
+		let { actions, data, editConfig }  = this.props
 		let activeKey = ['0', '1']
 		let state     = this.state
 		let colors    = data.list[data.idx].colors
@@ -210,6 +212,11 @@ class EditTheme extends React.Component {
 				<Advert 
 					data={editConfig.globalData}
 					action={'updateGlobal'}
+				/>
+				<LoadingConfig
+					data={editConfig.globalData}
+					action={'updateGlobal'}
+					actions={actions}
 				/>
 			</section>
 		)

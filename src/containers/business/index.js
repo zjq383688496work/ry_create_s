@@ -154,17 +154,17 @@ class BusinessComponent extends React.Component {
 		})
 	}
 	getUserInfo(cb) {
-		if (ENV === 'dev'){
-			Ajax.postLogin('/bsoms/user/ajaxLogin', {
-				password: 'RYxyz123',
-				userName: 'xcyh001',
-				verifyCode: ''
-			}).then(() => {
-				this.initData(cb)
-			})
-		} else {
+		// if (ENV === 'dev'){
+		// 	Ajax.postLogin('/bsoms/user/ajaxLogin', {
+		// 		password: 'RYxyz123',
+		// 		userName: 'xcyh001',
+		// 		verifyCode: ''
+		// 	}).then(() => {
+		// 		this.initData(cb)
+		// 	})
+		// } else {
 			this.initData(cb)
-		}
+		// }
 	}
 	componentWillMount() {
 		this.getUserInfo(() => {

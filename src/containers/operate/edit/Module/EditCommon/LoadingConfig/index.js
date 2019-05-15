@@ -7,8 +7,11 @@ import ImageUploadTheme from 'compEdit/EditCommon/ImageUploadTheme'
 import './index.less'
 
 var cfgArr = [
-	{ name: '列表', key: 'list' },
-	{ name: '网页', key: 'web' }
+	{ name: '店铺无数据', key: 'store' },
+	{ name: '店铺加载',   key: 'storeList' },
+	{ name: '商品无数据', key: 'goods' },
+	{ name: '商品加载',   key: 'goodsList' },
+	{ name: '网页离线',   key: 'web' }
 ]
 
 class LoadingConfig extends React.Component {
@@ -38,6 +41,8 @@ class LoadingConfig extends React.Component {
 		var nodeList = cfgArr.map(({ name, key }, i) => {
 			var item = loading[key]
 			return (
+				envType === 'operate' || (envType === 'business' && item.auth)
+				?
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">{name}</div>
 					<div className="pgsr-ctrl">
@@ -49,10 +54,16 @@ class LoadingConfig extends React.Component {
 							</Row>
 						</div>
 					</div>
-					<div className="pgsr-auth">
-						<Checkbox checked={item.auth || false} onChange={({ target }) => this.onChangeAuth(target.checked, item)} />
-					</div>
+					{
+						envType === 'operate'
+						?
+						<div className="pgsr-auth">
+							<Checkbox checked={item.auth || false} onChange={({ target }) => this.onChangeAuth(target.checked, item)} />
+						</div>
+						: null
+					}
 				</div>
+				: null
 			)
 		})
 		return nodeList

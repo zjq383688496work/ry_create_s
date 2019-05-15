@@ -14,8 +14,11 @@ const globalData = {
 			time:   { auth: false, value: 30 }
 		},
 		loading: {
-			list: { auth: false, value: false },
-			web:  { auth: false, value: false }
+			web:       { auth: false, value: '' },
+			store:     { auth: false, value: '' },
+			storeList: { auth: false, value: '' },
+			goods:     { auth: false, value: '' },
+			goodsList: { auth: false, value: '' },
 		},
 		composeType:'portrait'
 	},
