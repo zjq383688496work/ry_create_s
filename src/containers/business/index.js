@@ -93,6 +93,7 @@ class BusinessComponent extends React.Component {
 
 				//dataFormat.get.pageEach(cfg.pageContent)
 				// debugger
+				cfg.globalData.data = { ...globalData.data, ...cfg.globalData.data }
 				cfg.globalData = { ...globalData, ...cfg.globalData }
 				let newCfg = {
 					curComp: {},
