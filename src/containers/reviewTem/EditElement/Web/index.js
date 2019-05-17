@@ -29,11 +29,8 @@ class WebShow extends React.Component {
 				break
 			}
 		}
-		if(!haveRouter){ value.router = '' }
-		if (type === 'back' && value) { 
-			//clearInterval(RYTimer);  
-			//funcIn(); 
-		}else if(type === 'toDetails'){
+		if(!haveRouter) value.router = ''
+		if (type === 'toDetails') {
 			const dataStr = checkToJump(value.details,value.router);
 			JumpRouter(dataStr,animate,animateParams,action)
 		}
@@ -45,7 +42,13 @@ class WebShow extends React.Component {
 		let { data } = this.props
 		return ( 
 			<div className="e-web">
-				<iframe id={this.state.id} className="ew-iframe-show" src={data.data.content.url} scrolling={'no'} />
+				<iframe
+					id={this.state.id}
+					className="ew-iframe-show"
+					src={data.data.content.url}
+					scrolling={'no'}
+					sandbox="allow-top-navigation"
+				/>
 			</div> 
 		) 
 	}

@@ -296,7 +296,7 @@ class EditElement extends React.Component {
 				aniCls    = '',
 				aniSty    = {},
 				lockAspectRatio = layout.lockAspectRatio,
-				editStatus = _.feature&&_.feature.editStatus;
+				editStatus = _.feature && _.feature.editStatus;
 			i === compIdx ? disableDragging = editStatus : null
 			let compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i,state.drag, csn, state.keyCtrl,disableDragging,state.shift)
 			if (!compCon) return false 
