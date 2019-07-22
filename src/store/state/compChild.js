@@ -52,6 +52,7 @@ module.exports = {
 		catgByStore2:   1,
 		pageByStore2:   1,
 		floorByStore2:  1,
+		buildByStore2:  1,
 		letterByStore2: 1,
 		resetByStore2:  1,
 		mapByStore2:    1

@@ -9,11 +9,7 @@ import './index.less'
 
 export default class Button extends React.Component {
 	shouldComponentUpdate(newProps, newState){
-		if (newProps.drag != undefined) {
-			return newProps.drag
-		} else {
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 	render() {
 		let { type, data } = this.props

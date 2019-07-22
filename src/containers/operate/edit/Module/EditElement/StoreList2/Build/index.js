@@ -5,27 +5,19 @@ import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 import * as Server from 'server'
 
-export default class CatgByGoods extends React.Component {
+export default class BuildByStore2 extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { list: [] }
+		var { build = [] } = props.ioInput
+		this.state = { list: build }
 	}
-	componentWillMount() {
-		this.getData()
-	}
-	shouldComponentUpdate(newProps, newState){
+	shouldComponentUpdate(newProps, newState) {
 		return newProps.drag != undefined? newProps.drag: true
 	}
-	getData = e => {
-		Server.goods.getCategoryList(o => {
-			this.setState({ list: o })
-		})
-	}
-	renderItem = (item, catg, idx) => {
+	renderItem = (item, floor, idx) => {
 		let { data } = this.props,
-			{ categoryId } = item,
+			{ id } = item,
 			{ componentLayout, layout } = data.data,
-			// isAV = categoryId === catg,
 			isAV = !idx,
 			cl   = []
 		componentLayout.map(_ => {
@@ -45,14 +37,14 @@ export default class CatgByGoods extends React.Component {
 		let { body } = this.props.ioInput,
 			{ list } = this.state
 		return list.map((_, i) => {
-			return <div key={i}>{this.renderItem(_, body.catg, i)}</div>
+			return <div key={i}>{this.renderItem(_, body.floor, i)}</div>
 		})
 	}
 	render() {
 		let dom = this.renderList()
 		return (
-			<section className={`e-catg-by-goods scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>
-				<div className="e-catg-by-goods-box" style={cssColorFormat(this.props, 'filterFlex')}>
+			<section className={`e-floor-by-store2 scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>
+				<div className="e-floor-by-store2-box" style={cssColorFormat(this.props, 'filterFlex')}>
 					{ dom }
 				</div>
 			</section>

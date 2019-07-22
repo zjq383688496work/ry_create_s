@@ -10,11 +10,7 @@ import './index.less'
 
 export default class PictureListBind extends React.Component {
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 	renderImage = imgs => {
 		let props = this.props,

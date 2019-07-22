@@ -9,11 +9,7 @@ export default class ResetByGoods extends React.Component {
 	}
 
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 	renderDom = e => {
 		let { data, ioInput } = this.props,

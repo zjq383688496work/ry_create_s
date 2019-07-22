@@ -114,6 +114,7 @@ module.exports = {
 	catgByStore2:      authInit(require('./storeList2/content/catg')),		// 分类
 	pageByStore2:      authInit(require('./storeList2/content/page')),		// 分页
 	floorByStore2:     authInit(require('./storeList2/content/floor')),		// 楼层
+	buildByStore2:     authInit(require('./storeList2/content/build')),		// 楼栋
 	letterByStore2:    authInit(require('./storeList2/content/letter')),	// 字母
 	resetByStore2:     authInit(require('./storeList2/content/reset')),		// 重置
 	mapByStore2:       authInit(require('./storeList2/content/map')),		// 导航

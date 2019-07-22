@@ -14,11 +14,7 @@ const typeMap = {
 
 export default class TextBind extends React.Component {
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 	render() {
 		let props = this.props,

@@ -4,6 +4,7 @@ const cdnUrl  = `${cdn}/commodity/text`
 const cdnSUrl = `${cdn}/system/mcp/DEV/app/upload`
 const catg  = ['餐饮', '潮流', '儿童', '美发', '生活']
 const floor = ['B2', 'B1', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6']
+const build = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 const pics  = [
 	'201808271739138841',
 	'201808271739139870',
@@ -50,6 +51,7 @@ var Item = {
 		praiseAmount: rn(1e4),
 		name:      `优衣库/UNIQLO`,
 		qrcode:    'http://rongyi.b0.rongyi.com/commodity/text/201808271756227480.png',
+		buildNumber: `A${rn(20)}`,
 		berthNumber: 'L1=199',
 		contact:   '021-88888888',
 		featuredShop:true,
@@ -125,6 +127,15 @@ module.exports = {
 				return {
 					id:   i + 1,
 					name: floor[i]
+				}
+			})
+		},
+		storeBuild() {
+			var length = build.length
+			return Array.apply(null, { length }).map((_, i) => {
+				return {
+					id:   i + 1,
+					name: build[i]
 				}
 			})
 		},

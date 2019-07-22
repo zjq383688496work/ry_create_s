@@ -13,11 +13,7 @@ import './index.less'
 
 class Page extends React.Component {
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 	selectVal(str) {
 		let { parent, actions, ioInput, ioOuter } = this.props

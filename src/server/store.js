@@ -4,8 +4,8 @@ module.exports = ({ host, mockList, mockItem, getMallId }) => {
 		// 分类列表
 		getCategoryList(cb) {
 			// if (envType !== 'business') {
-				var { storeCatg, storeFloor } = mockList
-				cb && cb({floor: storeFloor(), catg: storeCatg() })
+				var { storeCatg, storeFloor, storeBuild } = mockList
+				cb && cb({floor: storeFloor(), catg: storeCatg(), build: storeBuild() })
 			// } else {
 			// 	Ajax.post(`${path}/shopTypeFloorList`, getMallId()).then(res => {
 			// 		var { floorList, typeList } = res.data? res.data: {}

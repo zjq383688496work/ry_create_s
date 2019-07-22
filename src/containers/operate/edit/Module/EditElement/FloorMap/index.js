@@ -12,11 +12,7 @@ class FloorMap extends React.Component {
 	 * 组件挂载完成
 	*/
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 
 	render() {

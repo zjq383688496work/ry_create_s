@@ -21,11 +21,7 @@ class StoreDetails extends React.Component {
 		super(props)
 	}
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 	ioOuter(ipt) {
 		

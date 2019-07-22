@@ -27,17 +27,17 @@ const data = {
 	}, 
 	content: [
 		{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506216176.jpg' },
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231506216176.jpg' },
 			router: {},
 			type:'image',
 		}, 
 		{ 
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506213816.jpg' },
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231506213816.jpg' },
 			router: {},
 			type:'image'
 		}, 
 		{   
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506215219.jpg' },
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231506215219.jpg' },
 			router: {},
 			type:'image'
 		}

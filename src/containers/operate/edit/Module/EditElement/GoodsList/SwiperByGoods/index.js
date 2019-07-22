@@ -23,11 +23,7 @@ export default class SwiperByGoods extends React.Component {
 		this.setState({ ...s })
 	}
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 	init = (props, state) => {
 		var { data } = props.data,

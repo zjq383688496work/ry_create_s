@@ -10,11 +10,7 @@ import './index.less'
 
 export default class Area extends React.Component {
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 	render() {
 		let { show = true } = this.props

@@ -220,6 +220,11 @@ module.exports = [
 					key:  'floorByStore2'
 				},
 				{
+					icon: 'floorNav',
+					name: '楼栋',
+					key: 'buildByStore2'
+				},
+				{
 					icon: 'classifyNav',
 					name: '分类',
 					key:  'catgByStore2'

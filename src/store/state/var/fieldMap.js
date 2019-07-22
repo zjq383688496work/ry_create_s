@@ -24,6 +24,7 @@ var Map = {
 		logo:         'LOGO',
 		name:         '店铺名称',
 		berthNumber:  '楼层名称',
+		buildNumber:  '楼栋名称',
 		description:  '店铺描述',
 		pictures:     '店铺图片',
 		praiseAmount: '点赞数',
@@ -36,6 +37,9 @@ var Map = {
 	},
 	storeFloor: {
 		name: '楼层名称'
+	},
+	storeBuild: {
+		name: '楼栋名称'
 	},
 	storeLetter: {
 		name: '名称'
@@ -57,6 +61,7 @@ module.exports = {
 	listByStore2:    deepCopy(Map.store),
 	catgByStore2:    deepCopy(Map.storeCatg),
 	floorByStore2:   deepCopy(Map.storeFloor),
+	buildByStore2:   deepCopy(Map.storeBuild),
 	letterByStore2:  deepCopy(Map.storeLetter),
 	pageByStore2:    deepCopy(Map.storePage),
 	storeBlock:      deepCopy(Map.store),

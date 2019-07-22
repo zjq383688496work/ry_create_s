@@ -29,11 +29,7 @@ export default class StoreList2 extends React.Component {
 		this.getData()
 	}
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 	componentWillReceiveProps() {
 		this.getData()
@@ -49,9 +45,10 @@ export default class StoreList2 extends React.Component {
 		let { content } = data
 		let size = ipt.body.size = content.size
 
-		Server.store.getCategoryList(({ floor, catg }) => {
+		Server.store.getCategoryList(({ floor, catg, build }) => {
 			ipt.floor = floor
-			ipt.catg  = catg
+			ipt.catg  = catg,
+			ipt.build = build
 			this.setState({ ioInput: ipt })
 		})
 	}

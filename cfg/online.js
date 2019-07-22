@@ -23,7 +23,7 @@ let config = Object.assign({}, baseConfig, {
         filename: '[name]_[hash:8].js',
         chunkFilename: '[name]_[hash:8].js',
         publicPath: '/store_static/'
-        // publicPath: 'http://rongyi.b0.upaiyun.com/fe/screen/v23/assets/'
+        // publicPath: 'http://rongyi.b0.rongyi.com/fe/screen/v23/assets/'
     },
     cache: false,
     // devtool: 'source-map',

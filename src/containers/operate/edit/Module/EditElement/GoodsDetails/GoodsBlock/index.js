@@ -10,11 +10,7 @@ export default class GoodsBlock extends React.Component {
 		this.state = {}
 	}
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		return newProps.drag != undefined? newProps.drag: true
 	}
 	render() {
 		let props = this.props,
