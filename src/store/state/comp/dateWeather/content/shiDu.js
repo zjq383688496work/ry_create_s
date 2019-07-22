@@ -13,7 +13,7 @@ const shiDu = extendRmSL(deepCopy(require('../../../comp/area')), {
 			filterBox:{
 				backgroundColor: { type: 'custom', color: '#4a89dc' },
 				opacity: 0.6,
-				WebkitMaskImage:`url('http://rongyi.b0.upaiyun.com/wd/other/store_other/2018/images/shidu.svg')` 
+				WebkitMaskImage:`url('http://rongyi.b0.rongyi.com/wd/other/store_other/2018/images/shidu.svg')` 
 			}    
 		}  
 	}

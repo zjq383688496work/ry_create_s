@@ -13,7 +13,7 @@ const instroButton = extendRmSL(deepCopy(require('../../../comp/button')), {
 				background: 'center no-repeat',
 				backgroundSize: 'contain', 
 				backgroundColor: { type: 'custom', color: '#fff' }, 
-				backgroundImage:{type:'custom',img:"http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/136c4156-08c9-4d37-8ffc-da00c7b5af7b.png"},
+				backgroundImage:{type:'custom',img:"http://rongyi.b0.rongyi.com/system/mcp/DEV/app/upload/136c4156-08c9-4d37-8ffc-da00c7b5af7b.png"},
 				borderWidth:     0
 			}   
 		},        

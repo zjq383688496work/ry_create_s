@@ -77,7 +77,7 @@ const PriceT = extendRmSL(deepCopy(p), {
 			height: 12
 		},
 		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201808271801007506.png' }
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201808271801007506.png' }
 		}
 	}
 })

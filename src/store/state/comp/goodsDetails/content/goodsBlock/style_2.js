@@ -12,7 +12,7 @@ const Title = extendRmSL(deepCopy(p), {
 			height: 18
 		},
 		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201807251208278441.png' }
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201807251208278441.png' }
 		}
 	}
 })

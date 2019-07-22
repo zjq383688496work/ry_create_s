@@ -68,17 +68,17 @@ const data = {
 	}, 
 	content: [
 		{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506216176.jpg' },
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231506216176.jpg' },
 			//title: '图片1',		// 图片标题
 			router: {},			// 路由
 		}, 
 		{ 
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506213816.jpg' },
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231506213816.jpg' },
 			//title: '图片2',		// 图片标题
 			router: {},			// 路由
 		}, 
 		{   
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231506215219.jpg' },
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231506215219.jpg' },
 			//title: '图片3',		// 图片标题
 			router: {},			// 路由
 		}

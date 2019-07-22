@@ -89,31 +89,31 @@ class OperateComponent extends React.Component {
 				{
 					id:      '5a532b82130b38000b1884a7',
 					name:    'B1',
-					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				},
 				{
 					id:      '5a532b82130b38000b1884a7',
 					name:    'L1',
-					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				},
 				{
 					id:      '5a532b82130b38000b1884a7',
 					name:    'L2',
-					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				},
 				{
 					id:      '5a532b82130b38000b1884a7',
 					name:    'L3',
-					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				},
 				{
 					id:      '5a532b82130b38000b1884a7',
 					name:    'L4',
-					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				}
 			]
@@ -127,31 +127,31 @@ class OperateComponent extends React.Component {
 				{
 					id:      '5a532b82130b38000b1884a7',
 					name:    '餐 饮',
-					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				},
 				{
 					id:      '5a532b82130b38000b1884a7',
 					name:    '服 饰',
-					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				},
 				{
 					id:      '5a532b82130b38000b1884a7',
 					name:    '亲 子',
-					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				},
 				{
 					id:      '5a532b82130b38000b1884a7',
 					name:    '娱 乐',
-					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				},
 				{
 					id:      '5a532b82130b38000b1884a7',
 					name:    '其他',
-					picture: 'http://rongyi.b0.upaiyun.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
+					picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 					sort:    1
 				}
 			]
@@ -170,7 +170,7 @@ class OperateComponent extends React.Component {
 						floor: `L1=1${('00' + (i+1)).substr(-2)}`,
 						no:    `1${('00' + (i+1)).substr(-2)}`,
 						mall_id: '54f403eae4b002000cf63762',
-						pic: 'http://rongyi.b0.upaiyun.com/commodity/text/201805311433385479.png'
+						pic: 'http://rongyi.b0.rongyi.com/commodity/text/201805311433385479.png'
 					}
 				}),
 				page: 1,
@@ -188,19 +188,19 @@ class OperateComponent extends React.Component {
 				images: [
 					{
 						title: '促销图文',
-						url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+						url:   'http://rongyi.b0.rongyi.com/system/smartService/null/201801180034041097.png'
 					},
 					{
 						title: '促销图文',
-						url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+						url:   'http://rongyi.b0.rongyi.com/system/smartService/null/201801180034041097.png'
 					},
 					{
 						title: '促销图文',
-						url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+						url:   'http://rongyi.b0.rongyi.com/system/smartService/null/201801180034041097.png'
 					},
 					{
 						title: '促销图文',
-						url:   'http://rongyi.b0.upaiyun.com/system/smartService/null/201801180034041097.png'
+						url:   'http://rongyi.b0.rongyi.com/system/smartService/null/201801180034041097.png'
 					}
 				],
 				text: '优衣库/UNIQLO'

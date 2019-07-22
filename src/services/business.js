@@ -6,7 +6,7 @@ const formatImage      = formatMap.image
 const formatPxMap2     = formatMap.px2
 const NT = formatMap.numberTemplate
 
-const cdnUrl = 'http://rongyi.b0.upaiyun.com/commodity/text'
+const cdnUrl = 'http://rongyi.b0.rongyi.com/commodity/text'
 const pics = [
 	'201808271739138841',
 	'201808271739139870',

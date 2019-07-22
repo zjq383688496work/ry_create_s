@@ -17,7 +17,7 @@ const gPic = extendRmSL(deepCopy(p), {
 			}
 		},
 		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201808271722229141.png' }
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201808271722229141.png' }
 		}
 	}
 })
@@ -47,7 +47,7 @@ const gPicAV = extendRmSL(deepCopy(p), {
 			height: 40
 		},
 		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201808271722230189.png' }
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201808271722230189.png' }
 		}
 	},
 	feature: { active: true }

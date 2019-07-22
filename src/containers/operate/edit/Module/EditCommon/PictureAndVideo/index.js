@@ -603,7 +603,7 @@ class VideoModule extends React.Component {
 					break;
 				}
 			} 
-			!_.preview ? _.preview = 'http://rongyi.b0.upaiyun.com/commodity/text/201811081000076071.png' : null
+			!_.preview ? _.preview = 'http://rongyi.b0.rongyi.com/commodity/text/201811081000076071.png' : null
 			return _
 		}) 
 		this.setState({

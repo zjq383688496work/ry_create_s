@@ -65,7 +65,7 @@ const Recom = extendRmSL(deepCopy(t), {
 				lineHeight: 20,
 				textAlign: 'center',
 				color: { type: 'custom', color: '#fff' },
-				backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201811271625344267.png' },
+				backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201811271625344267.png' },
 				backgroundSize: 'cover'
 			}
 		}
@@ -80,7 +80,7 @@ const Ico = extendRmSL(deepCopy(p), {
 			height: 8
 		},
 		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805191128322385.png' }
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805191128322385.png' }
 		}
 	}
 })

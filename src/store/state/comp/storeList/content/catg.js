@@ -89,10 +89,10 @@ const data = {
 			}
 		},
 		PagePrev: {
-			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/ef9a5f7c-b208-49e6-8c0f-7058cfed894e.png' }
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/system/mcp/DEV/app/upload/ef9a5f7c-b208-49e6-8c0f-7058cfed894e.png' }
 		},
 		PageNext: {
-			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/877a1801-aeac-4d3c-b4f9-30e41f41357a.png' }
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/system/mcp/DEV/app/upload/877a1801-aeac-4d3c-b4f9-30e41f41357a.png' }
 		}
 	},
 	content: {

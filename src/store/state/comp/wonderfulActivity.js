@@ -74,17 +74,17 @@ const data = {
 	content: {
 		list: [
 			{
-				img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231508121878.png' },
+				img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231508121878.png' },
 				title: '图片1',		// 图片标题
 				router: {}			// 路由
 			},
 			{
-				img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231508123038.png' },
+				img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231508123038.png' },
 				title: '图片2',		// 图片标题
 				router: {}			// 路由
 			},
 			{
-				img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231508124320.png' },
+				img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231508124320.png' },
 				title: '图片3',		// 图片标题
 				router: {}			// 路由
 			}

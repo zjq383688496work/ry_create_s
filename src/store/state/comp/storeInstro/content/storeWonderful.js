@@ -21,22 +21,22 @@ const storeWonderful = extendRmSL(deepCopy(require('../../../comp/wonderfulActiv
 		content: {
 			list: [
 				{
-					img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/de750143-1462-46c2-b5ea-cfe407cac3fd.png' },
+					img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/system/mcp/DEV/app/upload/de750143-1462-46c2-b5ea-cfe407cac3fd.png' },
 					title: '图片1',		// 图片标题
 					router: {}			// 路由
 				},
 				{
-					img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/5e541d36-c094-4acc-bb3f-4b40d745e369.png' },
+					img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/system/mcp/DEV/app/upload/5e541d36-c094-4acc-bb3f-4b40d745e369.png' },
 					title: '图片2',		// 图片标题
 					router: {}			// 路由
 				},
 				{
-					img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/78d75e81-40af-4eda-814f-a03c266417dc.png' },
+					img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/system/mcp/DEV/app/upload/78d75e81-40af-4eda-814f-a03c266417dc.png' },
 					title: '图片3',		// 图片标题
 					router: {}			// 路由
 				},
 				{
-					img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/9d5a73db-8a29-48c6-8bc2-bc456bf7ad0c.png' },
+					img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/system/mcp/DEV/app/upload/9d5a73db-8a29-48c6-8bc2-bc456bf7ad0c.png' },
 					title: '图片4',		// 图片标题
 					router: {}			// 路由
 				}

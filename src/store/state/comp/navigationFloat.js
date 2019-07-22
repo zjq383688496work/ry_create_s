@@ -95,10 +95,10 @@ const data = {
 			}
 		},
 		PagePrev: {
-			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/81dd2b08-3361-4b8f-8009-4da47881f37e.png' }
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/system/mcp/DEV/app/upload/81dd2b08-3361-4b8f-8009-4da47881f37e.png' }
 		},
 		PageNext: {
-			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/system/mcp/DEV/app/upload/75a48794-5e71-41b6-afee-7b4176dd2c8d.png' }
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/system/mcp/DEV/app/upload/75a48794-5e71-41b6-afee-7b4176dd2c8d.png' }
 		},
 		mainTable: {
 			height:65,
@@ -112,7 +112,7 @@ const data = {
 			background: 'center no-repeat',
 			backgroundSize: 'cover',
 			backgroundColor: { type: 'custom', color: '#fff' },
-			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201806261721226583.png' }
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201806261721226583.png' }
 		}
 	},
 	layout: {
@@ -124,25 +124,25 @@ const data = {
 	},
 	content: [
 		{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505013287.png' },
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231505013287.png' },
 			title: '导航1',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
 		},
 		{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505049273.png' },
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231505049273.png' },
 			title: '导航2',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
 		},
 		{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505123352.png' },
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231505123352.png' },
 			title: '导航3',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由
 		}, 
 		{
-			img: { type: 'custom', img: 'http://rongyi.b0.upaiyun.com/commodity/text/201805231505124540.png' },
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805231505124540.png' },
 			title: '导航4',		// 图片标题
 			highSwitch: false,
 			router: {},			// 路由

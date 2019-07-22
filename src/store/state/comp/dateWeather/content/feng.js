@@ -12,7 +12,7 @@ const feng = extendRmSL(deepCopy(require('../../../comp/area')), {
 		style:{
 			filterBox:{
 				backgroundColor: { type: 'custom', color: '#4a89dc' },
-				WebkitMaskImage:`url('http://rongyi.b0.upaiyun.com/wd/other/store_other/2018/images/feng.svg')`,
+				WebkitMaskImage:`url('http://rongyi.b0.rongyi.com/wd/other/store_other/2018/images/feng.svg')`,
 				opacity: 0.6
 			}    
 		}  

@@ -1,5 +1,5 @@
 let { rn, deepCopy } = require('state/common')
-const cdn     = 'http://rongyi.b0.upaiyun.com'
+const cdn     = 'http://rongyi.b0.rongyi.com'
 const cdnUrl  = `${cdn}/commodity/text`
 const cdnSUrl = `${cdn}/system/mcp/DEV/app/upload`
 const catg  = ['餐饮', '潮流', '儿童', '美发', '生活']
@@ -49,7 +49,7 @@ var Item = {
 		pictures: new Array(5).fill().map(_ => `${cdnSUrl}/${picsS[rn(4)]}.png`),
 		praiseAmount: rn(1e4),
 		name:      `优衣库/UNIQLO`,
-		qrcode:    'http://rongyi.b0.upaiyun.com/commodity/text/201808271756227480.png',
+		qrcode:    'http://rongyi.b0.rongyi.com/commodity/text/201808271756227480.png',
 		berthNumber: 'L1=199',
 		contact:   '021-88888888',
 		featuredShop:true,
