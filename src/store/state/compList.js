@@ -65,11 +65,11 @@ module.exports = [
 					name: '天气',
 					key:  'weather'
 				},
-				{
-					icon: 'navigation',
-					name: '导航列表',
-					key:  'navigation', 
-				},
+				// {
+				// 	icon: 'navigation',
+				// 	name: '导航列表',
+				// 	key:  'navigation', 
+				// },
 				{
 					icon: 'navigation',
 					name: '悬浮导航', 
