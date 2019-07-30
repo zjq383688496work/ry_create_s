@@ -24,7 +24,7 @@ export default class Layout extends React.Component {
 	render() { 
 		let { data,styleObj,itemList,type,realIndex } = this.props
 		let components = data.data.componentLayout
-		itemList ? itemList = RYdataMap(itemList) : null;
+		itemList? itemList = RYdataMap(itemList): null;
 		let childNode = components.map((_, i) => {
 			let compName = _.name, 
 				layout   = _.data.layout,

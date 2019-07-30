@@ -57,6 +57,12 @@ module.exports = {
 	},
 	floorByStore2: {
 		picture:  1,
+		text:     1,
+		textBind: 1
+	},
+	buildByStore2: {
+		picture:  1,
+		text:     1,
 		textBind: 1
 	},
 	letterByStore2: {

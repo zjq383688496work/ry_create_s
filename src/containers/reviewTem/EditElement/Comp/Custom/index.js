@@ -25,6 +25,7 @@ import ListByStore  from '../StoreList/ListByStore'
 //新店铺
 import LetterNew       	from '../StoreListNew/LetterNew'
 import FloorNew        	from '../StoreListNew/FloorNew'
+import BuildNew         from '../StoreListNew/BuildNew'
 import CatgNew         	from '../StoreListNew/CatgNew'
 import PageNew         	from '../StoreListNew/PageNew'
 import ResetNew        	from '../StoreListNew/ResetNew' 
@@ -54,7 +55,7 @@ import './index.less'
 class Custom extends React.Component {
 	 
 	render() {  
-		let { data, ioInput, ioOuter,floors,categories,shopsInfo,animate,animateParams,action,storeUpdate,have_goods,top,have_activitys } = this.props
+		let { data, ioInput, ioOuter,floors,builds,categories,shopsInfo,animate,animateParams,action,storeUpdate,have_goods,top,have_activitys } = this.props
 		let comp  = data.data.components,
 			delayTime = data.data.animation.className ? (data.data.animation.delay + data.data.animation.duration) : 0,
 			goodsDetails = ioInput&&ioInput.itemDetails;
@@ -65,7 +66,7 @@ class Custom extends React.Component {
 			let compName = _.name,
 				layout   = _.data.layout,
 				styleIdx = _.styleList.idx,
-				aniCls    = animateInfo.name,
+				aniCls   = animateInfo.name,
 				aniSty   = animateInfo.style,
 				contentBind = _.data.content&&_.data.content.bind,
 				compCon ;  
@@ -91,9 +92,10 @@ class Custom extends React.Component {
 				case 'reset' :  compCon = (<Reset data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} storeUpdate={storeUpdate} />);break
 				case 'floorMap' : compCon = (<FloorMap data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'listByStore' : compCon = (<ListByStore data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shops={shopsInfo} animate={animate} animateParams={animateParams} action={action} storeUpdate={storeUpdate} />);break
-				{/*//新店铺*/}
+
 				case 'letterByStore2' : compCon = (<LetterNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} letter={ioInput.letter} action={action} />);break
 				case 'floorByStore2' : compCon = (<FloorNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} floors={floors} floor={ioInput.floor} action={action} />);break
+				case 'buildByStore2': compCon = (<BuildNew  data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} builds={builds} build={ioInput.build} action={action} />);break
 				case 'catgByStore2' :  compCon = (<CatgNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} catg={ioInput.catg} categories={categories} action={action} />);break
 				case 'pageByStore2' : compCon = (<PageNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shopsInfo={shopsInfo} />);break
 				case 'resetByStore2' :  compCon = (<ResetNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} storeUpdate={storeUpdate} />);break

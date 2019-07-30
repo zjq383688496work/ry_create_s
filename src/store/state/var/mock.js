@@ -61,6 +61,10 @@ var Item = {
 		id:   1,
 		name: `运动`
 	},
+	storeBuild: {
+		id:   1,
+		name: `A`
+	},
 	storeFloor: {
 		id:   1,
 		name: `L1`
@@ -159,6 +163,7 @@ module.exports = {
 		listByStore2:    deepCopy(Item.store),
 		catgByStore2:    deepCopy(Item.storeCatg),
 		floorByStore2:   deepCopy(Item.storeFloor),
+		buildByStore2:   deepCopy(Item.storeBuild),
 		letterByStore2:  deepCopy(Item.storeLetter),
 		pageByStore2:    deepCopy(Item.storePage),
 		storeDetails2:   deepCopy(Item.store),

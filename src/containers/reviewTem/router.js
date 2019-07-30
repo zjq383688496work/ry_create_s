@@ -70,7 +70,13 @@ let defaultData = {
 				picture: 'http://rongyi.b0.rongyi.com/system/mall_area/picture/5a532b82130b38000b1884a7/201801181835551443.jpg',
 				sort:    1
 			}
-		]
+		],
+	builds: new Array(7).fill().map((_, i) => {
+		return {
+			id:   i + 1,
+			name: ['A', 'B', 'C', 'D', 'E', 'F', 'G'][i]
+		}
+	})
 } 
 export default class RouterRY extends React.Component {
 	state = {
@@ -106,6 +112,7 @@ export default class RouterRY extends React.Component {
 				actions={this.props.actions}
 				categories={defaultData.categories}
 				floors={defaultData.floors}
+				builds={defaultData.builds}
 				pageList={pageList.group[0].pages}
 				key={_}  
 				></EditElementCommon> : null

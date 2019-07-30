@@ -60,7 +60,7 @@ class EditElementCommon extends React.Component {
 	  	//homepage != pageContent.router ? funcIn() : null
 	} 
 	render() { 
-		let { globalData,categories,floors,pageList } = this.props,
+		let { globalData,categories,floors,builds,pageList } = this.props,
 			page  =this.state.page,     
 			eles   = page.elements.length > 0 ? page.elements : [],
 			theme  = globalData.theme, 
@@ -105,7 +105,7 @@ class EditElementCommon extends React.Component {
 							 	case "dateWeather" : compCon = (<DateWeatherShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
 							 	case "storeList" : compCon = (<StoreListShow data={element} categories={categories} floors={floors} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "storeDetails" : compCon = (<StoreDetailsShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-							 	case "storeList2" : compCon = (<StoreListNewShow data={element} categories={categories} floors={floors} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+							 	case "storeList2" : compCon = (<StoreListNewShow data={element} categories={categories} floors={floors} builds={builds} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "storeDetails2" : compCon = (<StoreDetailsNewShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "storeInstro" : compCon = (<StoreInstroShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
 						 	 	case "goodsList" : compCon = (<GoodsListShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} query={this.props.query}/>); break

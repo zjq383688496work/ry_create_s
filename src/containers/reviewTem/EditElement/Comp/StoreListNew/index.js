@@ -15,12 +15,13 @@ class StoreListNewShow extends React.Component {
 		paramsData:{
 			currentPage:1,
 			floor:  '',
+			build:  '',
 			letter: '', 
 			catg:   '',
 			loading:false,
 			changePage:false,
 			haveFloorMap:false,
-			mapParams:{floor:0,shopNo:''},
+			mapParams:{ floor: 0, shopNo: '' },
 			clickStore:false
 		}, 
 		internet:true,
@@ -32,14 +33,14 @@ class StoreListNewShow extends React.Component {
 		}  
 	};         
 	componentWillMount() {  
-		let { data,query,floors } = this.props,
+		let { data,query,floors, builds } = this.props,
 			content = data.data.content,
 			size = data.data.content.size || 12;
 		this.state.paramsData.size = size 
 		let paramsData = this.state.paramsData
 		let comp  = data.data.components
 		comp = comp.filter(item=>item.name == 'floorMap' || item.name == "mapByStore2")
-		this.do_not_params(comp,floors,paramsData,content.dataSource,size);
+		this.do_not_params(comp,floors,builds,paramsData,content.dataSource,size);
 	};
 	componentWillReceiveProps(props){
 		let { data } = props
@@ -47,10 +48,10 @@ class StoreListNewShow extends React.Component {
 		this.do_data(size)
 	} 
  	//无传楼层路由参数时
-	do_not_params = (comp,floors,paramsData,dataSource,size) => {
-		if(comp.length>0){
-			const floor = floors[0].recordId
-			paramsData.floor = floor
+	do_not_params = (comp,floors,builds,paramsData,dataSource,size) => {
+		if(comp.length){
+			paramsData.floor = floors[0].recordId
+			paramsData.build = builds[0].recordId
 			this.setState({paramsData:paramsData},()=>{
 				this.do_data(size);
 			}) 
@@ -96,7 +97,7 @@ class StoreListNewShow extends React.Component {
 		});
 	}
 	render() {
-		let { data,categories,floors,animate,animateParams,action } = this.props
+		let { data,categories,floors,builds,animate,animateParams,action } = this.props
 		let comp  = data.data.components,haveFloorMap = false
 		comp = comp.filter(item=>item.name == 'floorMap'||item.name == 'mapByStore2')
 		if(comp.length > 0){
@@ -112,6 +113,7 @@ class StoreListNewShow extends React.Component {
 						animateParams={animateParams}
 						shopsInfo={this.state.shopsInfo}
 						floors={floors}
+						builds={builds}
 						categories={categories}
 						ioInput={this.state.paramsData}
 						ioOuter={this.ioOuter}
