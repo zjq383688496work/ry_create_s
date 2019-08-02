@@ -81,7 +81,8 @@ const dataFormat = {
 									this.plus(_, cd, i, da)
 								})
 								break
-							case 'content' : break
+							case 'content':
+								break
 							default:
 								//if(org.length == 0) return //如果默认数据没有的话返回
 								da.map((_, i) => {

@@ -54,7 +54,7 @@ class OperateComponent extends React.Component {
 					name: name || '',
 					templateType: templateType || 'MALL',
 					composeType:  composeType  || 'PORTRAIT',
-					adsFlag:      ~~adsFlag      || 0
+					adsFlag:      ~~adsFlag    || 0
 				}
 				return resolve('模板数据')
 			}
@@ -62,8 +62,9 @@ class OperateComponent extends React.Component {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
-				// dataFormat.get.pageEach(cfg.pageContent)
-				// debugger
+
+				dataFormat.get.pageEach(cfg.pageContent)
+
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },

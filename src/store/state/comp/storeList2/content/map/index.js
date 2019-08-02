@@ -11,7 +11,8 @@ const data = {
 	},  
 	style: {},
 	content: {
-		mapThemeColor: { type: 'custom', color: '#cfad81' }
+		mapThemeColor: { type: 'custom', color: '#cfad81' },
+		mapZoom: 'off'
 	},
 	animation: {
 		className: '',		// 动画样式

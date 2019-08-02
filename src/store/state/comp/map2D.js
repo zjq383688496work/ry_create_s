@@ -18,7 +18,10 @@ const data = {
 	style: {
 		text: {}
 	},
-	content: {themeColor:{ type: 'custom', color: '#cfad81' }},
+	content: {
+		themeColor: { type: 'custom', color: '#cfad81' },
+		mapZoom: 'off'
+	},
 	animation: {
 		className: '',	// 动画样式
 		direction: '',				// 方向
