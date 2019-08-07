@@ -88,6 +88,8 @@ class EditElementCommon extends React.Component {
 							 	case "picture" : compCon = (<PictureShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "area" : compCon = (<AreaShow data={element} type={`Style${styleIdx + 1}`} />); break
 							 	case "qrcode" : compCon = (<QrcodeRYShow data={element} type={`Style${styleIdx + 1}`} />); break
+							 	case "qrcodeHui" : compCon = (<QrcodeRYShow data={element} type={`Style${styleIdx + 1}`} />); break
+							 	case "qrcodeNav" : compCon = (<QrcodeRYShow data={element} type={`Style${styleIdx + 1}`} />); break
 							 	case "web" : compCon = (<WebShow data={element} type={`Style${styleIdx + 1}`} pageList={pageList} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "text" : compCon = (<TextShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "button" : compCon = (<ButtonShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break

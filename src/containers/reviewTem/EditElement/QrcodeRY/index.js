@@ -11,19 +11,9 @@ export default class QrcodeRYShow extends React.Component {
 	componentWillUnmount() {}
 
 	render() {
-		let {data,type} = this.props,
-			layout  = data.data.layout,
-			content = data.data.content,
-			height = parseInt(layout.height),
-			width = parseInt(layout.width),
-			size = width > height ? height : width,
-			url = content.url;
-		!/https?\:\/\/.*?/.test(url) ? url = '' : null;
 		return (    
-			<div className="e-qrcode-bind">
-				{ 
-					url ? <QRCode size={size} value={url} /> : null
-				} 
+			<div className="e-qrcode">
+				<img src="http://rongyi.b0.rongyi.com/commodity/text/201808271756227480.png" />
 			</div> 
 		) 
 	} 

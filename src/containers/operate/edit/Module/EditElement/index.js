@@ -37,6 +37,8 @@ import Html              from 'compEdit/EditElement/Html'
 import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
 import Area              from 'compEdit/EditElement/Area'
 import Qrcode            from 'compEdit/EditElement/Qrcode'
+import QrcodeHui         from 'compEdit/EditElement/QrcodeHui'
+import QrcodeNav         from 'compEdit/EditElement/QrcodeNav'
 
 import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
 import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
@@ -80,6 +82,8 @@ const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl,contentEd
 		goodsDetails:      <GoodsDetails      {...props} />,
 		area:              <Area              {...props} />,
 		qrcode:            <Qrcode            {...props} />,
+		qrcodeHui:         <QrcodeHui         {...props} />,
+		qrcodeNav:         <QrcodeNav         {...props} />,
 		// tabs:              <Tabs              {...props} />,
 		storeList2:        <StoreList2        {...props} />,
 		storeDetails2:     <StoreDetails2     {...props} />

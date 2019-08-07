@@ -6,47 +6,49 @@
  */
 
 import React from 'react'
-import SplitLine      from '../../SplitLine'
-import Picture      from '../../Picture'
-import Web          from '../../Web'
-import Area        	from '../../Area'
-import Button       from '../../Button' 
-import Text         from '../../Text' 
-import Address      from '../StoreDetails/Address'
-import Time         from '../Common/Time' 
-import Weather      from '../Common/Weather' 
-import Letter       from '../StoreList/Letter'
-import Floor        from '../StoreList/Floor'
-import FloorMap     from '../StoreList/FloorMap'
-import Catg         from '../StoreList/Catg'
-import Page         from '../../Page'
-import Reset        from '../StoreList/Reset' 
-import ListByStore  from '../StoreList/ListByStore'
+import SplitLine         from '../../SplitLine'
+import Picture           from '../../Picture'
+import Web               from '../../Web'
+import Area        	     from '../../Area'
+import Button            from '../../Button'
+import Text              from '../../Text'
+import Address           from '../StoreDetails/Address'
+import Time              from '../Common/Time'
+import Weather           from '../Common/Weather'
+import Letter            from '../StoreList/Letter'
+import Floor             from '../StoreList/Floor'
+import FloorMap          from '../StoreList/FloorMap'
+import Catg              from '../StoreList/Catg'
+import Page              from '../../Page'
+import Reset             from '../StoreList/Reset'
+import ListByStore       from '../StoreList/ListByStore'
 //新店铺
-import LetterNew       	from '../StoreListNew/LetterNew'
-import FloorNew        	from '../StoreListNew/FloorNew'
-import BuildNew         from '../StoreListNew/BuildNew'
-import CatgNew         	from '../StoreListNew/CatgNew'
-import PageNew         	from '../StoreListNew/PageNew'
-import ResetNew        	from '../StoreListNew/ResetNew' 
-import ListByStoreNew  	from '../StoreListNew/ListByStoreNew'
+import LetterNew         from '../StoreListNew/LetterNew'
+import FloorNew          from '../StoreListNew/FloorNew'
+import BuildNew          from '../StoreListNew/BuildNew'
+import CatgNew           from '../StoreListNew/CatgNew'
+import PageNew           from '../StoreListNew/PageNew'
+import ResetNew          from '../StoreListNew/ResetNew'
+import ListByStoreNew    from '../StoreListNew/ListByStoreNew'
 //新店铺详情
 import StoreDetailsBlock from '../StoreDetailsNew/StoreDetailsBlock'
 
-import ListByGoods  from '../GoodsList/ListByGoods'
-import CatgByGoods from '../GoodsList/CatgByGoods'
-import ResetByGoods from '../GoodsList/ResetByGoods'
-import SwiperByGoods  from '../GoodsList/SwiperByGoods'
-import GoodsBar     from '../GoodsDetails/GoodsBar'
-import GoodsBlock   from '../GoodsDetails/GoodsBlock'
-import PictureListBind from '../GoodsDetails/PictureListBind'
+import ListByGoods       from '../GoodsList/ListByGoods'
+import CatgByGoods       from '../GoodsList/CatgByGoods'
+import ResetByGoods      from '../GoodsList/ResetByGoods'
+import SwiperByGoods     from '../GoodsList/SwiperByGoods'
+import GoodsBar          from '../GoodsDetails/GoodsBar'
+import GoodsBlock        from '../GoodsDetails/GoodsBlock'
+import PictureListBind   from '../GoodsDetails/PictureListBind'
 import WonderfulActivity from '../../WonderfulActivity'
-import CatgByActivity from '../WonderfulActivityNew/CatgByActivity'
-import ResetByActivity from '../WonderfulActivityNew/ResetByActivity'
-import ListByActivity from '../WonderfulActivityNew/ListByActivity'
-import Swiperbind  from '../Common/SwiperBind'
-import addAnimate from '../../../page/animateAdd' 
-import RYdataMap from '../Common/RYdataMap'   
+import CatgByActivity    from '../WonderfulActivityNew/CatgByActivity'
+import ResetByActivity   from '../WonderfulActivityNew/ResetByActivity'
+import ListByActivity    from '../WonderfulActivityNew/ListByActivity'
+import Swiperbind        from '../Common/SwiperBind'
+import addAnimate        from '../../../page/animateAdd'
+import RYdataMap         from '../Common/RYdataMap'
+
+import QrcodeRYShow      from 'reviewTem/EditElement/QrcodeRY'
 
 import './index.less'
 
@@ -102,6 +104,9 @@ class Custom extends React.Component {
 				case 'mapByStore2' : compCon = (<FloorMap data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'listByStore2' : compCon = (<ListByStoreNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shops={shopsInfo} animate={animate} animateParams={animateParams} action={action} storeUpdate={storeUpdate} />);break
 				case 'storeBlock' : compCon = (<StoreDetailsBlock data={_} type={`Style${styleIdx + 1}`} goodsDetails={goodsDetails} action={action} animate={animate} animateParams={animateParams} />);break
+
+				case "qrcodeHui" : compCon = (<QrcodeRYShow data={_} type={`Style${styleIdx + 1}`} />); break
+				case "qrcodeNav" : compCon = (<QrcodeRYShow data={_} type={`Style${styleIdx + 1}`} />); break
 
 				case 'listByGoods' : compCon = (<ListByGoods data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} ioInput={ioInput} />);break
 				case 'catgByGoods' : compCon = (<CatgByGoods data={_} type={`Style${styleIdx + 1}`} have_goods={have_goods} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break

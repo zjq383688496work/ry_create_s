@@ -3,7 +3,7 @@ const t  = authInit(require('state/comp/text'))
 const pb = authInit(require('state/comp/pictureBind'))
 const tb = authInit(require('state/comp/textBind'))
 const sb = authInit(require('state/comp/swiperBind'))
-const qr = authInit(require('state/comp/qrcodeBind'))
+const qr = authInit(require('state/comp/qrcode/qrcodeBind'))
 
 const Spr = extendRmSL(deepCopy(sb), {
 	data: {

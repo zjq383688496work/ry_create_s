@@ -20,11 +20,9 @@ const data = {
 		left:     0,
 		width:    100,
 		height:   100,
-		lockAspectRatio:true
+		lockAspectRatio: true
 	},
-	content: {
-		url: ''
-	},
+	content: {},
 	animation: {
 		className: '',		// 动画样式
 		direction: '',		// 方向
@@ -35,7 +33,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'qrcode',
+	name: 'qrcodeNav',
 	type: 'base',
 	// 位置大小
 	// 样式管理

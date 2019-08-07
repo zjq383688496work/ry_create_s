@@ -67,7 +67,9 @@ module.exports = {
 		resetByStore2:     '店铺重置',
 		mapByStore2:       '店铺导航',
 		qrcode:            '二维码',
-		qrcodeBind:        '二维码绑定'
+		qrcodeBind:        '二维码绑定',
+		qrcodeHui:         '惠码',
+		qrcodeNav:         '导航码',
 	},
 	num: {
 		address:           0,
@@ -138,5 +140,7 @@ module.exports = {
 		mapByStore2:     0,
 		qrcode:          0,
 		qrcodeBind:      0,
+		qrcodeHui:       0,
+		qrcodeNav:       0,
 	}
 }

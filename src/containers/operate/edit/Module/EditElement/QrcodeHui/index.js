@@ -8,7 +8,7 @@
 import React from 'react'
 import './index.less'
 
-export default class Qrcode extends React.Component {
+export default class QrcodeHui extends React.Component {
 	shouldComponentUpdate(newProps, newState) {
 		return newProps.drag != undefined? newProps.drag: true
 	}

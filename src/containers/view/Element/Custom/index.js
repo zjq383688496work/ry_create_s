@@ -55,6 +55,8 @@ import LetterByStore2 from 'compEdit/EditElement/StoreList2/Letter'
 import PageByStore2   from 'compEdit/EditElement/StoreList2/Page'
 import MapByStore2    from 'compEdit/EditElement/StoreList2/Map'
 import StoreBlock     from 'compEdit/EditElement/StoreDetails2/Block'
+import QrcodeHui      from 'compEdit/EditElement/QrcodeHui'
+import QrcodeNav      from 'compEdit/EditElement/QrcodeNav'
 
 
 const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter) => {
@@ -101,6 +103,8 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		pageByStore2:      <PageByStore2      {...props} />,
 		mapByStore2:       <MapByStore2       {...props} />,
 		storeBlock:        <StoreBlock        {...props} />,
+		qrcodeHui:         <QrcodeHui         {...props} />,
+		qrcodeNav:         <QrcodeNav         {...props} />,
 	}
 	return render[name]
 }

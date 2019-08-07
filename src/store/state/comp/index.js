@@ -133,8 +133,9 @@ module.exports = {
 	catgByTabs:        authInit(require('./tabs/content/catgByTabs')),
 	// 子元素
 	childElement:      authInit(require('./childElement')),
-	// 二维码
-	qrcode:            authInit(require('./qrcode')),
-	// 二维码绑定
-	qrcodeBind:        authInit(require('./qrcodeBind'))
+	/* 二维码 */
+	qrcode:            authInit(require('./qrcode/qrcode')),		// 二维码
+	qrcodeBind:        authInit(require('./qrcode/qrcodeBind')),	// 二维码绑定
+	qrcodeHui:         authInit(require('./qrcode/qrcodeHui')),		// 惠码
+	qrcodeNav:         authInit(require('./qrcode/qrcodeNav')),		// 导航码
 }

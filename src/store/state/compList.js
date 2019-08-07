@@ -21,11 +21,6 @@ module.exports = [
 					key:  'picture'
 				},
 				{
-					icon: 'qrcode',
-					name: '二维码',
-					key:  'qrcode'
-				},
-				{
 					icon: 'image',
 					name: '背景色块',
 					key:  'area'
@@ -102,108 +97,7 @@ module.exports = [
 					key:  'resetByActivity2'
 				}
 			]
-		},/*,
-		{
-			icon: 'store',
-			name: '店铺列表',
-			key:  'storeList',
-			child: [
-				{
-					icon: 'characterNav',
-					name: '字母',
-					key:  'letter'
-				},
-				{
-					icon: 'floorNav',
-					name: '楼层',
-					key:  'floor'
-				},
-				{
-					icon: 'classifyNav',
-					name: '分类',
-					key:  'catg'
-				},
-				{
-					icon: 'sorter',
-					name: '分页',
-					key:  'page'
-				},
-				{
-					icon: 'reset',
-					name: '重置',
-					key:  'reset'
-				},
-				{
-					icon: 'list',
-					name: '列表',
-					key:  'listByStore'
-				},
-				{
-					icon: 'floorMap',
-					name: '楼层地图',
-					key:  'floorMap'
-				}
-			]
 		},
-		{
-			icon: 'aboutStore',
-			name: '店铺简介',
-			key:  'storeInstro',
-			child: [
-				{
-					icon: 'aboutStore',
-					name: '店铺简介',
-					key:  'storeInstroTitle'
-				},
-				{
-					icon: 'text',
-					name: '店铺详情',
-					key:  'storeInstroInstroduce'
-				},
-				{
-					icon: 'carousel',
-					name: '轮播图片',
-					key:  'storeWonderful'
-				},
-				{
-					icon: 'splitLine2',
-					name: '图案装饰',
-					key:  'storeSplitLine'
-				} 
-			]
-		},
-		{
-			icon: 'storeDetails',
-			name: '店铺详情',
-			key:  'storeDetails',
-			child: [
-				{
-					icon: 'image',
-					name: '店铺LOGO',
-					key:  'instroPicture'
-				},
-				{
-					icon: 'text',
-					name: '店铺名称',
-					key:  'instroTitle'
-				},
-				{
-					icon: 'floorNav',
-					name: '楼层显示',
-					key:  'address'
-				},
-				{
-					icon: 'phone',
-					name: '电话显示',
-					key:  'phone' 
-				}, 
-				{
-					icon: 'button',
-					name: '前往按钮',
-					key:  'instroButton'
-				}
-			]
-		},*/
 		{
 			icon: 'store',
 			name: '店铺列表',
@@ -248,7 +142,12 @@ module.exports = [
 					icon: 'floorMap',
 					name: '楼层地图',
 					key:  'mapByStore2'
-				}
+				},
+				{
+					icon: 'qrcode_hui',
+					name: '惠码',
+					key:  'qrcodeHui'
+				},
 			]
 		},
 		{
@@ -270,7 +169,17 @@ module.exports = [
 					icon: 'button',
 					name: '前往按钮',
 					key:  'button'
-				}
+				},
+				{
+					icon: 'qrcode_hui',
+					name: '惠码',
+					key:  'qrcodeHui'
+				},
+				{
+					icon: 'qrcode_nav',
+					name: '导航码',
+					key:  'qrcodeNav'
+				},
 			]
 		},
 		{
@@ -386,6 +295,27 @@ module.exports = [
 			icon: '2DMap',
 			name: '2D地图',
 			key:  'map2D'
+		},
+		{
+			icon: 'qrcode_index',
+			name: '二维码',
+			child: [
+				{
+					icon: 'qrcode',
+					name: '二维码',
+					key:  'qrcode'
+				},
+				{
+					icon: 'qrcode_hui',
+					name: '惠码',
+					key:  'qrcodeHui'
+				},
+				{
+					icon: 'qrcode_nav',
+					name: '导航码',
+					key:  'qrcodeNav'
+				},
+			]
 		},
 		// {
 		// 	icon: 'html',

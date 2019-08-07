@@ -24,10 +24,6 @@ module.exports = {
 		instroButton:  1, 
 		instroPicture: 1
 	},
-	storeList2: {
-		listByStore2:   1,
-		catgByStore2:   1
-	},
 	dateWeather: {
 		kongQi:  1,
 		feng:    1,
@@ -55,12 +51,15 @@ module.exports = {
 		buildByStore2:  1,
 		letterByStore2: 1,
 		resetByStore2:  1,
-		mapByStore2:    1
+		mapByStore2:    1,
+		qrcodeHui:      1,
 	},
 	storeDetails2: {
 		storeBlock: 1,
 		swiperBind: 1,
-		button: 1
+		button:     1,
+		qrcodeHui:  1,
+		qrcodeNav:  1,
 	},
 	tabs: {
 		catgByTabs:   1,

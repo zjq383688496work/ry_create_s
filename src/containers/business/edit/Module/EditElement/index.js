@@ -36,6 +36,8 @@ import Html              from 'compEdit/EditElement/Html'
 import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
 import Area              from 'compEdit/EditElement/Area'
 import Qrcode            from 'compEdit/EditElement/Qrcode'
+import QrcodeHui         from 'compEdit/EditElement/QrcodeHui'
+import QrcodeNav         from 'compEdit/EditElement/QrcodeNav'
 
 import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
 
@@ -76,6 +78,8 @@ const compContent = (name, data, actions, type, idx, csn,contentEditable) => {
 		goodsDetails:      <GoodsDetails      {...props} />,
 		area:              <Area              {...props} />,
 		qrcode:            <Qrcode            {...props} />,
+		qrcodeHui:         <QrcodeHui         {...props} />,
+		qrcodeNav:         <QrcodeNav         {...props} />,
 		storeList2:        <StoreList2        {...props} />,
 		storeDetails2:     <StoreDetails2     {...props} />
 	}
