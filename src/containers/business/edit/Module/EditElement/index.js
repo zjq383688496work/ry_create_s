@@ -113,8 +113,7 @@ class EditElement extends React.Component {
 		let { data, actions, editConfig, location } = this.props
 		let { pageGroupIdx, pageIdx, compIdx } = editConfig.curData
 		let ct     = tempCfg.composeType || 'PORTRAIT'
-		let ads    = tempCfg.adsFlag? 'ads': ''
-		if (!data || data.title === undefined) return (<div className={`pg-element-parent e-flex-box pg-element-${ct} ${ads}`}><section className="pg-element"></section></div>)
+		if (!data || data.title === undefined) return (<div className={`pg-element-parent e-flex-box pg-element-${ct}`}><section className="pg-element"></section></div>)
 		let eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
@@ -167,10 +166,6 @@ class EditElement extends React.Component {
 		return (
 			<div className={`pg-element-business e-flex-box pg-element-${ct}`}>
 				<div className="pg-element-box">
-					{ /*ads
-						? <div className="ads-placeholder"></div>
-						: null*/
-					}
 					<section id="pgElement" className="pg-element">
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }

@@ -19,9 +19,10 @@ const RadioButton   = Radio.Button
 const RadioGroup    = Radio.Group
 const Option = Select.Option
 
+import Banner            from './Banner'
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
-import ImageAndVideoComp   from 'compEdit/EditCommon/ImageAndVideoComp'
+import ImageAndVideoComp from 'compEdit/EditCommon/ImageAndVideoComp'
 import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
 import CompLayout        from 'compEdit/EditCommon/CompLayout'
 import ChildElement      from './ChildElement'
@@ -55,6 +56,8 @@ import './index.less'
 const compContent = (name, data, updateComp) => {
 	var props  = { data, updateComp }
 	var render = {
+		bannerHorizontal:  <Banner            {...props} />,
+		bannerVertical:    <Banner            {...props} />,
 		navigation:        <Navigation        {...props} />,
 		navigationFloat:   <NavigationFloat   {...props} />,
 		weather:           <Weather           {...props} />,
@@ -83,6 +86,10 @@ class EditContent extends React.Component {
 		let { curData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
+		if (from === 'banner') {
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 	onChange = (val, con, key, cfg, index) => {
@@ -92,6 +99,10 @@ class EditContent extends React.Component {
 		let { parentComp } = curData
 		val = val > cfg.max ? cfg.max : val 
 		con[key] = val
+		if (from === 'banner') {
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		} 
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
@@ -100,6 +111,10 @@ class EditContent extends React.Component {
 		let { curData } = editConfig
 		let { parentComp } = curData
 		data.auth.content[key] = val
+		if (from === 'banner') {
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 
@@ -111,6 +126,10 @@ class EditContent extends React.Component {
 		if(getAttr(content) === 'Array') {
 			content = content.filter((item,i) => i!=index)
 			data.data.content = content
+			if (from === 'banner') {
+				globalData.banner = data
+				return actions.updateGlobal(globalData)
+			}
 			actions.updateComp(null, parentComp? parentComp: data)
 		}   
 		
@@ -363,16 +382,19 @@ class EditContent extends React.Component {
 	}
 
 	renObj(data, content, index) {
-		content = filterContent(data,content)
+		var { from } = this.props,
+			{ name } = data,
+			cons = data.data.content
+		content = filterContent(data, content)
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p] || contentFieldFilter[envType][p]) return false
-			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p],
-				type = data.name == 'swiperImgAndVideo'&&p=="img" ? 'ImgAndVideo' : cm.type
-			let val    = content[p]      
-			let render = this[`render${type}`] 
-			if (!render) return false 
-			// 根据样式类型渲染对应组件 
+			var cm     = p === 'img' && content.type === 'video'? conMap['video']: conMap[p],
+				type   = (name === 'swiperImgAndVideo' || from === 'banner') && p === 'img'? 'ImgAndVideo': cm.type,
+				val    = content[p],
+				render = this[`render${type}`]
+			if (!render) return false
+			// 根据样式类型渲染对应组件
 			let dom = this[`render${type}`].bind(this, cm, content, val, p, index)()
 			ci++ 
 			return (
@@ -382,9 +404,16 @@ class EditContent extends React.Component {
 					<div className="pgsr-auth">
 						<Checkbox checked={data.auth.content[p] || false} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
 					</div>
-					{  
-						(data.name !='picture'&&cm.name=='图片') || (p == 'img'&&cm.name=='视频') ? <div className="delete" onClick={()=>{this.deleteCom(index)}}><Icon type="close-circle" style={{ fontSize: 18}} /></div>:null
-					} 
+					{
+						(name != 'picture' && cm.name == '图片') || (p == 'img' && cm.name == '视频')
+						?
+						from === 'banner' && cons.length < 2
+						?
+						null
+						:
+						<div className="delete" onClick={() => this.deleteCom(index)}><Icon type="close-circle" style={{ fontSize: 18 }} /></div>
+						: null
+					}
 				</div> 
 			)
 		})

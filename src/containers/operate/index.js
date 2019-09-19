@@ -14,6 +14,7 @@ import * as actions from 'actions'
 import curData from 'state/cur/curData'
 import { Spin } from 'antd'
 import './index.less'
+const comp = require('state/comp')
 
 class OperateComponent extends React.Component {
 	constructor(props) {
@@ -25,6 +26,7 @@ class OperateComponent extends React.Component {
 
 	timeInit() {
 		let { actions } = this.props
+		window.Actions = actions
 		actions.updateTime()
 	}
 	getWeather() {
@@ -46,7 +48,7 @@ class OperateComponent extends React.Component {
 		let { location, actions, editConfig } = this.props
 		let { globalData } = editConfig
 		let { query } = location
-		let { templateType, composeType, adsFlag, name } = query
+		let { templateType, composeType, bannerAds, name } = query
 		let id = query.id
 		return (resolve, reject) => {
 			if (!id) {
@@ -54,8 +56,12 @@ class OperateComponent extends React.Component {
 					name: name || '',
 					templateType: templateType || 'MALL',
 					composeType:  composeType  || 'PORTRAIT',
-					adsFlag:      ~~adsFlag    || 0
+					bannerAds:    bannerAds    || 0,  // 0: 无  1: 有
 				}
+				if(bannerAds == 1) {
+ 					globalData.banner = comp[`banner${composeType === 'PORTRAIT'? 'Vertical': 'Horizontal'}`]
+ 					actions.updateGlobal(globalData)
+ 				}
 				return resolve('模板数据')
 			}
 			Ajax.get(`/mcp-gateway/template/get?templateId=${id}&phase=DEV`).then(res => {

@@ -1,10 +1,9 @@
-/*
-* @Author: weijie
-* @Date:   2017-09-28 10:49:49
- * @Last Modified by: lishengpeng
- * @Last Modified time: 2018-03-26 12:37:34
-*/
-
+.bannerBox {
+	z-index:50;
+}
+#pgElement.pg-operate {
+	overflow: inherit;
+}
 .pg-element-parent {
 	position: relative;
 	display: flex;
@@ -30,27 +29,11 @@
 			height: 960px;
 		}
 	}
-	&.pg-element-PORTRAIT.ads {
-		.pg-element {
-			width:  540px;
-			height: 960px - 304px;
-		}
-	}
-	.ads-placeholder {
-		display: flex;
-		width:  540px;
-		height: 304px;
-		// justify-content: center;
-		// align-items: center;
-		// font-size: 24px;
-		// color: #999;
-		background-image: url('http://rongyi.b0.rongyi.com/commodity/text/201807131118281927.jpg');
-		background-size: cover;
-	}
 	.pg-element-child {
 		height:  100%;
 		width:   100%;
 		position: relative;
+		flex: 1;
 	}
 	.pg-element-next {
 		position: absolute;
@@ -163,6 +146,29 @@
 	height: 100%;
 	z-index: 1;
 }
+
+.pge-banner {
+	position: relative;
+	z-index: 1;
+	width:  100%;
+	height: 100%;
+	&.s-active {
+		z-index: 10;
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1;
+			display: block;
+			width:  100%;
+			height: 100%;
+			pointer-events: none;
+			border: 2px solid #43bffe;
+		}
+	}
+}
+
 // 
 .react-draggable {
 	&:after {

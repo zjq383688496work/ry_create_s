@@ -11,40 +11,41 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import Rnd from 'react-rnd'
 
-import Picture           from 'compEdit/EditElement/Picture'
-import Web               from 'compEdit/EditElement/Web'
-import Text              from 'compEdit/EditElement/Text'
-import Button            from 'compEdit/EditElement/Button'
-import Video             from 'compEdit/EditElement/Video'
-import SwiperImage       from 'compEdit/EditElement/SwiperImage'
-import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
-import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
+import Picture            from 'compEdit/EditElement/Picture'
+import Web                from 'compEdit/EditElement/Web'
+import Text               from 'compEdit/EditElement/Text'
+import Button             from 'compEdit/EditElement/Button'
+import Banner             from 'compEdit/EditElement/Banner'
+import Video              from 'compEdit/EditElement/Video'
+import SwiperImage        from 'compEdit/EditElement/SwiperImage'
+import SwiperImgAndVideo  from 'compEdit/EditElement/SwiperImgAndVideo'
+import WonderfulActivity  from 'compEdit/EditElement/WonderfulActivity'
 import WonderfulActivity2 from 'compEdit/EditElement/WonderfulActivity2'
-import Time              from 'compEdit/EditElement/Time'
-import Weather           from 'compEdit/EditElement/Weather'
-import StoreList         from 'compEdit/EditElement/StoreList'
-import StoreDetails      from 'compEdit/EditElement/StoreDetails'
-import StoreInstro       from 'compEdit/EditElement/StoreInstro'
-import StoreList2        from 'compEdit/EditElement/StoreList2'
-import StoreDetails2     from 'compEdit/EditElement/StoreDetails2'
-import GoodsList         from 'compEdit/EditElement/GoodsList'
-import DateWeather       from 'compEdit/EditElement/DateWeather'
-import Navigation        from 'compEdit/EditElement/Navigation'
-import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
-import SplitLine         from 'compEdit/EditElement/SplitLine'
-import Map2D             from 'compEdit/EditElement/Map2D'
-import Html              from 'compEdit/EditElement/Html'
-import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
-import Area              from 'compEdit/EditElement/Area'
-import Qrcode            from 'compEdit/EditElement/Qrcode'
-import QrcodeHui         from 'compEdit/EditElement/QrcodeHui'
-import QrcodeNav         from 'compEdit/EditElement/QrcodeNav'
+import Time               from 'compEdit/EditElement/Time'
+import Weather            from 'compEdit/EditElement/Weather'
+import StoreList          from 'compEdit/EditElement/StoreList'
+import StoreDetails       from 'compEdit/EditElement/StoreDetails'
+import StoreInstro        from 'compEdit/EditElement/StoreInstro'
+import StoreList2         from 'compEdit/EditElement/StoreList2'
+import StoreDetails2      from 'compEdit/EditElement/StoreDetails2'
+import GoodsList          from 'compEdit/EditElement/GoodsList'
+import DateWeather        from 'compEdit/EditElement/DateWeather'
+import Navigation         from 'compEdit/EditElement/Navigation'
+import NavigationFloat    from 'compEdit/EditElement/NavigationFloat'
+import SplitLine          from 'compEdit/EditElement/SplitLine'
+import Map2D              from 'compEdit/EditElement/Map2D'
+import Html               from 'compEdit/EditElement/Html'
+import GoodsDetails       from 'compEdit/EditElement/GoodsDetails'
+import Area               from 'compEdit/EditElement/Area'
+import Qrcode             from 'compEdit/EditElement/Qrcode'
+import QrcodeHui          from 'compEdit/EditElement/QrcodeHui'
+import QrcodeNav          from 'compEdit/EditElement/QrcodeNav'
 
-import ContextMenu       from 'compEdit/EditCommon/ContextMenu'
-import ShortcutKey       from 'compEdit/EditCommon/ShortcutKey'
-import PostMessage       from 'compEdit/EditCommon/PostMessage'
-import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
-import { InductionLine,nearPosSty }     from 'compEdit/EditElement/InductionLine'
+import ContextMenu        from 'compEdit/EditCommon/ContextMenu'
+import ShortcutKey        from 'compEdit/EditCommon/ShortcutKey'
+import PostMessage        from 'compEdit/EditCommon/PostMessage'
+import RevokeRecovery     from 'compEdit/EditCommon/RevokeRecovery'
+import { InductionLine, nearPosSty } from 'compEdit/EditElement/InductionLine'
  
 import * as actions from 'actions'
 import { Icon, message } from 'antd'
@@ -58,35 +59,35 @@ var animeMap = variable.animeCompMap,
 const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl,contentEditable,shift) => {
 	var props  = { data, actions, type, idx,drag, csn, keyCtrl,contentEditable,shift }
 	var render = {
-		picture:           <Picture           {...props} />,
-		web:               <Web               {...props} />,
-		video:             <Video             {...props} />,
-		text:              <Text              {...props} />,
-		button:            <Button            {...props} />,
-		swiperImage:       <SwiperImage       {...props} />,
-		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
-		wonderfulActivity: <WonderfulActivity {...props} />,
+		picture:            <Picture           {...props} />,
+		web:                <Web               {...props} />,
+		video:              <Video             {...props} />,
+		text:               <Text              {...props} />,
+		button:             <Button            {...props} />,
+		swiperImage:        <SwiperImage       {...props} />,
+		swiperImgAndVideo:  <SwiperImgAndVideo {...props} />,
+		wonderfulActivity:  <WonderfulActivity {...props} />,
 		wonderfulActivity2: <WonderfulActivity2 {...props} />,
-		time:              <Time              {...props} />,
-		weather:           <Weather           {...props} />,
-		navigation:        <Navigation        {...props} />,
-		navigationFloat:   <NavigationFloat   {...props} />,
-		storeList:         <StoreList         {...props} />,
-		goodsList:         <GoodsList         {...props} />,
-		storeDetails:      <StoreDetails      {...props} />,
-		storeInstro:       <StoreInstro       {...props} />,
-		splitLine:         <SplitLine         {...props} />,
-		dateWeather:       <DateWeather       {...props} />,
-		map2D:             <Map2D             {...props} />,
-		html:              <Html              {...props} />,
-		goodsDetails:      <GoodsDetails      {...props} />,
-		area:              <Area              {...props} />,
-		qrcode:            <Qrcode            {...props} />,
-		qrcodeHui:         <QrcodeHui         {...props} />,
-		qrcodeNav:         <QrcodeNav         {...props} />,
-		// tabs:              <Tabs              {...props} />,
-		storeList2:        <StoreList2        {...props} />,
-		storeDetails2:     <StoreDetails2     {...props} />
+		time:               <Time              {...props} />,
+		weather:            <Weather           {...props} />,
+		navigation:         <Navigation        {...props} />,
+		navigationFloat:    <NavigationFloat   {...props} />,
+		storeList:          <StoreList         {...props} />,
+		goodsList:          <GoodsList         {...props} />,
+		storeDetails:       <StoreDetails      {...props} />,
+		storeInstro:        <StoreInstro       {...props} />,
+		splitLine:          <SplitLine         {...props} />,
+		dateWeather:        <DateWeather       {...props} />,
+		map2D:              <Map2D             {...props} />,
+		html:               <Html              {...props} />,
+		goodsDetails:       <GoodsDetails      {...props} />,
+		area:               <Area              {...props} />,
+		qrcode:             <Qrcode            {...props} />,
+		qrcodeHui:          <QrcodeHui         {...props} />,
+		qrcodeNav:          <QrcodeNav         {...props} />,
+		// tabs:               <Tabs              {...props} />,
+		storeList2:         <StoreList2        {...props} />,
+		storeDetails2:      <StoreDetails2     {...props} />
 	}
 	return render[name]
 } 
@@ -268,6 +269,21 @@ class EditElement extends React.Component {
 		let { actions } = this.props
 		actions.deleteComp(idx)
 	}
+	bannerDom = () => {
+		var { actions, editConfig } = this.props,
+			{ banner } = editConfig.globalData,
+			{ bannerAds, composeType = 'PORTRAIT' } = tempCfg
+		if (!banner || bannerAds != 1) return { position: 'top', DOM: null }
+		var { position } = banner.feature.swiperOptions,
+			{ layout } = banner.data,
+			{ height, width } = layout,
+			h = composeType === 'PORTRAIT'? height: '100%',
+			w = composeType === 'LANDSCAPE'? width: '100%'
+		return {
+			position,
+			DOM: <div className="bannerBox" style={{ height: h, width: w }}><Banner {...this.props} /></div>
+		}
+	}
 
 	render() {
 		let { data, actions, editConfig, location } = this.props
@@ -277,8 +293,7 @@ class EditElement extends React.Component {
 		let { index } = multiComp
 		let state  = this.state
 		let ct     = tempCfg.composeType || 'PORTRAIT'
-		let ads    = tempCfg.adsFlag? 'ads': ''
-		if (!data || data.title === undefined) return <div className={`pg-element-parent e-flex-box pg-element-${ct} ${ads}`}><section className="pg-element"></section></div>
+		if (!data || data.title === undefined) return <div className={`pg-element-parent e-flex-box pg-element-${ct}`}><section className="pg-element"></section></div>
 		let eles   = data.elements || [],
 			theme  = editConfig.globalData.theme,
 			colors = theme.list[theme.idx].colors,
@@ -349,14 +364,12 @@ class EditElement extends React.Component {
 				</Rnd>
 			)
 		})
+		var { position, DOM } = this.bannerDom()
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
 				<div className="pg-element-box">
-					{ /*ads
-						? <div className="ads-placeholder"></div>
-						: null*/
-					}
 					<section id="pgElement" className="pg-element">
+						{ (position === 'top' || position === 'left')? DOM: null }
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }
 						</div>
@@ -369,7 +382,8 @@ class EditElement extends React.Component {
 								<div className="lineNear_2" style={state.nearPos[2]}></div>
 								<div className="lineNear_3" style={state.nearPos[3]}></div>
 							</div> : null
-						} 
+						}
+						{ (position === 'right' || position === 'bottom')? DOM: null }
 						<div id="pgElementNext" className="pg-element-next"></div>
 					</section>
 					<RevokeRecovery />
