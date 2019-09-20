@@ -17,6 +17,7 @@
 		.pg-element {
 			width:  960px;
 			height: 540px;
+			flex-direction: row;
 		}
 	}
 	&.pg-element-PORTRAIT {
@@ -27,6 +28,7 @@
 		.pg-element {
 			width:  540px;
 			height: 960px;
+			flex-direction: column;
 		}
 	}
 	.pg-element-child {
@@ -55,6 +57,7 @@
 	}
 	.pg-element {
 		position: relative;
+		display: flex;
 		.inductionLine-h {
 			height: 0;
 			width:100%;
@@ -169,7 +172,6 @@
 	}
 }
 
-// 
 .react-draggable {
 	&:after {
 		content: '';

@@ -45,7 +45,7 @@ module.exports = extend(window, {
 		let { style, layout } = data.data
 		let sk = key === 'layout'? layout: style[key]
 		if (!sk) {
-			console.error(`名为 ${key} 的样式未定义!`)
+			console.log(`名为 ${key} 的样式未定义!`)
 			return {}
 		}
 		let obj = deepCopy(sk)
@@ -115,5 +115,35 @@ module.exports = extend(window, {
 		}
 		content = type === 'custom'? content.img: window.curThemeColor[type].img
 		return content
+	},
+	// 组件ID生成
+	compIdCreate(comp, globalData, globalUpdate = true) {
+		var { max } = globalData.data
+		if (!max) return comp
+		compIdCreateNode(comp, max)
+		if (globalUpdate) {
+			let t = setTimeout(() => {
+				clearTimeout(t)
+				Actions.updateGlobal(globalData)
+			})
+		}
+		console.log(comp, globalUpdate)
+		return comp
 	}
 })
+
+// 组件ID生成
+function compIdCreateNode(comp, max) {
+	var { components, componentLayout } = comp.data
+	comp._id = ++max.id
+	if (components) {
+		components.map(_ => {
+			compIdCreateNode(_, max)
+		})
+	}
+	if (componentLayout) {
+		componentLayout.map(_ => {
+			compIdCreateNode(_, max)
+		})
+	}
+}

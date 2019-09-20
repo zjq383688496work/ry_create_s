@@ -15,7 +15,7 @@ import curData from 'state/cur/curData'
 import { Spin } from 'antd'
 import './index.less'
 const comp = require('state/comp')
-
+ 
 class OperateComponent extends React.Component {
 	constructor(props) {
 		super(props)
@@ -25,7 +25,7 @@ class OperateComponent extends React.Component {
 	}
 
 	timeInit() {
-		let { actions } = this.props
+		var { actions } = this.props
 		window.Actions = actions
 		actions.updateTime()
 	}
@@ -52,14 +52,15 @@ class OperateComponent extends React.Component {
 		let id = query.id
 		return (resolve, reject) => {
 			if (!id) {
+ 				var ct = composeType || 'PORTRAIT'
 				window.tempCfg = {
 					name: name || '',
 					templateType: templateType || 'MALL',
-					composeType:  composeType  || 'PORTRAIT',
+					composeType:  ct,
 					bannerAds:    bannerAds    || 0,  // 0: 无  1: 有
 				}
-				if(bannerAds == 1) {
- 					globalData.banner = comp[`banner${composeType === 'PORTRAIT'? 'Vertical': 'Horizontal'}`]
+				if (bannerAds == 1) {
+ 					globalData.banner = comp[`banner${ct === 'PORTRAIT'? 'Vertical': 'Horizontal'}`]
  					actions.updateGlobal(globalData)
  				}
 				return resolve('模板数据')

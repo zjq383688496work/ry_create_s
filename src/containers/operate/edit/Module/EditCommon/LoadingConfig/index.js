@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Col, Row, Checkbox, Collapse } from 'antd'
 const Panel = Collapse.Panel
 import ImageUploadTheme from 'compEdit/EditCommon/ImageUploadTheme'

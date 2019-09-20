@@ -39,6 +39,8 @@ import Qrcode            from 'compEdit/EditElement/Qrcode'
 import QrcodeHui         from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav         from 'compEdit/EditElement/QrcodeNav'
 
+import Banner from 'compEdit/EditElement/Banner'
+
 import * as actions from 'actions'
 
 import { Icon } from 'antd'
@@ -99,8 +101,9 @@ class Element extends React.Component {
 		let ct     = tempCfg.composeType || 'PORTRAIT',
 			ads    = tempCfg.adsFlag? 'ads': '',
 			eles   = data.elements || [],
-			theme  = editConfig.globalData.theme,
-			colors = theme.list[theme.idx].colors,
+			{ theme, banner }  = editConfig.globalData,
+			bannerLayout    = banner && banner.data.layout,
+			{ colors } = theme.list[theme.idx],
 			color  = data.feature.backgroundColor,
 			type   = color.type
 		ct = ctMap[ct]? ct: 'PORTRAIT'
@@ -130,6 +133,12 @@ class Element extends React.Component {
 					{ /*ads
 						? <div className="ads-placeholder"></div>
 						: null*/
+					}
+					{
+						tempCfg.bannerAds == 1 ? 
+						<div className="bannerBox" style={{height:`${ct=="PORTRAIT"?bannerLayout.height+"px":"100%"}`,width:`${ct=="LANDSCAPE"?bannerLayout.width+"px":"100%"}`}}>
+							<Banner {...this.props} />
+						</div> : null
 					}
 					<section className="pg-element" style={bgStyle}>
 						{ childNode }

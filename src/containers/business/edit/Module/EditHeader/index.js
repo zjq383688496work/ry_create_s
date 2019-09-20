@@ -94,7 +94,8 @@ class Header extends React.Component {
 		cfg.globalData = {
 			data:    gd.data,
 			theme:   gd.theme,
-			feature: gd.feature
+			feature: gd.feature,
+			banner:  gd.banner
 		}
 		let config = {
 			configPC: {

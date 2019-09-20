@@ -21,31 +21,31 @@ class ImageAndVideoComp extends React.Component {
 	constructor(props) {
 		super(props)
 		var { width = 0, height = 0 } = props.data.data.layout
-		this.state = { width,height,init:false }
+		this.state = { width, height, init: false }
 	}
 	componentWillReceiveProps(props) {
 		var { width = 0, height = 0 } = props.data.data.layout
 		this.setState({ width, height })
 	}
 	changeImg = () => {
-		this.setState({init:true},()=>{this.addImgVideoModal.show()})
+		this.setState({ init: true }, () => this.addImgVideoModal.show())
 	} 
 	enter = (list,index) => {
 		if(index != 'remove') {this.addImgVideoModal.hide()}
 		if (!list.length) return
-		let { data, con  ,action, actions, editConfig } = this.props
+		let { data, con, action, actions, editConfig } = this.props
 		let da = data.data
 		let { content }    = da
 		let { curData }    = editConfig
 		let { parentComp } = curData
-		if(list[0].type == 2){
+		if (list[0].type == 2) {
 			delete con.img.img
 			delete con.router
 			con.img.preview = list[0].preview
 			con.img.originalSizePreview = list[0].originalSizePreview
 			con.img.video = list[0].url
 			con.type = 'video'
-		}else{    
+		} else {    
 			delete con.img.preview 
 			delete con.img.originalSizePreview
 			con.img.img = list[0].url
@@ -82,8 +82,8 @@ class ImageAndVideoComp extends React.Component {
 		let selectNode
 		let scaleNode
 		colors.custom = {
-			name:  '自定义',
-			img: imgVal
+			name: '自定义',
+			img:  imgVal
 		}
 		let options = Object.keys(colors).map((_) => {
 			let col = colors[_]

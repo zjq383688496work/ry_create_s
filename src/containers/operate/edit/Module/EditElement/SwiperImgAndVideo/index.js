@@ -109,12 +109,11 @@ function OneVideo({content}){
 	if(content.length == 0) return false
 	let video = content[0].img.video
 	if(!video) return false
-	return (<div className="e-video" id="RY-SwiperImage"> 
-					<video src={video} controls={false} autoPlay loop>
-						您的浏览器不支持 video 标签。
-					</video> 
-				</div>
-			)
+	return (
+		<div className="e-video" id="RY-SwiperImage"> 
+			<video src={video} controls={false} autoPlay loop>您的浏览器不支持 video 标签。</video> 
+		</div>
+	)
 } 
  
 //一张图片
@@ -122,16 +121,11 @@ function OneImage({content,prop}){
 	if(content.length == 0) return false
 	let img = compImgFormat(prop, content[0].img)
 	if(!img) return false
-	return (
-				<div className="e-img" id="RY-SwiperImage">
-					<img src={img} />
-				</div>
-			)
+	return <div className="e-img" id="RY-SwiperImage"><img src={img} /></div>
 }  
 
 //只有图片且delay设置一样
 class SwiperImage extends React.Component {
-
 	state = {
 		random: Date.now() + parseInt(Math.random()*1000),
 		realIndex: 0
@@ -165,7 +159,7 @@ class SwiperImage extends React.Component {
 		destroySwiper(this.mySwiperImage)
 	}
 	render() {
-		let { prop,content } = this.props
+		let { prop, content } = this.props
 		return ( 
 			<div className="e-SwiperImage" id="RY-SwiperImage">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
@@ -177,7 +171,7 @@ class SwiperImage extends React.Component {
 						}  
 					</div>
 				</div>
-				<PageRY totalPage={content.length} currentPage={this.state.realIndex} props={prop}></PageRY>
+				{/*<PageRY totalPage={content.length} currentPage={this.state.realIndex} props={prop}></PageRY>*/}
 			</div>
 		)
 	}
@@ -297,7 +291,7 @@ class SwiperImageVideo extends React.Component {
 		destroySwiper(this.mySwiperImage)
 	};
 	render() {
-		let { prop,content } = this.props
+		let { prop, content } = this.props
 		return (
 			<div className="e-SwiperImage" id="RY-SwiperImage">
 				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
@@ -314,15 +308,14 @@ class SwiperImageVideo extends React.Component {
 			          }  
 					</div>
 				</div>
-				<PageRY totalPage={content.length} currentPage={this.state.realIndex} props={prop}></PageRY>
+				{/*<PageRY totalPage={content.length} currentPage={this.state.realIndex} props={prop}></PageRY>*/}
 			</div>
 		)
 	}
 }
 
 //分页显示
-class PageRY extends React.Component {
-	
+/*class PageRY extends React.Component {
 	renderDom(props, totalPage,currentPage) {
 		let node = Array.from(new Array(totalPage)).map((_, i) => {
 			let cur = i
@@ -344,13 +337,14 @@ class PageRY extends React.Component {
 	}
 
 	render() {
-		let { totalPage,currentPage,props } = this.props
+		let { totalPage, currentPage, props } = this.props
+		if (/banner\w+/.test(props.name)) return null
 		return (
 			<section className="e-page">
 				{ totalPage > 1 ? this.renderDom.bind(this, props, totalPage,currentPage)() : null }
 			</section>
 		)
 	}
-}
+}*/
  
 export default RYSwiper 

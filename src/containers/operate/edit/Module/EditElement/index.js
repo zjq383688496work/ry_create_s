@@ -15,7 +15,6 @@ import Picture            from 'compEdit/EditElement/Picture'
 import Web                from 'compEdit/EditElement/Web'
 import Text               from 'compEdit/EditElement/Text'
 import Button             from 'compEdit/EditElement/Button'
-import Banner             from 'compEdit/EditElement/Banner'
 import Video              from 'compEdit/EditElement/Video'
 import SwiperImage        from 'compEdit/EditElement/SwiperImage'
 import SwiperImgAndVideo  from 'compEdit/EditElement/SwiperImgAndVideo'
@@ -46,7 +45,9 @@ import ShortcutKey        from 'compEdit/EditCommon/ShortcutKey'
 import PostMessage        from 'compEdit/EditCommon/PostMessage'
 import RevokeRecovery     from 'compEdit/EditCommon/RevokeRecovery'
 import { InductionLine, nearPosSty } from 'compEdit/EditElement/InductionLine'
- 
+
+import Banner from 'compEdit/EditElement/Banner'
+
 import * as actions from 'actions'
 import { Icon, message } from 'antd'
 
@@ -97,13 +98,37 @@ import './index.less'
 class EditElement extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { keyCtrl: false,shift:false,v:false,h:false,vPosition:{left:0},hPosition:{top:0},nearPos:false,dragAxis:'both',drag:true }
+		this.state = {
+			keyCtrl:    false,
+			shift:      false,
+			v:          false,
+			h:          false,
+			vPosition:  { left: 0 },
+			hPosition:  { top:  0 },
+			nearPos:    false,
+			drag:       true,
+			dragAxis:   'both',
+			editConfig: props.editConfig,
+		}
 	}
-	componentDidMount() {
-		
-	}
-	componentWillReceiveProps() {
-		this.state.drag ?  this.stateLayout() : null
+	componentWillReceiveProps(nextProps) {
+		let { editConfig } = nextProps,
+			{ curPage }    = editConfig,
+			editConfigPrev = this.props.editConfig,
+			curPagePrev    = editConfigPrev.curPage,
+			elements       = deepCopy(curPage.elements)
+		if (curPagePrev.router === curPage.router){
+			this.setState({ editConfig })
+		} else {
+			curPage.elements = []
+			this.setState({ editConfig })
+			var t = setTimeout(() => {
+				clearTimeout(t)
+				curPage.elements = elements
+				this.setState({ editConfig })
+			}, 1)
+		}
+		this.state.drag? this.stateLayout(): null
 	}
 	stateLayout = () => {
 		let { data, editConfig } = this.props
@@ -117,7 +142,7 @@ class EditElement extends React.Component {
 	keyDown = (k, e) => {
 		if (k === 'meta' || k === 'control') {
 			this.setState({ keyCtrl: true })
-		}else if(k === 'shift'){
+		} else if (k === 'shift'){
 			this.setState({ shift: true })
 		}
 	}
@@ -158,10 +183,7 @@ class EditElement extends React.Component {
 		let { index, list, type } = multiComp
 		if (keyCtrl) {
 			if (type === 'child') return message.success('不能跨级选组件!')
-			if (index[idx]) {
-				// delete index[idx]
-				list.remove(idx)
-			}
+			if (index[idx]) list.remove(idx)
 			index[idx] = true
 			list.unshift(idx)
 		} else {
@@ -218,7 +240,7 @@ class EditElement extends React.Component {
 			this.setState({dragAxis:'both',drag:false},()=>{ this.showLine(param,_,i) })
 		} 
 	}
-	//拖拽停止
+	// 拖拽停止
 	dragStop(e, d, item, idx) {
 		e.stopPropagation()
 		// e.preventDefault()
@@ -230,38 +252,42 @@ class EditElement extends React.Component {
 		this.setState({v:false,h:false,nearPos:false,drag:true})   
 		actions.updateComp(idx, item)
 	} 
-	//显示提示线
+	// 显示提示线
 	showLine = (param,_,i,obj) => {
-		let { data, actions } = this.props,
+		let { data, actions,editConfig } = this.props,
+			{ globalData } = editConfig,
+			{ multiComp, banner } = globalData;
+		let bannerLayout = banner && banner.data.layout,
 			eles   = data.elements || [],
-			bodySty = tempCfg.composeType == 'LANDSCAPE' ? {height:540,width:960,left:0,top:0} : {width:540,height:960,left:0,top:0},
-			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
-			InductionLineObj = InductionLine(param,eles,layout,i,bodySty,eleKnock),
+			bodySty = tempCfg.composeType == 'LANDSCAPE'? { height: 539, width: 959, left: 0, top: 0 } :
+			(tempCfg.bannerAds == 1? { width: 539, height: `${959 - bannerLayout.height}`, left: 0, top: 0 }: { width: 539, height: 959, left: 0, top: 0 }),
+			layout = obj? { ..._.data.layout, ...obj }: _.data.layout,
+			InductionLineObj = InductionLine(param,eles,layout,i,bodySty),
 			v= InductionLineObj.v,h=InductionLineObj.h,eleKnock = InductionLineObj.eleKnock
-		if(v){ 
+		if (v) {
 			this.setState({v:true,vPosition:{left:`${v.left}px`,p_left:v.p_left}})
-		}else{
+		} else {
 			this.setState({v:false,vPosition:{p_left:param.x}})
-		} 
-		if(h){
-			this.setState({h:true,hPosition:{top:`${h.top}px`,p_top:h.p_top}})
-		}else{ 
-			this.setState({h:false,hPosition:{p_top:param.y}})
 		}
-		if(eleKnock){
-			this.setState({nearPos:nearPosSty(eleKnock)})
-		}else{
-			this.setState({nearPos:false})
-		}   
-	}    
+		if (h) {
+			this.setState({ h: true, hPosition: { top: `${tempCfg.bannerAds == 1? h.top + bannerLayout.height: h.top}px`, p_top: h.p_top } })
+		} else {
+			this.setState({ h: false, hPosition: { p_top: param.y } })
+		}
+		if (eleKnock) {
+			this.setState({ nearPos: nearPosSty(eleKnock,bannerLayout) })
+		} else {
+			this.setState({ nearPos: false })
+		}
+	}
 	changeEditable = (item, idx) => {
 		let { actions } = this.props
 		if(item.name == 'web'){
 			let RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
 			if(RP.test(item.data.content.url)) return false
 		} 
-		this.setState({drag:true})  
-		item['feature'].editStatus != undefined ? item['feature'].editStatus = true : null
+		this.setState({drag:true})
+		item.feature.editStatus != undefined? itemfeature.editStatus = true: null
 		actions.updateComp(idx, item)
 	}
 	removeComp(e, idx) {
@@ -307,17 +333,17 @@ class EditElement extends React.Component {
 		}
 		let bgStyle   = data.feature? { backgroundColor: type === 'custom'? color.color: colors[type].color }: {}
 		let childNode = eles.map((_, i) => {
-			let compName  = _.name,
-				layout    = _.data.layout,
-				styleIdx  = _.styleList.idx,
-				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
-				ani       = _.data.animation,
-				aniCls    = '',
-				aniSty    = {},
+			let compName = _.name,
+				layout   = _.data.layout,
+				styleIdx = _.styleList.idx,
+				csn      = `handle-drag-${Math.floor(Math.random()*1e9)}`,
+				ani      = _.data.animation,
+				aniCls   = '',
+				aniSty   = {},
 				lockAspectRatio = layout.lockAspectRatio,
-				editStatus = _.feature && _.feature.editStatus;
+				editStatus = _.feature&&_.feature.editStatus;
 			i === compIdx ? disableDragging = editStatus : null
-			let compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i,state.drag, csn, state.keyCtrl,disableDragging,state.shift)
+			let compCon = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, state.drag, csn, state.keyCtrl, disableDragging, state.shift)
 			if (!compCon) return false 
 			if (ani.className) {  
 				let item = aStyle[ani.className]
@@ -368,8 +394,7 @@ class EditElement extends React.Component {
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
 				<div className="pg-element-box">
-					<section id="pgElement" className="pg-element">
-						{ (position === 'top' || position === 'left')? DOM: null }
+					<Banner {...this.props}>
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }
 						</div>
@@ -383,11 +408,9 @@ class EditElement extends React.Component {
 								<div className="lineNear_3" style={state.nearPos[3]}></div>
 							</div> : null
 						}
-						{ (position === 'right' || position === 'bottom')? DOM: null }
-						<div id="pgElementNext" className="pg-element-next"></div>
-					</section>
+					</Banner>
 					<RevokeRecovery />
-				</div> 
+				</div>
 				<ContextMenu />
 				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} disableDragging={disableDragging} />
 				<PostMessage />
@@ -395,9 +418,12 @@ class EditElement extends React.Component {
 		)
 	}
 }
-
-EditElement.defaultProps = {
-}
+					// <section id="pgElement" className="pg-element pg-operate">
+					// </section>
+						// <div id="pgElementNext" className="pg-element-next"></div>
+						// { (position === 'top' || position === 'left')? DOM: null }
+						// { (position === 'right' || position === 'bottom')? DOM: null }
+EditElement.defaultProps = {}
 
 const mapStateToProps = state => state
 

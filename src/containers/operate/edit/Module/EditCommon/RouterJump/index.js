@@ -50,31 +50,44 @@ class RouterJump extends React.Component {
 	}
 
 	onChange = val => {
-		let { data, content, actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { data, content, actions, editConfig, from } = this.props
+		let { curData, globalData } = editConfig
 		let { parentComp } = curData
 		content.type = 'router'
 		content.url  = val
 		if (!val) content.param = [{ type: '', value: '' }]
-		actions.updateComp(null, parentComp? parentComp: data)
+		if(from && from === 'banner') {
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		} 
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeParam = (val, key, param) => {
-		let { data, content, actions, editConfig,index } = this.props
-		let { curData } = editConfig
+		let { data, content, actions, editConfig, index, from } = this.props
+		let { curData, globalData } = editConfig
 		let { parentComp } = curData
 		let content_arr = data.data.content
 		param[key] = val
 		content.param[0] = param
 		if(index != undefined) content_arr[index].router = content;
 		if (key === 'type') param.value = ''
-		actions.updateComp(null, parentComp? parentComp: data)
+		if(from && from === 'banner') {
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, key) {
-		let { data, actions } = this.props
+		let { data, actions, editConfig, from } = this.props,
+			{ globalData } = editConfig
 		data.auth.content[key] = val
-		actions.updateComp(null, data)
+		if(from && from === 'banner'){
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
+		return actions.updateComp(null, data)
 	}
 
 	onSelect(newIdx) {

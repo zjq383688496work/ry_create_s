@@ -1,68 +1,79 @@
-/**
- * @Author: Along
- * @Date:   2018-05-03
-
- */
 import React from 'react'
 import './index.less'
 
-import  SwiperSame  from '../SwiperSame'
+import SwiperSame      from '../SwiperSame'
 import PictureAndVideo from 'compEdit/EditCommon/PictureAndVideo'
-import { Row, Col, Collapse, Icon,message } from 'antd'
-const  { Panel }    = Collapse
+import { Row, Col, Collapse, Icon, message } from 'antd'
+const  { Panel } = Collapse
 
-
-class SwiperImage extends React.Component {
-
-	constructor(props) {
-		super(props)
-
-	}
+export default class SwiperImage extends React.Component {
 	state = {
-		init:false
+		init: false
 	}
 	addImg = () => {
-		this.setState({init:true},()=>{this.addImgVideoModal.show()})
+		this.setState({ init: true }, () => { this.addImgVideoModal.show() })
 	}
 	enter = list => { 
-		let props = this.props.data
-		if (!props.editConfig) props = props.data
-		if (!props.editConfig) return
+		let props = this.props.data,isContinue = true
+		if (!props.editConfig) return props = props.data
 		let { data, actions, editConfig } = props
-		let { curData }    = editConfig
-		let { content }    = data.data
+		let { curData, globalData } = editConfig
+		let { content, layout }     = data.data
 		let { parentComp } = curData
 		let newContent =  this.do_content(list,content)
-		if(newContent.length > 40){
-			message.warning('最多只能添加40张素材！')
-			return false
-		} 
+		if (newContent.length > 20) return message.warning('最多只能添加20张素材！')
+		if (envType === 'business') isContinue = this.checkImg(list,layout)
+		if (!isContinue) return message.info("选择的图片不符合尺寸，请重新选择！")
+		this.setState({ init: false })
 		this.addImgVideoModal.hide() 
 		data.data.content = newContent
-		actions.updateComp(null, parentComp? parentComp: data)
+		return actions.updateComp(null, parentComp? parentComp: data)
+	}
+	// 检查素材大小
+	checkImg = (list, layout) => {
+		let { width, height } = layout, isOk = true
+		width *= 2
+		height *= 2
+		if(!list || list.length === 0) return
+		isOk = list.every(({ attribute, type }) => {
+			if(type == 2) return true
+			attribute = attribute && attribute.split('*')
+			return Math.abs(+attribute[0] - width) < 100 && Math.abs(+attribute[1] - height) < 100
+		})
+		return isOk
 	}  
-	do_content = (list,content) => {
-		list = list.map(_=>{
+	do_content = (list, content) => {
+		list = list.map(({ attribute, originalSizePreview, preview, type, url }) => {
 			let item = '' 
-			if(_.type == 2){ 
-				item = getEnv() === 'business' ? {img:{type:'custom',video:_.url,preview:_.preview,originalSizePreview:_.originalSizePreview},attribute:_.attribute,type:'video',date:''} :
-				 {img:{type:'custom',video:_.url,preview:_.preview,originalSizePreview:_.originalSizePreview},attribute:_.attribute,type:'video'}
-			}else{
-				item = getEnv() === 'business' ? {img:{type:'custom',img:_.url},attribute:_.attribute,router:{},type:'image',delayOnly:5,date:''} : {img:{type:'custom',img:_.url},attribute:_.attribute,router:{},type:'image'}
-			} 
+			if (type == 2) {
+				item = {
+					attribute,
+					img: { type: 'custom', video: url, preview, originalSizePreview },
+					type: 'video'
+				}
+				if (envType === 'business') item.data = ''
+			} else {
+				item = {
+					attribute,
+					img: { type: 'custom', img: url },
+					router: {},
+					type: 'image'
+				}
+				if (envType === 'business') item = { ...item, delayOnly: 5, date: '' }
+			}
 			return item
 		}) 
 		let newList = deepCopy(list)
-		content.map(_=>{
-			list.map(v=>{
-				if(v.type == "image" && _.type == "image"){
+		content.map(_ => {
+			list.map(v => {
+				if (v.type == 'image' && _.type == 'image') {
 					if(v.img.img == _.img.img){
-						newList = newList.filter(s=>s.img.img != v.img.img)
+						newList = newList.filter(s => s.img.img != v.img.img)
 						return
 					}
-				}else if(v.type == 'video' && _.type == "video"){
+				} else if (v.type == 'video' && _.type == 'video') {
 					if(v.img.video == _.img.video){
-						newList = newList.filter(s=>s.img.video != v.img.video)
+						newList = newList.filter(s => s.img.video != v.img.video)
 						return
 					}
 				} 
@@ -71,12 +82,9 @@ class SwiperImage extends React.Component {
 		let newContent = content.concat(newList)
 		return newContent
 	}  
-	initFn = () =>{
-		this.setState({init:false})
+	initFn = () => {
+		this.setState({ init: false })
 	}
-	/*shouldComponentUpdate(nextProps,nextState){
-		return nextState.init
-	}*/
 	render() {
 		let props = this.props.data
 		if (!props.editConfig) props = props.data
@@ -106,16 +114,16 @@ class SwiperImage extends React.Component {
 					</Panel>
 				</Collapse>
 				{
-					this.state.init ? <PictureAndVideo
-										ref={com => { this.addImgVideoModal = com }}
-										enter={this.enter}
-										init={this.state.init}
-										initFn={this.initFn}
-									/> : null
+					this.state.init
+					?
+					<PictureAndVideo
+						ref={com => { this.addImgVideoModal = com }}
+						enter={this.enter}
+						init={this.state.init}
+						initFn={this.initFn}
+					/> : null
 				} 
 			</div>
 		)
 	}
 }
-
-export default SwiperImage

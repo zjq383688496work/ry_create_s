@@ -39,10 +39,10 @@ class Header extends React.Component {
 	componentWillUnmount() {}
 
 	addComp(item) {
-		let { actions, editConfig } = this.props
-		let { curComp, curData, curPage } = editConfig
-		let { parentComp } = curData
-		let { key } = item
+		var { actions, editConfig } = this.props,
+			{ curComp, curData, curPage, globalData } = editConfig,
+			{ parentComp } = curData,
+			{ key } = item
 		if (!key) return
 		if (curComp.type === 'advanced' || parentComp) {
 			let compData = deepCopy(comp[key]),
@@ -52,20 +52,19 @@ class Header extends React.Component {
 			if (compData.type != 'advanced' && auth[key]) {
 				if (max != undefined) compData.feature.id = ++max
 				delete compData.styleList.list
+				compIdCreate(compData, globalData)
 				Comp.data.components.push(compData)
-				//message.success(`添加子组件: ${compMap[key]}!`)
 				this.selectMulti(Comp.data.components.length - 1)
 				return actions.updateComp(null, Comp)
 			} else {
-				message.info('该高级组件内不能添加该基础组件!',1)
+				message.info('该高级组件内不能添加该基础组件!', 1)
 			}
 		} else {
 			if (compP[key]) {
-				//message.success(`添加组件: ${compMap[key]}!`)
 				this.selectMulti(curPage.elements.length)
 				return actions.addComp(curData.router, key)
 			}
-			message.info('该组件内只能添加在高级组件中!',1)
+			message.info('该组件内只能添加在高级组件中!', 1)
 		} 
 	}
 	selectMulti(idx) {
@@ -74,7 +73,6 @@ class Header extends React.Component {
 		let { parentComp } = curData
 		let { multiComp }  = globalData
 		let { index, list, type } = multiComp
-		
 		var s = {}
 		s[idx] = true
 		multiComp.index = s
@@ -87,11 +85,11 @@ class Header extends React.Component {
 		}
 		actions.updateGlobal(globalData)
 	}
-	//预览模板
+	// 预览模板
 	review(){
 		this.reviewModal.show()
 	}
-	//常见问题
+	// 常见问题
 	question(){
 		this.questionModal.show()
 	}
@@ -103,12 +101,12 @@ class Header extends React.Component {
 	saveData() {
 		let { editConfig, location } = this.props
 		let { query } = location
-		let { templateType, id, composeType, adsFlag } = tempCfg
+		let { templateType, id, composeType, adsFlag, bannerAds } = tempCfg
 		let cfg = deepCopy(editConfig),cropWidth,cropHeight
 
 		let gd = cfg.globalData
-		//模板数据加入composeType
-		if(composeType === 'LANDSCAPE'){
+		// 模板数据加入composeType
+		if(composeType === 'LANDSCAPE') {
 			gd.data.composeType = 'landscape'
 			cropWidth = 960
 			cropHeight = 540
@@ -120,7 +118,8 @@ class Header extends React.Component {
 		cfg.globalData = {
 			data:    gd.data,
 			theme:   gd.theme,
-			feature: gd.feature
+			feature: gd.feature,
+			banner:  gd.banner
 		}
 		let config = {
 			configPC: {
@@ -129,14 +128,15 @@ class Header extends React.Component {
 				pageList:    cfg.pageList,
 				globalData:  cfg.globalData
 			}
-		}  
+		}
 		let da = {
 			adsFlag: adsFlag || 0,
 			config: JSON.stringify(config),
 			coverImgUrl:  '',
 			templateType: templateType,
 			composeType:  composeType,
-			name:         this.state.name
+			name:         this.state.name,
+			bannerAds: bannerAds || 0,
 		}
 		this.setState({ loading: true })
 		if (id) da.id = id
@@ -260,15 +260,15 @@ class Header extends React.Component {
 				<ReviewTemplate 
 					ref={com => { this.reviewModal = com }} 
 					editConfig={this.props.editConfig}
-					actions={this.props.actions} />
+					actions={this.props.actions}
+				/>
 			</div> 
 		)
 	}
 }
 
 
-Header.defaultProps = {
-}
+Header.defaultProps = {}
 
 const mapStateToProps = state => state
 

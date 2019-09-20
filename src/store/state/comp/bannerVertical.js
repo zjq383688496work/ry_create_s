@@ -2,24 +2,7 @@ let { deepCopy } = require('state/common')
 
 // 轮播图
 const data = {
-	style: {
-		swiperImage: {
-			borderRadius: {
-				topLeft:     0,
-				topRight:    0,
-				bottomRight: 0,
-				bottomLeft:  0
-			}
-		},
-		filterActive: {
-			borderWidth:     0,
-			borderStyle:     'solid',
-			borderColor:     { type: 'custom', color: '#a240ec' },
-			background:      'center no-repeat',
-			backgroundImage: { type: 'custom', img: '' },
-			backgroundColor: { type: 'custom', color: '#cfad81' }
-		}
-	},
+	style: {},
 	layout: { 
 		position: 'absolute',
 		width:  540,

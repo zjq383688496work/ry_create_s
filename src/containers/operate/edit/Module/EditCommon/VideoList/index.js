@@ -7,8 +7,10 @@
 
 import React from 'react';
 import SkyLight from 'react-skylight';
+import VideoCrop from '../VideoCrop'
+import InputFile from '../InputFile'
+import { Button, message,Modal,Pagination,Input,Upload,Icon } from 'antd'
 import './index.less'
-import { Button, message,Modal,Pagination,Input } from 'antd'
 const commonCss = {
 	dialogStyles: {
 		height: 'auto',
@@ -60,7 +62,7 @@ export default class VideoList extends React.Component {
 			type: 2
 		}
 		var ty = 'ySourceGroupManage'
-		if (getEnv() === 'business') {
+		if (envType === 'business') {
 			getData.mallId = uif.userInfo.mallMid
 			ty = 'sourceGroupManage'
 		}
@@ -95,7 +97,7 @@ export default class VideoList extends React.Component {
 				type:        2
 			}
 			var ty = 'ySourceManage'
-			if (getEnv() === 'business') {
+			if (envType === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
@@ -163,7 +165,8 @@ class VideoModule extends React.Component {
 		videoTypes: [],
 		videoList:  [],
 		current:    1,
-		groupId:    this.props.groupId
+		groupId:    this.props.groupId,
+		loading:    false
 	}
 	
 	componentWillReceiveProps(props){
@@ -185,27 +188,48 @@ class VideoModule extends React.Component {
 	}
 	chooseVideo = (id,attribute) => { 
 		let videoList = this.state.videoList
-		videoList = videoList.map(item=>{
+		videoList = videoList.map(item => {
 			item.id == id ? item.isClicked = !item.isClicked : item.isClicked = false;
 			return item
-		});
-		this.setState({
-				videoList:videoList
-			})
+		})
+		this.setState({ videoList })
 		let choosed_video = videoList.filter(item => item.isClicked == true);
 		this.props.save(choosed_video,attribute)
 	}
-	
+	customRequest = (state, file) => {
+		if (!state) return message.info(file)
+		this.setState({ loading: true })
+		VideoCrop(file, this.postEndFn, envType === 'business'? uif.userInfo.mallMid: null)
+	}
+	// 上传视频成功后的回调
+	postEndFn = success => {
+		message.info(`上传${success? '成功': '失败'}!`)
+		this.setState({ loading: false })
+		if (success) this.props.getVideoList()
+	}
 	render() {
-		const { page_video } = this.props;
+		var { page_video } = this.props,
+			{ loading }    = this.state
 		return (
 			<div className="content">
 				<div className="left">
-					{
-						this.state.videoTypes.map((item,index) => <Type groupId={this.state.groupId} key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
-					} 
+					{ this.state.videoTypes.map((item, index) => <Type groupId={this.state.groupId} key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>) }
 				</div> 
 				<div className="right">
+					<div>
+						<InputFile
+							accept=".mp4"
+							loading={loading}
+							maxFileSize={200 * 1000 * 1000}
+							handleCheck={this.customRequest}
+						>
+							<div className="if-box">
+								<Icon type={loading? 'loading': 'plus'}/>
+								上传视频<br/>
+								<p className="if-text-m">mp4格式,200MB大小以内</p>
+							</div>
+						</InputFile>
+					</div>
 					{ 
 						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseVideo}></List> )
 					}
@@ -215,8 +239,8 @@ class VideoModule extends React.Component {
 						current={this.state.current} 
 						total={page_video.totalCount} 
 						pageSize={page_video.pageSize}
-						onChange={page=>{this.chooseType('page',page)}}  
-						/> 
+						onChange={page=>{this.chooseType('page', page)}}  
+					/> 
 				</div>  
 			</div>
 		)

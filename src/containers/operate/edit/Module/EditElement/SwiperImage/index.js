@@ -109,7 +109,9 @@ class PageRY extends React.Component {
 	renderDom(props, totalPage,currentPage) {
 		let node = Array.from(new Array(totalPage)).map((_, i) => {
 			let cur = i
+			debugger
 			let nCss = cssColorFormat(props, 'pageSet')
+			debugger
 			if (currentPage === cur) nCss = { ...nCss, ...cssColorFormat(props, 'filterActive') }
 			return (
 				<div

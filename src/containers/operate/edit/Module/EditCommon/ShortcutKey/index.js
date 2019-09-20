@@ -216,17 +216,22 @@ class ShortcutKey extends React.Component {
 	// 粘贴 (支持多选)
 	pasteComp = (e) => {
 		e.stopPropagation()
-		let { actions, editConfig }  = this.props
-		let { curData, curComp, curPage, globalData } = editConfig
-		let { parentComp, pageGroupIdx, pageIdx } = curData
-		let { copyComp }   = globalData
-		let { name, list } = copyComp
+		var { actions, editConfig } = this.props,
+			{ curData, curComp, curPage, globalData } = editConfig,
+			{ parentComp, pageGroupIdx, pageIdx } = curData,
+			{ copyComp }   = globalData,
+			{ name, list } = copyComp
 		if (!copyComp) return message.warning(`没有可粘贴的组件!`)
-		let par = parentComp? parentComp: curComp
+		var par   = parentComp? parentComp: curComp,
+			nList = deepCopy(list),
+			nLen  = nList.length
+		nList.map((_, i) => {
+			compIdCreate(_, globalData, i === nLen - 1)
+		})
 		if ((parentComp && parentComp.name === name) || (name && curComp.name === name)) {
-			par.data.components = par.data.components.concat(deepCopy(list))
+			par.data.components = par.data.components.concat(nList)
 		} else if (!name) {
-			curPage.elements = curPage.elements.concat(deepCopy(list))
+			curPage.elements = curPage.elements.concat(nList)
 		} else {
 			return message.warning(`不同级别无法粘贴组件!`)
 		}
@@ -276,8 +281,7 @@ class ShortcutKey extends React.Component {
 	}
 }
 
-ShortcutKey.defaultProps = {
-}
+ShortcutKey.defaultProps = {}
 
 const mapStateToProps = state => state
 

@@ -68,13 +68,17 @@ class EditContent extends React.Component {
 		actions.updateComp(null, parentComp? parentComp: data)
 	}
 	onChange = (val, key, obj, index) => {
-		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { data, actions, editConfig, from } = this.props
+		let { curData, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
 		obj[key] = val
 		if(index != undefined && getAttr(content) == 'Array') content[index] = obj;
-		actions.updateComp(null, parentComp? parentComp: data)
+		if(from && from === 'banner'){
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, key) {
@@ -142,9 +146,9 @@ class EditContent extends React.Component {
 	}    
 	// 跳转路由
 	renderRouter(cfg, data, obj, val, key, index) {
-		let { actions } = this.props
+		let { actions, from } = this.props
 		return (
-			<RouterJump data={data} content={val} actions={actions} index={index} />
+			<RouterJump data={data} content={val} actions={actions} index={index} from={from} />
 		)
 	}
 	// 上传图片
@@ -157,6 +161,7 @@ class EditContent extends React.Component {
 				action={'updateComp'}
 				style={{ width: '100%' }}
 				index={index}
+				type="business"
 			/>
 		)
 	}
@@ -169,6 +174,7 @@ class EditContent extends React.Component {
 				name={`video`}
 				action={'updateComp'}
 				style={{ width: '100%' }}
+				type="business"
 			/>
 		)
 	}
@@ -182,6 +188,7 @@ class EditContent extends React.Component {
 					con={obj}
 					style={{ width: '100%' }}
 					index={index}
+					type="business"
 				/>
 			)
 	}
@@ -324,12 +331,13 @@ class EditContent extends React.Component {
 		) 
 	}
 	renObj(parent, data, content, index) {
+		var { from } = this.props
 		let me = this
 		let ci = 0
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p]) return false
-			let cm     = p=="img"&&content.type=="video" ? conMap['video'] : conMap[p],
-				type = data.name == 'swiperImgAndVideo'&&p=="img" ? 'ImgAndVideo' : cm.type
+			let cm     = p == 'img' && content.type == 'video'? conMap.video: conMap[p],
+				type   = (data.name === 'swiperImgAndVideo' || from === 'banner') && p === 'img'? 'ImgAndVideo': cm.type
 			let val    = content[p]
 			let auth   = data.auth.content[p]
 			let render = me[`render${type}`]
@@ -413,7 +421,7 @@ class EditContent extends React.Component {
 		if (content.length) {
 			childNode = content.map((_, i) => {
 				return (
-					<Panel header={`内容${i + 1}`} key={i + 1}>
+					<Panel header={`内容${i + 1}  ${compName === 'swiperImgAndVideo' && !i? '(建议为图片)': ''}`} key={i + 1}>
 						{ this.renObj(data, data, _, i) }
 					</Panel>
 				)

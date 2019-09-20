@@ -5,10 +5,12 @@
  */
 
 
-import React from 'react';
-import SkyLight from 'react-skylight';
+import React from 'react'
+import SkyLight from 'react-skylight'
+import VideoCrop from '../VideoCrop'
+import InputFile from '../InputFile'
 import './index.less'
-import { Button, Upload, message,Modal,Pagination,Icon,Input } from 'antd'
+import { Button, message, Modal, Pagination, Icon, Input } from 'antd'
 import Url from 'public/Url'
 const commonCss = {
 	dialogStyles: {
@@ -39,7 +41,6 @@ const commonCss = {
 		display:'none' 
 	}
 }
-
 
 export default class PictureAndVideo extends React.Component {
 	show() {
@@ -94,7 +95,7 @@ export default class PictureAndVideo extends React.Component {
 			type: type
 		}
 		var ty = 'ySourceGroupManage'
-		if (getEnv() === 'business') {
+		if (envType === 'business') {
 			getData.mallId = uif.userInfo.mallMid
 			ty = 'sourceGroupManage'
 		}
@@ -280,7 +281,7 @@ class ImgAndModule extends React.Component {
 				type:        1
 			}
 			var ty = 'ySourceManage'
-			if (getEnv() === 'business') {
+			if (envType === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
@@ -382,7 +383,7 @@ class VideoAndModule extends React.Component {
 				type:        2
 			}
 			var ty = 'ySourceManage'
-			if (getEnv() === 'business') {
+			if (envType === 'business') {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
@@ -500,48 +501,35 @@ class ImgModule extends React.Component {
 		let choosed_img = index ? img_list.filter(item => item.isClicked) : img_list.filter(item => item.id === img);
 		this.props.save(choosed_img)
 	};
-	customRequest = info => {
+	customRequest = (state, file) => {
+		if (!state) return message.info(file)
 		const that = this
-		this.setState({loading:true})
-		let id = window.uif.userInfo.id || '1'
+		this.setState({ loading: true })
+		let userId = window.uif.userInfo.id || '1'
 		let paramsData = {
-			userId:id,
-			mallId:'',
-			imageSourceType:'OPERATION'
+			userId,
+			mallId: '',
+			imageSourceType: 'OPERATION',
+			imageName: file.name.split('.')[0]
 		} 
-		paramsData.imageName = info.file.name.split(".")[0];
-		if (getEnv() === 'business') {
+		if (envType === 'business') {
 			paramsData.imageSourceType = 'BUSINESS'
 			paramsData.mallId = uif.userInfo.mallMid
 		}
 		var reader = new FileReader()
-			reader.onload = (function (file) {
-				return function (e) {
-					console.info(this.result) //这个就是base64的数据了
-					const img = this.result
-					const postData = {...paramsData,imageBase64:img}
-					Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage',postData).then(res=>{
-						message.info('上传成功!')
-						that.setState({loading:false})
-						that.props.getImgList()
-					})
-				}
-			})(info.file)
-			reader.readAsDataURL(info.file)
-	}
-	beforeUpload = file => {
-		let imgType = false;
-		if(file.type.indexOf('image/png') > -1 || file.type.indexOf('image/jpg')>-1 || file.type.indexOf('image/svg')>-1 || file.type.indexOf('image/jpeg')>-1){
-			imgType = true
+		reader.onload = function ({ target }) {
+			Ajax.postJSONIMG('/mcp-gateway/utility/uploadImage', { ...paramsData, imageBase64: target.result }).then(res=>{
+				message.info('上传成功!')
+				that.setState({ loading: false })
+				that.props.getImgList()
+			})
 		}
-	  if (!imgType) {
-	   message.info('请上传png、jpg、svg格式图片!')
-	  }
-	  return imgType;
+		reader.readAsDataURL(file)
 	}
 	render() {
-		let id = window.uif.userInfo.id || '1'
-		const { page_img } = this.props
+		var id = window.uif.userInfo.id || '1'
+		var { page_img } = this.props,
+			{ loading }  = this.state
 		return ( 
 			<div className="content">
 				<div className="left">
@@ -551,24 +539,20 @@ class ImgModule extends React.Component {
 				</div>
 				<div className="right">
 					<div>
-						<Upload
-							name= 'avatar'
-							className="avatar-uploader"
-							listType="picture-card"
-							showUploadList={false}
-							customRequest={this.customRequest}
-							beforeUpload={this.beforeUpload}
-							accept="image/*"
+						<InputFile
+							accept=".jpg,.jpeg,.png,.svg"
+							loading={loading}
+							maxFileSize={5 * 1000 * 1000}
+							handleCheck={this.customRequest}
 						>
-						<div>
-							<Icon type={this.state.loading ? 'loading' : 'plus'} />
-							<div className="ant-upload-text">上传图片</div>
-						</div>
-						</Upload>
+							<div className="if-box">
+								<Icon type={loading? 'loading': 'plus'}/>
+								上传图片<br/>
+								<p className="if-text-m">JPG, PNG, SVG格式,5MB大小以内</p>
+							</div>
+						</InputFile>
 					</div>
-					{
-						this.state.imgList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseImg.bind(this)}></List> )
-					}
+					{ this.state.imgList.map((item,index) => <List key={index} item={item} type={this.props.type} choose_one={this.chooseImg.bind(this)}></List> ) }
 					<Pagination
 						className="Pagination"
 						defaultCurrent={1}
@@ -588,7 +572,8 @@ class VideoModule extends React.Component {
 		videoTypes: [],
 		videoList:  [],
 		current:    this.props.currentPage,
-		groupId:    this.props.groupId
+		groupId:    this.props.groupId,
+		loading:    false
 	}
 	
 	componentWillReceiveProps(props){
@@ -607,8 +592,8 @@ class VideoModule extends React.Component {
 			return _
 		}) 
 		this.setState({
-			videoList:videoList,
-			videoTypes:videoTypes,
+			videoList,
+			videoTypes,
 			currentPage:props.currentPage
 		})
 	}
@@ -631,24 +616,45 @@ class VideoModule extends React.Component {
 				item.id == id ? item.isClicked = !item.isClicked : null;
 			}
 			return item
-		});  
-		this.setState({
-				videoList:videoList
-			}) 
+		})
+		this.setState({ videoList })
 		let choosed_video = index ? videoList.filter(item => item.isClicked) : videoList.filter(item => item.id == id); 
 		this.props.save(choosed_video) 
 	} 
-	
+	customRequest = (state, file) => {
+		if (!state) return message.info(file)
+		this.setState({ loading: true })
+		VideoCrop(file, this.postEndFn, envType === 'business'? uif.userInfo.mallMid: null)
+	}
+	// 上传视频成功后的回调
+	postEndFn = success => {
+		message.info(`上传${success? '成功': '失败'}!`)
+		this.setState({ loading: false })
+		if (success) this.props.getVideoList()
+	}
 	render() {
-		const { page_video } = this.props;
+		var { page_video } = this.props,
+			{ loading }    = this.state
 		return (
 			<div className="content">
 				<div className="left">
-					{
-						this.state.videoTypes.map((item,index) => <Type groupId={this.state.groupId} key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>)
-					} 
+					{ this.state.videoTypes.map((item,index) => <Type groupId={this.state.groupId} key={index} item={item} choose_one={this.chooseType.bind(this)}></Type>) }
 				</div> 
 				<div className="right">
+					<div>
+						<InputFile
+							accept=".mp4"
+							loading={loading}
+							maxFileSize={200 * 1000 * 1000}
+							handleCheck={this.customRequest}
+						>
+							<div className="if-box">
+								<Icon type={loading? 'loading': 'plus'}/>
+								上传视频<br/>
+								<p className="if-text-m">mp4格式,200MB大小以内</p>
+							</div>
+						</InputFile>
+					</div>
 					{ 
 						this.state.videoList.map((item,index) => <List key={index} item={item} choose_one={this.chooseVideo}></List> )
 					}

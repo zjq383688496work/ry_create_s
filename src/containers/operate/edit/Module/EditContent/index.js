@@ -12,7 +12,7 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import Color       from 'compEdit/EditCommon/Color'
-import { Row, Col, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch,Slider } from 'antd'
+import { Row, Col, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch, Slider } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
 const RadioButton   = Radio.Button
@@ -32,15 +32,15 @@ import Navigation        from './Navigation'
 import NavigationFloat   from './NavigationFloat'
 import Weather           from './Weather'
 import WonderfulActivity from './WonderfulActivity'
-import ListByActivity2 from './ListByActivity2'
+import ListByActivity2   from './ListByActivity2'
 import ListByStore       from './ListByStore'
 import ThemeColor        from './ThemeColor'
 import CatgByGoods       from './CatgByGoods'
 import SwiperByGoods     from './SwiperByGoods'
-import { filterContent }     from './filter'
+import { filterContent } from './filter'
 import * as variable from 'var'
 
-var conMap   = variable.contentMap
+var conMap = variable.contentMap
 var { fieldMap, contentFieldFilter } = variable
 var plMap  = {
 	catgByGoods:   'filter',
@@ -53,8 +53,8 @@ var plMap  = {
 
 import './index.less'
 
-const compContent = (name, data, updateComp) => {
-	var props  = { data, updateComp }
+const compContent = (name, data, updateComp, from) => {
+	var props  = { data, updateComp, from }
 	var render = {
 		bannerHorizontal:  <Banner            {...props} />,
 		bannerVertical:    <Banner            {...props} />,
@@ -82,19 +82,19 @@ class EditContent extends React.Component {
 	componentWillUnmount() {}
 
 	updateComp = () => {
-		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { data, actions, editConfig, from } = this.props
+		let { curData, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
 		if (from === 'banner') {
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
 		}
-		actions.updateComp(null, parentComp? parentComp: data)
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 	onChange = (val, con, key, cfg, index) => {
-		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { data, actions, editConfig, from } = this.props
+		let { curData, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
 		val = val > cfg.max ? cfg.max : val 
@@ -103,36 +103,35 @@ class EditContent extends React.Component {
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
 		} 
-		actions.updateComp(null, parentComp? parentComp: data)
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	onChangeAuth(val, key) {
-		let { data, actions, editConfig } = this.props
-		let { curData } = editConfig
+		let { data, actions, editConfig, from } = this.props
+		let { curData, globalData } = editConfig
 		let { parentComp } = curData
 		data.auth.content[key] = val
 		if (from === 'banner') {
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
 		}
-		actions.updateComp(null, parentComp? parentComp: data)
+		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
 	deleteCom(index) { 
-		let { data, actions, editConfig } = this.props;
-		let { curData, curComp } = editConfig
+		let { data, actions, editConfig, from } = this.props
+		let { curData, curComp, globalData } = editConfig
 		let { content } = data.data
 		let { parentComp } = curData
-		if(getAttr(content) === 'Array') {
+		if (getAttr(content) === 'Array') {
 			content = content.filter((item,i) => i!=index)
 			data.data.content = content
 			if (from === 'banner') {
 				globalData.banner = data
 				return actions.updateGlobal(globalData)
 			}
-			actions.updateComp(null, parentComp? parentComp: data)
-		}   
-		
+			return actions.updateComp(null, parentComp? parentComp: data)
+		}
 	}
 
 	urlCheck(val) {
@@ -175,9 +174,9 @@ class EditContent extends React.Component {
 	} 
 	// 跳转路由
 	renderRouter(cfg, con, val, key, index) {
-		let { data, actions } = this.props
+		let { data, actions, from } = this.props
 		return (
-			<RouterJump data={data} content={val} actions={actions} />
+			<RouterJump data={data} content={val} actions={actions} from={from} />
 		)
 	} 
 	// 上传图片
@@ -208,9 +207,9 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
-	//图片视频
+	// 图片视频
 	renderImgAndVideo(cfg, con, val, key, index) { 
-		let { data } = this.props
+		let { data, from } = this.props
 		return (
 				<ImageAndVideoComp
 					data={data}
@@ -219,6 +218,7 @@ class EditContent extends React.Component {
 					con={con}
 					style={{ width: '100%' }}
 					index={index}
+					from={from}
 				/>
 			)
 	}
@@ -275,33 +275,7 @@ class EditContent extends React.Component {
 				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, con, key, cfg, index)}
 			/>
 		)
-	} 
-	//日期范围
-	/*renderDate(cfg, con, val, key, index){
-		let defaultValue = val ? JSON.parse(val) : ''
-		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,con,key,cfg,index)}></DatePickerRY>)
-	} */
-	// 滑块
-	/*renderSlider(cfg, con, val, key, index) {
-		return (
-			<Row>
-				<Col span={12}>
-					<Slider
-						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={val} onChange={v => this.onChange(v, con, key, cfg, index)}
-					/>
-				</Col>
-				<Col span={3}></Col>
-				<Col span={9}>
-					<InputNumber
-						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={val} onChange={v => this.onChange(v, con, key, cfg, index)}
-						style={{ width: '100%' }}
-					/>
-				</Col>
-			</Row>
-		)
-	}*/
+	}
 	renderSwitch(cfg, con, val, key, index) {
 		return (
 			<Switch
@@ -341,7 +315,6 @@ class EditContent extends React.Component {
 		let { parentComp } = editConfig.curData
 		if (!parentComp) return
 		let map = fieldMap[parentComp.name]
-		// debugger
 		if (!map) return
 		let opts = Object.keys(map).map((_, i) => {
 			return <Option key={i} value={_}>{map[_]}</Option>
@@ -393,12 +366,12 @@ class EditContent extends React.Component {
 				type   = (name === 'swiperImgAndVideo' || from === 'banner') && p === 'img'? 'ImgAndVideo': cm.type,
 				val    = content[p],
 				render = this[`render${type}`]
-			if (!render) return false
+			if (!render) return null
 			// 根据样式类型渲染对应组件
 			let dom = this[`render${type}`].bind(this, cm, content, val, p, index)()
-			ci++ 
+			ci++
 			return (
-				<div className="pgs-row" key={i} style={{display:`${content.isShowDom&&(p=='size'||p=='pageSwitch') ? content.isShowDom :'flex'}`}}>
+				<div className="pgs-row" key={i} style={{display:`${content.isShowDom && (p == 'size' || p == 'pageSwitch')? content.isShowDom: 'flex'}`}}>
 					<div className="pgsr-name">{ cm.name }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 					<div className="pgsr-auth">
@@ -413,24 +386,20 @@ class EditContent extends React.Component {
 						:
 						<div className="delete" onClick={() => this.deleteCom(index)}><Icon type="close-circle" style={{ fontSize: 18 }} /></div>
 						: null
-					}
+					} 
 				</div> 
 			)
 		})
 		if (!ci) return false
 		return childNode
 	}
-
 	createMock(cn, da) {
 		var obj = {}
 		if (da) obj.layout = plMap[cn]? da.style[plMap[cn]]: da.layout
 		return obj
 	}
-	cb = e => {
-		console.log(e)
-	}
 	render() {
-		let { data, actions, editConfig } = this.props
+		let { data, actions, editConfig, from } = this.props
 		let compName = data.name
 		if (!compName) return false
 		let { curData } = editConfig
@@ -442,17 +411,17 @@ class EditContent extends React.Component {
 		let childNode,
 			activeKey,
 			feature,
-			compCon = compContent(compName, this.props, this.updateComp)
+			compCon = compContent(compName, this.props, this.updateComp, from)
 
 		if (content.length) {
 			activeKey = Array.from(new Array(content.length), (_, i) => `${i}`)
 			childNode = content.map((_, i) => {
 				return ( 
-					<Panel header={`内容${i + 1}`} key={`${i}`}> 
+					<Panel header={`内容${i + 1} ${compName === 'swiperImgAndVideo' && i === 0? '(建议为图片)': ''}`} key={`${i}`}> 
 						{ this.renObj(data, _, i) }       
-					</Panel>   
-				)  
-			})   
+					</Panel>
+				)
+			})
 		} else {
 			activeKey = ['0']
 			let con = this.renObj(data, content)
@@ -465,9 +434,7 @@ class EditContent extends React.Component {
 				: null
 			)
 		}
-		if (parentComp) {
-			mockData = this.createMock(compName, da)
-		}   
+		if (parentComp) mockData = this.createMock(compName, da)
 		return (
 			<section className="ry-roll-screen-config">
 				{
@@ -484,16 +451,15 @@ class EditContent extends React.Component {
 					: null
 				}
 				{ compCon }
-				<Collapse defaultActiveKey={activeKey} activeKey={activeKey} onChange={this.cb}>
-					{ childNode } 
-				</Collapse> 
+				<Collapse defaultActiveKey={activeKey} activeKey={activeKey}>
+					{ childNode }
+				</Collapse>
 			</section>
 		)
 	}
 }
 
-EditContent.defaultProps = {
-}
+EditContent.defaultProps = {}
 
 const mapStateToProps = state => state
 

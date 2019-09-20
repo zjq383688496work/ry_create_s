@@ -2,12 +2,12 @@
  
 import React from 'react'
 
+import InputFile from '../InputFile'
+
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
-import {
-	Row, Col, Collapse,Upload, InputNumber, Slider, Icon,message
-} from 'antd'
+import { Row, Col, Collapse, InputNumber, Slider, Icon, message } from 'antd'
 import './index.less'
 const Panel  = Collapse.Panel
 
@@ -63,40 +63,46 @@ class BackMusic extends React.Component {
 	cb = key => {
 		console.log(key)
 	}
-	customRequest = info => {
+	customRequest = (state, file) => {
+		if (!state) return message.info(file)
 		var that = this
 		var filedata = new FormData()
-		this.setState({loading: true})
-		filedata.append('file', info.file, info.file.name);
-		Ajax.postJSONAUDIO('/easy-smart-web/audioUpload/uploadBackgroundMusic',filedata).then(res=>{
+		this.setState({ loading: true })
+		filedata.append('file', file, file.name)
+		Ajax.postJSONAUDIO('/easy-smart-web/audioUpload/uploadBackgroundMusic', filedata).then(res => {
 			if(res.success){
 				message.info('上传成功!')
-				that.setState({loading:false})
+				that.setState({ loading: false })
 				that.onChange(res.result.data,'url')
 			} else {
-				that.setState({loading:false})
+				that.setState({ loading: false })
 				message.error(res.meta.msg)
 			}
 		})
 	}
 	render() {
 		let { data, action, actions } = this.props,
+			{ loading } = this.state,
 			activeKey = Array.from(new Array(1), (_, i) => `${i}`),
 			music = data.data.music || { url:'',volume:50 },
 			btnNode
-		let defaultParams = {
-		  name: 'file', 
-		  customRequest: this.customRequest,
-		  accept:"audio/*"
+
+		var params = {
+			accept: '.mp3',
+			loading,
+			maxFileSize: 20 * 1000 * 1000,
+			handleCheck: this.customRequest
 		}
 		if (music.url) {
 				btnNode = (
 					<div className="add_img add_video">
 						<div className="shadow">
 							<div className="add_text_change">
-								<Upload {...defaultParams}>
-								   <div className="add_text">{this.state.loading ? <Icon type="loading" /> : <Icon type="reload" />}</div>
-								 </Upload>
+								<InputFile {...params}>
+									<div className="if-box">
+										<Icon type={loading? 'loading': 'reload'}/>
+									</div>
+								</InputFile>
 							</div>
 							<div className="add_text_remove" onClick={this.removeMusic}><Icon type="close" /></div>
 						</div>
@@ -105,10 +111,12 @@ class BackMusic extends React.Component {
 			} else {
 				btnNode = (
 					<div className="add_img">
-						<Upload {...defaultParams}>
-						   <div className="add_text">{this.state.loading ? <Icon type="loading" /> : <Icon type="plus" />}</div>
-						 </Upload>
-						 <div className="tite">支持mp3格式音乐文件</div>
+						 <InputFile {...params}>
+							<div className="if-box">
+								<Icon type={loading? 'loading': 'plus'}/>
+							</div>
+						</InputFile>
+						<div className="tite">支持mp3格式音乐文件</div>
 					</div> 
 				)
 			}
