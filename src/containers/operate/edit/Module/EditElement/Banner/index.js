@@ -11,6 +11,8 @@ var positionMap = {
 	right:  'push',
 }
 
+// const comp     = require('state/comp')
+
 export default class Banner extends React.Component {
 	selectComp(e, data) {
 		e.stopPropagation()
@@ -27,14 +29,17 @@ export default class Banner extends React.Component {
 			{ bannerAds, composeType = 'PORTRAIT' } = tempCfg,
 			{ curData, curPage, globalData } = editConfig,
 			{ contentType } = curData,
-			{ banner } = globalData,
-			{ data, feature, name } = banner,
+			{ banner } = globalData
+		
+		// comp
+		if (!banner || bannerAds != 1) return { position: 'top', DOM: null }
+		
+		var { data, feature, name } = banner,
 			{ height, width } = data.layout,
 			{ position }      = feature.swiperOptions,
 			{ bannerCheck = true } = curPage.feature,
 			h = composeType === 'PORTRAIT'? height: '100%',
 			w = composeType === 'LANDSCAPE'? width: '100%'
-		if (!banner || bannerAds != 1) return { position: 'top', DOM: null }
 
 		var style = { height: h, width: w }
 		var DOM = (

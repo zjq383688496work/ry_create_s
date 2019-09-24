@@ -98,6 +98,7 @@ const dataFormat = {
 					oType = getAttr(org),
 					kType = getAttr(key)
 				if (org === undefined) {
+					if (key === '_id') return
 					delete daParent[key]; return
 				}
 				switch(dType) {
@@ -207,11 +208,11 @@ const dataFormat = {
 			})
 		},
 		pageEach: function(da) {
-			let st = JSON.stringify(da).length
+			console.log(deepCopy(da['p_1003']))
 			Object.keys(da).map(_ => {
 				// if (_ !== 'p_1002') return
-				let pa  = da[_]
-				let pae = pa.elements
+				var pa  = da[_],
+					pae = pa.elements
 				this.pageComp(pa, deepCopy(page))
 				pae.map((p, i) => {
 					var psi = p.styleList.idx || 0,
@@ -231,15 +232,173 @@ const dataFormat = {
 					this.compComp(p, c)
 				})
 			})
-			// let ed = JSON.stringify(da).length
-			// console.clear()
-			// console.log(st, ed, ed/st)
-			// console.log(da)
-			// console.log(JSON.stringify(da))
-			// return da
+			console.log(da['p_1003'])
 		}
 	},
 	save: {
+	},
+	sync: {
+		// comp数据处理
+		comp: {
+
+		},
+		// page数据处理
+		page: {
+			// 更新
+			plus: function(nowData, orgData, key, parent, filterMap) {
+				delete orgData.bottomNav
+				delete orgData.topNav
+				delete orgData.animation
+				if (nowData !== undefined) return
+				if (!key) {
+					debugger
+				}
+				console.log(`add ${key}.`)
+				filterMap[key] = true
+				parent[key] = orgData
+			},
+			// 去旧
+			slim: function(nowData, orgData, key, parent) {
+				if (orgData !== undefined) {
+					delete nowData.bottomNav
+					delete nowData.topNav
+					delete nowData.animation
+					return
+				}
+				console.log(`delete ${key}.`)
+				delete parent[key]
+			}
+		},
+		elements: {
+			// 更新
+			plus: function() {
+				
+			},
+			// 去旧
+			slim: function() {
+
+			}
+		},
+		pageFilter: function(nowData, orgData) {
+			var filterMap = {}
+			Object.keys(nowData).forEach(_ => {
+				this.page.slim(nowData[_], orgData[_], _, nowData)
+			})
+			Object.keys(orgData).forEach(_ => {
+				this.page.plus(nowData[_], orgData[_], _, nowData, filterMap)
+			})
+			return filterMap
+		},
+		elementsFilter: function(nowEles, orgEles) {
+			var nowIds    = {},
+				orgIds    = {},
+				filterMap = {},
+				addEles   = []
+			nowEles.forEach(({ _id }) => {if (_id) nowIds[_id] = true})
+			orgEles.forEach(({ _id }) => {if (_id) orgIds[_id] = true})
+
+			nowEles.forEach(({ _id }) => {
+				if (!_id || orgIds[_id]) return
+				console.log(`delete ${_id}.`)
+				delete nowIds[_id]
+			})
+
+			nowEles = nowEles.filter(_ => {if (_._id) return nowIds[_._id]})
+			orgEles.forEach(({ _id }) => {
+				if (!_id || nowIds[_id]) return
+				console.log(`add ${_id}.`)
+				filterMap[_id] = true
+				nowIds[_id] = true
+			})
+			if (Object.keys(filterMap).length) {
+				addEles = orgEles.filter(_ => filterMap[_._id])
+				nowEles.push.apply(nowEles, addEles)
+			}
+			
+			nowEles.forEach(_ => {if (_._id) nowIds[_._id] = _})
+			orgEles.forEach(_ => {if (_._id) orgIds[_._id] = _})
+			return {
+				nowElementsMap: nowIds,
+				orgElementsMap: orgIds,
+				filterMap
+			}
+		},
+		reduceAttr: function(now, org, key, nowParent, auth) {
+			var type = getAttr(auth)
+			if (key === 'content') {
+				console.log(now)
+			}
+			if (now === undefined || org === undefined) return
+			// console.log('key: ', key)
+			switch(type) {
+				case 'Object':
+					Object.keys(auth).forEach(k => {
+						this.reduceAttr(now[k], org[k], k, now, auth[k])
+					})
+					break
+				case 'Array':
+					debugger
+				case 'Boolean':
+					if (auth) break
+					nowParent[key] = org
+				default: break
+			}
+		},
+		compComp: function(now, org) {
+			if (now === undefined || org === undefined) return
+			now.auth = org.auth
+			var { auth, data } = now,
+				orgData = org.data
+			Object.keys(auth).forEach(key => {
+				var nowDa  = data[key],
+					orgDa  = orgData[key],
+					authDa = auth[key]
+				this.reduceAttr(data, orgData, key, now, auth)
+				data.layout = orgData.layout
+			})
+			var { components, componentLayout } = data,
+				name
+			if (components)      name = 'components'
+			if (componentLayout) name = 'componentLayout'
+			// Object.keys(now).forEach(key2 => {
+			// 	if (key2 === 'name' && now[key2] === 'picture') {
+			// 		debugger
+			// 	}
+			// })
+			if (name) {
+				// debugger
+				this.pageComp(data, orgData, name)
+			}
+			// console.log('now: ', now)
+		},
+		pageComp: function(now, org, key) {
+			var nowElements = now[key],
+				orgElements = org[key]
+
+			console.log(deepCopy(nowElements), deepCopy(orgElements))
+			var filter = this.elementsFilter(nowElements, orgElements)
+			var { nowElementsMap, orgElementsMap, filterMap } = filter
+			console.log('filter: ', filter)
+			Object.keys(nowElementsMap).forEach(_id => {
+				if (filterMap[_id]) {
+					// console.log(nowElementsMap[_id].name, orgElementsMap[_id].name)
+					return console.log(`忽略ID: ${_id}`)
+				}
+				this.compComp(nowElementsMap[_id], orgElementsMap[_id])
+			})
+			now[key] = Object.values(nowElementsMap)
+		},
+		pageEach: function(nowData, orgData) {
+			var filterMap = this.pageFilter(nowData, orgData)
+			Object.keys(nowData).forEach(name => {
+				if (filterMap[name]) return console.log(`忽略PAGE_ID: ${name}`)
+				var now = nowData[name],
+					org = orgData[name]
+				console.log(name)
+				this.pageComp(now, org, 'elements')
+			})
+			console.log(nowData, orgData)
+		}
 	}
 }
 module.exports = dataFormat

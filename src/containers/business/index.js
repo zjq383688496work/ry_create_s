@@ -21,9 +21,7 @@ import './index.less'
 class BusinessComponent extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			load: false
-		}
+		this.state = { load: false }
 	}
 
 	timeInit() {
@@ -69,6 +67,18 @@ class BusinessComponent extends React.Component {
 			resolve('天气数据')
 		}
 	}
+	getConfigByTid(id, cfg) {
+		return new Promise((resolve, reject) => {
+			var api = `/mcp-gateway/template/get?templateId=${id}&phase=RELEASE`
+			Ajax.get(api).then(({ data }) => {
+				var { config } = data,
+					tcfg = JSON.parse(config).configPC
+				cfg.pageList = tcfg.pageList
+				dataFormat.sync.pageEach(cfg.pageContent, tcfg.pageContent)
+				resolve(cfg)
+			})
+		})
+	}
 	getConfig() {
 		let { location, actions, editConfig } = this.props
 		let { globalData } = editConfig
@@ -82,20 +92,20 @@ class BusinessComponent extends React.Component {
 			message.error(`未选择模板!`)
 			return resolve('模板数据')
 		}
-        let api = `/mcp-gateway/${type}/get?${type}Id=${id}`
+        var api = `/mcp-gateway/${type}/get?${type}Id=${id}`
 		if (type === 'template') api += '&phase=RELEASE'
 
 		return (resolve, reject) => {
 			Ajax.get(api).then(res => {
-				let cfg = JSON.parse(res.data.config).configPC
+				var cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
-				let cur = cfg.pageList.group[0].pages[0]
+				var cur = cfg.pageList.group[0].pages[0]
 
 				dataFormat.get.pageEach(cfg.pageContent)
 
 				cfg.globalData.data = { ...globalData.data, ...cfg.globalData.data }
 				cfg.globalData = { ...globalData, ...cfg.globalData }
-				let newCfg = {
+				var newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },
 					curPage: cfg.pageContent[cur.router]
@@ -104,25 +114,26 @@ class BusinessComponent extends React.Component {
 				if (type === 'template') {
 					delete tempCfg.id
 					tempCfg.caseType        = caseType        || ''
-					//tempCfg.templateThemeId = templateThemeId || ''
 					tempCfg.templateId      = templateId      || ''
 					tempCfg.composeType     = composeType     || ''
-					//tempCfg.name            = name            || ''
 				}
-				/*if (type === 'template') {
-					let theme = cfg.globalData.theme
-					if (theme.list[templateThemeId]) theme.idx = templateThemeId * 1
-					else theme.idx = 0
-				}*/
-				actions.updateConfig({ ...newCfg, ...cfg })
+				var CFG = { ...newCfg, ...cfg }
+				if (cid) {
+					return this.getConfigByTid(tempCfg.templateId, CFG)
+				} else {
+					return new Promise(res => res(CFG))
+				}
+			}).then(config => {
+				actions.updateConfig(config)
 				resolve('模板数据')
-			}).catch(e => reject(e))
+			})
+			.catch(e => reject(e))
 		}
 	}
 	initData(cb) {
-		let { actions } = this.props
-		let stores = {}
-		let promise = new Promise((resolve, reject) => {
+		var { actions } = this.props,
+			stores = {},
+			promise = new Promise((resolve, reject) => {
 			let _res1 = ''
 			Ajax.postLogin('/easy-roa/v1/user/getBsTop', {
 				ryst: getCookie('RYST') || '123456',
@@ -155,24 +166,14 @@ class BusinessComponent extends React.Component {
 		})
 	}
 	getUserInfo(cb) {
-		// if (ENV === 'dev'){
-		// 	Ajax.postLogin('/bsoms/user/ajaxLogin', {
-		// 		password: 'RYxyz123',
-		// 		userName: 'xcyh001',
-		// 		verifyCode: ''
-		// 	}).then(() => {
-		// 		this.initData(cb)
-		// 	})
-		// } else {
-			this.initData(cb)
-		// }
+		this.initData(cb)
 	}
 	componentWillMount() {
 		this.getUserInfo(() => {
-			let { editConfig } = this.props
-			let { globalData } = editConfig
-			let arr = ['getConfig', 'getWeather', 'getFloor', 'getCatg']
-			let promises = arr.map(key => new Promise(this[key](globalData)))
+			var { editConfig } = this.props
+			var { globalData } = editConfig
+			var arr = ['getConfig', 'getWeather', 'getFloor', 'getCatg']
+			var promises = arr.map(key => new Promise(this[key](globalData)))
 			Promise.all(promises).then(() => {
 				this.setState({ load: true })
 			})//.catch(e => {
@@ -193,15 +194,11 @@ class BusinessComponent extends React.Component {
 		document.title = '作品编辑器'
 		return this.state.load
 		?
-		(
-			<div className="pg-edit pg-edit-business">
-				{ this.props.children }
-			</div>
-		)
+		<div className="pg-edit pg-edit-business">
+			{ this.props.children }
+		</div>
 		:
-		(
-			<Spin />
-		)
+		<Spin />
 	}
 }
 

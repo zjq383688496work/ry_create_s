@@ -54,6 +54,7 @@ export default function editConfig(state = initialState, action) {
 			// return Object.assign({}, state)
 
 			/* 除styleList代码 START */
+			console.log('_id: ', data._id)
 			var { parentComp, cusCompIdx } = curData
 			pageC[curData.router].elements[curData.compIdx] = data
 			state.curPage   = pageC[curData.router]

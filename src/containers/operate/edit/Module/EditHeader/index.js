@@ -52,6 +52,7 @@ class Header extends React.Component {
 			if (compData.type != 'advanced' && auth[key]) {
 				if (max != undefined) compData.feature.id = ++max
 				delete compData.styleList.list
+				debugger
 				compIdCreate(compData, globalData)
 				Comp.data.components.push(compData)
 				this.selectMulti(Comp.data.components.length - 1)
@@ -106,11 +107,11 @@ class Header extends React.Component {
 
 		let gd = cfg.globalData
 		// 模板数据加入composeType
-		if(composeType === 'LANDSCAPE') {
+		if (composeType === 'LANDSCAPE') {
 			gd.data.composeType = 'landscape'
 			cropWidth = 960
 			cropHeight = 540
-		}else{
+		} else {
 			gd.data.composeType = 'portrait'
 			cropWidth = 540
 			cropHeight = 960
@@ -136,7 +137,7 @@ class Header extends React.Component {
 			templateType: templateType,
 			composeType:  composeType,
 			name:         this.state.name,
-			bannerAds: bannerAds || 0,
+			bannerAds:    bannerAds || 0,
 		}
 		this.setState({ loading: true })
 		if (id) da.id = id

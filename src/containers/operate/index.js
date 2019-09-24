@@ -45,11 +45,12 @@ class OperateComponent extends React.Component {
 		}
 	}
 	getConfig() {
-		let { location, actions, editConfig } = this.props
-		let { globalData } = editConfig
-		let { query } = location
-		let { templateType, composeType, bannerAds, name } = query
-		let id = query.id
+		let { location, actions, editConfig } = this.props,
+			{ globalData } = editConfig,
+			{ query } = location,
+			{ templateType, composeType, bannerAds, name } = query,
+			id = query.id
+		bannerAds = 1
 		return (resolve, reject) => {
 			if (!id) {
  				var ct = composeType || 'PORTRAIT'

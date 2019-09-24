@@ -20,7 +20,10 @@ const globalData = {
 			goods:     { auth: false, value: '' },
 			goodsList: { auth: false, value: '' },
 		},
-		composeType:'portrait'
+		composeType:'portrait',
+		max: {
+			id: 0,
+		}
 	},
 	theme: {
 		idx: 0,
