@@ -53,7 +53,7 @@ class BusinessComponent extends React.Component {
 		} 
 	}
 	getWeather() {
-		return (resolve) => {
+		return resolve => {
 			window.weather = {
 				temp: '33℃',
 				type: '晴',
@@ -67,30 +67,18 @@ class BusinessComponent extends React.Component {
 			resolve('天气数据')
 		}
 	}
-	getConfigByTid(id, cfg) {
-		return new Promise((resolve, reject) => {
-			var api = `/mcp-gateway/template/get?templateId=${id}&phase=RELEASE`
-			Ajax.get(api).then(({ data }) => {
-				var { config } = data,
-					tcfg = JSON.parse(config).configPC
-				cfg.pageList = tcfg.pageList
-				dataFormat.sync.pageEach(cfg.pageContent, tcfg.pageContent)
-				resolve(cfg)
-			})
-		})
-	}
 	getConfig() {
-		let { location, actions, editConfig } = this.props
-		let { globalData } = editConfig
-		let { query } = location
-		let { /*name,*/ templateId, /*templateThemeId,*/ caseType, composeType } = query
-		let tid  = templateId,
+		var { location, actions, editConfig } = this.props,
+			{ globalData } = editConfig,
+			{ query } = location,
+			{ /*name,*/ templateId, /*templateThemeId,*/ caseType, composeType } = query,
+			tid  = templateId,
 			cid  = query.id,
 			type = cid? 'case': 'template',
 			id   = cid? cid: tid
 		if (!cid && !tid) {
 			message.error(`未选择模板!`)
-			return resolve('模板数据')
+			return resolve => resolve('未选择模板')
 		}
         var api = `/mcp-gateway/${type}/get?${type}Id=${id}`
 		if (type === 'template') api += '&phase=RELEASE'
@@ -113,16 +101,12 @@ class BusinessComponent extends React.Component {
 				window.tempCfg = res.data
 				if (type === 'template') {
 					delete tempCfg.id
-					tempCfg.caseType        = caseType        || ''
-					tempCfg.templateId      = templateId      || ''
-					tempCfg.composeType     = composeType     || ''
+					tempCfg.caseType    = caseType    || ''
+					tempCfg.templateId  = templateId  || ''
+					tempCfg.composeType = composeType || ''
 				}
 				var CFG = { ...newCfg, ...cfg }
-				if (cid) {
-					return this.getConfigByTid(tempCfg.templateId, CFG)
-				} else {
-					return new Promise(res => res(CFG))
-				}
+				return new Promise(res => res(CFG))
 			}).then(config => {
 				actions.updateConfig(config)
 				resolve('模板数据')

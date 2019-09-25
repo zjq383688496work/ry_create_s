@@ -19,9 +19,9 @@ import './index.less'
 class RevokeRecovery extends React.Component {
 	constructor(props) {
 		super(props)
-		let { editConfig } = this.props
-		let { curData, curPage } = editConfig
-		let router = curData.router
+		var { editConfig } = this.props,
+			{ curData, curPage } = editConfig,
+			router = curData.router
 		this.state = {
 			max: 30,
 			router,
@@ -33,17 +33,16 @@ class RevokeRecovery extends React.Component {
 	componentDidMount() {}
 
 	componentDidUpdate() {
-		let { editConfig } = this.props
-		let { curData, curPage } = editConfig
-		let router = curData.router
+		var { editConfig } = this.props,
+			{ curData, curPage } = editConfig,
+			router = curData.router
 		if (this.state.router !== router) {
 			// 切换页面 初始化
 			this.setState({
-				router: router,
+				router,
 				idx: 0,
 				history: [deepCopy(curPage)]
 			})
-			// debugger
 		} else if (window.storeState.saveHistory) {
 			// 允许保存历史
 			// console.clear()
@@ -82,6 +81,16 @@ class RevokeRecovery extends React.Component {
 		actions.updatePage(curData.pageGroupIdx, curData.pageIdx, deepCopy(history[idx]))
 		message.success(`恢复成功!`)
 	}
+	// 清空
+	handleClear = () => {
+		var { curData, curPage } = this.props.editConfig,
+			{ router } = curData
+		this.setState({
+			router,
+			idx: 0,
+			history: [deepCopy(curPage)]
+		})
+	}
 
 	render() {
 		let { idx, history } = this.state
@@ -96,6 +105,7 @@ class RevokeRecovery extends React.Component {
 				<Tooltip placement="right" title={'恢复'}>
 					<div id="btnRecovery" className={!idx? 's-disabled': ''} onClick={this.handleRecovery}><Iconf type="redo"/></div>
 				</Tooltip>
+				<a id="btnClearHistory" onClick={this.handleClear} style={{ display: 'none' }}></a>
 			</div>
 			)
 			// :

@@ -128,6 +128,12 @@ module.exports = extend(window, {
 				timeout = setTimeout(cb, (wait || 600))
 			}
 		}
+	},
+	_timeout(cb, time = 1000 / 60) {
+		let t = setTimeout(_ => {
+			clearTimeout(t)
+			cb && cb()
+		}, time)
 	}
 	// Ajax: require('./ajax')
 })

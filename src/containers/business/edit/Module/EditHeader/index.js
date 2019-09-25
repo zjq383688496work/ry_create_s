@@ -18,40 +18,37 @@ const compList = require('state/compList')
 
 import * as actions from 'actions'
 
-import { Icon, Input, message, Spin } from 'antd'
+import { Icon, Input, message, Modal, Spin } from 'antd'
+const { confirm } = Modal
  
 class Header extends React.Component {
 	constructor(props) {
 		super(props)
-
 		this.state = {
 			name: tempCfg.name.substr(0,16) || '',
 			loading: false,
-			isInput:this.props.isClick
+			isInput:this.props.isClick,
+			checkUpdate: true
 		}
 	}
 	componentWillMount() {}
-	componentDidMount() {
-		
-	}
+	componentDidMount() {}
 	componentWillReceiveProps(props){
-		if(props.isClick != this.props.isClick){
-			this.setState({isInput:props.isClick})
-		}
+		if (props.isClick != this.props.isClick) this.setState({isInput:props.isClick})
 	}
 	selectTheme() {
-		let { actions, editConfig } = this.props
+		var { actions, editConfig } = this.props
 		editConfig.curData.contentType = 'theme'
 		actions.updateCur(editConfig.curData)
 	}
 
 	formatStyle(data) {
-		let { style, layout } = data
+		var { style, layout } = data
 		Object.keys(data.style).map(_ => style[_] = cssFormatByTerm(style[_]))
 		data.layout = cssFormatByTerm(layout)
 	}
 	formatEle(obj) {
-		let { type, data } = obj
+		var { type, data } = obj
 		if (type === 'base') {
 			this.formatStyle(data)
 			delete obj.auth
@@ -66,9 +63,48 @@ class Header extends React.Component {
 	formatPage(obj) {
 		obj.elements.map(_ => this.formatEle(_))
 	}
-	//预览模板
-	review(){
+	// 预览模板
+	review() {
 		this.reviewModal.show()
+	}
+	// 数据更新
+	checkDataConfig = () => {
+		confirm({
+			title:   '确认更新模板?',
+			content: '检测到该作品引用的模板有样式更新, 是否同步已更新的数据到您的作品中?',
+			onOk: () => this.dataUpdate(),
+			onCancel()  {},
+			okText:     '确认',
+			cancelText: '取消'
+		})
+	}
+	dataUpdate = () => {
+		var { actions, location, editConfig } = this.props,
+			{ curData }    = editConfig,
+			{ templateId } = location.query
+		this.getConfigByTemplateId(templateId, CFG => {
+			editConfig.pageList = CFG.pageList
+			dataFormat.sync.pageEach(editConfig.pageContent, CFG.pageContent)
+			actions.updateConfig(editConfig)
+			_timeout(() => {
+				actions.selectPage(curData.router)
+				message.success('更新模板成功!')
+				this.setState({ checkUpdate: false })
+				this.clearHistory()
+			})
+		})
+	}
+	clearHistory() {
+		var doc = document.querySelector('#btnClearHistory')
+		doc.click()
+	}
+	getConfigByTemplateId(templateId, cb) {
+		var api = `/mcp-gateway/template/get?templateId=${templateId}&phase=RELEASE`
+		Ajax.get(api).then(({ data }) => {
+			var { config } = data,
+				cfg = JSON.parse(config).configPC
+			cb && cb(cfg)
+		})
 	}
 	saveData() {
 		if(!this.state.name){
@@ -81,7 +117,7 @@ class Header extends React.Component {
 		let newCon = deepCopy(cfg.pageContent)
 		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))
 		let gd = cfg.globalData,cropWidth,cropHeight
-		//作品数据加入composeType
+		// 作品数据加入composeType
 		if(composeType === 'LANDSCAPE'){
 			gd.data.composeType = 'landscape'
 			cropWidth = 960
@@ -175,9 +211,9 @@ class Header extends React.Component {
 		e.stopPropagation()
 	}
 	render() {
-		let { location } = this.props
-		let { query } = location
-		let loading = this.state.loading? (<div className="spin-mask"><Spin /></div>): false
+		var { location } = this.props,
+			{ query } = location,
+			loading = this.state.loading? (<div className="spin-mask"><Spin /></div>): false
 		return (
 			<div className="pe-header pe-header-business e-flex">
 				{ loading }
@@ -190,13 +226,27 @@ class Header extends React.Component {
 				<div className="peh-right">
 					<section className="comp-list comp-list-b">
 						{
-							!query.id ? <div className="cl-item cl-item-business" onClick={this.stopChange.bind(this)} >
+							!query.id
+							?
+							<div className="cl-item cl-item-business" onClick={this.stopChange.bind(this)} >
 								{
 									this.state.isInput ? <Input placeholder="请输入作品名称" onChange={this.saveCaseName.bind(this)} defaultValue={this.state.name} value={this.state.name} /> : 
 									<div>{this.state.name}</div>
 								}
 								<Icon type="edit" style={{fontSize:'30px'}} onClick={this.changeInput.bind(this)} />
-							</div> : null
+							</div>
+							: null
+						}
+						{
+							this.state.checkUpdate
+							?
+							<div className="cl-item" onClick={this.checkDataConfig}>
+								<div className="cl-item-icon">
+									<img src={require(`images/icon/reviewTem.png`)}/>
+								</div>
+								更新
+							</div>
+							: null
 						}
 						<div className="cl-item" onClick={this.review.bind(this)}>
 							<div className="cl-item-icon">
