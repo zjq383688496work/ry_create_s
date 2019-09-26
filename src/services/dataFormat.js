@@ -250,9 +250,6 @@ const dataFormat = {
 				delete orgData.topNav
 				delete orgData.animation
 				if (nowData !== undefined) return
-				if (!key) {
-					debugger
-				}
 				console.log(`add ${key}.`)
 				filterMap[key] = true
 				parent[key] = orgData
@@ -325,19 +322,16 @@ const dataFormat = {
 		},
 		reduceAttr: function(now, org, key, nowParent, auth) {
 			var type = getAttr(auth)
-			if (key === 'content') {
-				console.log(now)
-			}
 			if (now === undefined || org === undefined) return
 			// console.log('key: ', key)
 			switch(type) {
 				case 'Object':
+					var ntype = getAttr(now)
+					if (key === 'content' && ntype == 'Array') break
 					Object.keys(auth).forEach(k => {
 						this.reduceAttr(now[k], org[k], k, now, auth[k])
 					})
 					break
-				case 'Array':
-					debugger
 				case 'Boolean':
 					if (auth) break
 					nowParent[key] = org
@@ -398,6 +392,16 @@ const dataFormat = {
 				this.pageComp(now, org, 'elements')
 			})
 			console.log(nowData, orgData)
+		},
+		global: function(nowData, orgData) {
+			var nowBanner  = nowData.banner,
+				orgBanner  = orgData.banner,
+				orgFeature = orgData.feature
+			if (orgBanner) {
+				if (!nowBanner) nowData.banner = orgData
+				nowBanner.auth = orgBanner.auth
+			}
+			nowData.feature = orgFeature
 		}
 	}
 }

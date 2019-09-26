@@ -78,6 +78,13 @@ module.exports = {
 		picture:  1,
 		text:     1
 	},
+	navByStore2: {
+		area:        1,
+		picture:     1,
+		pictureBind: 1,
+		text:        1,
+		textBind:    1
+	},
 	storeBlock: {
 		area:        1,
 		picture:     1,

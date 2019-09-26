@@ -52,7 +52,6 @@ class Header extends React.Component {
 			if (compData.type != 'advanced' && auth[key]) {
 				if (max != undefined) compData.feature.id = ++max
 				delete compData.styleList.list
-				debugger
 				compIdCreate(compData, globalData)
 				Comp.data.components.push(compData)
 				this.selectMulti(Comp.data.components.length - 1)

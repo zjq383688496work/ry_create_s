@@ -28,7 +28,7 @@ export default class StoreList2 extends React.Component {
 	componentWillMount() {
 		this.getData()
 	}
-	shouldComponentUpdate(newProps, newState){
+	shouldComponentUpdate(newProps, newState) {
 		return newProps.drag != undefined? newProps.drag: true
 	}
 	componentWillReceiveProps() {
@@ -40,16 +40,16 @@ export default class StoreList2 extends React.Component {
 	}
 
 	getData = e => {
-		let ipt = this.state.ioInput
-		let { data } = this.props.data
-		let { content } = data
-		let size = ipt.body.size = content.size
+		var ipt = this.state.ioInput,
+			{ data } = this.props.data,
+			{ content } = data,
+			size = ipt.body.size = content.size
 
 		Server.store.getCategoryList(({ floor, catg, build }) => {
-			ipt.floor = floor
-			ipt.catg  = catg,
-			ipt.build = build
-			this.setState({ ioInput: ipt })
+			Server.store.getDetails(item => {
+				Object.assign(ipt, { build, catg, floor, item })
+				this.setState({ ioInput: ipt })
+			})
 		})
 	}
 

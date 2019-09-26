@@ -64,6 +64,7 @@ module.exports = {
 	buildByStore2:   deepCopy(Map.storeBuild),
 	letterByStore2:  deepCopy(Map.storeLetter),
 	pageByStore2:    deepCopy(Map.storePage),
+	navByStore2:     deepCopy(Map.store),
 	storeBlock:      deepCopy(Map.store),
 	storeDetails2:   deepCopy(Map.store),
 	// swiperBind:      deepCopy(Map.store),

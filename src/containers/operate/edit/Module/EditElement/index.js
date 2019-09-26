@@ -295,21 +295,6 @@ class EditElement extends React.Component {
 		let { actions } = this.props
 		actions.deleteComp(idx)
 	}
-	bannerDom = () => {
-		var { actions, editConfig } = this.props,
-			{ banner } = editConfig.globalData,
-			{ bannerAds, composeType = 'PORTRAIT' } = tempCfg
-		if (!banner || bannerAds != 1) return { position: 'top', DOM: null }
-		var { position } = banner.feature.swiperOptions,
-			{ layout } = banner.data,
-			{ height, width } = layout,
-			h = composeType === 'PORTRAIT'? height: '100%',
-			w = composeType === 'LANDSCAPE'? width: '100%'
-		return {
-			position,
-			DOM: <div className="bannerBox" style={{ height: h, width: w }}><Banner {...this.props} /></div>
-		}
-	}
 
 	render() {
 		let { data, actions, editConfig, location } = this.props
@@ -390,7 +375,6 @@ class EditElement extends React.Component {
 				</Rnd>
 			)
 		})
-		var { position, DOM } = this.bannerDom()
 		return (
 			<div className={`pg-element-parent e-flex-box pg-element-${ct}`}>
 				<div className="pg-element-box">
@@ -398,15 +382,18 @@ class EditElement extends React.Component {
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }
 						</div>
-						{state.h ? <div className="inductionLine-h" style={state.hPosition}></div> : null}
-						{state.v ? <div className="inductionLine-v" style={state.vPosition}></div> : null}
+						{state.h? <div className="inductionLine-h" style={state.hPosition}></div>: null}
+						{state.v? <div className="inductionLine-v" style={state.vPosition}></div>: null}
 						{
-							state.nearPos ? <div>
+							state.nearPos
+							?
+							<div>
 								<div className="lineNear_0" style={state.nearPos[0]}></div>
 								<div className="lineNear_1" style={state.nearPos[1]}></div>
 								<div className="lineNear_2" style={state.nearPos[2]}></div>
 								<div className="lineNear_3" style={state.nearPos[3]}></div>
-							</div> : null
+							</div>
+							: null
 						}
 					</Banner>
 					<RevokeRecovery />
@@ -418,11 +405,7 @@ class EditElement extends React.Component {
 		)
 	}
 }
-					// <section id="pgElement" className="pg-element pg-operate">
-					// </section>
-						// <div id="pgElementNext" className="pg-element-next"></div>
-						// { (position === 'top' || position === 'left')? DOM: null }
-						// { (position === 'right' || position === 'bottom')? DOM: null }
+
 EditElement.defaultProps = {}
 
 const mapStateToProps = state => state

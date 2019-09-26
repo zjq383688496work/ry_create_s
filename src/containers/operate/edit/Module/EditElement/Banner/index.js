@@ -24,28 +24,46 @@ export default class Banner extends React.Component {
 		curData.parentComp  = null
 		actions.updateCur(editConfig.curData)
 	}
+	getBanner = (banner, composeType) => {
+		try {
+			var { data, feature, name } = banner
+				
+			if (!data.content.length) return false
+			
+			var { height, width } = data.layout,
+				{ position }      = feature.swiperOptions,
+				h = composeType === 'PORTRAIT'? height: '100%',
+				w = composeType === 'LANDSCAPE'? width: '100%'
+
+			return {
+				width:  w,
+				height: h,
+				name,
+				position
+			}
+		} catch(e) {
+			return false
+		}
+	}
 	bannerDom = () => {
 		var { actions, editConfig } = this.props,
-			{ bannerAds, composeType = 'PORTRAIT' } = tempCfg,
+			{ composeType = 'PORTRAIT' } = tempCfg,
 			{ curData, curPage, globalData } = editConfig,
-			{ contentType } = curData,
 			{ banner } = globalData
 		
 		// comp
-		if (!banner || bannerAds != 1) return { position: 'top', DOM: null }
-		
-		var { data, feature, name } = banner,
-			{ height, width } = data.layout,
-			{ position }      = feature.swiperOptions,
-			{ bannerCheck = true } = curPage.feature,
-			h = composeType === 'PORTRAIT'? height: '100%',
-			w = composeType === 'LANDSCAPE'? width: '100%'
+		var bannerEle = this.getBanner(banner, composeType)
 
-		var style = { height: h, width: w }
+		if (!bannerEle) return { position: 'top', DOM: null }
+
+		var { width, height, name, position } = bannerEle,
+			{ contentType } = curData,
+			{ bannerCheck = true } = curPage.feature
+
 		var DOM = (
 			bannerCheck
 			?
-			<div className="bannerBox" style={style}>
+			<div className="bannerBox" style={{ height, width }}>
 				<div
 					className={`pge-banner ${contentType === 'banner'? 's-active': ''}`}
 					onClick={e => this.selectComp(e, banner)}
@@ -73,7 +91,7 @@ export default class Banner extends React.Component {
 		var dir = positionMap[position]
 
 		return (
-			<section id="pgElement" className="pg-element pg-operate">
+			<section id="pgElement" className={`pg-element pg-${envType === 'business'? 'business': 'operate'}`}>
 				{ dir === 'unshift'? DOM: null }
 				{ children }
 				{ dir === 'push'? DOM: null }

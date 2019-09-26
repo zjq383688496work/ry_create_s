@@ -6,11 +6,21 @@ const data = {
 		filterBox: {
 			transform:    { rotate: 0 },
 			opacity: 1,
+			borderWidth:  0,
+			borderStyle: 'solid',
+			borderColor: { type: 'main', color: '#fff' },
 			borderRadius: {
 				topLeft:     0,
 				topRight:    0,
 				bottomRight: 0,
 				bottomLeft:  0
+			},
+			boxShadow: {
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
+				spread_dis: 0,
+				color:      { type: 'custom', color: '#000' }
 			},
 			backgroundColor: { type: 'custom', color: '#f00' }
 		}

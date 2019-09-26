@@ -161,6 +161,7 @@ module.exports = {
 		goodsBlock:      deepCopy(Item.goods),
 		pictureListBind: deepCopy(Item.goods),
 		listByStore2:    deepCopy(Item.store),
+		navByStore2:     deepCopy(Item.store),
 		catgByStore2:    deepCopy(Item.storeCatg),
 		floorByStore2:   deepCopy(Item.storeFloor),
 		buildByStore2:   deepCopy(Item.storeBuild),

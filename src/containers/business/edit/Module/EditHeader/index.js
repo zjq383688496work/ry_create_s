@@ -79,15 +79,18 @@ class Header extends React.Component {
 		})
 	}
 	dataUpdate = () => {
-		var { actions, location, editConfig } = this.props,
-			{ curData }    = editConfig,
-			{ templateId } = location.query
+		var { actions, location, editConfig }    = this.props,
+			{ curData, pageContent, globalData } = editConfig,
+			{ templateId } = location.query,
+			{ homepage } = globalData.data,
+			{ router } = curData
 		this.getConfigByTemplateId(templateId, CFG => {
 			editConfig.pageList = CFG.pageList
-			dataFormat.sync.pageEach(editConfig.pageContent, CFG.pageContent)
+			dataFormat.sync.global(globalData, CFG.globalData)
+			dataFormat.sync.pageEach(pageContent, CFG.pageContent)
 			actions.updateConfig(editConfig)
 			_timeout(() => {
-				actions.selectPage(curData.router)
+				actions.selectPage(pageContent[router]? router: homepage)
 				message.success('更新模板成功!')
 				this.setState({ checkUpdate: false })
 				this.clearHistory()
@@ -242,9 +245,9 @@ class Header extends React.Component {
 							?
 							<div className="cl-item" onClick={this.checkDataConfig}>
 								<div className="cl-item-icon">
-									<img src={require(`images/icon/reviewTem.png`)}/>
+									<img src={require(`images/icon/reload.png`)}/>
 								</div>
-								更新
+								数据更新
 							</div>
 							: null
 						}

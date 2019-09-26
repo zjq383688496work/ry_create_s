@@ -24,6 +24,31 @@
 		display: flex;
 	}
 	.cl-left {
+		width: 140px;
+		dl {
+			width: 100%;
+		}
+		dt {
+			text-align: center;
+			background-color: #f1f1f1;
+		}
+		dt,
+		.cl-dd {
+			height: 30px;
+			line-height: 30px;
+		}
+		.cl-dd {
+			height: 30px;
+			line-height: 30px;
+			padding-left: 20px;
+			margin-bottom: 0;
+			&:hover,
+			&.s-active {
+				background-color: #b5d7ff;
+			}
+		}
+	}
+	.cl-center {
 		flex: 1;
 		justify-content: center;
 		align-items: center;
@@ -53,6 +78,7 @@
 			// zoom: 2;
 		}
 		.pge-layout {
+			overflow: auto;
 			pointer-events: none;
 		}
 		.react-draggable {

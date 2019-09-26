@@ -45,21 +45,21 @@ export default class ChildElement extends React.Component {
 		this.setState({ key: v })
 	}
 	addElement = () => {
-		let { layout, updateComp } = this.props
-		let { key } = this.state
+		var { layout, updateComp } = this.props,
+			{ key } = this.state
 		if (!key) return
 		layout.push(deepCopy(comp[key]))
 		updateComp()
 	}
 	removeElement = idx => {
-		let { layout, updateComp } = this.props
+		var { layout, updateComp } = this.props
 		layout.splice(idx, 1)
 		updateComp()
 	}
 	selList(comps) {
-		let { key } = this.state
+		var { key } = this.state
 		if (key && !comps[key]) return this.setState({ key: '' })
-		let opts = Object.keys(comps).map((_, i) => {
+		var opts = Object.keys(comps).map((_, i) => {
 			return <Option key={i} value={_}>{cmName[_]}</Option>
 		})
 		return (
@@ -171,20 +171,20 @@ export default class ChildElement extends React.Component {
 	}
 
 	render() {
-		let { name, layout } = this.props
-		let { key } = this.state
-		let comps = cElement[name] || {}
-		let selList = this.selList(comps)
-		let childAdd = (
-			<div className="pgs-row">
-				<div className="pgsr-name">添加元素</div>
-				<div className="pgsr-ctrl">
-					{ selList }
-					<a onClick={this.addElement} disabled={!key || layout.length > 19}>添加</a>
+		var { name, layout } = this.props,
+			{ key } = this.state,
+			comps = cElement[name] || {},
+			selList = this.selList(comps),
+			childAdd = (
+				<div className="pgs-row">
+					<div className="pgsr-name">添加元素</div>
+					<div className="pgsr-ctrl">
+						{ selList }
+						<a onClick={this.addElement} disabled={!key || layout.length > 19}>添加</a>
+					</div>
 				</div>
-			</div>
-		)
-		let childList = this.childList(layout, activeMap[name])
+			),
+			childList = this.childList(layout, activeMap[name])
 		return (
 			<div>
 				{ childAdd }

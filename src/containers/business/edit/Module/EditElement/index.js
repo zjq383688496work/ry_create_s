@@ -185,18 +185,11 @@ class EditElement extends React.Component {
 		return (
 			<div className={`pg-element-business e-flex-box pg-element-${ct}`}>
 				<div className="pg-element-box">
-					<section id="pgElement" className="pg-element">
-						{
-							tempCfg.bannerAds == 1 ? 
-							<div className="bannerBox" style={{height:`${ct=="PORTRAIT"?bannerLayout.height+"px":"100%"}`,width:`${ct=="LANDSCAPE"?bannerLayout.width+"px":"100%"}`}}>
-								<Banner {...this.props} />
-							</div> : null
-						}
+					<Banner {...this.props}>
 						<div id="pgElementChild" className="pg-element-child" style={bgStyle}>
 							{ childNode }
 						</div>
-						<div id="pgElementNext" className="pg-element-next"></div>
-					</section>
+					</Banner>
 					<RevokeRecovery />
 				</div>
 			</div>

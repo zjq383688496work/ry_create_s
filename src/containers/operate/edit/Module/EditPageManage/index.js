@@ -65,7 +65,7 @@ class EditPageManage extends React.Component {
 		let da    = globalData.data
 		let group = data.group[0]
 		let li    = group.pages[idx]
-		da.homepage = router
+		da.homepage = globalData.feature.reviewRouter = router
 		group.pages.splice(idx, 1)
 		group.pages.unshift(li)
 		actions.updateGlobal(globalData)

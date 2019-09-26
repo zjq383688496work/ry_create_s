@@ -57,7 +57,7 @@ export default class CompLayout extends React.Component {
 	componentWillUnmount() {}
 
 	updateIdx = idx => {
-		this.setState({ idx: idx })
+		this.setState({ idx })
 	}
 	showModal = () => {
 		this.setState({ visible: true, idx: -1 })
@@ -66,9 +66,9 @@ export default class CompLayout extends React.Component {
 		this.setState({ visible: false })
 	}
 	renderDom = (layout, isActive) => {
-		let { updateComp, props } = this.props,
-			{ name } = props.data
-		let da = mockMap[name] || {}
+		var { updateComp, props } = this.props,
+			{ name } = props.data,
+			da = mockMap[name] || {}
 		return layout.map((_, i) => {
 			var { name, data } = _,
 				lay = data.layout,
@@ -90,23 +90,52 @@ export default class CompLayout extends React.Component {
 			)
 		})
 	}
+	selectItem = i => {
+		var { idx } = this.state
+		this.setState({ idx: i === idx? -1: i })
+	}
+	renderList = layout => {
+		var { idx } = this.state,
+			layoutMap  = {},
+			len = layout.length - 1,
+			layoutCopy = deepCopy(layout).reverse()
+		var list = layoutCopy.map(({ name }, i) => {
+			if (!layoutMap[name]) layoutMap[name] = 0
+			++layoutMap[name]
+			var index = layoutMap[name],
+				ii = len - i
+			return (
+				<dd
+					key={i}
+					className={`cl-dd${idx === ii? ' s-active': ''}`}
+					onClick={() => this.selectItem(ii)}
+				>
+					{compMap[name]}{index}
+				</dd>
+			)
+		})
+		return (
+			<dl>
+				<dt>图层列表</dt>
+				{list}
+			</dl>
+		)
+	}
 	render() {
-		let { map, layout, parentLayout = {}, props = {}, updateComp, styleName } = this.props
-		let { name } = props.data
-		let { visible, id, idx, active } = this.state
-		let { width = 0, height = 0, margin } = parentLayout
+		var { map, layout, parentLayout = {}, props = {}, updateComp, styleName } = this.props,
+			{ name } = props.data,
+			{ visible, id, idx, active } = this.state,
+			{ width = 0, height = 0, margin } = parentLayout
 		if (margin) {
 			var { top = 0, right = 0, bottom = 0, left = 0 } = margin
 			width += (right + left)
 		}
-		let pLay = {
-			width:  width,
-			height: height
-		}
-		let isActive  = activeMap[name]
-		let renderDom = this.renderDom(layout, isActive)
-		let data = idx > -1? layout[idx]: false
-		let css = styleName? cssColorFormat(props, styleName): {}
+		var pLay = { width, height },
+			isActive  = activeMap[name],
+			renderDom = this.renderDom(layout, isActive),
+			data = idx > -1? layout[idx]: false,
+			css = styleName? cssColorFormat(props, styleName): {}
+		var layoutList = this.renderList(layout)
 		return (
 			<div className="comp-layout">
 				<a className="btn-edit-layout" onClick={this.showModal}>编辑布局</a>
@@ -118,7 +147,10 @@ export default class CompLayout extends React.Component {
 					footer={null}
 				>
 					<div className="cl-parent">
-						<div className="cl-left scrollbar">
+						<div className="cl-left">
+							{ layoutList }
+						</div>
+						<div className="cl-center scrollbar">
 							<div>
 								宽度: { width * 2 }
 								&nbsp;

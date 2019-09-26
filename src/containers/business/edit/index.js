@@ -49,13 +49,13 @@ class EditComponent extends React.Component {
 		this.setState({isClick:isClick})
 	}
 	render() {
-		let { editConfig, location } = this.props
+		var { editConfig, location } = this.props,
+			{ curData, globalData } = editConfig
 		setSwiperImgAndVideo(editConfig)
-		let theme  = editConfig.globalData.theme
-		let colors = theme.list[theme.idx].colors
-		let { curData } = editConfig
-		let type = curData.contentType
-		let editTab
+		var { banner, theme } = globalData,
+			colors = theme.list[theme.idx].colors,
+			type = curData.contentType,
+			editTab
 		window.curThemeColor = colors
 		if (type === 'page') {
 			editTab = (<EditPage data={editConfig.curPage} />)
@@ -65,6 +65,13 @@ class EditComponent extends React.Component {
 					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
 					<TabPane tab="展示" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
 					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
+				</Tabs>
+			)
+		} else if (type === 'banner') {
+			editTab = (
+				<Tabs defaultActiveKey="1" type="card">
+					<TabPane tab="内容" key="1"><EditContent data={banner} from="banner"/></TabPane>
+					<TabPane tab="展示" key="2"><EditStyle   data={banner} from="banner"/></TabPane>
 				</Tabs>
 			)
 		} else if (type === 'theme') {

@@ -19,9 +19,10 @@ const Option = Select.Option
 const RadioButton = Radio.Button
 const RadioGroup  = Radio.Group
 
-import RouterJump      from 'compEdit/EditCommon/RouterJump'
-import ImageUploadComp from 'compEdit/EditCommon/ImageUploadComp'
-import ImageAndVideoComp   from 'compEdit/EditCommon/ImageAndVideoComp'
+import Banner            from 'compEdit/EditContent/Banner'
+import RouterJump        from 'compEdit/EditCommon/RouterJump'
+import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
+import ImageAndVideoComp from 'compEdit/EditCommon/ImageAndVideoComp'
 import DatePickerRY      from 'compEdit/EditContent/DatePickerRY'
 import SwiperImage       from 'compEdit/EditContent/SwiperImage'
 import SwiperImgAndVideo from 'compEdit/EditContent/SwiperImgAndVideo'
@@ -42,6 +43,8 @@ import './index.less'
 const compContent = (name, data, updateComp) => {
 	var props  = { data, updateComp }
 	var render = {
+		bannerHorizontal:  <Banner            {...props} />,
+		bannerVertical:    <Banner            {...props} />,
 		navigation:        <Navigation        {...props} />,
 		navigationFloat:   <NavigationFloat   {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,
@@ -410,14 +413,13 @@ class EditContent extends React.Component {
 	}
 
 	render() {
-		let { data, actions, editConfig } = this.props
-		let compName = data.name
-		let content  = data.data.content
-		let childNode
-		let activeKey
-		let chiObj
-		let compCon = compContent(compName, this.props, this.updateComp)
-		
+		var { data, actions, editConfig } = this.props,
+			compName = data.name,
+			content  = data.data.content,
+			childNode,
+			activeKey,
+			chiObj,
+			compCon = compContent(compName, this.props, this.updateComp)
 		if (content.length) {
 			childNode = content.map((_, i) => {
 				return (

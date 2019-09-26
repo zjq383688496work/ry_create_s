@@ -144,6 +144,11 @@ module.exports = [
 					key:  'mapByStore2'
 				},
 				{
+					icon: 'floorMap',
+					name: '地图导航',
+					key:  'navByStore2'
+				},
+				{
 					icon: 'qrcode_hui',
 					name: '惠码',
 					key:  'qrcodeHui'

@@ -52,6 +52,7 @@ module.exports = {
 		letterByStore2: 1,
 		resetByStore2:  1,
 		mapByStore2:    1,
+		navByStore2:    1,
 		qrcodeHui:      1,
 	},
 	storeDetails2: {
