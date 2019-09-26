@@ -27,7 +27,7 @@ class EditPage extends React.Component {
 	componentWillUnmount() {}
 
 	onChange(e, key) {
-		let { actions, data, editConfig } = this.props,
+		var { actions, data, editConfig } = this.props,
 			{ pageGroupIdx, pageIdx }     = editConfig.curData,
 			da   = data,
 			keys = key.split('.'),
@@ -44,8 +44,11 @@ class EditPage extends React.Component {
 			<Row>
 				<Col span={12}>
 					<Slider
-						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-						value={val} onChange={v => this.onChange(v, key)}
+						min={cfg.min || 0}
+						max={cfg.max || 100}
+						step={cfg.step || 1}
+						value={val}
+						onChange={v => this.onChange(v, key)}
 					/>
 				</Col>
 				<Col span={3}></Col>
