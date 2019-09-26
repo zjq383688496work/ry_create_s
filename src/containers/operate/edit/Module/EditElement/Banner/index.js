@@ -2,7 +2,7 @@ import React from 'react'
 
 import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
 
-import './index.less'
+// import './index.less'
 
 var positionMap = {
 	top:    'unshift',

@@ -71,16 +71,17 @@ class EditPage extends React.Component {
 	}
 
 	render() {
-		var ani = {
-			className: '',
-			direction: '',				// 方向
-			delay: 0,					// 开始时间
-			duration: 1,				// 持续时间
-			iterationCount: 1			// 循环次数
-		}
+		// var ani = {
+		// 	className: '',
+		// 	direction: '',				// 方向
+		// 	delay: 0,					// 开始时间
+		// 	duration: 1,				// 持续时间
+		// 	iterationCount: 1			// 循环次数
+		// }
 		var { data, editConfig } = this.props,
-			{ bannerAds } = tempCfg,
-			{ pageIdx } = editConfig.curData
+			{ curData, globalData } = editConfig,
+			{ pageIdx } = curData,
+			{ banner } = globalData
 
 		if (!data || data.title === undefined) return false
 
@@ -122,7 +123,7 @@ class EditPage extends React.Component {
 							</div>
 						</div>
 						{
-							bannerAds == 1
+							banner
 							?
 							<div className="pgs-row">
 								<div className="pgsr-name">广告开关</div>

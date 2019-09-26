@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Collapse, Input, InputNumber, Slider } from 'antd'
+import { Row, Col, Collapse, Input, InputNumber, Slider, Checkbox } from 'antd'
 const Panel = Collapse.Panel
 
 import Color     from 'compEdit/EditCommon/Color'
@@ -33,10 +33,7 @@ class EditPage extends React.Component {
 			keys = key.split('.'),
 			klen = keys.length
 		keys.map((_, i) => {
-			if (i === klen - 1) {
-				da[_] = e
-				return
-			}
+			if (i === klen - 1) return da[_] = e
 			da = da[_]
 		})
 		actions.updatePage(pageGroupIdx, pageIdx, data)
@@ -54,6 +51,7 @@ class EditPage extends React.Component {
 				<Col span={3}></Col>
 				<Col span={9}>
 					<InputNumber
+						disabled={cfg.disabled || false}
 						min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
 						value={val} onChange={v => this.onChange(v, key)}
 						style={{ width: '100%' }}
@@ -62,26 +60,39 @@ class EditPage extends React.Component {
 			</Row>
 		)
 	}
+	// 开关
+	renderCheckbox({ defaultValue }, val, key) {
+		var checked = val === undefined? defaultValue: val
+		return (
+			<Checkbox
+				checked={checked} onChange={v => this.onChange(v.target.checked, key)}
+			/>
+		)
+	}
 
 	render() {
-		let ani = {
-			className: '',
-			direction: '',				// 方向
-			delay: 0,					// 开始时间
-			duration: 1,				// 持续时间
-			iterationCount: 1			// 循环次数
-		}
-		let { data, editConfig } = this.props,
+		// let ani = {
+		// 	className: '',
+		// 	direction: '',				// 方向
+		// 	delay: 0,					// 开始时间
+		// 	duration: 1,				// 持续时间
+		// 	iterationCount: 1			// 循环次数
+		// }
+		var { data, editConfig } = this.props,
+			{ curData, globalData } = editConfig,
 			{ pageIdx } = editConfig.curData,
-			{ feature } = data
+			{ banner }  = globalData
+		
 		if (!data || data.title === undefined) return false
-		if (data.animation === undefined) {
-			data.animation = {
-				in: deepCopy(ani),
-				out: deepCopy(ani),
-				interval: 0
-			}
-		}
+
+		var { backgroundColor, bannerCheck = true, homeTime = 30 } = data.feature
+		// if (data.animation === undefined) {
+		// 	data.animation = {
+		// 		in: deepCopy(ani),
+		// 		out: deepCopy(ani),
+		// 		interval: 0
+		// 	}
+		// }
 		let activeKey = ['0', '1']
 		return (
 			<section className="pg-page">
@@ -105,14 +116,27 @@ class EditPage extends React.Component {
 							<div className="pgsr-ctrl">
 								<Color
 									data={data}
-									color={feature.backgroundColor}
-									path={'feature.backgroundColor'}
+									color={backgroundColor}
+									path={'backgroundColor'}
 									action={'updatePage'}
 									placement="bottomLeft"
 								/>
 							</div>
 							<div className="pgsr-auth"></div>
 						</div>
+						{
+							banner
+							?
+							<div className="pgs-row">
+								<div className="pgsr-name">广告开关</div>
+								<div className="pgsr-ctrl">
+									{ this.renderCheckbox({
+										defaultValue: true
+									}, bannerCheck, 'feature.bannerCheck') }
+								</div>
+							</div>
+							: null
+						}
 						{
 							pageIdx
 							?
@@ -123,7 +147,7 @@ class EditPage extends React.Component {
 										min: 10,
 										max: 600,
 										step: 10
-									}, feature.homeTime || 30, 'feature.homeTime') }
+									}, homeTime || 30, 'feature.homeTime') }
 								</div>
 							</div>
 							: null
