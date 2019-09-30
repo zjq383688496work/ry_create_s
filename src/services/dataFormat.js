@@ -208,7 +208,7 @@ const dataFormat = {
 			})
 		},
 		pageEach: function(da) {
-			console.log(deepCopy(da['p_1003']))
+			// console.log(deepCopy(da['p_1003']))
 			Object.keys(da).map(_ => {
 				// if (_ !== 'p_1002') return
 				var pa  = da[_],
@@ -232,7 +232,7 @@ const dataFormat = {
 					this.compComp(p, c)
 				})
 			})
-			console.log(da['p_1003'])
+			// console.log(da['p_1003'])
 		}
 	},
 	save: {
@@ -250,7 +250,7 @@ const dataFormat = {
 				delete orgData.topNav
 				delete orgData.animation
 				if (nowData !== undefined) return
-				console.log(`add ${key}.`)
+				// console.log(`add ${key}.`)
 				filterMap[key] = true
 				parent[key] = orgData
 			},
@@ -262,7 +262,7 @@ const dataFormat = {
 					delete nowData.animation
 					return
 				}
-				console.log(`delete ${key}.`)
+				// console.log(`delete ${key}.`)
 				delete parent[key]
 			}
 		},
@@ -296,14 +296,14 @@ const dataFormat = {
 
 			nowEles.forEach(({ _id }) => {
 				if (!_id || orgIds[_id]) return
-				console.log(`delete ${_id}.`)
+				// console.log(`delete ${_id}.`)
 				delete nowIds[_id]
 			})
 
 			nowEles = nowEles.filter(_ => {if (_._id) return nowIds[_._id]})
 			orgEles.forEach(({ _id }) => {
 				if (!_id || nowIds[_id]) return
-				console.log(`add ${_id}.`)
+				// console.log(`add ${_id}.`)
 				filterMap[_id] = true
 				nowIds[_id] = true
 			})
@@ -369,10 +369,10 @@ const dataFormat = {
 			var nowElements = now[key],
 				orgElements = org[key]
 
-			console.log(deepCopy(nowElements), deepCopy(orgElements))
+			// console.log(deepCopy(nowElements), deepCopy(orgElements))
 			var filter = this.elementsFilter(nowElements, orgElements)
 			var { nowElementsMap, orgElementsMap, filterMap } = filter
-			console.log('filter: ', filter)
+			// console.log('filter: ', filter)
 			Object.keys(nowElementsMap).forEach(_id => {
 				if (filterMap[_id]) {
 					// console.log(nowElementsMap[_id].name, orgElementsMap[_id].name)
@@ -388,10 +388,11 @@ const dataFormat = {
 				if (filterMap[name]) return console.log(`忽略PAGE_ID: ${name}`)
 				var now = nowData[name],
 					org = orgData[name]
-				console.log(name)
+				// console.log(name)
+				now.title = org.title
 				this.pageComp(now, org, 'elements')
 			})
-			console.log(nowData, orgData)
+			// console.log(nowData, orgData)
 		},
 		global: function(nowData, orgData) {
 			var nowBanner  = nowData.banner,

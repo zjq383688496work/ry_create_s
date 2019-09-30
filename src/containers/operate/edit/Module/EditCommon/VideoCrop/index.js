@@ -23,8 +23,7 @@ export default function(file, fn, mallId) {
 		videoFile.append('file', file, file.name)
 		// 前端发送资源的基本信息到后端， 后端返回上传文件需要的参数(authorization, policy)以及资源Id
 		Ajax.postVIDEO('/easy-smart-web/fileUpload/uploadFile', videoFile, mallId).then(res => {
-			var { url } = res.result.data
-			data.url = url
+			data.url = res.result.data
 			console.log('data: ', JSON.stringify(data))
 			Ajax.postJSON('/easy-smart-web/merchantSource/saveMerchantSource', data)
 				.then(res => fn && fn(true))

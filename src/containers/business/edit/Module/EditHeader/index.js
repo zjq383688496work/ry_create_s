@@ -63,6 +63,14 @@ class Header extends React.Component {
 	formatPage(obj) {
 		obj.elements.map(_ => this.formatEle(_))
 	}
+	bannerSlim(banner) {
+		var b = deepCopy(banner),
+			{ data } = b
+		data.layout = cssFormatByTerm(data.layout)
+		delete b.auth
+		delete data.layout.position
+		return b
+	}
 	// 预览模板
 	review() {
 		this.reviewModal.show()
@@ -134,8 +142,11 @@ class Header extends React.Component {
 			data:    gd.data,
 			theme:   gd.theme,
 			feature: gd.feature,
-			banner:  gd.banner
+			// banner:  gd.banner
 		}
+		var terminalGlobalData = deepCopy(cfg.globalData)
+		cfg.globalData.banner  = gd.banner
+		terminalGlobalData.data.banner = this.bannerSlim(gd.banner)
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,
@@ -145,7 +156,7 @@ class Header extends React.Component {
 			configTerminal: {
 				pageContent: newCon,
 				pageList:    cfg.pageList,
-				globalData:  cfg.globalData
+				globalData:  terminalGlobalData
 			}
 		}
 		let da = {
