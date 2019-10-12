@@ -154,7 +154,6 @@ class EditPage extends React.Component {
 							</div>
 							: null
 						}
-
 					</Panel>
 				</Collapse>
 			</section>

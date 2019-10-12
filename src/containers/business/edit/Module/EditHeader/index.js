@@ -24,11 +24,13 @@ const { confirm } = Modal
 class Header extends React.Component {
 	constructor(props) {
 		super(props)
+		var { name, updateStatus } = tempCfg
 		this.state = {
-			name: tempCfg.name.substr(0,16) || '',
+			name: name.substr(0,16) || '',
 			loading: false,
 			isInput:this.props.isClick,
-			checkUpdate: true
+			checkUpdate: updateStatus === 1,
+			isUpdata: false,
 		}
 	}
 	componentWillMount() {}
@@ -49,15 +51,15 @@ class Header extends React.Component {
 	}
 	formatEle(obj) {
 		var { type, data } = obj
+		delete obj.auth
 		if (type === 'base') {
 			this.formatStyle(data)
-			delete obj.auth
 		} else if (type === 'advanced') {
 			data.layout = cssFormatByTerm(data.layout)
-			data.components&&data.components.map(_ => this.formatEle(_))
+			data.components && data.components.map(_ => this.formatEle(_))
 		} else if (type === 'layout') {
 			this.formatStyle(data)
-			data.componentLayout&&data.componentLayout.map(_ => this.formatEle(_))
+			data.componentLayout && data.componentLayout.map(_ => this.formatEle(_))
 		}
 	}
 	formatPage(obj) {
@@ -100,7 +102,7 @@ class Header extends React.Component {
 			_timeout(() => {
 				actions.selectPage(pageContent[router]? router: homepage)
 				message.success('更新模板成功!')
-				this.setState({ checkUpdate: false })
+				this.setState({ checkUpdate: false, isUpdata: true })
 				this.clearHistory()
 			})
 		})
@@ -123,7 +125,7 @@ class Header extends React.Component {
 		}
 		let { editConfig, location } = this.props
 		let { query } = location
-		let { caseType, id, composeType, templateId } = tempCfg
+		let { caseType, id, composeType, templateId, updateStatus } = tempCfg
 		let cfg = deepCopy(editConfig)
 		let newCon = deepCopy(cfg.pageContent)
 		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))
@@ -182,8 +184,11 @@ class Header extends React.Component {
 			})	
 		}
 	}
-	post_save(query,da,cropWidth,cropHeight){
+	post_save(query, da, cropWidth, cropHeight) {
 		this.setState({ loading: true })
+		if (this.state.isUpdata) {
+			Ajax.postJSON('/mcp-gateway/case/updateCaseSynTemplateChangeStatus', { caseId: tempCfg.id, synStatus: 1 })
+		}
 		Ajax.post(`/mcp-gateway/case/${query.id? 'update': 'save'}`, da).then(res => {
 			if (!query.id) {
 				tempCfg.id = res.data

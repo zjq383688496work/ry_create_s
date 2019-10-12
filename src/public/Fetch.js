@@ -58,7 +58,7 @@ export default class Fetch {
 		})
 	}
 	static post(url, config = {}) {
-		let id = window.uif.userInfo.id || '1'
+		var id = window.uif.userInfo.id || '1'
 		if (id) config.userId = id
 		return new Promise((resolve, reject) => {
 			Fetch.remote(url, {

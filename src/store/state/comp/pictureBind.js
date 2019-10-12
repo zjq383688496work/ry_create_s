@@ -12,6 +12,9 @@ const data = {
 				bottom: 0,
 				left:   0
 			},
+			borderWidth:  0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#fff' },
 			borderRadius: {
 				topLeft:     0,
 				topRight:    0,

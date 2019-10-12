@@ -102,7 +102,7 @@ module.exports = {
 			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'main', color: '#cfad81' },
-			backgroundColor: { type: 'custom', color: '#fff' },
+			backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 			borderRadius: {
 				topLeft:     6,
 				topRight:    6,

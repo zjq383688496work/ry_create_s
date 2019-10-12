@@ -6,6 +6,9 @@ const data = {
 		image: {
 			transform: { rotate: 0 },
 			opacity:   1,
+			borderWidth:  0,
+			borderStyle: 'solid',
+			borderColor: { type: 'custom', color: '#fff' },
 			borderRadius: {
 				topLeft:     0,
 				topRight:    0,
