@@ -50,7 +50,6 @@ class OperateComponent extends React.Component {
 			{ query } = location,
 			{ templateType, composeType, bannerAds, name } = query,
 			id = query.id
-		bannerAds = 1
 		return (resolve, reject) => {
 			if (!id) {
  				var ct = composeType || 'PORTRAIT'
