@@ -282,12 +282,12 @@ class EditElement extends React.Component {
 	}
 	changeEditable = (item, idx) => {
 		let { actions } = this.props
-		if(item.name == 'web'){
+		if (item.name == 'web') {
 			let RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
 			if(RP.test(item.data.content.url)) return false
 		} 
 		this.setState({drag:true})
-		item.feature.editStatus != undefined? itemfeature.editStatus = true: null
+		item.feature.editStatus != undefined? item.feature.editStatus = true: null
 		actions.updateComp(idx, item)
 	}
 	removeComp(e, idx) {
