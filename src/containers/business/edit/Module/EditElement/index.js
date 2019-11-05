@@ -39,7 +39,6 @@ import Qrcode            from 'compEdit/EditElement/Qrcode'
 import QrcodeHui         from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav         from 'compEdit/EditElement/QrcodeNav'
 
-import RevokeRecovery    from 'compEdit/EditCommon/RevokeRecovery'
 import Banner            from 'compEdit/EditElement/Banner'
 
 import * as actions from 'actions'
@@ -190,7 +189,6 @@ class EditElement extends React.Component {
 							{ childNode }
 						</div>
 					</Banner>
-					<RevokeRecovery />
 				</div>
 			</div>
 		)
