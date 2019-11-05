@@ -130,6 +130,7 @@ class Header extends React.Component {
 		let newCon = deepCopy(cfg.pageContent)
 		Object.keys(newCon).map(_ => this.formatPage(newCon[_]))
 		let gd = cfg.globalData,cropWidth,cropHeight
+
 		// 作品数据加入composeType
 		if(composeType === 'LANDSCAPE'){
 			gd.data.composeType = 'landscape'
@@ -148,7 +149,7 @@ class Header extends React.Component {
 		}
 		var terminalGlobalData = deepCopy(cfg.globalData)
 		cfg.globalData.banner  = gd.banner
-		terminalGlobalData.data.banner = this.bannerSlim(gd.banner)
+		if (gd.banner) terminalGlobalData.data.banner = this.bannerSlim(gd.banner)
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,
@@ -192,7 +193,7 @@ class Header extends React.Component {
 		Ajax.post(`/mcp-gateway/case/${query.id? 'update': 'save'}`, da).then(res => {
 			if (!query.id) {
 				tempCfg.id = res.data
-				hashHistory.push(`/business/edit?id=${res.data}`)
+				hashHistory.push(`/business/edit?id=${res.data}&templateId=${tempCfg.templateId}`)
 			}
 			Ajax.createCrop({
 				url: `${window.location.origin}${window.location.pathname}#/view?id=${tempCfg.id}`,

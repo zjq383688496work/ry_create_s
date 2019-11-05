@@ -540,7 +540,7 @@ class ImgModule extends React.Component {
 				<div className="right">
 					<div>
 						<InputFile
-							accept=".jpg,.jpeg,.png,.svg"
+							accept=".jpg,.jpeg,.png,.svg,.gif"
 							loading={loading}
 							maxFileSize={5 * 1000 * 1000}
 							handleCheck={this.customRequest}
@@ -548,7 +548,7 @@ class ImgModule extends React.Component {
 							<div className="if-box">
 								<Icon type={loading? 'loading': 'plus'}/>
 								上传图片<br/>
-								<p className="if-text-m">JPG, PNG, SVG格式,5MB大小以内</p>
+								<p className="if-text-m">JPG, PNG, SVG, GIF格式,5MB大小以内</p>
 							</div>
 						</InputFile>
 					</div>

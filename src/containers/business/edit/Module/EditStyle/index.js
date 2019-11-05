@@ -58,10 +58,6 @@ class EditStyle extends React.Component {
 		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
-	cb(key) {
-		console.log(key)
-	}
-
 	/* 渲染组件开始 */
 	// 数字
 	renderNumber(cfg, data, obj, val, key, node) {
@@ -155,15 +151,11 @@ class EditStyle extends React.Component {
 		)
 	}
 	// 背景图
-	renderBGImage(cfg, data, obj, val, key, node) {
-		let onImage = url => {
-			obj[key].img = url
-			this.onChange.bind(this, url, key, obj, 'img')()
-		}
+	renderBGImage = (cfg, data, obj, val, key, node) => {
 		return (
 			<ImageUpload
 				data={this.props.data}
-				enter={onImage}
+				enter={url => this.onChange(url, key, obj, 'img')}
 				img={val}
 			/>
 		)

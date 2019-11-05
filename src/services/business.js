@@ -45,7 +45,7 @@ module.exports = extend(window, {
 		let { style, layout } = data.data
 		let sk = key === 'layout'? layout: style[key]
 		if (!sk) {
-			console.log(`名为 ${key} 的样式未定义!`)
+			// console.log(`名为 ${key} 的样式未定义!`)
 			return {}
 		}
 		let obj = deepCopy(sk)
@@ -127,7 +127,6 @@ module.exports = extend(window, {
 				Actions.updateGlobal(globalData)
 			})
 		}
-		console.log(comp, globalUpdate)
 		return comp
 	}
 })

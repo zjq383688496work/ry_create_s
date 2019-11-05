@@ -37,7 +37,7 @@ class EditStyle extends React.Component {
 
 	componentWillUnmount() {}
 
-	onChange(val, css, obj,cfg,node, attribute) {
+	onChange(val, css, obj, cfg, node, attribute) {
 		let { data, actions, editConfig, from } = this.props
 		data = lineHightAdaptation(data,val,css)
 		data = imageAdaptation(data,attribute)
@@ -168,15 +168,12 @@ class EditStyle extends React.Component {
 		)
 	}
 	// 背景图
-	renderBGImage(cfg, data, obj, val, key, node) {
-		let onImage = (url, attribute) => {
-			obj[key].img = url
-			this.onChange.bind(this, url, key, obj, 'img', attribute)()
-		}
+	renderBGImage = (cfg, data, obj, val, key, node) => {
+		let onImage = url => this.onChange.bind(this, url, key, obj, {}, 'img')()
 		return (
 			<ImageUpload
 				data={this.props.data}
-				enter={onImage}
+				enter={url => this.onChange(url, key, obj, {}, 'img')}
 				img={val}
 			/>
 		)
