@@ -57,8 +57,8 @@ const ctMap  = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl,contentEditable,shift) => {
-	var props  = { data, actions, type, idx,drag, csn, keyCtrl,contentEditable,shift }
+const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl, contentEditable, shift) => {
+	var props  = { data, actions, type, idx,drag, csn, keyCtrl, contentEditable, shift }
 	var render = {
 		picture:            <Picture           {...props} />,
 		web:                <Web               {...props} />,
