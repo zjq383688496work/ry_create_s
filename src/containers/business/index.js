@@ -67,6 +67,16 @@ class BusinessComponent extends React.Component {
 			resolve('天气数据')
 		}
 	}
+	checkUpdate(pageContent) {
+		var isOld = false
+		Object.values(pageContent).forEach(({ elements }) => {
+			elements.forEach(({ _id }) => {
+				if (isOld) return
+				if (!_id) isOld = true
+			})
+		})
+		if (isOld) tempCfg.updateStatus = 0
+	}
 	getConfig() {
 		var { location, actions, editConfig } = this.props,
 			{ globalData } = editConfig,
@@ -105,6 +115,7 @@ class BusinessComponent extends React.Component {
 					tempCfg.templateId  = templateId  || ''
 					tempCfg.composeType = composeType || ''
 				}
+				if (tempCfg.updateStatus) this.checkUpdate(cfg.pageContent)
 				var CFG = { ...newCfg, ...cfg }
 				return new Promise(res => res(CFG))
 			}).then(config => {
