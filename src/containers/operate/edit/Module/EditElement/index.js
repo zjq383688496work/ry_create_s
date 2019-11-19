@@ -256,8 +256,9 @@ class EditElement extends React.Component {
 	showLine = (param,_,i,obj) => {
 		let { data, actions,editConfig } = this.props,
 			{ globalData } = editConfig,
-			{ multiComp, banner } = globalData;
-		let bannerLayout = banner && banner.data.layout,
+			{ multiComp, banner } = globalData,
+			bannerData   = banner,
+			bannerLayout = banner && banner.data.layout,
 			eles   = data.elements || [],
 			bodySty = tempCfg.composeType == 'LANDSCAPE'? { height: 539, width: 959, left: 0, top: 0 } :
 			(tempCfg.bannerAds == 1? { width: 539, height: `${959 - bannerLayout.height}`, left: 0, top: 0 }: { width: 539, height: 959, left: 0, top: 0 }),
@@ -275,7 +276,7 @@ class EditElement extends React.Component {
 			this.setState({ h: false, hPosition: { p_top: param.y } })
 		}
 		if (eleKnock) {
-			this.setState({ nearPos: nearPosSty(eleKnock,bannerLayout) })
+			this.setState({ nearPos: nearPosSty(eleKnock, bannerData) })
 		} else {
 			this.setState({ nearPos: false })
 		}

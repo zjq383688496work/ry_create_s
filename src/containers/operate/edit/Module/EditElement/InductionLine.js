@@ -120,35 +120,28 @@ function abs(num,origin){
 	return false 
 }
 
-export function nearPosSty(layout_this, bannerLayout){
-	let arr = new Array(4);
+export function nearPosSty(layout_this, banner) {
 	let layout = deepCopy(layout_this)
-	if(tempCfg.composeType == 'LANDSCAPE'){
+	// if (tempCfg.bannerAds == 1 && banner) {
+	// 	let { data, feature: { swiperOptions } } = banner,
+	// 		bannerLayout = data.layout,
+	// 		{ position } = swiperOptions,
+	// 		{ composeType } = tempCfg
 
-	}else{
-		tempCfg.bannerAds == 1 ? layout.top += bannerLayout.height : null
-	}
-	for(let i = 0;i<4;i++){
-		let objSty = {}
-		if(i == 0){
-			objSty.height = layout.height;
-			objSty.left = layout.left;
-			objSty.top = layout.top;
-		}else if(i == 1){
-			objSty.height = layout.height;
-			objSty.left = layout.left + layout.width;
-			objSty.top = layout.top;
-		}else if(i == 2){
-			objSty.width = layout.width;
-			objSty.left = layout.left;
-			objSty.top = layout.top;
-		}else {
-			objSty.width = layout.width;
-			objSty.left = layout.left;
-			objSty.top = layout.top + layout.height;
-		}
-		arr[i] = objSty
-	}
+	// 	if (composeType === 'PORTRAIT' && position === 'top') {
+	// 		layout.top += bannerLayout.height
+	// 	}
+	// 	if(composeType == 'LANDSCAPE' && position === 'left') {
+	// 		layout.left += bannerLayout.width
+	// 	}
+	// }
+	let { width, height, left, top } = layout
+	let arr = [
+		{ height, left, top },
+		{ height, left: left + width, top },
+		{ width, left, top },
+		{ width, left, top: top + height },
+	]
 	return arr 
 }
    

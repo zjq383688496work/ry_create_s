@@ -13,7 +13,7 @@ import './index.less'
 
 import Rnd from 'react-rnd'
 import { Icon, message } from 'antd'
-import { InductionLine,nearPosSty }     from 'compEdit/EditElement/InductionLine'
+import { InductionLine, nearPosSty }     from 'compEdit/EditElement/InductionLine'
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Button       from 'compEdit/EditElement/Button'
@@ -203,7 +203,9 @@ class Custom extends React.Component {
 	}
 	//显示提示线
 	showLine = (param,_,i,obj) => {
-		let { data, actions } = this.props,
+		let { data, actions, editConfig } = this.props,
+			{ globalData: { banner } } = editConfig,
+			bannerData   = banner,
 			eles   = data.data.components || [], 
 			bodySty = {...data.data.layout,...{left:0,top:0}}, 
 			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
@@ -220,7 +222,7 @@ class Custom extends React.Component {
 			this.setState({h:false,hPosition:{p_top:param.y}})
 		}
 		if(eleKnock){
-			this.setState({nearPos:nearPosSty(eleKnock)})
+			this.setState({nearPos: nearPosSty(eleKnock, bannerData)})
 		}else{
 			this.setState({nearPos:false})
 		}   
