@@ -3,7 +3,7 @@ module.exports = {
 	// 页面分组
 	group: [
 		{
-			name: '默认',
+			name: '页面跳转',
 			pages: [
 				{
 					router: 'p_1000',

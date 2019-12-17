@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Col, Row, Radio, Select } from 'antd'
+import { Col, Row, Radio, Select, Input } from 'antd'
 const { Option, OptGroup } = Select
 const RadioButton = Radio.Button
 const RadioGroup  = Radio.Group
@@ -55,7 +55,8 @@ class RouterJump extends React.Component {
 		let { parentComp } = curData
 		content.type = 'router'
 		content.url  = val
-		if (!val) content.param = [{ type: '', value: '' }]
+		if (/^p_\d+$/.test(val)) content.param = [{ type: '', value: '' }]
+		if (val === 'thirdApp')  content.param  = { type: 'app', value: '' }
 		if(from && from === 'banner') {
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
@@ -72,6 +73,18 @@ class RouterJump extends React.Component {
 		content.param[0] = param
 		if(index != undefined) content_arr[index].router = content;
 		if (key === 'type') param.value = ''
+		if(from && from === 'banner') {
+			globalData.banner = data
+			return actions.updateGlobal(globalData)
+		}
+		return actions.updateComp(null, parentComp? parentComp: data)
+	}
+
+	onChangeAppParam = ({ target }) => {
+		let { data, content, actions, editConfig, from } = this.props
+		let { curData, globalData } = editConfig
+		let { parentComp } = curData
+		content.param.value = target.value
 		if(from && from === 'banner') {
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
@@ -128,14 +141,22 @@ class RouterJump extends React.Component {
 					// 	{ paramMap.map((_, i) => <Option key={i} value={_.value}>{_.name}</Option>) }
 					// </Select>
 	}
+	renderAppValue() {
+		let { content } = this.props,
+			{ param, url } = content
 
+		if (envType !== 'business' || url !== 'thirdApp') return false
+		let { value } = param
+
+		return <Input placeholder={'请输入AppID'} style={{ marginTop: 8 }} defaultValue={value} onBlur={this.onChangeAppParam} />
+	}
 	renderParamValue() {
-		let { content } = this.props
-		let param = content.param
-		if (envType !== 'business' || !content.url || !param.length) return false
+		let { content } = this.props,
+			{ param, url } = content
+		if (envType !== 'business' || !/^p_\d+$/.test(url)) return false
 		param = param[0]
 		let { type, value } = param
-		if (!type) return false
+		if (!type || !this[`render_${type}`]) return false
 		let dom = this[`render_${type}`](param)
 		return (
 			<Row style={{ marginTop: 8 }}>
@@ -147,7 +168,6 @@ class RouterJump extends React.Component {
 				</Col>
 			</Row>
 		)
-		// style={{ textAlign: 'right', paddingRight: 7 }}
 	}
 	render_catg(param) {
 		let { type, value } = param
@@ -202,14 +222,17 @@ class RouterJump extends React.Component {
 				</OptGroup>
 			)
 		})
+		if (url === 'thirdApp') hasRouter = true
 		if (!hasRouter) content.url = ''
 		let featureNode = (
 			<OptGroup label={'功能'}>
 				<Option value="back">返回</Option>
+				<Option value="thirdApp">第三方应用</Option>
 			</OptGroup>
 		)
 		let paramType  = this.renderParamType()
 		let paramValue = this.renderParamValue()
+		let appValue   = this.renderAppValue()
 		return (
 			<div>
 				<Select
@@ -218,12 +241,13 @@ class RouterJump extends React.Component {
 					onChange={this.onChange}
 				>
 					<Option value={''}>无</Option>
-					{ data.name == 'button'? <Option value={'back'}>返回上一级</Option>: null }
+					{ /*data.name == 'button'? <Option value={'back'}>返回上一级</Option>: null*/ }
 					{ selectNode }
 					{ featureNode }
 				</Select>
 				{ paramType }
 				{ paramValue }
+				{ appValue }
 			</div>
 		)
 	}

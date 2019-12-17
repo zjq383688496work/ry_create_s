@@ -97,7 +97,9 @@ class BusinessComponent extends React.Component {
 			Ajax.get(api).then(res => {
 				var cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
-				var cur = cfg.pageList.group[0].pages[0]
+				var group  = cfg.pageList.group[0]
+				if (group.name === '默认') group.name = '页面跳转'
+				var cur    = group.pages[0]
 
 				dataFormat.get.pageEach(cfg.pageContent)
 

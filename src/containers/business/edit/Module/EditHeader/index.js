@@ -116,6 +116,8 @@ class Header extends React.Component {
 		Ajax.get(api).then(({ data }) => {
 			var { config } = data,
 				cfg = JSON.parse(config).configPC
+			var group = cfg.pageList.group[0]
+			if (group.name === '默认') group.name = '页面跳转'
 			cb && cb(cfg)
 		})
 	}

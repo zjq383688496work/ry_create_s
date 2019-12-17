@@ -68,7 +68,9 @@ class OperateComponent extends React.Component {
 			Ajax.get(`/mcp-gateway/template/get?templateId=${id}&phase=DEV`).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
-				let cur = cfg.pageList.group[0].pages[0]
+				let group  = cfg.pageList.group[0]
+				if (group.name === '默认') group.name = '页面跳转'
+				let cur = group.pages[0]
 
 				dataFormat.get.pageEach(cfg.pageContent)
 
