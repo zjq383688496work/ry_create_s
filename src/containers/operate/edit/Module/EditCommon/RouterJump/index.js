@@ -56,7 +56,7 @@ class RouterJump extends React.Component {
 		content.type = 'router'
 		content.url  = val
 		if (/^p_\d+$/.test(val)) content.param = [{ type: '', value: '' }]
-		if (val === 'thirdApp')  content.param  = { type: 'app', value: '' }
+		if (val === 'thirdApp')  content.param  = [{ type: 'app', value: '' }]
 		if(from && from === 'banner') {
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
@@ -84,7 +84,7 @@ class RouterJump extends React.Component {
 		let { data, content, actions, editConfig, from } = this.props
 		let { curData, globalData } = editConfig
 		let { parentComp } = curData
-		content.param.value = target.value
+		content.param[0].value = target.value
 		if(from && from === 'banner') {
 			globalData.banner = data
 			return actions.updateGlobal(globalData)
@@ -115,38 +115,31 @@ class RouterJump extends React.Component {
 	}
 	
 	renderParamType() {
-		let { content } = this.props
-		let param = content.param
-		if (envType !== 'business' || !content.url || !param.length) return false
-		param = param[0]
+		let { content } = this.props,
+			{ param: [ obj ], url } = content
+		if (envType !== 'business' || !/^p_\d+$/.test(url)) return false
+		let { type } = obj
 		return (
 			<Row style={{ marginTop: 8 }}>
 				<Col span={7}>跳转类型</Col>
 				<Col span={17}>
 					<RadioGroup
 						size="small"
-						value={param.type}
-						onChange={_ => this.onChangeParam(_.target.value, 'type', param)}
+						value={type}
+						onChange={_ => this.onChangeParam(_.target.value, 'type', obj)}
 					>
 						{ paramMap.map((_, i) => (<RadioButton key={i} value={_.value}>{_.name}</RadioButton>)) }
 					</RadioGroup>
 				</Col>
 			</Row>
 		)
-					// <Select
-					// 	style={{ width: '100%' }}
-					// 	value={param.type}
-					// 	onChange={v => this.onChangeParam(v, 'type', param)}
-					// >
-					// 	{ paramMap.map((_, i) => <Option key={i} value={_.value}>{_.name}</Option>) }
-					// </Select>
 	}
 	renderAppValue() {
 		let { content } = this.props,
-			{ param, url } = content
+			{ param: [ obj ], url } = content
 
 		if (envType !== 'business' || url !== 'thirdApp') return false
-		let { value } = param
+		let { value } = obj
 
 		return <Input placeholder={'请输入AppID'} style={{ marginTop: 8 }} defaultValue={value} onBlur={this.onChangeAppParam} />
 	}
