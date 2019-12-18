@@ -43,10 +43,16 @@ class RouterJump extends React.Component {
 
 	componentWillUnmount() {}
 
-	componentWillReceiveProps() {
-		const { content } = this.props
-		const { param }   = content
+	componentWillReceiveProps(props) {
+		let { content } = this.props,
+			{ param }   = props.content
 		if (param === undefined) content.param = [{ type: '', value: '' }]
+		else {
+			let [{ type, value }] = param,
+				ipt = this.refs.input
+			content.param = param
+			if (type === 'app' && ipt) ipt.input.value = value
+		}
 	}
 
 	onChange = val => {
@@ -141,7 +147,7 @@ class RouterJump extends React.Component {
 		if (envType !== 'business' || url !== 'thirdApp') return false
 		let { value } = obj
 
-		return <Input placeholder={'请输入AppID'} style={{ marginTop: 8 }} defaultValue={value} onBlur={this.onChangeAppParam} />
+		return <Input ref="input" placeholder={'请输入AppID'} style={{ marginTop: 8 }} defaultValue={value} onBlur={this.onChangeAppParam} />
 	}
 	renderParamValue() {
 		let { content } = this.props,
