@@ -31,12 +31,12 @@ let typeMap = {
 }
 
 class RouterJump extends React.Component {
-	// constructor(props) {
-	// 	super(props)
-	// 	const { content } = props
-	// 	const { param }   = content
-	// 	if (param === undefined) content.param = [{ type: '', value: '' }]
-	// }
+	constructor(props) {
+		super(props)
+		const { content } = props
+		const { param }   = content
+		if (param === undefined) content.param = [{ type: '', value: '' }]
+	}
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -47,7 +47,6 @@ class RouterJump extends React.Component {
 	// componentWillReceiveProps(props) {
 		// let { content } = this.props,
 		// 	{ param }   = props.content
-		// debugger
 		// if (param === undefined) content.param = [{ type: '', value: '' }]
 		// else {
 		// 	let [{ type, value }] = param,
