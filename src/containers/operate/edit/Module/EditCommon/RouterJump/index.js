@@ -43,11 +43,10 @@ class RouterJump extends React.Component {
 
 	componentWillUnmount() {}
 
-	componentWillUpdate(props) {
-	// componentWillReceiveProps(props) {
-		// let { content } = this.props,
-		// 	{ param }   = props.content
-		// if (param === undefined) content.param = [{ type: '', value: '' }]
+	componentWillReceiveProps() {
+		let { content } = this.props,
+			{ param }   = content
+		if (param === undefined) content.param = [{ type: '', value: '' }]
 		// else {
 		// 	let [{ type, value }] = param,
 		// 		ipt = this.refs.input
