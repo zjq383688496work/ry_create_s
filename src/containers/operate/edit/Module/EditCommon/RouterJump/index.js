@@ -31,28 +31,30 @@ let typeMap = {
 }
 
 class RouterJump extends React.Component {
-	constructor(props) {
-		super(props)
-		const { content } = props
-		const { param }   = content
-		if (param === undefined) content.param = [{ type: '', value: '' }]
-	}
+	// constructor(props) {
+	// 	super(props)
+	// 	const { content } = props
+	// 	const { param }   = content
+	// 	if (param === undefined) content.param = [{ type: '', value: '' }]
+	// }
 	componentWillMount() {}
 
 	componentDidMount() {}
 
 	componentWillUnmount() {}
 
-	componentWillReceiveProps(props) {
-		let { content } = this.props,
-			{ param }   = props.content
-		if (param === undefined) content.param = [{ type: '', value: '' }]
-		else {
-			let [{ type, value }] = param,
-				ipt = this.refs.input
-			content.param = param
-			if (type === 'app' && ipt) ipt.input.value = value
-		}
+	componentWillUpdate(props) {
+	// componentWillReceiveProps(props) {
+		// let { content } = this.props,
+		// 	{ param }   = props.content
+		// debugger
+		// if (param === undefined) content.param = [{ type: '', value: '' }]
+		// else {
+		// 	let [{ type, value }] = param,
+		// 		ipt = this.refs.input
+		// 	content.param = param
+		// 	if (type === 'app' && ipt) ipt.input.value = value
+		// }
 	}
 
 	onChange = val => {
@@ -147,7 +149,7 @@ class RouterJump extends React.Component {
 		if (envType !== 'business' || url !== 'thirdApp') return false
 		let { value } = obj
 
-		return <Input ref="input" placeholder={'请输入AppID'} style={{ marginTop: 8 }} defaultValue={value} onBlur={this.onChangeAppParam} />
+		return <Input placeholder={'请输入AppID'} style={{ marginTop: 8 }} value={value} onChange={this.onChangeAppParam} />
 	}
 	renderParamValue() {
 		let { content } = this.props,
