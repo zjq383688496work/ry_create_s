@@ -18,6 +18,11 @@ const RadioGroup  = Radio.Group
 
 import StoreListModal from 'compEdit/EditCommon/StoreListModal'
 
+const urlMap = {
+	thirdApp: 1,
+	back: 1
+}
+
 let paramMap = [
 	{ name: '无',  value: '' },
 	{ name: '业态', value: 'catg' },
@@ -221,7 +226,7 @@ class RouterJump extends React.Component {
 				</OptGroup>
 			)
 		})
-		if (url === 'thirdApp') hasRouter = true
+		if (urlMap[url]) hasRouter = true
 		if (!hasRouter) content.url = ''
 		let featureNode = (
 			<OptGroup label={'功能'}>
