@@ -25,21 +25,21 @@ module.exports = [
 					name: '背景色块',
 					key:  'area'
 				},
-				{
-					icon: 'splitLine',
-					name: '分割线',
-					key:  'splitLine'
-				},
+				// {
+				// 	icon: 'splitLine',
+				// 	name: '分割线',
+				// 	key:  'splitLine'
+				// },
 				{
 					icon: 'video',
 					name: '视频', 
 					key:  'video'
 				},
-				{
-					icon: 'carousel',
-					name: '轮播',
-					key:  'swiperImage'
-				},
+				// {
+				// 	icon: 'carousel',
+				// 	name: '轮播',
+				// 	key:  'swiperImage'
+				// },
 				/*{
 					icon: 'carousel',
 					name: '精彩活动',
@@ -224,60 +224,60 @@ module.exports = [
 				}
 			]
 		},
-		{
-			icon: 'shops',
-			name: '商品列表',
-			key:  'goodsList',
-			child: [
-				// {
-				// 	icon: 'sorter',
-				// 	name: '分页',
-				// 	key:  'page'
-				// },
-				{
-					icon: 'reset',
-					name: '重置',
-					key:  'resetByGoods'
-				},
-				{
-					icon: 'list',
-					name: '列表',
-					key:  'listByGoods'
-				},
-				{
-					icon: 'classifyNav',
-					name: '分类',
-					key:  'catgByGoods'
-				},
-				{
-					icon: 'list',
-					name: '推荐列表',
-					key:  'swiperByGoods'
-				}
-			]
-		},
-		{
-			icon: 'shopDetail',
-			name: '商品详情',
-			key: 'goodsDetails',
-			child: [
-				{
-					icon: 'carousel',
-					name: '信息浮动条',
-					key:  'goodsBar'
-				},
-				{
-					icon: 'carousel',
-					name: '商品信息',
-					key:  'goodsBlock'
-				},
-				{
-					icon: 'classifyNav',
-					name: '图片列表-绑定',
-					key:  'pictureListBind'
-				}
-			]
-		},
+		// {
+		// 	icon: 'shops',
+		// 	name: '商品列表',
+		// 	key:  'goodsList',
+		// 	child: [
+		// 		// {
+		// 		// 	icon: 'sorter',
+		// 		// 	name: '分页',
+		// 		// 	key:  'page'
+		// 		// },
+		// 		{
+		// 			icon: 'reset',
+		// 			name: '重置',
+		// 			key:  'resetByGoods'
+		// 		},
+		// 		{
+		// 			icon: 'list',
+		// 			name: '列表',
+		// 			key:  'listByGoods'
+		// 		},
+		// 		{
+		// 			icon: 'classifyNav',
+		// 			name: '分类',
+		// 			key:  'catgByGoods'
+		// 		},
+		// 		{
+		// 			icon: 'list',
+		// 			name: '推荐列表',
+		// 			key:  'swiperByGoods'
+		// 		}
+		// 	]
+		// },
+		// {
+		// 	icon: 'shopDetail',
+		// 	name: '商品详情',
+		// 	key: 'goodsDetails',
+		// 	child: [
+		// 		{
+		// 			icon: 'carousel',
+		// 			name: '信息浮动条',
+		// 			key:  'goodsBar'
+		// 		},
+		// 		{
+		// 			icon: 'carousel',
+		// 			name: '商品信息',
+		// 			key:  'goodsBlock'
+		// 		},
+		// 		{
+		// 			icon: 'classifyNav',
+		// 			name: '图片列表-绑定',
+		// 			key:  'pictureListBind'
+		// 		}
+		// 	]
+		// },
 		
 		// {
 		// 	icon: 'store',

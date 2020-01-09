@@ -1,12 +1,12 @@
 // 基础组件对应添加子组件
 module.exports = {
-	listByGoods: {
-		picture:     1,
-		text:        1,
-		pictureBind: 1,
-		textBind:    1,
-		swiperBind:  1
-	},
+	// listByGoods: {
+	// 	picture:     1,
+	// 	text:        1,
+	// 	pictureBind: 1,
+	// 	textBind:    1,
+	// 	swiperBind:  1
+	// },
 	goodsBar: {
 		picture:     1,
 		text:        1,
@@ -27,24 +27,24 @@ module.exports = {
 		picture:     1,
 		text:        1
 	},
-	swiperByGoods: {
-		picture:     1,
-		text:        1,
-		pictureBind: 1,
-		textBind:    1
-	},
-	catgByGoods: {
-		area:        1,
-		picture:     1,
-		text:        1,
-		pictureBind: 1,
-		textBind:    1
-	},
-	resetByGoods: {
-		area:    1,
-		picture: 1,
-		text:    1
-	},
+	// swiperByGoods: {
+	// 	picture:     1,
+	// 	text:        1,
+	// 	pictureBind: 1,
+	// 	textBind:    1
+	// },
+	// catgByGoods: {
+	// 	area:        1,
+	// 	picture:     1,
+	// 	text:        1,
+	// 	pictureBind: 1,
+	// 	textBind:    1
+	// },
+	// resetByGoods: {
+	// 	area:    1,
+	// 	picture: 1,
+	// 	text:    1
+	// },
 	listByStore2: {
 		picture:     1,
 		text:        1,
@@ -92,10 +92,10 @@ module.exports = {
 		text:        1,
 		textBind:    1
 	},
-	resetByGoods: {
-		picture: 1,
-		text:    1
-	},
+	// resetByGoods: {
+	// 	picture: 1,
+	// 	text:    1
+	// },
 	catgByActivity2: {
 		picture:  1,
 		textBind: 1

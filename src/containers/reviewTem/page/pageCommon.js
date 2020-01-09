@@ -20,7 +20,7 @@ import WonderfulActivityShow from 'reviewTem/EditElement/WonderfulActivity'
 import WonderfulActivityNewShow from 'reviewTem/EditElement/Comp/WonderfulActivityNew'  
 import TimeShow              from 'reviewTem/EditElement/Comp/Common/Time' 
 import WeatherShow           from 'reviewTem/EditElement/Comp/Common/Weather'
-import SplitLineShow         from 'reviewTem/EditElement/SplitLine'
+// import SplitLineShow         from 'reviewTem/EditElement/SplitLine'
 import Map2DShow             from 'reviewTem/EditElement/Map2D'
 import NavigationShow        from 'reviewTem/EditElement/Navigation'
 import NavigationFloatShow   from 'reviewTem/EditElement/NavigationFloat'
@@ -30,8 +30,8 @@ import StoreListNewShow      from 'reviewTem/EditElement/Comp/StoreListNew'
 import StoreDetailsShow      from 'reviewTem/EditElement/Comp/StoreDetails'
 import StoreDetailsNewShow   from 'reviewTem/EditElement/Comp/StoreDetailsNew'
 import StoreInstroShow       from 'reviewTem/EditElement/Comp/StoreInstro'
-import GoodsListShow         from 'reviewTem/EditElement/Comp/GoodsList'
-import GoodsDetailsShow      from 'reviewTem/EditElement/Comp/GoodsDetails'
+// import GoodsListShow         from 'reviewTem/EditElement/Comp/GoodsList'
+// import GoodsDetailsShow      from 'reviewTem/EditElement/Comp/GoodsDetails'
 
 import addAnimate from 'reviewTem/page/animateAdd'
 import 'reviewTem/page/index.less'
@@ -100,7 +100,7 @@ class EditElementCommon extends React.Component {
 								case "wonderfulActivity2" : compCon = (<WonderfulActivityNewShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action}/>); break
 							 	case "time" : compCon = (<TimeShow data={element} type={`Style${styleIdx + 1}`} />); break
 							 	case "weather" : compCon = (<WeatherShow data={element} type={`Style${styleIdx + 1}`} />); break
-							 	case "splitLine" : compCon = (<SplitLineShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
+							 	// case "splitLine" : compCon = (<SplitLineShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
 							 	case "map2D" : compCon = (<Map2DShow data={element} type={`Style${styleIdx + 1}`} />); break 
 							 	case "navigation" : compCon = (<NavigationShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "navigationFloat" : compCon = (<NavigationFloatShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
@@ -110,8 +110,8 @@ class EditElementCommon extends React.Component {
 							 	case "storeList2" : compCon = (<StoreListNewShow data={element} categories={categories} floors={floors} builds={builds} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "storeDetails2" : compCon = (<StoreDetailsNewShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "storeInstro" : compCon = (<StoreInstroShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
-						 	 	case "goodsList" : compCon = (<GoodsListShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} query={this.props.query}/>); break
-						 	 	case "goodsDetails" : compCon = (<GoodsDetailsShow data={element} type={`Style${styleIdx + 1}`} top={layout.top} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+						 	 	// case "goodsList" : compCon = (<GoodsListShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} query={this.props.query}/>); break
+						 	 	// case "goodsDetails" : compCon = (<GoodsDetailsShow data={element} type={`Style${styleIdx + 1}`} top={layout.top} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 						 	 default: ; break
 						 } 
 						 return (

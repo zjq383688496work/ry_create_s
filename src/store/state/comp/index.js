@@ -97,16 +97,16 @@ module.exports = {
 
 	/* 商品 开始 */
 	// 商品列表
-	goodsList:             authInit(require('./goodsList')),
+	// goodsList:             authInit(require('./goodsList')),
 	// 列表&轮播&分类 (商品)
-	listByGoods:           authInit(require('./goodsList/content/list')),		// 列表
-	swiperByGoods:         authInit(require('./goodsList/content/swiper')),		// 轮播
-	catgByGoods:           authInit(require('./goodsList/content/catg')),		// 分类
-	resetByGoods:          authInit(require('./goodsList/content/reset')),		// 重置
+	// listByGoods:           authInit(require('./goodsList/content/list')),		// 列表
+	// swiperByGoods:         authInit(require('./goodsList/content/swiper')),		// 轮播
+	// catgByGoods:           authInit(require('./goodsList/content/catg')),		// 分类
+	// resetByGoods:          authInit(require('./goodsList/content/reset')),		// 重置
 	// 商品详情
-	goodsDetails:          authInit(require('./goodsDetails')),
-	goodsBar:              authInit(require('./goodsDetails/content/goodsBar')),	// 商品条
-	goodsBlock:            authInit(require('./goodsDetails/content/goodsBlock')),	// 商品信息
+	// goodsDetails:          authInit(require('./goodsDetails')),
+	// goodsBar:              authInit(require('./goodsDetails/content/goodsBar')),	// 商品条
+	// goodsBlock:            authInit(require('./goodsDetails/content/goodsBlock')),	// 商品信息
 	/* 商品 结束 */
 
 	/* 店铺 开始 */

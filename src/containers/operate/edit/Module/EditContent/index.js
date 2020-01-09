@@ -35,19 +35,19 @@ import WonderfulActivity from './WonderfulActivity'
 import ListByActivity2   from './ListByActivity2'
 import ListByStore       from './ListByStore'
 import ThemeColor        from './ThemeColor'
-import CatgByGoods       from './CatgByGoods'
-import SwiperByGoods     from './SwiperByGoods'
+// import CatgByGoods       from './CatgByGoods'
+// import SwiperByGoods     from './SwiperByGoods'
 import { filterContent } from './filter'
 import * as variable from 'var'
 
 var conMap = variable.contentMap
 var { fieldMap, contentFieldFilter } = variable
 var plMap  = {
-	catgByGoods:   'filter',
-	listByGoods:   'filter',
-	swiperByGoods: 'filterBox',
+	// catgByGoods:   'filter',
+	// listByGoods:   'filter',
+	// swiperByGoods: 'filterBox',
 	// resetByGoods:  'filterBox',
-	goodsBar:      'filter',
+	// goodsBar:      'filter',
 	listByStore2:  'filter',
 }
 
@@ -68,8 +68,8 @@ const compContent = (name, data, updateComp, from) => {
 		listByStore:       <ListByStore       {...props} />,
 		map2D:             <ThemeColor        {...props} />,
 		floorMap:          <ThemeColor        {...props} />,
-		catgByGoods:       <CatgByGoods       {...props} />,
-		swiperByGoods:     <SwiperByGoods     {...props} />
+		// catgByGoods:       <CatgByGoods       {...props} />,
+		// swiperByGoods:     <SwiperByGoods     {...props} />
 	} 
 	return render[name]
 }

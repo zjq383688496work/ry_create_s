@@ -27,14 +27,14 @@ import StoreDetails       from 'compEdit/EditElement/StoreDetails'
 import StoreInstro        from 'compEdit/EditElement/StoreInstro'
 import StoreList2         from 'compEdit/EditElement/StoreList2'
 import StoreDetails2      from 'compEdit/EditElement/StoreDetails2'
-import GoodsList          from 'compEdit/EditElement/GoodsList'
 import DateWeather        from 'compEdit/EditElement/DateWeather'
 import Navigation         from 'compEdit/EditElement/Navigation'
 import NavigationFloat    from 'compEdit/EditElement/NavigationFloat'
-import SplitLine          from 'compEdit/EditElement/SplitLine'
+// import SplitLine          from 'compEdit/EditElement/SplitLine'
 import Map2D              from 'compEdit/EditElement/Map2D'
 import Html               from 'compEdit/EditElement/Html'
-import GoodsDetails       from 'compEdit/EditElement/GoodsDetails'
+// import GoodsList          from 'compEdit/EditElement/GoodsList'
+// import GoodsDetails       from 'compEdit/EditElement/GoodsDetails'
 import Area               from 'compEdit/EditElement/Area'
 import Qrcode             from 'compEdit/EditElement/Qrcode'
 import QrcodeHui          from 'compEdit/EditElement/QrcodeHui'
@@ -74,14 +74,14 @@ const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl, contentE
 		navigation:         <Navigation        {...props} />,
 		navigationFloat:    <NavigationFloat   {...props} />,
 		storeList:          <StoreList         {...props} />,
-		goodsList:          <GoodsList         {...props} />,
+		// goodsList:          <GoodsList         {...props} />,
 		storeDetails:       <StoreDetails      {...props} />,
+		// goodsDetails:       <GoodsDetails      {...props} />,
 		storeInstro:        <StoreInstro       {...props} />,
 		splitLine:          <SplitLine         {...props} />,
 		dateWeather:        <DateWeather       {...props} />,
 		map2D:              <Map2D             {...props} />,
 		html:               <Html              {...props} />,
-		goodsDetails:       <GoodsDetails      {...props} />,
 		area:               <Area              {...props} />,
 		qrcode:             <Qrcode            {...props} />,
 		qrcodeHui:          <QrcodeHui         {...props} />,

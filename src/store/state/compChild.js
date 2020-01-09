@@ -32,17 +32,17 @@ module.exports = {
 		time:    1,  
 		weather: 1
 	},
-	goodsList: {
-		listByGoods:   1,
-		swiperByGoods: 1,
-		catgByGoods:   1,
-		resetByGoods:  1
-	},
-	goodsDetails: {
-		goodsBar:    1,
-		goodsBlock:  1,
-		pictureListBind: 1
-	},
+	// goodsList: {
+	// 	listByGoods:   1,
+	// 	swiperByGoods: 1,
+	// 	catgByGoods:   1,
+	// 	resetByGoods:  1
+	// },
+	// goodsDetails: {
+	// 	goodsBar:    1,
+	// 	goodsBlock:  1,
+	// 	pictureListBind: 1
+	// },
 	storeList2: {
 		listByStore2:   1,
 		catgByStore2:   1,

@@ -23,7 +23,7 @@ export default class SwiperImage extends React.Component {
 		let newContent =  this.do_content(list,content)
 		if (newContent.length > 20) return message.warning('最多只能添加20张素材！')
 		if (envType === 'business') isContinue = this.checkImg(list,layout)
-		if (!isContinue) return message.info("选择的图片不符合尺寸，请重新选择！")
+		// if (!isContinue) return message.info("选择的图片不符合尺寸，请重新选择！")
 		this.setState({ init: false })
 		this.addImgVideoModal.hide() 
 		data.data.content = newContent

@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import SplitLine         from '../../SplitLine'
+// import SplitLine         from '../../SplitLine'
 import Picture           from '../../Picture'
 import Web               from '../../Web'
 import Area        	     from '../../Area'
@@ -33,13 +33,13 @@ import ListByStoreNew    from '../StoreListNew/ListByStoreNew'
 //新店铺详情
 import StoreDetailsBlock from '../StoreDetailsNew/StoreDetailsBlock'
 
-import ListByGoods       from '../GoodsList/ListByGoods'
-import CatgByGoods       from '../GoodsList/CatgByGoods'
-import ResetByGoods      from '../GoodsList/ResetByGoods'
-import SwiperByGoods     from '../GoodsList/SwiperByGoods'
-import GoodsBar          from '../GoodsDetails/GoodsBar'
-import GoodsBlock        from '../GoodsDetails/GoodsBlock'
-import PictureListBind   from '../GoodsDetails/PictureListBind'
+// import ListByGoods       from '../GoodsList/ListByGoods'
+// import CatgByGoods       from '../GoodsList/CatgByGoods'
+// import ResetByGoods      from '../GoodsList/ResetByGoods'
+// import SwiperByGoods     from '../GoodsList/SwiperByGoods'
+// import GoodsBar          from '../GoodsDetails/GoodsBar'
+// import GoodsBlock        from '../GoodsDetails/GoodsBlock'
+// import PictureListBind   from '../GoodsDetails/PictureListBind'
 import WonderfulActivity from '../../WonderfulActivity'
 import CatgByActivity    from '../WonderfulActivityNew/CatgByActivity'
 import ResetByActivity   from '../WonderfulActivityNew/ResetByActivity'
@@ -76,7 +76,7 @@ class Custom extends React.Component {
 			switch(compName){
 				case 'text' : compCon = (<Text data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} />);break
 				case 'picture'   : compCon = (<Picture data={_} type={`Style${styleIdx + 1}`} name={data.name} animate={animate} animateParams={animateParams} />);break
-				case 'splitLine' : compCon = (<SplitLine data={_} type={`Style${styleIdx + 1}`} />);break
+				// case 'splitLine' : compCon = (<SplitLine data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'web': compCon = (<Web data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'area' : compCon = (<Area data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'button' : compCon = (<Button data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} />);break
@@ -108,17 +108,17 @@ class Custom extends React.Component {
 				case "qrcodeHui" : compCon = (<QrcodeRYShow data={_} type={`Style${styleIdx + 1}`} />); break
 				case "qrcodeNav" : compCon = (<QrcodeRYShow data={_} type={`Style${styleIdx + 1}`} />); break
 
-				case 'listByGoods' : compCon = (<ListByGoods data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} ioInput={ioInput} />);break
-				case 'catgByGoods' : compCon = (<CatgByGoods data={_} type={`Style${styleIdx + 1}`} have_goods={have_goods} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
-				case 'resetByGoods' : compCon = (<ResetByGoods data={_} type={`Style${styleIdx + 1}`} have_goods={have_goods} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
-				case 'swiperByGoods' : compCon = (<SwiperByGoods data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} />);break
-				case 'goodsBar' :  compCon = (<GoodsBar data={_} type={`Style${styleIdx + 1}`} top={top} ioInput={ioInput} refresh={ioInput.refresh} />);break
-				case 'goodsBlock' :  compCon = (<GoodsBlock data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} refresh={ioInput.refresh} />);break
+				// case 'listByGoods' : compCon = (<ListByGoods data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} ioInput={ioInput} />);break
+				// case 'catgByGoods' : compCon = (<CatgByGoods data={_} type={`Style${styleIdx + 1}`} have_goods={have_goods} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
+				// case 'resetByGoods' : compCon = (<ResetByGoods data={_} type={`Style${styleIdx + 1}`} have_goods={have_goods} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
+				// case 'swiperByGoods' : compCon = (<SwiperByGoods data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} />);break
+				// case 'goodsBar' :  compCon = (<GoodsBar data={_} type={`Style${styleIdx + 1}`} top={top} ioInput={ioInput} refresh={ioInput.refresh} />);break
+				// case 'goodsBlock' :  compCon = (<GoodsBlock data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} refresh={ioInput.refresh} />);break
 				case 'swiperBind' : 
 					compCon = <Swiperbind data={_} bind={contentBind} item={goodsDetails} realIndex={true} />;break
-				case 'pictureListBind' : 
-					const imgList = contentBind&&getAttr(goodsDetails[contentBind])=="Array" ? goodsDetails[contentBind] : []
-					 compCon = <PictureListBind data={_} imgList={imgList} type={`Style${styleIdx + 1}`} refresh={ioInput.refresh} />;break
+				// case 'pictureListBind' : 
+				// 	const imgList = contentBind&&getAttr(goodsDetails[contentBind])=="Array" ? goodsDetails[contentBind] : []
+				// 	 compCon = <PictureListBind data={_} imgList={imgList} type={`Style${styleIdx + 1}`} refresh={ioInput.refresh} />;break
 			}
 			return (   
 				<div className={`pge-layout ${compName} ${aniCls? aniCls: ''}`} style={{...layout,...aniSty}} key={i}>{ compCon }</div> 

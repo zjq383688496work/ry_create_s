@@ -30,7 +30,7 @@ import Reset        from 'compEdit/EditElement/Reset'
 import FloorMap     from 'compEdit/EditElement/FloorMap'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
 import ListByGoods  from 'compEdit/EditElement/GoodsList/ListByGoods'
-import SplitLine         from 'compEdit/EditElement/SplitLine'
+// import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 import CatgByActivity2   from 'compEdit/EditElement/WonderfulActivity2/Catg'
 import ListByActivity2   from 'compEdit/EditElement/WonderfulActivity2/List'
@@ -39,14 +39,14 @@ import PictureBind       from 'compEdit/EditElement/PictureBind'
 import TextBind          from 'compEdit/EditElement/TextBind'
 import SwiperBind        from 'compEdit/EditElement/SwiperBind'
 import Area              from 'compEdit/EditElement/Area'
-import PictureListBind   from 'compEdit/EditElement/PictureListBind'
-import GoodsBar       from 'compEdit/EditElement/GoodsDetails/GoodsBar'
-import GoodsBlock     from 'compEdit/EditElement/GoodsDetails/GoodsBlock'
+// import PictureListBind   from 'compEdit/EditElement/PictureListBind'
+// import GoodsBar       from 'compEdit/EditElement/GoodsDetails/GoodsBar'
+// import GoodsBlock     from 'compEdit/EditElement/GoodsDetails/GoodsBlock'
 import CatgByTabs     from 'compEdit/EditElement/Tabs/CatgByTabs'
 import ChildElement   from 'compEdit/EditElement/ChildElement'
-import SwiperByGoods  from 'compEdit/EditElement/GoodsList/SwiperByGoods'
-import CatgByGoods    from 'compEdit/EditElement/GoodsList/CatgByGoods'
-import ResetByGoods   from 'compEdit/EditElement/GoodsList/ResetByGoods'
+// import SwiperByGoods  from 'compEdit/EditElement/GoodsList/SwiperByGoods'
+// import CatgByGoods    from 'compEdit/EditElement/GoodsList/CatgByGoods'
+// import ResetByGoods   from 'compEdit/EditElement/GoodsList/ResetByGoods'
 import ListByStore2   from 'compEdit/EditElement/StoreList2/List'
 import CatgByStore2   from 'compEdit/EditElement/StoreList2/Catg'
 import ResetByStore2  from 'compEdit/EditElement/StoreList2/Reset'
@@ -92,14 +92,14 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		textBind:          <TextBind          {...props} />,
 		swiperBind:        <SwiperBind        {...props} />,
 		area:              <Area              {...props} />,
-		pictureListBind:   <PictureListBind   {...props} />,
-		goodsBar:          <GoodsBar          {...props} />,
-		goodsBlock:        <GoodsBlock        {...props} />,
+		// pictureListBind:   <PictureListBind   {...props} />,
+		// goodsBar:          <GoodsBar          {...props} />,
+		// goodsBlock:        <GoodsBlock        {...props} />,
 		catgByTabs:        <CatgByTabs        {...props} />,
 		childElement:      <ChildElement      {...props} />,
-		swiperByGoods:     <SwiperByGoods     {...props} />,
-		catgByGoods:       <CatgByGoods       {...props} />,
-		resetByGoods:      <ResetByGoods      {...props} />,
+		// swiperByGoods:     <SwiperByGoods     {...props} />,
+		// catgByGoods:       <CatgByGoods       {...props} />,
+		// resetByGoods:      <ResetByGoods      {...props} />,
 		listByStore2:      <ListByStore2      {...props} />,
 		catgByStore2:      <CatgByStore2      {...props} />,
 		resetByStore2:     <ResetByStore2     {...props} />,
