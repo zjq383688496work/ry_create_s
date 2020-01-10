@@ -2,7 +2,7 @@ let { authInit, deepCopy, extend, styleIdxChange } = require('state/common')
 const t  = authInit(require('./content/storeInstroTitle'))
 const s  = authInit(require('./content/storeInstroInstroduce'))
 const w  = authInit(require('./content/storeWonderful'))
-const l  = authInit(require('./content/storeSplitLine')) 
+// const l  = authInit(require('./content/storeSplitLine')) 
 const data = {
 	style:     {},
 	layout:    {
@@ -21,7 +21,7 @@ const data = {
 		iterationCount: 1			// 循环次数
 	},
 	// 组件管理  
-	components: [t,s,w,l]
+	components: [ t, s, w ]
 }
 
 module.exports = {  

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
+import Voice             from 'compEdit/EditElement/Voice'
 
 // import './index.less'
 
@@ -95,6 +96,7 @@ export default class Banner extends React.Component {
 				{ dir === 'unshift'? DOM: null }
 				{ children }
 				{ dir === 'push'? DOM: null }
+				<Voice {...this.props} />
 			</section>
 		)
 	}

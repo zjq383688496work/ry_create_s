@@ -16,7 +16,7 @@ import Iconf from 'compEdit/EditCommon/Iconf'
 
 import './index.less'
 
-class RevokeRecovery extends React.Component {
+class ToolsBar extends React.Component {
 	constructor(props) {
 		super(props)
 		var { editConfig } = this.props,
@@ -91,20 +91,39 @@ class RevokeRecovery extends React.Component {
 			history: [deepCopy(curPage)]
 		})
 	}
+	// 选择语音助手
+	selectVoice = e => {
+		e.stopPropagation()
+		let { actions, editConfig: { curData, globalData } } = this.props,
+			{ voice }   = globalData,
+			{ visible } = voice.feature
+		voice.feature.visible = !visible
+		actions.updateGlobal(globalData)
+		if (visible) actions.selectPage(curData.router)
+	}
 
 	render() {
+		let { voice } = this.props.editConfig.globalData
 		let { idx, history } = this.state
 		let len = history.length - 1
 		// return ENV === 'dev'
 			// ?
 		return	(
-			<div className={`revoke-recovery ${tempCfg.composeType == 'PORTRAIT' ? 'portrait' : 'landscape'}`}>
+			<div className={`tools-bar ${tempCfg.composeType == 'PORTRAIT' ? 'portrait' : 'landscape'}`}>
 				<Tooltip placement="right" title={'撤销'}>
 					<div id="btnRevoke" className={idx >= len? 's-disabled': ''} onClick={this.handleRevoke}><Iconf type="undo"/></div>
 				</Tooltip>
 				<Tooltip placement="right" title={'恢复'}>
 					<div id="btnRecovery" className={!idx? 's-disabled': ''} onClick={this.handleRecovery}><Iconf type="redo"/></div>
 				</Tooltip>
+				{
+					voice
+					?
+					<Tooltip placement="right" title={'语音助手'}>
+						<div className={!voice.feature.visible? 's-gray': ''} onClick={this.selectVoice}><Iconf type="sound"/></div>
+					</Tooltip>
+					: null
+				}
 				<a id="btnClearHistory" onClick={this.handleClear} style={{ display: 'none' }}></a>
 			</div>
 			)
@@ -113,7 +132,7 @@ class RevokeRecovery extends React.Component {
 	}
 }
 
-RevokeRecovery.defaultProps = {
+ToolsBar.defaultProps = {
 }
 
 const mapStateToProps = state => state
@@ -125,4 +144,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(RevokeRecovery)
+)(ToolsBar)

@@ -21,28 +21,28 @@ const picsS = [
 const catgActivity = ['进行中','未开始','已过期']
 // 高级组件对应添加子组件
 var Item = {
-	goods: {
-		id:       1,
-		currentPrice:  `9925.0`,
-		originalPrice: `9799.9`,
-		commodityName: 'TELEFLORA 11朵粉紫玫瑰七夕花束预定',
-		commodityPicList: Array.apply(null, { length: 3 }).map(_ => `${cdnUrl}/${pics[rn(5)]}.png`),
-		qrcode: `${cdnUrl}/201808271756227480.png`
-	},
-	reGoods: {
-		id: 1,
-		currentPrice:  `9925.0`,
-		originalPrice: `9799.9`,
-		commodityName: `商品-1`,
-		showPicList: Array.apply(null, { length: 3 }).map(_ => `${cdnUrl}/${pics[rn(5)]}.png`),
-		recommendReason: `推荐理由`,
-		qrcode: `${cdnUrl}/201808271756227480.png`
-	},
-	goodsCatg: {
-		categoryId:   1,
-		categoryName: `运动`,
-		url:  `${cdnUrl}/201807191807420161.jpg`
-	},
+	// goods: {
+	// 	id:       1,
+	// 	currentPrice:  `9925.0`,
+	// 	originalPrice: `9799.9`,
+	// 	commodityName: 'TELEFLORA 11朵粉紫玫瑰七夕花束预定',
+	// 	commodityPicList: Array.apply(null, { length: 3 }).map(_ => `${cdnUrl}/${pics[rn(5)]}.png`),
+	// 	qrcode: `${cdnUrl}/201808271756227480.png`
+	// },
+	// reGoods: {
+	// 	id: 1,
+	// 	currentPrice:  `9925.0`,
+	// 	originalPrice: `9799.9`,
+	// 	commodityName: `商品-1`,
+	// 	showPicList: Array.apply(null, { length: 3 }).map(_ => `${cdnUrl}/${pics[rn(5)]}.png`),
+	// 	recommendReason: `推荐理由`,
+	// 	qrcode: `${cdnUrl}/201808271756227480.png`
+	// },
+	// goodsCatg: {
+	// 	categoryId:   1,
+	// 	categoryName: `运动`,
+	// 	url:  `${cdnUrl}/201807191807420161.jpg`
+	// },
 	store: {
 		id:       1,
 		categories: [{ name: '运动' }],
@@ -82,34 +82,34 @@ var Item = {
 }
 module.exports = {
 	list: {
-		goods(num = 1) {
-			return Array.apply(null, { length: num }).map((_, i) => {
-				return {
-					...deepCopy(Item.goods),
-					id: i + 1,
-					commodityPicList: Array.apply(null, { length: 3 }).map(() => `${cdnUrl}/${pics[rn(5)]}.png`)
-				}
-			})
-		},
-		reGoods(num = 1) {
-			return Array.apply(null, { length: num }).map((_, i) => {
-				return {
-					...deepCopy(Item.reGoods),
-					id: i + 1,
-					showPicList: Array.apply(null, { length: 3 }).map((p, j) => `${cdnUrl}/${pics[j]}.png`)
-				}
-			})
-		},
-		goodsCatg(num = 1) {
-			var pics = ['201808271728380089', '201808271728381172', '201808271728382159', '201808271728383194', '201808271728384138']
-			return Array.apply(null, { length: num }).map((_, i) => {
-				return {
-					categoryId:   i + 1,
-					categoryName: catg[rn(catg.length)],
-					url:  `${cdnUrl}/${pics[rn(pics.length)]}.png`
-				}
-			})
-		},
+		// goods(num = 1) {
+		// 	return Array.apply(null, { length: num }).map((_, i) => {
+		// 		return {
+		// 			...deepCopy(Item.goods),
+		// 			id: i + 1,
+		// 			commodityPicList: Array.apply(null, { length: 3 }).map(() => `${cdnUrl}/${pics[rn(5)]}.png`)
+		// 		}
+		// 	})
+		// },
+		// reGoods(num = 1) {
+		// 	return Array.apply(null, { length: num }).map((_, i) => {
+		// 		return {
+		// 			...deepCopy(Item.reGoods),
+		// 			id: i + 1,
+		// 			showPicList: Array.apply(null, { length: 3 }).map((p, j) => `${cdnUrl}/${pics[j]}.png`)
+		// 		}
+		// 	})
+		// },
+		// goodsCatg(num = 1) {
+		// 	var pics = ['201808271728380089', '201808271728381172', '201808271728382159', '201808271728383194', '201808271728384138']
+		// 	return Array.apply(null, { length: num }).map((_, i) => {
+		// 		return {
+		// 			categoryId:   i + 1,
+		// 			categoryName: catg[rn(catg.length)],
+		// 			url:  `${cdnUrl}/${pics[rn(pics.length)]}.png`
+		// 		}
+		// 	})
+		// },
 		store(num = 1) {
 			return Array.apply(null, { length: num }).map((_, i) => {
 				return {
@@ -153,13 +153,13 @@ module.exports = {
 		}
 	},
 	item: {
-		listByGoods:     deepCopy(Item.goods),
-		swiperByGoods:   deepCopy(Item.reGoods),
-		catgByGoods:     deepCopy(Item.goodsCatg),
-		goodsDetails:    deepCopy(Item.goods),
-		goodsBar:        deepCopy(Item.goods),
-		goodsBlock:      deepCopy(Item.goods),
-		pictureListBind: deepCopy(Item.goods),
+		// listByGoods:     deepCopy(Item.goods),
+		// swiperByGoods:   deepCopy(Item.reGoods),
+		// catgByGoods:     deepCopy(Item.goodsCatg),
+		// goodsDetails:    deepCopy(Item.goods),
+		// goodsBar:        deepCopy(Item.goods),
+		// goodsBlock:      deepCopy(Item.goods),
+		// pictureListBind: deepCopy(Item.goods),
 		listByStore2:    deepCopy(Item.store),
 		navByStore2:     deepCopy(Item.store),
 		catgByStore2:    deepCopy(Item.storeCatg),

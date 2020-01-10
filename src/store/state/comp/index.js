@@ -30,7 +30,7 @@ module.exports = {
 	// 视频
 	video:                 authInit(require('./video')),
 	// 分割线
-	splitLine:             authInit(require('./splitLine')),
+	// splitLine:             authInit(require('./splitLine')),
 
 	// 店铺简介--标题
 	storeInstroTitle:      authInit(require('./storeInstro/content/storeInstroTitle')), 
@@ -87,13 +87,17 @@ module.exports = {
 	// 2d地图组件
 	map2D:                 authInit(require('./map2D')),
 	// 组件上传
-	html:                  authInit(require('./html')),
+	// html:                  authInit(require('./html')),
 	// 图片-绑定
 	pictureBind:           authInit(require('./pictureBind')),
 	// 文本-绑定
 	textBind:              authInit(require('./textBind')),
 	// 轮播-绑定
 	swiperBind:            authInit(require('./swiperBind')),
+	// 音频
+	audio:                 authInit(require('./audio')),
+	// 状态切换按钮
+	buttonStatus:          authInit(require('./buttonStatus')),
 
 	/* 商品 开始 */
 	// 商品列表
@@ -131,7 +135,7 @@ module.exports = {
 	// 图片列表-绑定
 	pictureListBind:       authInit(require('./pictureListBind')),
 	// 切换标签
-	tabs:                  authInit(require('./tabs')),
+	// tabs:                  authInit(require('./tabs')),
 	// 标签分类
 	catgByTabs:            authInit(require('./tabs/content/catgByTabs')),
 	// 子元素
@@ -141,4 +145,8 @@ module.exports = {
 	qrcodeBind:            authInit(require('./qrcode/qrcodeBind')),	// 二维码绑定
 	qrcodeHui:             authInit(require('./qrcode/qrcodeHui')),		// 惠码
 	qrcodeNav:             authInit(require('./qrcode/qrcodeNav')),		// 导航码
+
+	// 语音模块
+	voice:                 authInit(require('./voice')),
+	listByVoice:           authInit(require('./voice/content/list')),
 }

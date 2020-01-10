@@ -14,10 +14,8 @@ const RadioButton   = Radio.Button
 const RadioGroup    = Radio.Group
 let advertTime = { type: 'Slider', min: 10, max: 600, step: 10 }
 let advertSwitch = { type:'Switch', option:[{name:'打开',value:true},{name:'关闭',value:false}]}
+
 class Advert extends React.Component {
-	state = {
-		loading:false
-	}
 	componentDidMount(){
 		
 	}

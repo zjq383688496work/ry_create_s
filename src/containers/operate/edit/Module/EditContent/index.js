@@ -21,9 +21,11 @@ const Option = Select.Option
 
 import Banner            from './Banner'
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
+import StatusJump        from 'compEdit/EditCommon/StatusJump'
+import AudioUploadComp   from 'compEdit/EditCommon/AudioUploadComp'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
 import ImageAndVideoComp from 'compEdit/EditCommon/ImageAndVideoComp'
-import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
+// import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
 import CompLayout        from 'compEdit/EditCommon/CompLayout'
 import ChildElement      from './ChildElement'
 import SwiperImage       from './SwiperImage'
@@ -162,6 +164,15 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	renderSlider(cfg, con, val, key, index) {
+		return (
+			<Slider
+				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
+				value={val} onChange={v => this.onChange(v, con, key,cfg, index)}
+				style={{ width: '100%' }}
+			/>
+		)
+	}
 	// 标题
 	renderTitle(cfg, con, val, key, index) {
 		return (
@@ -178,7 +189,28 @@ class EditContent extends React.Component {
 		return (
 			<RouterJump data={data} content={val} actions={actions} from={from} />
 		)
-	} 
+	}
+	// 跳转路由
+	renderStatus(cfg, con, val, key, index) {
+		let { data, actions } = this.props
+		return (
+			<StatusJump data={data} content={val} actions={actions} />
+		)
+	}
+	// 上传音频
+	renderAudio(cfg, con, val, key, index) {
+		let { data } = this.props
+		return (
+			<AudioUploadComp
+				data={data}
+				img={val}
+				name={key}
+				action={'updateComp'}
+				style={{ width: '100%' }}
+				index={index}
+			/>
+		)
+	}
 	// 上传图片
 	renderImage(cfg, con, val, key, index) {
 		let { data } = this.props
@@ -223,15 +255,15 @@ class EditContent extends React.Component {
 			)
 	}
 	// 上传组件
-	renderFile(cfg, con, val, key, index) {
-		return (
-			<HtmlUpload
-				data={val}
-				style={{ width: '100%' }}
-				onChange={v => this.onChange(v, con, key,cfg, index)}
-			/>
-		)
-	}
+	// renderFile(cfg, con, val, key, index) {
+	// 	return (
+	// 		<HtmlUpload
+	// 			data={val}
+	// 			style={{ width: '100%' }}
+	// 			onChange={v => this.onChange(v, con, key,cfg, index)}
+	// 		/>
+	// 	)
+	// }
 	// 网址
 	renderUrl(cfg, con, val, key, index) {
 		return (

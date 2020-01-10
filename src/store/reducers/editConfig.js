@@ -1,15 +1,13 @@
-/*
-* @Author: Liao Hui
-* @Date:   2017-04-10 17:50:56
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-21T13:06:11+08:00
-*/
-
 import * as types from '../constants'
 import state from 'state'
 
 const comp  = require('state/comp')
 const pagec = require('state/page/content')
+
+const selectMap = {
+	voice:  1,
+	banner: 1
+}
 
 const initialState = state
 export default function editConfig(state = initialState, action) {
@@ -82,6 +80,9 @@ export default function editConfig(state = initialState, action) {
 				console.log('选择组件!')
 				curData.cusCompIdx  = -1
 			} else console.log('选择子组件!')
+			if (selectMap[data.name]) {
+				curData.compIdx = -1
+			}
 			state.curComp       = data
 			curData.contentType = 'comp'
 			return Object.assign({}, state)
@@ -165,6 +166,7 @@ export default function editConfig(state = initialState, action) {
 			return Object.assign({}, state)
 
 		case types.UPDATE_GLOBAL:
+			var { voice } = data
 			state.globalData = data
 			console.log('更新全局数据!')
 			return Object.assign({}, state)

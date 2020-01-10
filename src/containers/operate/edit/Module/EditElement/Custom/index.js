@@ -16,7 +16,9 @@ import { Icon, message } from 'antd'
 import { InductionLine, nearPosSty }     from 'compEdit/EditElement/InductionLine'
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
+import Audio        from 'compEdit/EditElement/Audio'
 import Button       from 'compEdit/EditElement/Button'
+import ButtonStatus from 'compEdit/EditElement/ButtonStatus'
 import Text         from 'compEdit/EditElement/Text'
 import Time         from 'compEdit/EditElement/Time'
 import Weather      from 'compEdit/EditElement/Weather'
@@ -59,6 +61,7 @@ import NavByStore2    from 'compEdit/EditElement/StoreList2/Nav'
 import StoreBlock     from 'compEdit/EditElement/StoreDetails2/Block'
 import QrcodeHui      from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav      from 'compEdit/EditElement/QrcodeNav'
+import ListByVoice    from 'compEdit/EditElement/Voice/List'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -69,7 +72,9 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
+		audio:             <Audio             {...props} />,
 		button:            <Button            {...props} />,
+		buttonStatus:      <ButtonStatus      {...props} />,
 		text:              <Text              {...props} />,
 		time:              <Time              {...props} />,
 		weather:           <Weather           {...props} />,
@@ -84,7 +89,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		catg:              <Catg              {...props} />,
 		page:              <Page              {...props} />,
 		floorMap:          <FloorMap          {...props} />,
-		splitLine:         <SplitLine         {...props} />,
+		// splitLine:         <SplitLine         {...props} />,
 		reset:             <Reset             {...props} />,
 		listByStore:       <ListByStore       {...props} />,
 		listByGoods:       <ListByGoods       {...props} />,
@@ -112,6 +117,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		storeBlock:        <StoreBlock        {...props} />,
 		qrcodeHui:         <QrcodeHui         {...props} />,
 		qrcodeNav:         <QrcodeNav         {...props} />,
+		listByVoice:       <ListByVoice       {...props} />,
 	}
 	return render[name]
 }
@@ -205,52 +211,44 @@ class Custom extends React.Component {
 	showLine = (param,_,i,obj) => {
 		let { data, actions, editConfig } = this.props,
 			{ globalData: { banner } } = editConfig,
-			bannerData   = banner,
-			eles   = data.data.components || [], 
-			bodySty = {...data.data.layout,...{left:0,top:0}}, 
-			layout = obj ? {..._.data.layout,...obj} : _.data.layout,
+			bannerData = banner,
+			eles       = data.data.components || [],
+			bodySty    = { ...data.data.layout, ...{left:0,top:0}},
+			layout     = obj? { ..._.data.layout, ...obj}: _.data.layout,
 			InductionLineObj = InductionLine(param,eles,layout,i,bodySty,eleKnock),
 			v= InductionLineObj.v,h=InductionLineObj.h,eleKnock = InductionLineObj.eleKnock
-		if(v){   
-			this.setState({v:true,vPosition:{left:`${v.left}px`,p_left:v.p_left}})
-		}else{
-			this.setState({v:false,vPosition:{p_left:param.x}})
-		} 
-		if(h){
-			this.setState({h:true,hPosition:{top:`${h.top}px`,p_top:h.p_top}})
-		}else{ 
-			this.setState({h:false,hPosition:{p_top:param.y}})
-		}
-		if(eleKnock){
-			this.setState({nearPos: nearPosSty(eleKnock, bannerData)})
-		}else{
-			this.setState({nearPos:false})
-		}   
-	}  
-	//拖拽
-	dragMove(e,param,_,i) {
+		if (v)        this.setState( { v: true,  vPosition: { left:   `${v.left}px`, p_left: v.p_left } })
+		else          this.setState( { v: false, vPosition: { p_left: param.x } })
+		if (h)        this.setState( { h: true,  hPosition: { top:    `${h.top}px`, p_top: h.p_top } })
+		else          this.setState( { h: false, hPosition: { p_top:  param.y } })
+		if (eleKnock) this.setState( { nearPos: nearPosSty(eleKnock, bannerData) })
+		else          this.setState( { nearPos: false})
+	}
+	// 拖拽
+	dragMove(e, param, _, i) {
 		e.stopPropagation()
-		let stateLay = {},lay = deepCopy(_.data.layout)
-		if(this.props.shift){
-			if(Math.abs(lay.top-param.y) > Math.abs(lay.left-param.x)){
+		let lay = deepCopy(_.data.layout)
+		if (this.props.shift) {
+			if (Math.abs(lay.top - param.y) > Math.abs(lay.left - param.x)) {
 				let layout = deepCopy(_.data.layout),
-					pos = {x:param.x,y:param.y}
+					pos = { x: param.x, y: param.y }
 				pos.x = layout.left
-				this.setState({...stateLay,dragAxis:'y',drag:false},()=>{ this.showLine(pos,_,i) })
-			}else{
+				this.setState({ dragAxis: 'y', drag: false }, () => { this.showLine(pos,_,i) })
+			} else {
 				let layout = deepCopy(_.data.layout),
-					pos = {x:param.x,y:param.y}
+					pos = { x: param.x, y: param.y }
 				pos.y = layout.top
-				this.setState({...stateLay,dragAxis:'x',drag:false},()=>{ this.showLine(pos,_,i) })
+				this.setState({ dragAxis: 'x', drag: false }, () => { this.showLine(pos,_,i) })
 			}
-		}else{
-			this.setState({dragAxis:'both',drag:false},()=>{ this.showLine(param,_,i) })
+		} else {
+			this.setState({ dragAxis: 'both', drag: false }, () => { this.showLine(param,_,i) })
 		} 
-	}  
+	}
 	dragStop(e, d, item, idx, parent) {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
 		let lay = item.data.layout
+		console.log('lay-stop: ', lay)
 		if (lay.left === d.x && lay.top  === d.y) return
 		lay.left = this.state.vPosition.p_left
 		lay.top  = this.state.hPosition.p_top
@@ -330,10 +328,10 @@ class Custom extends React.Component {
 					}}
 					dragAxis={state.dragAxis}
 					style={{ position: lay.position }}
-					onDragStart={e => this.selectComp(e, _, i, idx, data)}
-					onDrag={(e,param) => this.dragMove(e,param,_,i)}
+					onDragStart={e     => this.selectComp(e, _, i, idx, data)}
+					onDrag={(e, param) => this.dragMove(e, param, _, i)}
 					onDragStop={(e, d) => this.dragStop(e, d, _, i, data)}
-					onResizeStart={e => this.selectComp(e, _, i, idx, data)}
+					onResizeStart={e   => this.selectComp(e, _, i, idx, data)}
 					onResize={(e, dir, ref, delta, pos) => this.dragResize(e, ref, delta, pos, _, i)}
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i, data)}
 				>

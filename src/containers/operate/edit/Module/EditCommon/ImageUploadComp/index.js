@@ -48,8 +48,7 @@ class ImageUploadComp extends React.Component {
 		if (envType === 'operate') data = imageAdaptation(data, attribute)
 		let da = data.data
 		let { content }    = da
-		let { curData }    = editConfig
-		let { parentComp } = curData
+		let { parentComp } = editConfig.curData
 		const length = content.length
 		img[name] = imgList[0].url
 		name == "video" ? (img.preview = imgList[0].preview,img.originalSizePreview = imgList[0].originalSizePreview) : null

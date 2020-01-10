@@ -1,7 +1,6 @@
 import React from 'react'
 import './index.less'
 
-import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 import * as Server from 'server'
 

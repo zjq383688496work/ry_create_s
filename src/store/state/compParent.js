@@ -21,6 +21,8 @@ module.exports = {
 	map2D:              1,
 	html:               1,
 	area:               1,
+	buttonStatus:       1,
+	audio:              1,
 	tabs:               1,
 	// goodsList:          1,
 	// goodsDetails:       1,
@@ -29,4 +31,5 @@ module.exports = {
 	qrcode:             1,
 	qrcodeHui:          1,
 	qrcodeNav:          1,
+	voice:              1,
 }  

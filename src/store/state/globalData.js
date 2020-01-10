@@ -11,7 +11,10 @@ const globalData = {
 		},
 		advert: {
 			switch: { auth: false, value: false },
-			time:   { auth: false, value: 30 }
+			time:   { auth: false, value: 30 },
+		},
+		voice: {
+			switch: { auth: false, value: false },
 		},
 		loading: {
 			web:       { auth: false, value: '' },

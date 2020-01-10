@@ -70,5 +70,13 @@ module.exports = {
 		catgByActivity2:   1,
 		listByActivity2:   1,
 		resetByActivity2:  1
+	},
+	voice: {
+		picture:      1,
+		button:       1,
+		text:         1,
+		area:         1,
+		audio:        1,
+		buttonStatus: 1,
 	}
 }

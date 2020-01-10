@@ -34,8 +34,8 @@ class Header extends React.Component {
 			loading: false
 		}
 	}
-	componentWillMount() {}
-	componentDidMount() {}
+	componentWillMount()   {}
+	componentDidMount()    {}
 	componentWillUnmount() {}
 
 	addComp(item) {
@@ -163,7 +163,7 @@ class Header extends React.Component {
 		// console.log(JSON.stringify(config))
 	}
 	tNameChange(name) {
-		this.setState({ name: name })
+		this.setState({ name })
 		tempCfg.name = name
 	}
 	closeWin() {

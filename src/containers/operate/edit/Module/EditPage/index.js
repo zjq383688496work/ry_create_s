@@ -84,11 +84,11 @@ class EditPage extends React.Component {
 		var { data, editConfig } = this.props,
 			{ curData, globalData } = editConfig,
 			{ pageIdx } = curData,
-			{ banner } = globalData
+			{ banner, voice } = globalData
 
 		if (!data || data.title === undefined) return false
 
-		var { backgroundColor, bannerCheck = true, homeTime = 30 } = data.feature
+		var { backgroundColor, bannerCheck = true, voiceCheck = true, homeTime = 30 } = data.feature
 		// if (data.animation === undefined) {
 		// 	data.animation = {
 		// 		in: deepCopy(ani),
@@ -150,6 +150,19 @@ class EditPage extends React.Component {
 										step: 10,
 										disabled: true
 									}, homeTime || 30, 'feature.homeTime') }
+								</div>
+							</div>
+							: null
+						}
+						{
+							voice
+							?
+							<div className="pgs-row">
+								<div className="pgsr-name">语音开关</div>
+								<div className="pgsr-ctrl">
+									{ this.renderCheckbox({
+										defaultValue: true
+									}, voiceCheck, 'feature.voiceCheck') }
 								</div>
 							</div>
 							: null

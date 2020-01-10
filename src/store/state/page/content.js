@@ -9,6 +9,7 @@ module.exports = {
 		homeTime: 30,		// 返回首页的时间
 		backgroundColor: { type: 'custom', color: '#fff' },	// 页面背景色
 		bannerCheck: true,
+		voiceCheck: true,
 	},
 	animation: {
 		in: {

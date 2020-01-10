@@ -126,10 +126,10 @@ class RouterJump extends React.Component {
 	}
 	
 	renderParamType() {
-		let { content } = this.props,
-			{ param: [ obj ], url } = content
-		if (envType !== 'business' || !/^p_\d+$/.test(url)) return false
-		let { type } = obj
+		let { param, url } = this.props.content
+		if (!param || envType !== 'business' || !/^p_\d+$/.test(url)) return false
+		let [ obj ] = param,
+			{ type } = obj
 		return (
 			<Row style={{ marginTop: 8 }}>
 				<Col span={7}>跳转类型</Col>
@@ -146,22 +146,23 @@ class RouterJump extends React.Component {
 		)
 	}
 	renderAppValue() {
-		let { content } = this.props,
-			{ param: [ obj ], url } = content
-
-		if (envType !== 'business' || url !== 'thirdApp') return false
-		let { value } = obj
+		let { param, url } = this.props.content
+		if (!param || envType !== 'business' || url !== 'thirdApp') return false
+		
+		let [ obj ] = param,
+			{ value } = obj
 
 		return <Input placeholder={'请输入AppID'} style={{ marginTop: 8 }} value={value} onChange={this.onChangeAppParam} />
 	}
 	renderParamValue() {
-		let { content } = this.props,
-			{ param, url } = content
-		if (envType !== 'business' || !/^p_\d+$/.test(url)) return false
-		param = param[0]
-		let { type, value } = param
+		let { param, url } = this.props.content
+		if (!param || envType !== 'business' || !/^p_\d+$/.test(url)) return false
+
+		let [ obj ] = param,
+			{ type, value } = obj
+
 		if (!type || !this[`render_${type}`]) return false
-		let dom = this[`render_${type}`](param)
+		let dom = this[`render_${type}`](obj)
 		return (
 			<Row style={{ marginTop: 8 }}>
 				<Col
@@ -245,7 +246,6 @@ class RouterJump extends React.Component {
 					onChange={this.onChange}
 				>
 					<Option value={''}>无</Option>
-					{ /*data.name == 'button'? <Option value={'back'}>返回上一级</Option>: null*/ }
 					{ selectNode }
 					{ featureNode }
 				</Select>

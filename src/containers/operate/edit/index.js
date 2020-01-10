@@ -21,6 +21,7 @@ import EditElement    from 'compEdit/EditElement'
 import EditStyle      from 'compEdit/EditStyle'
 import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEdit/EditTheme'
+import EditStatus     from 'compEdit/EditStatus'
 
 import * as actions from 'actions'
 
@@ -46,6 +47,9 @@ const cTypeMap = {
 	theme: '主题'
 }
 
+import * as variable from 'var'
+const { statusAuth } = variable
+
 class EditComponent extends React.Component {
 	constructor(props) {
 		super(props)
@@ -64,7 +68,7 @@ class EditComponent extends React.Component {
 
 	render() { 
 		let { editConfig, location } = this.props,
-			{ curData, globalData } = editConfig,
+			{ curComp, curData, globalData } = editConfig,
 			{ banner, theme } = globalData,
 			colors = theme.list[theme.idx].colors,
 			type   = curData.contentType,
@@ -75,9 +79,15 @@ class EditComponent extends React.Component {
 		} else if(type === 'comp') {
 			editTab = (
 				<Tabs defaultActiveKey="1" type="card">
-					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} from={null}/></TabPane>
-					<TabPane tab="展示" key="2"><EditStyle     data={editConfig.curComp} from={null}/></TabPane>
-					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} from={null}/></TabPane>
+					<TabPane tab="内容" key="1"><EditContent   data={curComp} from={null}/></TabPane>
+					<TabPane tab="展示" key="2"><EditStyle     data={curComp} from={null}/></TabPane>
+					<TabPane tab="动画" key="3"><EditAnimation data={curComp} from={null}/></TabPane>
+					{
+						statusAuth[curComp.name]
+						?
+						<TabPane tab="状态" key="4"><EditStatus data={curComp} from={null}/></TabPane>
+						: null
+					}
 				</Tabs>
 			)
 		} else if (type === 'banner') {

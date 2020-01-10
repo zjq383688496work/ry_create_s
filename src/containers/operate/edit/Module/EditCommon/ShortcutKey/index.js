@@ -196,7 +196,7 @@ class ShortcutKey extends React.Component {
 		let { curData, curPage, globalData } = editConfig
 		let { parentComp } = curData
 		let { multiComp }  = globalData
-		let { parentIdx, list, type } = multiComp
+		let { list } = multiComp
 		if (!list.length) return message.warning(`组件未选中!`)
 		let comps = []
 		let cComp = {}

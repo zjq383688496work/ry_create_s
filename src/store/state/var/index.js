@@ -11,4 +11,6 @@ module.exports = {
 	mock:           require('./mock'),
 	childElementActiveMap: require('./childElementActiveMap'),
 	contentFieldFilter:    require('./contentFieldFilter'),
+	statusAuth:     require('./statusAuth'),
+	statusManage:   require('./statusManage'),
 }

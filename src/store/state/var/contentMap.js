@@ -4,6 +4,9 @@ module.exports = {
 	title:         { name: '标题',    type: 'Title',    max: 30 },
 	img:           { name: '图片',    type: 'Image' },
 	bind:          { name: '字段绑定', type: 'Bind' },
+	audio:         { name: '音频',    type: 'Audio' },
+	volume:        { name: '音量',    type: 'Slider', min: 0, max: 100, step: 1 },
+	loop:          { name: '是否循环', type: 'Checkbox' },
 	video:         { name: '视频',    type: 'Video' },
 	filterBGImg:   { name: '字母图片', type: 'Image' },
 	filterPageImg: { name: '分页图片', type: 'Image' },
@@ -39,19 +42,19 @@ module.exports = {
 		{ name: '3D流', value: 'coverflow' },
 		{ name: '3D翻转', value: 'flip' }
 	] },
-	autoplay:      { name: '自动播放', type: 'Switch' },
-	loop:          { name: '循环播放', type: 'Switch' },
-	speed:         { name: '切换速度', type: 'Number', min: 0, max: 2e4, step: 100 },
-	delay:         { name: '停留时长', type: 'Number', min: 0, max: 5e3, step: 100 },
-	slidesPerView:  { name: '显示数量', type: 'Number', min: 1, max: 10 },
-	slidesPerGroup: { name: '滚动数量', type: 'Number', min: 1, max: 10 },
-	centeredSlides: { name: '居中排列', type: 'Switch' },
-	spaceBetween:   { name: '图片间距', type: 'Number', min: -500, max: 500 },
-	pagination:     { name: '分页器', type: 'Switch' },
+	autoplay:           { name: '自动播放', type: 'Switch' },
+	loop:               { name: '循环播放', type: 'Switch' },
+	speed:              { name: '切换速度', type: 'Number', min: 0, max: 2e4, step: 100 },
+	delay:              { name: '停留时长', type: 'Number', min: 0, max: 5e3, step: 100 },
+	slidesPerView:      { name: '显示数量', type: 'Number', min: 1, max: 10 },
+	slidesPerGroup:     { name: '滚动数量', type: 'Number', min: 1, max: 10 },
+	centeredSlides:     { name: '居中排列', type: 'Switch' },
+	spaceBetween:       { name: '图片间距', type: 'Number', min: -500, max: 500 },
+	pagination:         { name: '分页器', type: 'Switch' },
 	slidesOffsetBefore: { name: '左偏移量', type: 'Number', min: -1000, max: 1000 },
-	swiperOptions:  { name: '轮播配置', type: 'Options' },
-	mapThemeColor:  { name: '地图主色', type: 'Color' },
-	dataSource:     { name: '数据来源',    type: 'RadioMix', option: [
+	swiperOptions:      { name: '轮播配置', type: 'Options' },
+	mapThemeColor:      { name: '地图主色', type: 'Color' },
+	dataSource:         { name: '数据来源',    type: 'RadioMix', option: [
 		{ name: '基础数据', value: 'base' },
 		{ name: 'API', value: 'api' }
 	] },
@@ -61,4 +64,14 @@ module.exports = {
 		{ name: '开启', value: 'on' },
 		{ name: '关闭', value: 'off' }
 	]},
+
+	status:               { name: '状态选择', type: 'Status' },
+	// 语音
+	voice_default:        { name: '默认', type: 'Status' },
+	voice_listen:         { name: '监听', type: 'Status' },
+	voice_success:        { name: '成功', type: 'Status' },
+	voice_error_network:  { name: '网络错误', type: 'Status' },
+	voice_error_software: { name: '软件错误', type: 'Status' },
+	voice_error_hardware: { name: '硬件错误', type: 'Status' },
+	voice_error_user:     { name: '用户问题', type: 'Status' },
 } 

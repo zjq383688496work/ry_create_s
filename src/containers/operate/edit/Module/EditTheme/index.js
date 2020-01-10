@@ -14,7 +14,8 @@ import * as actions from 'actions'
 // import ColorPicker from 'rc-color-picker'
 // import ThemeManage from 'compEdit/EditCommon/ThemeManage'
 import BackMusic from 'compEdit/EditCommon/BackMusic'
-import Advert from 'compEdit/EditCommon/Advertisement'
+import Advert    from 'compEdit/EditCommon/Advertisement'
+import Voice     from 'compEdit/EditCommon/Voice'
 import LoadingConfig from 'compEdit/EditCommon/LoadingConfig'
 // import { Collapse, Icon, Input, Select, Tabs } from 'antd'
 
@@ -234,6 +235,10 @@ class EditTheme extends React.Component {
 					action={'updateGlobal'}
 				/>
 				<Advert 
+					data={editConfig.globalData}
+					action={'updateGlobal'}
+				/>
+				<Voice 
 					data={editConfig.globalData}
 					action={'updateGlobal'}
 				/>

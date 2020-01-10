@@ -1,11 +1,4 @@
-/*
-* @Author: weijie
-* @Date:   2017-09-28 10:49:49
- * @Last Modified by: lishengpeng
- * @Last Modified time: 2018-03-26 12:37:34
-*/
-
-.revoke-recovery {
+.tools-bar {
 	position: absolute;
 	top: 40px;
 	//right: ~"calc(50% - 298px)";
@@ -20,9 +13,12 @@
 		align-items: center;
 		width:  100%;
 		height: 30px;
+		&.s-disabled,
+		&.s-gray {
+			background-color: #999;
+		}
 		&.s-disabled {
 			pointer-events: none;
-			background-color: #999;
 		}
 		&:hover {
 			background-color: #595858;

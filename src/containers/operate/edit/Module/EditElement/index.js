@@ -14,7 +14,9 @@ import Rnd from 'react-rnd'
 import Picture            from 'compEdit/EditElement/Picture'
 import Web                from 'compEdit/EditElement/Web'
 import Text               from 'compEdit/EditElement/Text'
+import Audio              from 'compEdit/EditElement/Audio'
 import Button             from 'compEdit/EditElement/Button'
+import ButtonStatus       from 'compEdit/EditElement/ButtonStatus'
 import Video              from 'compEdit/EditElement/Video'
 import SwiperImage        from 'compEdit/EditElement/SwiperImage'
 import SwiperImgAndVideo  from 'compEdit/EditElement/SwiperImgAndVideo'
@@ -43,7 +45,7 @@ import QrcodeNav          from 'compEdit/EditElement/QrcodeNav'
 import ContextMenu        from 'compEdit/EditCommon/ContextMenu'
 import ShortcutKey        from 'compEdit/EditCommon/ShortcutKey'
 import PostMessage        from 'compEdit/EditCommon/PostMessage'
-import RevokeRecovery     from 'compEdit/EditCommon/RevokeRecovery'
+import ToolsBar           from 'compEdit/EditCommon/ToolsBar'
 import { InductionLine, nearPosSty } from 'compEdit/EditElement/InductionLine'
 
 import Banner from 'compEdit/EditElement/Banner'
@@ -64,7 +66,9 @@ const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl, contentE
 		web:                <Web               {...props} />,
 		video:              <Video             {...props} />,
 		text:               <Text              {...props} />,
+		audio:              <Audio             {...props} />,
 		button:             <Button            {...props} />,
+		buttonStatus:       <ButtonStatus      {...props} />,
 		swiperImage:        <SwiperImage       {...props} />,
 		swiperImgAndVideo:  <SwiperImgAndVideo {...props} />,
 		wonderfulActivity:  <WonderfulActivity {...props} />,
@@ -78,7 +82,7 @@ const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl, contentE
 		storeDetails:       <StoreDetails      {...props} />,
 		// goodsDetails:       <GoodsDetails      {...props} />,
 		storeInstro:        <StoreInstro       {...props} />,
-		splitLine:          <SplitLine         {...props} />,
+		// splitLine:          <SplitLine         {...props} />,
 		dateWeather:        <DateWeather       {...props} />,
 		map2D:              <Map2D             {...props} />,
 		html:               <Html              {...props} />,
@@ -236,7 +240,7 @@ class EditElement extends React.Component {
 				pos.y = layout.top
 				this.setState({...stateLay,dragAxis:'x',drag:false},()=>{ this.showLine(pos,_,i) })
 			}
-		}else{
+		} else {
 			this.setState({dragAxis:'both',drag:false},()=>{ this.showLine(param,_,i) })
 		} 
 	}
@@ -249,7 +253,7 @@ class EditElement extends React.Component {
 		if (lay.left === d.x && lay.top  === d.y) return
 		lay.left = this.state.vPosition.p_left
 		lay.top  = this.state.hPosition.p_top
-		this.setState({v:false,h:false,nearPos:false,drag:true})   
+		this.setState({ v: false, h: false, nearPos: false, drag: true })   
 		actions.updateComp(idx, item)
 	} 
 	// 显示提示线
@@ -322,7 +326,7 @@ class EditElement extends React.Component {
 			let compName = _.name,
 				layout   = _.data.layout,
 				styleIdx = _.styleList.idx,
-				csn      = `handle-drag-${Math.floor(Math.random()*1e9)}`,
+				csn      = `handle-drag-${Math.random() * 1e9 | 0}`,
 				ani      = _.data.animation,
 				aniCls   = '',
 				aniSty   = {},
@@ -347,7 +351,8 @@ class EditElement extends React.Component {
 			return (
 				<Rnd
 					key={i}
-					className={`${i in index? 's-select': ''} ${i === compIdx? 's-active': ''} `}
+					// className={`${i in index? 's-select': ''} ${i === compIdx? 's-active': ''} `}
+					className={`${i === compIdx? 's-select': ''} ${i === compIdx? 's-active': ''} `}
 					size={{
 						width:  lay.width || '100%',
 						height: lay.height
@@ -397,7 +402,7 @@ class EditElement extends React.Component {
 							: null
 						}
 					</Banner>
-					<RevokeRecovery />
+					<ToolsBar />
 				</div>
 				<ContextMenu />
 				<ShortcutKey keyDown={this.keyDown} keyUp={this.keyUp} disableDragging={disableDragging} />

@@ -121,10 +121,10 @@ class EditCompLayout extends React.Component {
 				<a onClick={e => this.removeComp(e, len - i)}><Icon type="delete"/></a>
 			</li>
 		))
-		let SortableItem = SortableElement(({_, i, l}) => {
+		let SortableItem = SortableElement(({ _: { _id, name }, i, l }) => {
 				return (
 					<li className={`pecl-li${(l - i) === editConfig.curData.compIdx? ' s-active': ''}`}>
-						<div className="pl-name">{ names[i] }</div>
+						<div className="pl-name">{ names[i] } -{ _id || name }</div>
 						<div className="pl-ctrl">
 							<a><Icon type="copy"/></a>
 							<a><Icon type="delete"/></a>
@@ -137,9 +137,7 @@ class EditCompLayout extends React.Component {
 			return (
 				<ul>
 					{
-						eles.map((_, i) => (
-							<SortableItem key={i} index={i} l={len} i={i} _={_} />
-						))
+						eles.map((_, i) => (<SortableItem key={i} index={i} l={len} i={i} _={_} />))
 					}
 				</ul>
 			)
