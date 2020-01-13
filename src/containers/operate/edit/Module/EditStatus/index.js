@@ -12,6 +12,8 @@ import ImageUploadTheme from 'compEdit/EditCommon/ImageUploadTheme'
 
 import './index.less'
 
+const statusLimit = 16
+
 class EditStatus extends React.Component {
 	constructor(props) {
 		super(props)
@@ -79,9 +81,9 @@ class EditStatus extends React.Component {
 			{ data, editConfig } = props,
 			{ list }  = data.feature.status,
 			keys      = Object.keys(list),
-			activeKey = ['0', '1']
-		let addNode
-		if (keys.length < 10) {
+			activeKey = ['0', '1'],
+			addNode
+		if (keys.length < statusLimit) {
 			addNode = (
 				<div className="pgs-row">
 					<div className="pgsr-name">状态名</div>
@@ -107,7 +109,7 @@ class EditStatus extends React.Component {
 					<div className="pgsr-auth" style={{ width: 30 }}>
 						<div className="pgt-edit">
 							{
-								key === 1
+								key != 1
 								?
 								<div className onClick={this.removeKey.bind(this, key)}><Icon type="close"/></div>
 								: null
@@ -121,6 +123,7 @@ class EditStatus extends React.Component {
 			<section className="pg-status">
 				<Collapse defaultActiveKey={activeKey}>
 					<Panel header={'状态编辑'}>
+						<span>状态上限: {statusLimit}</span>
 						{ addNode }
 						{ childNode }
 					</Panel>

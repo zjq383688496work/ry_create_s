@@ -29,7 +29,7 @@ class StatusJump extends React.Component {
 
 	onChange = val => {
 		let { data, content, actions, editConfig } = this.props
-		let { curData, globalData } = editConfig
+		let { curData } = editConfig
 		let { parentComp } = curData
 		content.type = 'status'
 		content.url  = val
@@ -37,9 +37,12 @@ class StatusJump extends React.Component {
 	}
 
 	render() {
-		let { data, content, editConfig } = this.props
-		let { url }    = content
-		let { list }   = data.feature.status
+		let { data, content, editConfig } = this.props,
+			{ parentComp } = editConfig.curData,
+			{ url }  = content,
+			status   = data.feature.status || parentComp.feature.status,
+			isParent = !data.feature.status,
+			{ list } = status
 		let selectNode = Object.keys(list).map(key => <Option key={key} value={key}>{ list[key].name }</Option>)
 		return (
 			<div>

@@ -74,9 +74,11 @@ module.exports = {
 	voice: {
 		picture:      1,
 		button:       1,
+		buttonStatus: 1,
+		buttonAuto:   1,
 		text:         1,
 		area:         1,
 		audio:        1,
-		buttonStatus: 1,
+		listByVoice:  1,
 	}
 }

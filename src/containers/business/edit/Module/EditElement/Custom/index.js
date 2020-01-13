@@ -1,10 +1,3 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
@@ -12,11 +5,15 @@ import * as actions from 'actions'
 import './index.less'
 
 import Rnd from 'react-rnd'
-import { Icon } from 'antd'
+
+
 
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
+import Audio        from 'compEdit/EditElement/Audio'
 import Button       from 'compEdit/EditElement/Button'
+import ButtonStatus from 'compEdit/EditElement/ButtonStatus'
+import ButtonAuto   from 'compEdit/EditElement/ButtonAuto'
 import Text         from 'compEdit/EditElement/Text'
 import Time         from 'compEdit/EditElement/Time'
 import Weather      from 'compEdit/EditElement/Weather'
@@ -55,6 +52,7 @@ import NavByStore2    from 'compEdit/EditElement/StoreList2/Nav'
 import StoreBlock     from 'compEdit/EditElement/StoreDetails2/Block'
 import QrcodeHui      from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav      from 'compEdit/EditElement/QrcodeNav'
+import ListByVoice    from 'compEdit/EditElement/Voice/List'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -65,7 +63,10 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
+		audio:             <Audio             {...props} />,
 		button:            <Button            {...props} />,
+		buttonStatus:      <ButtonStatus      {...props} />,
+		buttonAuto:        <ButtonAuto      {...props} />,
 		text:              <Text              {...props} />,
 		time:              <Time              {...props} />,
 		weather:           <Weather           {...props} />,
@@ -104,6 +105,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		storeBlock:        <StoreBlock        {...props} />,
 		qrcodeHui:         <QrcodeHui         {...props} />,
 		qrcodeNav:         <QrcodeNav         {...props} />,
+		listByVoice:       <ListByVoice       {...props} />,
 	}
 	return render[name]
 }

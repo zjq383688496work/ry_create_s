@@ -316,6 +316,14 @@ class EditContent extends React.Component {
 			/>
 		)
 	}
+	// 备注
+	renderRemarks(cfg, con, val, key, index) {
+		let { color = '#ccc', text } = val
+		if (!text) return null
+		return (
+			<span style={{ color }}>{text}</span>
+		)
+	}
 	// 筛选框
 	renderRadio(cfg, con, val, key, index) {
 		let { option } = cfg

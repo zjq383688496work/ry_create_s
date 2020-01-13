@@ -12,5 +12,5 @@ module.exports = {
 	childElementActiveMap: require('./childElementActiveMap'),
 	contentFieldFilter:    require('./contentFieldFilter'),
 	statusAuth:     require('./statusAuth'),
-	statusManage:   require('./statusManage'),
+	// statusManage:   require('./statusManage'),
 }

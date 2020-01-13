@@ -1,12 +1,10 @@
 let { deepCopy } = require('state/common')
-let { statusManage } = require('var')
+let status  = require('./status')
 let style_1 = require('./style_1')
-
-let { voice } = statusManage
 
 let _style_1 = deepCopy(style_1)
 
-_style_1.components = voice.list[1].components
+_style_1.components = status.list[1].components
 
 module.exports = {
 	name: 'voice',
@@ -25,7 +23,7 @@ module.exports = {
 	// 功能特性
 	feature: {
 		statusIndex: 1,
-		status: voice,
+		status: status,
 		visible: true
 	}
 }

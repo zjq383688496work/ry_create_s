@@ -7,10 +7,10 @@ const data = {
 			width: 120,
 			backgroundColor: { type: 'custom', color: '#fff' },
 			padding: {
-				top:     0,
-				right:   0,
-				bottom:  0,
-				left:    0
+				top:    0,
+				right:  0,
+				bottom: 0,
+				left:   0
 			},
 			borderRadius: {
 				topLeft:     0,

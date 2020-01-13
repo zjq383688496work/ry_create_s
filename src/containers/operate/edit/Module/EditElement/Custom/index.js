@@ -1,10 +1,3 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
@@ -12,13 +5,15 @@ import * as actions from 'actions'
 import './index.less'
 
 import Rnd from 'react-rnd'
-import { Icon, message } from 'antd'
-import { InductionLine, nearPosSty }     from 'compEdit/EditElement/InductionLine'
+import { message } from 'antd'
+import { InductionLine, nearPosSty } from 'compEdit/EditElement/InductionLine'
+
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Audio        from 'compEdit/EditElement/Audio'
 import Button       from 'compEdit/EditElement/Button'
 import ButtonStatus from 'compEdit/EditElement/ButtonStatus'
+import ButtonAuto   from 'compEdit/EditElement/ButtonAuto'
 import Text         from 'compEdit/EditElement/Text'
 import Time         from 'compEdit/EditElement/Time'
 import Weather      from 'compEdit/EditElement/Weather'
@@ -31,7 +26,7 @@ import Page         from 'compEdit/EditElement/Page'
 import Reset        from 'compEdit/EditElement/Reset'
 import FloorMap     from 'compEdit/EditElement/FloorMap'
 import ListByStore  from 'compEdit/EditElement/ListByStore'
-import ListByGoods  from 'compEdit/EditElement/GoodsList/ListByGoods'
+// import ListByGoods  from 'compEdit/EditElement/GoodsList/ListByGoods'
 // import SplitLine         from 'compEdit/EditElement/SplitLine'
 import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
 import CatgByActivity2   from 'compEdit/EditElement/WonderfulActivity2/Catg'
@@ -75,6 +70,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		audio:             <Audio             {...props} />,
 		button:            <Button            {...props} />,
 		buttonStatus:      <ButtonStatus      {...props} />,
+		buttonAuto:        <ButtonAuto      {...props} />,
 		text:              <Text              {...props} />,
 		time:              <Time              {...props} />,
 		weather:           <Weather           {...props} />,
@@ -92,7 +88,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		// splitLine:         <SplitLine         {...props} />,
 		reset:             <Reset             {...props} />,
 		listByStore:       <ListByStore       {...props} />,
-		listByGoods:       <ListByGoods       {...props} />,
+		// listByGoods:       <ListByGoods       {...props} />,
 		pictureBind:       <PictureBind       {...props} />,
 		textBind:          <TextBind          {...props} />,
 		swiperBind:        <SwiperBind        {...props} />,
@@ -248,7 +244,6 @@ class Custom extends React.Component {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
 		let lay = item.data.layout
-		console.log('lay-stop: ', lay)
 		if (lay.left === d.x && lay.top  === d.y) return
 		lay.left = this.state.vPosition.p_left
 		lay.top  = this.state.hPosition.p_top

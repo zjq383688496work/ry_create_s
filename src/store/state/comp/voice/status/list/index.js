@@ -110,43 +110,48 @@ const Pos = extendRmSL(deepCopy(tb), {
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  0,
-		left: 0,
-		width:  441,
+		top:  50,
+		left: 50,
+		width:  440,
 		height: 300
 	},
 	style: {
 		filter: {
-			width:  100,
-			height: 90,
+			width:  440,
+			height: 80,
 			borderWidth:  1,
 			borderStyle: 'solid',
-			borderColor: { type: 'custom', color: '#cfad81' },
+			borderColor: { type: 'custom', color: '#e0e0e0' },
 			backgroundColor: { type: 'custom', color: '#fff' },
 			margin: {
 				top:     0,
-				right:   10,
+				right:   0,
 				bottom:  10,
 				left:    0,
 			},
 			borderRadius:    {
-				topLeft:     10,
-				topRight:    10,
-				bottomLeft:  10,
-				bottomRight: 10
+				topLeft:     0,
+				topRight:    0,
+				bottomLeft:  0,
+				bottomRight: 0
 			},
 			boxShadow: {
-				h_shadow:   0,
-				v_shadow:   0,
-				blur_dis:   0,
+				h_shadow:   2,
+				v_shadow:   2,
+				blur_dis:   10,
 				spread_dis: 0,
-				color:      { type: 'custom', color: '#000' }
+				color:      { type: 'custom', color: 'rgba(0, 0, 0, 0.2)', rgb: '#000', alpha: 20 }
 			}
 		}
 	},
 	componentLayout: [ LOGO, Name, Ico, Pos, Recom ],
 	content: {
-		router: {},
+		storeRouter:  {},
+		publicRouter: {},
+		goodsRouter:  {},
+		appRouter:    {},
+		onlySwitch:   true,
+		remarks:      { text: '唯一跳转: 指的是只有一条搜索结果的时候是否自动跳转', color: 'red' },
 	},
 	animation: {
 		className: '',		// 动画样式

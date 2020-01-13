@@ -11,13 +11,14 @@ module.exports = {
 	},
 	style: {},
 	content: {
-		voice_default:        {},
-		voice_listen:         {},
-		voice_success:        {},
-		voice_error_network:  {},
-		voice_error_software: {},
-		voice_error_hardware: {},
-		voice_error_user:     {},
+		voice_default:        { type: 'status', url: '1' },
+		voice_listen:         { type: 'status', url: '2' },
+		voice_success:        { type: 'status', url: '3' },
+		voice_success_null:   { type: 'status', url: '4' },
+		voice_error_network:  { type: 'status', url: '5' },
+		voice_error_software: { type: 'status', url: '6' },
+		voice_error_hardware: { type: 'status', url: '7' },
+		voice_error_user:     { type: 'status', url: '8' },
 	},
 	animation: {
 		className: '',		// 动画样式

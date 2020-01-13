@@ -12,33 +12,28 @@ export default class ListByVoice extends React.Component {
 	componentWillMount() {
 		this.getData()
 	}
-	componentWillReceiveProps(props) {
-		var { size } = props.ioInput.body,
-			size2 = this.state.size
-		if (size2 != size) this.getData()
-	}
-	shouldComponentUpdate(newProps, newState){
+	componentWillReceiveProps(props) {}
+	shouldComponentUpdate(newProps, newState) {
 		return newProps.drag != undefined? newProps.drag: true
 	}
 	getData = e => {
-		var { size } = this.props.ioInput.body
-		Server.store.getList(size, o => {
-			this.setState({ list: o, size: size })
+		Server.store.getList(16, o => {
+			this.setState({ list: o })
 		})
 	}
 	renderList = e => {
-		let { data, ioInput } = this.props,
-			{ list = [] } = this.state,
-			{ componentLayout, layout } = data.data
+		let { props, state } = this,
+			{ componentLayout, layout } = props.data.data,
+			{ list } = state
 		return list.map((_, i) => {
-			if(i >= 6 ){_.featuredShop = false}
-			return <Layout key={i} data={_} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filter')} />
+			if (i % 3) _.featuredShop = false
+			return <Layout key={i} data={_} layout={layout} components={componentLayout} styleObj={cssColorFormat(props, 'filter')} />
 		})
 	}
 	render() {
 		let dom = this.renderList()
 		return (
-			<section className={`e-list-by-store2`}>
+			<section className={`e-list-by-voice`}>
 				{ dom }
 			</section>
 		)

@@ -86,11 +86,11 @@ class Header extends React.Component {
 		actions.updateGlobal(globalData)
 	}
 	// 预览模板
-	review(){
+	review() {
 		this.reviewModal.show()
 	}
 	// 常见问题
-	question(){
+	question() {
 		this.questionModal.show()
 	}
 	selectTheme() {
@@ -119,7 +119,8 @@ class Header extends React.Component {
 			data:    gd.data,
 			theme:   gd.theme,
 			feature: gd.feature,
-			banner:  gd.banner
+			banner:  gd.banner,
+			voice:   gd.voice,
 		}
 		let config = {
 			configPC: {

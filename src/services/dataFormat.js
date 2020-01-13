@@ -397,11 +397,15 @@ const dataFormat = {
 		global: function(nowData, orgData) {
 			var nowBanner  = nowData.banner,
 				orgBanner  = orgData.banner,
+				orgVoice   = orgData.voice,
 				orgFeature = orgData.feature
 			if (orgBanner) {
 				if (!nowBanner) nowData.banner = orgData
 				nowBanner.auth = orgBanner.auth
 			}
+
+			nowData.voice = orgVoice
+
 			nowData.feature = orgFeature
 		}
 	}

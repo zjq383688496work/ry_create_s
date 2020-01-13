@@ -3,9 +3,13 @@ let { deepCopy } = require('state/common')
 // 图片
 const data = {
 	style:     {
-		image: {
+		audio: {
 			transform: { rotate: 0 },
 			opacity:   1,
+			background: 'center no-repeat',
+			backgroundSize: 'contain',
+			backgroundColor: { type: 'custom', color: '#fff' },
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/202001131001053309.png' },
 			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'custom', color: '#fff' },
@@ -14,19 +18,18 @@ const data = {
 				topRight:    0,
 				bottomRight: 0,
 				bottomLeft:  0
-			}
+			},
 		}
 	},
 	layout: {
 		position: 'absolute',
 		top:      0,
 		left:     0,
-		width:    120,
-		height:   120,
+		width:    64,
+		height:   64,
 		lockAspectRatio: true
 	},
 	content: {
-		img:    { type: 'custom', img: '' },
 		audio:  '',
 		volume: 50,
 		loop: false,

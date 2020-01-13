@@ -15,6 +15,17 @@ export default class Voice extends React.Component {
 		super(props)
 		this.state = { ioInput: {} }
 	}
+
+	componentWillMount() {
+		let { curPage, globalData: { voice } } = this.props.editConfig,
+			{ voiceCheck = true } = curPage.feature
+
+		if (!voice.feature.visible || !voiceCheck) return
+		
+		let { data: { components }, feature } = voice,
+			{ list } = feature.status
+		list[1].components = components
+	}
 	
 	shouldComponentUpdate(newProps, newState) {
 		return newProps.drag != undefined? newProps.drag: true

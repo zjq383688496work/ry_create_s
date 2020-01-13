@@ -16,7 +16,6 @@ import Web                from 'compEdit/EditElement/Web'
 import Text               from 'compEdit/EditElement/Text'
 import Audio              from 'compEdit/EditElement/Audio'
 import Button             from 'compEdit/EditElement/Button'
-import ButtonStatus       from 'compEdit/EditElement/ButtonStatus'
 import Video              from 'compEdit/EditElement/Video'
 import SwiperImage        from 'compEdit/EditElement/SwiperImage'
 import SwiperImgAndVideo  from 'compEdit/EditElement/SwiperImgAndVideo'
@@ -68,7 +67,6 @@ const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl, contentE
 		text:               <Text              {...props} />,
 		audio:              <Audio             {...props} />,
 		button:             <Button            {...props} />,
-		buttonStatus:       <ButtonStatus      {...props} />,
 		swiperImage:        <SwiperImage       {...props} />,
 		swiperImgAndVideo:  <SwiperImgAndVideo {...props} />,
 		wonderfulActivity:  <WonderfulActivity {...props} />,

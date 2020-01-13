@@ -98,6 +98,8 @@ module.exports = {
 	audio:                 authInit(require('./audio')),
 	// 状态切换按钮
 	buttonStatus:          authInit(require('./buttonStatus')),
+	// 自执行按钮
+	buttonAuto:            authInit(require('./buttonAuto')),
 
 	/* 商品 开始 */
 	// 商品列表
@@ -148,5 +150,5 @@ module.exports = {
 
 	// 语音模块
 	voice:                 authInit(require('./voice')),
-	listByVoice:           authInit(require('./voice/content/list')),
+	listByVoice:           authInit(require('./voice/status/list')),
 }

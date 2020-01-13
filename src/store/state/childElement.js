@@ -98,10 +98,16 @@ module.exports = {
 	// },
 	catgByActivity2: {
 		picture:  1,
-		textBind: 1
+		textBind: 1,
 	},
 	resetByActivity2: {
 		picture:  1,
-		text:     1
+		text:     1,
+	},
+	listByVoice: {
+		area:     1,
+		picture:  1,
+		text:     1,
+		textBind: 1,
 	},
 }

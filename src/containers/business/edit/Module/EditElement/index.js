@@ -10,36 +10,38 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
-import Picture           from 'compEdit/EditElement/Picture'
-import Web               from 'compEdit/EditElement/Web'
-import Text              from 'compEdit/EditElement/Text'
-import Button            from 'compEdit/EditElement/Button'
-import Video             from 'compEdit/EditElement/Video'
-import SwiperImage       from 'compEdit/EditElement/SwiperImage'
-import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
-import WonderfulActivity from 'compEdit/EditElement/WonderfulActivity'
+import Picture            from 'compEdit/EditElement/Picture'
+import Web                from 'compEdit/EditElement/Web'
+import Text               from 'compEdit/EditElement/Text'
+import Audio              from 'compEdit/EditElement/Audio'
+import Button             from 'compEdit/EditElement/Button'
+import ButtonStatus       from 'compEdit/EditElement/ButtonStatus'
+import Video              from 'compEdit/EditElement/Video'
+import SwiperImage        from 'compEdit/EditElement/SwiperImage'
+import SwiperImgAndVideo  from 'compEdit/EditElement/SwiperImgAndVideo'
+import WonderfulActivity  from 'compEdit/EditElement/WonderfulActivity'
 import WonderfulActivity2 from 'compEdit/EditElement/WonderfulActivity2'
-import Time              from 'compEdit/EditElement/Time'
-import Weather           from 'compEdit/EditElement/Weather'
-import StoreList         from 'compEdit/EditElement/StoreList'
-import StoreDetails      from 'compEdit/EditElement/StoreDetails'
-import StoreInstro       from 'compEdit/EditElement/StoreInstro'
-import StoreList2        from 'compEdit/EditElement/StoreList2'
-import StoreDetails2     from 'compEdit/EditElement/StoreDetails2'
-// import GoodsList         from 'compEdit/EditElement/GoodsList'
-import DateWeather       from 'compEdit/EditElement/DateWeather'
-import Navigation        from 'compEdit/EditElement/Navigation'
-import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
-// import SplitLine         from 'compEdit/EditElement/SplitLine'
-import Map2D             from 'compEdit/EditElement/Map2D'
-import Html              from 'compEdit/EditElement/Html'
-// import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
-import Area              from 'compEdit/EditElement/Area'
-import Qrcode            from 'compEdit/EditElement/Qrcode'
-import QrcodeHui         from 'compEdit/EditElement/QrcodeHui'
-import QrcodeNav         from 'compEdit/EditElement/QrcodeNav'
+import Time               from 'compEdit/EditElement/Time'
+import Weather            from 'compEdit/EditElement/Weather'
+import StoreList          from 'compEdit/EditElement/StoreList'
+import StoreDetails       from 'compEdit/EditElement/StoreDetails'
+import StoreInstro        from 'compEdit/EditElement/StoreInstro'
+import StoreList2         from 'compEdit/EditElement/StoreList2'
+import StoreDetails2      from 'compEdit/EditElement/StoreDetails2'
+// import GoodsList          from 'compEdit/EditElement/GoodsList'
+import DateWeather        from 'compEdit/EditElement/DateWeather'
+import Navigation         from 'compEdit/EditElement/Navigation'
+import NavigationFloat    from 'compEdit/EditElement/NavigationFloat'
+// import SplitLine          from 'compEdit/EditElement/SplitLine'
+import Map2D              from 'compEdit/EditElement/Map2D'
+import Html               from 'compEdit/EditElement/Html'
+// import GoodsDetails       from 'compEdit/EditElement/GoodsDetails'
+import Area               from 'compEdit/EditElement/Area'
+import Qrcode             from 'compEdit/EditElement/Qrcode'
+import QrcodeHui          from 'compEdit/EditElement/QrcodeHui'
+import QrcodeNav          from 'compEdit/EditElement/QrcodeNav'
 
-import Banner            from 'compEdit/EditElement/Banner'
+import Banner             from 'compEdit/EditElement/Banner'
 
 import * as actions from 'actions'
 
@@ -54,34 +56,36 @@ var animeMap = variable.animeCompMap,
 const compContent = (name, data, actions, type, idx, csn,contentEditable) => {
 	var props  = { data, actions, type, idx, csn ,contentEditable},
 		render = {
-		picture:           <Picture           {...props} />,
-		web:               <Web               {...props} />,
-		video:             <Video             {...props} />,
-		text:              <Text              {...props} />,
-		button:            <Button            {...props} />,
-		swiperImage:       <SwiperImage       {...props} />,
-		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
-		wonderfulActivity: <WonderfulActivity {...props} />,
+		picture:            <Picture           {...props} />,
+		web:                <Web               {...props} />,
+		video:              <Video             {...props} />,
+		text:               <Text              {...props} />,
+		audio:              <Audio             {...props} />,
+		button:             <Button            {...props} />,
+		buttonStatus:       <ButtonStatus      {...props} />,
+		swiperImage:        <SwiperImage       {...props} />,
+		swiperImgAndVideo:  <SwiperImgAndVideo {...props} />,
+		wonderfulActivity:  <WonderfulActivity {...props} />,
 		wonderfulActivity2: <WonderfulActivity2 {...props} />,
-		time:              <Time              {...props} />,
-		weather:           <Weather           {...props} />,
-		navigation:        <Navigation        {...props} />,
-		navigationFloat:   <NavigationFloat   {...props} />,
-		storeList:         <StoreList         {...props} />,
-		// goodsList:         <GoodsList         {...props} />,
-		storeDetails:      <StoreDetails      {...props} />,
-		storeInstro:       <StoreInstro       {...props} />,
-		// splitLine:         <SplitLine         {...props} />,
-		dateWeather:       <DateWeather       {...props} />,
-		map2D:             <Map2D             {...props} />,
-		html:              <Html              {...props} />,
-		// goodsDetails:      <GoodsDetails      {...props} />,
-		area:              <Area              {...props} />,
-		qrcode:            <Qrcode            {...props} />,
-		qrcodeHui:         <QrcodeHui         {...props} />,
-		qrcodeNav:         <QrcodeNav         {...props} />,
-		storeList2:        <StoreList2        {...props} />,
-		storeDetails2:     <StoreDetails2     {...props} />
+		time:               <Time              {...props} />,
+		weather:            <Weather           {...props} />,
+		navigation:         <Navigation        {...props} />,
+		navigationFloat:    <NavigationFloat   {...props} />,
+		storeList:          <StoreList         {...props} />,
+		// goodsList:          <GoodsList         {...props} />,
+		storeDetails:       <StoreDetails      {...props} />,
+		storeInstro:        <StoreInstro       {...props} />,
+		// splitLine:          <SplitLine         {...props} />,
+		dateWeather:        <DateWeather       {...props} />,
+		map2D:              <Map2D             {...props} />,
+		html:               <Html              {...props} />,
+		// goodsDetails:       <GoodsDetails      {...props} />,
+		area:               <Area              {...props} />,
+		qrcode:             <Qrcode            {...props} />,
+		qrcodeHui:          <QrcodeHui         {...props} />,
+		qrcodeNav:          <QrcodeNav         {...props} />,
+		storeList2:         <StoreList2        {...props} />,
+		storeDetails2:      <StoreDetails2     {...props} />
 	}
 	return render[name]
 }

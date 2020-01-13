@@ -92,8 +92,8 @@ class Header extends React.Component {
 		var { actions, location, editConfig }    = this.props,
 			{ curData, pageContent, globalData } = editConfig,
 			{ templateId } = location.query,
-			{ homepage } = globalData.data,
-			{ router } = curData
+			{ homepage }   = globalData.data,
+			{ router }     = curData
 		this.getConfigByTemplateId(templateId, CFG => {
 			editConfig.pageList = CFG.pageList
 			dataFormat.sync.global(globalData, CFG.globalData)
@@ -109,7 +109,7 @@ class Header extends React.Component {
 	}
 	clearHistory() {
 		var doc = document.querySelector('#btnClearHistory')
-		doc.click()
+		doc && doc.click()
 	}
 	getConfigByTemplateId(templateId, cb) {
 		var api = `/mcp-gateway/template/get?templateId=${templateId}&phase=RELEASE`
@@ -134,24 +134,25 @@ class Header extends React.Component {
 		let gd = cfg.globalData,cropWidth,cropHeight
 
 		// 作品数据加入composeType
-		if(composeType === 'LANDSCAPE'){
+		if (composeType === 'LANDSCAPE') {
 			gd.data.composeType = 'landscape'
-			cropWidth = 960
+			cropWidth  = 960
 			cropHeight = 540
-		}else{
+		} else {
 			gd.data.composeType = 'portrait'
-			cropWidth = 540
+			cropWidth  = 540
 			cropHeight = 960
 		}
 		cfg.globalData = {
 			data:    gd.data,
 			theme:   gd.theme,
 			feature: gd.feature,
-			// banner:  gd.banner
 		}
 		var terminalGlobalData = deepCopy(cfg.globalData)
 		cfg.globalData.banner  = gd.banner
+		cfg.globalData.voice   = gd.voice
 		if (gd.banner) terminalGlobalData.data.banner = this.bannerSlim(gd.banner)
+		if (gd.voice)  terminalGlobalData.data.voice  = this.bannerSlim(gd.voice)
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,

@@ -16,11 +16,6 @@ module.exports = [
 				key:  'button'
 			},
 			{
-				icon: 'button',
-				name: '状态按钮',
-				key:  'buttonStatus'
-			},
-			{
 				icon: 'image',
 				name: '图片',
 				key:  'picture'
@@ -256,6 +251,16 @@ module.exports = [
 				key:  'button'
 			},
 			{
+				icon: 'button',
+				name: '状态按钮',
+				key:  'buttonStatus'
+			},
+			{
+				icon: 'button',
+				name: '自执行按钮',
+				key:  'buttonAuto'
+			},
+			{
 				icon: 'image',
 				name: '图片',
 				key:  'picture'
@@ -266,8 +271,13 @@ module.exports = [
 				key:  'area'
 			},
 			{
+				icon: 'audio',
+				name: '音频', 
+				key:  'audio'
+			},
+			{
 				icon: 'list',
-				name: '列表',
+				name: '搜索列表',
 				key:  'listByVoice'
 			},
 		]
