@@ -261,6 +261,11 @@ module.exports = [
 				key:  'buttonAuto'
 			},
 			{
+				icon: 'button',
+				name: '事件触发器',
+				key:  'eventTrigger'
+			},
+			{
 				icon: 'image',
 				name: '图片',
 				key:  'picture'

@@ -76,6 +76,7 @@ module.exports = {
 		button:       1,
 		buttonStatus: 1,
 		buttonAuto:   1,
+		eventTrigger: 1,
 		text:         1,
 		area:         1,
 		audio:        1,

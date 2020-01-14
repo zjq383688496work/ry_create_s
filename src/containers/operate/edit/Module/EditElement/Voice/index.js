@@ -17,16 +17,29 @@ export default class Voice extends React.Component {
 	}
 
 	componentWillMount() {
-		let { curPage, globalData: { voice } } = this.props.editConfig,
-			{ voiceCheck = true } = curPage.feature
+		this.syncData(this.props)
+	}
 
-		if (!voice.feature.visible || !voiceCheck) return
-		
-		let { data: { components }, feature } = voice,
-			{ list } = feature.status
-		list[1].components = components
+	componentWillReceiveProps(props) {
+		this.syncData(props)
 	}
 	
+	syncData = props => {
+		let data = this.getData(props)
+		if (!data) return
+		let { curPage, voiceCheck, voice } = data,
+			{ data: { components }, feature: { status } } = voice,
+			{ idx, list } = status
+		list[idx].components = components
+	}
+
+	getData = props => {
+		let { curPage, globalData: { voice } } = props.editConfig,
+			{ voiceCheck = true } = curPage.feature
+		if (!voice || !voice.feature.visible || !voiceCheck) return false
+		return { curPage, voiceCheck, voice }
+	}
+
 	shouldComponentUpdate(newProps, newState) {
 		return newProps.drag != undefined? newProps.drag: true
 	}

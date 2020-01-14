@@ -22,6 +22,7 @@ const Option = Select.Option
 import Banner            from './Banner'
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
 import StatusJump        from 'compEdit/EditCommon/StatusJump'
+import EventTrigger      from 'compEdit/EditCommon/EventTrigger'
 import AudioUploadComp   from 'compEdit/EditCommon/AudioUploadComp'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
 import ImageAndVideoComp from 'compEdit/EditCommon/ImageAndVideoComp'
@@ -190,11 +191,18 @@ class EditContent extends React.Component {
 			<RouterJump data={data} content={val} actions={actions} from={from} />
 		)
 	}
-	// 跳转路由
+	// 切换状态
 	renderStatus(cfg, con, val, key, index) {
 		let { data, actions } = this.props
 		return (
 			<StatusJump data={data} content={val} actions={actions} />
+		)
+	}
+	// 事件触发
+	renderEvent(cfg, con, val, key, index) {
+		let { data, actions } = this.props
+		return (
+			<EventTrigger data={data} content={val} actions={actions} />
 		)
 	}
 	// 上传音频

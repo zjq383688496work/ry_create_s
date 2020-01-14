@@ -195,7 +195,7 @@ class EditStyle extends React.Component {
 						val = style[p][q],
 						auth   = data.auth.style[p][q],
 						render = this[`render${cm.type}`]
-					console.log(val, auth)
+					// console.log(val, auth)
 					if (!auth || !render) return
 					++ci
 					// 根据样式类型渲染对应组件

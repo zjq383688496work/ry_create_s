@@ -6,7 +6,7 @@ const JumpRouter = (data,animate,animateParams,action) => {
     if (data == 'back') {  
         //history.go(-1);  
         //如果是toRYMapPage则跳转到有地图组件的第一个路由页面
-    }else if (data&&data.indexOf('toRYPage') != -1) {
+    } else if (data && data.indexOf('toRYPage') != -1) {
         const routerParams = JSON.parse(data);
         //如果跳转到本页则返回
         if(!routerParams.to || RY_page_router == routerParams.to) return

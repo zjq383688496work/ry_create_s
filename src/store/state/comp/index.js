@@ -100,6 +100,8 @@ module.exports = {
 	buttonStatus:          authInit(require('./buttonStatus')),
 	// 自执行按钮
 	buttonAuto:            authInit(require('./buttonAuto')),
+	// 事件触发器
+	eventTrigger:          authInit(require('./eventTrigger')),
 
 	/* 商品 开始 */
 	// 商品列表

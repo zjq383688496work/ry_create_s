@@ -82,4 +82,5 @@ module.exports = {
 	voice_error_user:     { name: '用户问题', type: 'Status' },
 	onlySwitch:           { name: '唯一跳转', type: 'Switch' },
 	remarks:              { name: '备注', type: 'Remarks' },
+	event:                { name: '事件', type: 'Event' },
 } 

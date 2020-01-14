@@ -174,7 +174,7 @@ class EditElement extends React.Component {
 		} 
 		actions.updateCur(curData)	// 更新 当前数据
 		actions.selectComp(data)
-	} 
+	}
  
 	selectMulti(e, idx) {
 		e.stopPropagation()

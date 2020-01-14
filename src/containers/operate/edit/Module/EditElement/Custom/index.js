@@ -14,6 +14,7 @@ import Audio        from 'compEdit/EditElement/Audio'
 import Button       from 'compEdit/EditElement/Button'
 import ButtonStatus from 'compEdit/EditElement/ButtonStatus'
 import ButtonAuto   from 'compEdit/EditElement/ButtonAuto'
+import EventTrigger from 'compEdit/EditElement/EventTrigger'
 import Text         from 'compEdit/EditElement/Text'
 import Time         from 'compEdit/EditElement/Time'
 import Weather      from 'compEdit/EditElement/Weather'
@@ -70,7 +71,8 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		audio:             <Audio             {...props} />,
 		button:            <Button            {...props} />,
 		buttonStatus:      <ButtonStatus      {...props} />,
-		buttonAuto:        <ButtonAuto      {...props} />,
+		buttonAuto:        <ButtonAuto        {...props} />,
+		eventTrigger:      <EventTrigger      {...props} />,
 		text:              <Text              {...props} />,
 		time:              <Time              {...props} />,
 		weather:           <Weather           {...props} />,
