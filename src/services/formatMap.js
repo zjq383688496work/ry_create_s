@@ -35,6 +35,18 @@ const formatMap = {
 		borderBottom: 1,
 		borderLeft:   1
 	},
+	complexOrder: {
+		margin:       [ 'top', 'right', 'bottom', 'left' ],
+		padding:      [ 'top', 'right', 'bottom', 'left' ],
+		borderRadius: [ 'topLeft', 'topRight', 'bottomRight', 'bottomLeft' ],
+		boxShadow:    [ 'h_shadow', 'v_shadow', 'blur_dis', 'spread_dis', 'color' ],
+		textShadow:   [ 'h_shadow', 'v_shadow', 'blur_dis', 'color' ],
+		border:       [ 'width', 'style', 'color' ],
+		borderTop:    [ 'width', 'style', 'color' ],
+		borderRight:  [ 'width', 'style', 'color' ],
+		borderBottom: [ 'width', 'style', 'color' ],
+		borderLeft:   [ 'width', 'style', 'color' ]
+	},
 	color: {
 		color:           1,
 		borderColor:     1,

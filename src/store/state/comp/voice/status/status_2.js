@@ -1,14 +1,15 @@
 let { authInit, deepCopy, extendRmSL } = require('state/common')
 const p    = authInit(require('state/comp/picture'))
+const t    = authInit(require('state/comp/text'))
 const bs   = authInit(require('state/comp/buttonStatus'))
 
 const voice_icon = extendRmSL(deepCopy(bs), {
 	data: {
 		layout: {
-			top:  175,
-			left: 430,
-			width:  90,
-			height: 90
+			top:  318,
+			left: 440,
+			width:  75,
+			height: 75
 		},
 		content: {
 			text:   '',
@@ -23,16 +24,31 @@ const voice_icon = extendRmSL(deepCopy(bs), {
 		}
 	}
 })
-const voice_text = extendRmSL(deepCopy(p), {
+
+const voice_text_bg = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
-			top:  193,
-			left: 242,
-			width:  190,
+			top:  330,
+			left: 250,
+			width:  200,
 			height: 55
 		},
 		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/202001131038426510.png' }
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/202001151750500923.png' }
+		}
+	}
+})
+
+const voice_text = extendRmSL(deepCopy(p), {
+	data: {
+		layout: {
+			top:  344,
+			left: 328,
+			width:  40,
+			height: 26
+		},
+		content: {
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/202001151751291077.gif' }
 		}
 	}
 })
@@ -40,5 +56,6 @@ const voice_text = extendRmSL(deepCopy(p), {
 // 组件状态管理
 module.exports = [
 	voice_icon,
+	voice_text_bg,
 	voice_text
 ]

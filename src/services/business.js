@@ -1,9 +1,10 @@
 const formatMap = require('./formatMap')
-const formatPxMap      = formatMap.px
-const formatComplexMap = formatMap.complex
-const formatColorMap   = formatMap.color
-const formatImage      = formatMap.image
-const formatPxMap2     = formatMap.px2
+const formatPxMap        = formatMap.px
+const formatComplexMap   = formatMap.complex
+const formatComplexOrder = formatMap.complexOrder
+const formatColorMap     = formatMap.color
+const formatImage        = formatMap.image
+const formatPxMap2       = formatMap.px2
 const NT = formatMap.numberTemplate
 
 const cdnUrl = 'http://rongyi.b0.rongyi.com/commodity/text'
@@ -54,10 +55,20 @@ module.exports = extend(window, {
 			let v = obj[p]
 			if (formatComplexMap[p]) {
 				colorChange = colorVaild(v.color, v, 'color', colorChange)
-				obj[p] = Object.keys(v).map(_ => {
-					let w  = v[_], nt = NT[_]
-					return nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? w += 'px': w
-				}).join(' ')
+				if (formatComplexOrder[p]) {
+					obj[p] = formatComplexOrder[p].map(_ => {
+						let w = v[_]
+						return getAttr(w) === 'Number'? w += 'px': w
+					}).join(' ')
+					if (p === 'textShadow') {
+						console.log('textShadow: ', obj[p])
+					}
+				} else {
+					obj[p] = Object.keys(v).map(_ => {
+						let w  = v[_], nt = NT[_]
+						return nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? w += 'px': w
+					}).join(' ')
+				}
 			}
 			else if (formatColorMap[p]) {
 				colorChange = colorVaild(v, obj, p, colorChange)
@@ -81,11 +92,19 @@ module.exports = extend(window, {
 		Object.keys(obj).map(p => {
 			let v = obj[p]
 			if (formatComplexMap[p]) {
-				 Object.keys(v).map(_ => {
-					let w  = v[_], nt = NT[_]
-					const nowData =  nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? (w *2 + 'px'): w
-					obj[p][_] = nowData
-				})
+				if (formatComplexOrder[p]) {
+					obj[p] = formatComplexOrder[p].map(_ => {
+						let w = v[_]
+						obj[p][_] = getAttr(w) === 'Number'? (w * 2 + 'px'): w
+					})
+				} else {
+					Object.keys(v).map(_ => {
+						let w  = v[_], nt = NT[_]
+						const nowData =  nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? (w * 2 + 'px'): w
+						obj[p][_] = nowData
+					})
+				}
+				
 			}
 			else if (formatPxMap[p]) {
 				obj[p] = v * 2 + 'px'
