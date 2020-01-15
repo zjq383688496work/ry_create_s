@@ -66,12 +66,19 @@ class Header extends React.Component {
 		obj.elements.map(_ => this.formatEle(_))
 	}
 	bannerSlim(banner) {
-		var b = deepCopy(banner),
-			{ data } = b
-		data.layout = cssFormatByTerm(data.layout)
-		delete b.auth
-		delete data.layout.position
-		return b
+	}
+	voiceSlim(voice) {
+		var v = deepCopy(voice),
+			{ data, feature } = v,
+			{ list } = feature.status
+		delete data.layout
+		delete data.components
+		// data.layout = cssFormatByTerm(data.layout)
+		delete v.auth
+		Object.values(list).forEach(({ components }) => {
+			components.forEach(component => this.formatEle(component))
+		})
+		return v
 	}
 	// 预览模板
 	review() {
@@ -152,7 +159,7 @@ class Header extends React.Component {
 		cfg.globalData.banner  = gd.banner
 		cfg.globalData.voice   = gd.voice
 		if (gd.banner) terminalGlobalData.data.banner = this.bannerSlim(gd.banner)
-		if (gd.voice)  terminalGlobalData.data.voice  = this.bannerSlim(gd.voice)
+		if (gd.voice)  terminalGlobalData.data.voice  = this.voiceSlim(gd.voice)
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,
