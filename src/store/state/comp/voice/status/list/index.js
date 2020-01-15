@@ -110,30 +110,30 @@ const Pos = extendRmSL(deepCopy(tb), {
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  50,
-		left: 50,
-		width:  440,
-		height: 300
+		top:  315,
+		left: 31,
+		width:  500,
+		height: 260
 	},
 	style: {
 		filter: {
-			width:  440,
-			height: 80,
+			width:  110,
+			height: 120,
 			borderWidth:  1,
 			borderStyle: 'solid',
-			borderColor: { type: 'custom', color: '#e0e0e0' },
+			borderColor: { type: 'custom', color: '#e2e2e2' },
 			backgroundColor: { type: 'custom', color: '#fff' },
 			margin: {
 				top:     0,
-				right:   0,
-				bottom:  10,
+				right:   12.5,
+				bottom:  12.5,
 				left:    0,
 			},
 			borderRadius:    {
-				topLeft:     0,
-				topRight:    0,
-				bottomLeft:  0,
-				bottomRight: 0
+				topLeft:     10,
+				topRight:    10,
+				bottomLeft:  10,
+				bottomRight: 10
 			},
 			boxShadow: {
 				h_shadow:   2,
