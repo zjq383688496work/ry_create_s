@@ -2,6 +2,21 @@ let { authInit, deepCopy, extendRmSL } = require('state/common')
 const p    = authInit(require('state/comp/picture'))
 const t    = authInit(require('state/comp/text'))
 const bs   = authInit(require('state/comp/buttonStatus'))
+const ev   = authInit(require('state/comp/eventTrigger'))
+
+const event = extendRmSL(deepCopy(ev), {
+	data: {
+		content: {
+			text:  '',
+			event: { url: 'eventVoicelisten' }
+		},
+		style: {
+			text: {
+				opacity: 0,
+			}
+		}
+	}
+})
 
 const voice_icon = extendRmSL(deepCopy(bs), {
 	data: {
@@ -55,6 +70,7 @@ const voice_text = extendRmSL(deepCopy(p), {
 
 // 组件状态管理
 module.exports = [
+	event,
 	voice_icon,
 	voice_text_bg,
 	voice_text

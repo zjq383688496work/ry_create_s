@@ -171,5 +171,6 @@ module.exports = {
 		storeBlock:      deepCopy(Item.store),
 		// swiperBind:      deepCopy(Item.store),
 		catgByActivity2: deepCopy(Item.storeActivityCatg),
+		listByVoice:     deepCopy(Item.store),
 	}
 }

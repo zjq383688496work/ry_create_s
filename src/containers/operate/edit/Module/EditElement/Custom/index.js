@@ -333,7 +333,7 @@ class Custom extends React.Component {
 					onResizeStop={(e, dir, ref, delta, pos) => this.resizeFn(e, ref, delta, pos, _, i, data)}
 				>
 					<div
-						className={`pge-layout ${aniCls? aniCls: ''}`}
+						className={`pge-layout ${compName} ${aniCls? aniCls: ''}`}
 						style={aniSty}
 						onClick={e => {this.selectComp(e, _, i, idx, data);this.selectMulti(e, i, idx)}}
 						onContextMenu={e => this.selectComp(e, _, i, idx, data)}

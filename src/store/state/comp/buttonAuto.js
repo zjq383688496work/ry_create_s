@@ -69,7 +69,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'buttonStatus',
+	name: 'buttonAuto',
 	type: 'base',
 	data: deepCopy(data),
 	// 样式列表

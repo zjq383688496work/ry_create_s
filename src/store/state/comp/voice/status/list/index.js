@@ -7,18 +7,18 @@ const tb = authInit(require('state/comp/textBind'))
 const LOGO = extendRmSL(deepCopy(pb), {
 	data: {
 		layout: {
-			top:  10,
-			left: 29,
-			width:  40,
-			height: 40
+			top:  18.5,
+			left: 30,
+			width:  50,
+			height: 50
 		},
 		style: {
 			image: {
 				borderRadius: {
-					topLeft:     20,
-					topRight:    20,
-					bottomRight: 20,
-					bottomLeft:  20
+					topLeft:     25,
+					topRight:    25,
+					bottomRight: 25,
+					bottomLeft:  25
 				}
 			}
 		}, 
@@ -30,43 +30,20 @@ const LOGO = extendRmSL(deepCopy(pb), {
 const Name = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  50,
+			top:  75,
 			left: 0,
-			width:  100,
-			height: 14
+			width:  110,
+			height: 16
 		},
 		content: {
 			bind: 'name'
 		},
 		style: {
 			text: {
-				fontSize:   8,
+				fontSize:   10,
 				lineHeight: 14,
 				textAlign: 'center',
-				color: { type: 'custom', color: '#666' }
-			}
-		}
-	}
-})
-const Recom = extendRmSL(deepCopy(t), {
-	data: {
-		layout: {
-			top:  0,
-			left: 70,
-			width:  20,
-			height: 20
-		},
-		content: {
-			text: '荐'
-		},
-		style: {
-			text: {
-				fontSize:   12,
-				lineHeight: 20,
-				textAlign: 'center',
-				color: { type: 'custom', color: '#fff' },
-				backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201811271625344267.png' },
-				backgroundSize: 'cover'
+				color: { type: 'custom', color: '#333' }
 			}
 		}
 	}
@@ -74,7 +51,7 @@ const Recom = extendRmSL(deepCopy(t), {
 const Ico = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
-			top:  66,
+			top:  95,
 			left: 30,
 			width:  8,
 			height: 8
@@ -87,7 +64,7 @@ const Ico = extendRmSL(deepCopy(p), {
 const Pos = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  63,
+			top:  92,
 			left: 40,
 			width:  60,
 			height: 14
@@ -100,7 +77,7 @@ const Pos = extendRmSL(deepCopy(tb), {
 				fontSize:   8,
 				lineHeight: 14,
 				textAlign: 'left',
-				color: { type: 'custom', color: '#cfad81' }
+				color: { type: 'custom', color: '#333' }
 			}
 		}
 	}
@@ -110,42 +87,43 @@ const Pos = extendRmSL(deepCopy(tb), {
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  315,
-		left: 31,
+		top:  320,
+		left: 32,
 		width:  500,
-		height: 260
+		height: 277
 	},
 	style: {
 		filter: {
 			width:  110,
 			height: 120,
-			borderWidth:  1,
+			borderWidth:  0.5,
 			borderStyle: 'solid',
 			borderColor: { type: 'custom', color: '#e2e2e2' },
-			backgroundColor: { type: 'custom', color: '#fff' },
+			backgroundColor: { type: 'custom', color: '#fafafa' },
 			margin: {
 				top:     0,
-				right:   12.5,
-				bottom:  12.5,
+				right:   12,
+				bottom:  13,
 				left:    0,
 			},
 			borderRadius:    {
-				topLeft:     10,
-				topRight:    10,
-				bottomLeft:  10,
-				bottomRight: 10
+				topLeft:     5,
+				topRight:    5,
+				bottomLeft:  5,
+				bottomRight: 5
 			},
 			boxShadow: {
-				h_shadow:   2,
-				v_shadow:   2,
-				blur_dis:   10,
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
 				spread_dis: 0,
-				color:      { type: 'custom', color: 'rgba(0, 0, 0, 0.2)', rgb: '#000', alpha: 20 }
+				color:      { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 }
 			}
 		}
 	},
-	componentLayout: [ LOGO, Name, Ico, Pos, Recom ],
+	componentLayout: [ LOGO, Name, Ico, Pos ],
 	content: {
+		size: 8,
 		storeRouter:  {},
 		publicRouter: {},
 		goodsRouter:  {},

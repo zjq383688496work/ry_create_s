@@ -78,6 +78,7 @@ module.exports = {
 		buttonAuto:   1,
 		eventTrigger: 1,
 		text:         1,
+		textBind:     1,
 		area:         1,
 		audio:        1,
 		listByVoice:  1,

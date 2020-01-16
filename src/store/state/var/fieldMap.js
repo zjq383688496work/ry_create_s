@@ -49,6 +49,9 @@ var Map = {
 	},
 	activityCatg: {
 		name: '活动分类'
+	},
+	voice: {
+		keyword: '关键字'
 	}
 }
 module.exports = {
@@ -68,5 +71,6 @@ module.exports = {
 	storeBlock:      deepCopy(Map.store),
 	storeDetails2:   deepCopy(Map.store),
 	// swiperBind:      deepCopy(Map.store),
-	catgByActivity2: deepCopy(Map.activityCatg)
+	catgByActivity2: deepCopy(Map.activityCatg),
+	voice:           deepCopy(Map.voice)
 }

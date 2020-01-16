@@ -44,7 +44,7 @@ const voice_text = extendRmSL(deepCopy(t), {
 		layout: {
 			top:  340,
 			left: 260,
-			width:  180,
+			width:  175,
 			height: 36
 		},
 		style: {
@@ -56,7 +56,7 @@ const voice_text = extendRmSL(deepCopy(t), {
 					h_shadow:   1,
 					v_shadow:   1,
 					blur_dis:   1,
-					color:      { type: 'custom', color: 'rgba(147, 66, 0 , 0)', rgb: '#934200', alpha: 50 }
+					color:      { type: 'custom', color: 'rgba(147, 66, 0, 0.5)', rgb: '#934200', alpha: 50 }
 				},
 				color:          { type: 'custom', color: '#fff' }
 			}

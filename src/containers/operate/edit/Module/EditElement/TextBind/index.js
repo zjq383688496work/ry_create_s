@@ -21,9 +21,9 @@ export default class TextBind extends React.Component {
 			{ ioInput, type } = props,
 			ipt = ioInput? ioInput: props,
 			{ data } = props,
-			{ item } = ipt,
+			{ item = {} } = ipt,
 			{ bind } = data.data.content,
-			text = bind? item[bind] || '': '',
+			text = bind? item[bind] || '文字': '',
 			dom
 		if (bind === 'categories') {
 			if (text && getAttr(text) === 'Array') {

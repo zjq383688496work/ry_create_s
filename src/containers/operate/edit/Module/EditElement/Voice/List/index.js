@@ -12,12 +12,15 @@ export default class ListByVoice extends React.Component {
 	componentWillMount() {
 		this.getData()
 	}
-	componentWillReceiveProps(props) {}
+	componentWillReceiveProps(props) {
+		this.getData()
+	}
 	shouldComponentUpdate(newProps, newState) {
 		return newProps.drag != undefined? newProps.drag: true
 	}
 	getData = e => {
-		Server.store.getList(16, o => {
+		let { size = 8 } = this.props.data.data.content
+		Server.store.getList(size, o => {
 			this.setState({ list: o })
 		})
 	}

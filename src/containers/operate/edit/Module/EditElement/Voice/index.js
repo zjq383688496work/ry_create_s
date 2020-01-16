@@ -61,9 +61,10 @@ export default class Voice extends React.Component {
 		let Custom = cusMap[envType] || CustomV
 		let { voiceCheck = true } = curPage.feature
 
-		return voice.feature.visible && voiceCheck
-			?
-			(
+		if (!voiceCheck) return null
+		if (envType === 'operate' && !voice.feature.visible) return null
+
+		return (
 			<div onClick={e => this.selectComp(e, voice)}>
 				<Custom
 					{...this.props}
@@ -74,6 +75,6 @@ export default class Voice extends React.Component {
 					ioOuter={this.ioOuter.bind(this)}
 				/>
 			</div>
-			): null
+		)
 	}
 }

@@ -246,6 +246,11 @@ module.exports = [
 				key:  'text'
 			},
 			{
+				icon: 'text',
+				name: '字段绑定',
+				key:  'textBind'
+			},
+			{
 				icon: 'button',
 				name: '按钮',
 				key:  'button'

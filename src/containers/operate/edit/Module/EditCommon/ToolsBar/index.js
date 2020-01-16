@@ -99,7 +99,13 @@ class ToolsBar extends React.Component {
 			{ visible } = voice.feature
 		voice.feature.visible = !visible
 		actions.updateGlobal(globalData)
-		if (visible) actions.selectPage(curData.router)
+		if (visible) {
+			actions.selectPage(curData.router)
+		} else {
+			// var dom = document.getElementById('voice-box')
+			// dom && dom.click()
+			actions.selectComp(voice)
+		}
 	}
 
 	render() {
