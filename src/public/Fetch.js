@@ -109,19 +109,11 @@ export default class Fetch {
 	}
 
 	static createCrop(config = {}) {
-		var host = ENV === 'qa'
-			?
-			'186.rongyi.com'
-			:
-			ENV === 'dev'
-			?
-			'localhost:4090'
-			:
-			ENV === 'dist'
-			?
-			'manage.preview.rongyi.com'
-			:
-			'manage.w.rongyi.com'
+		var host = ({
+			dev: 'localhost:4090',
+			qa: '186.rongyi.com',
+			dist: 'manage.preview.rongyi.com'
+		})[ENV] || 'manage.w.rongyi.com'
 
 		var API = `http://${host}/api/screen/create`
 		return new Promise((resolve, reject) => {

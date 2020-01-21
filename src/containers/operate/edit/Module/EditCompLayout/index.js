@@ -101,12 +101,17 @@ class EditCompLayout extends React.Component {
 		this.setState({ check: true })
 	}
 	render() {
-		let { data, editConfig } = this.props
+		let { data, editConfig } = this.props,
+			{ curComp, globalData } = editConfig,
+			{ voice } = globalData,
+			{ name } = curComp
 		let { check } = this.state
 		let map  = deepCopy(compNum)
 		let eles = data.elements
 		if (!eles) return false
 		eles = deepCopy(eles)
+		// if (voice && name === 'voice') {
+		// }
 		let len  = eles.length - 1
 		eles.reverse()
 		let names = new Array(eles.length).fill().map((_, i) => {
@@ -133,12 +138,10 @@ class EditCompLayout extends React.Component {
 				)
 			}
 		)
-		const SortableList = SortableContainer(({eles}) => {
+		const SortableList = SortableContainer(({ eles }) => {
 			return (
 				<ul>
-					{
-						eles.map((_, i) => (<SortableItem key={i} index={i} l={len} i={i} _={_} />))
-					}
+					{ eles.map((_, i) => (<SortableItem key={i} index={i} l={len} i={i} _={_} />)) }
 				</ul>
 			)
 		})

@@ -8,9 +8,14 @@ export default class ButtonAuto extends React.Component {
 	render() {
 		let { type, data } = this.props
 		let style = cssColorFormat(this.props, 'text')
+		let { text, defer } = data.data.content
+		text = text.replace(/(\{\{(.*?)\}\})/g, (m, l, key) => {
+			key = key.replace(/\s+/g, '')
+			return ({ second: defer })[key] || ''
+		})
 		return (
 			<div className='e_button e_button_auto' style={style}>
-				{ data.data.content.text }
+				{ text }
 			</div>
 		)
 	}

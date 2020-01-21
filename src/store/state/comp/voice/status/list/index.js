@@ -128,6 +128,7 @@ const data = {
 		publicRouter: {},
 		goodsRouter:  {},
 		appRouter:    {},
+		status:       { type: 'status', url: '1' },
 		onlySwitch:   true,
 		remarks:      { text: '唯一跳转: 指的是只有一条搜索结果的时候是否自动跳转', color: 'red' },
 	},

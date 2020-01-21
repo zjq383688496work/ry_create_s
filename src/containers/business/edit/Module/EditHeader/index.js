@@ -66,6 +66,12 @@ class Header extends React.Component {
 		obj.elements.map(_ => this.formatEle(_))
 	}
 	bannerSlim(banner) {
+		var b = deepCopy(banner),
+			{ data } = b
+		data.layout = cssFormatByTerm(data.layout)
+		delete b.auth
+		delete data.layout.position
+		return b
 	}
 	voiceSlim(voice) {
 		var v = deepCopy(voice),
@@ -160,6 +166,8 @@ class Header extends React.Component {
 		cfg.globalData.voice   = gd.voice
 		if (gd.banner) terminalGlobalData.data.banner = this.bannerSlim(gd.banner)
 		if (gd.voice)  terminalGlobalData.data.voice  = this.voiceSlim(gd.voice)
+		if (!gd.banner) delete terminalGlobalData.data.banner
+		if (!gd.voice)  delete terminalGlobalData.data.voice
 		let config = {
 			configPC: {
 				pageContent: cfg.pageContent,

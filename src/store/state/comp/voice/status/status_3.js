@@ -4,6 +4,7 @@ const t    = authInit(require('state/comp/text'))
 const area = authInit(require('state/comp/area'))
 const list = authInit(require('./list'))
 const bs   = authInit(require('state/comp/buttonStatus'))
+const ba   = authInit(require('state/comp/buttonAuto'))
 
 const shop_list = deepCopy(list)
 
@@ -131,12 +132,37 @@ const voice_text = extendRmSL(deepCopy(t), {
 	}
 })
 
+const autoBack = extendRmSL(deepCopy(ba), {
+	data: {
+		layout: {
+			top:  100,
+			left: 168,
+			width:  200,
+			height: 30
+		},
+		content: {
+			text:   '{{second}} 秒自动返回',
+			status: { type: 'status', url: '1' },
+			defer:  10,
+		},
+		style: {
+			text: {
+				lineHeight:  30,
+				backgroundColor: { type: 'custom', color: '#fff' },
+				borderWidth: 0,
+				fontSize: 12,
+			}
+		}
+	}
+})
+
 // 组件状态管理
 module.exports = [
 	bg,
 	shop_bg,
 	shop_list,
 	back,
+	autoBack,
 	voice_icon,
 	voice_text_bg,
 	voice_text

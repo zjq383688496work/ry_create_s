@@ -476,7 +476,7 @@ class EditContent extends React.Component {
 			childNode = (
 				con.length
 				? 
-				<Panel header={'内容编辑'} key={0}>
+				<Panel header={`内容编辑 id: ${data._id || data.name}`} key={0}>
 					{ con }
 				</Panel>
 				: null

@@ -5,7 +5,8 @@ import * as actions from 'actions'
 
 const comp = require('state/comp')
 
-import { Row, Col, Collapse, Radio, Checkbox } from 'antd'
+import { Row, Col, Collapse, Radio, Checkbox, Modal } from 'antd'
+const { confirm } = Modal
 
 // import './index.less'
 
@@ -16,10 +17,12 @@ let voiceSwitch   = { type: 'Switch', option: [{ name: '打开', value: true }, 
 
 class Voice extends React.Component {
 	componentDidMount() {}
-	onChange(val, key, name) {
+
+	onChange(val, key, name, is = false) {
 		let { data, action, actions } = this.props,
 			{ voice } = data.data
 		if (voice) {
+			if (!val && !is) return this.confirmVoice()
 			voice[key][name] = val
 		} else {
 			data.data['voice'] = { switch: { auth: false, value: false } }
@@ -32,6 +35,18 @@ class Voice extends React.Component {
 			_data.components = feature.status.list[1].components
 		}
 		actions[action](data)
+	}
+	confirmVoice = () => {
+		confirm({
+			title:   '确认要关闭语音功能吗?',
+			content: '关闭语音功能会清空之前语音的所有设置',
+			onOk: () => {
+				this.onChange(false, 'switch', 'value', true)
+			},
+			onCancel() {},
+			okText: '确认',
+			cancelText: '取消',
+		})
 	}
 	// 筛选框
 	renderRadio(cfg, val, key) {
@@ -71,7 +86,7 @@ class Voice extends React.Component {
 						<div className="pgs-row" key={0}>
 							<div className="pgsr-name">语音开关</div>
 							<div className="pgsr-ctrl">
-								{this.renderRadio.bind(this, voiceSwitch,voice.switch.value,'switch')()}
+								{this.renderRadio.bind(this, voiceSwitch, voice.switch.value, 'switch')()}
 							</div>
 							<div className="pgsr-auth">
 								<Checkbox checked={voice.switch.auth || false} onChange={_ => this.onChange(_.target.checked,'switch', 'auth')} />

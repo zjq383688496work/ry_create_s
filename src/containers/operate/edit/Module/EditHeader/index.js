@@ -93,6 +93,15 @@ class Header extends React.Component {
 	question() {
 		this.questionModal.show()
 	}
+	voiceInit(voice) {
+		if (!voice) return
+		let { data, feature } = voice,
+			{ status } = feature
+		if (!feature.visible) feature.visible = true
+		if (status.idx == 1) return
+		status.idx = 1
+		data.components = status.list[1].components
+	}
 	selectTheme() {
 		let { actions, editConfig } = this.props
 		editConfig.curData.contentType = 'theme'
@@ -102,19 +111,22 @@ class Header extends React.Component {
 		let { editConfig, location } = this.props
 		let { query } = location
 		let { templateType, id, composeType, adsFlag, bannerAds } = tempCfg
-		let cfg = deepCopy(editConfig),cropWidth,cropHeight
+		let cfg = deepCopy(editConfig), cropWidth, cropHeight
 
 		let gd = cfg.globalData
 		// 模板数据加入composeType
 		if (composeType === 'LANDSCAPE') {
 			gd.data.composeType = 'landscape'
-			cropWidth = 960
+			cropWidth  = 960
 			cropHeight = 540
 		} else {
 			gd.data.composeType = 'portrait'
-			cropWidth = 540
+			cropWidth  = 540
 			cropHeight = 960
 		}
+
+		this.voiceInit(gd.voice)
+
 		cfg.globalData = {
 			data:    gd.data,
 			theme:   gd.theme,
