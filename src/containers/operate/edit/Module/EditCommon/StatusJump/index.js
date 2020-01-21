@@ -40,9 +40,9 @@ class StatusJump extends React.Component {
 		let { data, content, editConfig } = this.props,
 			{ parentComp } = editConfig.curData,
 			{ url }  = content,
-			status   = data.feature.status || parentComp.feature.status,
+			status   = data.feature.status || (parentComp? parentComp.feature.status: {}),
 			isParent = !data.feature.status,
-			{ list } = status
+			{ list = {} } = status
 		let selectNode = Object.keys(list).map(key => <Option key={key} value={key}>{ list[key].name }</Option>)
 		return (
 			<div>
