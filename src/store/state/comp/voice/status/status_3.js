@@ -77,8 +77,7 @@ const voice_icon = extendRmSL(deepCopy(bs), {
 			height: 75
 		},
 		content: {
-			text:   '',
-			status: { type: 'status', url: '2' }
+			text:   ''
 		},
 		style: {
 			text: {
