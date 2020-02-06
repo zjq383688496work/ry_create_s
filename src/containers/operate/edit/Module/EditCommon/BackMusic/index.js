@@ -1,29 +1,24 @@
-
- 
 import React from 'react'
 
 import InputFile from '../InputFile'
 
-import { bindActionCreators } from 'redux'
-import { connect }  from 'react-redux'
-import * as actions from 'actions'
 import { Row, Col, Collapse, InputNumber, Slider, Icon, message } from 'antd'
 import './index.less'
 const Panel  = Collapse.Panel
 
 
 let musicMap = { type: 'Slider', min: 0, max: 100, step: 1 }
-class BackMusic extends React.Component {
+export default class BackMusic extends React.Component {
 	state = {
-		loading:false
+		loading: false,
 	}
 	componentDidMount(){
 		let { data } = this.props,
 			dom = document.getElementById('RYAudio')
-		dom ? dom.volume = data.data.music['volume']/100 : null
+		dom? dom.volume = data.data.music['volume'] / 100: null
 	}
 	onChange(val, key) {
-		let { data, action, actions } = this.props,
+		let { data } = this.props,
 			dom = key == 'volume' ? document.getElementById('RYAudio') : false
 		if(data.data.music){
 			data.data.music[key] = val
@@ -32,13 +27,18 @@ class BackMusic extends React.Component {
 			data.data.music[key] = val
 		}
 		dom ? dom.volume = data.data.music['volume']/100 : null
-		actions[action](data)
+		this.update()
 	} 
 	removeMusic = () => {
-		let { data, action, actions } = this.props
+		let { data } = this.props
 		data.data.music['url'] = ''
+		this.update()
+	}
+	update = () => {
+		let { actions, action, data } = this.props
 		actions[action](data)
-	} 
+		this.setState({ idx: 0 })
+	}
 	// 滑块
 	renderSlider(cfg, val, key) {
 		return (
@@ -159,17 +159,3 @@ class BackMusic extends React.Component {
 		)
 	}
 }
-
-BackMusic.defaultProps = {
-}
-
-const mapStateToProps = state => state
-
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(actions, dispatch)
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(BackMusic)

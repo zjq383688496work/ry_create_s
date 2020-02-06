@@ -74,7 +74,7 @@ class Voice extends React.Component {
 		)
 	}
 	render() {
-		let { data, action, actions } = this.props,
+		let { data } = this.props,
 			activeKey = Array.from(new Array(1), (_, i) => `${i}`),
 			voice = data.data.voice || { switch: { auth: false, value: false } },
 			btnNode

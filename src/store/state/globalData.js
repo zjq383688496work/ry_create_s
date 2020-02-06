@@ -23,6 +23,13 @@ const globalData = {
 			goods:     { auth: false, value: '' },
 			goodsList: { auth: false, value: '' },
 		},
+		language: {
+			default: 1,
+			list: [
+				{ key: 1 },
+				{ key: 4 },
+			]
+		},
 		composeType:'portrait',
 		max: {
 			id: 0,

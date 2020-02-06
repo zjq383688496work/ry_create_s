@@ -1,13 +1,9 @@
-
- 
 import React from 'react'
 
-import { bindActionCreators } from 'redux'
-import { connect }  from 'react-redux'
-import * as actions from 'actions'
 import {
 	Row, Col, Collapse,Radio, InputNumber, Slider, Icon,message,Checkbox
 } from 'antd'
+
 import './index.less'
 const Panel  = Collapse.Panel
 const RadioButton   = Radio.Button
@@ -15,30 +11,32 @@ const RadioGroup    = Radio.Group
 let advertTime = { type: 'Slider', min: 10, max: 600, step: 10 }
 let advertSwitch = { type:'Switch', option:[{name:'打开',value:true},{name:'关闭',value:false}]}
 
-class Advert extends React.Component {
-	componentDidMount(){
-		
-	}
+export default class Advert extends React.Component {
 	onChange(val, key) {
-		let { data, action, actions } = this.props
+		let { data } = this.props
 		if(data.data.advert){
 			data.data.advert[key]['value'] = val
 		}else{
 			data.data['advert'] = { switch:{auth:false,value:false}, time:{auth:false,value:30} }
 			data.data.advert[key]['value'] = val
 		}
-		actions[action](data)
-	} 
-	onChangeAuth(val,key) {
-		let { data, action, actions } = this.props
+		this.update()
+	}
+	onChangeAuth(val, key) {
+		let { data } = this.props
 		if(data.data.advert){
 			data.data.advert[key]['auth'] = val
 		}else{
 			data.data['advert'] = { switch:{auth:false,value:false}, time:{auth:false,value:30} }
 			data.data.advert[key]['auth'] = val
 		} 
+		this.update()
+	}
+	update = () => {
+		let { actions, action, data } = this.props
 		actions[action](data)
-	} 
+		this.setState({ idx: 0 })
+	}
 	// 滑块
 	renderSlider(cfg, val, key) {
 		return (
@@ -70,43 +68,39 @@ class Advert extends React.Component {
 			</RadioGroup>
 		)
 	}
-	cb = key => {
-		console.log(key)
-	}
 	renderBus(advert){
 		return (
-				advert.switch.auth || (advert.time.auth&&advert.switch.value) ? <Collapse defaultActiveKey={['0']}>
-					<Panel header={`全屏广告`} key={0}>
-						{
-							advert.switch.auth ? <div className="pgs-row" key={0}>
-								<div className="pgsr-name">广告开关</div>
-								<div className="pgsr-ctrl">
-									{this.renderRadio.bind(this,advertSwitch,advert.switch.value,'switch')()}
-								</div>
-							</div> : null
-						}
-						{
-							advert.time.auth&&advert.switch.value ? <div className="pgs-row" key={1}>
-								<div className="pgsr-name">冷却时长</div>
-								<div className="pgsr-ctrl">
-									{this.renderSlider.bind(this,advertTime,advert.time.value,'time')()}
-								</div>
-							</div> : null
-						} 
-					</Panel>
-				</Collapse> : null
-			)
+			advert.switch.auth || (advert.time.auth&&advert.switch.value) ? <Collapse defaultActiveKey={['0']}>
+				<Panel header={`全屏广告`} key={0}>
+					{
+						advert.switch.auth ? <div className="pgs-row" key={0}>
+							<div className="pgsr-name">广告开关</div>
+							<div className="pgsr-ctrl">
+								{this.renderRadio.bind(this,advertSwitch,advert.switch.value,'switch')()}
+							</div>
+						</div> : null
+					}
+					{
+						advert.time.auth&&advert.switch.value ? <div className="pgs-row" key={1}>
+							<div className="pgsr-name">冷却时长</div>
+							<div className="pgsr-ctrl">
+								{this.renderSlider.bind(this,advertTime,advert.time.value,'time')()}
+							</div>
+						</div> : null
+					} 
+				</Panel>
+			</Collapse> : null
+		)
 	}
 	render() {
-		let { data, action, actions } = this.props,
+		let { data } = this.props,
 			activeKey = Array.from(new Array(1), (_, i) => `${i}`),
 			advert = data.data.advert || { switch:{auth:false,value:false}, time:{auth:false,value:30} },
 			btnNode
-		if(envType === 'business'){
-			return this.renderBus.bind(this,advert)()
-		}else{
+		if (envType === 'business') return this.renderBus.bind(this,advert)()
+		else {
 			return (
-				 <Collapse defaultActiveKey={activeKey} onChange={this.cb}>
+				 <Collapse defaultActiveKey={activeKey}>
 					<Panel header={`全屏广告`} key={0}>
 						<div className="pgs-row" key={0}>
 							<div className="pgsr-name">广告开关</div>
@@ -132,20 +126,5 @@ class Advert extends React.Component {
 				</Collapse>
 			)
 		}
-		
 	}
 }
-
-Advert.defaultProps = {
-}
-
-const mapStateToProps = state => state
-
-const mapDispatchToProps = dispatch => ({
-	actions: bindActionCreators(actions, dispatch)
-})
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Advert)

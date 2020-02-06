@@ -16,7 +16,8 @@ import * as actions from 'actions'
 import BackMusic from 'compEdit/EditCommon/BackMusic'
 import Advert    from 'compEdit/EditCommon/Advertisement'
 import Voice     from 'compEdit/EditCommon/Voice'
-import LoadingConfig from 'compEdit/EditCommon/LoadingConfig'
+import LoadingConfig  from 'compEdit/EditCommon/LoadingConfig'
+import LanguageConfig from 'compEdit/EditCommon/LanguageConfig'
 // import { Collapse, Icon, Input, Select, Tabs } from 'antd'
 
 // const Panel  = Collapse.Panel
@@ -233,16 +234,23 @@ class EditTheme extends React.Component {
 				<BackMusic
 					data={editConfig.globalData}
 					action={'updateGlobal'}
+					actions={actions}
 				/>
 				<Advert 
 					data={editConfig.globalData}
 					action={'updateGlobal'}
+					actions={actions}
 				/>
 				<Voice 
 					data={editConfig.globalData}
 					action={'updateGlobal'}
 				/>
 				<LoadingConfig
+					data={editConfig.globalData}
+					action={'updateGlobal'}
+					actions={actions}
+				/>
+				<LanguageConfig
 					data={editConfig.globalData}
 					action={'updateGlobal'}
 					actions={actions}
