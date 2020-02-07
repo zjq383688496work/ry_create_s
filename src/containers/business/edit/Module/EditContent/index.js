@@ -20,6 +20,7 @@ const RadioButton = Radio.Button
 const RadioGroup  = Radio.Group
 
 import Banner            from 'compEdit/EditContent/Banner'
+import LanguageChange    from 'compEdit/EditContent/LanguageChange'
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
 import ImageAndVideoComp from 'compEdit/EditCommon/ImageAndVideoComp'
@@ -45,6 +46,7 @@ const compContent = (name, data, updateComp) => {
 	var render = {
 		bannerHorizontal:  <Banner            {...props} />,
 		bannerVertical:    <Banner            {...props} />,
+		buttonLanguage:    <LanguageChange    {...props} />,
 		navigation:        <Navigation        {...props} />,
 		navigationFloat:   <NavigationFloat   {...props} />,
 		wonderfulActivity: <WonderfulActivity {...props} />,

@@ -32,4 +32,5 @@ module.exports = {
 	qrcodeHui:          1,
 	qrcodeNav:          1,
 	voice:              1,
+	buttonLanguage:     1,
 }  

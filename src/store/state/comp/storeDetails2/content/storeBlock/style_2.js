@@ -33,7 +33,8 @@ const Title = extendRmSL(deepCopy(t), {
 			}
 		},
 		content: {
-			text: '店铺介绍'
+			text:  '店铺介绍',
+			text2: '',
 		}
 	}
 })

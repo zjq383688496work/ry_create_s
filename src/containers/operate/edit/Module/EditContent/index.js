@@ -20,6 +20,7 @@ const RadioGroup    = Radio.Group
 const Option = Select.Option
 
 import Banner            from './Banner'
+import LanguageChange    from './LanguageChange'
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
 import StatusJump        from 'compEdit/EditCommon/StatusJump'
 import EventTrigger      from 'compEdit/EditCommon/EventTrigger'
@@ -44,7 +45,11 @@ import { filterContent } from './filter'
 import * as variable from 'var'
 
 var conMap = variable.contentMap
-var { fieldMap, contentFieldFilter } = variable
+var { fieldMap, contentFieldFilter, languages } = variable
+let {
+	indexs: languageIndexs,
+	values: languageValues
+} = languages
 var plMap  = {
 	// catgByGoods:   'filter',
 	// listByGoods:   'filter',
@@ -61,6 +66,7 @@ const compContent = (name, data, updateComp, from) => {
 	var render = {
 		bannerHorizontal:  <Banner            {...props} />,
 		bannerVertical:    <Banner            {...props} />,
+		buttonLanguage:    <LanguageChange    {...props} />,
 		navigation:        <Navigation        {...props} />,
 		navigationFloat:   <NavigationFloat   {...props} />,
 		weather:           <Weather           {...props} />,
@@ -95,6 +101,7 @@ class EditContent extends React.Component {
 		}
 		return actions.updateComp(null, parentComp? parentComp: data)
 	}
+
 	onChange = (val, con, key, cfg, index) => {
 		let { data, actions, editConfig, from } = this.props
 		let { curData, globalData } = editConfig
@@ -146,13 +153,15 @@ class EditContent extends React.Component {
 	// 文本
 	renderTextarea(cfg, con, val, key, index) {
 		return (
-			<TextArea
-				min={cfg.min || 0} max={cfg.max || 100}
-				placeholder={cfg.placeholder || '右侧编辑内容'}
-				autosize={cfg.autosize || false}
-				value={val} onChange={v => this.onChange(v.target.value, con, key,cfg, index)}
-				style={{ width: '100%' }}
-			/>
+			<div>
+				<TextArea
+					min={cfg.min || 0} max={cfg.max || 100}
+					placeholder={cfg.placeholder || '右侧编辑内容'}
+					autosize={cfg.autosize || false}
+					value={val} onChange={v => this.onChange(v.target.value, con, key,cfg, index)}
+					style={{ width: '100%' }}
+				/>
+			</div>
 		)
 	}
 	// 数字
@@ -403,7 +412,7 @@ class EditContent extends React.Component {
 	}
 
 	renObj(data, content, index) {
-		var { from } = this.props,
+		var { from, editConfig } = this.props,
 			{ name } = data,
 			cons = data.data.content
 		content = filterContent(data, content)
@@ -411,16 +420,34 @@ class EditContent extends React.Component {
 		let childNode = Object.keys(content).map((p, i) => {
 			if (!conMap[p] || contentFieldFilter[envType][p]) return false
 			var cm     = p === 'img' && content.type === 'video'? conMap['video']: conMap[p],
+				cname  = cm.name,
 				type   = (name === 'swiperImgAndVideo' || from === 'banner') && p === 'img'? 'ImgAndVideo': cm.type,
 				val    = content[p],
 				render = this[`render${type}`]
 			if (!render) return null
 			// 根据样式类型渲染对应组件
 			let dom = this[`render${type}`].bind(this, cm, content, val, p, index)()
+
+			// 判断文本内容名称
+			if (cname === '文本内容') {
+				let { list } = editConfig.globalData.data.language,
+					len = list.length
+				if (len > 1) {
+					let [ text1, text2 ] = list
+					if (p === 'text')  cname = languageIndexs[text1.key]
+					else if (p === 'text2') {
+						cname = languageIndexs[text2.key]
+						if (!cname) return null
+					}
+				} else {
+					if (p === 'text2') return null
+				}
+			}
+
 			ci++
 			return (
 				<div className="pgs-row" key={i} style={{display:`${content.isShowDom && (p == 'size' || p == 'pageSwitch')? content.isShowDom: 'flex'}`}}>
-					<div className="pgsr-name">{ cm.name }</div>
+					<div className="pgsr-name">{ cname }</div>
 					<div className="pgsr-ctrl">{ dom }</div>
 					<div className="pgsr-auth">
 						<Checkbox checked={data.auth.content[p] || false} onChange={_ => this.onChangeAuth(_.target.checked, p)} />
@@ -447,7 +474,7 @@ class EditContent extends React.Component {
 		return obj
 	}
 	render() {
-		let { data, actions, editConfig, from } = this.props
+		let { data, editConfig, from } = this.props
 		let compName = data.name
 		if (!compName) return false
 		let { curData } = editConfig

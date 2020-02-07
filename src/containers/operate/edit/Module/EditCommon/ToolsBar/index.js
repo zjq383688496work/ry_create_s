@@ -109,7 +109,7 @@ class ToolsBar extends React.Component {
 	}
 
 	render() {
-		let { voice } = this.props.editConfig.globalData
+		let { data, voice } = this.props.editConfig.globalData
 		let { idx, history } = this.state
 		let len = history.length - 1
 		// return ENV === 'dev'

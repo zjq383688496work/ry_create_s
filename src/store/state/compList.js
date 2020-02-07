@@ -16,6 +16,11 @@ module.exports = [
 				key:  'button'
 			},
 			{
+				icon: 'button',
+				name: '语言按钮',
+				key:  'buttonLanguage'
+			},
+			{
 				icon: 'image',
 				name: '图片',
 				key:  'picture'

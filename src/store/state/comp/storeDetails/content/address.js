@@ -2,8 +2,8 @@ let { deepCopy } = require('state/common')
 
 // 地址
 const data = {
-	style:     {
-		text: { 
+	style:    {
+		text: {
 			textAlign:      'left',
 			fontSize:       12, 
 			lineHeight:     16,   
@@ -19,41 +19,41 @@ const data = {
 				color:      { type: 'custom', color: '#f58f8f' }
 			},
 			color:          { type: 'custom', color: '#333' },
-			margin: { 
+			margin: {
 				top:     0,
 				right:   0,
 				bottom:  0,
 				left:    0,
 			}
-		}, 
+		},
 		image:{
-			height:17, 
-			width:17,
+			height: 17,
+			width:  17,
 			borderRadius:    {
 				topLeft:     6,
 				topRight:    6,
 				bottomRight:  6,
 				bottomLeft: 6
-			},    
-			margin: {  
-				top:     0, 
-				right:   5,  
+			},
+			margin: {
+				top:     0,
+				right:   5,
 				bottom:  0,
 				left:    0,
-			}  
-		}    
-	},  
+			}
+		}
+	},
 	layout: {
 		position: 'absolute',
 		top:      54,
 		left:     87.5,
 		width:    80,
-		height:   30 
-	}, 
+		height:   30
+	},
 	content: {
 		img:    { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805191128322385.png' },	// 图片url
-		text:   'L2  2489',    
-		router: {},	// 路由 
+		text:   'L2  2489',
+		router: {},	// 路由
 	},
 	type:'address',
 	animation: {

@@ -125,6 +125,8 @@ class Header extends React.Component {
 			cropHeight = 960
 		}
 
+		if (gd.data.language) gd.data.language.default = 1
+
 		this.voiceInit(gd.voice)
 
 		cfg.globalData = {

@@ -13,6 +13,7 @@ const voice_icon = extendRmSL(deepCopy(bs), {
 		},
 		content: {
 			text:   '',
+			text2:  '',
 			status: { type: 'status', url: '2' }
 		},
 		style: {

@@ -54,8 +54,9 @@ const data = {
 		}
 	},
 	content: {
-		text:   '按钮',	// 文字内容
-		router: {} 			// 路由
+		text:   '按钮',
+		text2:  '',
+		router: {}
 	},	
 	animation: {
 		className: '',	// 动画样式

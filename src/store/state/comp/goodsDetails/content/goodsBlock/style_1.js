@@ -56,7 +56,8 @@ const PIcon = extendRmSL(deepCopy(t), {
 			}
 		},
 		content: {
-			text: '¥'
+			text:  '¥',
+			text2: '¥',
 		}
 	}
 })
@@ -141,7 +142,8 @@ const QR = extendRmSL(deepCopy(qr), {
 		},
 		content: {
 			bind: 'qrcode',
-			text: '扫码即可购买'
+			text:  '扫码即可购买',
+			text2: '',
 		}
 	}
 })

@@ -88,7 +88,8 @@ const rmbIcon = extendRmSL(deepCopy(t), {
 			height: 30
 		},
 		content: {
-			text: '¥'
+			text:  '¥',
+			text2: '',
 		},
 		style: {
 			text: {

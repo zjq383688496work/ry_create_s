@@ -1,10 +1,3 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
@@ -26,8 +19,13 @@ const RadioGroup  = Radio.Group
 import * as comp from 'state/comp'
 import * as variable from 'var'
 
-var styleMap = variable.styleMap.name
-var cssMap   = variable.styleMap.style
+var { styleMap: sMap, languages } = variable
+var styleMap = sMap.name
+var cssMap   = sMap.style
+let {
+	indexs: languageIndexs,
+	values: languageValues
+} = languages
    
 
 class EditStyle extends React.Component {
@@ -69,10 +67,6 @@ class EditStyle extends React.Component {
 			return actions.updateGlobal(globalData)
 		}
 		return actions.updateComp(null, parentComp? parentComp: data)
-	}
-
-	cb(key) {
-		console.log(key)
 	}
 
 	/* 渲染组件开始 */
@@ -180,8 +174,8 @@ class EditStyle extends React.Component {
 	}
 
 	render() {
-		let { data, from } = this.props
-		let da       = data.data
+		let { data, editConfig, from } = this.props
+		let da = data.data
 		if (!da) return null
 		let { style, layout } = da
 		let styles     = Object.keys(style)	// 具体样式
@@ -189,31 +183,32 @@ class EditStyle extends React.Component {
 		let activeKey  = Array.from(new Array(styles.length), (_, i) => `${i}`)
 		// 位置大小
 		let layoutNode = Object.keys(layout).map((q, j) => {
-				if (!cssMap[q]) return
-				if(from === 'banner') {
-					if(tempCfg.composeType == 'LANDSCAPE'){
-						if(q != 'width') return false
-					}else{
-						if(q != 'height') return false
-					}
+			if (!cssMap[q]) return
+			if(from === 'banner') {
+				if(tempCfg.composeType == 'LANDSCAPE'){
+					if(q != 'width') return false
+				}else{
+					if(q != 'height') return false
 				}
-				let cm     = cssMap[q],
-					val    = layout[q],
-					render = this[`render${cm.type}`]
-				if (!render) return
-				// 根据样式类型渲染对应组件
-				let dom = this[`render${cm.type}`].bind(this, cm, data, layout, val, q)()
-				return (
-					<div className="pgs-row" key={j}>
-						<div className="pgsr-name">{ cm.name }</div>
-						<div className="pgsr-ctrl">{ dom }</div>
-						<div className="pgsr-auth"></div>
-					</div>
-				)
-			})
+			}
+			let cm     = cssMap[q],
+				val    = layout[q],
+				render = this[`render${cm.type}`]
+			if (!render) return
+			// 根据样式类型渲染对应组件
+			let dom = this[`render${cm.type}`].bind(this, cm, data, layout, val, q)()
+			return (
+				<div className="pgs-row" key={j}>
+					<div className="pgsr-name">{ cm.name }</div>
+					<div className="pgsr-ctrl">{ dom }</div>
+					<div className="pgsr-auth"></div>
+				</div>
+			)
+		})
 		// 子组件循环渲染
 		let childNode = styles.map((p, i) => {
-			if (!styleMap[p]) return
+			let cname = styleMap[p]
+			if (!cname) return
 			let ci    = 0
 			let cnode = Object.keys(style[p]).map((q, j) => {
 				if (!cssMap[q]) return
@@ -241,16 +236,27 @@ class EditStyle extends React.Component {
 					</div>
 				)
 			})
+
 			if (ci === 0) return
+
+			// 判断文本内容名称
+			if (cname === '语言') {
+				let { list } = editConfig.globalData.data.language,
+					len = list.length
+				let [ text1, text2 ] = list
+				if (text1 && p === 'language') cname = languageIndexs[text1.key]
+				else if (text2 && p === 'language2') cname = languageIndexs[text2.key]
+			}
+
 			return (
-				<Panel header={styleMap[p]} key={i}>
+				<Panel header={cname} key={i}>
 					{ cnode }
 				</Panel>
 			)
 		})
 		return (
 			<section className="pg-style">
-				<Collapse defaultActiveKey={['0']} onChange={this.cb}>
+				<Collapse defaultActiveKey={['0']}>
 					<Panel header={'组件样式'} key={0}>
 						{ layoutNode }
 					</Panel>

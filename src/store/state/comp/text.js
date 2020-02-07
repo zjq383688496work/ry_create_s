@@ -49,7 +49,8 @@ const data = {
 		height:   30
 	},
 	content: {
-		text:   '', 			// 文字内容
+		text:   '',
+		text2:  '',
 		router: {}				// 路由
 	},
 	type:'normal',

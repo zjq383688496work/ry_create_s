@@ -55,6 +55,7 @@ const data = {
 	},
 	content: {
 		text:  '事件触发器',
+		text2: '',
 		event: {} 			// 事件
 	},	
 	animation: {

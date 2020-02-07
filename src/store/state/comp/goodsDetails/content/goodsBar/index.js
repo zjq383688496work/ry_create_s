@@ -41,7 +41,8 @@ const PIcon = extendRmSL(deepCopy(t), {
 			}
 		},
 		content: {
-			text: '¥'
+			text:  '¥',
+			text2: '¥',
 		}
 	}
 })

@@ -27,7 +27,9 @@ module.exports = {
 		swiperImage:      '轮播',
 		line:             '线',
 		split:            '分隔符',
-		mainTable:        '导航Home'
+		mainTable:        '导航Home',
+		language:         '语言',
+		language2:        '语言',
 	},
 	// 定义样式名称 & 渲染类型 & 相关配置
 	style: {

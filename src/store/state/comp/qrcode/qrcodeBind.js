@@ -41,7 +41,8 @@ const data = {
 	},
 	content: {
 		bind: 'qrcode',
-		text: ''
+		text:  '',
+		text2: '',
 	},
 	animation: {
 		className: '',	// 动画样式

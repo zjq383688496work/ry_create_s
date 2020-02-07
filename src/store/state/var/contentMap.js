@@ -1,6 +1,7 @@
 // 高级组件对应添加子组件
 module.exports = {
 	text:          { name: '文本内容', type: 'Textarea', max: 1000, placeholder: '右侧编辑内容', autosize: { minRows: 1, maxRows: 6 } },
+	text2:         { name: '文本内容', type: 'Textarea', max: 1000, placeholder: '右侧编辑内容', autosize: { minRows: 1, maxRows: 6 } },
 	title:         { name: '标题',    type: 'Title',    max: 30 },
 	img:           { name: '图片',    type: 'Image' },
 	bind:          { name: '字段绑定', type: 'Bind' },

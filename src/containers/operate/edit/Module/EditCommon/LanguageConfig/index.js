@@ -8,7 +8,7 @@ import { languages } from 'var'
 
 const { indexs, values } = languages
 
-const languageLimit = 3
+const languageLimit = 2
 
 export default class LanguageConfig extends React.Component {
 	constructor(props) {
@@ -20,13 +20,11 @@ export default class LanguageConfig extends React.Component {
 		item.key = val
 		this.update()
 	}
-	selectLanguage = item => {
+	selectLanguage = (item, idx) => {
 		return (
 			<Select value={item.key || -1} onChange={e => this.changeLanguage(e, item)} style={{ width: '100%' }}>
-				<Option key={0} value={-1}>请选择</Option>
-				{
-					values.map(({ name, key }) => <Option key={key} value={key}>{name}</Option>)
-				}
+				{ idx > 0 && <Option key={0} value={-1}>请选择</Option> }
+				{ values.map(({ name, key }) => <Option key={key} value={key}>{name}</Option>) }
 			</Select>
 		)
 	}
@@ -57,7 +55,7 @@ export default class LanguageConfig extends React.Component {
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name">语言 {i + 1}</div>
 					<div className="pgsr-ctrl">
-						{ this.selectLanguage(item) }
+						{ this.selectLanguage(item, i) }
 					</div>
 					<div className="pgsr-auth" style={{ width: 30 }}>
 						<div className="pgt-edit">

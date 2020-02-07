@@ -161,6 +161,9 @@ class Header extends React.Component {
 			theme:   gd.theme,
 			feature: gd.feature,
 		}
+
+		if (gd.data.language) gd.data.language.default = 1
+
 		var terminalGlobalData = deepCopy(cfg.globalData)
 		cfg.globalData.banner  = gd.banner
 		cfg.globalData.voice   = gd.voice

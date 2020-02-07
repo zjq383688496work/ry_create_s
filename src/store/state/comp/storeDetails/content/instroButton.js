@@ -18,7 +18,7 @@ const instroButton = extendRmSL(deepCopy(require('../../../comp/button')), {
 			}   
 		},        
 		content: {  
-			text: ''
+			text:  '',
 		},
 		type:'instroButton',
 		animation: {

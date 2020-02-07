@@ -1,10 +1,3 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
 
 import { bindActionCreators } from 'redux'
@@ -16,6 +9,7 @@ import Web                from 'compEdit/EditElement/Web'
 import Text               from 'compEdit/EditElement/Text'
 import Audio              from 'compEdit/EditElement/Audio'
 import Button             from 'compEdit/EditElement/Button'
+import ButtonLanguage     from 'compEdit/EditElement/ButtonLanguage'
 import Video              from 'compEdit/EditElement/Video'
 import SwiperImage        from 'compEdit/EditElement/SwiperImage'
 import SwiperImgAndVideo  from 'compEdit/EditElement/SwiperImgAndVideo'
@@ -67,6 +61,7 @@ const compContent = (name, data, actions, type, idx,drag, csn, keyCtrl, contentE
 		text:               <Text              {...props} />,
 		audio:              <Audio             {...props} />,
 		button:             <Button            {...props} />,
+		buttonLanguage:     <ButtonLanguage    {...props} />,
 		swiperImage:        <SwiperImage       {...props} />,
 		swiperImgAndVideo:  <SwiperImgAndVideo {...props} />,
 		wonderfulActivity:  <WonderfulActivity {...props} />,

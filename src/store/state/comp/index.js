@@ -102,6 +102,8 @@ module.exports = {
 	buttonAuto:            authInit(require('./buttonAuto')),
 	// 事件触发器
 	eventTrigger:          authInit(require('./eventTrigger')),
+	// 语言切换
+	buttonLanguage:        authInit(require('./buttonLanguage')),
 
 	/* 商品 开始 */
 	// 商品列表

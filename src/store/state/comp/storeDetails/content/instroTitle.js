@@ -12,7 +12,7 @@ const instroTitle = extendRmSL(deepCopy(require('../../../comp/text')), {
 			}
 		},   
 		content: {
-			text: '优衣库/UNIQLO'
+			text:  '优衣库/UNIQLO',
 		},
 		type:'instroTitle',
 		animation: {

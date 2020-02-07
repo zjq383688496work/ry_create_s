@@ -55,6 +55,7 @@ const data = {
 	},
 	content: {
 		text:   '按钮',
+		text2:  '',
 		status: {},		// 状态
 		router: {},		// 路由
 		defer:  0,
