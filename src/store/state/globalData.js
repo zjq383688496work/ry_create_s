@@ -27,7 +27,7 @@ const globalData = {
 			default: 1,
 			list: [
 				{ key: 1 },
-				{ key: 4 },
+				// { key: 2 },
 			]
 		},
 		composeType:'portrait',

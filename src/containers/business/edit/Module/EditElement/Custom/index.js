@@ -6,8 +6,6 @@ import './index.less'
 
 import Rnd from 'react-rnd'
 
-
-
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Audio        from 'compEdit/EditElement/Audio'
@@ -58,8 +56,8 @@ import * as variable from 'var'
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter) => {
-	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter }
+const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter, language) => {
+	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter, language }
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -117,6 +115,7 @@ class Custom extends React.Component {
 
 	render() {
 		let { data, actions, idx, csn, editConfig, ioInput, ioOuter, name } = this.props
+		let { language } = editConfig.globalData.data
 		let icomp = ioInput.comp
 		let comp  = data.data.components
 		let childNode = comp.map((_, i) => {
@@ -127,7 +126,7 @@ class Custom extends React.Component {
 				aniCls   = '',
 				aniSty   = {},
 				isEdit   = true,
-				compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter)
+				compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter, language)
 
 			if (icomp && icomp[compName]) {
 				let v   = icomp[compName],

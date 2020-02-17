@@ -26,10 +26,12 @@ export default class Text extends React.Component {
 		else return !!firstMap[first]
 	}
 	render() {
-		var { data, type, contentEditable, item } = this.props,
+		var { data, type, contentEditable, item, language } = this.props,
 			style = { ...cssColorFormat(this.props, 'text'), cursor: contentEditable? 'auto': 'move' }
-
 		if (item && item.featuredShop === false) return false
+
+		var text = textByLanguage(data, language)
+
 		return (
 			<div className={`e-text`} id="e-text">
 				<div
@@ -37,7 +39,7 @@ export default class Text extends React.Component {
 					style={style}
 					contentEditable={contentEditable}
 					onBlur={this.handleBlur}
-					dangerouslySetInnerHTML={{__html: textBreak(data.data.content.text || '双击编辑内容')}}
+					dangerouslySetInnerHTML={{__html: textBreak(text || '双击编辑内容')}}
 				></div>
 			</div>
 		)

@@ -23,7 +23,8 @@ var compMap = variable.compMap,
 	cmNum   = compMap.num,
 	conMap  = variable.contentMap,
 	fieldMap  = variable.fieldMap,
-	activeMap = variable.childElementActiveMap
+	activeMap = variable.childElementActiveMap,
+	languages = variable.languages
 
 var fMap = {
 	img:  1,
@@ -128,16 +129,56 @@ export default class ChildElement extends React.Component {
 	}
 	// 文本
 	renderTextarea(cfg, con, val, key) {
-		return (
-			<TextArea
-				min={cfg.min || 0} max={cfg.max || 100}
-				placeholder={cfg.placeholder || '请填入内容'}
-				autosize={cfg.autosize || false}
-				value={val}
-				onChange={v => { con[key] = v.target.value; this.update() }}
-				style={{ width: '100%' }}
-			/>
-		)
+		var { language = {} } = this.props,
+			{ default: defaultValue, list = []} = language,
+			{ indexs, values } = languages,
+			[ lang1, lang2 ] = list
+
+		if (list.length === 1) {
+			return (
+				<TextArea
+					min={cfg.min || 0} max={cfg.max || 100}
+					placeholder={cfg.placeholder || '请填入内容'}
+					autosize={cfg.autosize || false}
+					value={val}
+					onChange={v => { con[key] = v.target.value; this.update() }}
+					style={{ width: '100%' }}
+				/>
+			)
+		} else if (list.length === 2) {
+			let key2 = 'text2'
+			return (
+				<div>
+					<Row>
+						<Col span={6}>{ indexs[lang1.key] }</Col>
+						<Col span={18}>
+							<TextArea
+								min={cfg.min || 0} max={cfg.max || 100}
+								placeholder={cfg.placeholder || '请填入内容'}
+								autosize={cfg.autosize || false}
+								value={val}
+								onChange={v => { con[key] = v.target.value; this.update() }}
+								style={{ width: '100%' }}
+							/>
+						</Col>
+					</Row>
+					<Row>
+						<Col span={6}>{ indexs[lang2.key] }</Col>
+						<Col span={18}>
+							<TextArea
+								min={cfg.min || 0} max={cfg.max || 100}
+								placeholder={cfg.placeholder || '请填入内容'}
+								autosize={cfg.autosize || false}
+								value={con[key2]}
+								onChange={v => { con[key2] = v.target.value; this.update() }}
+								style={{ width: '100%' }}
+							/>
+						</Col>
+					</Row>
+				</div>
+			)
+		}
+
 	}
 	// 图片
 	renderImage(cfg, con, val, name, idx, data) {

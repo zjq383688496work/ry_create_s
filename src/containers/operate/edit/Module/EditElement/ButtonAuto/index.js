@@ -6,9 +6,10 @@ export default class ButtonAuto extends React.Component {
 		return newProps.drag != undefined? newProps.drag: true
 	}
 	render() {
-		let { type, data } = this.props
+		let { type, data, language } = this.props
 		let style = cssColorFormat(this.props, 'text')
-		let { text, defer } = data.data.content
+		let { defer } = data.data.content
+		let text  = textByLanguage(data, language)
 		text = text.replace(/(\{\{(.*?)\}\})/g, (m, l, key) => {
 			key = key.replace(/\s+/g, '')
 			return ({ second: defer })[key] || ''

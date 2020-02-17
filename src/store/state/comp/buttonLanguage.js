@@ -58,7 +58,7 @@ const data = {
 	},
 	content: {
 		text:  '',
-		text2: ''
+		text2: '',
 	},	
 	animation: {
 		className: '',	// 动画样式

@@ -6,6 +6,9 @@
  */
 
 import React from 'react'
+import { bindActionCreators } from 'redux'
+import { connect }  from 'react-redux'
+import * as actions from 'actions'
 import { Icon, message } from 'antd'
 
 import Picture      from 'compEdit/EditElement/Picture'
@@ -20,8 +23,8 @@ import * as variable from 'var'
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, item, autoplay) => {
-	var props  = { data, item, autoplay }
+const compContent = (name, data, item, autoplay, language) => {
+	var props  = { data, item, autoplay, language }
 	var render = {
 		picture:     <Picture     {...props} />,
 		text:        <Text        {...props} />,
@@ -36,7 +39,7 @@ const compContent = (name, data, item, autoplay) => {
 
 import './index.less'
 
-export default class Layout extends React.Component {
+class Layout extends React.Component {
 	constructor(props) {
 		super(props)
 		// this.state = {}
@@ -47,11 +50,13 @@ export default class Layout extends React.Component {
 	// componentWillReceiveProps() {}
 
 	render() {
-		let { data, layout, components, autoplay, styleObj } = this.props
+		let { data, layout, components, autoplay, styleObj, editConfig } = this.props
+		let { language } = editConfig.globalData.data
+
 		let childNode = components.map((_, i) => {
 			let compName = _.name,
 				layout   = _.data.layout,
-				compCon  = compContent(compName, _, data, autoplay)
+				compCon  = compContent(compName, _, data, autoplay, language)
 
 			if (!compCon) return false
 
@@ -71,3 +76,16 @@ export default class Layout extends React.Component {
 	}
 }
 
+Layout.defaultProps = {
+}
+
+const mapStateToProps = state => state
+
+const mapDispatchToProps = dispatch => ({
+	actions: bindActionCreators(actions, dispatch)
+})
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Layout)

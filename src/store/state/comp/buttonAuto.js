@@ -59,6 +59,7 @@ const data = {
 		status: {},		// 状态
 		router: {},		// 路由
 		defer:  0,
+		remarks: { text: '键值说明<br>{{second}}: 倒计时(s)', color: 'red' }
 	},	
 	animation: {
 		className: '',

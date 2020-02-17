@@ -7,6 +7,8 @@ const formatImage        = formatMap.image
 const formatPxMap2       = formatMap.px2
 const NT = formatMap.numberTemplate
 
+const lang = require('var/languages')
+
 const cdnUrl = 'http://rongyi.b0.rongyi.com/commodity/text'
 const pics = [
 	'201808271739138841',
@@ -143,6 +145,20 @@ module.exports = extend(window, {
 			})
 		}
 		return comp
+	},
+	// 文本
+	textByLanguage(data, language = {}) {
+		let { default: defaultValue, list } = language
+		if (!list) {
+			debugger
+		}
+		let { indexs, values } = lang
+		let { text, text2 } = data.data.content
+		let idx = 0
+		list.forEach(({ key }, i) => {
+			if (defaultValue === key) idx = i
+		})
+		return idx? text2: text
 	}
 })
 

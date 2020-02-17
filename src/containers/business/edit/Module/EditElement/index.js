@@ -53,8 +53,8 @@ const ctMap = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, actions, type, idx, csn,contentEditable) => {
-	var props  = { data, actions, type, idx, csn ,contentEditable},
+const compContent = (name, data, actions, type, idx, csn, contentEditable, language) => {
+	var props  = { data, actions, type, idx, csn, contentEditable, language},
 		render = {
 		picture:            <Picture           {...props} />,
 		web:                <Web               {...props} />,
@@ -133,6 +133,7 @@ class EditElement extends React.Component {
 			{ curData, globalData } = editConfig,
 			{ pageGroupIdx, pageIdx, compIdx } = curData,
 			{ banner } = globalData,
+			{ language } = globalData.data,
 			bannerLayout    = banner && banner.data.layout
 		let ct     = tempCfg.composeType || 'PORTRAIT'
 		if (!data || data.title === undefined) return (<div className={`pg-element-parent e-flex-box pg-element-${ct}`}><section className="pg-element"></section></div>)
@@ -157,7 +158,7 @@ class EditElement extends React.Component {
 				aniSty    = {},
 				editStatus = _.feature&&_.feature.editStatus,
 				disableDragging = i === compIdx ? editStatus : false, 
-				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn,disableDragging)
+				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, disableDragging, language)
 			
 			if (!compCon) return false
 

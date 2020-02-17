@@ -57,7 +57,8 @@ const Recom = extendRmSL(deepCopy(t), {
 			height: 20
 		},
 		content: {
-			text: '荐'
+			text: '荐',
+			text2: 'Recommend',
 		},
 		style: {
 			text: {

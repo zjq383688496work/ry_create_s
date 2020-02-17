@@ -63,8 +63,8 @@ import * as variable from 'var'
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter,drag) => {
-	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter,drag }
+const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter, drag, language) => {
+	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter, drag, language }
 	var render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -269,6 +269,7 @@ class Custom extends React.Component {
 		let { data, actions, idx, csn, editConfig, ioInput, ioOuter, name } = this.props
 		let { globalData, curData } = editConfig
 		let { multiComp } = globalData
+		let { language } = globalData.data
 		let { index, type } = multiComp
 		let state = this.state
 		let { compIdx, cusCompIdx } = curData
@@ -281,7 +282,7 @@ class Custom extends React.Component {
 				ani      = _.data.animation,
 				aniCls   = '',
 				aniSty   = {},
-				compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter,state.drag)
+				compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter, state.drag, language)
 
 			if (icomp && icomp[compName]) {
 				let v   = icomp[compName],
