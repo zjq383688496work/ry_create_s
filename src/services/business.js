@@ -57,17 +57,10 @@ module.exports = extend(window, {
 			let v = obj[p]
 			if (formatComplexMap[p]) {
 				colorChange = colorVaild(v.color, v, 'color', colorChange)
-				// if (formatComplexOrder[p]) {
-				// 	obj[p] = formatComplexOrder[p].map(_ => {
-				// 		let w = v[_]
-				// 		return getAttr(w) === 'Number'? w += 'px': w
-				// 	}).join(' ')
-				// } else {
-					obj[p] = Object.keys(v).map(_ => {
-						let w  = v[_], nt = NT[_]
-						return nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? w += 'px': w
-					}).join(' ')
-				// }
+				obj[p] = Object.keys(v).map(_ => {
+					let w  = v[_], nt = NT[_]
+					return nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? w += 'px': w
+				}).join(' ')
 			}
 			else if (formatColorMap[p]) {
 				colorChange = colorVaild(v, obj, p, colorChange)
@@ -91,18 +84,11 @@ module.exports = extend(window, {
 		Object.keys(obj).map(p => {
 			let v = obj[p]
 			if (formatComplexMap[p]) {
-				// if (formatComplexOrder[p]) {
-				// 	obj[p] = formatComplexOrder[p].map(_ => {
-				// 		let w = v[_]
-				// 		obj[p][_] = getAttr(w) === 'Number'? (w * 2 + 'px'): w
-				// 	})
-				// } else {
-					Object.keys(v).map(_ => {
-						let w  = v[_], nt = NT[_]
-						const nowData =  nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? (w * 2 + 'px'): w
-						obj[p][_] = nowData
-					})
-				// }
+				 Object.keys(v).map(_ => {
+					let w  = v[_], nt = NT[_]
+					const nowData =  nt? nt.substitute({ val: w }): getAttr(w) === 'Number'? (w *2 + 'px'): w
+					obj[p][_] = nowData
+				})
 			}
 			else if (formatPxMap[p]) {
 				obj[p] = v * 2 + 'px'
