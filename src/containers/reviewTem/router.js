@@ -96,7 +96,6 @@ export default class RouterRY extends React.Component {
 	componentWillReceiveProps(props) {
 		let {pageContent,globalData} = props.editConfig,
 		homePage = globalData.feature.reviewRouter
-		console.log('homePage: ', homePage)
 		this.setState({ homePage })
 	}
 	render() {
