@@ -23,7 +23,6 @@ class ReviewTem extends React.Component {
 			load: false
 		}
 	}
-
 	timeInit() {
 		let { actions } = this.props
 		actions.updateTime()
@@ -48,17 +47,14 @@ class ReviewTem extends React.Component {
 		let { globalData } = editConfig
 		let { query } = location
 		let { id,type } = query,url
-		if(type == 'template'){
-			url = `/mcp-gateway/template/get?templateId=${id}&phase=DEV`
-		}else{
-			 url = `/mcp-gateway/case/get?caseId=${id}`
-		}
+		if (type == 'template') url = `/mcp-gateway/template/get?templateId=${id}&phase=DEV`
+		else url = `/mcp-gateway/case/get?caseId=${id}`
 		return (resolve, reject) => {
 			Ajax.get(url).then(res => {
 				let cfg = JSON.parse(res.data.config).configPC
 				delete res.data.config
 				let cur = cfg.pageList.group[0].pages[0]
-				//dataFormat.get.pageEach(cfg.pageContent)
+				dataFormat.get.pageEach(cfg.pageContent)
 				// debugger
 				let newCfg = {
 					curComp: {},

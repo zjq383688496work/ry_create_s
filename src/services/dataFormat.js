@@ -215,6 +215,7 @@ const dataFormat = {
 					pae = pa.elements
 				this.pageComp(pa, deepCopy(page))
 				pae.map((p, i) => {
+					if (!comp[p.name]) return
 					var psi = p.styleList.idx || 0,
 						c   = deepCopy(comp[p.name]),
 						cs  = c.styleList,

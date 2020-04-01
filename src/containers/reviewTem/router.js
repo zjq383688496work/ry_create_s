@@ -77,16 +77,15 @@ let defaultData = {
 	})
 }
 export default class RouterRY extends React.Component {
-	state = {
-		homePage:'p_1000'
+	constructor(props) {
+		super(props)
+
+		let { homepage } = props.editConfig.globalData.data
+		this.state = {
+			homePage: homepage
+		}
 	}
-	componentWillMount() {
-		let { globalData } = this.props.editConfig,
-			{ homePage }   = globalData.data,
-			action = { updateGlobal: this.props.actions.updateGlobal, globalData }
-		//backHome(homePage, action)
-		this.setState({ homePage })
-	}
+	componentWillMount() {}
 	componentDidMount() {
 		let { music } = this.props.editConfig.globalData.data
 		if (music && music.url) {
@@ -97,13 +96,16 @@ export default class RouterRY extends React.Component {
 	componentWillReceiveProps(props) {
 		let {pageContent,globalData} = props.editConfig,
 		homePage = globalData.feature.reviewRouter
+		console.log('homePage: ', homePage)
 		this.setState({ homePage })
 	}
 	render() {
 		let { pageContent, globalData, pageList } = this.props.editConfig,
+			{ homePage } = this.state,
 			{ music } = globalData.data
+		if (!homePage) return null
 		let dom = Object.keys(pageContent).map(_ => {
-			return pageContent[_].router == this.state.homePage
+			return pageContent[_].router == homePage
 			?
 			<EditElementCommon
 				pageContent={pageContent[_]}
