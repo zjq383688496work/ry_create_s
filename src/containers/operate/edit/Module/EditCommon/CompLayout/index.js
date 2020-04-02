@@ -1,10 +1,3 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
 import './index.less'
 
@@ -22,8 +15,8 @@ import SwiperBind  from 'compEdit/EditElement/SwiperBind'
 import Area        from 'compEdit/EditElement/Area'
 import QrcodeBind  from 'compEdit/EditElement/QrcodeBind'
 
-const compContent = (name, data, item) => {
-	var props  = { data, item }
+const compContent = (name, data, item, language) => {
+	var props  = { data, item, language }
 	var render = {
 		picture:     <Picture     {...props} />,
 		text:        <Text        {...props} />,
@@ -67,12 +60,13 @@ export default class CompLayout extends React.Component {
 	}
 	renderDom = (layout, isActive) => {
 		var { updateComp, props } = this.props,
+			{ language } = props.editConfig.globalData.data,
 			{ name } = props.data,
 			da = mockMap[name] || {}
 		return layout.map((_, i) => {
 			var { name, data } = _,
 				lay = data.layout,
-				dom = compContent(name, _, da)
+				dom = compContent(name, _, da, language)
 			return (
 				<RndModule
 					key={i}

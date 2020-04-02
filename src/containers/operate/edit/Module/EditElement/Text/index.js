@@ -29,7 +29,6 @@ export default class Text extends React.Component {
 		var { data, type, contentEditable, item, language } = this.props,
 			style = { ...cssColorFormat(this.props, 'text'), cursor: contentEditable? 'auto': 'move' }
 		if (item && item.featuredShop === false) return false
-
 		var text = textByLanguage(data, language)
 
 		return (

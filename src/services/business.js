@@ -135,9 +135,7 @@ module.exports = extend(window, {
 	// 文本
 	textByLanguage(data, language = {}) {
 		let { default: defaultValue, list } = language
-		if (!list) {
-			debugger
-		}
+		if (!list) return console.log('缺少多语言信息!')
 		let { indexs, values } = lang
 		let { text, text2 } = data.data.content
 		let idx = 0
