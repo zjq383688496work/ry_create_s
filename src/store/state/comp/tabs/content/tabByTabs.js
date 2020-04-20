@@ -1,23 +1,8 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const p  = authInit(require('../../picture'))
-const pb = authInit(require('../../pictureBind'))
-const t  = authInit(require('../../text'))
-const tb = authInit(require('../../textBind'))
+const p = authInit(require('../../picture'))
+const t = authInit(require('../../text'))
 
-const gPic = extendRmSL(deepCopy(pb), {
-	data: {
-		layout: {
-			top:  12,
-			left: 12,
-			width:  152,
-			height: 152
-		},
-		content: {
-			bind: 'pic'
-		}
-	}
-})
-const gName = extendRmSL(deepCopy(tb), {
+const gName = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  166,
@@ -26,7 +11,8 @@ const gName = extendRmSL(deepCopy(tb), {
 			height: 36
 		},
 		content: {
-			bind: 'name'
+			text: '标签1',
+			text2: '',
 		},
 		style: {
 			text: {
@@ -75,7 +61,7 @@ const data = {
 			}
 		}
 	},
-	componentLayout: [ gPic, gName ],
+	componentLayout: [ gName ],
 	content: {
 		tabs: []
 	},
@@ -90,7 +76,7 @@ const data = {
 
 module.exports = {
 	name: 'catgByTabs',
-	type: 'layout',
+	type: 'layoutGlobal',
 	// 位置大小
 	data: deepCopy(data),
 	// 样式列表

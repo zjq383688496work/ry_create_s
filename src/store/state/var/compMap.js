@@ -76,6 +76,7 @@ module.exports = {
 		qrcodeBind:        '二维码绑定',
 		qrcodeHui:         '惠码',
 		qrcodeNav:         '导航码',
+		voice:             '语音助手',
 		listByVoice:       '语音助手-列表',
 	},
 	num: {
@@ -156,5 +157,6 @@ module.exports = {
 		qrcodeHui:             0,
 		qrcodeNav:             0,
 		listByVoice:           0,
+		voice:                 0,
 	}
 }

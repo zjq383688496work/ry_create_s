@@ -30,11 +30,6 @@ module.exports = [
 				name: '背景色块',
 				key:  'area'
 			},
-			// {
-			// 	icon: 'splitLine',
-			// 	name: '分割线',
-			// 	key:  'splitLine'
-			// },
 			{
 				icon: 'audio',
 				name: '音频', 
@@ -45,16 +40,6 @@ module.exports = [
 				name: '视频', 
 				key:  'video'
 			},
-			// {
-			// 	icon: 'carousel',
-			// 	name: '轮播',
-			// 	key:  'swiperImage'
-			// },
-			/*{
-				icon: 'carousel',
-				name: '精彩活动',
-				key:  'wonderfulActivity'
-			},*/
 			{
 				icon: 'html',
 				name: '网页',
@@ -70,11 +55,6 @@ module.exports = [
 				name: '天气',
 				key:  'weather'
 			},
-			// {
-			// 	icon: 'navigation',
-			// 	name: '导航列表',
-			// 	key:  'navigation', 
-			// },
 			{
 				icon: 'navigation',
 				name: '悬浮导航', 
@@ -233,11 +213,6 @@ module.exports = [
 				name: '湿度图标',
 				key:  'shiDu'
 			},
-			{
-				icon: 'splitLine',  
-				name: '分割线',
-				key:  'line'
-			}
 		]
 	},
 	// 语音助手
@@ -351,24 +326,18 @@ module.exports = [
 	// 		}
 	// 	]
 	// },
-	
-	// {
-	// 	icon: 'store',
-	// 	name: '标签切换',
-	// 	key: 'tabs',
-	// 	child: [
-	// 		{
-	// 			icon: 'carousel',
-	// 			name: '标签',
-	// 			key:  'catgByTabs'
-	// 		},
-	// 		{
-	// 			icon: 'carousel',
-	// 			name: '子元素',
-	// 			key:  'childElement'
-	// 		}
-	// 	]
-	// },
+	{
+		icon: 'store',
+		name: '标签切换',
+		key: 'tabs',
+		child: [
+			{
+				icon: 'carousel',
+				name: '标签',
+				key:  'tabByTabs'
+			},
+		]
+	},
 	{
 		icon: '2DMap',
 		name: '2D地图',

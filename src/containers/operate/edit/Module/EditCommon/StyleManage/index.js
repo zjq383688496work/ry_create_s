@@ -108,10 +108,9 @@ class StyleManage extends React.Component {
 		let len = list.length
 		let activeKey = Array.from(new Array(2), (_, i) => `${i}`)
 		let curData   = list[idx]
+		if (!curData) return null
 		let editNode
 		let listNode  = list.map((_, k) => {
-			// let remDom
-			// if (list.length > 1) remDom = (<a className="pgs-sl-remove" onClick={this.onRemove.bind(this, k)}><Icon type="close" /></a>)
 			return (
 				<li
 					key={k} title={_.name}

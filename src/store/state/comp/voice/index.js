@@ -6,6 +6,7 @@ let _style_1 = deepCopy(style_1)
 
 _style_1.components = status.list[1].components
 
+
 module.exports = {
 	name: 'voice',
 	type: 'advanced',

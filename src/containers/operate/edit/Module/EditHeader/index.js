@@ -49,6 +49,14 @@ class Header extends React.Component {
 				Comp     = parentComp || curComp,
 				{ max }  = Comp.feature,
 				auth     = compC[Comp.name]
+			if (compData.type === 'layoutGlobal') {
+				compIdCreate(compData, globalData)
+				if (Comp.data.componentsGlobal) {
+					Comp.data.componentsGlobal.push(compData)
+					this.selectMulti(Comp.data.componentsGlobal.length - 1)
+					return actions.updateComp(null, Comp)
+				}
+			}
 			if (compData.type != 'advanced' && auth[key]) {
 				if (max != undefined) compData.feature.id = ++max
 				delete compData.styleList.list

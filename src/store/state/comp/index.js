@@ -141,9 +141,9 @@ module.exports = {
 	// 图片列表-绑定
 	pictureListBind:       authInit(require('./pictureListBind')),
 	// 切换标签
-	// tabs:                  authInit(require('./tabs')),
+	tabs:                  authInit(require('./tabs')),
 	// 标签分类
-	catgByTabs:            authInit(require('./tabs/content/catgByTabs')),
+	tabByTabs:            authInit(require('./tabs/content/tabByTabs')),
 	// 子元素
 	childElement:          authInit(require('./childElement')),
 	/* 二维码 */

@@ -1,45 +1,27 @@
-let { authInit, deepCopy, extend, styleIdxChange } = require('state/common')
-// const list = authInit(require('./content/listByGoods'))
+let { deepCopy } = require('state/common')
+let status  = require('./status')
+let tabs    = require('./tabs')
+let style_1 = require('./style_1')
 
-// 店铺列表
-const dataStyle_1 = {
-	layout: {
-		position: 'absolute',
-		top:      0,
-		left:     0,
-		width:    540,
-		height:   800
-	},
-	style: {},
-	content: {},
-	animation: {
-		className: '',		// 动画样式
-		direction: '',		// 方向
-		delay: 0,			// 开始时间
-		duration: 1,		// 持续时间
-		iterationCount: 1	// 循环次数
-	},
-	components: []
-}
+let _style_1 = deepCopy(style_1)
 
+_style_1.components = status.list[1].components
+_style_1.componentsGlobal = []
+
+// 标签切换
 module.exports = {
 	name: 'tabs',
 	type: 'advanced',
-	data: deepCopy(dataStyle_1),
-	// 动画设置
+	data: _style_1,
 	styleList: {
 		idx:  0,
-		list: [{
-			name: '品牌导购',
-			img:  '',
-			data: deepCopy(dataStyle_1)
-		}]
+		list: []
 	},
 	// 功能特性
 	feature: {
-		max: 0,
-		body: {
-			catg: ''
-		}
+		statusIndex: 1,
+		status,
+		tabs,
+		visible: true
 	}
 }

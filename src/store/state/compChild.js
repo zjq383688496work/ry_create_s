@@ -63,13 +63,17 @@ module.exports = {
 		qrcodeNav:  1,
 	},
 	tabs: {
-		catgByTabs:   1,
-		childElement: 1
+		tabByTabs:         1,
+		picture:           1,
+		button:            1,
+		text:              1,
+		area:              1,
+		swiperImgAndVideo: 1,
 	},
 	wonderfulActivity2: {
 		catgByActivity2:   1,
 		listByActivity2:   1,
-		resetByActivity2:  1
+		resetByActivity2:  1,
 	},
 	voice: {
 		picture:      1,

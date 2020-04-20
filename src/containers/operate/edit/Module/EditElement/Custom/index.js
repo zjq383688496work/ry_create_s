@@ -40,7 +40,7 @@ import Area              from 'compEdit/EditElement/Area'
 // import PictureListBind   from 'compEdit/EditElement/PictureListBind'
 // import GoodsBar       from 'compEdit/EditElement/GoodsDetails/GoodsBar'
 // import GoodsBlock     from 'compEdit/EditElement/GoodsDetails/GoodsBlock'
-import CatgByTabs     from 'compEdit/EditElement/Tabs/CatgByTabs'
+import TabByTabs     from 'compEdit/EditElement/Tabs/TabByTabs'
 import ChildElement   from 'compEdit/EditElement/ChildElement'
 // import SwiperByGoods  from 'compEdit/EditElement/GoodsList/SwiperByGoods'
 // import CatgByGoods    from 'compEdit/EditElement/GoodsList/CatgByGoods'
@@ -98,7 +98,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		// pictureListBind:   <PictureListBind   {...props} />,
 		// goodsBar:          <GoodsBar          {...props} />,
 		// goodsBlock:        <GoodsBlock        {...props} />,
-		catgByTabs:        <CatgByTabs        {...props} />,
+		catgByTabs:        <TabByTabs        {...props} />,
 		childElement:      <ChildElement      {...props} />,
 		// swiperByGoods:     <SwiperByGoods     {...props} />,
 		// catgByGoods:       <CatgByGoods       {...props} />,
@@ -259,8 +259,8 @@ class Custom extends React.Component {
 		let { curData } = editConfig
 		editConfig.curComp = {}
 		curData.cusCompIdx = -1
-		let comp = data.data.components
-		comp.splice(idx, 1)
+		let { components } = data.data
+		components.splice(idx, 1)
 		actions.updateComp(editConfig.curData.compIdx, parent)
 		actions.updateCur(curData)
 		actions.selectComp(parent)

@@ -34,6 +34,7 @@ import Area               from 'compEdit/EditElement/Area'
 import Qrcode             from 'compEdit/EditElement/Qrcode'
 import QrcodeHui          from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav          from 'compEdit/EditElement/QrcodeNav'
+import Tabs               from 'compEdit/EditElement/Tabs'
 
 import ContextMenu        from 'compEdit/EditCommon/ContextMenu'
 import ShortcutKey        from 'compEdit/EditCommon/ShortcutKey'
@@ -83,9 +84,9 @@ const compContent = (name, data, actions, type, idx, drag, csn, keyCtrl, content
 		qrcode:             <Qrcode            {...props} />,
 		qrcodeHui:          <QrcodeHui         {...props} />,
 		qrcodeNav:          <QrcodeNav         {...props} />,
-		// tabs:               <Tabs              {...props} />,
 		storeList2:         <StoreList2        {...props} />,
-		storeDetails2:      <StoreDetails2     {...props} />
+		storeDetails2:      <StoreDetails2     {...props} />,
+		tabs:               <Tabs              {...props} />,
 	}
 	return render[name]
 } 

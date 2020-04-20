@@ -12,16 +12,17 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import EditHeader     from 'compEdit/EditHeader'
-import EditPage       from 'compEdit/EditPage'
-import EditPageManage from 'compEdit/EditPageManage'
-import EditCompLayout from 'compEdit/EditCompLayout'
-import EditContent    from 'compEdit/EditContent'
-import EditElement    from 'compEdit/EditElement'
-import EditStyle      from 'compEdit/EditStyle'
-import EditAnimation  from 'compEdit/EditAnimation'
-import EditTheme      from 'compEdit/EditTheme'
-import EditStatus     from 'compEdit/EditStatus'
+import EditHeader          from 'compEdit/EditHeader'
+import EditPage            from 'compEdit/EditPage'
+import EditPageManage      from 'compEdit/EditPageManage'
+import EditCompLayout      from 'compEdit/EditCompLayout'
+import EditChildCompLayout from 'compEdit/EditChildCompLayout'
+import EditContent         from 'compEdit/EditContent'
+import EditElement         from 'compEdit/EditElement'
+import EditStyle           from 'compEdit/EditStyle'
+import EditAnimation       from 'compEdit/EditAnimation'
+import EditTheme           from 'compEdit/EditTheme'
+import EditStatus          from 'compEdit/EditStatus'
 
 import * as actions from 'actions'
 
@@ -66,16 +67,25 @@ class EditComponent extends React.Component {
 		actions.selectPage(curData.router)
 	}
 
+	isVoice = () => {
+		let { curComp, curData } = this.props.editConfig,
+			{ parentComp } = curData
+		if (curComp.name === 'voice') return true
+		if (parentComp && parentComp.name === 'voice') return true
+		return false
+	}
+
 	render() { 
 		let { editConfig, location } = this.props,
-			{ curComp, curData, globalData } = editConfig,
+			{ curComp, curData, curPage, globalData, pageList } = editConfig,
 			{ banner, theme } = globalData,
-			colors = theme.list[theme.idx].colors,
-			type   = curData.contentType,
+			colors  = theme.list[theme.idx].colors,
+			type    = curData.contentType,
+			isVoice = this.isVoice(),
 			editTab
 		window.curThemeColor = colors
 		if (type === 'page') {
-			editTab = <EditPage data={editConfig.curPage} />
+			editTab = <EditPage data={curPage} />
 		} else if(type === 'comp') {
 			editTab = (
 				<Tabs defaultActiveKey="1" type="card">
@@ -98,19 +108,25 @@ class EditComponent extends React.Component {
 				</Tabs>
 			)
 		} else if (type === 'theme') {
-			editTab = <EditTheme data={editConfig.globalData.theme} />
+			editTab = <EditTheme data={theme} />
 		}
 		return (
 			<div className="pg-edit-box">
 				<EditHeader location={location}/>
 				<div className="pg-body e-flex-box">
 					<div className="pg-left scrollbar">
-						<EditPageManage data={editConfig.pageList} />
+						<EditPageManage data={pageList} />
 					</div>
+					{
+						curData.router && !isVoice &&
+						<div className="pg-left scrollbar">
+							<EditCompLayout data={curPage} />
+						</div>
+					}
 					{
 						curData.router &&
 						<div className="pg-left scrollbar">
-							<EditCompLayout data={editConfig.curPage} />
+							<EditChildCompLayout data={curData.parentComp || curComp} />
 						</div>
 					}
 					<div

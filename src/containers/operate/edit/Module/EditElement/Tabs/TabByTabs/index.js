@@ -9,7 +9,7 @@ import React from 'react'
 import './index.less'
 
 
-export default class CatgByTabs extends React.Component {
+export default class TabByTabs extends React.Component {
 	constructor(props) {
 		super(props)
 	}
@@ -30,8 +30,8 @@ export default class CatgByTabs extends React.Component {
 	render() {
 
 		return (
-			<section className={`e-catg-by-tabs`}>
-				CatgByTabs
+			<section className={`e-tab-by-tabs`}>
+				TabByTabs
 				{ this.renderDom() }
 			</section>
 		)

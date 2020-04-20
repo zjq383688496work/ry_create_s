@@ -37,11 +37,18 @@ class Voice extends React.Component {
 		actions[action](data)
 	}
 	confirmVoice = () => {
+		let { actions, editConfig } = this.props,
+			{ curData } = editConfig
 		confirm({
 			title:   '确认要关闭语音功能吗?',
 			content: '关闭语音功能会清空之前语音的所有设置',
 			onOk: () => {
 				this.onChange(false, 'switch', 'value', true)
+				curData.compIdx = -1
+				curData.cusCompIdx = -1
+				curData.parentComp = null
+				actions.updateCur(curData)
+				actions.selectComp({})
 			},
 			onCancel() {},
 			okText: '确认',
