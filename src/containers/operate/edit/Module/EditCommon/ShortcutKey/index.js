@@ -1,10 +1,3 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
 
 import { bindActionCreators } from 'redux'
@@ -252,6 +245,11 @@ class ShortcutKey extends React.Component {
 		if (parentComp) {
 			let cs = parentComp.data.components
 			parentComp.data.components = cs.removeByIdx(list)
+			if (curComp.name === 'tabByTabs') {
+				let { feature } = parentComp,
+					{ tabs }    = feature
+				feature.tabs = tabs.filter(({ _id }) => _id !== curComp._id)
+			}
 			editConfig.curComp = {}
 			curData.cusCompIdx = -1
 			curData.parentComp = null

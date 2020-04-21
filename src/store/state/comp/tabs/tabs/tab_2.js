@@ -1,103 +1,104 @@
-let { authInit, deepCopy, extendRmSL } = require('state/common')
-const t = authInit(require('state/comp/text'))
+let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
+const p = authInit(require('../../picture'))
+const t = authInit(require('../../text'))
 
-const gName = extendRmSL(deepCopy(t), {
+const Name = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  0,
 			width:  60,
 			height: 24
-		},
-		content: {
-			text: '标签2',
-			text2: '',
 		},
 		style: {
 			text: {
 				lineHeight:      24,
 				backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
+				borderWidth: 0,
+				borderStyle:     'solid',
+				borderColor: 	 { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 				borderRadius:    {
 					topLeft:     20,
 					topRight:    20,
 					bottomRight: 20,
 					bottomLeft:  20
 				},
-				borderColor: 	 { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 				color:           { type: 'custom', color: '#666' }
 			}
 		},
+		content: {
+			text: '标签2'
+		}
 	}
 })
-const gNameAV = extendRmSL(deepCopy(t), {
+const NameAV = extendRmSL(deepCopy(t), {
 	data: {
 		layout: {
 			top:  0,
 			width:  60,
 			height: 24
 		},
-		content: {
-			text: '标签2',
-			text2: '',
-		},
 		style: {
 			text: {
 				lineHeight:      20,
 				backgroundColor: { type: 'custom', color: '#cfad81' },
+				borderWidth: 2,
+				borderStyle: 'solid',
+				borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 				borderRadius:    {
 					topLeft:     20,
 					topRight:    20,
 					bottomRight: 20,
 					bottomLeft:  20
 				},
-				borderWidth:     2,
-				borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 				color: { type: 'textHigh', color: '#fff' },
 			}
 		},
+		content: {
+			text: '标签2'
+		}
 	},
 	feature: { active: true }
 })
 
+// 字母排序
 const data = {
 	layout: {
 		position: 'absolute',
-		top:  0,
-		left: 0,
-		width:  441,
-		height: 300
+		top:  20,
+		left: 120,
+		width:  60,
+		height: 24
 	},
 	style: {
-		filter: {
-			width:  100,
-			height: 90,
-			borderWidth:  1,
+		filterBox: {
+			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'custom', color: '#cfad81' },
-			backgroundColor: { type: 'custom', color: '#fff' },
-			margin: {
-				top:     0,
-				right:   10,
-				bottom:  10,
-				left:    0,
+			backgroundColor: { type: 'custom', color: 'rgba(255, 255, 255, 0)', rgb: '#fff', alpha: 0 },
+			padding: {
+				top:    0,
+				right:  0,
+				bottom: 0,
+				left:   0
 			},
-			borderRadius:    {
-				topLeft:     10,
-				topRight:    10,
-				bottomLeft:  10,
-				bottomRight: 10
+			borderRadius: {
+				topLeft:     0,
+				topRight:    0,
+				bottomLeft:  0,
+				bottomRight: 0
 			},
 			boxShadow: {
 				h_shadow:   0,
 				v_shadow:   0,
 				blur_dis:   0,
 				spread_dis: 0,
-				color:      { type: 'custom', color: '#000' }
+				color: { type: 'custom', color: '#000' }
 			}
 		}
 	},
-	componentLayout: [ gName, gNameAV ],
+	componentLayout: [ Name, NameAV ],
 	content: {
-		status: { type: 'status', url: '2' }
+		status: { url: '2' } 			// 状态
 	},
 	animation: {
 		className: '',		// 动画样式
@@ -108,7 +109,6 @@ const data = {
 	}
 }
 
-// 组件状态管理
 module.exports = {
 	name: 'tabByTabs',
 	type: 'layout',

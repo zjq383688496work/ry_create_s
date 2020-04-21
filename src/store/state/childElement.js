@@ -23,10 +23,10 @@ module.exports = {
 	// 	swiperBind:  1,
 	// 	qrcodeBind:  1
 	// },
-	childElement: {
-		picture:     1,
-		text:        1
-	},
+	// childElement: {
+	// 	picture:     1,
+	// 	text:        1
+	// },
 	// swiperByGoods: {
 	// 	picture:     1,
 	// 	text:        1,
@@ -74,6 +74,11 @@ module.exports = {
 		picture:  1,
 		textBind: 1
 	},
+	turnByStore2: {
+		area:     1,
+		picture:  1,
+		textBind: 1,
+	},
 	resetByStore2: {
 		picture:  1,
 		text:     1
@@ -109,5 +114,10 @@ module.exports = {
 		picture:  1,
 		text:     1,
 		textBind: 1,
+	},
+	// 标签
+	tabByTabs: {
+		picture: 1,
+		text:    1,
 	},
 }

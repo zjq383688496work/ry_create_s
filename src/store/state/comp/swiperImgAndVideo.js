@@ -55,7 +55,7 @@ const data = {
 		left:     0,
 		width:    540,
 		height:   304,
-		lockAspectRatio:true
+		lockAspectRatio: true
 	}, 
 	content: [
 		{

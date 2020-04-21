@@ -49,17 +49,13 @@ class Header extends React.Component {
 				Comp     = parentComp || curComp,
 				{ max }  = Comp.feature,
 				auth     = compC[Comp.name]
-			if (compData.type === 'layoutGlobal') {
-				compIdCreate(compData, globalData)
-				if (Comp.data.componentsGlobal) {
-					Comp.data.componentsGlobal.push(compData)
-					this.selectMulti(Comp.data.componentsGlobal.length - 1)
-					return actions.updateComp(null, Comp)
-				}
-			}
 			if (compData.type != 'advanced' && auth[key]) {
 				if (max != undefined) compData.feature.id = ++max
 				delete compData.styleList.list
+				if (compData.name === 'tabByTabs') {
+					if (Comp.name !== 'tabs') return message.info('该高级组件内不能添加该基础组件!', 1)
+					Comp.feature.tabs.push(compData)
+				}
 				compIdCreate(compData, globalData)
 				Comp.data.components.push(compData)
 				this.selectMulti(Comp.data.components.length - 1)

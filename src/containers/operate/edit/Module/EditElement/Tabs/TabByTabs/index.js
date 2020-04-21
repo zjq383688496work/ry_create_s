@@ -1,17 +1,15 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
-import './index.less'
+// import './index.less'
 
+import Layout from 'compEdit/EditElement/Layout'
 
 export default class TabByTabs extends React.Component {
 	constructor(props) {
 		super(props)
+	}
+	shouldComponentUpdate(newProps, newState){
+		if (newProps.drag != undefined) return newProps.drag
+		return true
 	}
 	componentWillMount() {}
 
@@ -22,16 +20,23 @@ export default class TabByTabs extends React.Component {
 	componentWillReceiveProps() {}
 
 	renderDom = () => {
-		let { data } = this.props,
-			{ content, componentLayout } = data.data
-		return null
+		let { data, parent } = this.props,
+			{ componentLayout, content, layout } = data.data,
+			{ url: pUrl } = parent.data.content.tab_default,
+			{ url } = content.status,
+			cl = componentLayout.filter(({ feature: { active } }) => ((active && pUrl == url) || (!active && pUrl != url)))
+		return <Layout
+			data={{}}
+			layout={layout}
+			components={cl}
+			styleObj={cssColorFormat(this.props, 'filter')}
+		/>
 	}
 
 	render() {
 
 		return (
 			<section className={`e-tab-by-tabs`}>
-				TabByTabs
 				{ this.renderDom() }
 			</section>
 		)

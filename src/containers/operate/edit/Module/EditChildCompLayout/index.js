@@ -31,8 +31,14 @@ class EditChildCompLayout extends React.Component {
 		e.stopPropagation()
 		let { actions, data, editConfig } = this.props,
 			{ curData } = editConfig,
-			{ components } = data.data
+			{ components } = data.data,
+			curComp = components[idx]
 		message.success(`删除组件: ${compMap[components[idx].name]}!`)
+		if (curComp.name === 'tabByTabs') {
+			let { feature } = data,
+				{ tabs }    = feature
+			feature.tabs = tabs.filter(({ _id }) => _id !== curComp._id)
+		}
 		components.splice(idx, 1)
 		editConfig.curComp = {}
 		curData.cusCompIdx = -1
@@ -117,7 +123,7 @@ class EditChildCompLayout extends React.Component {
 		let SortableItem = SortableElement(({ _: { _id, name }, i, l }) => {
 				return (
 					<li className={`pecl-li${(l - i) === editConfig.curData.cusCompIdx? ' s-active': ''}`}>
-						<div className="pl-name">{ compMap[name] } - { _id || name }</div>
+						<div className="pl-name">{ compMap[name] }</div>
 						<div className="pl-ctrl">
 							<a><Icon type="delete"/></a>
 						</div>
@@ -133,7 +139,7 @@ class EditChildCompLayout extends React.Component {
 			)
 		})
 		return (
-			<div className={`pe-comp-layout${check? ' pe-comp-layout-open': ''}`}>
+			<div className={`pe-comp-layout pe-comp-layout-fixed${check? ' pe-comp-layout-open': ''}`}>
 				<div className="pecl-title">{parentName || name}</div>
 				<a className="bar-open" onClick={this.barShow} title="展开图层列表"><Icon type="menu-unfold" /></a>
 				<a className="bar-close" onClick={this.barHide} title="关闭图层列表"><Icon type="menu-fold" /></a>

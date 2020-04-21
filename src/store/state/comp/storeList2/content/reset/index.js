@@ -1,5 +1,4 @@
 let { authInit, deepCopy, extendRmSL } = require('state/common')
-const a = authInit(require('state/comp/area'))
 const p = authInit(require('state/comp/picture'))
 const t = authInit(require('state/comp/text'))
 

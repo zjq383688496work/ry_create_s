@@ -7,10 +7,11 @@ module.exports = {
 		top:      0,
 		left:     0,
 		width:    540,
-		height:   500
+		height:   400
 	},
 	style: {},
 	content: {
+		tab_default:        { type: 'status', url: '1' },
 	},
 	animation: {
 		className: '',		// 动画样式

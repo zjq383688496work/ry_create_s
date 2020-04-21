@@ -10,6 +10,7 @@ module.exports = {
 		backgroundColor: { type: 'custom', color: '#fff' },	// 页面背景色
 		bannerCheck: true,
 		voiceCheck: true,
+		tag: 1
 	},
 	animation: {
 		in: {

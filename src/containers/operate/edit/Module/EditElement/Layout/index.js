@@ -50,7 +50,7 @@ class Layout extends React.Component {
 	// componentWillReceiveProps() {}
 
 	render() {
-		let { data, layout, components, autoplay, styleObj, editConfig } = this.props
+		let { data = {}, layout, components, autoplay, styleObj = {}, editConfig } = this.props
 		let { language } = editConfig.globalData.data
 
 		let childNode = components.map((_, i) => {

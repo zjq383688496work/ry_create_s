@@ -16,25 +16,12 @@ let cusMap = {
 	operate:  CustomO,
 	business: CustomB
 }
-let featureMap = {
-	price:     '价格',
-	oldPrice:  '原价',
-	brand:     '品牌',
-	name:      '商品名称',
-	pic:       '图片',
-	pics:      '图片列表',
-	QRPic:     '二维码',
-	sTime:     '上架时间',
-	catg:      '产品分类',
-	pType:     '包装种类',
-	artNo:     '货号',
-	spec:      '颜色规格'
-}
 
 export default class Tabs extends React.Component {
 	constructor(props) {
 		super(props)
-		this.init()
+		this.dataInit(props)
+		this.init(props)
 	}
 	componentWillMount() {}
 
@@ -42,23 +29,34 @@ export default class Tabs extends React.Component {
 
 	componentWillUnmount() {}
 
-	componentWillReceiveProps() {
-		let { data, csn } = this.props
-		let { feature } = data
-		let ipt = deepCopy(feature)
-		this.state = { ioInput: ipt }
+	componentWillReceiveProps(props) {
+		let { feature } = props.data,
+			ipt = deepCopy(feature)
+		this.init(props)
 		this.ioOuter(ipt)
 	}
 
-	ioOuter(ipt) {
+	ioOuter = ipt => {
 		this.setState({ ioInput: ipt })
-		console.clear()
 	}
 
-	init = () => {
-		let { data, csn } = this.props
-		let { feature } = data
-		let ipt = deepCopy(feature)
+	dataInit = props => {
+		let { data, feature } = props.data,
+			{ components, content } = data,
+			{ url = 1 } = content.tab_default,
+			{ list }  = feature.status,
+			curStatus = list[url]
+		if (!curStatus) data.components = []
+		data.components = deepCopy(curStatus.components || [])
+	}
+
+	init = props => {
+		let { data, feature } = props.data,
+			{ components } = data,
+			{ tabs } = feature,
+			ipt = deepCopy(feature),
+			comps = components.filter(({ name }) => name !== 'tabByTabs')
+		data.components = [ ...comps, ...tabs ]
 		this.state = { ioInput: ipt }
 	}
 
@@ -68,7 +66,7 @@ export default class Tabs extends React.Component {
 			<Custom
 				{...this.props}
 				ioInput={this.state.ioInput}
-				ioOuter={this.ioOuter.bind(this)}
+				ioOuter={this.ioOuter}
 			/>
 		)
 	}

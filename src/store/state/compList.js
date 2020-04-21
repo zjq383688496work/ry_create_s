@@ -123,6 +123,11 @@ module.exports = [
 				key:  'pageByStore2'
 			},
 			{
+				icon: 'sorter',
+				name: '翻页',
+				key:  'turnByStore2'
+			},
+			{
 				icon: 'reset',
 				name: '重置',
 				key:  'resetByStore2'
@@ -335,6 +340,36 @@ module.exports = [
 				icon: 'carousel',
 				name: '标签',
 				key:  'tabByTabs'
+			},
+			{
+				icon: 'text',
+				name: '文本',
+				key:  'text'
+			},
+			{
+				icon: 'button',
+				name: '按钮',
+				key:  'button'
+			},
+			{
+				icon: 'image',
+				name: '图片',
+				key:  'picture'
+			},
+			{
+				icon: 'image',
+				name: '背景色块',
+				key:  'area'
+			},
+			{
+				icon: 'video',
+				name: '视频', 
+				key:  'video'
+			},
+			{
+				icon: 'carousel',
+				name: '图片/视频',
+				key:  'swiperImgAndVideo'
 			},
 		]
 	},

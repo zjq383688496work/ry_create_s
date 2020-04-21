@@ -40,6 +40,10 @@ module.exports = {
 		{ name: '水平', value: 'horizontal' },
 		{ name: '垂直', value: 'vertical' }
 	] },
+	turn:          { name: '翻页方向', type: 'Radio', option: [
+		{ name: '上一页', value: 'prev' },
+		{ name: '下一页', value: 'next' }
+	] },
 	effect:        { name: '效果',    type: 'RadioMix', option: [
 		{ name: '位移切换', value: 'slide' },
 		{ name: '淡入', value: 'fade' },
@@ -82,6 +86,9 @@ module.exports = {
 	voice_error_hardware: { name: '硬件错误', type: 'Status' },
 	voice_error_user:     { name: '用户问题', type: 'Status' },
 	onlySwitch:           { name: '唯一跳转', type: 'Switch' },
+	// 标签
+	tab_default:          { name: '默认', type: 'Status' },
+	// 其他
 	remarks:              { name: '备注', type: 'Remarks' },
 	event:                { name: '事件', type: 'Event' },
 } 

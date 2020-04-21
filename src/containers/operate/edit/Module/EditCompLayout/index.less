@@ -5,11 +5,12 @@
 	width: 34px;
 	height: 100%;
 	font-size: 12px;
-	background-color: #f2f2f2;
+	// background-color: #f2f2f2;
+	box-shadow: 2px 0 4px rgba(0, 0, 0, .1);
+	background-color: #fff;
 	&.pe-comp-layout-open {
 		width: 180px;
-		background-color: #fff;
-		border-right: 1px solid #c1c1c1;
+		// border-right: 1px solid #c1c1c1;
 		.pecl-title,
 		.pecl-list {
 			display: flex;
@@ -25,7 +26,7 @@
 	.bar-close {
 		position: absolute;
 		top:  8px;
-		left: 8px;
+		left: 6px;
 		width:  24px;
 		height: 24px;
 		line-height: 24px;
@@ -166,6 +167,10 @@
 			opacity: 1;
 		}
 	}
+}
+.pe-comp-layout-fixed {
+	position: absolute;
+	z-index: 1;
 }
 .pecl-li {
 	display: flex;

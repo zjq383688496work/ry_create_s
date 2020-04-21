@@ -1,7 +1,6 @@
 import React from 'react'
 import './index.less'
 
-import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 import * as Server from 'server'
 
@@ -12,11 +11,8 @@ export default class CatgByStore2 extends React.Component {
 		this.state = { list: catg }
 	}
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		if (newProps.drag != undefined) return newProps.drag
+		return true
 	}
 	renderItem = (item, catg, idx) => {
 		let { data } = this.props,

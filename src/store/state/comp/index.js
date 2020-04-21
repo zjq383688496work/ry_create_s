@@ -125,6 +125,7 @@ module.exports = {
 	listByStore2:          authInit(require('./storeList2/content/list')),		// 列表
 	catgByStore2:          authInit(require('./storeList2/content/catg')),		// 分类
 	pageByStore2:          authInit(require('./storeList2/content/page')),		// 分页
+	turnByStore2:          authInit(require('./storeList2/content/turn')),		// 翻页
 	floorByStore2:         authInit(require('./storeList2/content/floor')),		// 楼层
 	buildByStore2:         authInit(require('./storeList2/content/build')),		// 楼栋
 	letterByStore2:        authInit(require('./storeList2/content/letter')),	// 字母

@@ -40,8 +40,9 @@ import Area              from 'compEdit/EditElement/Area'
 // import PictureListBind   from 'compEdit/EditElement/PictureListBind'
 // import GoodsBar       from 'compEdit/EditElement/GoodsDetails/GoodsBar'
 // import GoodsBlock     from 'compEdit/EditElement/GoodsDetails/GoodsBlock'
-import TabByTabs     from 'compEdit/EditElement/Tabs/TabByTabs'
-import ChildElement   from 'compEdit/EditElement/ChildElement'
+import TabByTabs         from 'compEdit/EditElement/Tabs/TabByTabs'
+import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
+// import ChildElement   from 'compEdit/EditElement/ChildElement'
 // import SwiperByGoods  from 'compEdit/EditElement/GoodsList/SwiperByGoods'
 // import CatgByGoods    from 'compEdit/EditElement/GoodsList/CatgByGoods'
 // import ResetByGoods   from 'compEdit/EditElement/GoodsList/ResetByGoods'
@@ -52,6 +53,7 @@ import FloorByStore2  from 'compEdit/EditElement/StoreList2/Floor'
 import BuildByStore2  from 'compEdit/EditElement/StoreList2/Build'
 import LetterByStore2 from 'compEdit/EditElement/StoreList2/Letter'
 import PageByStore2   from 'compEdit/EditElement/StoreList2/Page'
+import TurnByStore2   from 'compEdit/EditElement/StoreList2/Turn'
 import MapByStore2    from 'compEdit/EditElement/StoreList2/Map'
 import NavByStore2    from 'compEdit/EditElement/StoreList2/Nav'
 import StoreBlock     from 'compEdit/EditElement/StoreDetails2/Block'
@@ -98,8 +100,8 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		// pictureListBind:   <PictureListBind   {...props} />,
 		// goodsBar:          <GoodsBar          {...props} />,
 		// goodsBlock:        <GoodsBlock        {...props} />,
-		catgByTabs:        <TabByTabs        {...props} />,
-		childElement:      <ChildElement      {...props} />,
+		tabByTabs:         <TabByTabs         {...props} />,
+		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		// swiperByGoods:     <SwiperByGoods     {...props} />,
 		// catgByGoods:       <CatgByGoods       {...props} />,
 		// resetByGoods:      <ResetByGoods      {...props} />,
@@ -110,6 +112,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		buildByStore2:     <BuildByStore2     {...props} />,
 		letterByStore2:    <LetterByStore2    {...props} />,
 		pageByStore2:      <PageByStore2      {...props} />,
+		turnByStore2:      <TurnByStore2      {...props} />,
 		mapByStore2:       <MapByStore2       {...props} />,
 		navByStore2:       <NavByStore2       {...props} />,
 		storeBlock:        <StoreBlock        {...props} />,

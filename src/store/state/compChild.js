@@ -47,6 +47,7 @@ module.exports = {
 		listByStore2:   1,
 		catgByStore2:   1,
 		pageByStore2:   1,
+		turnByStore2:   1,
 		floorByStore2:  1,
 		buildByStore2:  1,
 		letterByStore2: 1,
@@ -68,6 +69,7 @@ module.exports = {
 		button:            1,
 		text:              1,
 		area:              1,
+		video:             1,
 		swiperImgAndVideo: 1,
 	},
 	wonderfulActivity2: {
