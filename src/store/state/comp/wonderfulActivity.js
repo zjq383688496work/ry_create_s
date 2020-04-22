@@ -1,8 +1,3 @@
-/**
- * @Author: Along
- * @Date:   2018-05-08
- 
- */
 let { deepCopy } = require('state/common')
 
 // 精彩活动

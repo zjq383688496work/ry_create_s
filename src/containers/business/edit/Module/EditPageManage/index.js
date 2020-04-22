@@ -1,10 +1,3 @@
-/**
- * @Author: Liao Hui <liaohui>
- * @Date:   2018-01-25T11:52:09+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-19T14:29:30+08:00
- */
-
 import React from 'react'
 import './index.less'
 import { bindActionCreators } from 'redux'

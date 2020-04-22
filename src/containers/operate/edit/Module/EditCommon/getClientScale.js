@@ -1,10 +1,3 @@
-/**
- * @Author: Along
- * @Date:   2018-11-12
-
- */
-
-
 export default function getClientScale(height,scale){
 	  var clientHeight=0;
 	  if(document.body.clientHeight&&document.documentElement.clientHeight)

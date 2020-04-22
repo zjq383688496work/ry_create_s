@@ -1,8 +1,3 @@
-/**
- * @Author: Along
- * @Date:   2018-05-07
-
- */
 let { deepCopy } = require('state/common')
 
 // 按钮

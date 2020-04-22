@@ -77,3 +77,44 @@ table {
 }
 
 
+.preview-cover {
+    img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: block;
+    }
+    &.pg-element-PORTRAIT,
+    &.pg-element-LANDSCAPE {
+        display: flex;
+        .pg-element-child {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            flex: 1;
+        }
+    }
+    &.pg-element-PORTRAIT {
+        .pg-element-box,
+        .pg-element {
+            width:  540px;
+            height: 960px;
+            flex-direction: column;
+        }
+    }
+    &.pg-element-LANDSCAPE {
+        .pg-element-box,
+        .pg-element {
+            width:  960px;
+            height: 540px;
+            flex-direction: row;
+        }
+    }
+    .react-draggable {
+        &:after,
+        > span {
+            display: none;
+        }
+    }
+}

@@ -1,10 +1,3 @@
-/*
- * @Author: liaohui
- * @Date:   2017-06-26 17:06:16
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-23T14:40:00+08:00
-*/
-
 'use strict';
 
 import React from 'react'

@@ -1,10 +1,3 @@
-/**
- * @Author: Along
- * @Date:   2018-05-02
-
- */
-
-
 import React from 'react';
 import SkyLight from 'react-skylight';
 import getClientScale from '../getClientScale'

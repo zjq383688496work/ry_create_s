@@ -1,8 +1,3 @@
-/**
- * @Author: Along
- * @Date:   2018-05-05
- 
- */
 let { deepCopy } = require('state/common')
 
 // 导航

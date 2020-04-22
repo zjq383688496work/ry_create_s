@@ -1,13 +1,7 @@
-/**
- * @Author: Liao Hui <liaohui>
- * @Date:   2018-01-25T11:52:09+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-19T14:29:30+08:00
- */
-
 import React from 'react'
 import CommonQuestion from 'compEdit/EditCommon/CommonQuestion'
-import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate'  
+import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate'
+import snapshot       from 'compEdit/EditCommon/snapshot'
 import './index.less'
 import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
@@ -159,27 +153,18 @@ class Header extends React.Component {
 		}
 		this.setState({ loading: true })
 		if (id) da.id = id
-		Ajax.post(`/mcp-gateway/template/${query.id? 'update': 'save'}?`, da).then(res => {
-			if (!query.id) {
-				tempCfg.id = res.data
-				hashHistory.push(`/operate/edit?id=${res.data}`)
-			}
-			Ajax.createCrop({
-				url: `${window.location.origin}${window.location.pathname}#/view?id=${tempCfg.id}&s=template`,
-				w: cropWidth,
-				h: cropHeight,
-				t: 1000
-			}).then(cover => {
-				Ajax.post(`/mcp-gateway/template/updateCoverImgUrl`, {
-					templateId: tempCfg.id,
-					coverImgUrl: cover.data
-				}).then(() => {
-					this.setState({ loading: false })
-					message.success(`${query.id? '更新': '保存'}成功!`)
-				}).catch(e => { this.setState({ loading: false }) })
+
+		snapshot(document.querySelector('#pgElement'), composeType, cover => {
+			if (cover) da.coverImgUrl = cover
+			Ajax.post(`/mcp-gateway/template/${query.id? 'update': 'save'}?`, da).then(res => {
+				if (!query.id) {
+					tempCfg.id = res.data
+					hashHistory.push(`/operate/edit?id=${res.data}`)
+				}
+				this.setState({ loading: false })
+				message.success(`${query.id? '更新': '保存'}成功!`)
 			}).catch(e => { this.setState({ loading: false }) })
-		}).catch(e => { this.setState({ loading: false }) })
-		// console.log(JSON.stringify(config))
+		})
 	}
 	tNameChange(name) {
 		this.setState({ name })

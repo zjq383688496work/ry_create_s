@@ -1,10 +1,3 @@
-/**
- * @Author: Along
- * @Date:   2018-11-01T17:21:39+08:00
- * @Last modified by:   Along
- * @Last modified time:  2018-11-01T13:47:49+08:00
- */
-
 import React from 'react'
 
 import { bindActionCreators } from 'redux'

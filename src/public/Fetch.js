@@ -1,4 +1,3 @@
-import 'whatwg-fetch'
 import { message } from 'antd'
 
 const common = {}
