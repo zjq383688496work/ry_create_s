@@ -105,65 +105,70 @@ class Header extends React.Component {
 		editConfig.curData.contentType = 'theme'
 		actions.updateCur(editConfig.curData)
 	}
-	saveData() {
-		let { editConfig, location } = this.props
+	saveData = () => {
+		this.setState({ loading: true })
+		let { actions, editConfig, location } = this.props
 		let { query } = location
 		let { templateType, id, composeType, adsFlag, bannerAds } = tempCfg
 		let cfg = deepCopy(editConfig), cropWidth, cropHeight
 
 		let gd = cfg.globalData
-		// 模板数据加入composeType
-		if (composeType === 'LANDSCAPE') {
-			gd.data.composeType = 'landscape'
-			cropWidth  = 960
-			cropHeight = 540
-		} else {
-			gd.data.composeType = 'portrait'
-			cropWidth  = 540
-			cropHeight = 960
-		}
+		actions.selectPage(gd.data.homepage)
+		setTimeout(() => {
 
-		if (gd.data.language) gd.data.language.default = 1
-
-		this.voiceInit(gd.voice)
-
-		cfg.globalData = {
-			data:    gd.data,
-			theme:   gd.theme,
-			feature: gd.feature,
-			banner:  gd.banner,
-			voice:   gd.voice,
-		}
-		let config = {
-			configPC: {
-				// pageContent: dataFormat.save.pageEach(cfg.pageContent),
-				pageContent: cfg.pageContent,
-				pageList:    cfg.pageList,
-				globalData:  cfg.globalData
+			// 模板数据加入composeType
+			if (composeType === 'LANDSCAPE') {
+				gd.data.composeType = 'landscape'
+				cropWidth  = 960
+				cropHeight = 540
+			} else {
+				gd.data.composeType = 'portrait'
+				cropWidth  = 540
+				cropHeight = 960
 			}
-		}
-		let da = {
-			adsFlag: adsFlag || 0,
-			config: JSON.stringify(config),
-			coverImgUrl:  '',
-			templateType: templateType,
-			composeType:  composeType,
-			name:         this.state.name,
-			bannerAds:    bannerAds || 0,
-		}
-		this.setState({ loading: true })
-		if (id) da.id = id
 
-		snapshot(document.querySelector('#pgElement'), composeType, cover => {
-			if (cover) da.coverImgUrl = cover
-			Ajax.post(`/mcp-gateway/template/${query.id? 'update': 'save'}?`, da).then(res => {
-				if (!query.id) {
-					tempCfg.id = res.data
-					hashHistory.push(`/operate/edit?id=${res.data}`)
+			if (gd.data.language) gd.data.language.default = 1
+
+			this.voiceInit(gd.voice)
+
+			cfg.globalData = {
+				data:    gd.data,
+				theme:   gd.theme,
+				feature: gd.feature,
+				banner:  gd.banner,
+				voice:   gd.voice,
+			}
+			let config = {
+				configPC: {
+					// pageContent: dataFormat.save.pageEach(cfg.pageContent),
+					pageContent: cfg.pageContent,
+					pageList:    cfg.pageList,
+					globalData:  cfg.globalData
 				}
-				this.setState({ loading: false })
-				message.success(`${query.id? '更新': '保存'}成功!`)
-			}).catch(e => { this.setState({ loading: false }) })
+			}
+			let da = {
+				adsFlag: adsFlag || 0,
+				config: JSON.stringify(config),
+				coverImgUrl:  '',
+				templateType: templateType,
+				composeType:  composeType,
+				name:         this.state.name,
+				bannerAds:    bannerAds || 0,
+			}
+			if (id) da.id = id
+
+			snapshot(document.querySelector('#pgElement'), composeType, cover => {
+				if (cover) da.coverImgUrl = cover
+				Ajax.post(`/mcp-gateway/template/${query.id? 'update': 'save'}?`, da).then(res => {
+					if (!query.id) {
+						tempCfg.id = res.data
+						hashHistory.push(`/operate/edit?id=${res.data}`)
+					}
+					this.setState({ loading: false })
+					message.success(`${query.id? '更新': '保存'}成功!`)
+				}).catch(e => { this.setState({ loading: false }) })
+			})
+		
 		})
 	}
 	tNameChange(name) {
@@ -246,7 +251,7 @@ class Header extends React.Component {
 							</div>
 							全局配置
 						</div>
-						<div className="cl-item" onClick={this.saveData.bind(this)}>
+						<div className="cl-item" onClick={this.saveData}>
 							<div className="cl-item-icon">
 								<img src={require(`images/icon/save.png`)}/>
 							</div>

@@ -14,4 +14,5 @@ module.exports = {
 	statusAuth:     require('./statusAuth'),
 	// statusManage:   require('./statusManage'),
 	languages:      require('./languages'),
+	tags:           require('./tags'),
 }

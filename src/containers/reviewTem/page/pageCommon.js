@@ -34,6 +34,8 @@ import StoreInstroShow       from 'reviewTem/EditElement/Comp/StoreInstro'
 // import GoodsListShow         from 'reviewTem/EditElement/Comp/GoodsList'
 // import GoodsDetailsShow      from 'reviewTem/EditElement/Comp/GoodsDetails'
 
+import Tabs from 'reviewTem/EditElement/Comp/Tabs'
+
 import addAnimate from 'reviewTem/page/animateAdd'
 import 'reviewTem/page/index.less'
 
@@ -114,6 +116,7 @@ class EditElementCommon extends React.Component {
 							 	case "storeInstro" :        compCon = (<StoreInstroShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
 						 	 	// case "goodsList" :          compCon = (<GoodsListShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} query={this.props.query}/>); break
 						 	 	// case "goodsDetails" :       compCon = (<GoodsDetailsShow data={element} type={`Style${styleIdx + 1}`} top={layout.top} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
+						 	 	case "tabs":                compCon = <Tabs data={element} type={`Style${styleIdx + 1}`} />;break
 						 	 default: ; break
 						 } 
 						 return (

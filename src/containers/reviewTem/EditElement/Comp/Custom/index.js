@@ -45,6 +45,10 @@ import RYdataMap         from '../Common/RYdataMap'
 
 import QrcodeRYShow      from 'reviewTem/EditElement/QrcodeRY'
 
+// 标签
+import TabByTabs         from '../Tabs/TabByTabs'
+import SwiperImgAndVideo from '../../SwiperImgAndVideo'
+
 import './index.less'
 
  
@@ -54,9 +58,9 @@ class Custom extends React.Component {
 	render() {  
 		let { data, ioInput, ioOuter,floors,builds,categories,shopsInfo,animate,animateParams,action,storeUpdate,have_goods,top,have_activitys } = this.props
 		let comp  = data.data.components,
-			delayTime = data.data.animation.className ? (data.data.animation.delay + data.data.animation.duration) : 0,
+			delayTime = data.data.animation.className ? (data.data.animation.delay + data.data.animation.duration): 0,
 			goodsDetails = ioInput&&ioInput.itemDetails;
-		goodsDetails ? goodsDetails = RYdataMap(goodsDetails) : null;
+		goodsDetails? goodsDetails = RYdataMap(goodsDetails): null;
 		let childNode = comp.map((_, i) => {   
 			const noFormatAni = _.data.animation;
 			const animateInfo = addAnimate(noFormatAni);
@@ -69,52 +73,55 @@ class Custom extends React.Component {
 				compCon ;  
 			aniSty.animationDelay = `${noFormatAni.delay + delayTime}s`;
 			switch(compName){
-				case 'text' :              compCon = (<Text data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} />);break
-				case 'picture'   :         compCon = (<Picture data={_} type={`Style${styleIdx + 1}`} name={data.name} animate={animate} animateParams={animateParams} />);break
-				// case 'splitLine' :         compCon = (<SplitLine data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'text':              compCon = (<Text data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} />);break
+				case 'picture'  :         compCon = (<Picture data={_} type={`Style${styleIdx + 1}`} name={data.name} animate={animate} animateParams={animateParams} />);break
+				// case 'splitLine':         compCon = (<SplitLine data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'web':                compCon = (<Web data={_} type={`Style${styleIdx + 1}`} />);break
-				case 'area' :              compCon = (<Area data={_} type={`Style${styleIdx + 1}`} />);break
-				case 'button' :            compCon = (<Button data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} />);break
-				case 'buttonAuto' :        compCon = (<ButtonAuto data={_} type={`Style${styleIdx + 1}`}   ioInput={ioInput} ioOuter={ioOuter} animate={animate} animateParams={animateParams} action={action} />);break
-				case 'buttonStatus' :      compCon = (<ButtonStatus data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} animate={animate} animateParams={animateParams} action={action} />);break
-				case 'address' :           compCon = (<Address data={_} type={`Style${styleIdx + 1}`} />);break
-				case 'time' :              compCon = (<Time data={_} type={`Style${styleIdx + 1}`} />);break
-				case 'weather' :           compCon = (<Weather data={_} type={`Style${styleIdx + 1}`} />);break 
-				case 'wonderfulActivity' : compCon = (<WonderfulActivity  activities={_.data.content} data={_} type={`Style${styleIdx + 1}`} name={name} />);break
-				case 'catgByActivity2' :   compCon = (<CatgByActivity  data={_} type={`Style${styleIdx + 1}`} have_activitys={have_activitys} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
-				case 'resetByActivity2' :  compCon = (<ResetByActivity  data={_} type={`Style${styleIdx + 1}`} have_activitys={have_activitys} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
-				case 'listByActivity2' :   compCon = (<ListByActivity  activities={_.data.content} data={_} type={`Style${styleIdx + 1}`} />);break
-				case 'letter' :            compCon = (<Letter data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} letter={ioInput.letter} action={action} />);break
-				case 'floor' :             compCon = (<Floor data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} floors={floors} floor={ioInput.floor} action={action} />);break
-				case 'catg' :              compCon = (<Catg data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} catg={ioInput.catg} categories={categories} action={action} />);break
-				case 'page' :              compCon = (<Page data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shopsInfo={shopsInfo} />);break
-				case 'reset' :             compCon = (<Reset data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} storeUpdate={storeUpdate} />);break
-				case 'floorMap' :          compCon = (<FloorMap data={_} type={`Style${styleIdx + 1}`} />);break
-				case 'listByStore' :       compCon = (<ListByStore data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shops={shopsInfo} animate={animate} animateParams={animateParams} action={action} storeUpdate={storeUpdate} />);break
+				case 'area':              compCon = (<Area data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'button':            compCon = (<Button data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} />);break
+				case 'buttonAuto':        compCon = (<ButtonAuto data={_} type={`Style${styleIdx + 1}`}   ioInput={ioInput} ioOuter={ioOuter} animate={animate} animateParams={animateParams} action={action} />);break
+				case 'buttonStatus':      compCon = (<ButtonStatus data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} animate={animate} animateParams={animateParams} action={action} />);break
+				case 'address':           compCon = (<Address data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'time':              compCon = (<Time data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'weather':           compCon = (<Weather data={_} type={`Style${styleIdx + 1}`} />);break 
+				case 'wonderfulActivity': compCon = (<WonderfulActivity  activities={_.data.content} data={_} type={`Style${styleIdx + 1}`} name={name} />);break
+				case 'catgByActivity2':   compCon = (<CatgByActivity  data={_} type={`Style${styleIdx + 1}`} have_activitys={have_activitys} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
+				case 'resetByActivity2':  compCon = (<ResetByActivity  data={_} type={`Style${styleIdx + 1}`} have_activitys={have_activitys} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
+				case 'listByActivity2':   compCon = (<ListByActivity  activities={_.data.content} data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'letter':            compCon = (<Letter data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} letter={ioInput.letter} action={action} />);break
+				case 'floor':             compCon = (<Floor data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} floors={floors} floor={ioInput.floor} action={action} />);break
+				case 'catg':              compCon = (<Catg data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} catg={ioInput.catg} categories={categories} action={action} />);break
+				case 'page':              compCon = (<Page data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shopsInfo={shopsInfo} />);break
+				case 'reset':             compCon = (<Reset data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} storeUpdate={storeUpdate} />);break
+				case 'floorMap':          compCon = (<FloorMap data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'listByStore':       compCon = (<ListByStore data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shops={shopsInfo} animate={animate} animateParams={animateParams} action={action} storeUpdate={storeUpdate} />);break
 
-				case 'letterByStore2' :    compCon = (<LetterNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} letter={ioInput.letter} action={action} />);break
-				case 'floorByStore2' :     compCon = (<FloorNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} floors={floors} floor={ioInput.floor} action={action} />);break
+				case 'letterByStore2':    compCon = (<LetterNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} letter={ioInput.letter} action={action} />);break
+				case 'floorByStore2':     compCon = (<FloorNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} floors={floors} floor={ioInput.floor} action={action} />);break
 				case 'buildByStore2':      compCon = (<BuildNew  data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} builds={builds} build={ioInput.build} action={action} />);break
-				case 'catgByStore2' :      compCon = (<CatgNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} catg={ioInput.catg} categories={categories} action={action} />);break
-				case 'pageByStore2' :      compCon = (<PageNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shopsInfo={shopsInfo} />);break
-				case 'resetByStore2' :     compCon = (<ResetNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} storeUpdate={storeUpdate} />);break
-				case 'mapByStore2' :       compCon = (<FloorMap data={_} type={`Style${styleIdx + 1}`} />);break
-				case 'listByStore2' :      compCon = (<ListByStoreNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shops={shopsInfo} animate={animate} animateParams={animateParams} action={action} storeUpdate={storeUpdate} />);break
-				case 'storeBlock' :        compCon = (<StoreDetailsBlock data={_} type={`Style${styleIdx + 1}`} goodsDetails={goodsDetails} action={action} animate={animate} animateParams={animateParams} />);break
+				case 'catgByStore2':      compCon = (<CatgNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} catg={ioInput.catg} categories={categories} action={action} />);break
+				case 'pageByStore2':      compCon = (<PageNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shopsInfo={shopsInfo} />);break
+				case 'resetByStore2':     compCon = (<ResetNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} storeUpdate={storeUpdate} />);break
+				case 'mapByStore2':       compCon = (<FloorMap data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'listByStore2':      compCon = (<ListByStoreNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shops={shopsInfo} animate={animate} animateParams={animateParams} action={action} storeUpdate={storeUpdate} />);break
+				case 'storeBlock':        compCon = (<StoreDetailsBlock data={_} type={`Style${styleIdx + 1}`} goodsDetails={goodsDetails} action={action} animate={animate} animateParams={animateParams} />);break
 
-				case "qrcodeHui" :         compCon = (<QrcodeRYShow data={_} type={`Style${styleIdx + 1}`} />); break
-				case "qrcodeNav" :         compCon = (<QrcodeRYShow data={_} type={`Style${styleIdx + 1}`} />); break
+				case "qrcodeHui":         compCon = (<QrcodeRYShow data={_} type={`Style${styleIdx + 1}`} />); break
+				case "qrcodeNav":         compCon = (<QrcodeRYShow data={_} type={`Style${styleIdx + 1}`} />); break
 
-				// case 'listByGoods' :       compCon = (<ListByGoods data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} ioInput={ioInput} />);break
-				// case 'catgByGoods' :       compCon = (<CatgByGoods data={_} type={`Style${styleIdx + 1}`} have_goods={have_goods} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
-				// case 'resetByGoods' :      compCon = (<ResetByGoods data={_} type={`Style${styleIdx + 1}`} have_goods={have_goods} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
-				// case 'swiperByGoods' :     compCon = (<SwiperByGoods data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} />);break
-				// case 'goodsBar' :          compCon = (<GoodsBar data={_} type={`Style${styleIdx + 1}`} top={top} ioInput={ioInput} refresh={ioInput.refresh} />);break
-				// case 'goodsBlock' :        compCon = (<GoodsBlock data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} refresh={ioInput.refresh} />);break
-				case 'swiperBind' :        compCon = <Swiperbind data={_} bind={contentBind} item={goodsDetails} realIndex={true} />;break
-				// case 'pictureListBind' : 
-				// 	const imgList = contentBind&&getAttr(goodsDetails[contentBind])=="Array" ? goodsDetails[contentBind] : []
+				// case 'listByGoods':       compCon = (<ListByGoods data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} ioInput={ioInput} />);break
+				// case 'catgByGoods':       compCon = (<CatgByGoods data={_} type={`Style${styleIdx + 1}`} have_goods={have_goods} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
+				// case 'resetByGoods':      compCon = (<ResetByGoods data={_} type={`Style${styleIdx + 1}`} have_goods={have_goods} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
+				// case 'swiperByGoods':     compCon = (<SwiperByGoods data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} />);break
+				// case 'goodsBar':          compCon = (<GoodsBar data={_} type={`Style${styleIdx + 1}`} top={top} ioInput={ioInput} refresh={ioInput.refresh} />);break
+				// case 'goodsBlock':        compCon = (<GoodsBlock data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} refresh={ioInput.refresh} />);break
+				case 'swiperBind':        compCon = <Swiperbind data={_} bind={contentBind} item={goodsDetails} realIndex={true} />;break
+				// case 'pictureListBind': 
+				// 	const imgList = contentBind&&getAttr(goodsDetails[contentBind])=="Array" ? goodsDetails[contentBind]: []
 				// 	 compCon = <PictureListBind data={_} imgList={imgList} type={`Style${styleIdx + 1}`} refresh={ioInput.refresh} />;break
+
+				case 'tabByTabs':         compCon = <TabByTabs parent={data} data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} />; break
+				case "swiperImgAndVideo": compCon = <SwiperImgAndVideo data={_} type={`Style${styleIdx + 1}`} />; break
 			}
 			return (   
 				<div className={`pge-layout ${compName} ${aniCls? aniCls: ''}`} style={{...layout,...aniSty}} key={i}>{ compCon }</div> 

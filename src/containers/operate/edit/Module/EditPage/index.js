@@ -9,6 +9,7 @@ const Panel = Collapse.Panel
 
 import Color     from 'compEdit/EditCommon/Color'
 // import PageAnime from 'compEdit/EditCommon/PageAnime'
+import TagsConfig from 'compEdit/EditCommon/TagsConfig'
 
 import './index.less'
 
@@ -118,6 +119,7 @@ class EditPage extends React.Component {
 								/>
 							</div>
 						</div>
+						<TagsConfig data={data} />
 						{
 							banner
 							?
