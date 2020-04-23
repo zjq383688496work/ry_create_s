@@ -77,7 +77,7 @@ const dataFormat = {
 										i2 = s2.idx,
 										l2 = s2.list
 									s2.idx  = i1 || 0
-									cd.data = l2[i1].data
+									if (l2[i1]) cd.data = l2[i1].data
 									this.plus(_, cd, i, da)
 								})
 								break
@@ -134,7 +134,7 @@ const dataFormat = {
 										i2 = s2.idx,
 										l2 = s2.list
 									s2.idx  = i1 || 0
-									cd.data = l2[i1].data
+									if (l2[i1]) cd.data = l2[i1].data
 									this.slim(_, cd, i, da)
 								})
 								break

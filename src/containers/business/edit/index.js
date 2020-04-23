@@ -13,6 +13,7 @@ import EditElement    from 'compEditB/EditElement'
 import EditStyle      from 'compEditB/EditStyle'
 import EditAnimation  from 'compEdit/EditAnimation'
 import EditTheme      from 'compEditB/EditTheme'
+import EditStatus     from 'compEdit/EditStatus'
 import { setSwiperImgAndVideo } from 'compEdit/EditContent/filter'
 import * as actions from 'actions'
 
@@ -22,6 +23,9 @@ import './index.less'
 
 import { Tabs } from 'antd'
 const TabPane = Tabs.TabPane
+
+import * as variable from 'var'
+const { statusAuth } = variable
 
 class EditComponent extends React.Component {
 	constructor(props) {
@@ -43,7 +47,7 @@ class EditComponent extends React.Component {
 	}
 	render() {
 		var { editConfig, location } = this.props,
-			{ curData, globalData } = editConfig
+			{ curComp, curData, globalData } = editConfig
 		setSwiperImgAndVideo(editConfig)
 		var { banner, theme } = globalData,
 			colors = theme.list[theme.idx].colors,
@@ -55,9 +59,15 @@ class EditComponent extends React.Component {
 		} else if(type === 'comp') {
 			editTab = (
 				<Tabs defaultActiveKey="1" type="card">
-					<TabPane tab="内容" key="1"><EditContent   data={editConfig.curComp} /></TabPane>
-					<TabPane tab="展示" key="2"><EditStyle     data={editConfig.curComp} /></TabPane>
-					<TabPane tab="动画" key="3"><EditAnimation data={editConfig.curComp} /></TabPane>
+					<TabPane tab="内容" key="1"><EditContent   data={curComp} /></TabPane>
+					<TabPane tab="展示" key="2"><EditStyle     data={curComp} /></TabPane>
+					<TabPane tab="动画" key="3"><EditAnimation data={curComp} /></TabPane>
+					{
+						statusAuth[curComp.name]
+						?
+						<TabPane tab="状态" key="4"><EditStatus data={curComp} /></TabPane>
+						: null
+					}
 				</Tabs>
 			)
 		} else if (type === 'banner') {

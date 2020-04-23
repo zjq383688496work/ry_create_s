@@ -82,7 +82,7 @@ class EditStatus extends React.Component {
 			{ list }  = data.feature.status,
 			keys      = Object.keys(list),
 			activeKey = ['0', '1'],
-			addNode
+			addNode   = null
 		if (keys.length < statusLimit) {
 			addNode = (
 				<div className="pgs-row">
@@ -109,7 +109,7 @@ class EditStatus extends React.Component {
 					<div className="pgsr-auth" style={{ width: 30 }}>
 						<div className="pgt-edit">
 							{
-								key != 1
+								key != 1 && envType !== 'business'
 								?
 								<div className onClick={this.removeKey.bind(this, key)}><Icon type="close"/></div>
 								: null
@@ -123,8 +123,18 @@ class EditStatus extends React.Component {
 			<section className="pg-status">
 				<Collapse defaultActiveKey={activeKey}>
 					<Panel header={'状态编辑'}>
-						<span>状态上限: {statusLimit}</span>
-						{ addNode }
+						{
+							envType !== 'business'
+							?
+							<span>状态上限: {statusLimit}</span>
+							: null
+						}
+						{
+							envType !== 'business'
+							?
+							addNode
+							: null
+						}
 						{ childNode }
 					</Panel>
 				</Collapse>

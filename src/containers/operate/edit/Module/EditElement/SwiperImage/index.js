@@ -11,8 +11,7 @@ import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.css'
 import './index.less'
 
-class SwiperImage extends React.Component {
-	
+export default class SwiperImage extends React.Component {
 	componentWillReceiveProps(props) {
 		this.getData(props);
 	}
@@ -120,10 +119,7 @@ class PageRY extends React.Component {
 				</div>
 			)
 		})
-		node = (
-			<div className="ep-page">{node}</div>
-		)
-		return node
+		return <div className="ep-page">{node}</div>
 	}
 
 	render() {
@@ -135,5 +131,3 @@ class PageRY extends React.Component {
 		)
 	}
 }
-
-export default SwiperImage

@@ -24,6 +24,7 @@ import BuildNew          from '../StoreListNew/BuildNew'
 import CatgNew           from '../StoreListNew/CatgNew'
 import PageNew           from '../StoreListNew/PageNew'
 import ResetNew          from '../StoreListNew/ResetNew'
+import Turn              from '../StoreListNew/Turn'
 import ListByStoreNew    from '../StoreListNew/ListByStoreNew'
 // 新店铺详情
 import StoreDetailsBlock from '../StoreDetailsNew/StoreDetailsBlock'
@@ -76,7 +77,7 @@ class Custom extends React.Component {
 				case 'text':              compCon = (<Text data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} />);break
 				case 'picture'  :         compCon = (<Picture data={_} type={`Style${styleIdx + 1}`} name={data.name} animate={animate} animateParams={animateParams} />);break
 				// case 'splitLine':         compCon = (<SplitLine data={_} type={`Style${styleIdx + 1}`} />);break
-				case 'web':                compCon = (<Web data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'web':               compCon = (<Web data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'area':              compCon = (<Area data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'button':            compCon = (<Button data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} />);break
 				case 'buttonAuto':        compCon = (<ButtonAuto data={_} type={`Style${styleIdx + 1}`}   ioInput={ioInput} ioOuter={ioOuter} animate={animate} animateParams={animateParams} action={action} />);break
@@ -102,6 +103,7 @@ class Custom extends React.Component {
 				case 'catgByStore2':      compCon = (<CatgNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} catg={ioInput.catg} categories={categories} action={action} />);break
 				case 'pageByStore2':      compCon = (<PageNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shopsInfo={shopsInfo} />);break
 				case 'resetByStore2':     compCon = (<ResetNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} storeUpdate={storeUpdate} />);break
+				case 'turnByStore2':      compCon = <Turn data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shopsInfo={shopsInfo} />; break
 				case 'mapByStore2':       compCon = (<FloorMap data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'listByStore2':      compCon = (<ListByStoreNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shops={shopsInfo} animate={animate} animateParams={animateParams} action={action} storeUpdate={storeUpdate} />);break
 				case 'storeBlock':        compCon = (<StoreDetailsBlock data={_} type={`Style${styleIdx + 1}`} goodsDetails={goodsDetails} action={action} animate={animate} animateParams={animateParams} />);break
@@ -123,10 +125,10 @@ class Custom extends React.Component {
 				case 'tabByTabs':         compCon = <TabByTabs parent={data} data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} />; break
 				case "swiperImgAndVideo": compCon = <SwiperImgAndVideo data={_} type={`Style${styleIdx + 1}`} />; break
 			}
-			return (   
+			return (
 				<div className={`pge-layout ${compName} ${aniCls? aniCls: ''}`} style={{...layout,...aniSty}} key={i}>{ compCon }</div> 
-			)   
-		})     
+			)
+		})
 		return (
 			<section className="pg-custom">
 				{ childNode } 

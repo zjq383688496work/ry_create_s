@@ -18,11 +18,8 @@ export default class ListByStore2 extends React.Component {
 		if (size2 != size) this.getData()
 	}
 	shouldComponentUpdate(newProps, newState){
-		if(newProps.drag != undefined){
-			return newProps.drag
-		}else{
-			return true
-		}
+		if (newProps.drag != undefined) return newProps.drag
+		else return true
 	}
 	getData = e => {
 		var { size } = this.props.ioInput.body

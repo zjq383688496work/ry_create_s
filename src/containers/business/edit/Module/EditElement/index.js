@@ -33,6 +33,7 @@ import Area               from 'compEdit/EditElement/Area'
 import Qrcode             from 'compEdit/EditElement/Qrcode'
 import QrcodeHui          from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav          from 'compEdit/EditElement/QrcodeNav'
+import Tabs               from 'compEdit/EditElement/Tabs'
 
 import Banner             from 'compEdit/EditElement/Banner'
 
@@ -78,8 +79,13 @@ const compContent = (name, data, actions, type, idx, csn, contentEditable, langu
 		qrcodeHui:          <QrcodeHui         {...props} />,
 		qrcodeNav:          <QrcodeNav         {...props} />,
 		storeList2:         <StoreList2        {...props} />,
-		storeDetails2:      <StoreDetails2     {...props} />
+		storeDetails2:      <StoreDetails2     {...props} />,
+		tabs:               <Tabs              {...props} />,
 	}
+	// let res = render[name]
+	// if (!res) {
+	// 	debugger
+	// }
 	return render[name]
 }
 

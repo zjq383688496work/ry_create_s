@@ -16,5 +16,5 @@ module.exports = {
 	storeDetails:      1,
 	storeInstro:       1,
 	/*dateWeather:       1,*/
-	map2D:             1
+	map2D:             1,
 }

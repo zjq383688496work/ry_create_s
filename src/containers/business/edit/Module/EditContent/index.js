@@ -15,6 +15,7 @@ const RadioGroup  = Radio.Group
 import Banner            from 'compEdit/EditContent/Banner'
 import LanguageChange    from 'compEdit/EditContent/LanguageChange'
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
+import StatusJump        from 'compEdit/EditCommon/StatusJump'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
 import ImageAndVideoComp from 'compEdit/EditCommon/ImageAndVideoComp'
 import DatePickerRY      from 'compEdit/EditContent/DatePickerRY'
@@ -137,16 +138,23 @@ class EditContent extends React.Component {
 			/>
 		)
 	} 
-	//日期范围
+	// 日期范围
 	renderDate(cfg, data, obj, val, key, index){
 		let defaultValue = val ? JSON.parse(val) : ''
 		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,key,obj,index)}></DatePickerRY>)
-	}    
+	}
 	// 跳转路由
 	renderRouter(cfg, data, obj, val, key, index) {
 		let { actions, from } = this.props
 		return (
 			<RouterJump data={data} content={val} actions={actions} index={index} from={from} />
+		)
+	}
+	// 切换状态
+	renderStatus(cfg, data, obj, val, key, index) {
+		let { actions } = this.props
+		return (
+			<StatusJump data={data} content={val} actions={actions} />
 		)
 	}
 	// 上传图片
@@ -362,13 +370,13 @@ class EditContent extends React.Component {
 	chiObj = (data, init) => {
 		let comps = data.data.components
 		if (!comps) return false
+		let map   = deepCopy(compNum)
 		return comps.map((_, i) => {
 			let _da  = _.data
 			let con  = _da.content
 			let name = _.name
 			let cn   = compMap[name]
 			let OK   = false
-			let map  = deepCopy(compNum)
 			let compLay = _da.componentLayout
 			let compCon = compContent(name, _, this.updateComp)
 			let childNode
@@ -413,8 +421,8 @@ class EditContent extends React.Component {
 			content  = data.data.content,
 			childNode,
 			activeKey,
-			chiObj,
-			compCon = compContent(compName, this.props, this.updateComp)
+			chiObj
+		var compCon = compContent(compName, this.props, this.updateComp)
 		if (content.length) {
 			childNode = content.map((_, i) => {
 				return (

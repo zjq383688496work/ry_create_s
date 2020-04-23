@@ -16,22 +16,22 @@ import { content_do,everySame,destroySwiper,formatObj,sameCheck } from './conten
 class RYSwiper extends React.Component {
 	state = {
 		content:'',
-		type:1, //1--一张图片  2--一个视频 3--图片集合且delay一致 4--其他
+		type: 1, // 1--一张图片  2--一个视频 3--图片集合且delay一致 4--其他
 		newContent:[],
 		swiperOptions:''
 	}
-	componentDidMount(){
+	componentDidMount() {
 		this.getData(this.props)
 	}
 	componentWillReceiveProps(props){
 		this.getData(props)
 	} 
-	content_show = (obj,props) => {
+	content_show = (obj, props) => {
 		let contentOri = JSON.stringify(props.data.data.content),
 			objReturn = content_do(contentOri),
 			content = objReturn.content,
 			date = objReturn.date 
-		if(getAttr(content) == 'Array'){
+		if (getAttr(content) == 'Array'){
 			let type = this.oneSwiper(content),newObj = {newContent:content,type:type,...obj}
 			sameCheck(this.state.newContent,content) ? this.setState(newObj) : this.setState(obj)
 			clearInterval(this.timer)
@@ -49,26 +49,26 @@ class RYSwiper extends React.Component {
 				let arr_start = JSON.parse(contentOri) 
 				arr_start = arr_start.filter(_=>_.date == '')
 				let type = this.oneSwiper(arr_start),newObj = {newContent:arr_start,type:type,...obj}
-				sameCheck(this.state.newContent,arr_start) ? this.setState(newObj) : this.setState(obj)
+				sameCheck(this.state.newContent,arr_start)? this.setState(newObj): this.setState(obj)
 			}else{ 
 				if(now >= _ && now < date[i+1]){ 
 					let arr_content = content[_],
 						type = this.oneSwiper(arr_content),
 						newObj = {newContent:arr_content,type:type,...obj}
-					sameCheck(this.state.newContent,arr_content) ? this.setState(newObj) : this.setState(obj)
+					sameCheck(this.state.newContent,arr_content)? this.setState(newObj): this.setState(obj)
 				} 
 			} 
 		}) 
 	}  
 	oneSwiper = item => {
-		let arr_content = item,type=1
-		if(arr_content.length == 1){
-			type = arr_content[0].type == "image" ? 1 : 2
-		}else if(arr_content.length > 1){
-			type = everySame(arr_content) ? 3 : 4
-		}else{
+		let arr_content = item,type = 1
+		if (arr_content.length == 1) {
+			type = arr_content[0].type == 'image'? 1: 2
+		} else if(arr_content.length > 1){
+			type = everySame(arr_content)? 3: 4
+		} else {
 			type = 1
-		} 
+		}
 		return type
 	} 
 	getData = props => { 
@@ -79,24 +79,21 @@ class RYSwiper extends React.Component {
 		this.content_show({content:content,swiperOptions:swiperOptions},props)	
 	}   
 	componentWillUnmount(){
-		clearInterval(this.timer)
 	}  
-	shouldComponentUpdate(newProps, newState){
-		let { data } = newProps,
-			{ feature} = data, 
-			swiperOptions = JSON.stringify(feature.swiperOptions),
-			content = JSON.stringify(data.data.content)
-		if(this.state.content != content || this.state.swiperOptions != swiperOptions){
-			return true
-		} 
-		return false
-	}    
-	render(){ 
-		let type = this.state.type,renderDom
+	// shouldComponentUpdate(newProps, newState){
+	// 	let { data } = newProps,
+	// 		{ feature} = data, 
+	// 		swiperOptions = JSON.stringify(feature.swiperOptions),
+	// 		content = JSON.stringify(data.data.content)
+	// 	if (this.state.content != content || this.state.swiperOptions != swiperOptions) return true
+	// 	return false
+	// }
+	render() {
+		let type = this.state.type, renderDom = null
 		switch(type){
 			case 1 : renderDom = (<OneImage content={this.state.newContent} prop={this.props}></OneImage>);break
 			case 2 : renderDom = (<OneVideo content={this.state.newContent}></OneVideo>);break
-			case 3 : renderDom = (<SwiperImage content={this.state.newContent} prop={this.props}></SwiperImage>);break
+			case 3 : renderDom = (<SwiperImage content={this.state.newContent} prop={this.props} />);break
 			case 4 : renderDom = (<SwiperImageVideo content={this.state.newContent} prop={this.props}></SwiperImageVideo>);break
 
 		}
@@ -124,50 +121,50 @@ function OneImage({content,prop}){
 	return <div className="e-img" id="RY-SwiperImage"><img src={img} /></div>
 }  
 
-//只有图片且delay设置一样
+// 只有图片且delay设置一样
 class SwiperImage extends React.Component {
 	state = {
-		random: Date.now() + parseInt(Math.random()*1000),
 		realIndex: 0
-	} 
-	componentWillReceiveProps(props) {
-		this.init(props);
-	}  
+	}
 	componentDidMount() {
 		this.init(this.props)
-	} 
+	}
+	componentWillReceiveProps(props) {
+		this.init(props)
+	}
 	init = props => {
-		let { prop,content } = props,
-			swiperOptions = deepCopy(prop.data.feature.swiperOptions);
-		if(swiperOptions.autoplay){
-			content[0].delayOnly ? swiperOptions.autoplayOptions.delay = content[0].delayOnly*1000 : swiperOptions.autoplayOptions['delay'] = swiperOptions.autoplayOptions.delayBig*1000
-		}  
-		swiperOptions['speed'] = swiperOptions.speedBig*1000 
+		let { prop, content: [ { delayOnly } ] } = props,
+			{ $swiper }   = this.refs,
+			swiperOptions = deepCopy(prop.data.feature.swiperOptions),
+			{ autoplay, autoplayOptions } = swiperOptions
+		if (autoplay) autoplayOptions.delay = (delayOnly || autoplayOptions.delayBig) * 1000
+		swiperOptions.speed = swiperOptions.speedBig * 1000 
 		delete swiperOptions.speedBig
-		delete swiperOptions.autoplayOptions.delayBig
-		swiperOptions = formatObj(swiperOptions,()=>{
-			this.mySwiperImage&&!this.mySwiperImage.destroyed ? this.setState({realIndex:this.mySwiperImage.realIndex}) : 
-			this.setState({realIndex:0})
-		});         
-		destroySwiper(this.mySwiperImage)
-		clearTimeout(this.timer)
-		this.timer = setTimeout(()=>{this.mySwiperImage = new Swiper(`.swiper-container_${this.state.random}`, swiperOptions)},10)
-	}          
-	   
+		delete autoplayOptions.delayBig
+		this.myStoreSwiper && this.myStoreSwiper.destroy(false)
+		this.myStoreSwiper = new Swiper($swiper, swiperOptions)
+	}
 	componentWillUnmount() {
-		clearTimeout(this.timer)
-		destroySwiper(this.mySwiperImage)
+		this.myStoreSwiper && this.myStoreSwiper.destroy(false)
 	}
 	render() {
-		let { prop, content } = this.props
-		return ( 
+		let { prop, content } = this.props,
+			style = cssColorFormat(prop, 'swiperImage')
+		return (
 			<div className="e-SwiperImage" id="RY-SwiperImage">
-				<div className={`swiper-container swiper-container_${this.state.random} outer_box`}>
+				<div className="swiper-container outer_box" ref="$swiper">
 					<div className="swiper-wrapper">
 						{
-							content.map((item,index) => <div className="swiper-slide" key={index}>{
-								compImgFormat(prop, item.img) ? <img src={compImgFormat(prop, item.img)} style={cssColorFormat(prop, 'swiperImage')} /> : null
-							}</div>)
+							content.map((item, i) => {
+								let img = compImgFormat(prop, item.img)
+								return (
+									<div className="swiper-slide" key={i}>
+										{
+											img && <img src={img} style={style} />
+										}
+									</div>
+								)
+							})
 						}  
 					</div>
 				</div>

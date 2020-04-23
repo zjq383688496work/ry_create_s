@@ -49,6 +49,8 @@ export default class Tabs extends React.Component {
 			{ tabs } = feature,
 			ipt = deepCopy(feature),
 			comps = components.filter(({ name }) => name !== 'tabByTabs')
+
+		// data.components = [ ...comps, ...tabs ]
 		data.components = [ ...comps, ...tabs ]
 		this.state = { ioInput: ipt }
 	}
