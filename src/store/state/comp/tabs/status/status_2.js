@@ -1,7 +1,7 @@
 let { authInit, deepCopy, extendRmSL } = require('state/common')
 const sp = authInit(require('state/comp/swiperImgAndVideo'))
 
-const picture = extendRmSL(deepCopy(sp), {
+const swiper = extendRmSL(deepCopy(sp), {
 	data: {
 		layout: {
 			position: 'absolute',
@@ -16,5 +16,5 @@ const picture = extendRmSL(deepCopy(sp), {
 
 // 组件状态管理
 module.exports = [
-	picture
+	// swiper
 ]

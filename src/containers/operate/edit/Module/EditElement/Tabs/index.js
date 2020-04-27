@@ -13,9 +13,9 @@ let cusMap = {
 export default class Tabs extends React.Component {
 	constructor(props) {
 		super(props)
-		this.dataInit(props)
 		this.init(props)
 	}
+
 	componentWillMount() {}
 
 	componentDidMount() {}
@@ -33,26 +33,16 @@ export default class Tabs extends React.Component {
 		this.setState({ ioInput: ipt })
 	}
 
-	dataInit = props => {
-		let { data, feature } = props.data,
-			{ components, content } = data,
-			{ url = 1 } = content.tab_default,
-			{ list }  = feature.status,
-			curStatus = list[url]
-		if (!curStatus) data.components = []
-		data.components = deepCopy(curStatus.components || [])
-	}
-
 	init = props => {
 		let { data, feature } = props.data,
-			{ components } = data,
-			{ tabs } = feature,
-			ipt = deepCopy(feature),
-			comps = components.filter(({ name }) => name !== 'tabByTabs')
-
-		// data.components = [ ...comps, ...tabs ]
+			{ status, tabs }  = feature,
+			{ idx, list }     = status,
+			curStatus = list[idx],
+			comps
+		if (!curStatus) comps = []
+		comps = curStatus.components || []
 		data.components = [ ...comps, ...tabs ]
-		this.state = { ioInput: ipt }
+		this.state = { ioInput: deepCopy(feature) }
 	}
 
 	render() {

@@ -68,74 +68,74 @@ class ShortcutKey extends React.Component {
 		if (key === 'meta') this.setState({ meta: false })
 	}
 	// OSX 下的command取代ctrl
-	key_meta = (e) => {
+	key_meta = e => {
 		const { os } = this.state
 		if (os != 'mac') return
 		this.setState({ meta: true })
 	}
 	// 复制
-	key_ctrl_c = (e) => {
+	key_ctrl_c = e => {
 		this.copyComp(e)
 	}
-	key_meta_c = (e) => {
+	key_meta_c = e => {
 		this.copyComp(e)
 	}
 	// 粘贴
-	key_ctrl_v = (e) => {
+	key_ctrl_v = e => {
 		this.pasteComp(e)
 	}
-	key_meta_v = (e) => {
+	key_meta_v = e => {
 		this.pasteComp(e)
 	}
 	// 删除
-	key_delete = (e) => {
+	key_delete = e => {
 		this.removeComp(e)
 	}
-	key_backspace = (e) => {
+	key_backspace = e => {
 		this.removeComp(e)
 	}
 	// 撤销
-	key_ctrl_z = (e) => {
+	key_ctrl_z = e => {
 		var doc = document.querySelector('#btnRevoke')
 		doc.click()
 	}
-	key_meta_z = (e) => {
+	key_meta_z = e => {
 		var doc = document.querySelector('#btnRevoke')
 		doc.click()
 	}
 	// 恢复
-	key_ctrl_y = (e) => {
+	key_ctrl_y = e => {
 		var doc = document.querySelector('#btnRecovery')
 		doc.click()
 	}
-	key_meta_y = (e) => {
+	key_meta_y = e => {
 		var doc = document.querySelector('#btnRecovery')
 		doc.click()
 	}
 	// 移动 1px
-	key_arrowup = (e) => {
+	key_arrowup = e => {
 		this.moveComp(e, -1, 0)
 	}
-	key_arrowright = (e) => {
+	key_arrowright = e => {
 		this.moveComp(e, 0, 1)
 	}
-	key_arrowdown = (e) => {
+	key_arrowdown = e => {
 		this.moveComp(e, 1, 0)
 	}
-	key_arrowleft = (e) => {
+	key_arrowleft = e => {
 		this.moveComp(e, 0, -1)
 	}
 	// 移动 10px
-	key_shift_arrowup = (e) => {
+	key_shift_arrowup = e => {
 		this.moveComp(e, -10, 0)
 	}
-	key_shift_arrowright = (e) => {
+	key_shift_arrowright = e => {
 		this.moveComp(e, 0, 10)
 	}
-	key_shift_arrowdown = (e) => {
+	key_shift_arrowdown = e => {
 		this.moveComp(e, 10, 0)
 	}
-	key_shift_arrowleft = (e) => {
+	key_shift_arrowleft = e => {
 		this.moveComp(e, 0, -10)
 	}
 
@@ -183,7 +183,7 @@ class ShortcutKey extends React.Component {
 	}
 
 	// 复制 (支持多选)
-	copyComp = (e) => {
+	copyComp = e => {
 		e.stopPropagation()
 		let { actions, editConfig } = this.props
 		let { curData, curPage, globalData } = editConfig
@@ -207,7 +207,7 @@ class ShortcutKey extends React.Component {
 	}
 
 	// 粘贴 (支持多选)
-	pasteComp = (e) => {
+	pasteComp = e => {
 		e.stopPropagation()
 		var { actions, editConfig } = this.props,
 			{ curData, curComp, curPage, globalData } = editConfig,
@@ -234,7 +234,7 @@ class ShortcutKey extends React.Component {
 	}
 
 	// 删除 (支持多选)
-	removeComp = (e) => {
+	removeComp = e => {
 		e.stopPropagation()
 		let { actions, editConfig }  = this.props
 		let { curData, curComp, curPage, globalData } = editConfig
@@ -243,21 +243,17 @@ class ShortcutKey extends React.Component {
 		let { parentIdx, list, type } = multiComp
 		if (!list.length) return message.warning(`组件未选中!`)
 		if (parentComp) {
-			let cs = parentComp.data.components
-			parentComp.data.components = cs.removeByIdx(list)
-			if (curComp.name === 'tabByTabs') {
-				let { feature } = parentComp,
-					{ tabs }    = feature
-				feature.tabs = tabs.filter(({ _id }) => _id !== curComp._id)
-			}
+			// let { data } = parentComp
+			removeCompByIdx(parentComp, list)
 			editConfig.curComp = {}
 			curData.cusCompIdx = -1
 			curData.parentComp = null
-			let comp = parentComp.data.components
 			message.success(`删除组件!`)
 			actions.updateComp(compIdx, parentComp)
 			actions.updateCur(curData)
 			actions.selectComp(parentComp)
+			// console.clear()
+			// console.log(parentComp)
 		} else {
 			let ce = curPage.elements
 			curData.compIdx  = -1

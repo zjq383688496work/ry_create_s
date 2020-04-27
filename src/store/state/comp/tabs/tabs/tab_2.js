@@ -65,7 +65,7 @@ const data = {
 	layout: {
 		position: 'absolute',
 		top:  20,
-		left: 120,
+		left: 20,
 		width:  60,
 		height: 24
 	},

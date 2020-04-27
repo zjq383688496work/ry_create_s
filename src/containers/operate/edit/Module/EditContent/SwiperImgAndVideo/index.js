@@ -6,7 +6,7 @@ import PictureAndVideo from 'compEdit/EditCommon/PictureAndVideo'
 import { Row, Col, Collapse, Icon, message } from 'antd'
 const  { Panel } = Collapse
 
-export default class SwiperImage extends React.Component {
+export default class SwiperImgAndVideo extends React.Component {
 	state = {
 		init: false
 	}
@@ -86,12 +86,10 @@ export default class SwiperImage extends React.Component {
 		this.setState({ init: false })
 	}
 	render() {
-		let props = this.props.data
-		if (!props.editConfig) props = props.data
-		if (!props.editConfig) return
-		let { data, actions, editConfig } = props
-		let { curData }    = editConfig
-		let { content }    = data.data
+		let { data: props, editConfig } = this.props
+		if (envType === 'operate' && !props.editConfig) return null
+		if (envType === 'business' && editConfig) return null
+		let { content } = props.data.data
 		return (
 			<div>
 				{ content.length > 1? <SwiperSame data={props} />: false }

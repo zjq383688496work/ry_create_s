@@ -86,7 +86,7 @@ export default class SwiperSame extends React.Component {
 			/>
 		)
 	}
-	//多选项 
+	// 多选项 
 	renderRadio(cfg, data, val, key) {
 		let option = cfg.option;
 		return (

@@ -1,7 +1,6 @@
 import React from 'react'
 import CommonQuestion from 'compEdit/EditCommon/CommonQuestion'
-import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate'
-import snapshot       from 'compEdit/EditCommon/snapshot'
+import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate'  
 import './index.less'
 import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
@@ -17,7 +16,8 @@ import * as actions from 'actions'
 
 import { Input, message, Spin } from 'antd'
 import * as variable from 'var'
-let compMap = variable.compMap.name
+let compMap    = variable.compMap.name
+let statusAuth = variable.statusAuth
  
 class Header extends React.Component {
 	constructor(props) {
@@ -41,18 +41,26 @@ class Header extends React.Component {
 		if (curComp.type === 'advanced' || parentComp) {
 			let compData = deepCopy(comp[key]),
 				Comp     = parentComp || curComp,
-				{ max }  = Comp.feature,
-				auth     = compC[Comp.name]
+				{ data, feature, name } = Comp,
+				{ max, tabs, status } = feature,
+				auth          = compC[name]
 			if (compData.type != 'advanced' && auth[key]) {
 				if (max != undefined) compData.feature.id = ++max
 				delete compData.styleList.list
+
 				if (compData.name === 'tabByTabs') {
-					if (Comp.name !== 'tabs') return message.info('该高级组件内不能添加该基础组件!', 1)
-					Comp.feature.tabs.push(compData)
+					if (name !== 'tabs') return message.info('该高级组件内不能添加该基础组件!', 1)
+					tabs.push(compData)
 				}
 				compIdCreate(compData, globalData)
-				Comp.data.components.push(compData)
-				this.selectMulti(Comp.data.components.length - 1)
+				if (statusAuth[curComp.name]) {				// 状态组件
+					let { idx, list } = status,
+						curStatus = list[idx]
+					curStatus.components.push(compData)
+				} else {									// 非状态组件
+					Comp.data.components.push(compData)
+					this.selectMulti(Comp.data.components.length - 1)
+				}
 				return actions.updateComp(null, Comp)
 			} else {
 				message.info('该高级组件内不能添加该基础组件!', 1)
@@ -113,63 +121,68 @@ class Header extends React.Component {
 		let cfg = deepCopy(editConfig), cropWidth, cropHeight
 
 		let gd = cfg.globalData
-		actions.selectPage(gd.data.homepage)
-		setTimeout(() => {
+		// 模板数据加入composeType
+		if (composeType === 'LANDSCAPE') {
+			gd.data.composeType = 'landscape'
+			cropWidth  = 960
+			cropHeight = 540
+		} else {
+			gd.data.composeType = 'portrait'
+			cropWidth  = 540
+			cropHeight = 960
+		}
 
-			// 模板数据加入composeType
-			if (composeType === 'LANDSCAPE') {
-				gd.data.composeType = 'landscape'
-				cropWidth  = 960
-				cropHeight = 540
-			} else {
-				gd.data.composeType = 'portrait'
-				cropWidth  = 540
-				cropHeight = 960
+		if (gd.data.language) gd.data.language.default = 1
+
+		this.voiceInit(gd.voice)
+
+		cfg.globalData = {
+			data:    gd.data,
+			theme:   gd.theme,
+			feature: gd.feature,
+			banner:  gd.banner,
+			voice:   gd.voice,
+		}
+		let config = {
+			configPC: {
+				// pageContent: dataFormat.save.pageEach(cfg.pageContent),
+				pageContent: cfg.pageContent,
+				pageList:    cfg.pageList,
+				globalData:  cfg.globalData
 			}
-
-			if (gd.data.language) gd.data.language.default = 1
-
-			this.voiceInit(gd.voice)
-
-			cfg.globalData = {
-				data:    gd.data,
-				theme:   gd.theme,
-				feature: gd.feature,
-				banner:  gd.banner,
-				voice:   gd.voice,
+		}
+		let da = {
+			adsFlag: adsFlag || 0,
+			config: JSON.stringify(config),
+			coverImgUrl:  '',
+			templateType: templateType,
+			composeType:  composeType,
+			name:         this.state.name,
+			bannerAds:    bannerAds || 0,
+		}
+		this.setState({ loading: true })
+		if (id) da.id = id
+		Ajax.post(`/mcp-gateway/template/${query.id? 'update': 'save'}?`, da).then(res => {
+			if (!query.id) {
+				tempCfg.id = res.data
+				hashHistory.push(`/operate/edit?id=${res.data}`)
 			}
-			let config = {
-				configPC: {
-					// pageContent: dataFormat.save.pageEach(cfg.pageContent),
-					pageContent: cfg.pageContent,
-					pageList:    cfg.pageList,
-					globalData:  cfg.globalData
-				}
-			}
-			let da = {
-				adsFlag: adsFlag || 0,
-				config: JSON.stringify(config),
-				coverImgUrl:  '',
-				templateType: templateType,
-				composeType:  composeType,
-				name:         this.state.name,
-				bannerAds:    bannerAds || 0,
-			}
-			if (id) da.id = id
-
-			snapshot(document.querySelector('#pgElement'), composeType, cover => {
-				if (cover) da.coverImgUrl = cover
-				Ajax.post(`/mcp-gateway/template/${query.id? 'update': 'save'}?`, da).then(res => {
-					if (!query.id) {
-						tempCfg.id = res.data
-						hashHistory.push(`/operate/edit?id=${res.data}`)
-					}
+			Ajax.createCrop({
+				url: `${window.location.origin}${window.location.pathname}#/view?id=${tempCfg.id}&s=template`,
+				w: cropWidth,
+				h: cropHeight,
+				t: 1000
+			}).then(cover => {
+				Ajax.post(`/mcp-gateway/template/updateCoverImgUrl`, {
+					templateId: tempCfg.id,
+					coverImgUrl: cover.data
+				}).then(() => {
 					this.setState({ loading: false })
 					message.success(`${query.id? '更新': '保存'}成功!`)
 				}).catch(e => { this.setState({ loading: false }) })
-			})
-		
-		})
+			}).catch(e => { this.setState({ loading: false }) })
+		}).catch(e => { this.setState({ loading: false }) })
+		// console.log(JSON.stringify(config))
 	}
 	tNameChange(name) {
 		this.setState({ name })

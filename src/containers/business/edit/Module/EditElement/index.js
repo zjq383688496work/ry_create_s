@@ -82,16 +82,12 @@ const compContent = (name, data, actions, type, idx, csn, contentEditable, langu
 		storeDetails2:      <StoreDetails2     {...props} />,
 		tabs:               <Tabs              {...props} />,
 	}
-	// let res = render[name]
-	// if (!res) {
-	// 	debugger
-	// }
 	return render[name]
 }
 
 class EditElement extends React.Component {
 	state = {
-		editConfig:this.props.editConfig
+		editConfig: this.props.editConfig
 	}
 	componentWillReceiveProps(nextProps) {
 		let { editConfig } = nextProps,

@@ -70,7 +70,7 @@ module.exports = {
 		text:              1,
 		area:              1,
 		video:             1,
-		swiperImgAndVideo: 1,
+		// swiperImgAndVideo: 1,
 	},
 	wonderfulActivity2: {
 		catgByActivity2:   1,

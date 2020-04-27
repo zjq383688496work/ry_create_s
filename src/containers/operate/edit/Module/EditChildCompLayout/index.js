@@ -24,14 +24,9 @@ class EditChildCompLayout extends React.Component {
 		e.stopPropagation()
 		let { actions, data, editConfig } = this.props,
 			{ curData } = editConfig,
-			{ components } = data.data,
-			curComp = components[idx]
+			{ components } = data.data
 		message.success(`删除组件: ${compMap[components[idx].name]}!`)
-		if (curComp.name === 'tabByTabs') {
-			let { feature } = data,
-				{ tabs }    = feature
-			feature.tabs = tabs.filter(({ _id }) => _id !== curComp._id)
-		}
+		removeCompByIdx(data, [idx])
 		components.splice(idx, 1)
 		editConfig.curComp = {}
 		curData.cusCompIdx = -1

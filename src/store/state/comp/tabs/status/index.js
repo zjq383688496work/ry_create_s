@@ -6,8 +6,8 @@ const status_2 = require('./status_2')
 module.exports = {
 	idx: 1,
 	list: {
-		1: { name: '标签1', components: [ ...status_1 ] },
-		2: { name: '标签2', components: [ ...status_2 ] },
+		1: { name: '标签1', components: [ ...status_2 ] },
+		2: { name: '标签2', components: [ ...status_1 ] },
 	},
 	max: 2
 }

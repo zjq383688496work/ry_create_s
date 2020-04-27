@@ -35,8 +35,8 @@ var conMap   = variable.contentMap,
 
 import './index.less'
 
-const compContent = (name, data, updateComp) => {
-	var props  = { data, updateComp }
+const compContent = (name, data, updateComp, editConfig, from) => {
+	var props  = { data, updateComp, editConfig, from }
 	var render = {
 		bannerHorizontal:  <Banner            {...props} />,
 		bannerVertical:    <Banner            {...props} />,
@@ -368,6 +368,7 @@ class EditContent extends React.Component {
 		return childNode
 	}
 	chiObj = (data, init) => {
+		let { editConfig, from } = this.props
 		let comps = data.data.components
 		if (!comps) return false
 		let map   = deepCopy(compNum)
@@ -378,7 +379,7 @@ class EditContent extends React.Component {
 			let cn   = compMap[name]
 			let OK   = false
 			let compLay = _da.componentLayout
-			let compCon = compContent(name, _, this.updateComp)
+			let compCon = compContent(name, _, this.updateComp, editConfig, from)
 			let childNode
 			if (con.length) {
 				childNode = con.map((_, j) => {

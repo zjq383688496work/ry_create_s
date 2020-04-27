@@ -5,8 +5,7 @@ let style_1 = require('./style_1')
 
 let _style_1 = deepCopy(style_1)
 
-_style_1.components = status.list[1].components
-_style_1.componentsGlobal = []
+// _style_1.components = status.list[1].components
 
 // 标签切换
 module.exports = {

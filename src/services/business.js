@@ -1,4 +1,5 @@
-const formatMap = require('./formatMap')
+const formatMap          = require('./formatMap')
+const { statusAuth }     = require('var')
 const formatPxMap        = formatMap.px
 const formatComplexMap   = formatMap.complex
 const formatComplexOrder = formatMap.complexOrder
@@ -143,21 +144,61 @@ module.exports = extend(window, {
 			if (defaultValue === key) idx = i
 		})
 		return idx? text2: text
-	}
+	},
+
+	// 删除状态组件 根据IDX
+	removeCompByIdx(data, list) {
+		let { data: _data, feature, name } = data,
+			{ components }   = _data,
+			{ status } = feature,
+			cs = list.map(idx => components[idx])
+		if (statusAuth[name]) {
+			let { idx, list } = status,
+				curStatus = list[idx]
+			cs.forEach(comp => {
+				let { name: _name, _id } = comp
+				if (_name === 'tabByTabs') {
+					Object.keys(feature.tabs).forEach(key => {
+						let tab = feature.tabs[key]
+						if (tab._id === _id) delete feature.tabs[key]
+					})
+				} else {
+					curStatus.components = curStatus.components.filter(cp => _id != cp._id)
+				}
+			})
+		} else {
+			_data.components = components.removeByIdx(list)
+		}
+	},
 })
 
 // 组件ID生成
 function compIdCreateNode(comp, max) {
-	var { components, componentLayout } = comp.data
+	let { data, feature } = comp,
+		{ components, componentLayout } = data,
+		{ status, tabs } = feature
 	comp._id = ++max.id
-	if (components) {
-		components.map(_ => {
+	if (components && !status) {
+		components.forEach(_ => {
 			compIdCreateNode(_, max)
 		})
 	}
 	if (componentLayout) {
-		componentLayout.map(_ => {
+		componentLayout.forEach(_ => {
 			compIdCreateNode(_, max)
+		})
+	}
+	if (status) {
+		let list = Object.values(status.list)
+		list.forEach(({ components = [] }) => {
+			components.forEach(comp => {
+				compIdCreateNode(comp, max)
+			})
+		})
+	}
+	if (tabs) {
+		tabs.forEach(tab => {
+			compIdCreateNode(tab, max)
 		})
 	}
 }

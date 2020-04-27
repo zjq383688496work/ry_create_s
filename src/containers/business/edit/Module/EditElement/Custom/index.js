@@ -111,8 +111,6 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		qrcodeNav:         <QrcodeNav         {...props} />,
 		listByVoice:       <ListByVoice       {...props} />,
 	}
-	// let res = render[name]
-	console.log(name)
 	return render[name]
 }
 
