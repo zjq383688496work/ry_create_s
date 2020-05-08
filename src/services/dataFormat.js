@@ -199,7 +199,7 @@ const dataFormat = {
 		// page数据比对
 		pageComp: function(da, org) {
 			Object.keys(org).map(_ => {
-				if (!pageMap[_]) return
+				if (!pageMap[_]) return// console.log(_)
 				this.page.plus(da[_], org[_], _, da)
 			})
 			Object.keys(da).map(_ => {
@@ -342,7 +342,8 @@ const dataFormat = {
 		compComp: function(now, org) {
 			if (now === undefined || org === undefined) return
 			now.auth = org.auth
-			var { auth, data } = now,
+			var { auth, data, feature } = now,
+				{ status, tabs } = feature,
 				orgData = org.data
 			Object.keys(auth).forEach(key => {
 				var nowDa  = data[key],
@@ -360,20 +361,29 @@ const dataFormat = {
 			// 		debugger
 			// 	}
 			// })
-			if (name) {
-				// debugger
-				this.pageComp(data, orgData, name)
-			}
+			if (name) this.pageComp(data, orgData, name)
+			if (status) now.feature.status = org.feature.status
+			if (tabs)   now.feature.tabs = org.feature.tabs
 			// console.log('now: ', now)
 		},
+		// 元素排序
+		compSort: function(source, index) {
+			let sequence = source.map(_ => _._id),
+				newData  = []
+			sequence.map(_id => {
+				newData.push(index[_id])
+			})
+			return newData
+		},
 		pageComp: function(now, org, key) {
-			var nowElements = now[key],
-				orgElements = org[key]
+			var nowElements  = now[key],
+				orgElements  = org[key],
+				_nowElements
 
 			// console.log(deepCopy(nowElements), deepCopy(orgElements))
 			var filter = this.elementsFilter(nowElements, orgElements)
 			var { nowElementsMap, orgElementsMap, filterMap } = filter
-			// console.log('filter: ', filter)
+			console.log('filter: ', filter)
 			Object.keys(nowElementsMap).forEach(_id => {
 				if (filterMap[_id]) {
 					// console.log(nowElementsMap[_id].name, orgElementsMap[_id].name)
@@ -381,7 +391,8 @@ const dataFormat = {
 				}
 				this.compComp(nowElementsMap[_id], orgElementsMap[_id])
 			})
-			now[key] = Object.values(nowElementsMap)
+			_nowElements = this.compSort(orgElements, nowElementsMap)
+			now[key]     = _nowElements
 		},
 		pageEach: function(nowData, orgData) {
 			var filterMap = this.pageFilter(nowData, orgData)

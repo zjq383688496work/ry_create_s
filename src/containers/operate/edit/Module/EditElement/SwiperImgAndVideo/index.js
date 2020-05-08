@@ -1,10 +1,3 @@
-/**
- * @Author: Along
- * @Date:   2018-05-03
-
- */
-
-
 import React from 'react'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.css'

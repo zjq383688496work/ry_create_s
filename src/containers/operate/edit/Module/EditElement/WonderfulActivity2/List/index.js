@@ -1,9 +1,3 @@
-/**
- * @Author: yawen
- * @Date:   2018-11-26
-
- */
-
 import React from 'react'
 import Swiper from 'swiper'
 

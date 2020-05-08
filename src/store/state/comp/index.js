@@ -84,8 +84,9 @@ module.exports = {
 	storeInstro:           authInit(require('./storeInstro/index')),
 	// 日期天气
 	dateWeather:           authInit(require('./dateWeather/index')),
-	// 2d地图组件
+	// 地图组件
 	map2D:                 authInit(require('./map2D')),
+	map3D:                 authInit(require('./map3D')), 
 	// 组件上传
 	// html:                  authInit(require('./html')),
 	// 图片-绑定

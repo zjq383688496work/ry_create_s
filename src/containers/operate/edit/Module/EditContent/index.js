@@ -75,7 +75,7 @@ const compContent = (name, data, updateComp, from) => {
 		swiperImage:       <SwiperImage       {...props} />,
 		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		listByStore:       <ListByStore       {...props} />,
-		map2D:             <ThemeColor        {...props} />,
+		// map2D:             <ThemeColor        {...props} />,
 		floorMap:          <ThemeColor        {...props} />,
 		// catgByGoods:       <CatgByGoods       {...props} />,
 		// swiperByGoods:     <SwiperByGoods     {...props} />

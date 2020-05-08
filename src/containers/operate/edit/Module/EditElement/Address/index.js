@@ -1,10 +1,3 @@
-/**
- * @Author: Along
- * @Date:   2018-05-16
- 
- */
-
-
 import React from 'react'
 import './index.less'
 

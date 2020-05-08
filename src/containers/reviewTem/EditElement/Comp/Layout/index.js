@@ -76,7 +76,7 @@ export default class Layout extends React.Component {
 			)
 		})
 		return ( 
-			<section className="pg-layout-ele" id="layoutComp" style={styleObj}>
+			<section className="pg-layout-ele" style={styleObj}>
 				{ childNode }
 			</section>
 		)

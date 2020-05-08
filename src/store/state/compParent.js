@@ -18,6 +18,7 @@ module.exports = {
 	storeInstro:        1,
 	dateWeather:        1,
 	map2D:              1,
+	map3D:              1,
 	html:               1,
 	area:               1,
 	buttonStatus:       1,

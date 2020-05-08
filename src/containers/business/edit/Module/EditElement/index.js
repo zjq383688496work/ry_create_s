@@ -27,6 +27,7 @@ import Navigation         from 'compEdit/EditElement/Navigation'
 import NavigationFloat    from 'compEdit/EditElement/NavigationFloat'
 // import SplitLine          from 'compEdit/EditElement/SplitLine'
 import Map2D              from 'compEdit/EditElement/Map2D'
+import Map3D              from 'compEdit/EditElement/Map3D'
 import Html               from 'compEdit/EditElement/Html'
 // import GoodsDetails       from 'compEdit/EditElement/GoodsDetails'
 import Area               from 'compEdit/EditElement/Area'
@@ -72,6 +73,7 @@ const compContent = (name, data, actions, type, idx, csn, contentEditable, langu
 		// splitLine:          <SplitLine         {...props} />,
 		dateWeather:        <DateWeather       {...props} />,
 		map2D:              <Map2D             {...props} />,
+		map3D:              <Map3D             {...props} />,
 		html:               <Html              {...props} />,
 		// goodsDetails:       <GoodsDetails      {...props} />,
 		area:               <Area              {...props} />,

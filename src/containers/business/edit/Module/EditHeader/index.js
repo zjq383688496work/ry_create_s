@@ -36,20 +36,22 @@ class Header extends React.Component {
 		editConfig.curData.contentType = 'theme'
 		actions.updateCur(editConfig.curData)
 	}
-
 	formatStyle(data) {
 		var { style, layout } = data
 		Object.keys(data.style).map(_ => style[_] = cssFormatByTerm(style[_]))
 		data.layout = cssFormatByTerm(layout)
 	}
 	formatEle(obj) {
-		var { type, data } = obj
+		var { type, data, feature } = obj,
+			{ status, tabs } = feature
 		delete obj.auth
 		if (type === 'base') {
 			this.formatStyle(data)
 		} else if (type === 'advanced') {
 			data.layout = cssFormatByTerm(data.layout)
 			data.components && data.components.map(_ => this.formatEle(_))
+			if (status) Object.values(status.list).map(({ components }) => components.map(_ => this.formatEle(_)))
+			if (tabs)   tabs.map(tab => this.formatEle(tab))
 		} else if (type === 'layout') {
 			this.formatStyle(data)
 			data.componentLayout && data.componentLayout.map(_ => this.formatEle(_))
@@ -72,7 +74,6 @@ class Header extends React.Component {
 			{ list } = feature.status
 		delete data.layout
 		delete data.components
-		// data.layout = cssFormatByTerm(data.layout)
 		delete v.auth
 		Object.values(list).forEach(({ components }) => {
 			components.forEach(component => this.formatEle(component))

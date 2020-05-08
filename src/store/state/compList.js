@@ -366,17 +366,23 @@ module.exports = [
 				name: '视频', 
 				key:  'video'
 			},
-			{
-				icon: 'carousel',
-				name: '图片/视频',
-				key:  'swiperImgAndVideo'
-			},
 		]
 	},
 	{
 		icon: '2DMap',
-		name: '2D地图',
-		key:  'map2D'
+		name: '地图',
+		child: [
+			{
+				icon: '2DMap',
+				name: '2D地图',
+				key:  'map2D',
+			},
+			{
+				icon: '2DMap',
+				name: '3D地图',
+				key:  'map3D',
+			}
+		]
 	},
 	{
 		icon: 'qrcode_index',

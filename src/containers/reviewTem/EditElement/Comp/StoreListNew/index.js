@@ -62,7 +62,7 @@ class StoreListNewShow extends React.Component {
 	// 筛选
 	ioOuter = (ipt, params) => {
 		let { $swiper, props } = this,
-			{ type, value } = ipt
+			{ type, value }    = ipt
 		if (type) {
 			if (type === 'list') {
 				return this.$swiper = value
