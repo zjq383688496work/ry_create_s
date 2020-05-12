@@ -51,7 +51,8 @@ var Map = {
 		name: '活动分类'
 	},
 	voice: {
-		keyword: '关键字'
+		keyword: '关键字',
+		result:  '对话内容',
 	}
 }
 module.exports = {
