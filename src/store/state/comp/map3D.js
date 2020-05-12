@@ -14,7 +14,8 @@ const data = {
 		text: {}
 	},
 	content: {
-		themeColor: { type: 'custom', color: '#cfad81' },
+		themeColor: { type: 'custom', color: '#cfad81', rgb: '#cfad81' },
+		bgColor:    { type: 'custom', color: '#e1e1e1', rgb: '#e1e1e1' },
 	},
 	animation: {
 		className: '',	// 动画样式

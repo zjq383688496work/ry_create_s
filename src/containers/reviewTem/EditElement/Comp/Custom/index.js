@@ -48,7 +48,7 @@ import QrcodeRYShow      from 'reviewTem/EditElement/QrcodeRY'
 
 // 标签
 import TabByTabs         from '../Tabs/TabByTabs'
-import SwiperImgAndVideo from '../../SwiperImgAndVideo'
+// import SwiperImgAndVideo from '../../SwiperImgAndVideo'
 
 import './index.less'
 
@@ -123,7 +123,7 @@ class Custom extends React.Component {
 				// 	 compCon = <PictureListBind data={_} imgList={imgList} type={`Style${styleIdx + 1}`} refresh={ioInput.refresh} />;break
 
 				case 'tabByTabs':         compCon = <TabByTabs parent={data} data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />; break
-				case "swiperImgAndVideo": compCon = <SwiperImgAndVideo data={_} type={`Style${styleIdx + 1}`} />; break
+				// case "swiperImgAndVideo": compCon = <SwiperImgAndVideo data={_} type={`Style${styleIdx + 1}`} />; break
 			}
 			return (
 				<div className={`pge-layout ${compName} ${aniCls? aniCls: ''}`} style={{...layout,...aniSty}} key={i}>{ compCon }</div> 

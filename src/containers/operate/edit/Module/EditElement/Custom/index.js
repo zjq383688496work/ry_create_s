@@ -41,7 +41,7 @@ import Area              from 'compEdit/EditElement/Area'
 // import GoodsBar       from 'compEdit/EditElement/GoodsDetails/GoodsBar'
 // import GoodsBlock     from 'compEdit/EditElement/GoodsDetails/GoodsBlock'
 import TabByTabs         from 'compEdit/EditElement/Tabs/TabByTabs'
-import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
+// import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
 // import ChildElement   from 'compEdit/EditElement/ChildElement'
 // import SwiperByGoods  from 'compEdit/EditElement/GoodsList/SwiperByGoods'
 // import CatgByGoods    from 'compEdit/EditElement/GoodsList/CatgByGoods'
@@ -101,7 +101,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		// goodsBar:          <GoodsBar          {...props} />,
 		// goodsBlock:        <GoodsBlock        {...props} />,
 		tabByTabs:         <TabByTabs         {...props} />,
-		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
+		// swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		// swiperByGoods:     <SwiperByGoods     {...props} />,
 		// catgByGoods:       <CatgByGoods       {...props} />,
 		// resetByGoods:      <ResetByGoods      {...props} />,

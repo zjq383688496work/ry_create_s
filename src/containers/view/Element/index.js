@@ -32,12 +32,14 @@ import Navigation        from 'compEdit/EditElement/Navigation'
 import NavigationFloat   from 'compEdit/EditElement/NavigationFloat'
 import SplitLine         from 'compEdit/EditElement/SplitLine'
 import Map2D             from 'compEdit/EditElement/Map2D'
+import Map3D             from 'compEdit/EditElement/Map3D'
 import Html              from 'compEdit/EditElement/Html'
 import GoodsDetails      from 'compEdit/EditElement/GoodsDetails'
 import Area              from 'compEdit/EditElement/Area'
 import Qrcode            from 'compEdit/EditElement/Qrcode'
 import QrcodeHui         from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav         from 'compEdit/EditElement/QrcodeNav'
+import Tabs              from 'compEdit/EditElement/Tabs'
 
 import Banner from 'compEdit/EditElement/Banner'
 
@@ -51,8 +53,8 @@ import * as variable from 'var'
 
 const ctMap = variable.composeTypeMap
 
-const compContent = (name, data, actions, type, idx, csn) => {
-	var props  = { data, actions, type, idx, csn },
+const compContent = (name, data, actions, type, idx, csn, language) => {
+	var props  = { data, actions, type, idx, csn, language },
 		render = {
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
@@ -74,6 +76,7 @@ const compContent = (name, data, actions, type, idx, csn) => {
 		splitLine:         <SplitLine         {...props} />,
 		dateWeather:       <DateWeather       {...props} />,
 		map2D:             <Map2D             {...props} />,
+		map3D:             <Map3D             {...props} />,
 		html:              <Html              {...props} />,
 		goodsDetails:      <GoodsDetails      {...props} />,
 		area:              <Area              {...props} />,
@@ -82,6 +85,7 @@ const compContent = (name, data, actions, type, idx, csn) => {
 		storeDetails2:     <StoreDetails2     {...props} />,
 		qrcodeHui:         <QrcodeHui         {...props} />,
 		qrcodeNav:         <QrcodeNav         {...props} />,
+		tabs:              <Tabs              {...props} />,
 	}
 	return render[name]
 }
@@ -101,7 +105,8 @@ class Element extends React.Component {
 		let ct     = tempCfg.composeType || 'PORTRAIT',
 			ads    = tempCfg.adsFlag? 'ads': '',
 			eles   = data.elements || [],
-			{ theme, banner }  = editConfig.globalData,
+			{ globalData } = editConfig,
+			{ data: { language }, theme, banner }  = globalData,
 			bannerLayout    = banner && banner.data.layout,
 			{ colors } = theme.list[theme.idx],
 			color  = data.feature.backgroundColor,
@@ -120,7 +125,7 @@ class Element extends React.Component {
 				styleIdx  = _.styleList.idx,
 				csn       = `handle-drag-${Math.floor(Math.random()*1e9)}`,
 				isEdit    = true,
-				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn)
+				compCon   = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, csn, language)
 			
 			if (!compCon) return false
 			return (

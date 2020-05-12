@@ -75,7 +75,6 @@
     "babel-preset-env": "^1.7.0",
     "classnames": "^2.2.5",
     "core-js": "^2.5.5",
-    "html2canvas": "^1.0.0-rc.5",
     "iscroll": "^5.2.0",
     "moment": "^2.22.2",
     "normalize.css": "^4.0.0",

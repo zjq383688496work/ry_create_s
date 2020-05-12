@@ -1,11 +1,3 @@
-
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-  
 import React from 'react'
 import PictureShow           from 'reviewTem/EditElement/Picture'
 import AreaShow              from 'reviewTem/EditElement/Area'
@@ -23,6 +15,7 @@ import TimeShow              from 'reviewTem/EditElement/Comp/Common/Time'
 import WeatherShow           from 'reviewTem/EditElement/Comp/Common/Weather'
 // import SplitLineShow         from 'reviewTem/EditElement/SplitLine'
 import Map2DShow             from 'reviewTem/EditElement/Map2D'
+import Map3DShow             from 'reviewTem/EditElement/Map3D'
 import NavigationShow        from 'reviewTem/EditElement/Navigation'
 import NavigationFloatShow   from 'reviewTem/EditElement/NavigationFloat'
 import DateWeatherShow       from 'reviewTem/EditElement/Comp/DateWeather'
@@ -82,11 +75,11 @@ class EditElementCommon extends React.Component {
  							const noFormatAni = element.data.animation;
 							const animateInfo = addAnimate(noFormatAni);
 							let layout    = element.data.layout, 
-								  styleIdx  = element.styleList.idx,
-								  aniCls    = animateInfo.name,
-				                  aniSty    = animateInfo.style,
-				                  compCon;
-				                 aniSty.animationDelay = `${noFormatAni.delay + pageInAnimateDelay}s`;
+								styleIdx  = element.styleList.idx,
+								aniCls    = animateInfo.name,
+								aniSty    = animateInfo.style,
+								compCon;
+								aniSty.animationDelay = `${noFormatAni.delay + pageInAnimateDelay}s`;
 				              switch (element.name) {
 							 	case "picture" :            compCon = (<PictureShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "area" :               compCon = (<AreaShow data={element} type={`Style${styleIdx + 1}`} />); break
@@ -105,7 +98,8 @@ class EditElementCommon extends React.Component {
 							 	case "time" :               compCon = (<TimeShow data={element} type={`Style${styleIdx + 1}`} />); break
 							 	case "weather" :            compCon = (<WeatherShow data={element} type={`Style${styleIdx + 1}`} />); break
 							 	// case "splitLine" :          compCon = (<SplitLineShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
-							 	case "map2D" :              compCon = (<Map2DShow data={element} type={`Style${styleIdx + 1}`} />); break 
+							 	case "map2D" :              compCon = (<Map2DShow data={element} type={`Style${styleIdx + 1}`} />); break
+							 	case "map3D" :              compCon = (<Map3DShow data={element} type={`Style${styleIdx + 1}`} />); break
 							 	case "navigation" :         compCon = (<NavigationShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "navigationFloat" :    compCon = (<NavigationFloatShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
 							 	case "dateWeather" :        compCon = (<DateWeatherShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break

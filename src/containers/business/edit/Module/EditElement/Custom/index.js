@@ -36,7 +36,7 @@ import Area              from 'compEdit/EditElement/Area'
 // import GoodsBlock     from 'compEdit/EditElement/GoodsDetails/GoodsBlock'
 // import ChildElement   from 'compEdit/EditElement/ChildElement'
 import TabByTabs         from 'compEdit/EditElement/Tabs/TabByTabs'
-import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
+// import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
 // import SwiperByGoods  from 'compEdit/EditElement/GoodsList/SwiperByGoods'
 // import CatgByGoods    from 'compEdit/EditElement/GoodsList/CatgByGoods'
 // import ResetByGoods   from 'compEdit/EditElement/GoodsList/ResetByGoods'
@@ -92,7 +92,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		// goodsBlock:        <GoodsBlock        {...props} />,
 		// childElement:      <ChildElement      {...props} />,
 		tabByTabs:         <TabByTabs         {...props} />,
-		swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
+		// swiperImgAndVideo: <SwiperImgAndVideo {...props} />,
 		// swiperByGoods:     <SwiperByGoods     {...props} />,
 		// catgByGoods:       <CatgByGoods       {...props} />,
 		// resetByGoods:      <ResetByGoods      {...props} />,
@@ -131,8 +131,8 @@ class Custom extends React.Component {
 				ani      = _.data.animation,
 				aniCls   = '',
 				aniSty   = {},
-				isEdit   = true
-			let compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter, language)
+				isEdit   = true,
+				compCon  = compContent(compName, _, data, editConfig, actions, `Style${styleIdx + 1}`, ioInput, ioOuter, language)
 
 			if (icomp && icomp[compName]) {
 				let v   = icomp[compName],
