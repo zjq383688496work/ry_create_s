@@ -110,17 +110,27 @@ class EditComponent extends React.Component {
 					<div className="pg-left scrollbar">
 						<EditPageManage data={pageList} />
 					</div>
+					<div className="pg-left pg-left-fc scrollbar">
+						{
+							curData.router && !isVoice &&
+							<EditCompLayout data={curPage} />
+						}
+						{
+							curData.router &&
+							<EditChildCompLayout data={curData.parentComp || curComp} />
+						}
+					</div>
 					{
-						curData.router && !isVoice &&
+						/*curData.router && !isVoice &&
 						<div className="pg-left scrollbar">
 							<EditCompLayout data={curPage} />
-						</div>
+						</div>*/
 					}
 					{
-						curData.router &&
+						/*curData.router &&
 						<div className="pg-left scrollbar">
 							<EditChildCompLayout data={curData.parentComp || curComp} />
-						</div>
+						</div>*/
 					}
 					<div
 						className="pg-center e-flex-box scrollbar"
