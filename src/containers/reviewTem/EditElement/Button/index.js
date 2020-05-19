@@ -10,8 +10,7 @@ import checkToJump from '../checkToJump'
 import './index.less'
 
 class ButtonShow extends React.Component {
-	
-	 toPage = (data) => { 
+	 toPage = (data) => {
 	 	const {animate,animateParams,action} = this.props;
 	 	if(data.RYDetail){
 	 		JumpRouter(data.RYDetail,animate,animateParams,action)

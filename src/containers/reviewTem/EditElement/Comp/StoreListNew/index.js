@@ -111,7 +111,7 @@ class StoreListNewShow extends React.Component {
 						categories={categories}
 						ioInput={this.state.paramsData}
 						ioOuter={this.ioOuter}
-						action={action} 
+						action={action}
 						storeUpdate={this.state.Update}
 					/>
 				}

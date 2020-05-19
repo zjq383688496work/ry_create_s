@@ -25,9 +25,9 @@ export default class TurnByStore2 extends React.Component {
 			{ totalPage }   = shopsInfo.page,
 			{ turn } = content,
 			cl = componentLayout.filter(({ feature: { active } }) => {
-				return active && (!(turn === 'prev' && currentPage === 1) && !(turn === 'next' && currentPage === totalPage))
+				if (!(turn === 'prev' && currentPage === 1) && !(turn === 'next' && currentPage === totalPage) && active)  return true
+				if (((turn === 'prev' && currentPage === 1) || (turn === 'next' && currentPage === totalPage)) && !active) return true
 			})
-
 		let dataNew = JSON.parse(JSON.stringify(data))
 		dataNew.data.componentLayout = cl
 		return <Layout data={dataNew} refresh={true} />

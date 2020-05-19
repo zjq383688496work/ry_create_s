@@ -110,7 +110,7 @@ class EditElementCommon extends React.Component {
 							 	case "storeInstro" :        compCon = (<StoreInstroShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} />); break
 						 	 	// case "goodsList" :          compCon = (<GoodsListShow data={element} type={`Style${styleIdx + 1}`} animateParams={animateParams} animate={this.leaveAnimate} action={action} query={this.props.query}/>); break
 						 	 	// case "goodsDetails" :       compCon = (<GoodsDetailsShow data={element} type={`Style${styleIdx + 1}`} top={layout.top} animateParams={animateParams} animate={this.leaveAnimate} action={action} />); break
-						 	 	case "tabs":                compCon = <Tabs data={element} type={`Style${styleIdx + 1}`} />;break
+						 	 	case "tabs":                compCon = <Tabs data={element} type={`Style${styleIdx + 1}`} action={action} />;break
 						 	 default: ; break
 						 } 
 						 return (

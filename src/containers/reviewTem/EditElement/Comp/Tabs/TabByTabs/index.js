@@ -28,15 +28,14 @@ export default class TabByTabs extends React.Component {
 	}
 
 	renderDom = () => {
-		let { data, ioInput } = this.props,
+		let { data, ioInput, action } = this.props,
 			{ componentLayout, content, layout } = data.data,
 			{ url } = content.status,
 			cl = componentLayout.filter(({ feature: { active } }) => ((active && ioInput == url) || (!active && ioInput != url)))
-
 		let dataNew = JSON.parse(JSON.stringify(data))
 		dataNew.data.componentLayout = cl
-
 		return <Layout
+			action={action}
 			data={dataNew}
 			components={cl}
 			styleObj={cssColorFormat(this.props, 'filter')}

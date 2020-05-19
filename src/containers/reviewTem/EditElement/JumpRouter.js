@@ -1,7 +1,7 @@
 
 
 const JumpRouter = (data,animate,animateParams,action) => {
-    let globalData = action&&action.globalData
+    let globalData = action && action.globalData
      //如果是back则返回上一级
     if (data == 'back') {  
         //history.go(-1);  

@@ -122,7 +122,7 @@ class Custom extends React.Component {
 				// 	const imgList = contentBind&&getAttr(goodsDetails[contentBind])=="Array" ? goodsDetails[contentBind]: []
 				// 	 compCon = <PictureListBind data={_} imgList={imgList} type={`Style${styleIdx + 1}`} refresh={ioInput.refresh} />;break
 
-				case 'tabByTabs':         compCon = <TabByTabs parent={data} data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} />; break
+				case 'tabByTabs':         compCon = <TabByTabs parent={data} data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} />; break
 				// case "swiperImgAndVideo": compCon = <SwiperImgAndVideo data={_} type={`Style${styleIdx + 1}`} />; break
 			}
 			return (

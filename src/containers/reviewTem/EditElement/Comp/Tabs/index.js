@@ -42,10 +42,12 @@ export default class Tabs extends React.Component {
 	}
 
 	render() {
+		let { action } = this.props
 		let { data } = this.state
 		return (
 			<Custom
 				data={data}
+				action={action}
 				ioInput={this.state.ioInput}
 				ioOuter={this.ioOuter.bind(this)}
 			/>
