@@ -19,7 +19,6 @@ export default function editConfig(state = initialState, action) {
 		
 		// 组件操作
 		case types.ADD_COMP:
-			debugger
 			var compData = compIdCreate(getCompData(state, key), globalData)
 			pageC[router].elements.push(compData)
 			state.curPage       = pageC[router]
