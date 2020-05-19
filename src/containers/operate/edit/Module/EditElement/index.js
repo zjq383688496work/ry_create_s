@@ -221,7 +221,7 @@ class EditElement extends React.Component {
 		this.setState(o)
 	} 
 	//拖拽
-	dragMove(e,param,_,i) {
+	dragMove(e, param, _, i) {
 		e.stopPropagation()
 		let stateLay = {},lay = deepCopy(_.data.layout)
 		if(this.state.shift){

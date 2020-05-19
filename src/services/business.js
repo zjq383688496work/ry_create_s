@@ -163,7 +163,7 @@ module.exports = extend(window, {
 						if (tab._id === _id) delete feature.tabs[key]
 					})
 				} else {
-					curStatus.components = curStatus.components.filter(cp => _id != cp._id)
+					_data.components = curStatus.components = curStatus.components.filter(cp => _id != cp._id)
 				}
 			})
 		} else {

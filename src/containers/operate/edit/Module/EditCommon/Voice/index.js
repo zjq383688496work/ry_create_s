@@ -19,7 +19,8 @@ class Voice extends React.Component {
 	componentDidMount() {}
 
 	onChange(val, key, name, is = false) {
-		let { data, action, actions } = this.props,
+		let { data, action, actions, editConfig } = this.props,
+			{ globalData } = editConfig,
 			{ voice } = data.data
 		if (voice) {
 			if (!val && !is) return this.confirmVoice()
@@ -28,7 +29,7 @@ class Voice extends React.Component {
 			data.data['voice'] = { switch: { auth: false, value: false } }
 			voice[key][name] = val
 		}
-		if (data.data.voice.switch.value && !data.voice) data.voice = deepCopy(comp.voice)
+		if (data.data.voice.switch.value && !data.voice) data.voice = compIdCreate(deepCopy(comp.voice), globalData)
 		else data.voice = null
 		if (data.voice) {
 			var { data: _data, feature } = data.voice

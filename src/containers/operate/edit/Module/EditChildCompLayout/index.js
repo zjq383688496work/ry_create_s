@@ -127,7 +127,7 @@ class EditChildCompLayout extends React.Component {
 			)
 		})
 		return (
-			<div className={`pe-comp-layout pe-comp-layout-fixed${check? ' pe-comp-layout-open': ''}`}>
+			<div className={`pe-comp-layout${check? ' pe-comp-layout-open': ''}`}>
 				<div className="pecl-title">{parentName || name}</div>
 				<a className="bar-open" onClick={this.barShow} title="展开图层列表"><Icon type="menu-unfold" /></a>
 				<a className="bar-close" onClick={this.barHide} title="关闭图层列表"><Icon type="menu-fold" /></a>

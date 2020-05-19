@@ -19,6 +19,7 @@ export default function editConfig(state = initialState, action) {
 		
 		// 组件操作
 		case types.ADD_COMP:
+			debugger
 			var compData = compIdCreate(getCompData(state, key), globalData)
 			pageC[router].elements.push(compData)
 			state.curPage       = pageC[router]
@@ -78,7 +79,7 @@ export default function editConfig(state = initialState, action) {
 			var { parentComp } = curData
 			if (!parentComp) {
 				console.log('选择组件!')
-				curData.cusCompIdx  = -1
+				curData.cusCompIdx = -1
 			} else console.log('选择子组件!')
 			if (selectMap[data.name]) {
 				curData.compIdx = -1
