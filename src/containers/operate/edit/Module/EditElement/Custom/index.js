@@ -282,6 +282,7 @@ class Custom extends React.Component {
 		let icomp = ioInput.comp
 		let comp  = data.data.components
 		let childNode = comp.map((_, i) => {
+			if (!_) return null
 			let compName = _.name,
 				layout   = _.data.layout,
 				styleIdx = _.styleList.idx,

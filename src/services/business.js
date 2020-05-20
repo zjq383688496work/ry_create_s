@@ -158,10 +158,7 @@ module.exports = extend(window, {
 			cs.forEach(comp => {
 				let { name: _name, _id } = comp
 				if (_name === 'tabByTabs') {
-					Object.keys(feature.tabs).forEach(key => {
-						let tab = feature.tabs[key]
-						if (tab._id === _id) delete feature.tabs[key]
-					})
+					feature.tabs = feature.tabs.filter(tb => tb._id != _id)
 				} else {
 					_data.components = curStatus.components = curStatus.components.filter(cp => _id != cp._id)
 				}
