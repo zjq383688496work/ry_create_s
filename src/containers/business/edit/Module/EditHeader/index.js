@@ -82,7 +82,8 @@ class Header extends React.Component {
 	}
 	// 预览模板
 	review() {
-		this.reviewModal.show()
+		let { reviewModal } = this.refs
+		reviewModal && reviewModal.show()
 	}
 	// 数据更新
 	checkDataConfig = () => {
@@ -310,7 +311,7 @@ class Header extends React.Component {
 					</section>
 				</div>
 				<ReviewTemplate 
-					ref={com => { this.reviewModal = com }} 
+					ref="reviewModal"
 					editConfig={this.props.editConfig}
 					actions={this.props.actions} />
 			</div>
