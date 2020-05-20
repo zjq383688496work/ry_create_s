@@ -478,7 +478,8 @@ class EditContent extends React.Component {
 	}
 	render() {
 		let { data, editConfig, from } = this.props
-		let { language } = editConfig.globalData.data
+		let { globalData } = editConfig
+		let { language } = globalData.data
 		let compName = data.name
 		if (!compName) return false
 		let { curData } = editConfig
@@ -524,7 +525,7 @@ class EditContent extends React.Component {
 							<CompLayout props={this.props} layout={compLay} parentLayout={mockData.layout} styleName={plMap[compName]} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
-							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} language={language} />
+							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} language={language} globalData={globalData} />
 						</Panel>
 					</Collapse>
 					: null

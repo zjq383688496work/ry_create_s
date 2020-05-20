@@ -46,10 +46,10 @@ export default class ChildElement extends React.Component {
 		this.setState({ key: v })
 	}
 	addElement = () => {
-		var { layout, updateComp } = this.props,
+		var { layout, updateComp, globalData } = this.props,
 			{ key } = this.state
 		if (!key) return
-		layout.push(deepCopy(comp[key]))
+		layout.push(compIdCreate(deepCopy(comp[key]), globalData))
 		updateComp()
 	}
 	removeElement = idx => {
