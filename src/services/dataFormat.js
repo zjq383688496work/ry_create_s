@@ -402,6 +402,7 @@ const dataFormat = {
 					org = orgData[name]
 				// console.log(name)
 				now.title = org.title
+				now.feature = org.feature
 				this.pageComp(now, org, 'elements')
 			})
 			// console.log(nowData, orgData)
