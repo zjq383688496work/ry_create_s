@@ -9,6 +9,7 @@ import Rnd from 'react-rnd'
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Audio        from 'compEdit/EditElement/Audio'
+import Video        from 'compEdit/EditElement/Video'
 import Button       from 'compEdit/EditElement/Button'
 import ButtonStatus from 'compEdit/EditElement/ButtonStatus'
 import ButtonAuto   from 'compEdit/EditElement/ButtonAuto'
@@ -65,6 +66,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
 		audio:             <Audio             {...props} />,
+		video:             <Video             {...props} />,
 		button:            <Button            {...props} />,
 		buttonStatus:      <ButtonStatus      {...props} />,
 		buttonAuto:        <ButtonAuto      {...props} />,

@@ -3,6 +3,7 @@ import React from 'react'
 import Picture           from '../../Picture'
 import Web               from '../../Web'
 import Area        	     from '../../Area'
+import Video             from '../../Video'
 import Button            from '../../Button'
 import ButtonAuto        from '../../ButtonAuto'
 import ButtonStatus      from '../../ButtonStatus'
@@ -79,6 +80,7 @@ class Custom extends React.Component {
 				// case 'splitLine':         compCon = (<SplitLine data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'web':               compCon = (<Web data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'area':              compCon = (<Area data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'video':             compCon = (<Video data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'button':            compCon = (<Button data={_} type={`Style${styleIdx + 1}`} animate={animate} animateParams={animateParams} action={action} />);break
 				case 'buttonAuto':        compCon = (<ButtonAuto data={_} type={`Style${styleIdx + 1}`}   ioInput={ioInput} ioOuter={ioOuter} animate={animate} animateParams={animateParams} action={action} />);break
 				case 'buttonStatus':      compCon = (<ButtonStatus data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} animate={animate} animateParams={animateParams} action={action} />);break

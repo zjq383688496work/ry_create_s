@@ -10,6 +10,7 @@ import { Icon } from 'antd'
 import Picture      from 'compEdit/EditElement/Picture'
 import Web          from 'compEdit/EditElement/Web'
 import Button       from 'compEdit/EditElement/Button'
+import Video        from 'compEdit/EditElement/Video'
 import Text         from 'compEdit/EditElement/Text'
 import Time         from 'compEdit/EditElement/Time'
 import Weather      from 'compEdit/EditElement/Weather'
@@ -61,6 +62,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		picture:           <Picture           {...props} />,
 		web:               <Web               {...props} />,
 		button:            <Button            {...props} />,
+		video:             <Video             {...props} />,
 		text:              <Text              {...props} />,
 		time:              <Time              {...props} />,
 		weather:           <Weather           {...props} />,
