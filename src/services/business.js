@@ -1,5 +1,5 @@
 const formatMap          = require('./formatMap')
-const { statusAuth }     = require('var')
+const { statusRemoveAuth }     = require('var')
 const formatPxMap        = formatMap.px
 const formatComplexMap   = formatMap.complex
 const formatComplexOrder = formatMap.complexOrder
@@ -152,7 +152,7 @@ module.exports = extend(window, {
 			{ components }   = _data,
 			{ status } = feature,
 			cs = list.map(idx => components[idx])
-		if (statusAuth[name]) {
+		if (statusRemoveAuth[name]) {
 			let { idx, list } = status,
 				curStatus = list[idx]
 			cs.forEach(comp => {

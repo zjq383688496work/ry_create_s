@@ -17,7 +17,7 @@ import * as actions from 'actions'
 import { Input, message, Spin } from 'antd'
 import * as variable from 'var'
 let compMap    = variable.compMap.name
-let statusAuth = variable.statusAuth
+let statusAddAuth = variable.statusAddAuth
  
 class Header extends React.Component {
 	constructor(props) {
@@ -53,7 +53,7 @@ class Header extends React.Component {
 					tabs.push(compData)
 				}
 				compIdCreate(compData, globalData)
-				if (statusAuth[curComp.name]) {				// 状态组件
+				if (statusAddAuth[curComp.name]) {				// 状态组件
 					let { idx, list } = status,
 						curStatus = list[idx]
 					curStatus.components.push(compData)

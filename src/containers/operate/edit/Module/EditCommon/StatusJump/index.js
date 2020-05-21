@@ -39,7 +39,7 @@ class StatusJump extends React.Component {
 	render() {
 		let { data, content, editConfig } = this.props,
 			{ parentComp } = editConfig.curData,
-			{ url }  = content,
+			{ url = 0 }  = content,
 			status   = data.feature.status || (parentComp? parentComp.feature.status: {}),
 			isParent = !data.feature.status,
 			{ list = {} } = status
@@ -47,7 +47,7 @@ class StatusJump extends React.Component {
 		return (
 			<div>
 				<Select
-					value={url === undefined? 0: url}
+					value={+url}
 					style={{ width: '100%' }}
 					onChange={this.onChange}
 				>
