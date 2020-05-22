@@ -98,7 +98,7 @@ const data = {
 	},
 	componentLayout: [ Name, NameAV ],
 	content: {
-		status: { url: '0' } 			// 状态
+		status: { type: 'status', url: '1' } 			// 状态
 	},
 	animation: {
 		className: '',		// 动画样式

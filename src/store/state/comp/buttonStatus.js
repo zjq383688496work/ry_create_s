@@ -51,7 +51,7 @@ const data = {
 	content: {
 		text:   '按钮',
 		text2:  '',
-		status: { url: '0' } 			// 状态
+		status: { type: 'status', url: '1' } 			// 状态
 	},	
 	animation: {
 		className: '',

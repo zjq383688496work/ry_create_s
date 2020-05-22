@@ -38,6 +38,7 @@ const dataFormat = {
 				if (da === undefined || dType !== oType) {
 					daParent[key] = org; return
 				}
+				
 				switch(oType) {
 					case 'Object':
 						switch(key) {
@@ -55,7 +56,6 @@ const dataFormat = {
 								if (idx === undefined || !org.list[idx]) da.idx = org.idx || 0
 								if (da.list) delete da.list
 								break
-								// break
 							default:
 								Object.keys(org).map(_ => {
 									this.plus(da[_], org[_], _, da)
@@ -81,6 +81,7 @@ const dataFormat = {
 									this.plus(_, cd, i, da)
 								})
 								break
+							case 'tabs':
 							case 'content': break
 							default:
 								//if(org.length == 0) return //如果默认数据没有的话返回
@@ -112,6 +113,8 @@ const dataFormat = {
 										this.slim(da[_], org[_], _, da)
 									}
 								})
+								break
+							case 'list':
 								break
 							default:
 								Object.keys(da).map(_ => {
