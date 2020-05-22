@@ -1,10 +1,3 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
 import './index.less'
 import { bindActionCreators } from 'redux'
@@ -43,11 +36,15 @@ class StatusJump extends React.Component {
 			status   = data.feature.status || (parentComp? parentComp.feature.status: {}),
 			isParent = !data.feature.status,
 			{ list = {} } = status
-		let selectNode = Object.keys(list).map(key => <Option key={key} value={key}>{ list[key].name }</Option>)
+		url = ~~url
+		let selectNode = Object.keys(list).map(key => {
+			key = ~~key
+			return <Option key={key} value={key}>{ list[key].name }</Option>
+		})
 		return (
 			<div>
 				<Select
-					value={+url}
+					value={url}
 					style={{ width: '100%' }}
 					onChange={this.onChange}
 				>

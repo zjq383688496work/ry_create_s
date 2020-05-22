@@ -69,7 +69,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		video:             <Video             {...props} />,
 		button:            <Button            {...props} />,
 		buttonStatus:      <ButtonStatus      {...props} />,
-		buttonAuto:        <ButtonAuto      {...props} />,
+		buttonAuto:        <ButtonAuto        {...props} />,
 		text:              <Text              {...props} />,
 		time:              <Time              {...props} />,
 		weather:           <Weather           {...props} />,

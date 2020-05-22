@@ -48,15 +48,17 @@ class Header extends React.Component {
 				if (max != undefined) compData.feature.id = ++max
 				delete compData.styleList.list
 
-				if (compData.name === 'tabByTabs') {
-					if (name !== 'tabs') return message.info('该高级组件内不能添加该基础组件!', 1)
-					tabs.push(compData)
-				}
 				compIdCreate(compData, globalData)
+
 				if (statusAddAuth[curComp.name]) {				// 状态组件
 					let { idx, list } = status,
 						curStatus = list[idx]
-					curStatus.components.push(compData)
+					if (compData.name === 'tabByTabs') {
+						if (name !== 'tabs') return message.info('该高级组件内不能添加该基础组件!', 1)
+						tabs.push(compData)
+					} else {
+						curStatus.components.push(compData)
+					}
 				} else {									// 非状态组件
 					Comp.data.components.push(compData)
 					this.selectMulti(Comp.data.components.length - 1)
