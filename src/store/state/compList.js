@@ -68,6 +68,11 @@ module.exports = [
 		name: '图片/视频',
 		key:  'swiperImgAndVideo'
 	},
+	{
+		icon: 'carousel',
+		name: '视图轮播',
+		key:  'swiperIV'
+	},
 	// 精彩活动
 	{
 		icon: 'carousel',

@@ -9,6 +9,8 @@ module.exports = {
 	swiperImage:           authInit(require('./swiperImage')),
 	// 轮播图片和视频
 	swiperImgAndVideo:     authInit(require('./swiperImgAndVideo')),
+	// 视图轮播
+	swiperIV:              authInit(require('./swiperIV')),
 	bannerHorizontal:      authInit(require('./bannerHorizontal')),
 	bannerVertical:        authInit(require('./bannerVertical')),
 	// 精彩活动

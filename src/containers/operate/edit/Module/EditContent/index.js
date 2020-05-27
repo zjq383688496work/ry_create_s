@@ -27,6 +27,7 @@ import EventTrigger      from 'compEdit/EditCommon/EventTrigger'
 import AudioUploadComp   from 'compEdit/EditCommon/AudioUploadComp'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
 import ImageAndVideoComp from 'compEdit/EditCommon/ImageAndVideoComp'
+import IV                from 'compEdit/EditCommon/IV'
 // import HtmlUpload        from 'compEdit/EditCommon/HtmlUpload'
 import CompLayout        from 'compEdit/EditCommon/CompLayout'
 import ChildElement      from './ChildElement'
@@ -260,16 +261,28 @@ class EditContent extends React.Component {
 	renderImgAndVideo(cfg, con, val, key, index) { 
 		let { data, from } = this.props
 		return (
-				<ImageAndVideoComp
-					data={data}
-					action={'updateComp'}
-					img={val}
-					con={con}
-					style={{ width: '100%' }}
-					index={index}
-					from={from}
-				/>
-			)
+			<ImageAndVideoComp
+				data={data}
+				action={'updateComp'}
+				img={val}
+				con={con}
+				style={{ width: '100%' }}
+				index={index}
+				from={from}
+			/>
+		)
+	}
+	renderMeidia(cfg, con, val, key) {
+		let { data } = this.props
+		return (
+			<IV
+				data={data}
+				action={'updateComp'}
+				media={val}
+				con={con}
+				style={{ width: '100%' }}
+			/>
+		)
 	}
 	// 上传组件
 	// renderFile(cfg, con, val, key, index) {

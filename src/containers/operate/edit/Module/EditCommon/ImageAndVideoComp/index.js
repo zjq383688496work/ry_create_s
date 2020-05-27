@@ -61,10 +61,7 @@ class ImageAndVideoComp extends React.Component {
 	} 
 	initFn = () =>{
 		this.setState({init:false})
-	}  
-	/*shouldComponentUpdate(nextProps,nextState){
-		return nextState.init || nextState.change
-	} */
+	}
 	render() {
 		let { img, editConfig,con, index, data } = this.props
 		let { width, height,init } = this.state

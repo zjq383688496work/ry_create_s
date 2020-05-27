@@ -70,6 +70,7 @@ module.exports = {
 		text:              1,
 		area:              1,
 		video:             1,
+		swiperIV:          1,
 		// swiperImgAndVideo: 1,
 	},
 	wonderfulActivity2: {

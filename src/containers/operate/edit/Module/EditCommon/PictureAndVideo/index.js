@@ -134,11 +134,9 @@ export default class PictureAndVideo extends React.Component {
 			}
 		})
 	} 
-	choosedMap = (list,id,type) => {
-		if(this.props.index){
-			this.setState({list:list,groupIdVideo:id})
-			return
-		}
+	choosedMap = (list, id, type) => {
+		let { index } = this.props
+		if (index) return this.setState({ list, groupIdVideo: id })
 		let oList = this.state.list
 		if(type == 1){
 			if(list[0].isClicked){
@@ -173,45 +171,48 @@ export default class PictureAndVideo extends React.Component {
 					ref={com => { this.addImgVideoModal = com }}
 					title={''} 
 				>
-				<div className="outer">
-					{
-						this.state.type == 1 ? <ImgAndModule 
-												changeType={this.changeType} 
-												close={this.close} 
-												type={this.state.type}
-												choosedMap={this.choosedMap}
-												groupId={this.state.groupIdImg}
-												types={this.state.types}
-												saveGroupId={this.saveGroupId}
-												currentPage={this.state.currentPageImg}
-												list={this.state.list}
-												enter={this.enter}
-												init={this.props.init}
-												index={this.props.index}
-											/> : 
-											<VideoAndModule 
-												changeType={this.changeType} 
-												close={this.close} 
-												type={this.state.type}
-												choosedMap={this.choosedMap}
-												groupId={this.state.groupIdVideo}
-												types={this.state.types}
-												saveGroupId={this.saveGroupId}
-												currentPage={this.state.currentPageVideo}
-												list={this.state.list}
-												enter={this.enter}
-												init={this.props.init}
-												index={this.props.index}   
-											/>
-					} 
-				</div> 
-				</SkyLight> 
+					<div className="outer">
+						{
+							this.state.type == 1
+							?
+							<ImgAndModule 
+								changeType={this.changeType} 
+								close={this.close} 
+								type={this.state.type}
+								choosedMap={this.choosedMap}
+								groupId={this.state.groupIdImg}
+								types={this.state.types}
+								saveGroupId={this.saveGroupId}
+								currentPage={this.state.currentPageImg}
+								list={this.state.list}
+								enter={this.enter}
+								init={this.props.init}
+								index={this.props.index}
+							/>
+							:
+							<VideoAndModule 
+								changeType={this.changeType} 
+								close={this.close} 
+								type={this.state.type}
+								choosedMap={this.choosedMap}
+								groupId={this.state.groupIdVideo}
+								types={this.state.types}
+								saveGroupId={this.saveGroupId}
+								currentPage={this.state.currentPageVideo}
+								list={this.state.list}
+								enter={this.enter}
+								init={this.props.init}
+								index={this.props.index}
+							/>
+						}
+					</div>
+				</SkyLight>
 			</div>
 		)
 	}
 }
 
-//图片素材
+// 图片素材
 class ImgAndModule extends React.Component {
 	state = {
 		choosed_img:[],
@@ -350,9 +351,6 @@ class VideoAndModule extends React.Component {
 	componentWillMount(){
 		this.getVideoList('groupId',this.props.groupId,'init')
 	}
-	/*componentWillReceiveProps(props){
-		this.getVideoList('groupId', props.groupId,'init')
-	}*/ 
 	getVideoList = (str, id,init) => {
 		let currentPage = this.props.currentPage
 		if (str == 'page') {
@@ -447,13 +445,11 @@ class ImgModule extends React.Component {
 		current:this.props.currentPage
 	}
 
-	componentWillReceiveProps(props){
-		let list = props.list;
+	componentWillReceiveProps(props) {
+		let { currentPage, groupId, list, imgList, imgTypes } = props
 		list = list.filter(_=>_.type == 1)
-		let img_list = props.imgList;
-		let imgTypes = props.imgTypes;
-		img_list = img_list.map(_=>{
-			for(let i=0;i<list.length;i++){
+		imgList = imgList.map(_=>{
+			for(let i = 0; i < list.length; i++) {
 				if(list[i].id == _.id){
 					_.isClicked = true
 					break;
@@ -462,10 +458,10 @@ class ImgModule extends React.Component {
 			return _
 		})
 		this.setState({
-			imgList:img_list,
-			imgTypes:imgTypes,
-			current:props.currentPage,
-			groupId:props.groupId
+			current: currentPage,
+			imgList,
+			imgTypes,
+			groupId
 		})
 	} 
 	chooseType(str, id) {
@@ -478,22 +474,17 @@ class ImgModule extends React.Component {
 		this.props.getImgList(str, id)
 	}
 	chooseImg(img) {
-		let index = this.props.index
-		let img_list = this.state.imgList
-		img_list = img_list.map(item=>{
-			if(index){
-				item.id === img ? item.isClicked = !item.isClicked : item.isClicked = false
-			}else{
-				item.id === img ? item.isClicked = !item.isClicked : null
-			}
+		let { index }   = this.props
+		let { imgList } = this.state
+		imgList = imgList.map(item => {
+			if (item.id === img) item.isClicked = !item.isClicked
+			else if (index)      item.isClicked = false
 			return item
 		}) 
-		this.setState({
-			imgList:img_list
-		})
-		let choosed_img = index ? img_list.filter(item => item.isClicked) : img_list.filter(item => item.id === img);
+		this.setState({ imgList })
+		let choosed_img = index ? imgList.filter(item => item.isClicked) : imgList.filter(item => item.id === img);
 		this.props.save(choosed_img)
-	};
+	}
 	customRequest = (state, file) => {
 		if (!state) return message.info(file)
 		const that = this
@@ -600,14 +591,11 @@ class VideoModule extends React.Component {
 		this.props.getVideoList(str, id)
 	}
 	chooseVideo = id => { 
-		let index = this.props.index
-		let videoList = this.state.videoList
-		videoList = videoList.map(item=>{
-			if(index){
-				item.id == id ? item.isClicked = !item.isClicked : item.isClicked = false;
-			}else{
-				item.id == id ? item.isClicked = !item.isClicked : null;
-			}
+		let { index } = this.props
+		let { videoList } = this.state
+		videoList = videoList.map(item => {
+			if (item.id === id) item.isClicked = !item.isClicked
+			else if (index)     item.isClicked = false
 			return item
 		})
 		this.setState({ videoList })

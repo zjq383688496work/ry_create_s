@@ -20,6 +20,7 @@ module.exports = {
 	numberSwitch:  { name: '数字开关', type: 'Checkbox' },
 	posIcon:       { name: '坐标图标', type: 'Image' },
 	url:           { name: '网址',    type: 'Url' },
+	media:         { name: '媒体',    type: 'Meidia' },
 	split:         { name: '分隔符',  type: 'Input', min: 0, max: 5 },
 	prefix:        { name: '前缀',    type: 'Input', min: 0, max: 5 },
 	suffix:        { name: '后缀',    type: 'Input', min: 0, max: 5 },

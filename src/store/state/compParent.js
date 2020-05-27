@@ -7,6 +7,7 @@ module.exports = {
 	button:             1,
 	swiperImage:        1,
 	swiperImgAndVideo:  1,
+	swiperIV:           1,
 	wonderfulActivity:  1,
 	wonderfulActivity2: 1,
 	time:               1,
