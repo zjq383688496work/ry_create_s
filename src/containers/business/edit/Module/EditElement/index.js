@@ -12,6 +12,7 @@ import ButtonLanguage     from 'compEdit/EditElement/ButtonLanguage'
 import Video              from 'compEdit/EditElement/Video'
 import SwiperImage        from 'compEdit/EditElement/SwiperImage'
 import SwiperImgAndVideo  from 'compEdit/EditElement/SwiperImgAndVideo'
+import SwiperIV           from 'compEdit/EditElement/SwiperIV'
 import WonderfulActivity  from 'compEdit/EditElement/WonderfulActivity'
 import WonderfulActivity2 from 'compEdit/EditElement/WonderfulActivity2'
 import Time               from 'compEdit/EditElement/Time'
@@ -60,6 +61,7 @@ const compContent = (name, data, actions, type, idx, csn, contentEditable, langu
 		buttonLanguage:     <ButtonLanguage    {...props} />,
 		swiperImage:        <SwiperImage       {...props} />,
 		swiperImgAndVideo:  <SwiperImgAndVideo {...props} />,
+		swiperIV:           <SwiperIV          {...props} />,
 		wonderfulActivity:  <WonderfulActivity {...props} />,
 		wonderfulActivity2: <WonderfulActivity2 {...props} />,
 		time:               <Time              {...props} />,

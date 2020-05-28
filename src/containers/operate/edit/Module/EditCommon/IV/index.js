@@ -4,25 +4,30 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
-import { Row, Col, Icon, Select } from 'antd'
-const { Option } = Select
+import { Icon, Slider } from 'antd'
 
+import RouterJump      from 'compEdit/EditCommon/RouterJump'
+import DatePickerNew   from 'compEdit/EditContent/DatePickerNew'
 import PictureAndVideo from '../PictureAndVideo'
 import './index.less'
 
 let max = 20
 let typeMap = {
-	1: 'image',
-	2: 'video'
+	image: '图片',
+	video: '视频'
 }
 let mediaMap = {
 	1: {
 		media:  { type: 'custom', url: '' },
 		router: {},
+		date:   ['', ''],
+		delay:  5,
 		type:   'image'
 	},
 	2: {
 		media: { type: 'custom', url: '', preview: '' },
+		date:  ['', ''],
+		delay:  5,
 		type:  'video'
 	}
 }
@@ -43,9 +48,6 @@ class IV extends React.Component {
 		var { width = 0, height = 0 } = props.data.data.layout
 		this.setState({ width, height })
 	}
-	// changeImg = () => {
-	// 	this.setState({ init: true, single: true }, () => this.refs.IVModal.show())
-	// }
 	enter = list => {
 		this.refs.IVModal.hide()
 		if (!list.length) return
@@ -53,7 +55,8 @@ class IV extends React.Component {
 		let { data, media, con, action, actions, editConfig } = this.props
 		// 单个文件
 		if (single) {
-			return
+			let { type, url, preview, originalSizePreview } = list[0]
+			media[idx] = createMedia(type, url, preview, originalSizePreview)
 		} else {
 			let newList = list.map(({ type, url, preview, originalSizePreview }) => createMedia(type, url, preview, originalSizePreview))
 			media.push(...newList)
@@ -61,13 +64,9 @@ class IV extends React.Component {
 		let { parentComp } = editConfig.curData
 		actions[action](null, parentComp? parentComp: data)
 	}
-	removeImg = type => {
-		type === 'image' ? this.enter([{ url: '', type:1 }],'remove') : this.enter([{ url: '',preview:'',originalSizePreview:'',type:2 }],'remove')
-	}
 	initFn = () =>{
 		this.setState({ init: false })
 	}
-
 	// 添加媒体-操作
 	addMedia = () => {
 		this.setState({ init: true, single: false, idx: -1 }, () => this.refs.IVModal.show())
@@ -76,16 +75,31 @@ class IV extends React.Component {
 	editMedia = idx => {
 		this.setState({ init: true, single: true, idx }, () => this.refs.IVModal.show())
 	}
-	// 删除媒体-操作
-	removeMedia = idx => {
+	// 清空媒体-操作
+	clearMedia = idx => {
 		let { data, media, action, actions, editConfig } = this.props
 		removeMedia(media[idx])
 		let { parentComp } = editConfig.curData
 		actions[action](null, parentComp? parentComp: data)
 	}
+	// 删除媒体-操作
+	removeMedia = idx => {
+		let { data, media, action, actions, editConfig } = this.props
+		media.splice(idx, 1)
+		let { parentComp } = editConfig.curData
+		actions[action](null, parentComp? parentComp: data)
+	}
+	changeMedia = (val, key, idx) => {
+		let { data, media, action, actions, editConfig } = this.props,
+			item = media[idx]
+		item[key] = val
+		let { parentComp } = editConfig.curData
+		actions[action](null, parentComp? parentComp: data)
+	}
 	// 添加媒体-渲染
 	renderAdd = () => {
-		let { media } = this.props
+		let { media } = this.props,
+			{ width, height } = this.state
 		return (
 			<div className="pgs-row">
 				<div className="pgsr-name" style={{ width: 52 }}>
@@ -93,19 +107,20 @@ class IV extends React.Component {
 				</div>
 				<div className="pgsr-ctrl">
 					{ media.length } / { max }
+					<div className="img_scale">{ width * 2 } x { height * 2 }</div>
 				</div>
 			</div>
 		)
 	}
 	// 媒体节点-渲染
 	renderMedia = () => {
-		let { media } = this.props
-		return media.map((item, i) => {
-			let { url, preview, originalSizePreview } = item.media
+		let { actions, data, media } = this.props
+		return media.map(({ date, delay, media, router, type }, i) => {
+			let { url, preview, originalSizePreview } = media
 			return (
 				<div key={i} className="pgs-row">
 					<div className="pgsr-name" style={{ width: 52 }}>
-						内容{i + 1}
+						{i + 1}-{typeMap[type]}
 					</div>
 					<div className="pgsr-ctrl">
 						{
@@ -114,15 +129,40 @@ class IV extends React.Component {
 							<div className="add_img" style={{ backgroundImage: `url('${originalSizePreview || preview || url}')` }}>
 								<div className="shadow">
 									<div className="add_text_change" onClick={() => this.editMedia(i)}><Icon type="reload" /></div>
-									<div className="add_text_remove" onClick={() => this.removeMedia(i)}><Icon type="close" /></div>
+									<div className="add_text_remove" onClick={() => this.clearMedia(i)}><Icon type="close" /></div>
 								</div>
 							</div>
 							:
-							<div className="add_img" onClick={this.changeImg}>
+							<div className="add_img" onClick={() => this.editMedia(i)}>
 								<div className="add_text"><Icon type="plus" /></div>
 							</div>
 						}
+						{
+							router
+							?
+							[
+								<hr key={0} className="hr-split"/>,
+								<RouterJump key={1} data={data} content={router} actions={actions} />
+							]
+							: null
+						}
+						{
+							envType === 'business'
+							?
+							[
+								<Slider
+									key={0} min={1} max={30} step={1}
+									value={delay} onChange={v => this.changeMedia(v, 'delay', i)}
+									style={{ width: '100%' }}
+								/>,
+								<DatePickerNew
+									key={1} date={date} onChange={v => this.changeMedia(v, 'date', i)}
+								/>
+							]
+							: null
+						}
 					</div>
+					<div className="delete" onClick={() => this.removeMedia(i)}><Icon type="close-circle" style={{ fontSize: 18 }} /></div>
 				</div>
 			)
 		})
@@ -132,27 +172,6 @@ class IV extends React.Component {
 		let addNode   = this.renderAdd()
 		let mediaNode = this.renderMedia()
 		let { width, height, init, single } = this.state
-		let btnNode
-		let scaleNode
-		// if (img.type === 'custom') {
-		// 	if (imgVal) {
-		// 		btnNode = (
-		// 			<div className="add_img" style={{ backgroundImage: `url('${imgVal}')` }}>
-		// 				<div className="shadow">
-		// 					<div className="add_text_change" onClick={this.changeImg}><Icon type="reload" /></div>
-		// 					<div className="add_text_remove" onClick={()=>{this.removeImg(con.type)}}><Icon type="close" /></div>
-		// 				</div>
-		// 			</div>
-		// 		)
-		// 		scaleNode = <div className="img_scale">{ width * 2 } x { height * 2 }</div>
-		// 	} else {
-		// 		btnNode = (
-		// 			<div className="add_img" onClick={this.changeImg}>
-		// 				<div className="add_text"><Icon type="plus" /></div>
-		// 			</div>
-		// 		)
-		// 	}
-		// }
 		return (
 			<div>
 				{ addNode }
@@ -163,7 +182,7 @@ class IV extends React.Component {
 					<PictureAndVideo
 						ref="IVModal"
 						enter={this.enter}
-						init={this.state.init}
+						init={init}
 						initFn={this.initFn}
 						index={single}
 					/>
@@ -176,6 +195,7 @@ class IV extends React.Component {
 
 // 创建媒体
 function createMedia(type, url, preview, originalSizePreview) {
+	if (type === 3) type = 1
 	let item = deepCopy(mediaMap[type])
 	let { media } = item
 	if (url)     media.url = url

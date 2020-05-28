@@ -118,7 +118,7 @@ module.exports = {
 				spaceBetween:0,
 				slidesPerView:1,
 				centeredSlides:true,
-			},       
+			},
 			autoplayOptions: {
 			delayBig: 5,//1秒切换一次
 			//stopOnLastSlide: false,//如果设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。

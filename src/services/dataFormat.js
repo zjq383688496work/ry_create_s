@@ -82,6 +82,7 @@ const dataFormat = {
 								})
 								break
 							case 'tabs':
+							case 'media':
 							case 'content': break
 							default:
 								//if(org.length == 0) return //如果默认数据没有的话返回
@@ -141,7 +142,8 @@ const dataFormat = {
 									this.slim(_, cd, i, da)
 								})
 								break
-							case 'content' : break
+							case 'media':
+							case 'content': break
 							default:
 								//if(org.length == 0) return  //如果默认数据没有的话返回
 								da.map((_, i) => {

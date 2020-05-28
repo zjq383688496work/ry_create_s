@@ -5,12 +5,12 @@ import { connect }  from 'react-redux'
 import * as actions from 'actions'
 
 import Color       from 'compEdit/EditCommon/Color'
-import {Row, Col,  Card, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch,Slider } from 'antd'
+import { Row, Col, Card, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch,Slider } from 'antd'
 const  { TextArea } = Input
 const  { Panel }    = Collapse
-const Option = Select.Option
-const RadioButton = Radio.Button
-const RadioGroup  = Radio.Group
+const Option        = Select.Option
+const RadioButton   = Radio.Button
+const RadioGroup    = Radio.Group
 
 import Banner            from 'compEdit/EditContent/Banner'
 import LanguageChange    from 'compEdit/EditContent/LanguageChange'
@@ -18,6 +18,7 @@ import RouterJump        from 'compEdit/EditCommon/RouterJump'
 import StatusJump        from 'compEdit/EditCommon/StatusJump'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
 import ImageAndVideoComp from 'compEdit/EditCommon/ImageAndVideoComp'
+import IV                from 'compEdit/EditCommon/IV'
 import DatePickerRY      from 'compEdit/EditContent/DatePickerRY'
 import SwiperImage       from 'compEdit/EditContent/SwiperImage'
 import SwiperImgAndVideo from 'compEdit/EditContent/SwiperImgAndVideo'
@@ -185,18 +186,29 @@ class EditContent extends React.Component {
 		)
 	}
 	//图片视频
-	renderImgAndVideo(cfg, data,obj, val, key, index) {
+	renderImgAndVideo(cfg, data, obj, val, key, index) {
 		return (
-				<ImageAndVideoComp
-					data={data}
-					action={'updateComp'}
-					img={val}
-					con={obj}
-					style={{ width: '100%' }}
-					index={index}
-					type="business"
-				/>
-			)
+			<ImageAndVideoComp
+				data={data}
+				action={'updateComp'}
+				img={val}
+				con={obj}
+				style={{ width: '100%' }}
+				index={index}
+				type="business"
+			/>
+		)
+	}
+	renderMeidia(cfg, data, obj, val, key) {
+		return (
+			<IV
+				data={data}
+				action={'updateComp'}
+				media={val}
+				con={obj}
+				style={{ width: '100%' }}
+			/>
+		)
 	}
 	// 网址
 	renderUrl(cfg, data, obj, val, key, index) {
@@ -269,6 +281,17 @@ class EditContent extends React.Component {
 				size="small"
 				checked={val || false} onChange={v => this.onChange(v, key, obj)}
 			/>
+		)
+	}
+	// 备注
+	renderRemarks(cfg, data, obj, val) {
+		let { color = '#ccc', text } = val
+		if (!text) return null
+		return (
+			<span
+				style={{ color }}
+				dangerouslySetInnerHTML={{ __html: text }}
+			></span>
 		)
 	}
 	// 筛选框

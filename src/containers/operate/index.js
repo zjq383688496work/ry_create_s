@@ -15,7 +15,7 @@ import curData from 'state/cur/curData'
 import { Spin } from 'antd'
 import './index.less'
 const comp = require('state/comp')
- 
+
 class OperateComponent extends React.Component {
 	constructor(props) {
 		super(props)

@@ -83,12 +83,12 @@
 		.pgsr-name {
 			width: 60px;
 		}
-		&:hover{ 
-			.delete {
+		&:hover { 
+			& > .delete {
 				display: block;
 			}
 		}
-		.delete {
+		& > .delete {
 			display: none; 
 			position: absolute;
 			top:0;
@@ -242,6 +242,14 @@
 				}
 			}
 		}
+		.ant-collapse-content-box {
+			& > .pgs-row {
+				border-top: 1px solid #ddd;
+				&:first-child {
+					border-top: none;
+				}
+			}
+		}
 	}
 	.sc-radio-group {
 		display: flex;
@@ -338,3 +346,4 @@ body {
 		}
 	}
 }
+

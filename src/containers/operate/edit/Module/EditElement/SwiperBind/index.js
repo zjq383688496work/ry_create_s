@@ -7,15 +7,12 @@ export default class SwiperBind extends React.Component {
 	constructor(props) {
 		super(props)
 		var s = this.init(props, this.state)
-		this.state = {
-			random: rn(1e9),
-			...s
-		}
+		this.state = { ...s }
 	}
 
 	componentWillReceiveProps(props) {
-		var state = this.state
-		var s = this.init(props, state)
+		var { init, state } = this
+		var s = init(props, state)
 		var { rebuild } = s
 		// 数据相等不渲染
 		if (!rebuild && rebuild === state.rebuild) return false
@@ -43,7 +40,7 @@ export default class SwiperBind extends React.Component {
 		})
 	}
 	renderDom = e => {
-		let { random, imgs, swiperOptions, rebuild } = this.state,
+		let { imgs, swiperOptions, rebuild } = this.state,
 			slide = imgs.map((_, i) => {
 			return <div className="swiper-slide" key={i}><img src={_}  style={cssColorFormat(this.props, 'swiperImage')} /></div>
 		})

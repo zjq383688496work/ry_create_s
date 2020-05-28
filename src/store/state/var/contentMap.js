@@ -55,7 +55,7 @@ module.exports = {
 	autoplay:           { name: '自动播放', type: 'Switch' },
 	loop:               { name: '循环播放', type: 'Switch' },
 	speed:              { name: '切换速度', type: 'Number', min: 0, max: 2e4, step: 100 },
-	delay:              { name: '停留时长', type: 'Number', min: 0, max: 5e3, step: 100 },
+	delay:              { name: '停留时长', type: 'Number', min: 0, max: 1e4, step: 500 },
 	defer:              { name: '延迟时间', type: 'Number', min: 0, max: 100, step: 0.1 },
 	slidesPerView:      { name: '显示数量', type: 'Number', min: 1, max: 10 },
 	slidesPerGroup:     { name: '滚动数量', type: 'Number', min: 1, max: 10 },

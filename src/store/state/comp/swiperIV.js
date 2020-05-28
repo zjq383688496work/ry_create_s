@@ -60,17 +60,17 @@ const data = {
 		top:    0,
 		left:   0,
 		width:  540,
-		height: 200
+		height: 304
 	},
 	content: {
 		media: [],
 		swiperOptions: {
 			direction: 'horizontal',
 			effect:  'slide',
-			autoplay: true,
+			// autoplay: true,
 			loop:  true,
 			speed: 300,
-			delay: 2000,
+			// delay: 5000,
 			spaceBetween:   0,
 			slidesPerView:  1,
 			slidesPerGroup: 1,

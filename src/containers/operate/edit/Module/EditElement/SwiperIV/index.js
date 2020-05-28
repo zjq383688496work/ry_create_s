@@ -22,10 +22,7 @@ export default class SwiperIV extends React.Component {
 		else return true
 	}
 	init = (props, state) => {
-		let { ioInput } = props
-		let ipt = ioInput? ioInput: props
 		let { data } = props
-		let { item } = ipt
 		let { media, swiperOptions } = data.data.content
 		if (!state) return deepCopy({ media, swiperOptions, rebuild: false })
 		return deepCopy({
@@ -35,16 +32,16 @@ export default class SwiperIV extends React.Component {
 		})
 	}
 	renderDom = e => {
-		let { media, swiperOptions, rebuild } = this.state
-		if (!media.length) return null
-		let slide = media.map((_, i) => {
-			return <div className="swiper-slide" key={i}><img src={_}  style={cssColorFormat(this.props, 'swiperImage')} /></div>
+		let { media, swiperOptions, rebuild } = this.state,
+			newList = media.filter(_ => _.media.url)
+		if (!newList.length) return null
+		let slide = newList.map(({ media: { url, preview, originalSizePreview }, type }, i) => {
+			return <div className="swiper-slide" key={i}><img src={originalSizePreview || preview || url} style={cssColorFormat(this.props, 'swiperImage')} /></div>
 		})
 		return <SwiperElement props={this.props} options={swiperOptions} rebuild={rebuild}>{ slide }</SwiperElement>
 	}
 	render() {
 		let dom = this.renderDom()
-
 		return (
 			<section className="e-swiper-vi" style={cssColorFormat(this.props, 'swiperImage')}>
 				{ dom }
