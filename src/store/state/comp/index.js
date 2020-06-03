@@ -159,4 +159,7 @@ module.exports = {
 	// 语音模块
 	voice:                 authInit(require('./voice')),
 	listByVoice:           authInit(require('./voice/status/list')),
+
+	// 弹幕
+	biubiubiu:             authInit(require('./biubiubiu')),
 }

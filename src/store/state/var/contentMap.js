@@ -66,6 +66,7 @@ module.exports = {
 	swiperOptions:      { name: '轮播配置', type: 'Options' },
 	mapThemeColor:      { name: '地图主色', type: 'Color' },
 	themeColor:         { name: '主题色',   type: 'Color' },
+	textColor:          { name: '文本色',   type: 'Color' },
 	bgColor:            { name: '背景色',   type: 'Color' },
 	dataSource:         { name: '数据来源',    type: 'RadioMix', option: [
 		{ name: '基础数据', value: 'base' },
@@ -94,4 +95,7 @@ module.exports = {
 	// 其他
 	remarks:              { name: '备注', type: 'Remarks' },
 	event:                { name: '事件', type: 'Event' },
-} 
+
+	// 弹幕
+	requestCount:         { name: '请求数量', type: 'Number', min: 10, max: 200 },
+}

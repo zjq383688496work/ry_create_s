@@ -8,6 +8,7 @@ import Picture            from 'compEdit/EditElement/Picture'
 import Web                from 'compEdit/EditElement/Web'
 import Text               from 'compEdit/EditElement/Text'
 import Audio              from 'compEdit/EditElement/Audio'
+import Biubiubiu          from 'compEdit/EditElement/Biubiubiu'
 import Button             from 'compEdit/EditElement/Button'
 import ButtonLanguage     from 'compEdit/EditElement/ButtonLanguage'
 import Video              from 'compEdit/EditElement/Video'
@@ -63,6 +64,7 @@ const compContent = (name, data, actions, type, idx, drag, csn, keyCtrl, content
 		video:              <Video             {...props} />,
 		text:               <Text              {...props} />,
 		audio:              <Audio             {...props} />,
+		biubiubiu:          <Biubiubiu         {...props} />,
 		button:             <Button            {...props} />,
 		buttonLanguage:     <ButtonLanguage    {...props} />,
 		swiperImage:        <SwiperImage       {...props} />,

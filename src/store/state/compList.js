@@ -53,21 +53,27 @@ module.exports = [
 			{
 				icon: 'weather',
 				name: '天气',
-				key:  'weather'
+				key:  'weather',
 			},
 			{
 				icon: 'navigation',
 				name: '悬浮导航', 
-				key:  'navigationFloat', 
+				key:  'navigationFloat',
 			},
+			{
+				icon: 'text',
+				name: '弹幕',
+				key:  'biubiubiu',
+			}
 		]
 	},
-	// 图片/视频
-	{
-		icon: 'carousel',
-		name: '图片/视频',
-		key:  'swiperImgAndVideo'
-	},
+	// 图片/视频 (作废)
+	// {
+	// 	icon: 'carousel',
+	// 	name: '图片/视频',
+	// 	key:  'swiperImgAndVideo'
+	// },
+	// 视图轮播
 	{
 		icon: 'carousel',
 		name: '视图轮播',
@@ -282,60 +288,7 @@ module.exports = [
 			},
 		]
 	},
-	// {
-	// 	icon: 'shops',
-	// 	name: '商品列表',
-	// 	key:  'goodsList',
-	// 	child: [
-	// 		// {
-	// 		// 	icon: 'sorter',
-	// 		// 	name: '分页',
-	// 		// 	key:  'page'
-	// 		// },
-	// 		{
-	// 			icon: 'reset',
-	// 			name: '重置',
-	// 			key:  'resetByGoods'
-	// 		},
-	// 		{
-	// 			icon: 'list',
-	// 			name: '列表',
-	// 			key:  'listByGoods'
-	// 		},
-	// 		{
-	// 			icon: 'classifyNav',
-	// 			name: '分类',
-	// 			key:  'catgByGoods'
-	// 		},
-	// 		{
-	// 			icon: 'list',
-	// 			name: '推荐列表',
-	// 			key:  'swiperByGoods'
-	// 		}
-	// 	]
-	// },
-	// {
-	// 	icon: 'shopDetail',
-	// 	name: '商品详情',
-	// 	key: 'goodsDetails',
-	// 	child: [
-	// 		{
-	// 			icon: 'carousel',
-	// 			name: '信息浮动条',
-	// 			key:  'goodsBar'
-	// 		},
-	// 		{
-	// 			icon: 'carousel',
-	// 			name: '商品信息',
-	// 			key:  'goodsBlock'
-	// 		},
-	// 		{
-	// 			icon: 'classifyNav',
-	// 			name: '图片列表-绑定',
-	// 			key:  'pictureListBind'
-	// 		}
-	// 	]
-	// },
+	// 标签切换
 	{
 		icon: 'store',
 		name: '标签切换',
@@ -371,8 +324,14 @@ module.exports = [
 				name: '视频', 
 				key:  'video'
 			},
+			{
+				icon: 'carousel',
+				name: '视图轮播',
+				key:  'swiperIV'
+			},
 		]
 	},
+	// 地图
 	{
 		icon: '2DMap',
 		name: '地图',
@@ -389,6 +348,7 @@ module.exports = [
 			}
 		]
 	},
+	// 二维码
 	{
 		icon: 'qrcode_index',
 		name: '二维码',
@@ -410,9 +370,4 @@ module.exports = [
 			},
 		]
 	},
-	// {
-	// 	icon: 'html',
-	// 	name: '组件上传',
-	// 	key:  'html'
-	// }
 ]

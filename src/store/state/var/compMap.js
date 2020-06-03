@@ -81,6 +81,7 @@ module.exports = {
 		qrcodeNav:         '导航码',
 		voice:             '语音助手',
 		listByVoice:       '语音助手-列表',
+		biubiubiu:         '弹幕',
 	},
 	num: {
 		address:               0,
@@ -165,5 +166,6 @@ module.exports = {
 		qrcodeNav:             0,
 		listByVoice:           0,
 		voice:                 0,
+		biubiubiu:             0,
 	}
 }

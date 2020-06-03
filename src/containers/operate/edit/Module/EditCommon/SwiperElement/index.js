@@ -6,7 +6,6 @@ export default class SwiperElement extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			random: Math.random() * 1e9 >> 0,
 			children: props.children
 		}
 		this.swiper = null
@@ -39,7 +38,6 @@ export default class SwiperElement extends React.Component {
 			speed: 500,
 			delay: 3000
 		} } = this.props,
-			{ random }  = this.state,
 			opts = deepCopy(options)
 		delete opts.pagination
 		if (len < 2) {
@@ -49,7 +47,7 @@ export default class SwiperElement extends React.Component {
 		}
 		let { autoplay, delay } = opts
 		if (autoplay) opts.autoplay = { delay, disableOnInteraction: false }
-		opts.containerClass  = `swiper-element swiper-container customized-container-${random}`
+		opts.containerClass  = `swiper-element swiper-container`
 		opts.on = {
 			slideChange: e => {
 				if (!this.swiper) return

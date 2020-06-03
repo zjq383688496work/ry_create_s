@@ -38,7 +38,8 @@ export default class SwiperIV extends React.Component {
 		let slide = newList.map(({ media: { url, preview, originalSizePreview }, type }, i) => {
 			return <div className="swiper-slide" key={i}><img src={originalSizePreview || preview || url} style={cssColorFormat(this.props, 'swiperImage')} /></div>
 		})
-		return <SwiperElement props={this.props} options={swiperOptions} rebuild={rebuild}>{ slide }</SwiperElement>
+		let options = Object.assign(deepCopy(swiperOptions), { autoplay: true, delay: 5e3 })
+		return <SwiperElement props={this.props} options={options} rebuild={rebuild}>{ slide }</SwiperElement>
 	}
 	render() {
 		let dom = this.renderDom()
