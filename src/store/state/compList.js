@@ -149,6 +149,11 @@ module.exports = [
 				key:  'listByStore2'
 			},
 			{
+				icon: 'list',
+				name: '推荐列表',
+				key:  'recListByStore2'
+			},
+			{
 				icon: 'floorMap',
 				name: '楼层地图',
 				key:  'mapByStore2'

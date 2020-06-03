@@ -24,7 +24,7 @@ const compContent = (name, data, item, language) => {
 		textBind:    <TextBind    {...props} />,
 		swiperBind:  <SwiperBind  {...props} />,
 		area:        <Area        {...props} />,
-		qrcodeBind:  <QrcodeBind  {...props} />
+		qrcodeBind:  <QrcodeBind  {...props} />,
 	}
 	return render[name]
 }

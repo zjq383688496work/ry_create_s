@@ -126,6 +126,7 @@ module.exports = {
 	// 店铺列表
 	storeList2:            authInit(require('./storeList2')),
 	listByStore2:          authInit(require('./storeList2/content/list')),		// 列表
+	recListByStore2:       authInit(require('./storeList2/content/recList')),	// 推荐列表
 	catgByStore2:          authInit(require('./storeList2/content/catg')),		// 分类
 	pageByStore2:          authInit(require('./storeList2/content/page')),		// 分页
 	turnByStore2:          authInit(require('./storeList2/content/turn')),		// 翻页

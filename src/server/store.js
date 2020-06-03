@@ -3,38 +3,27 @@ module.exports = ({ host, mockList, mockItem, getMallId }) => {
 	return {
 		// 分类列表
 		getCategoryList(cb) {
-			// if (envType !== 'business') {
-				var { storeCatg, storeFloor, storeBuild } = mockList
-				cb && cb({floor: storeFloor(), catg: storeCatg(), build: storeBuild() })
-			// } else {
-			// 	Ajax.post(`${path}/shopTypeFloorList`, getMallId()).then(res => {
-			// 		var { floorList, typeList } = res.data? res.data: {}
-			// 		cb && cb({ floor: floorList, catg: typeList })
-			// 	})
-			// }
+			var { storeCatg, storeFloor, storeBuild } = mockList
+			cb && cb({floor: storeFloor(), catg: storeCatg(), build: storeBuild() })
 		},
-		// 分类商品列表
+		// 商品列表
 		getList(size = 10, cb) {
-			// if (envType !== 'business') {
-				var { store } = mockList
-				cb && cb(store(size))
-			// } else {
-			// 	var da = { currentPage: 1, floor: 1, pageSize: size, type: 1 }
-			// 	Ajax.post(`${path}/shopList`, getMallId(da)).then(res => {
-			// 		var list = res.data? res.data.list: []
-			// 		cb && cb(list)
-			// 	})
-			// }
+			var { store } = mockList
+			cb && cb(store(size))
+		},
+		// 推荐商品列表
+		getRecList(size = 10, cb) {
+			var { store } = mockList
+			cb && cb(store(size))
 		},
 		// 店铺详情
 		getDetails(cb) {
 			cb && cb(mockItem.storeDetails2)
 		},
-		//精彩活动分类 
+		// 精彩活动分类 
 		getActivityCatg(cb) {
 			var { storeActivityCatg } = mockList
-				cb && cb({ catg: storeActivityCatg() })
+			cb && cb({ catg: storeActivityCatg() })
 		}
-		
 	}
 }

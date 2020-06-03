@@ -30,7 +30,8 @@ var Map = {
 		praiseAmount: '点赞数',
 		contact:      '联系方式',
 		qrcode:       '二维码',
-		categories:   '分类名称'
+		categories:   '分类名称',
+		otherPicture: '其他图片',
 	},
 	storeCatg: {
 		name: '店铺类型'
@@ -63,6 +64,7 @@ module.exports = {
 	// goodsBlock:      deepCopy(Map.goods),
 	// pictureListBind: deepCopy(Map.goods),
 	listByStore2:    deepCopy(Map.store),
+	recListByStore2: deepCopy(Map.store),
 	catgByStore2:    deepCopy(Map.storeCatg),
 	floorByStore2:   deepCopy(Map.storeFloor),
 	buildByStore2:   deepCopy(Map.storeBuild),
