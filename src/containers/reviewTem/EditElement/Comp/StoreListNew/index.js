@@ -21,7 +21,7 @@ class StoreListNewShow extends React.Component {
 		Update:   false,
 		shopsInfo: {
 			data: [],
-			page: { total: 36, currentPage: 1, totalPage: 3 }
+			page: { total: 36, currentPage: 1, totalPage: 6 }
 		}
 	}
 	componentWillMount() {  
@@ -31,7 +31,7 @@ class StoreListNewShow extends React.Component {
 		this.state.paramsData.size = size 
 		let paramsData = this.state.paramsData
 		let comp  = data.data.components
-		comp = comp.filter(item=>item.name == 'floorMap' || item.name == "mapByStore2")
+		comp = comp.filter(({ name }) => name == 'floorMap' || name == 'mapByStore2')
 		this.do_not_params(comp,floors,builds,paramsData,content.dataSource,size)
 	}
 	componentWillReceiveProps(props){
@@ -39,7 +39,7 @@ class StoreListNewShow extends React.Component {
 		const size = data.data.content.size
 		this.do_data(size)
 	}
- 	//无传楼层路由参数时
+ 	// 无传楼层路由参数时
 	do_not_params = (comp, floors, builds, paramsData, dataSource, size) => {
 		if (!comp.length) return this.do_data(size)
 		paramsData.floor = floors[0].recordId
@@ -47,10 +47,10 @@ class StoreListNewShow extends React.Component {
 		this.setState({ paramsData }, () => this.do_data(size))
 	}
 	do_data = size => {
-		let paramsData = this.state.paramsData,
-			shopsInfo  = this.state.shopsInfo
+		let { paramsData, shopsInfo } = this.state
 		Server.store.getList(size, o => {
-			shopsInfo.data = [o, o, o] 
+			let { totalPage } = shopsInfo.page
+			shopsInfo.data = new Array(totalPage).fill().map(_ => o)
 			paramsData.loading = true
 			this.setState({ 
 				paramsData,
@@ -76,14 +76,15 @@ class StoreListNewShow extends React.Component {
 			ipt.currentPage = 1
 			ipt.loading = false
 		}
-		params? (ipt.mapParams[params.type] = params.value) : null 
+		params? (ipt.mapParams[params.type] = params.value): null 
 		if (params && params.type == 'shopNo') {
 			ipt.clickStore = true
 			ipt.loading = true
 			this.setState({ paramsData: ipt })
 		} else {
 			ipt.clickStore = false
-			this.changeData(ipt,size)
+			this.setState({ paramsData: ipt, Update: false })
+			// this.changeData(ipt, size)
 		}
 	} 
 	//筛选店铺
@@ -93,7 +94,7 @@ class StoreListNewShow extends React.Component {
 		});
 	}
 	render() {
-		let { data,categories,floors,builds,animate,animateParams,action } = this.props
+		let { data, categories, floors, builds, animate, animateParams, action } = this.props
 		let comp  = data.data.components,haveFloorMap = false
 		comp = comp.filter(item => item.name == 'floorMap' || item.name == 'mapByStore2')
 		if (comp.length > 0) haveFloorMap = true
@@ -115,6 +116,7 @@ class StoreListNewShow extends React.Component {
 						storeUpdate={this.state.Update}
 					/>
 				}
+				<div ref="$mask" className="s-mask"></div>
 			</div>
 		)
 	} 

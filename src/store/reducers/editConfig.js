@@ -25,7 +25,7 @@ export default function editConfig(state = initialState, action) {
 			state.curComp       = compData
 			curData.compIdx     = state.curPage.elements.length - 1
 			curData.contentType = 'comp'
-			console.log('添加组件!')
+			// console.log('添加组件!')
 			saveData()
 			return Object.assign({}, state)
 
@@ -57,7 +57,7 @@ export default function editConfig(state = initialState, action) {
 			pageC[curData.router].elements[curData.compIdx] = data
 			state.curPage   = pageC[curData.router]
 			curData.compIdx = idx || curData.compIdx
-			console.log('更新组件!')
+			// console.log('更新组件!')
 			saveData()
 			return Object.assign({}, state)
 			/* 除styleList代码 END */
@@ -70,16 +70,16 @@ export default function editConfig(state = initialState, action) {
 			curData.cusCompIdx  = -1
 			curData.parentComp  = null
 			curData.contentType = 'page'
-			console.log('删除组件!')
+			// console.log('删除组件!')
 			saveData()
 			return Object.assign({}, state)
 
 		case types.SELECT_COMP:
 			var { parentComp } = curData
 			if (!parentComp) {
-				console.log('选择组件!')
+				// console.log('选择组件!')
 				curData.cusCompIdx = -1
-			} else console.log('选择子组件!')
+			}// else console.log('选择子组件!')
 			if (selectMap[data.name]) {
 				curData.compIdx = -1
 			}
@@ -105,7 +105,7 @@ export default function editConfig(state = initialState, action) {
 				router: route,
 				title:  name
 			})
-			console.log('创建页面!')
+			// console.log('创建页面!')
 			return Object.assign({}, state)
 
 		case types.COPY_PAGE:
@@ -120,7 +120,7 @@ export default function editConfig(state = initialState, action) {
 			pageData.router = route
 			pageC[route] = pageData
 			pageList.group[groupIdx].pages.push(gpData)
-			console.log('复制页面!')
+			// console.log('复制页面!')
 			return Object.assign({}, state)
 		
 		case types.UPDATE_PAGE:
@@ -128,7 +128,7 @@ export default function editConfig(state = initialState, action) {
 			pgp.title          = data.title
 			pageC[data.router] = data
 			state.curPage      = data
-			console.log('更新页面!')
+			// console.log('更新页面!')
 			save && saveData()
 			return Object.assign({}, state)
 		
@@ -141,7 +141,7 @@ export default function editConfig(state = initialState, action) {
 			curData.compIdx     = -1
 			curData.cusCompIdx  = -1
 			curData.contentType = ''
-			console.log('删除页面!')
+			// console.log('删除页面!')
 			return Object.assign({}, state)
 
 		case types.SELECE_PAGE:
@@ -157,31 +157,31 @@ export default function editConfig(state = initialState, action) {
 			curData.parentComp  = null
 			curData.title       = pd.title
 
-			console.log('选择页面!')
+			// console.log('选择页面!')
 			return Object.assign({}, state)
 
 		case types.UPDATE_CUR:
 			state.curData = data
-			console.log('更新当前数据!')
+			// console.log('更新当前数据!')
 			return Object.assign({}, state)
 
 		case types.UPDATE_GLOBAL:
 			var { voice } = data
 			state.globalData = data
-			console.log('更新全局数据!')
+			// console.log('更新全局数据!')
 			return Object.assign({}, state)
 
 		case types.UPDATE_PAGELIST:
 			state.pageList = data
-			console.log('更新全局数据!')
+			// console.log('更新全局数据!')
 			return Object.assign({}, state)
 
 		case types.UPDATE_CONFIG:
-			console.log('更新整个config!')
+			// console.log('更新整个config!')
 			return Object.assign(state, action.config)
 
 		case types.UPDATE_COPYCOMP:
-			console.log('复制组件!')
+			// console.log('复制组件!')
 			globalData.copyComp = data
 			return Object.assign({}, state)
 
@@ -200,7 +200,7 @@ function saveData() {
 		window.storeState.saveHistory = true
 	}
 	startTime = Date.now()
-	console.log(`操作间隔: ${diffTime} ms`)
+	// console.log(`操作间隔: ${diffTime} ms`)
 }
 
 // 获取组件数据

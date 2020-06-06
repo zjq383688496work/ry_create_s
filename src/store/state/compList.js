@@ -2,7 +2,7 @@
 module.exports = [
 	// 基础组件
 	{
-		icon: 'basicsComponent',
+		icon: 'base',
 		name: '基础组件',
 		child: [
 			{
@@ -75,13 +75,13 @@ module.exports = [
 	// },
 	// 视图轮播
 	{
-		icon: 'carousel',
+		icon: 'media',
 		name: '视图轮播',
 		key:  'swiperIV'
 	},
 	// 精彩活动
 	{
-		icon: 'carousel',
+		icon: 'activity',
 		name: '精彩活动',
 		key:  'wonderfulActivity2',
 		child: [
@@ -172,7 +172,7 @@ module.exports = [
 	},
 	// 店铺详情
 	{
-		icon: 'storeDetails',
+		icon: 'storeDetail',
 		name: '店铺详情',
 		key:  'storeDetails2',
 		child: [
@@ -205,7 +205,7 @@ module.exports = [
 	},
 	// 日期天气
 	{
-		icon: 'dateWeather',
+		icon: 'weather',
 		name: '日期天气',
 		key:  'dateWeather',
 		child: [
@@ -295,7 +295,7 @@ module.exports = [
 	},
 	// 标签切换
 	{
-		icon: 'store',
+		icon: 'tabs',
 		name: '标签切换',
 		key: 'tabs',
 		child: [
@@ -338,7 +338,7 @@ module.exports = [
 	},
 	// 地图
 	{
-		icon: '2DMap',
+		icon: 'map',
 		name: '地图',
 		child: [
 			{
@@ -355,7 +355,7 @@ module.exports = [
 	},
 	// 二维码
 	{
-		icon: 'qrcode_index',
+		icon: 'qrcode',
 		name: '二维码',
 		child: [
 			{

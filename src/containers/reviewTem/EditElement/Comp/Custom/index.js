@@ -27,6 +27,7 @@ import PageNew           from '../StoreListNew/PageNew'
 import ResetNew          from '../StoreListNew/ResetNew'
 import Turn              from '../StoreListNew/Turn'
 import ListByStoreNew    from '../StoreListNew/ListByStoreNew'
+import RecListByStore2   from '../StoreListNew/RecListByStore2'
 // 新店铺详情
 import StoreDetailsBlock from '../StoreDetailsNew/StoreDetailsBlock'
 
@@ -62,7 +63,7 @@ class Custom extends React.Component {
 		let comp  = data.data.components,
 			delayTime = data.data.animation.className ? (data.data.animation.delay + data.data.animation.duration): 0,
 			goodsDetails = ioInput&&ioInput.itemDetails;
-		goodsDetails? goodsDetails = RYdataMap(goodsDetails): null;
+		goodsDetails? goodsDetails = RYdataMap(goodsDetails): null
 		let childNode = comp.map((_, i) => {   
 			const noFormatAni = _.data.animation;
 			const animateInfo = addAnimate(noFormatAni);
@@ -108,6 +109,7 @@ class Custom extends React.Component {
 				case 'turnByStore2':      compCon = <Turn data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shopsInfo={shopsInfo} />; break
 				case 'mapByStore2':       compCon = (<FloorMap data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'listByStore2':      compCon = (<ListByStoreNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shops={shopsInfo} animate={animate} animateParams={animateParams} action={action} storeUpdate={storeUpdate} />);break
+				case 'recListByStore2':   compCon = (<RecListByStore2 data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shops={shopsInfo} animate={animate} animateParams={animateParams} action={action} storeUpdate={storeUpdate} />);break
 				case 'storeBlock':        compCon = (<StoreDetailsBlock data={_} type={`Style${styleIdx + 1}`} goodsDetails={goodsDetails} action={action} animate={animate} animateParams={animateParams} />);break
 
 				case "qrcodeHui":         compCon = (<QrcodeRYShow data={_} type={`Style${styleIdx + 1}`} />); break
@@ -125,7 +127,7 @@ class Custom extends React.Component {
 				// 	 compCon = <PictureListBind data={_} imgList={imgList} type={`Style${styleIdx + 1}`} refresh={ioInput.refresh} />;break
 
 				case 'tabByTabs':         compCon = <TabByTabs parent={data} data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} />; break
-				// case "swiperImgAndVideo": compCon = <SwiperImgAndVideo data={_} type={`Style${styleIdx + 1}`} />; break
+				// case "swiperIV": compCon = <SwiperImgAndVideo data={_} type={`Style${styleIdx + 1}`} />; break
 			}
 			return (
 				<div className={`pge-layout ${compName} ${aniCls? aniCls: ''}`} style={{...layout,...aniSty}} key={i}>{ compCon }</div> 

@@ -20,6 +20,13 @@ const data = {
 				topRight:    0,
 				bottomRight: 0,
 				bottomLeft:  0
+			},
+			boxShadow: {
+				h_shadow:   0,
+				v_shadow:   0,
+				blur_dis:   0,
+				spread_dis: 0,
+				color:      { type: 'custom', color: '#fff' }
 			}
 		}
 	},

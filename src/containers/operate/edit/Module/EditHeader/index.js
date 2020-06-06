@@ -206,7 +206,7 @@ class Header extends React.Component {
 							<img src={require(`images/icon/${icon}.png`)}/>
 						</div>
 						{name}
-						{ child && (<s className="icon-arrow-down"></s>) }
+						{ /*child && (<s className="icon-arrow-down"></s>)*/ }
 					</dt>
 					{
 						child && (
@@ -215,9 +215,6 @@ class Header extends React.Component {
 								child && child.map((__, j) => {
 									return (
 										<div key={j} onClick={this.addComp.bind(this, __)}>
-											<div className="cl-item-icon">
-												<img src={require(`images/icon/${__.icon}.png`)}/>
-											</div>
 											{__.name}
 										</div>
 									)
@@ -257,13 +254,13 @@ class Header extends React.Component {
 						</div>*/}
 						<div className="cl-item" onClick={this.review.bind(this)}>
 							<div className="cl-item-icon">
-								<img src={require(`images/icon/reviewTem.png`)}/>
+								<img src={require(`images/icon/preview.png`)}/>
 							</div>
 							预览
 						</div>
 						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
 							<div className="cl-item-icon">
-								<img src={require(`images/icon/theme.png`)}/>
+								<img src={require(`images/icon/config.png`)}/>
 							</div>
 							全局配置
 						</div>

@@ -124,7 +124,7 @@ class BusinessComponent extends React.Component {
 	}
 	initData(cb) {
 		var { actions } = this.props,
-			stores = {},
+			stores  = {},
 			promise = new Promise((resolve, reject) => {
 			let _res1 = ''
 			Ajax.postLogin('/easy-roa/v1/user/getBsTop', {

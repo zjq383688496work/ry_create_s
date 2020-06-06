@@ -16,8 +16,9 @@ module.exports = {
 		filterBox:        '盒样式',
 		filterFlex:       '盒布局',
 		filter:           '元素',
-		pageSet:          '分页设置',
 		filterActive:     '激活',
+		// filterOffset:     '偏移样式',
+		pageSet:          '分页设置',
 		filterPage:       '上&下一页',
 		PagePrev:         '上一页',
 		PageNext:         '下一页',
@@ -38,7 +39,7 @@ module.exports = {
 		left:              { name: '左',      type: 'Number', min: -1000, max: 9999 },
 		width:             { name: '宽',      type: 'Number', min: 0, max: 9999 },
 		height:            { name: '高',      type: 'Number', min: 0, max: 9999 },
-		lockAspectRatio: { name: '拉伸比例', type: 'Radio', option: [
+		lockAspectRatio:   { name: '拉伸比例', type: 'Radio', option: [
 			{ name: '任意', value: false },
 			{ name: '等比', value: true }
 		] },
@@ -67,8 +68,8 @@ module.exports = {
 			{ name: '拉伸', value: '100% 100%' }
 		] },
 		boxShadow:         { name: '元素阴影', type: 'Complex', child: {
-			h_shadow:   { name: 'X偏移', type: 'Number', max: 40 },
-			v_shadow:   { name: 'Y偏移', type: 'Number', max: 40 },
+			h_shadow:   { name: 'X偏移', type: 'Number',  min: -100, max: 100 },
+			v_shadow:   { name: 'Y偏移', type: 'Number',  min: -100, max: 100 },
 			blur_dis:   { name: '模糊度', type: 'Number', max: 120 },
 			spread_dis: { name: '大小',  type: 'Number', max: 40 },
 			color:      { name: '颜色',  type: 'Color' }

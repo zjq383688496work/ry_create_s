@@ -39,7 +39,7 @@ export default class RecListByStore2 extends React.Component {
 	render() {
 		let dom = this.renderList()
 		return (
-			<section className={`e-list-by-store2`}>
+			<section className={`e-reclist-by-store2`}>
 				{ dom }
 			</section>
 		)

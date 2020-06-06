@@ -278,7 +278,7 @@ class Header extends React.Component {
 							?
 							<div className="cl-item" onClick={this.checkDataConfig}>
 								<div className="cl-item-icon">
-									<img src={require(`images/icon/reload.png`)}/>
+									<img src={require(`images/icon/refresh.png`)}/>
 								</div>
 								数据更新
 							</div>
@@ -286,13 +286,13 @@ class Header extends React.Component {
 						}
 						<div className="cl-item" onClick={this.review.bind(this)}>
 							<div className="cl-item-icon">
-								<img src={require(`images/icon/reviewTem.png`)}/>
+								<img src={require(`images/icon/preview.png`)}/>
 							</div>
 							预览
 						</div>
 						<div className="cl-item" onClick={this.selectTheme.bind(this)}>
 							<div className="cl-item-icon">
-								<img src={require(`images/icon/theme.png`)}/>
+								<img src={require(`images/icon/config.png`)}/>
 							</div>
 							全局配置
 						</div>

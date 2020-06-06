@@ -46,6 +46,14 @@ module.exports = {
 	// 	text:    1
 	// },
 	listByStore2: {
+		area:        1,
+		picture:     1,
+		text:        1,
+		pictureBind: 1,
+		textBind:    1
+	},
+	recListByStore2: {
+		area:        1,
 		picture:     1,
 		text:        1,
 		pictureBind: 1,
@@ -77,7 +85,7 @@ module.exports = {
 	turnByStore2: {
 		area:     1,
 		picture:  1,
-		textBind: 1,
+		text:     1,
 	},
 	resetByStore2: {
 		picture:  1,

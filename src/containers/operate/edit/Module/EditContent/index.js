@@ -403,9 +403,10 @@ class EditContent extends React.Component {
 		const keys      = Object.keys(val)
 		const childNode = keys.map((_, i) => {
 			if (_ === 'name') return null
-			let v  = val[_],
-				cm = conMap[_],
-				fn = this[`render${cm.type}`],
+			let v   = val[_],
+				cm  = conMap[_]
+			if (!cm) return
+			let fn  = this[`render${cm.type}`],
 				dom = fn.bind(this, cm, val, v, _)()
 			return (
 				<div className="pgs-row" key={i}>

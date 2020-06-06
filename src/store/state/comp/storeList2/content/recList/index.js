@@ -1,14 +1,39 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
+const a  = authInit(require('state/comp/area'))
 const p  = authInit(require('state/comp/picture'))
 const pb = authInit(require('state/comp/pictureBind'))
 const t  = authInit(require('state/comp/text'))
 const tb = authInit(require('state/comp/textBind'))
 
+const Banner = extendRmSL(deepCopy(pb), {
+	data: {
+		layout: {
+			top:  0,
+			left: 0,
+			width:  150,
+			height: 200
+		},
+		style: {
+			image: {
+				boxShadow: {
+					h_shadow:   0,
+					v_shadow:   15,
+					blur_dis:   15,
+					spread_dis: 0,
+					color:      { type: 'custom', color: 'rgba(108,88,88,.2)', rgb: '#665858', alpha: .2 }
+				}
+			}
+		},
+		content: {
+			bind: 'otherPicture'
+		}
+	}
+})
 const LOGO = extendRmSL(deepCopy(pb), {
 	data: {
 		layout: {
-			top:  10,
-			left: 29,
+			top:  147.5,
+			left: 7.5,
 			width:  40,
 			height: 40
 		},
@@ -30,8 +55,8 @@ const LOGO = extendRmSL(deepCopy(pb), {
 const Name = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  50,
-			left: 0,
+			top:  153,
+			left: 52.5,
 			width:  100,
 			height: 14
 		},
@@ -40,34 +65,25 @@ const Name = extendRmSL(deepCopy(tb), {
 		},
 		style: {
 			text: {
-				fontSize:   8,
+				fontSize:   12,
 				lineHeight: 14,
-				textAlign: 'center',
-				color: { type: 'custom', color: '#666' }
+				textAlign: 'left',
+				color: { type: 'custom', color: '#fff' }
 			}
 		}
 	}
 })
-const Recom = extendRmSL(deepCopy(t), {
+const BG = extendRmSL(deepCopy(a), {
 	data: {
 		layout: {
-			top:  0,
-			left: 70,
-			width:  20,
-			height: 20
-		},
-		content: {
-			text: '荐',
-			text2: 'Recommend',
+			top:  135,
+			left: 0,
+			width:  150,
+			height: 65
 		},
 		style: {
-			text: {
-				fontSize:   12,
-				lineHeight: 20,
-				textAlign: 'center',
-				color: { type: 'custom', color: '#fff' },
-				backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201811271625344267.png' },
-				backgroundSize: 'cover'
+			filterBox: {
+				backgroundColor: { type: 'custom', color: 'rgba(119,111,86,.4)', rgb: '#776f56', alpha: .4 }
 			}
 		}
 	}
@@ -75,10 +91,10 @@ const Recom = extendRmSL(deepCopy(t), {
 const Ico = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
-			top:  66,
-			left: 30,
-			width:  8,
-			height: 8
+			top:  182,
+			left: 54,
+			width:  10,
+			height: 10
 		},
 		content: {
 			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805191128322385.png' }
@@ -88,8 +104,8 @@ const Ico = extendRmSL(deepCopy(p), {
 const Pos = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
-			top:  63,
-			left: 40,
+			top:  180,
+			left: 66,
 			width:  60,
 			height: 14
 		},
@@ -98,10 +114,10 @@ const Pos = extendRmSL(deepCopy(tb), {
 		},
 		style: {
 			text: {
-				fontSize:   8,
+				fontSize:   10,
 				lineHeight: 14,
 				textAlign: 'left',
-				color: { type: 'custom', color: '#cfad81' }
+				color: { type: 'custom', color: '#fff' }
 			}
 		}
 	}
@@ -113,41 +129,67 @@ const data = {
 		position: 'absolute',
 		top:  0,
 		left: 0,
-		width:  441,
-		height: 300
+		width:  540,
+		height: 500
 	},
 	style: {
 		filter: {
-			width:  100,
-			height: 90,
-			borderWidth:  1,
-			borderStyle: 'solid',
-			borderColor: { type: 'custom', color: '#cfad81' },
-			backgroundColor: { type: 'custom', color: '#fff' },
+			width:  150,
+			height: 200,
+			borderWidth:     0,
+			borderStyle:     'solid',
+			borderColor:     { type: 'custom', color: '#cfad81' },
+			backgroundColor: { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0 },
 			margin: {
 				top:     0,
-				right:   10,
-				bottom:  10,
-				left:    0,
+				right:   0,
+				bottom:  30,
+				left:    25,
 			},
 			borderRadius:    {
-				topLeft:     10,
-				topRight:    10,
-				bottomLeft:  10,
-				bottomRight: 10
+				topLeft:     0,
+				topRight:    0,
+				bottomLeft:  0,
+				bottomRight: 0
 			},
 			boxShadow: {
-				h_shadow:   0,
-				v_shadow:   0,
+				h_shadow:   -10,
+				v_shadow:   10,
 				blur_dis:   0,
 				spread_dis: 0,
-				color:      { type: 'custom', color: '#000' }
+				color:      { type: 'custom', color: 'rgba(255,255,255,.2)', rgb: '#fff', alpha: .2 }
 			}
-		}
+		},
 	},
-	componentLayout: [ LOGO, Name, Ico, Pos, Recom ],
+	componentLayout: [ Banner, BG, LOGO, Name, Ico, Pos ],
 	content: {
 		router: {},
+		// swiperOptions: {
+			// direction: 'horizontal',
+			// loop: false,
+			// spaceBetween:   0,
+			// slidesPerView:  1,
+			// slidesPerGroup: 1,
+			// slidesOffsetBefore: 0,
+		// },
+		bufferOptions: {
+			indexMultiple:  1,
+			indexOffset:    0,
+			// indexOffsetStr: '',
+			// increment:      0,
+			offsetX:        0,
+			offsetXStr:     '',
+			offsetY:        0,
+			offsetYStr:     '',
+			offsetS:        1,
+			offsetSStr:     '',
+			offsetR:        0,
+			offsetRStr:     '',
+			speed:          300,
+			delay:          100,
+			offsetT:        0,
+		},
+		remarks: { text: '缓冲配置: 慎用, 否则会有反效果, 不懂问开发', color: 'red' }
 	},
 	animation: {
 		className: '',		// 动画样式
@@ -159,7 +201,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'listByStore2',
+	name: 'recListByStore2',
 	type: 'layout',
 	// 位置大小
 	data: deepCopy(data),

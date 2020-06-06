@@ -55,7 +55,7 @@ module.exports = {
 	autoplay:           { name: '自动播放', type: 'Switch' },
 	loop:               { name: '循环播放', type: 'Switch' },
 	speed:              { name: '切换速度', type: 'Number', min: 0, max: 2e4, step: 100 },
-	delay:              { name: '停留时长', type: 'Number', min: 0, max: 1e4, step: 500 },
+	delay:              { name: '停留时长', type: 'Number', min: 0, max: 1e4, step: 100 },
 	defer:              { name: '延迟时间', type: 'Number', min: 0, max: 100, step: 0.1 },
 	slidesPerView:      { name: '显示数量', type: 'Number', min: 1, max: 10 },
 	slidesPerGroup:     { name: '滚动数量', type: 'Number', min: 1, max: 10 },
@@ -96,6 +96,20 @@ module.exports = {
 	remarks:              { name: '备注', type: 'Remarks' },
 	event:                { name: '事件', type: 'Event' },
 
+	// 缓冲区
+	bufferOptions:        { name: '缓冲配置', type: 'Options' },
+	indexMultiple:        { name: '索引倍数', type: 'Number', min: 1,   max: 10, step: 1 },
+	indexOffset:          { name: '索引偏移', type: 'Number', min: -20, max: 20, step: 1 },
+	increment:            { name: '顺序增量', type: 'Number', min: -10, max: 10, step: .1 },
+	offsetX:              { name: 'X轴偏移',  type: 'Number', min: -100, max: 100, step: 1 },
+	offsetXStr:           { name: 'X轴倍率',  type: 'Input',  min: 0, max: 20 },
+	offsetY:              { name: 'Y轴偏移',  type: 'Number', min: -100, max: 100, step: 1 },
+	offsetYStr:           { name: 'Y轴倍率',  type: 'Input',  min: 0, max: 20 },
+	offsetS:              { name: '缩放',     type: 'Number', min: 0, max: 10,  step: .1 },
+	offsetSStr:           { name: '缩放倍率',  type: 'Input',  min: 0, max: 20 },
+	offsetR:              { name: '旋转',     type: 'Number', min: 0, max: 359, step: 1 },
+	offsetRStr:           { name: '旋转倍率',  type: 'Input',  min: 0, max: 20 },
+	offsetT:              { name: '偏移时间',  type: 'Number', min: 0, max: 1e3, step: 50 },
 	// 弹幕
 	requestCount:         { name: '请求数量', type: 'Number', min: 10, max: 200 },
 }
