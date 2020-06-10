@@ -1,6 +1,6 @@
 import React from 'react'
 import Swiper from 'swiper'
-import 'swiper/dist/css/swiper.css'
+// import 'swiper/dist/css/swiper.css'
 import { Player } from 'video-react'
 import "video-react/dist/video-react.css"
 import './index.less'

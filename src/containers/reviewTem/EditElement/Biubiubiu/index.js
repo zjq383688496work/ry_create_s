@@ -1,7 +1,7 @@
 import React from 'react'
-import json from './data'
-import barrage from './barrage'
-import './index.less'
+import json from 'compEdit/EditElement/Biubiubiu/data'
+import barrage from 'compEdit/EditElement/Biubiubiu/barrage'
+// import './index.less'
 
 export default class Biubiubiu extends React.Component {
 	constructor(props) {

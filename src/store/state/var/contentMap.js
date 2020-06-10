@@ -78,6 +78,14 @@ module.exports = {
 		{ name: '开启', value: 'on' },
 		{ name: '关闭', value: 'off' }
 	]},
+	positionH:     { name: '水平位置',     type: 'Radio', option: [
+		{ name: '左', value: 'left' },
+		{ name: '右', value: 'right' }
+	]},
+	positionV:     { name: '垂直位置',     type: 'Radio', option: [
+		{ name: '上', value: 'top' },
+		{ name: '下', value: 'bottom' }
+	]},
 
 	status:               { name: '状态选择', type: 'Status' },
 	// 语音

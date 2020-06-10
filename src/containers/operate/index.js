@@ -60,7 +60,7 @@ class OperateComponent extends React.Component {
 					bannerAds:    bannerAds    || 0,  // 0: 无  1: 有
 				}
 				if (bannerAds == 1) {
- 					globalData.banner = comp[`banner${ct === 'PORTRAIT'? 'Vertical': 'Horizontal'}`]
+ 					globalData.banner = comp[`banner${ct === 'PORTRAIT'? 'Vertical': 'Horizontal'}IV`]
  					actions.updateGlobal(globalData)
  				}
 				return resolve('模板数据')

@@ -1,29 +1,32 @@
 import React from 'react'
-import PictureShow           from 'reviewTem/EditElement/Picture'
-import AreaShow              from 'reviewTem/EditElement/Area'
-import AudioShow             from 'reviewTem/EditElement/Audio'
-import WebShow               from 'reviewTem/EditElement/Web'
-import TextShow              from 'reviewTem/EditElement/Text'
-import QrcodeRYShow          from 'reviewTem/EditElement/QrcodeRY'
-import ButtonShow            from 'reviewTem/EditElement/Button'
-import VideoShow             from 'reviewTem/EditElement/Video'
-import SwiperImageShow       from 'reviewTem/EditElement/SwiperImage'
-import SwiperImgAndVideoShow from 'reviewTem/EditElement/SwiperImgAndVideo'
-import WonderfulActivityShow from 'reviewTem/EditElement/WonderfulActivity'
+
+import PictureShow              from 'reviewTem/EditElement/Picture'
+import AreaShow                 from 'reviewTem/EditElement/Area'
+import AudioShow                from 'reviewTem/EditElement/Audio'
+import WebShow                  from 'reviewTem/EditElement/Web'
+import TextShow                 from 'reviewTem/EditElement/Text'
+import QrcodeRYShow             from 'reviewTem/EditElement/QrcodeRY'
+import Biubiubiu                from 'reviewTem/EditElement/Biubiubiu'
+import ButtonShow               from 'reviewTem/EditElement/Button'
+import VideoShow                from 'reviewTem/EditElement/Video'
+import SwiperImageShow          from 'reviewTem/EditElement/SwiperImage'
+import SwiperImgAndVideoShow    from 'reviewTem/EditElement/SwiperImgAndVideo'
+import SwiperIV                 from 'reviewTem/EditElement/SwiperIV'
+import WonderfulActivityShow    from 'reviewTem/EditElement/WonderfulActivity'
 import WonderfulActivityNewShow from 'reviewTem/EditElement/Comp/WonderfulActivityNew'  
-import TimeShow              from 'reviewTem/EditElement/Comp/Common/Time' 
-import WeatherShow           from 'reviewTem/EditElement/Comp/Common/Weather'
+import TimeShow                 from 'reviewTem/EditElement/Comp/Common/Time' 
+import WeatherShow              from 'reviewTem/EditElement/Comp/Common/Weather'
 // import SplitLineShow         from 'reviewTem/EditElement/SplitLine'
-import Map2DShow             from 'reviewTem/EditElement/Map2D'
-import Map3DShow             from 'reviewTem/EditElement/Map3D'
-import NavigationShow        from 'reviewTem/EditElement/Navigation'
-import NavigationFloatShow   from 'reviewTem/EditElement/NavigationFloat'
-import DateWeatherShow       from 'reviewTem/EditElement/Comp/DateWeather'
-import StoreListShow         from 'reviewTem/EditElement/Comp/StoreList' 
-import StoreListNewShow      from 'reviewTem/EditElement/Comp/StoreListNew'
-import StoreDetailsShow      from 'reviewTem/EditElement/Comp/StoreDetails'
-import StoreDetailsNewShow   from 'reviewTem/EditElement/Comp/StoreDetailsNew'
-import StoreInstroShow       from 'reviewTem/EditElement/Comp/StoreInstro'
+import Map2DShow                from 'reviewTem/EditElement/Map2D'
+import Map3DShow                from 'reviewTem/EditElement/Map3D'
+import NavigationShow           from 'reviewTem/EditElement/Navigation'
+import NavigationFloatShow      from 'reviewTem/EditElement/NavigationFloat'
+import DateWeatherShow          from 'reviewTem/EditElement/Comp/DateWeather'
+import StoreListShow            from 'reviewTem/EditElement/Comp/StoreList' 
+import StoreListNewShow         from 'reviewTem/EditElement/Comp/StoreListNew'
+import StoreDetailsShow         from 'reviewTem/EditElement/Comp/StoreDetails'
+import StoreDetailsNewShow      from 'reviewTem/EditElement/Comp/StoreDetailsNew'
+import StoreInstroShow          from 'reviewTem/EditElement/Comp/StoreInstro'
 // import GoodsListShow         from 'reviewTem/EditElement/Comp/GoodsList'
 // import GoodsDetailsShow      from 'reviewTem/EditElement/Comp/GoodsDetails'
 
@@ -69,6 +72,7 @@ class EditElementCommon extends React.Component {
 			switch (element.name) {
 				case 'picture':            compCon = (<PictureShow data={element} type={`Style${styleIdx + 1}`} action={action} />); break
 				case 'area':               compCon = (<AreaShow data={element} type={`Style${styleIdx + 1}`} />); break
+				case 'biubiubiu':          compCon = (<Biubiubiu data={element} type={`Style${styleIdx + 1}`} />); break
 				case 'audio':              compCon = (<AudioShow data={element} type={`Style${styleIdx + 1}`} />); break
 				case 'qrcode':             compCon = (<QrcodeRYShow data={element} type={`Style${styleIdx + 1}`} />); break
 				case 'qrcodeHui':          compCon = (<QrcodeRYShow data={element} type={`Style${styleIdx + 1}`} />); break
@@ -79,6 +83,7 @@ class EditElementCommon extends React.Component {
 				case 'video':              compCon = (<VideoShow data={element} type={`Style${styleIdx + 1}`} />); break
 				case 'swiperImage':        compCon = (<SwiperImageShow data={element} type={`Style${styleIdx + 1}`} action={action} />); break
 				case 'swiperImgAndVideo':  compCon = (<SwiperImgAndVideoShow data={element} type={`Style${styleIdx + 1}`} action={action} />); break
+				case 'swiperIV':           compCon = (<SwiperIV data={element} type={`Style${styleIdx + 1}`} action={action} />); break
 				case 'wonderfulActivity':  compCon = (<WonderfulActivityShow activities={element.data.content} data={element} type={`Style${styleIdx + 1}`} />); break
 				case 'wonderfulActivity2': compCon = (<WonderfulActivityNewShow data={element} type={`Style${styleIdx + 1}`} action={action}/>); break
 				case 'time':               compCon = (<TimeShow data={element} type={`Style${styleIdx + 1}`} />); break

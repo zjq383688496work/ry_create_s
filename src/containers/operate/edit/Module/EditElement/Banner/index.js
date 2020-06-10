@@ -1,6 +1,7 @@
 import React from 'react'
 
 import SwiperImgAndVideo from 'compEdit/EditElement/SwiperImgAndVideo'
+import SwiperIV          from 'compEdit/EditElement/SwiperIV'
 import Voice             from 'compEdit/EditElement/Voice'
 
 // import './index.less'
@@ -10,6 +11,20 @@ var positionMap = {
 	left:   'unshift',
 	bottom: 'push',
 	right:  'push',
+}
+var oldMap = {
+	bannerHorizontal: 1,
+	bannerVertical:   1,
+}
+const compContent = (name, data, actions) => {
+	var props  = { name, data, actions }
+	var render = {
+		bannerHorizontal:   <SwiperImgAndVideo  {...props} />,
+		bannerVertical:     <SwiperImgAndVideo  {...props} />,
+		bannerHorizontalIV: <SwiperIV           {...props} />,
+		bannerVerticalIV:   <SwiperIV           {...props} />,
+	}
+	return render[name]
 }
 
 // const comp     = require('state/comp')
@@ -28,13 +43,21 @@ export default class Banner extends React.Component {
 	getBanner = (banner, composeType) => {
 		try {
 			var { data, feature, name } = banner
-				
-			if (!data.content.length) return false
+			
+			// if (!data.content.length) return false
 			
 			var { height, width } = data.layout,
-				{ position }      = feature.swiperOptions,
+				position,
+				// { position }      = feature.swiperOptions,
 				h = composeType === 'PORTRAIT'? height: '100%',
 				w = composeType === 'LANDSCAPE'? width: '100%'
+
+			if (oldMap[name]) {
+				position = feature.swiperOptions.position
+			} else {
+				let { content } = data
+				position = content.positionH || content.positionV
+			}
 
 			return {
 				width:  w,
@@ -60,7 +83,6 @@ export default class Banner extends React.Component {
 		var { width, height, name, position } = bannerEle,
 			{ contentType } = curData,
 			{ bannerCheck = true } = curPage.feature
-
 		var DOM = (
 			bannerCheck
 			?
@@ -69,11 +91,7 @@ export default class Banner extends React.Component {
 					className={`pge-banner ${contentType === 'banner'? 's-active': ''}`}
 					onClick={e => this.selectComp(e, banner)}
 				>
-					<SwiperImgAndVideo
-						name={name}
-						data={banner}
-						actions={actions}
-					/>
+					{ compContent(name, banner, actions) }
 				</div>
 			</div>
 			: null

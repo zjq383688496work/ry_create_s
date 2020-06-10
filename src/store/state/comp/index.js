@@ -13,6 +13,8 @@ module.exports = {
 	swiperIV:              authInit(require('./swiperIV')),
 	bannerHorizontal:      authInit(require('./bannerHorizontal')),
 	bannerVertical:        authInit(require('./bannerVertical')),
+	bannerHorizontalIV:    authInit(require('./bannerHorizontalIV')),
+	bannerVerticalIV:      authInit(require('./bannerVerticalIV')),
 	// 精彩活动
 	wonderfulActivity:     authInit(require('./wonderfulActivity')),
 	wonderfulActivity2:    authInit(require('./wonderfulActivity2')),					// 新精彩活动

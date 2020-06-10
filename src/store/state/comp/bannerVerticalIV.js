@@ -64,6 +64,7 @@ const data = {
 	},
 	content: {
 		media: [],
+		positionV: 'top',
 		swiperOptions: {
 			direction: 'horizontal',
 			effect:  'slide',
@@ -90,7 +91,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'swiperIV',
+	name: 'bannerVerticalIV',
 	type: 'base',
 	// 位置大小
 	// 样式管理

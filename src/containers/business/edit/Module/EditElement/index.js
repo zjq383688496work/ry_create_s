@@ -3,10 +3,12 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
+
 import Picture            from 'compEdit/EditElement/Picture'
 import Web                from 'compEdit/EditElement/Web'
 import Text               from 'compEdit/EditElement/Text'
 import Audio              from 'compEdit/EditElement/Audio'
+import Biubiubiu          from 'compEdit/EditElement/Biubiubiu'
 import Button             from 'compEdit/EditElement/Button'
 import ButtonLanguage     from 'compEdit/EditElement/ButtonLanguage'
 import Video              from 'compEdit/EditElement/Video'
@@ -22,7 +24,6 @@ import StoreDetails       from 'compEdit/EditElement/StoreDetails'
 import StoreInstro        from 'compEdit/EditElement/StoreInstro'
 import StoreList2         from 'compEdit/EditElement/StoreList2'
 import StoreDetails2      from 'compEdit/EditElement/StoreDetails2'
-// import GoodsList          from 'compEdit/EditElement/GoodsList'
 import DateWeather        from 'compEdit/EditElement/DateWeather'
 import Navigation         from 'compEdit/EditElement/Navigation'
 import NavigationFloat    from 'compEdit/EditElement/NavigationFloat'
@@ -30,6 +31,7 @@ import NavigationFloat    from 'compEdit/EditElement/NavigationFloat'
 import Map2D              from 'compEdit/EditElement/Map2D'
 import Map3D              from 'compEdit/EditElement/Map3D'
 import Html               from 'compEdit/EditElement/Html'
+// import GoodsList          from 'compEdit/EditElement/GoodsList'
 // import GoodsDetails       from 'compEdit/EditElement/GoodsDetails'
 import Area               from 'compEdit/EditElement/Area'
 import Qrcode             from 'compEdit/EditElement/Qrcode'
@@ -56,6 +58,7 @@ const compContent = (name, data, actions, type, idx, csn, contentEditable, langu
 		web:                <Web               {...props} />,
 		video:              <Video             {...props} />,
 		text:               <Text              {...props} />,
+		biubiubiu:          <Biubiubiu         {...props} />,
 		audio:              <Audio             {...props} />,
 		button:             <Button            {...props} />,
 		buttonLanguage:     <ButtonLanguage    {...props} />,

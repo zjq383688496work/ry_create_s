@@ -55,7 +55,7 @@ class Barrage {
 		_traTimer[idx] = setTimeout(() => {
 			clearTimeout(_traTimer[idx])
 			_traActive[idx] = true
-		}, ~~timeout + 2000)
+		}, ~~timeout + 100)
 	}
 	// 创建弹幕
 	create() {
@@ -109,7 +109,7 @@ class Barrage {
 		_dom.timer = setTimeout(() => {
 			if (!dom) return
 			self.removeItem(dom.id)
-		}, time + 200)
+		}, time + 100)
 		// let tw = new tween({
 		// 	start: 0,
 		// 	end:   100,

@@ -59,11 +59,12 @@ const data = {
 		position: 'absolute',
 		top:    0,
 		left:   0,
-		width:  540,
-		height: 304
+		width:  304,
+		height: 540
 	},
 	content: {
 		media: [],
+		positionH: 'left',
 		swiperOptions: {
 			direction: 'horizontal',
 			effect:  'slide',
@@ -90,7 +91,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'swiperIV',
+	name: 'bannerHorizontalIV',
 	type: 'base',
 	// 位置大小
 	// 样式管理
