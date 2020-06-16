@@ -158,6 +158,7 @@ module.exports = {
 	qrcodeBind:            authInit(require('./qrcode/qrcodeBind')),	// 二维码绑定
 	qrcodeHui:             authInit(require('./qrcode/qrcodeHui')),		// 惠码
 	qrcodeNav:             authInit(require('./qrcode/qrcodeNav')),		// 导航码
+	qrcodeBarrage:         authInit(require('./qrcode/qrcodeBarrage')),	// 弹幕码
 
 	// 语音模块
 	voice:                 authInit(require('./voice')),

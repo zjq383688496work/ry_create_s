@@ -1,10 +1,3 @@
-/**
- * @Author: Along
- * @Date:   2018-05-30
- 
- */
- 
-
 export function filterContent(data,con) {
 	let content = data.data.content;
 	const t = data.data.type;
@@ -26,21 +19,25 @@ export function filterContent(data,con) {
 export function setSwiperImgAndVideo(editConfig){
 	let { pageContent, globalData } = editConfig,
 		{ banner } = globalData
-	if(tempCfg.bannerAds == 1){
-		banner.data.content.forEach(e=>{
-			!e.delayOnly&&e.type=='image' ? e.delayOnly = 5 : null
-			!e.date ? e.date = '' : null
-		})
+	if (tempCfg.bannerAds == 1) {
+		if (!/IV$/.test(banner.name)) {
+			let { content } = banner.data
+			content.forEach(e => {
+				!e.delayOnly && e.type == 'image'? e.delayOnly = 5 : null
+				!e.date ? e.date = '' : null
+			})
+		}
 	}
 	Object.keys(pageContent).map(_=>{
-		let page = pageContent[_],elements =  page.elements;
-		elements.map(val=>{
+		let page = pageContent[_],
+			elements = page.elements;
+		elements.map(val => {
 			if (val.name === 'swiperImgAndVideo') {
 				let contentList = deepCopy(val.data.content)
 				if(getAttr(contentList) != 'Array') return
 				contentList.forEach(e=>{
-					!e.delayOnly&&e.type=='image' ? e.delayOnly = 5 : null
-					!e.date ? e.date = '' : null
+					!e.delayOnly && e.type=='image'? e.delayOnly = 5: null
+					!e.date? e.date = '': null
 				})
 				val.data.content = contentList
 			}

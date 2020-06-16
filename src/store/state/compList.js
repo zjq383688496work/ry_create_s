@@ -373,6 +373,11 @@ module.exports = [
 				name: '导航码',
 				key:  'qrcodeNav'
 			},
+			{
+				icon: 'qrcode_nav',
+				name: '弹幕码',
+				key:  'qrcodeBarrage'
+			}
 		]
 	},
 ]

@@ -41,6 +41,7 @@ import Area               from 'compEdit/EditElement/Area'
 import Qrcode             from 'compEdit/EditElement/Qrcode'
 import QrcodeHui          from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav          from 'compEdit/EditElement/QrcodeNav'
+import QrcodeBarrage      from 'compEdit/EditElement/QrcodeBarrage'
 import Tabs               from 'compEdit/EditElement/Tabs'
 
 import Banner from 'compEdit/EditElement/Banner'
@@ -89,6 +90,7 @@ const compContent = (name, data, actions, type, idx, csn, language) => {
 		storeDetails2:      <StoreDetails2      {...props} />,
 		qrcodeHui:          <QrcodeHui          {...props} />,
 		qrcodeNav:          <QrcodeNav          {...props} />,
+		qrcodeBarrage:      <QrcodeBarrage      {...props} />,
 		tabs:               <Tabs               {...props} />,
 	}
 	return render[name]
