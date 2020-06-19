@@ -51,7 +51,6 @@ export default class RecListByStore2 extends React.Component {
 			{ data, ioInput } = props,
 			{ list = [], cols, rows }   = state,
 			{ componentLayout, layout } = data.data
-			// defaultStyle = cssColorFormat(props, 'filter')
 		let listDom = list.map((_, i) => {
 				let styles = calcOffset(list, props, cols, rows)
 				return (
