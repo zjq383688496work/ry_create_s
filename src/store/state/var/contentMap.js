@@ -107,7 +107,6 @@ module.exports = {
 	// 缓冲区
 	bufferOptions:        { name: '缓冲配置', type: 'Options' },
 	indexMultiple:        { name: '索引倍数', type: 'Number', min: 1,   max: 10, step: 1 },
-	indexOffset:          { name: '索引偏移', type: 'Number', min: -20, max: 20, step: 1 },
 	increment:            { name: '顺序增量', type: 'Number', min: -10, max: 10, step: .1 },
 	offsetX:              { name: 'X轴偏移',  type: 'Number', min: -100, max: 100, step: 1 },
 	offsetXStr:           { name: 'X轴倍率',  type: 'Input',  min: 0, max: 20 },

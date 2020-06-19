@@ -174,9 +174,6 @@ const data = {
 		// },
 		bufferOptions: {
 			indexMultiple:  1,
-			indexOffset:    0,
-			// indexOffsetStr: '',
-			// increment:      0,
 			offsetX:        0,
 			offsetXStr:     '',
 			offsetY:        0,

@@ -55,10 +55,10 @@ class IV extends React.Component {
 		let { data, media, con, action, actions, editConfig } = this.props
 		// 单个文件
 		if (single) {
-			let { type, url, preview, originalSizePreview } = list[0]
-			media[idx] = createMedia(type, url, preview, originalSizePreview)
+			let { id, type, url, preview, originalSizePreview } = list[0]
+			media[idx] = createMedia(type, url, preview, originalSizePreview, id)
 		} else {
-			let newList = list.map(({ type, url, preview, originalSizePreview }) => createMedia(type, url, preview, originalSizePreview))
+			let newList = list.map(({ id, type, url, preview, originalSizePreview }) => createMedia(type, url, preview, originalSizePreview, id))
 			media.push(...newList)
 		}
 		let { parentComp } = editConfig.curData
@@ -194,10 +194,11 @@ class IV extends React.Component {
 }
 
 // 创建媒体
-function createMedia(type, url, preview, originalSizePreview) {
+function createMedia(type, url, preview, originalSizePreview, id) {
 	if (type === 3) type = 1
 	let item = deepCopy(mediaMap[type])
 	let { media } = item
+	if (id)      media.id  = id
 	if (url)     media.url = url
 	if (preview) media.preview = preview
 	if (originalSizePreview) media.originalSizePreview = originalSizePreview
@@ -205,9 +206,9 @@ function createMedia(type, url, preview, originalSizePreview) {
 }
 // 清除媒体
 function removeMedia(item) {
-	let { media, type } = item,
-		{ url } = media
+	let { media, type } = item
 	media.url = ''
+	delete media.id
 	if (type === 'video') media.preview = media.originalSizePreview = ''
 }
 

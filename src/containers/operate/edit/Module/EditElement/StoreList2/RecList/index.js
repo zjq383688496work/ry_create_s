@@ -4,10 +4,17 @@ import './index.less'
 import Layout from 'compEdit/EditElement/Layout'
 import * as Server from 'server'
 
+import calcOffset from './util_offset'
+
 export default class RecListByStore2 extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { list: [] }
+		let { cols, rows } = this.getGrid(props)
+		this.state = {
+			list: [],
+			cols,
+			rows
+		}
 	}
 	componentWillMount() {
 		this.getData()
@@ -21,6 +28,18 @@ export default class RecListByStore2 extends React.Component {
 		if (newProps.drag != undefined) return newProps.drag
 		else return true
 	}
+	getGrid = props => {
+		let { data, parent, shops } = props,
+			{ size } = parent.data.content,
+			{ layout, style } = data.data,
+			{ width }  = layout,
+			{ filter } = style,
+			{ width: cWidth, margin } = filter,
+			{ right, left } = margin,
+			rows = width / (cWidth + right + left) >> 0,
+			cols = Math.ceil(size / rows)
+		return { cols, rows }
+	}
 	getData = e => {
 		var { size } = this.props.ioInput.body
 		Server.store.getList(size, o => {
@@ -28,13 +47,20 @@ export default class RecListByStore2 extends React.Component {
 		})
 	}
 	renderList = e => {
-		let { data, ioInput } = this.props,
-			{ list = [] } = this.state,
+		let { props, state } = this,
+			{ data, ioInput } = props,
+			{ list = [], cols, rows }   = state,
 			{ componentLayout, layout } = data.data
-		return list.map((_, i) => {
-			if(i >= 6 ){_.featuredShop = false}
-			return <Layout key={i} data={_} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filter')} />
-		})
+			// defaultStyle = cssColorFormat(props, 'filter')
+		let listDom = list.map((_, i) => {
+				let styles = calcOffset(list, props, cols, rows)
+				return (
+					<div key={i} style={styles[i]}>
+						<Layout data={_} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filter')} />
+					</div>
+				)
+			})
+		return listDom
 	}
 	render() {
 		let dom = this.renderList()

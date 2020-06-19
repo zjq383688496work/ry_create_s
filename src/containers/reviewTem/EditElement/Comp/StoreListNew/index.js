@@ -101,21 +101,19 @@ class StoreListNewShow extends React.Component {
 		this.state.paramsData.haveFloorMap = haveFloorMap
 		return (  
 			<div style={{height:"100%"}}>
-				{ 
-					<Custom 
-						data={data} 
-						animate={animate}
-						animateParams={animateParams}
-						shopsInfo={this.state.shopsInfo}
-						floors={floors}
-						builds={builds}
-						categories={categories}
-						ioInput={this.state.paramsData}
-						ioOuter={this.ioOuter}
-						action={action}
-						storeUpdate={this.state.Update}
-					/>
-				}
+				<Custom 
+					data={data}
+					animate={animate}
+					animateParams={animateParams}
+					shopsInfo={this.state.shopsInfo}
+					floors={floors}
+					builds={builds}
+					categories={categories}
+					ioInput={this.state.paramsData}
+					ioOuter={this.ioOuter}
+					action={action}
+					storeUpdate={this.state.Update}
+				/>
 				<div ref="$mask" className="s-mask"></div>
 			</div>
 		)

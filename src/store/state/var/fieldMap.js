@@ -31,7 +31,7 @@ var Map = {
 		contact:      '联系方式',
 		qrcode:       '二维码',
 		categories:   '分类名称',
-		otherPicture: '其他图片',
+		otherPic:     '其他图片',
 	},
 	storeCatg: {
 		name: '店铺类型'
