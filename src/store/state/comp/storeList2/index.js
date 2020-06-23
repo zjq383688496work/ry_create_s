@@ -1,6 +1,7 @@
 let { authInit, deepCopy, extend } = require('state/common')
 const style_1 = require('./style_1')
 const style_2 = require('./style_2')
+const style_3 = require('./style_3')
 
 module.exports = {
 	name: 'storeList2',
@@ -19,6 +20,11 @@ module.exports = {
 			name: '楼层导航',
 			img:  '',
 			data: deepCopy(style_2)
+		},
+		{
+			name: '品牌墙',
+			img:  '',
+			data: deepCopy(style_3)
 		}
 		]
 	},

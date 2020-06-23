@@ -25,7 +25,7 @@ const Banner = extendRmSL(deepCopy(pb), {
 			}
 		},
 		content: {
-			bind: 'otherPicture'
+			bind: 'otherPic'
 		}
 	}
 })
