@@ -20,7 +20,7 @@ const data = {
 			marginRight: 2,
 			background: 'center no-repeat',
 			backgroundSize: 'contain',
-			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805191128322385.png' },
+			backgroundImage: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/202007011045563094.png' },
 			backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000' },
 		},
 		title: {

@@ -10,7 +10,7 @@ const phone = extendRmSL(deepCopy(require('./address')), {
 		type:'phone',
 		content: { 
 			text: '023-64538476',
-			img:    { type: 'custom', img: "http://rongyi.b0.rongyi.com/system/mcp/DEV/app/upload/e49fe7db-78c7-4dc6-9abd-d2198b8b4ffb.png" }
+			img:    { type: 'custom', img: "http://rongyi.b0.rongyi.com/commodity/text/202007011045563014.png" }
 		}, 
 		animation: {
 			className: '',	// 动画样式

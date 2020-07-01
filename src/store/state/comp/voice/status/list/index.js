@@ -57,7 +57,7 @@ const Ico = extendRmSL(deepCopy(p), {
 			height: 8
 		},
 		content: {
-			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805191128322385.png' }
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/202007011045563094.png' }
 		}
 	}
 })

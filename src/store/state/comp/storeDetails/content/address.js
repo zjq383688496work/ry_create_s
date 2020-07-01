@@ -51,7 +51,7 @@ const data = {
 		height:   30
 	},
 	content: {
-		img:    { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/201805191128322385.png' },	// 图片url
+		img:    { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/202007011045563094.png' },	// 图片url
 		text:   'L2  2489',
 		router: {},	// 路由
 	},
