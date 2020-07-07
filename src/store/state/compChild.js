@@ -47,6 +47,7 @@ module.exports = {
 		listByStore2:    1,
 		recListByStore2: 1,
 		catgByStore2:    1,
+		catgSecByStore2: 1,
 		pageByStore2:    1,
 		turnByStore2:    1,
 		floorByStore2:   1,
@@ -90,5 +91,11 @@ module.exports = {
 		area:         1,
 		audio:        1,
 		listByVoice:  1,
+	},
+	activity: {
+		area:             1,
+		buttonByActivity: 1,
+		viewByActivity:   1,
+		listByActivity:   1,
 	}
 }

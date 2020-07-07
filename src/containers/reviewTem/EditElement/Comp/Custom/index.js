@@ -23,6 +23,7 @@ import LetterNew         from '../StoreListNew/LetterNew'
 import FloorNew          from '../StoreListNew/FloorNew'
 import BuildNew          from '../StoreListNew/BuildNew'
 import CatgNew           from '../StoreListNew/CatgNew'
+import CatgSec           from '../StoreListNew/CatgSec'
 import PageNew           from '../StoreListNew/PageNew'
 import ResetNew          from '../StoreListNew/ResetNew'
 import Turn              from '../StoreListNew/Turn'
@@ -102,8 +103,9 @@ class Custom extends React.Component {
 
 				case 'letterByStore2':    compCon = (<LetterNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} letter={ioInput.letter} action={action} />);break
 				case 'floorByStore2':     compCon = (<FloorNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} floors={floors} floor={ioInput.floor} action={action} />);break
-				case 'buildByStore2':      compCon = (<BuildNew  data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} builds={builds} build={ioInput.build} action={action} />);break
+				case 'buildByStore2':     compCon = (<BuildNew  data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} builds={builds} build={ioInput.build} action={action} />);break
 				case 'catgByStore2':      compCon = (<CatgNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} catg={ioInput.catg} categories={categories} action={action} />);break
+				case 'catgSecByStore2':   compCon = (<CatgSec data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} catg={ioInput.catgSec} categories={categories} action={action} />);break
 				case 'pageByStore2':      compCon = (<PageNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shopsInfo={shopsInfo} />);break
 				case 'resetByStore2':     compCon = (<ResetNew data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} storeUpdate={storeUpdate} />);break
 				case 'turnByStore2':      compCon = <Turn data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} shopsInfo={shopsInfo} />; break

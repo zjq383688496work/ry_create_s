@@ -11,6 +11,7 @@ module.exports = {
 	turnByStore2:     1,
 	catgByActivity2:  1,
 	resetByActivity2: 1,
+	listByActivity:   1,
 	listByVoice:      1,
 	tabByTabs:        1,
 }

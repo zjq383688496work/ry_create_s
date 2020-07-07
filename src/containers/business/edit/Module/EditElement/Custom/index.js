@@ -44,6 +44,7 @@ import SwiperIV          from 'compEdit/EditElement/SwiperIV'
 import ListByStore2    from 'compEdit/EditElement/StoreList2/List'
 import RecListByStore2 from 'compEdit/EditElement/StoreList2/RecList'
 import CatgByStore2    from 'compEdit/EditElement/StoreList2/Catg'
+import CatgSecByStore2 from 'compEdit/EditElement/StoreList2/CatgSec'
 import ResetByStore2   from 'compEdit/EditElement/StoreList2/Reset'
 import FloorByStore2   from 'compEdit/EditElement/StoreList2/Floor'
 import BuildByStore2   from 'compEdit/EditElement/StoreList2/Build'
@@ -102,6 +103,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		listByStore2:      <ListByStore2      {...props} />,
 		recListByStore2:   <RecListByStore2   {...props} />,
 		catgByStore2:      <CatgByStore2      {...props} />,
+		catgSecByStore2:   <CatgSecByStore2   {...props} />,
 		resetByStore2:     <ResetByStore2     {...props} />,
 		floorByStore2:     <FloorByStore2     {...props} />,
 		buildByStore2:     <BuildByStore2     {...props} />,

@@ -68,18 +68,18 @@ export default class RecListByStore2 extends React.Component {
 			{ bufferOptions } = data.data.content,
 			{ $swiper, $wrapper, $current } = this.refs
 		let options = Object.assign({
-			speed:  0,
+			speed:  300,
 			// loop:   true,
 			// autoplay: {
 			// 	delay: 5000,
 			// 	disableOnInteraction: false,
 			// },
-			effect: 'fade',
+			// effect: 'fade',
 			fadeEffect: 'false',
 		}, {
 			on: {
 				slideChangeTransitionStart: function() {
-					self.maskDisplay('block')
+					// self.maskDisplay('block')
 				},
 				slideChangeTransitionEnd: function() {
 					var curPage  = this.activeIndex + 1,
@@ -89,9 +89,9 @@ export default class RecListByStore2 extends React.Component {
 					ioInput.changePage  = true
 					ioOuter(ioInput)
 
-					self.addAnimate(curPage - 1, prevIdx, $wrapper, $wrapper.childNodes, bufferOptions, self.state, () => {
+					/*self.addAnimate(curPage - 1, prevIdx, $wrapper, $wrapper.childNodes, bufferOptions, self.state, () => {
 						self.maskDisplay('none')
-					})
+					})*/
 				}
 			}
 		})
@@ -108,13 +108,13 @@ export default class RecListByStore2 extends React.Component {
 		if (ioInput.haveFloorMap) ioOuter(ioInput, { type: 'shopNo', value: shopNo })
 		else JumpRouter(dataStr)
 	}
-	addAnimate = (curIdx, prevIdx, $wrapper, nodes, { delay, speed, offsetT }, { rows }, cb) => {
+	/*addAnimate = (curIdx, prevIdx, $wrapper, nodes, { delay, speed, offsetT }, { rows }, cb) => {
 		let self     = this,
 			curNode  = nodes[curIdx],
 			prevNode = nodes[prevIdx],
 			curList  = curNode.childNodes,
 			prevList = prevNode.childNodes,
-			isNext   = curIdx > prevIdx /*|| (curIdx < prevIdx && !curIdx)*/,
+			isNext   = curIdx > prevIdx,//|| (curIdx < prevIdx && !curIdx)
 			dir      = isNext? 'next': 'prev',
 			clsIn    = `s-slide-in-${dir}`,
 			clsOut   = `s-slide-out-${dir}`,
@@ -154,7 +154,7 @@ export default class RecListByStore2 extends React.Component {
 		self.waitTimer = setTimeout(() => {
 			cb && cb()
 		}, wait + waitOff)
-	}
+	}*/
 	renderItem = (list, data, styles, defaultStyle) => {
 		let node = list.map((_, i) => {
 			return (
@@ -179,10 +179,13 @@ export default class RecListByStore2 extends React.Component {
 		return shops.data.map((list, i) => {
 			let styles = calcOffset(list, props, cols, rows)
 			return (
-				<div className={`swiper-slide${!i? ' s-slide-in-next': ''}`} key={i}>
+				<div className={`swiper-slide`} key={i}>
 					{ this.renderItem(list, data, styles, defaultStyle) }
 				</div>
 			)
+				// <div className={`swiper-slide${!i? ' s-slide-in-next': ''}`} key={i}>
+				// 	{ this.renderItem(list, data, styles, defaultStyle) }
+				// </div>
 		})
 	}
 	render() {

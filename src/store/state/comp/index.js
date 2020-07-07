@@ -130,6 +130,7 @@ module.exports = {
 	listByStore2:          authInit(require('./storeList2/content/list')),		// 列表
 	recListByStore2:       authInit(require('./storeList2/content/recList')),	// 推荐列表
 	catgByStore2:          authInit(require('./storeList2/content/catg')),		// 分类
+	catgSecByStore2:       authInit(require('./storeList2/content/catgSec')),	// 二级分类
 	pageByStore2:          authInit(require('./storeList2/content/page')),		// 分页
 	turnByStore2:          authInit(require('./storeList2/content/turn')),		// 翻页
 	floorByStore2:         authInit(require('./storeList2/content/floor')),		// 楼层
@@ -150,7 +151,7 @@ module.exports = {
 	// 切换标签
 	tabs:                  authInit(require('./tabs')),
 	// 标签分类
-	tabByTabs:            authInit(require('./tabs/content/tabByTabs')),
+	tabByTabs:             authInit(require('./tabs/content/tabByTabs')),
 	// 子元素
 	childElement:          authInit(require('./childElement')),
 	/* 二维码 */
@@ -166,4 +167,10 @@ module.exports = {
 
 	// 弹幕
 	biubiubiu:             authInit(require('./biubiubiu')),
+
+	// 精彩活动 (新)
+	activity:              authInit(require('./activity')),
+	buttonByActivity:      authInit(require('./activity/content/button')),
+	viewByActivity:        authInit(require('./activity/content/view')),
+	listByActivity:        authInit(require('./activity/content/list')),
 }

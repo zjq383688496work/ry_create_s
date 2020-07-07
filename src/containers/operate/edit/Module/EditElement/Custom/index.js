@@ -47,21 +47,25 @@ import SwiperIV          from 'compEdit/EditElement/SwiperIV'
 // import SwiperByGoods  from 'compEdit/EditElement/GoodsList/SwiperByGoods'
 // import CatgByGoods    from 'compEdit/EditElement/GoodsList/CatgByGoods'
 // import ResetByGoods   from 'compEdit/EditElement/GoodsList/ResetByGoods'
-import ListByStore2    from 'compEdit/EditElement/StoreList2/List'
-import RecListByStore2 from 'compEdit/EditElement/StoreList2/RecList'
-import CatgByStore2    from 'compEdit/EditElement/StoreList2/Catg'
-import ResetByStore2   from 'compEdit/EditElement/StoreList2/Reset'
-import FloorByStore2   from 'compEdit/EditElement/StoreList2/Floor'
-import BuildByStore2   from 'compEdit/EditElement/StoreList2/Build'
-import LetterByStore2  from 'compEdit/EditElement/StoreList2/Letter'
-import PageByStore2    from 'compEdit/EditElement/StoreList2/Page'
-import TurnByStore2    from 'compEdit/EditElement/StoreList2/Turn'
-import MapByStore2     from 'compEdit/EditElement/StoreList2/Map'
-import NavByStore2     from 'compEdit/EditElement/StoreList2/Nav'
-import StoreBlock      from 'compEdit/EditElement/StoreDetails2/Block'
-import QrcodeHui       from 'compEdit/EditElement/QrcodeHui'
-import QrcodeNav       from 'compEdit/EditElement/QrcodeNav'
-import ListByVoice     from 'compEdit/EditElement/Voice/List'
+import ListByStore2      from 'compEdit/EditElement/StoreList2/List'
+import RecListByStore2   from 'compEdit/EditElement/StoreList2/RecList'
+import CatgByStore2      from 'compEdit/EditElement/StoreList2/Catg'
+import CatgSecByStore2   from 'compEdit/EditElement/StoreList2/CatgSec'
+import ResetByStore2     from 'compEdit/EditElement/StoreList2/Reset'
+import FloorByStore2     from 'compEdit/EditElement/StoreList2/Floor'
+import BuildByStore2     from 'compEdit/EditElement/StoreList2/Build'
+import LetterByStore2    from 'compEdit/EditElement/StoreList2/Letter'
+import PageByStore2      from 'compEdit/EditElement/StoreList2/Page'
+import TurnByStore2      from 'compEdit/EditElement/StoreList2/Turn'
+import MapByStore2       from 'compEdit/EditElement/StoreList2/Map'
+import NavByStore2       from 'compEdit/EditElement/StoreList2/Nav'
+import StoreBlock        from 'compEdit/EditElement/StoreDetails2/Block'
+import QrcodeHui         from 'compEdit/EditElement/QrcodeHui'
+import QrcodeNav         from 'compEdit/EditElement/QrcodeNav'
+import ListByVoice       from 'compEdit/EditElement/Voice/List'
+import ButtonByActivity  from 'compEdit/EditElement/Activity/Button'
+import ViewByActivity    from 'compEdit/EditElement/Activity/View'
+import ListByActivity    from 'compEdit/EditElement/Activity/List'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -111,6 +115,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		listByStore2:      <ListByStore2      {...props} />,
 		recListByStore2:   <RecListByStore2   {...props} />,
 		catgByStore2:      <CatgByStore2      {...props} />,
+		catgSecByStore2:   <CatgSecByStore2   {...props} />,
 		resetByStore2:     <ResetByStore2     {...props} />,
 		floorByStore2:     <FloorByStore2     {...props} />,
 		buildByStore2:     <BuildByStore2     {...props} />,
@@ -123,6 +128,9 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		qrcodeHui:         <QrcodeHui         {...props} />,
 		qrcodeNav:         <QrcodeNav         {...props} />,
 		listByVoice:       <ListByVoice       {...props} />,
+		buttonByActivity:  <ButtonByActivity  {...props} />,
+		viewByActivity:    <ViewByActivity    {...props} />,
+		listByActivity:    <ListByActivity    {...props} />,
 	}
 	return render[name]
 }

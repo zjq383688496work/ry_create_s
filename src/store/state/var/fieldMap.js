@@ -36,6 +36,9 @@ var Map = {
 	storeCatg: {
 		name: '店铺类型'
 	},
+	storeCatgSec: {
+		name: '二级分类'
+	},
 	storeFloor: {
 		name: '楼层名称'
 	},
@@ -50,6 +53,10 @@ var Map = {
 	},
 	activityCatg: {
 		name: '活动分类'
+	},
+	activityList: {
+		preview: '预览图',
+		url:     '媒体',
 	},
 	voice: {
 		keyword: '关键字',
@@ -66,6 +73,7 @@ module.exports = {
 	listByStore2:    deepCopy(Map.store),
 	recListByStore2: deepCopy(Map.store),
 	catgByStore2:    deepCopy(Map.storeCatg),
+	catgSecByStore2: deepCopy(Map.storeCatgSec),
 	floorByStore2:   deepCopy(Map.storeFloor),
 	buildByStore2:   deepCopy(Map.storeBuild),
 	letterByStore2:  deepCopy(Map.storeLetter),
@@ -75,5 +83,6 @@ module.exports = {
 	storeDetails2:   deepCopy(Map.store),
 	// swiperBind:      deepCopy(Map.store),
 	catgByActivity2: deepCopy(Map.activityCatg),
+	listByActivity:  deepCopy(Map.activityList),
 	voice:           deepCopy(Map.voice)
 }

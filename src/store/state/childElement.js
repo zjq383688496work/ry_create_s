@@ -63,6 +63,10 @@ module.exports = {
 		picture:  1,
 		textBind: 1
 	},
+	catgSecByStore2: {
+		picture:  1,
+		textBind: 1
+	},
 	floorByStore2: {
 		picture:  1,
 		text:     1,
@@ -116,6 +120,17 @@ module.exports = {
 	resetByActivity2: {
 		picture:  1,
 		text:     1,
+	},
+	buttonByActivity: {
+		picture:  1,
+		text:     1,
+	},
+	listByActivity: {
+		area:        1,
+		picture:     1,
+		pictureBind: 1,
+		text:        1,
+		textBind:    1
 	},
 	listByVoice: {
 		area:     1,

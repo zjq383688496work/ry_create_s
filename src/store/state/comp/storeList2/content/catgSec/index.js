@@ -1,8 +1,7 @@
-let { authInit, deepCopy, extendRmSL } = require('state/common')
-const p = authInit(require('state/comp/picture'))
-const t = authInit(require('state/comp/text'))
+let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
+const tb = authInit(require('state/comp/textBind'))
 
-const Name = extendRmSL(deepCopy(t), {
+const gName = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  0,
@@ -13,25 +12,22 @@ const Name = extendRmSL(deepCopy(t), {
 			text: {
 				lineHeight:      24,
 				backgroundColor: { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
-				borderWidth: 0,
-				borderStyle:     'solid',
-				borderColor: 	 { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 				borderRadius:    {
 					topLeft:     20,
 					topRight:    20,
 					bottomRight: 20,
-					bottomLeft:  20,
+					bottomLeft:  20
 				},
+				borderColor: 	 { type: 'custom', color: 'rgba(0, 0, 0, 0)', rgb: '#000', alpha: 0 },
 				color:           { type: 'custom', color: '#666' }
 			}
 		},
 		content: {
-			text: '全部',
-			text2: ''
+			bind: 'name'
 		}
 	}
 })
-const NameAV = extendRmSL(deepCopy(t), {
+const gNameAV = extendRmSL(deepCopy(tb), {
 	data: {
 		layout: {
 			top:  0,
@@ -42,37 +38,38 @@ const NameAV = extendRmSL(deepCopy(t), {
 			text: {
 				lineHeight:      20,
 				backgroundColor: { type: 'custom', color: '#cfad81' },
-				borderWidth: 2,
-				borderStyle: 'solid',
-				borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 				borderRadius:    {
 					topLeft:     20,
 					topRight:    20,
 					bottomRight: 20,
 					bottomLeft:  20
 				},
+				borderWidth:     2,
+				borderColor: { type: 'auxiliary', color: '#e5c7a2' },
 				color: { type: 'textHigh', color: '#fff' },
 			}
 		},
 		content: {
-			text: '全部',
-			text2: ''
+			bind: 'name'
 		}
 	},
 	feature: { active: true }
 })
 
 
-// 字母排序
 const data = {
 	layout: {
 		position: 'absolute',
 		top:  0,
 		left: 0,
-		width:  60,
-		height: 24
+		width:  370,
+		height: 30
 	},
 	style: {
+		filterFlex: {
+			flexDirection: 'row',
+			flexWrap: 'nowrap',
+		},
 		filterBox: {
 			borderWidth:  0,
 			borderStyle: 'solid',
@@ -97,10 +94,22 @@ const data = {
 				spread_dis: 0,
 				color: { type: 'custom', color: '#000' }
 			}
+		},
+		filter: {
+			width:  60,
+			height: 24,
+			margin: {
+				top:    0,
+				right:  20,
+				bottom: 0,
+				left:   20
+			}
 		}
 	},
-	componentLayout: [ Name, NameAV ],
+	componentLayout: [ gName, gNameAV ],
 	content: {
+		rel: 0,
+		/*router: {}*/
 	},
 	animation: {
 		className: '',		// 动画样式
@@ -112,7 +121,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'resetByStore2',
+	name: 'catgSecByStore2',
 	type: 'layout',
 	// 位置大小
 	data: deepCopy(data),

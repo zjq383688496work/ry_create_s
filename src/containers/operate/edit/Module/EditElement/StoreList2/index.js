@@ -38,9 +38,9 @@ export default class StoreList2 extends React.Component {
 			{ content } = data,
 			size = ipt.body.size = content.size
 
-		Server.store.getCategoryList(({ floor, catg, build }) => {
+		Server.store.getCategoryList(({ floor, catg, catgSec, build }) => {
 			Server.store.getDetails(item => {
-				Object.assign(ipt, { build, catg, floor, item })
+				Object.assign(ipt, { build, catg, catgSec, floor, item })
 				this.setState({ ioInput: ipt })
 			})
 		})

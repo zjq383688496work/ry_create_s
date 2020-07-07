@@ -14,7 +14,7 @@ export default class ListByStore2 extends React.Component {
 	}
 	componentWillReceiveProps(props) {
 		var { size } = props.ioInput.body,
-			size2 = this.state.size
+			size2 =  this.state.size
 		if (size2 != size) this.getData()
 	}
 	shouldComponentUpdate(newProps, newState){
@@ -24,7 +24,7 @@ export default class ListByStore2 extends React.Component {
 	getData = e => {
 		var { size } = this.props.ioInput.body
 		Server.store.getList(size, o => {
-			this.setState({ list: o, size: size })
+			this.setState({ list: o, size })
 		})
 	}
 	renderList = e => {

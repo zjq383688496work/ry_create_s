@@ -80,26 +80,63 @@ module.exports = [
 		key:  'swiperIV'
 	},
 	// 精彩活动
+	// {
+	// 	icon: 'activity',
+	// 	name: '精彩活动',
+	// 	key:  'wonderfulActivity2',
+	// 	child: [
+	// 		{
+	// 			icon: 'classifyNav',
+	// 			name: '活动分类',
+	// 			key:  'catgByActivity2'
+	// 		},
+	// 		{
+	// 			icon: 'list',
+	// 			name: '活动列表',
+	// 			key:  'listByActivity2'
+	// 		},
+	// 		{
+	// 			icon: 'reset',
+	// 			name: '重置',
+	// 			key:  'resetByActivity2'
+	// 		}
+	// 	]
+	// },
 	{
 		icon: 'activity',
 		name: '精彩活动',
-		key:  'wonderfulActivity2',
+		key:  'activity',
 		child: [
+			// {
+			// 	icon: 'classifyNav',
+			// 	name: '进行时',
+			// 	key:  'progressByActivity'
+			// },
+			// {
+			// 	icon: 'reset',
+			// 	name: '重置',
+			// 	key:  'resetByActivity'
+			// },
 			{
-				icon: 'classifyNav',
-				name: '活动分类',
-				key:  'catgByActivity2'
+				icon: 'reset',
+				name: '跳转按钮',
+				key:  'buttonByActivity'
+			},
+			{
+				icon: 'list',
+				name: '活动展示',
+				key:  'viewByActivity'
 			},
 			{
 				icon: 'list',
 				name: '活动列表',
-				key:  'listByActivity2'
+				key:  'listByActivity'
 			},
 			{
-				icon: 'reset',
-				name: '重置',
-				key:  'resetByActivity2'
-			}
+				icon: 'image',
+				name: '背景色块',
+				key:  'area'
+			},
 		]
 	},
 	// 店铺列表
@@ -127,6 +164,11 @@ module.exports = [
 				icon: 'classifyNav',
 				name: '分类',
 				key:  'catgByStore2'
+			},
+			{
+				icon: 'classifyNav',
+				name: '二级分类',
+				key:  'catgSecByStore2'
 			},
 			{
 				icon: 'sorter',

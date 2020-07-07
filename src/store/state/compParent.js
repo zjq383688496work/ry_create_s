@@ -1,5 +1,6 @@
 // 父组件
 module.exports = {
+	activity:           1,
 	picture:            1,
 	web:                1,
 	video:              1,

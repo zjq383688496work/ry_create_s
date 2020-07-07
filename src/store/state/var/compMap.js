@@ -1,5 +1,9 @@
 module.exports = {
 	name: {
+		activity:           '精彩活动',
+		buttonByActivity:   '跳转按钮',	// 精彩活动
+		viewByActivity:     '活动展示',	// 精彩活动
+		listByActivity:     '活动列表',	// 精彩活动
 		address:            '地址',
 		picture:            '图片',
 		phone:              '电话',
@@ -67,6 +71,7 @@ module.exports = {
 		listByStore2:      '列表',
 		recListByStore2:   '推荐列表',
 		catgByStore2:      '分类',
+		catgSecByStore2:   '二级分类',
 		storeBlock:        '信息',
 		pageByStore2:      '分页',
 		turnByStore2:      '翻页',
@@ -86,6 +91,10 @@ module.exports = {
 		biubiubiu:         '弹幕',
 	},
 	num: {
+		activity:              0,
+		buttonByActivity:      0,
+		viewByActivity:        0,
+		listByActivity:        0,
 		address:               0,
 		picture:               0,
 		phone:                 0,
@@ -154,6 +163,7 @@ module.exports = {
 		listByStore2:          0,
 		recListByStore2:       0,
 		catgByStore2:          0,
+		catgSecByStore2:       0,
 		storeBlock:            0,
 		pageByStore2:          0,
 		turnByStore2:          0,

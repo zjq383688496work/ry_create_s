@@ -2,9 +2,10 @@ let { rn, deepCopy } = require('state/common')
 const cdn     = 'http://rongyi.b0.rongyi.com'
 const cdnUrl  = `${cdn}/commodity/text`
 const cdnSUrl = `${cdn}/system/mcp/DEV/app/upload`
-const catg  = ['餐饮', '潮流', '儿童', '美发', '生活']
-const floor = ['B2', 'B1', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6']
-const build = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+const catg    = ['餐饮', '潮流', '儿童', '美发', '生活']
+const catgSec = ['火锅', '烧烤', '简餐', '饮料', '甜品', '东北菜']
+const floor   = ['B2', 'B1', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6']
+const build   = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 var { random, round } = Math
 const pics  = [
 	'201808271739138841',
@@ -19,7 +20,7 @@ const picsS = [
 	'78d75e81-40af-4eda-814f-a03c266417dc',
 	'9d5a73db-8a29-48c6-8bc2-bc456bf7ad0c'
 ]
-const catgActivity = ['进行中','未开始','已过期']
+const catgActivity = ['进行中', '未开始', '已过期']
 
 function getBool() {
 	return !!round(random())
@@ -74,6 +75,10 @@ var Item = {
 		id:   1,
 		name: `运动`
 	},
+	storeCatgSec: {
+		id:   1,
+		name: `烧烤`
+	},
 	storeBuild: {
 		id:   1,
 		name: `A`
@@ -91,6 +96,14 @@ var Item = {
 	storeActivityCatg: {
 		id:   1,
 		name: `已开始`
+	},
+	storeActivityList: {
+		id:      1,
+		preview: 'http://rongyi.b0.rongyi.com/commodity/text/201805231508121878.png',
+		url:     'http://rongyi.b0.rongyi.com/commodity/text/201805231508121878.png',  
+		name:    `媒体1`,
+		router:  1,
+		bigPicType: 1,
 	}
 }
 module.exports = {
@@ -142,6 +155,14 @@ module.exports = {
 				}
 			})
 		},
+		storeCatgSec() {
+			return Array.apply(null, { length: catgSec.length }).map((_, i) => {
+				return {
+					id:   i + 1,
+					name: catgSec[i]
+				}
+			})
+		},
 		storeFloor() {
 			return Array.apply(null, { length: floor.length }).map((_, i) => {
 				return {
@@ -166,6 +187,19 @@ module.exports = {
 					name: catgActivity[i]
 				}
 			})
+		},
+		storeActivityList(num = 1) {
+			return Array.apply(null, { length: num }).map((_, i) => {
+				let idx = i + 1
+				return {
+					id:      idx,
+					preview: 'http://rongyi.b0.rongyi.com/commodity/text/201805231508121878.png',
+					url:     'http://rongyi.b0.rongyi.com/commodity/text/201805231508121878.png',  
+					name:    `媒体${idx}`,
+					router:  idx,
+					bigPicType: 1,
+				}
+			})
 		}
 	},
 	item: {
@@ -180,6 +214,7 @@ module.exports = {
 		recListByStore2: deepCopy(Item.store),
 		navByStore2:     deepCopy(Item.store),
 		catgByStore2:    deepCopy(Item.storeCatg),
+		catgSecByStore2: deepCopy(Item.storeCatgSec),
 		floorByStore2:   deepCopy(Item.storeFloor),
 		buildByStore2:   deepCopy(Item.storeBuild),
 		letterByStore2:  deepCopy(Item.storeLetter),
@@ -188,6 +223,7 @@ module.exports = {
 		storeBlock:      deepCopy(Item.store),
 		// swiperBind:      deepCopy(Item.store),
 		catgByActivity2: deepCopy(Item.storeActivityCatg),
+		listByActivity:  deepCopy(Item.storeActivityList),
 		listByVoice:     deepCopy(Item.store),
 	}
 }
