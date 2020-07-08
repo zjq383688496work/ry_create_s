@@ -42,7 +42,7 @@ import StoreDetailsBlock from '../StoreDetailsNew/StoreDetailsBlock'
 import WonderfulActivity from '../../WonderfulActivity'
 import CatgByActivity    from '../WonderfulActivityNew/CatgByActivity'
 import ResetByActivity   from '../WonderfulActivityNew/ResetByActivity'
-import ListByActivity    from '../WonderfulActivityNew/ListByActivity'
+import ListByActivity2   from '../WonderfulActivityNew/ListByActivity'
 import Swiperbind        from '../Common/SwiperBind'
 import addAnimate        from '../../../page/animateAdd'
 import RYdataMap         from '../Common/RYdataMap'
@@ -52,6 +52,9 @@ import QrcodeRYShow      from 'reviewTem/EditElement/QrcodeRY'
 // 标签
 import TabByTabs         from '../Tabs/TabByTabs'
 // import SwiperImgAndVideo from '../../SwiperImgAndVideo'
+import ButtonByActivity  from '../Activity/Button'
+import ViewByActivity    from '../Activity/View'
+import ListByActivity    from '../Activity/List'
 
 import './index.less'
 
@@ -92,7 +95,7 @@ class Custom extends React.Component {
 				case 'wonderfulActivity': compCon = (<WonderfulActivity  activities={_.data.content} data={_} type={`Style${styleIdx + 1}`} name={name} />);break
 				case 'catgByActivity2':   compCon = (<CatgByActivity  data={_} type={`Style${styleIdx + 1}`} have_activitys={have_activitys} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
 				case 'resetByActivity2':  compCon = (<ResetByActivity  data={_} type={`Style${styleIdx + 1}`} have_activitys={have_activitys} action={action} animate={animate} animateParams={animateParams} ioInput={ioInput} ioOuter={ioOuter} />);break
-				case 'listByActivity2':   compCon = (<ListByActivity  activities={_.data.content} data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'listByActivity2':   compCon = (<ListByActivity2  activities={_.data.content} data={_} type={`Style${styleIdx + 1}`} />);break
 				case 'letter':            compCon = (<Letter data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} letter={ioInput.letter} action={action} />);break
 				case 'floor':             compCon = (<Floor data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} floors={floors} floor={ioInput.floor} action={action} />);break
 				case 'catg':              compCon = (<Catg data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} catg={ioInput.catg} categories={categories} action={action} />);break
@@ -130,6 +133,9 @@ class Custom extends React.Component {
 
 				case 'tabByTabs':         compCon = <TabByTabs parent={data} data={_} type={`Style${styleIdx + 1}`} ioInput={ioInput} ioOuter={ioOuter} action={action} />; break
 				// case "swiperIV": compCon = <SwiperImgAndVideo data={_} type={`Style${styleIdx + 1}`} />; break
+				case 'listByActivity':   compCon = (<ListByActivity   ioInput={ioInput} data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'buttonByActivity': compCon = (<ButtonByActivity ioInput={ioInput} data={_} type={`Style${styleIdx + 1}`} />);break
+				case 'viewByActivity':   compCon = (<ViewByActivity   ioInput={ioInput} data={_} type={`Style${styleIdx + 1}`} />);break
 			}
 			return (
 				<div className={`pge-layout ${compName} ${aniCls? aniCls: ''}`} style={{...layout,...aniSty}} key={i}>{ compCon }</div> 

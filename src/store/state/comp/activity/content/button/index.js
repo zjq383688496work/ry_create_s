@@ -2,25 +2,20 @@ let { authInit, deepCopy, extendRmSL } = require('state/common')
 const p = authInit(require('state/comp/picture'))
 const t = authInit(require('state/comp/text'))
 
-const Name = extendRmSL(deepCopy(t), {
+const Pic = extendRmSL(deepCopy(p), {
 	data: {
 		layout: {
 			top:   0,
-			left:  7,
-			width:  60,
-			height: 24
+			left:  0,
+			width:  75,
+			height: 25
 		},
 		style: {
-			text: {
-				fontSize:   10,
-				lineHeight: 24,
-				color:      { type: 'custom', color: '#fff' },
-				backgroundColor: { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0 },
+			image: {
 			}
 		},
 		content: {
-			text:  '前往店铺',
-			text1: '',
+			img: { type: 'custom', img: 'http://rongyi.b0.rongyi.com/commodity/text/202007081403136145.png' },
 		}
 	}
 })
@@ -40,7 +35,7 @@ const data = {
 			borderWidth:     0,
 			borderStyle:     'solid',
 			borderColor:     { type: 'custom', color: '#cfad81' },
-			backgroundColor: { type: 'custom', color: '#ff6259' },
+			backgroundColor: { type: 'custom', color: 'rgba(0,0,0,0)', rgb: '#000', alpha: 0 },
 			padding: {
 				top:    0,
 				right:  0,
@@ -62,7 +57,7 @@ const data = {
 			}
 		}
 	},
-	componentLayout: [ Name ],
+	componentLayout: [ Pic ],
 	content: {
 	},
 	animation: {

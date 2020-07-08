@@ -1,10 +1,3 @@
-
-/**
- * @Author: Along
- * @Date:   2018-07-25
-
- **/
-
 import React from 'react'
 import Layout from '../../Layout'
 import './index.less'

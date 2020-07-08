@@ -1,17 +1,10 @@
 import React from 'react'
 import './index.less'
 
-import CustomO from 'compEdit/EditElement/Custom'
-import CustomB from 'compEditB/EditElement/Custom'
-import CustomV from 'view/Element/Custom'
+import Custom from '../Custom'
 import * as Server from 'server'
 
-let cusMap = {
-	operate:  CustomO,
-	business: CustomB
-}
-
-export default class WonderfulActivity2 extends React.Component {
+export default class Activity extends React.Component {
 	constructor(props) {
 		super(props)
 		// console.log("新精彩活动："+JSON.stringify(props));
@@ -47,7 +40,6 @@ export default class WonderfulActivity2 extends React.Component {
 	}
 
 	render() {
-		let Custom = cusMap[envType] || CustomV
 		return (
 			<Custom
 				{...this.props}

@@ -3,7 +3,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
-
+import Activity           from 'compEdit/EditElement/Activity'
 import Picture            from 'compEdit/EditElement/Picture'
 import Web                from 'compEdit/EditElement/Web'
 import Text               from 'compEdit/EditElement/Text'
@@ -55,6 +55,7 @@ var animeMap = variable.animeCompMap,
 const compContent = (name, data, actions, type, idx, csn, contentEditable, language) => {
 	var props  = { data, actions, type, idx, csn, contentEditable, language},
 		render = {
+		activity:           <Activity           {...props} />,
 		picture:            <Picture           {...props} />,
 		web:                <Web               {...props} />,
 		video:              <Video             {...props} />,

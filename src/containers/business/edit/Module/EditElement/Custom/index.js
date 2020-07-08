@@ -57,6 +57,9 @@ import StoreBlock      from 'compEdit/EditElement/StoreDetails2/Block'
 import QrcodeHui       from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav       from 'compEdit/EditElement/QrcodeNav'
 import ListByVoice     from 'compEdit/EditElement/Voice/List'
+import ButtonByActivity  from 'compEdit/EditElement/Activity/Button'
+import ViewByActivity    from 'compEdit/EditElement/Activity/View'
+import ListByActivity    from 'compEdit/EditElement/Activity/List'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -116,6 +119,9 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		qrcodeHui:         <QrcodeHui         {...props} />,
 		qrcodeNav:         <QrcodeNav         {...props} />,
 		listByVoice:       <ListByVoice       {...props} />,
+		buttonByActivity:  <ButtonByActivity  {...props} />,
+		viewByActivity:    <ViewByActivity    {...props} />,
+		listByActivity:    <ListByActivity    {...props} />,
 	}
 	return render[name]
 }
@@ -177,7 +183,7 @@ class Custom extends React.Component {
 			)
 		})
 		return (
-			<section className={`pg-custom ele-${data.name} ${csn} scrollbar`}>
+			<section className={`pg-custom pg-custom-business ele-${data.name} ${csn} scrollbar`}>
 				{ childNode }
 			</section>
 		)

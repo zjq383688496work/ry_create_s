@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Activity                 from 'reviewTem/EditElement/Comp/Activity'
 import PictureShow              from 'reviewTem/EditElement/Picture'
 import AreaShow                 from 'reviewTem/EditElement/Area'
 import AudioShow                from 'reviewTem/EditElement/Audio'
@@ -70,6 +71,7 @@ class EditElementCommon extends React.Component {
 				styleIdx = element.styleList.idx,
 				compCon
 			switch (element.name) {
+				case 'activity':           compCon = (<Activity data={element} type={`Style${styleIdx + 1}`} action={action} />); break
 				case 'picture':            compCon = (<PictureShow data={element} type={`Style${styleIdx + 1}`} action={action} />); break
 				case 'area':               compCon = (<AreaShow data={element} type={`Style${styleIdx + 1}`} />); break
 				case 'biubiubiu':          compCon = (<Biubiubiu data={element} type={`Style${styleIdx + 1}`} />); break

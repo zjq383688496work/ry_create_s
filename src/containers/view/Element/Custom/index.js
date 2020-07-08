@@ -55,7 +55,9 @@ import NavByStore2     from 'compEdit/EditElement/StoreList2/Nav'
 import StoreBlock      from 'compEdit/EditElement/StoreDetails2/Block'
 import QrcodeHui       from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav       from 'compEdit/EditElement/QrcodeNav'
-
+import ButtonByActivity  from 'compEdit/EditElement/Activity/Button'
+import ViewByActivity    from 'compEdit/EditElement/Activity/View'
+import ListByActivity    from 'compEdit/EditElement/Activity/List'
 
 const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter, language) => {
 	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter, language }
@@ -108,6 +110,9 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		storeBlock:        <StoreBlock        {...props} />,
 		qrcodeHui:         <QrcodeHui         {...props} />,
 		qrcodeNav:         <QrcodeNav         {...props} />,
+		buttonByActivity:  <ButtonByActivity  {...props} />,
+		viewByActivity:    <ViewByActivity    {...props} />,
+		listByActivity:    <ListByActivity    {...props} />,
 	}
 	return render[name]
 }
@@ -190,7 +195,7 @@ class Custom extends React.Component {
 			)
 		})
 		return (
-			<section className={`pg-custom ${csn}`}>
+			<section className={`pg-custom pg-custom-view ${csn}`}>
 				{ childNode }
 			</section>
 		)

@@ -1,15 +1,9 @@
-/**
- * @Author: Liao Hui
- * @Date:   2018-04-21T17:21:39+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-24T13:47:49+08:00
- */
-
 import React from 'react'
 
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 
+import Activity           from 'compEdit/EditElement/Activity'
 import Picture            from 'compEdit/EditElement/Picture'
 import Web                from 'compEdit/EditElement/Web'
 import Text               from 'compEdit/EditElement/Text'
@@ -59,6 +53,7 @@ const ctMap = variable.composeTypeMap
 const compContent = (name, data, actions, type, idx, csn, language) => {
 	var props  = { data, actions, type, idx, csn, language },
 		render = {
+		activity:           <Activity           {...props} />,
 		picture:            <Picture            {...props} />,
 		web:                <Web                {...props} />,
 		video:              <Video              {...props} />,
