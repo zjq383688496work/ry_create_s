@@ -59,6 +59,7 @@ const data = {
 	},
 	componentLayout: [ Pic ],
 	content: {
+		router: {}
 	},
 	animation: {
 		className: '',		// 动画样式

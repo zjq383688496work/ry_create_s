@@ -56,7 +56,6 @@ var Map = {
 	},
 	activityList: {
 		preview: '预览图',
-		url:     '媒体',
 	},
 	voice: {
 		keyword: '关键字',
