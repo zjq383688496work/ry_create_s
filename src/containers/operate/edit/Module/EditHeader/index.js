@@ -1,6 +1,7 @@
 import React from 'react'
 import CommonQuestion from 'compEdit/EditCommon/CommonQuestion'
-import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate'  
+import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate'
+import DbModel from 'components/DbModel'
 import './index.less'
 import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
@@ -29,7 +30,9 @@ class Header extends React.Component {
 		}
 	}
 	componentWillMount()   {}
-	componentDidMount()    {}
+	componentDidMount()    {
+		this.db()
+	}
 	componentWillUnmount() {}
 
 	addComp(item) {
@@ -92,6 +95,11 @@ class Header extends React.Component {
 			delete multiComp.parentIdx
 		}
 		actions.updateGlobal(globalData)
+	}
+	// 数据库
+	db = () => {
+		let { dbModal } = this.refs
+		dbModal && dbModal.show()
 	}
 	// 预览模板
 	review() {
@@ -226,11 +234,6 @@ class Header extends React.Component {
 				</dl>
 			)
 		})
-					// <Input
-					// 	value={this.state.name}
-					// 	placeholder={'模板名称'}
-					// 	onChange={e => this.tNameChange(e.target.value)}
-					// />
 		return (
 			<div className="pe-header e-flex">
 				{ loading }
@@ -252,6 +255,12 @@ class Header extends React.Component {
 							</div>
 							常见问题
 						</div>*/}
+						<div className="cl-item" onClick={this.db}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/config.png`)}/>
+							</div>
+							数据库
+						</div>
 						<div className="cl-item" onClick={this.review.bind(this)}>
 							<div className="cl-item-icon">
 								<img src={require(`images/icon/preview.png`)}/>
@@ -284,7 +293,8 @@ class Header extends React.Component {
 					editConfig={this.props.editConfig}
 					actions={this.props.actions}
 				/>
-			</div> 
+				<DbModel ref="dbModal" />
+			</div>
 		)
 	}
 }

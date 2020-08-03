@@ -38,10 +38,10 @@ const commonCss = {
 export default class PictureAndVideo extends React.Component {
 	show() {
 		this.addImgVideoModal.show()
-	} 
+	}
 	hide() {
 		this.addImgVideoModal.hide()
-	}  
+	}
 	state = {
 		type:1,
 		list:[],
@@ -56,11 +56,11 @@ export default class PictureAndVideo extends React.Component {
 		this.getTypes(1,id=>{
 			this.setState({groupIdImg:id})
 		})
-	} 
+	}
 	componentWillReceiveProps(props){
-		if(!props.init){
-			 this.timer = setTimeout(()=>{
-			 	this.state.have ? this.setState({
+		if(!props.init) {
+			this.timer = setTimeout(()=>{
+				this.state.have ? this.setState({
 					type:1,
 					list:[],
 					groupIdImg:'',
@@ -73,16 +73,16 @@ export default class PictureAndVideo extends React.Component {
 						this.setState({groupIdImg:id})
 					})
 				}) : null
-			},500)  
-		} 
-	} 
+			},500)
+		}
+	}
 	componentWillUnmount(){
 		this.state.have = false
 		clearTimeout(this.timer)
-	}  
-	 shouldComponentUpdate(newProps, newState) {
-	 	  return newProps.init ? newProps.init : false;
-	  }   
+	}
+	shouldComponentUpdate(newProps, newState) {
+		return newProps.init ? newProps.init : false;
+	}
 	getTypes = (type,fn) => {
 		var getData = {
 			type: type
@@ -92,19 +92,19 @@ export default class PictureAndVideo extends React.Component {
 			getData.mallId = uif.userInfo.mallMid
 			ty = 'sourceGroupManage'
 		}
-		Ajax.postJSON(`/easy-smart-basic/${ty}/query`, getData).then(res => {
-			this.setState({ 
-				types: res.data
-			},()=>{fn&&fn(res.data[0].id)})
+		Ajax.postJSON(`/easy-smart-basic/${ty}/query`, getData).then(({ data }) => {
+			this.setState({ types: data }, () => {
+				fn && fn(data[0].id)
+			})
 		})
-	}  
+	}
 	close = () => {
 		this.props.initFn()
 		this.addImgVideoModal.hide()
 	}
 	onOverlayClicked = () => {
 		this.props.initFn()
-	}  
+	}
 	saveGroupId = (str,id) => {
 		if(this.state.type == 1){
 			if (str == 'page') {
@@ -133,7 +133,7 @@ export default class PictureAndVideo extends React.Component {
 				!this.state.groupIdVideo ? this.setState({groupIdVideo:id}) : null
 			}
 		})
-	} 
+	}
 	choosedMap = (list, id, type) => {
 		let { index } = this.props
 		if (index) return this.setState({ list, groupIdVideo: id })
@@ -158,7 +158,7 @@ export default class PictureAndVideo extends React.Component {
 		this.props.initFn()
 		if(this.state.list.length == 0) return
 		this.props.enter(this.state.list,this.props.index)
-	} 
+	}
 	render() {
 		return (
 			<div>
@@ -226,10 +226,10 @@ class ImgAndModule extends React.Component {
 		name:'', 
 		groupId: this.props.groupId,
 		have:true
-	} 
+	}
 	componentWillMount(){
 		this.getImgList('groupId', this.props.groupId,'init')
-	}  
+	}
 	componentWillReceiveProps(props){
 		if(!props.init){
 			this.timer = setTimeout(()=>{
@@ -237,21 +237,21 @@ class ImgAndModule extends React.Component {
 				imgList = imgList.map(_=>{
 					_.isClicked = false
 					return _
-				}) 
+				})
 				this.state.have ? this.setState({
 					imgList:imgList,
 					groupId:props.groupId,
 					currentPage:props.currentPage
 				},()=>{
 					this.getImgList('groupId', props.groupId,'init')
-				}) : null 
+				}) : null
 			},500)
-		} 
-	} 
+		}
+	}
 	componentWillUnmount(){
 		this.state.have = false
 		clearTimeout(this.timer)
-	}  
+	}
 	getImgList = (str, id,init) => {
 		let currentPage = this.props.currentPage
 		if (str == 'page') {
@@ -260,7 +260,7 @@ class ImgAndModule extends React.Component {
 		} else if (str == 'groupId') {
 			init ? this.setState({ groupId: id,currentPage:currentPage}) : (currentPage = 1,this.setState({ groupId: id,currentPage: 1}))
 		}else if(str == 'name'){
-			currentPage = 1 
+			currentPage = 1
 			this.setState({ name: id, currentPage: 1 })
 		}
 		!init ? this.props.saveGroupId(str, id) : null
@@ -292,7 +292,7 @@ class ImgAndModule extends React.Component {
 		this.props.changeType(type)
 	}
 	save = () => {
-		this.props.enter()	
+		this.props.enter()
 	}
 	save_img = choosed_img => {
 		this.props.choosedMap(choosed_img,this.state.groupId,this.props.type)
@@ -310,27 +310,27 @@ class ImgAndModule extends React.Component {
 		let style = {color:'#1890ff'}
 		return (
 			<div className="outer_v_i">
-				<ImgModule 
-					save={this.save_img} 
-					groupId={this.state.groupId} 
-					page_img={this.state.page_img} 
-					getImgList={this.getImgList} 
-					imgTypes={this.props.types} 
+				<ImgModule
+					save={this.save_img}
+					groupId={this.state.groupId}
+					page_img={this.state.page_img}
+					getImgList={this.getImgList}
+					imgTypes={this.props.types}
 					imgList={this.state.imgList}
 					currentPage={this.state.currentPage}
 					list={this.props.list}
-					index={this.props.index} 
+					index={this.props.index}
 				/>
 				<div className="bottom">
 					<Button type="primary" onClick={this.save}>确定</Button>
 					<Button onClick={this.close}>取消</Button>
-				</div> 
+				</div>
 				<div className="searchImg">
 					<div className="name" style={this.props.type == 1 ? style : {}} onClick={()=>{this.changeType(1)}}>图片素材</div>
 					<div className="name" style={this.props.type == 2 ? style : {}} onClick={()=>{this.changeType(2)}}>视频素材</div>
 					<Input size="large" placeholder="请输入查询名称" onChange={e=>this.searchName(e)} /><Button type="primary" onClick={this.searchList}>搜索</Button>
 				</div>
-			</div> 
+			</div>
 		)
 	}
 }
@@ -347,7 +347,7 @@ class VideoAndModule extends React.Component {
 		name:'', 
 		groupId:this.props.groupId,
 		attribute:''
-	} 
+	}
 	componentWillMount(){
 		this.getVideoList('groupId',this.props.groupId,'init')
 	}
@@ -362,7 +362,7 @@ class VideoAndModule extends React.Component {
 			currentPage = 1
 			this.setState({ name: id, currentPage: 1 })
 		}
-		 !init ? this.props.saveGroupId(str, id) : null
+		!init ? this.props.saveGroupId(str, id) : null
 		setTimeout(() => {
 			let postData = { 
 				page:        this.state.page,
@@ -387,7 +387,7 @@ class VideoAndModule extends React.Component {
 		}, 10)
 	}
 	save = () => {
-		this.props.enter()	
+		this.props.enter()
 	} 
 	changeType = type => {
 		if(type == 2) return
@@ -410,17 +410,17 @@ class VideoAndModule extends React.Component {
 		return (
 			
 				<div className="outer_v_i">
-					<VideoModule 
-						page_video={this.state.page_video} 
-						save={this.save_img} 
-						groupId={this.state.groupId} 
-						getVideoList={this.getVideoList} 
-						videoTypes={this.props.types} 
-						videoList={this.state.videoList} 
+					<VideoModule
+						page_video={this.state.page_video}
+						save={this.save_img}
+						groupId={this.state.groupId}
+						getVideoList={this.getVideoList}
+						videoTypes={this.props.types}
+						videoList={this.state.videoList}
 						type={type}
 						currentPage={this.state.currentPage}
 						list={this.props.list}
-						index={this.props.index} 
+						index={this.props.index}
 					/>
 					<div className="bottom">
 						<Button type="primary" onClick={this.save}>确定</Button>
@@ -432,7 +432,7 @@ class VideoAndModule extends React.Component {
 						<Input size="large" placeholder="请输入查询名称" onChange={e=>this.searchName(e)} /><Button type="primary" onClick={this.searchList}>搜索</Button>
 					</div>
 				</div>
-		)  
+		)
 	}
 }
 //图片列表
@@ -463,7 +463,7 @@ class ImgModule extends React.Component {
 			imgTypes,
 			groupId
 		})
-	} 
+	}
 	chooseType(str, id) {
 		let current = 1
 		if (str === 'groupId') {
@@ -480,7 +480,7 @@ class ImgModule extends React.Component {
 			if (item.id === img) item.isClicked = !item.isClicked
 			else if (index)      item.isClicked = false
 			return item
-		}) 
+		})
 		this.setState({ imgList })
 		let choosed_img = index ? imgList.filter(item => item.isClicked) : imgList.filter(item => item.id === img);
 		this.props.save(choosed_img)
@@ -514,7 +514,7 @@ class ImgModule extends React.Component {
 		var id = window.uif.userInfo.id || '1'
 		var { page_img } = this.props,
 			{ loading }  = this.state
-		return ( 
+		return (
 			<div className="content">
 				<div className="left">
 					{
@@ -544,7 +544,7 @@ class ImgModule extends React.Component {
 						total={page_img.totalCount}
 						pageSize={page_img.pageSize}
 						onChange={page=>{this.chooseType('page',page)}}
-						/> 
+						/>
 				</div>
 			</div>
 		)
@@ -571,10 +571,10 @@ class VideoModule extends React.Component {
 					_.isClicked = true
 					break;
 				}
-			} 
+			}
 			!_.preview ? _.preview = 'http://rongyi.b0.rongyi.com/commodity/text/201811081000076071.png' : null
 			return _
-		}) 
+		})
 		this.setState({
 			videoList,
 			videoTypes,
@@ -601,7 +601,7 @@ class VideoModule extends React.Component {
 		this.setState({ videoList })
 		let choosed_video = index ? videoList.filter(item => item.isClicked) : videoList.filter(item => item.id == id); 
 		this.props.save(choosed_video) 
-	} 
+	}
 	customRequest = (state, file) => {
 		if (!state) return message.info(file)
 		this.setState({ loading: true })

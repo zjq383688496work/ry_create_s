@@ -44,10 +44,9 @@ export default class PictureList extends React.Component {
 			getData.mallId = uif.userInfo.mallMid
 			ty = 'sourceGroupManage'
 		}
-		Ajax.postJSON(`/easy-smart-basic/${ty}/query`, getData).then(res => {
-			this.setState({ 
-				imgTypes: res.data
-			})
+		Ajax.postJSON(`/easy-smart-basic/${ty}/query`, getData).then(({ data }) => {
+			this.setState({ imgTypes: data })
+			debugger
 			this.setState({ groupId: res.data[0].id })
 			this.getImgList('groupId', res.data[0].id)
 		})
@@ -95,10 +94,10 @@ export default class PictureList extends React.Component {
 				postData.mallId = uif.userInfo.mallMid
 				ty = 'sourceManage'
 			}
-			Ajax.postJSON(`/easy-smart-basic/${ty}/query`, postData).then(res => {
+			Ajax.postJSON(`/easy-smart-basic/${ty}/query`, postData).then(({ data, page }) => {
 				this.setState({
-					imgList:res.data,
-					page_img:res.page
+					imgList:  data,
+					page_img: page
 				})
 			})
 		}, 10)
