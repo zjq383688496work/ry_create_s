@@ -416,15 +416,18 @@ const dataFormat = {
 			var nowBanner  = nowData.banner,
 				orgBanner  = orgData.banner,
 				orgVoice   = orgData.voice,
-				orgFeature = orgData.feature
+				orgFeature = orgData.feature,
+				nowDb  = nowData.db,
+				orgDb  = orgData.db
 			if (orgBanner) {
 				if (!nowBanner) nowData.banner = orgData
 				nowBanner.auth = orgBanner.auth
 			}
 
-			nowData.voice = orgVoice
-
+			nowData.voice   = orgVoice
 			nowData.feature = orgFeature
+
+			if (orgDb && !nowDb) nowData.db = orgDb
 		}
 	}
 }

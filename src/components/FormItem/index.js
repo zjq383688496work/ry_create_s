@@ -8,10 +8,10 @@ class FormItem extends React.Component {
 		let hasError = false, errorMsg = ''
 		if (!visible) return { hasError, errorMsg }
 		for (let i = 0, l = rules.length; i < l; i++) {
-			let [ value, error ] = rules[i]
-			if (value) {
+			let [ vaild, msg ] = rules[i]
+			if (vaild) {
 				hasError = true
-				errorMsg = error
+				errorMsg = msg
 				break
 			}
 		}

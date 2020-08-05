@@ -19,6 +19,7 @@ class DbModel extends React.Component {
 	}
 	handleClose = () => {
 		this.hide()
+		this.refs.db.pageChange('tables', {})
 	}
 	render() {
 		let { visible } = this.state
@@ -30,7 +31,7 @@ class DbModel extends React.Component {
 				width={1000}
 				onClose={this.handleClose}
 			>
-				<DbTable />
+				<DbTable ref="db" db={this.props.db} />
 			</Drawer>
 		)
 	}

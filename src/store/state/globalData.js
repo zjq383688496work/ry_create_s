@@ -27,12 +27,16 @@ const globalData = {
 			default: 1,
 			list: [
 				{ key: 1 },
-				// { key: 2 },
 			]
 		},
 		composeType:'portrait',
 		max: {
 			id: 0,
+		},
+		db: {
+			data:  {},
+			field: [],
+			maxId: 0,
 		}
 	},
 	theme: {

@@ -2,22 +2,17 @@ import React from 'react'
 
 import { Alert, Row, Col, Form, Button, Input, Select, Divider, Table, Modal } from 'antd'
 
-import './index.less'
+// import './index.less'
 
-import FormItem from 'components/FormItem'
+import FormParent from 'components/FormParent'
+import FormItem   from 'components/FormItem'
+
+import { formItemLayout } from '../config'
+
 const { Item } = Form
 const { Option } = Select
 
-const formItemLayout = {
-	labelCol: {
-		sm: { span: 2 },
-	},
-	wrapperCol: {
-		sm: { span: 8 },
-	},
-}
-
-const dataEmpty = () => ({ name: '', key: '', type: 1, desc: '' })
+const dataEmpty = () => ({ name: '', key: '', type: 1 })
 
 class TableModelEdit extends React.Component {
 	constructor(props) {
@@ -53,12 +48,13 @@ class TableModelEdit extends React.Component {
 			})
 		}
 	}
+	// 主字段修改
 	mainChange = (val, key) => {
 		let obj = {}
 		obj[key] = val
 		this.setState(obj)
 	}
-	// 字段修改
+	// 自定义字段修改
 	fieldChange = (val, item, key) => {
 		let { data } = this.state
 		item[key] = val
@@ -74,25 +70,96 @@ class TableModelEdit extends React.Component {
 	// 字段值重复校验
 	fieldCheck = (idx, val, key) => {
 		let { data, isSubmit } = this.state,
-			_data = deepCopy(data).splice(idx, 1)
+			_data = deepCopy(data)
+		_data.splice(idx, 1)
 		if (!isSubmit || !val) return true
+			if (val.replace(/\s/g, '') != val) return false
 		for (let i = 0, l = _data.length; i < l; i++) {
 			let item = _data[i]
 			if (_data[i][key] === val) {
+				// console.log(idx, key, ': 校验失败')
 				return false
 			}
 		}
+		// console.log(idx, key, ': 校验成功')
 		return true
 	}
+	// fieldNullCheck = val => {
+	// 	let { isSubmit } = this.state
+	// 	if (!isSubmit) return true
+	// 	let newVal = val.replace(/\s/g, '')
+	// 	if (!newVal || newVal != val) return false
+	// 	return true
+	// }
+	// 字段批量校验重复
+	fieldsCheck = () => {
+		let { data } = this.state,
+			error  = 0
+		for (let i = 0, l = data.length; i < l; i++) {
+			let { name, key } = data[i]
+			if (!this.fieldCheck(i, name, 'name')) ++error
+			if (!this.fieldCheck(i, key,  'key'))  ++error
+		}
+		return !error? true: false
+	}
+	// 字段批量校验重复
+	// fieldsNullCheck = () => {
+	// 	let { data } = this.state,
+	// 		error  = 0
+	// 	for (let i = 0, l = data.length; i < l; i++) {
+	// 		let { name, key } = data[i]
+	// 		if (!this.fieldNullCheck(name)) ++error
+	// 		if (!this.fieldNullCheck(key))  ++error
+	// 	}
+	// 	return !error? true: false
+	// }
+	// 表单提交校验
 	submit = () => {
-		this.setState({ isSubmit: true })
+		let { title, key, data } = this.state
+		this.setState({ isSubmit: true }, () => {
+			let { error, result } = this.refs.form.submit()
+			if (error) {
+				console.log(result)
+				return false
+			}
+			let newData = this.clearNullData(data)
+			this.props.dataUpdate({ title, key, data: newData })
+		})
+	}
+	// 清除空字段
+	clearNullData(data) {
+		return data.filter(_ => {
+			let { name, key } = _
+			name = name.replace(/\s/g, '')
+			key  = key.replace(/\s/g, '')
+			return name && key
+		})
+	}
+	// 校验规则
+	rules = () => {
+		let { title, key, data } = this.state
+		return {
+			title: [
+				[ !title, '标题不能为空!' ],
+				[ !/^\S+$/, '标题不能存在空格换行符之类字符!' ],
+				[ !this.props.checkTitle(title), '标题不能重复!' ]
+			],
+			key: [
+				[ !key, 'key不能为空!' ],
+				[ !/^[a-zA-Z_]{3,32}$/.test(key), '格式必须是3-32位大小写字母跟下划线' ]
+			],
+			data: [
+				// [ !this.fieldsNullCheck(), '数据不能为空重复!' ],
+				[ !this.fieldsCheck(), '数据存在空格或重复!' ]
+			]
+		}
 	}
 	// 渲染自定义字段
 	renderField = () => {
 		let { data } = this.state,
 			len = data.length
 		let tr = data.map((item, idx) => {
-			let { name, key, type, desc } = item
+			let { name, key, type } = item
 			return (
 				<tr key={idx}>
 					<td className={!this.fieldCheck(idx, name, 'name')? 'has-error': ''}>
@@ -110,13 +177,10 @@ class TableModelEdit extends React.Component {
 						</Select>
 					</td>
 					<td>
-						<Input value={desc} placeholder="请填写描述" onChange={e => this.fieldChange(e.target.value, item, 'desc')} />
-					</td>
-					<td>
 						<div className={'tcf-ctrl'}>
 							<a onClick={() => this.fieldMove(idx, -1)} disabled={!idx}>上移</a>
-							<a onClick={() => this.fieldMove(idx, 1)} disabled={idx === len - 1}>下移</a>
-							<a onClick={() => this.delField(item, idx)}>删除</a>
+							<a style={{ marginLeft: 10 }} onClick={() => this.fieldMove(idx, 1)} disabled={idx === len - 1}>下移</a>
+							<a style={{ marginLeft: 10 }} onClick={() => this.delField(item, idx)}>删除</a>
 						</div>
 					</td>
 				</tr>
@@ -129,8 +193,7 @@ class TableModelEdit extends React.Component {
 						<th>名称</th>
 						<th>key</th>
 						<th>类型</th>
-						<th>描述</th>
-						<th width={140}>操作</th>
+						<th width={200}>操作</th>
 					</tr>
 				</thead>
 				<tbody>{ tr }</tbody>
@@ -139,31 +202,27 @@ class TableModelEdit extends React.Component {
 	}
 	render() {
 		let { title, key, data, isSubmit } = this.state
+		let rules = this.rules()
 		let tableDom = this.renderField()
 		return (
 			<div className="table-custom-field">
-				<Alert message="名称, key 未填写或存在重复则视为无效" type="error" />
+				<Alert message="自定义字段: 名称, key 未填写或存在重复则视为无效" type="error" />
 				<br/>
-				<Form>
-					<FormItem required visible={isSubmit} {...formItemLayout} label="名称" rules={[
-						[ !title, '名称不能为空!' ],
-						[ !this.props.checkTitle(title), '名称不能重复!' ]
-					]}>
-						<Input value={title} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'title')} />
+				<FormParent ref="form" data={{ title, key, data }} rules={rules}>
+					<FormItem required visible={isSubmit} {...formItemLayout} label="标题" rules={rules.title}>
+						<Input value={title} maxLength={32} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'title')} />
 					</FormItem>
-					<FormItem required visible={isSubmit} {...formItemLayout} label="key" rules={[
-						[ !key, 'key不能为空!' ],
-						[ !/^[a-zA-Z_]{3,32}$/.test(key), '格式必须是3-32位大小写字母跟下划线' ]
-					]}>
-						<Input value={key} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'key')} />
+					<FormItem required visible={isSubmit} {...formItemLayout} label="key" rules={rules.key}>
+						<Input value={key} maxLength={32} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'key')} />
 					</FormItem>
 					<Item {...formItemLayout} label="自定义字段" wrapperCol={{sm: { span: 22 }}}>
 						<Button type="primary" size="small" onClick={this.addField} disabled={data.length > 12}>新增字段</Button>
 						{ tableDom }
 					</Item>
-				</Form>
+				</FormParent>
 				<Divider/>
 				<Button type="primary" onClick={this.submit}>确定</Button>
+				<Button style={{ marginLeft: 10 }} onClick={this.props.back}>取消</Button>
 			</div>
 		)
 	}
@@ -173,30 +232,32 @@ class TableModel extends React.Component {
 	constructor(props) {
 		super(props)
 
-		let { data, params } = props,
-			_data = { title: '', key: '', data: [dataEmpty()] },
+		let { field, params } = props,
+			data  = { title: '', key: '', data: [dataEmpty()] },
 			update = false
-		if (data && params && params.index) {
-			_data  = data[params.idx],
+		if (field && params.idx != undefined) {
+			data  = field[params.idx],
 			update = true
+			if (!data.data.length) data.data.push(dataEmpty())
 		}
 		this.state = {
-			data: _data,
+			data,
 			update
 		}
 	}
 	dataUpdate = data => {
-		let { dataCreate, dataUpdate } = this.props,
+		let { fieldCreate, fieldUpdate, pageChange } = this.props,
 			{ update } = this.state
-		if (update) dataUpdate(data)
-		else        dataCreate(data)
+		if (update) fieldUpdate(data)
+		else        fieldCreate(data)
+		pageChange('tables', {})
 	}
 	checkTitle = val => {
 		if (!val) return true
-		let { data, params } = this.props,
+		let { field, params } = this.props,
 			{ update } = this.state,
-			_data = data
-		if (update) _data = data.filter((_, i) => i != params.idx)
+			_data = field
+		if (update) _data = field.filter((_, i) => i != params.idx)
 		for (let i = 0, l = _data.length; i < l; i++) {
 			if (_data[i].title === val) {
 				return false
@@ -206,8 +267,9 @@ class TableModel extends React.Component {
 	}
 	render() {
 		let { data } = this.state
+		let { pageChange } = this.props
 		return (
-			<TableModelEdit data={data} dataUpdate={this.dataUpdate} checkTitle={this.checkTitle} />
+			<TableModelEdit data={data} dataUpdate={this.dataUpdate} back={() => pageChange('tables', {})} checkTitle={this.checkTitle} />
 		)
 	}
 }

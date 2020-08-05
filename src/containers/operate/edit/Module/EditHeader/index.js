@@ -204,7 +204,10 @@ class Header extends React.Component {
 		window.close()
 	}
 	render() {
-		let loading = this.state.loading? (<div className="spin-mask"><Spin /></div>): false
+		let { editConfig } = this.props,
+			{ data } = editConfig.globalData
+		let { loading } = this.state
+		let loadingDom = loading? <div className="spin-mask"><Spin /></div>: false
 		let compListNode = compList.map((_, i) => {
 			let { icon, child, name } = _
 			return (
@@ -236,7 +239,7 @@ class Header extends React.Component {
 		})
 		return (
 			<div className="pe-header e-flex">
-				{ loading }
+				{ loadingDom }
 				<div className="peh-left">
 					<div className="logo"></div>
 				</div>
@@ -290,10 +293,10 @@ class Header extends React.Component {
 				<CommonQuestion ref={com => { this.questionModal = com }} />
 				<ReviewTemplate 
 					ref="reviewModal"
-					editConfig={this.props.editConfig}
+					editConfig={editConfig}
 					actions={this.props.actions}
 				/>
-				<DbModel ref="dbModal" />
+				<DbModel ref="dbModal" db={data.db} />
 			</div>
 		)
 	}
