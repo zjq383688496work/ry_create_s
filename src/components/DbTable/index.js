@@ -23,6 +23,12 @@ class DbTable extends React.Component {
 		obj.params = params? params: null
 		this.setState(obj)
 	}
+	dataUpdate = data => {
+		debugger
+	}
+	dataCreate = data => {
+		debugger
+	}
 	render() {
 		let { data, params, state } = this.state
 		let comp = compState(state, data, params, this.pageChange)

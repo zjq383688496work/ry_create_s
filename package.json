@@ -31,7 +31,7 @@
   "keywords": [],
   "author": "weijie",
   "devDependencies": {
-    "antd": "3.26.18",
+    "antd": "3.7.1",
     "autoprefixer": "^8.3.0",
     "babel-core": "^6.0.0",
     "babel-eslint": "^6.0.0",
