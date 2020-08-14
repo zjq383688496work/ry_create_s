@@ -58,6 +58,7 @@ module.exports = {
 		pictureBind:       '图片绑定',
 		textBind:          '文本绑定',
 		swiperBind:        '轮播绑定',
+		mediaBind:         '媒体绑定',
 		// goodsDetails:      '商品详情',
 		area:              '区域色块',
 		// pictureListBind:   '图片列表绑定',
@@ -89,6 +90,9 @@ module.exports = {
 		voice:             '语音助手',
 		listByVoice:       '语音助手-列表',
 		biubiubiu:         '弹幕',
+		advancedIV:        '高级视图',
+		pageByIV:          '分页',
+		swiperBlockByIV:   '轮播列表',
 	},
 	num: {
 		activity:              0,
@@ -149,6 +153,7 @@ module.exports = {
 		pictureBind:           0,
 		textBind:              0,
 		swiperBind:            0,
+		mediaBind:             0,
 		// goodsDetails:          0,
 		area:                  0,
 		// pictureListBind:       0,
@@ -181,5 +186,8 @@ module.exports = {
 		listByVoice:           0,
 		voice:                 0,
 		biubiubiu:             0,
+		advancedIV:            0,
+		pageByIV:              0,
+		swiperBlockByIV:       0,
 	}
 }

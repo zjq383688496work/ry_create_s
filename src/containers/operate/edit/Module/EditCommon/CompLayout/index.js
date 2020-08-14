@@ -14,6 +14,7 @@ import TextBind    from 'compEdit/EditElement/TextBind'
 import SwiperBind  from 'compEdit/EditElement/SwiperBind'
 import Area        from 'compEdit/EditElement/Area'
 import QrcodeBind  from 'compEdit/EditElement/QrcodeBind'
+import MediaBind   from 'compEdit/EditElement/MediaBind'
 
 const compContent = (name, data, item, language) => {
 	var props  = { data, item, language }
@@ -25,6 +26,7 @@ const compContent = (name, data, item, language) => {
 		swiperBind:  <SwiperBind  {...props} />,
 		area:        <Area        {...props} />,
 		qrcodeBind:  <QrcodeBind  {...props} />,
+		mediaBind:   <MediaBind   {...props} />,
 	}
 	return render[name]
 }
@@ -59,10 +61,14 @@ export default class CompLayout extends React.Component {
 		this.setState({ visible: false })
 	}
 	renderDom = (layout, isActive) => {
-		var { updateComp, props } = this.props,
+		var { updateComp, props, db, parent } = this.props,
 			{ language } = props.editConfig.globalData.data,
 			{ name } = props.data,
-			da = mockMap[name] || {}
+			da = mockMap[name]// || {}
+		if (!da && parent) {
+			da = getTableById(parent.data.content.dbSource, db)[0]
+		}
+		if (!da) da = {}
 		return layout.map((_, i) => {
 			var { name, data } = _,
 				lay = data.layout,

@@ -11,6 +11,7 @@ import TextBind     from 'compEdit/EditElement/TextBind'
 import SwiperBind   from 'compEdit/EditElement/SwiperBind'
 import Area         from 'compEdit/EditElement/Area'
 import QrcodeBind   from 'compEdit/EditElement/QrcodeBind'
+import MediaBind    from 'compEdit/EditElement/MediaBind'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -25,7 +26,8 @@ const compContent = (name, data, item, autoplay, language) => {
 		textBind:    <TextBind    {...props} />,
 		swiperBind:  <SwiperBind  {...props} />,
 		area:        <Area        {...props} />,
-		qrcodeBind:  <QrcodeBind  {...props} />
+		qrcodeBind:  <QrcodeBind  {...props} />,
+		mediaBind:   <MediaBind   {...props} />,
 	}
 	return render[name]
 }

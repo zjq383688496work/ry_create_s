@@ -167,6 +167,22 @@ module.exports = extend(window, {
 			_data.components = components.removeByIdx(list)
 		}
 	},
+
+	// 获取数据源 根据ID
+	getTableById(id, { data }) {
+		if (!id) return
+		return data[id]
+	},
+	// 获取数据源 根据ID
+	getFieldById(id, { field }) {
+		if (!id) return
+		let fields = field.filter(_ => _.id === id)[0]
+		if (!fields) return
+		let { data } = fields,
+			obj = {}
+		data.forEach(_ => obj[_.key] = _.name)
+		return obj
+	}
 })
 
 // 组件ID生成

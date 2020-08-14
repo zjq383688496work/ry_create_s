@@ -97,5 +97,8 @@ module.exports = {
 		buttonByActivity: 1,
 		viewByActivity:   1,
 		listByActivity:   1,
-	}
+	},
+	advancedIV: {
+		swiperBind: 1,
+	},
 }

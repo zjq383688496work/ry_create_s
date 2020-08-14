@@ -192,9 +192,11 @@ export default class ChildElement extends React.Component {
 	}
 	// 绑定
 	renderBind(cfg, con, val, key, idx) {
-		let { name, map } = this.props
+		let { name, map, db, parent } = this.props
 		let dataMap = fieldMap[name]
-		// debugger
+		if (!dataMap && parent) {
+			dataMap = getFieldById(parent.data.content.dbSource, db)
+		}
 		if (!dataMap) return
 		let opts = Object.keys(dataMap).map((_, i) => {
 			return <Option key={i} value={_}>{dataMap[_]}</Option>

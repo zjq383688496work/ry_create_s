@@ -1,11 +1,14 @@
 import React from 'react'
 import { hashHistory } from 'react-router'
 
-import { Row, Col, Form, Button, Divider, Input } from 'antd'
+import { Row, Col, Form, Button, Divider, Input, Modal, DatePicker, Switch } from 'antd'
+import moment from 'moment'
 
-import { formItemView, typeDefMap } from '../config'
+import { formItemView, typeMap } from '../config'
+import IV from 'compEdit/EditCommon/IV'
 
 const { Item } = Form
+const dateFormat = 'YYYY-MM-DD'
  
 class Views extends React.Component {
 	constructor(props) {
@@ -19,31 +22,126 @@ class Views extends React.Component {
 			data: data[id] || []
 		}
 	}
+	// 添加数据
 	addData = () => {
 		let { data, field } = this.state,
-			obj = {}
+			obj = { id: ++field.maxId }
 		field.data.forEach(_ => {
 			let { key, type } = _
-			obj[key] = typeDefMap[type]()
+			obj[key] = typeMap[type].def()
 		})
+
 		data.push(obj)
+		this.setState({ data, field })
+	}
+	// 删除数据
+	delData = (item, idx) => {
+		let { data } = this.state,
+			len = 0
+		Object.values(item).map(val => { if (getAttr(val) != 'Boolean' && val) ++len })
+		if (len) {
+			Modal.confirm({
+				title: '删除数据',
+				content: '确定要删除该数据吗?',
+				okText: '确认',
+				cancelText: '取消',
+				onOk: () => {
+					data.splice(idx, 1)
+					this.setState({ data })
+				}
+			})
+		} else {
+			data.splice(idx, 1)
+			this.setState({ data })
+		}
+	}
+	// 数据修改
+	dataChange = (val, item, key, idx) => {
+		let { data } = this.state,
+			oldVal   = data[idx][key]
+		item[key] = val
 		this.setState({ data })
+	}
+	// 提交
+	submit = () => {
+		let { fieldUpdate, pageChange } = this.props,
+			{ data, field } = this.state
+		// if (update) fieldUpdate(data)
+		// debugger
+		fieldUpdate({ data, field })
+		pageChange('tables', {})
+	}
+	// 文本输入
+	render_text = (item, { name, key }, idx) => {
+		return (
+			<Input
+				onChange={e => this.dataChange(e.target.value, item, key, idx)}
+				maxLength={200}
+				value={item[key]}
+				placeholder={`请输入${name}`}
+				size="small"
+			/>
+		)
+	}
+	// 日期选择
+	render_date = (item, { name, key }, idx) => {
+		return (
+			<DatePicker
+				value={moment(item[key])}
+				size="small"
+				onChange={(d, str) => this.dataChange(str, item, key, idx)}
+			/>
+		)
+	}
+	// 媒体选择
+	render_media = (item, { name, key }, idx) => {
+		let media = item[key]
+		let prev  = null
+		if (media) {
+			let { originalSizePreview, preview, url } = media.media
+			prev = (
+				<div className="add_img" style={{ backgroundImage: `url('${originalSizePreview || preview || url}')` }}>
+				</div>
+			)
+		}
+		return (
+			<IV
+				media={media? [ media ]: []}
+				max={1}
+				single={true}
+				onChange={({ media, type }) => {
+					console.log({ media, type })
+					this.dataChange({ media, type }, item, key, idx)
+				}}
+			>{ prev }</IV>
+		)
+	}
+	// 开关
+	render_boolean = (item, { name, key }, idx) => {
+		return (
+			<Switch
+				size="small"
+				checked={item[key] || false} onChange={v => this.dataChange(v, item, key, idx)}
+			/>
+		)
 	}
 	// 渲染数据列表
 	renderData = () => {
 		let { field: { data: fields }, data } = this.state,
 			len = data.length
 		let tr = data.map((item, i) => {
-			let { name, key, type } = item
+			let { id, name, key, type } = item
 			return (
 				<tr key={i}>
+					<td>{id}</td>
 					{
 						fields.map((field, l) => {
 							let { name, key, type } = field
+							let render = this[`render_${typeMap[type].key}`]
+							let comp   = item[key]
+							if (render) comp = render(item, field, i)
 							return (
-								<td>
-									<Input key={`${i}_${l}`} value={item[key]} placeholder={`请输入${name}`} />
-								</td>
+								<td key={`${i}_${l}`}>{ comp }</td>
 							)
 						})
 					}
@@ -51,7 +149,7 @@ class Views extends React.Component {
 						<div className={'tcf-ctrl'}>
 							<a disabled={!i}>上移</a>
 							<a style={{ marginLeft: 10 }} disabled={i === len - 1}>下移</a>
-							<a style={{ marginLeft: 10 }}>删除</a>
+							<a style={{ marginLeft: 10 }} onClick={() => this.delData(item, i)}>删除</a>
 						</div>
 					</td>
 				</tr>
@@ -61,6 +159,7 @@ class Views extends React.Component {
 			<table className="tcf-table" cellPadding="0" cellSpacing="0">
 				<thead>
 					<tr>
+						<th>ID</th>
 						{
 							fields.map((field, i) => <th key={i}>{field.name}</th>)
 						}
@@ -104,7 +203,7 @@ class Views extends React.Component {
 				</Form>
 				{ dataDom }
 				<Divider />
-				<Button type="primary">确定</Button>
+				<Button type="primary" onClick={this.submit}>确定</Button>
 				<Button style={{ marginLeft: 10 }} onClick={() => pageChange('tables', {})}>返回</Button>
 			</div>
 		)

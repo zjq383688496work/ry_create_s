@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
 import Rnd from 'react-rnd'
 
+import AdvancedIV         from 'compEdit/EditElement/AdvancedIV'
 import Activity           from 'compEdit/EditElement/Activity'
 import Picture            from 'compEdit/EditElement/Picture'
 import Web                from 'compEdit/EditElement/Web'
@@ -58,9 +59,10 @@ const ctMap  = variable.composeTypeMap
 var animeMap = variable.animeCompMap,
 	aStyle   = animeMap.style
 
-const compContent = (name, data, actions, type, idx, drag, csn, keyCtrl, contentEditable, shift, language) => {
-	var props  = { data, actions, type, idx,drag, csn, keyCtrl, contentEditable, shift, language }
+const compContent = (name, data, actions, type, idx, drag, csn, keyCtrl, contentEditable, shift, language, db) => {
+	var props  = { data, actions, type, idx,drag, csn, keyCtrl, contentEditable, shift, language, db }
 	var render = {
+		advancedIV:         <AdvancedIV         {...props} />,
 		activity:           <Activity           {...props} />,
 		picture:            <Picture            {...props} />,
 		web:                <Web                {...props} />,
@@ -308,7 +310,7 @@ class EditElement extends React.Component {
 	render() {
 		let { data, actions, editConfig, location } = this.props
 		let { globalData, curData } = editConfig
-		let { language } = globalData.data
+		let { db, language } = globalData.data
 		let { pageGroupIdx, pageIdx, compIdx } = curData
 		let { multiComp } = globalData
 		let { index } = multiComp
@@ -338,7 +340,7 @@ class EditElement extends React.Component {
 				lockAspectRatio = layout.lockAspectRatio,
 				editStatus = _.feature&&_.feature.editStatus;
 			i === compIdx ? disableDragging = editStatus : null
-			let compCon = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, state.drag, csn, state.keyCtrl, disableDragging, state.shift, language)
+			let compCon = compContent(compName, _, actions, `Style${styleIdx + 1}`, i, state.drag, csn, state.keyCtrl, disableDragging, state.shift, language, db)
 			if (!compCon) return false 
 			if (ani.className) {  
 				let item = aStyle[ani.className]

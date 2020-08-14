@@ -37,4 +37,5 @@ module.exports = {
 	voice:              1,
 	buttonLanguage:     1,
 	biubiubiu:          1,
+	advancedIV:         1,
 }  

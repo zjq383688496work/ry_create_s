@@ -10,6 +10,8 @@ import TableModel from './TableModel'
 import Views      from './Views'
 // import TableModel from './TableModel'
 
+import { typeMap } from './config'
+
 import './index.less'
 
 class DbTable extends React.Component {
@@ -39,13 +41,48 @@ class DbTable extends React.Component {
 		obj.params = params? params: {}
 		this.setState(obj)
 	}
-	// 数据更新
-	fieldUpdate = item => {
-		let { field, params: { idx } } = this.state
-		field[idx] = item
-		this.setState({ field }, this.globalUpdate)
+	// 校验更新数据
+	checkUpdateData(list, { data }) {
+		if (!list.length) return
+		let first = deepCopy(list[0]),	// 第一个数据
+			field = {},		// 新增字段&索引
+			del   = {}		// 多余字段
+		
+		data.forEach(_ => field[_.key] = _.type)	// 建立字段索引
+		delete first.id		// 清除多余字段
+
+		// 排除已有字段
+		Object.keys(first).forEach(key => {
+			if (field[key]) {
+				delete field[key]
+			} else {
+				del[key] = 1
+			}
+		})
+
+		list.forEach(item => {
+			// 去除多余字段
+			Object.keys(del).forEach(key => {
+				delete item[key]
+			})
+			// 新增字段赋值
+			Object.keys(field).forEach(key => {
+				let type  = field[key],
+					obj   = typeMap[type]
+				item[key] = obj.def()
+			})
+		})
 	}
-	// 数据创建
+	// 表更新
+	fieldUpdate = ({ data: _data, field: _field }) => {
+		let { field, data, params: { idx } } = this.state,
+			{ id } = field[idx]
+		if (_field) Object.assign(field[idx], _field)
+		if (_data)  data[id] = _data
+		if (data[id]) this.checkUpdateData(data[id], _field)
+		this.setState({ data, field }, this.globalUpdate)
+	}
+	// 表创建
 	fieldCreate = item => {
 		let { field, maxId } = this.state
 		Object.assign(item, {

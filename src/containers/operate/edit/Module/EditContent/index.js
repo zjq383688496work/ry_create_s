@@ -272,7 +272,6 @@ class EditContent extends React.Component {
 				data={data}
 				action={'updateComp'}
 				media={val}
-				con={con}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -381,21 +380,19 @@ class EditContent extends React.Component {
 		let { parentComp } = editConfig.curData
 		if (!parentComp) return
 		let map = fieldMap[parentComp.name]
-		if (!map) return
+		if (!map) return null
 		let opts = Object.keys(map).map((_, i) => {
 			return <Option key={i} value={_}>{map[_]}</Option>
 		})
 		return (
-			<div>
-				<Select
-					value={val}
-					style={{ width: '100%' }}
-					onChange={v => this.onChange(v, con, key, cfg, index)}
-				>
-					<Option value={''}>无</Option>
-					{ opts }
-				</Select>
-			</div>
+			<Select
+				value={val}
+				style={{ width: '100%' }}
+				onChange={v => this.onChange(v, con, key, cfg, index)}
+			>
+				<Option value={''}>无</Option>
+				{ opts }
+			</Select>
 		)
 	}
 	// 复合
@@ -418,6 +415,25 @@ class EditContent extends React.Component {
 
 		return (
 			<div>{ childNode }</div>
+		)
+	}
+	// DB
+	renderDb = (cfg, con, val, key, index) => {
+		let { db } = this.props.editConfig.globalData.data
+		if (!db) return null
+		let { field = [] } = db
+		let opts = field.map((_, i) => {
+			return <Option key={i} value={_.id}>{_.title}</Option>
+		})
+		return (
+			<Select
+				value={val}
+				style={{ width: '100%' }}
+				onChange={v => this.onChange(v, con, key, cfg, index)}
+			>
+				<Option value={''}>无</Option>
+				{ opts }
+			</Select>
 		)
 	}
 
@@ -486,7 +502,7 @@ class EditContent extends React.Component {
 	render() {
 		let { data, editConfig, from } = this.props
 		let { globalData } = editConfig
-		let { language } = globalData.data
+		let { language, db } = globalData.data
 		let compName = data.name
 		if (!compName) return false
 		let { curData } = editConfig
@@ -529,10 +545,10 @@ class EditContent extends React.Component {
 					?
 					<Collapse defaultActiveKey={['0', '1']}>
 						<Panel header={`编辑布局`} key={0}>
-							<CompLayout props={this.props} layout={compLay} parentLayout={mockData.layout} styleName={plMap[compName]} updateComp={this.updateComp} />
+							<CompLayout props={this.props} db={db} parent={parentComp} layout={compLay} parentLayout={mockData.layout} styleName={plMap[compName]} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
-							<ChildElement name={compName} layout={compLay} updateComp={this.updateComp} language={language} globalData={globalData} />
+							<ChildElement name={compName} db={db} parent={parentComp} layout={compLay} updateComp={this.updateComp} language={language} globalData={globalData} />
 						</Panel>
 					</Collapse>
 					: null

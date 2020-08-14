@@ -66,6 +66,8 @@ import ListByVoice       from 'compEdit/EditElement/Voice/List'
 import ButtonByActivity  from 'compEdit/EditElement/Activity/Button'
 import ViewByActivity    from 'compEdit/EditElement/Activity/View'
 import ListByActivity    from 'compEdit/EditElement/Activity/List'
+import PageByIV          from 'compEdit/EditElement/AdvancedIV/Page'
+import SwiperBlockByIV   from 'compEdit/EditElement/AdvancedIV/SwiperBlock'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -131,6 +133,8 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		buttonByActivity:  <ButtonByActivity  {...props} />,
 		viewByActivity:    <ViewByActivity    {...props} />,
 		listByActivity:    <ListByActivity    {...props} />,
+		pageByIV:          <PageByIV          {...props} />,
+		swiperBlockByIV:   <SwiperBlockByIV   {...props} />,
 	}
 	return render[name]
 }

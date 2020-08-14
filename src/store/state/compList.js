@@ -79,6 +79,12 @@ module.exports = [
 		name: '视图轮播',
 		key:  'swiperIV'
 	},
+	// 高级视图轮播
+	{
+		icon: 'media',
+		name: '高级视图',
+		key:  'advancedIV',
+	},
 	// 精彩活动
 	// {
 	// 	icon: 'activity',

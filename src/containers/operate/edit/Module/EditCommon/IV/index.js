@@ -11,7 +11,6 @@ import DatePickerNew   from 'compEdit/EditContent/DatePickerNew'
 import PictureAndVideo from '../PictureAndVideo'
 import './index.less'
 
-let max = 20
 let typeMap = {
 	image: '图片',
 	video: '视频'
@@ -35,24 +34,29 @@ let mediaMap = {
 class IV extends React.Component {
 	constructor(props) {
 		super(props)
-		var { width = 0, height = 0 } = props.data.data.layout
+		let { data, max = 20, single = false } = props,
+			layout = data? props.data.data.layout: {}
+		var { width = 0, height = 0 } = layout
 		this.state = {
 			width,
 			height,
 			init: false,
-			single: true,
-			idx: -1
+			single,
+			idx: -1,
+			max
 		}
 	}
 	componentWillReceiveProps(props) {
-		var { width = 0, height = 0 } = props.data.data.layout
+		let { data } = props,
+			layout = data? props.data.data.layout: {},
+			{ width = 0, height = 0 } = layout
 		this.setState({ width, height })
 	}
 	enter = list => {
 		this.refs.IVModal.hide()
 		if (!list.length) return
 		let { single, idx } = this.state
-		let { data, media, con, action, actions, editConfig } = this.props
+		let { data, media, action, actions, editConfig, onChange } = this.props
 		// 单个文件
 		if (single) {
 			let { id, type, url, preview, originalSizePreview } = list[0]
@@ -61,15 +65,19 @@ class IV extends React.Component {
 			let newList = list.map(({ id, type, url, preview, originalSizePreview }) => createMedia(type, url, preview, originalSizePreview, id))
 			media.push(...newList)
 		}
-		let { parentComp } = editConfig.curData
-		actions[action](null, parentComp? parentComp: data)
+		if (action) {
+			let { parentComp } = editConfig.curData
+			actions[action](null, parentComp? parentComp: data)
+		}
+		if (onChange) onChange(media[idx])
 	}
-	initFn = () =>{
+	initFn = () => {
 		this.setState({ init: false })
 	}
 	// 添加媒体-操作
 	addMedia = () => {
-		this.setState({ init: true, single: false, idx: -1 }, () => this.refs.IVModal.show())
+		let { single } = this.props
+		this.setState({ init: true, single, idx: -1 }, () => this.refs.IVModal.show())
 	}
 	// 编辑媒体-操作
 	editMedia = idx => {
@@ -77,44 +85,63 @@ class IV extends React.Component {
 	}
 	// 清空媒体-操作
 	clearMedia = idx => {
-		let { data, media, action, actions, editConfig } = this.props
+		let { data, media, action, actions, editConfig, onChange } = this.props
 		removeMedia(media[idx])
-		let { parentComp } = editConfig.curData
-		actions[action](null, parentComp? parentComp: data)
+		if (action) {
+			let { parentComp } = editConfig.curData
+			actions[action](null, parentComp? parentComp: data)
+		}
+		if (onChange) onChange(null)
 	}
 	// 删除媒体-操作
 	removeMedia = idx => {
-		let { data, media, action, actions, editConfig } = this.props
+		let { data, media, action, actions, editConfig, onChange } = this.props
 		media.splice(idx, 1)
-		let { parentComp } = editConfig.curData
-		actions[action](null, parentComp? parentComp: data)
+		if (action) {
+			let { parentComp } = editConfig.curData
+			actions[action](null, parentComp? parentComp: data)
+		}
+		if (onChange) onChange(null)
 	}
 	changeMedia = (val, key, idx) => {
-		let { data, media, action, actions, editConfig } = this.props,
+		let { data, media, action, actions, editConfig, onChange } = this.props,
 			item = media[idx]
 		item[key] = val
-		let { parentComp } = editConfig.curData
-		actions[action](null, parentComp? parentComp: data)
+		if (action) {
+			let { parentComp } = editConfig.curData
+			actions[action](null, parentComp? parentComp: data)
+		}
+		if (onChange) onChange(item)
 	}
 	// 添加媒体-渲染
 	renderAdd = () => {
-		let { media } = this.props,
-			{ width, height } = this.state
+		let { media, single } = this.props,
+			{ width, height, max } = this.state
 		return (
 			<div className="pgs-row">
 				<div className="pgsr-name" style={{ width: 52 }}>
-					<a disabled={media.length >= max} onClick={this.addMedia}>添加</a>
+					<a disabled={!single && media.length >= max} onClick={this.addMedia}>
+						{
+							single && media[0]? '编辑': '添加'
+						}
+					</a>
 				</div>
-				<div className="pgsr-ctrl">
-					{ media.length } / { max }
-					<div className="img_scale">{ width * 2 } x { height * 2 }</div>
-				</div>
+				{
+					max > 1
+					?
+					<div className="pgsr-ctrl">
+						{ media.length } / { max }
+						<div className="img_scale">{ width * 2 } x { height * 2 }</div>
+					</div>
+					: null
+				}
 			</div>
 		)
 	}
 	// 媒体节点-渲染
 	renderMedia = () => {
-		let { actions, data, media } = this.props
+		let { actions, data, media, single } = this.props
+		if (single) return null
 		return media.map(({ date, delay, media, router, type }, i) => {
 			let { url, preview, originalSizePreview } = media
 			return (
@@ -168,12 +195,13 @@ class IV extends React.Component {
 		})
 	}
 	render() {
-		let { media, editConfig, con, index, data } = this.props
+		let { media, editConfig, index, data, children } = this.props
 		let addNode   = this.renderAdd()
 		let mediaNode = this.renderMedia()
 		let { width, height, init, single } = this.state
 		return (
 			<div>
+				{ children }
 				{ addNode }
 				{ mediaNode }
 				{

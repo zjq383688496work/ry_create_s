@@ -206,7 +206,7 @@ class TableModelEdit extends React.Component {
 		let tableDom = this.renderField()
 		return (
 			<div className="table-custom-field">
-				<Alert message="自定义字段: 名称, key 未填写或存在重复则视为无效" type="error" />
+				<Alert message="自定义字段: 名称, key 未填写或存在重复则视为无效. 修改key值需谨慎, 修改后会导致数据被删除." type="error" />
 				<br/>
 				<FormParent ref="form" data={{ title, key, data }} rules={rules}>
 					<FormItem required visible={isSubmit} {...formItemLayout} label="标题" rules={rules.title}>
@@ -217,6 +217,12 @@ class TableModelEdit extends React.Component {
 					</FormItem>
 					<Item {...formItemLayout} label="自定义字段" wrapperCol={{sm: { span: 22 }}}>
 						<Button type="primary" size="small" onClick={this.addField} disabled={data.length > 12}>新增字段</Button>
+						<div style={{ color: 'red', lineHeight: 1.5, fontSize: 12, padding: 10 }}>
+							特殊作用key: startData, 类型: 日期, 作用: 校验数据的开始日期, 未达到的数据不展示, 默认为空.<br/>
+							特殊作用key: endData, 类型: 日期, 作用: 校验数据的结束日期, 未达到的数据不展示, 默认为空.<br/>
+							特殊作用key: active, 类型: 布尔值, 作用: 不打开则不展示, 默认为关.<br/>
+							特殊作用key: media, 类型: 媒体, 作用: 视频全屏类型判断等操作.
+						</div>
 						{ tableDom }
 					</Item>
 				</FormParent>
@@ -248,7 +254,7 @@ class TableModel extends React.Component {
 	dataUpdate = data => {
 		let { fieldCreate, fieldUpdate, pageChange } = this.props,
 			{ update } = this.state
-		if (update) fieldUpdate(data)
+		if (update) fieldUpdate({ field: data })
 		else        fieldCreate(data)
 		pageChange('tables', {})
 	}

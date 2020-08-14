@@ -41,6 +41,7 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx'],
         alias: {
+            modules:    defaultSettings.nodePath,
             store:      `${defaultSettings.srcPath}/store`,
             state:      `${defaultSettings.srcPath}/store/state`,
             var:        `${defaultSettings.srcPath}/store/state/var`,

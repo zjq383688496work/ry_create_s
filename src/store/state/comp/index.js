@@ -11,6 +11,10 @@ module.exports = {
 	swiperImgAndVideo:     authInit(require('./swiperImgAndVideo')),
 	// 视图轮播
 	swiperIV:              authInit(require('./swiperIV')),
+	// 高级视图
+	advancedIV:            authInit(require('./advancedIV')),
+	pageByIV:              authInit(require('./advancedIV/content/page')),
+	swiperBlockByIV:       authInit(require('./advancedIV/content/swiperBlock')),
 	bannerHorizontal:      authInit(require('./bannerHorizontal')),
 	bannerVertical:        authInit(require('./bannerVertical')),
 	bannerHorizontalIV:    authInit(require('./bannerHorizontalIV')),
@@ -99,6 +103,8 @@ module.exports = {
 	textBind:              authInit(require('./textBind')),
 	// 轮播-绑定
 	swiperBind:            authInit(require('./swiperBind')),
+	// 媒体-绑定
+	mediaBind:             authInit(require('./mediaBind')),
 	// 音频
 	audio:                 authInit(require('./audio')),
 	// 状态切换按钮

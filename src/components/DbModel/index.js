@@ -19,7 +19,7 @@ class DbModel extends React.Component {
 	}
 	handleClose = () => {
 		this.hide()
-		this.refs.db.pageChange('tables', {})
+		// this.refs.db.pageChange('tables', {})
 	}
 	render() {
 		let { visible } = this.state

@@ -70,8 +70,9 @@ module.exports = {
 	bgColor:            { name: '背景色',   type: 'Color' },
 	dataSource:         { name: '数据来源',    type: 'RadioMix', option: [
 		{ name: '基础数据', value: 'base' },
-		{ name: 'API', value: 'api' }
+		{ name: 'API',    value: 'api' },
 	] },
+	dbSource:      { name: '数据库选择', type: 'Db' },
 	delayOnly:     { name: '轮播时长',  type: 'Slider', min: 1, max: 30, step: 1 },
 	date:          { name: '播放时段',  type: 'Date', min: 0, max: 90 },
 	mapZoom:       { name: '缩放',     type: 'Radio', option: [
