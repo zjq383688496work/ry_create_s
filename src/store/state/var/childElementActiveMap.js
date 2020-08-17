@@ -14,4 +14,6 @@ module.exports = {
 	listByActivity:   1,
 	listByVoice:      1,
 	tabByTabs:        1,
+	pageByIV:         1,
+	turnByIV:         1,
 }

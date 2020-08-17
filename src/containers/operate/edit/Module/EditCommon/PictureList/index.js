@@ -46,9 +46,8 @@ export default class PictureList extends React.Component {
 		}
 		Ajax.postJSON(`/easy-smart-basic/${ty}/query`, getData).then(({ data }) => {
 			this.setState({ imgTypes: data })
-			debugger
-			this.setState({ groupId: res.data[0].id })
-			this.getImgList('groupId', res.data[0].id)
+			this.setState({ groupId: data[0].id })
+			this.getImgList('groupId', data[0].id)
 		})
 		// this.getImgList()
 	}

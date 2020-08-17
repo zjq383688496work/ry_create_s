@@ -84,6 +84,33 @@ module.exports = [
 		icon: 'media',
 		name: '高级视图',
 		key:  'advancedIV',
+		child: [
+			{
+				icon: 'media',
+				name: '媒体',
+				key:  'swiperBlockByIV'
+			},
+			{
+				icon: 'button',
+				name: '全屏按钮',
+				key:  'buttonFullScreenByIV'
+			},
+			{
+				icon: 'page',
+				name: '分页',
+				key:  'pageByIV'
+			},
+			{
+				icon: 'sorter',
+				name: '翻页',
+				key:  'turnByIV'
+			},
+			{
+				icon: 'text',
+				name: '字段绑定',
+				key:  'textBind'
+			},
+		]
 	},
 	// 精彩活动
 	// {

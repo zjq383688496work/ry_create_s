@@ -163,26 +163,46 @@ class TableModelEdit extends React.Component {
 			return (
 				<tr key={idx}>
 					<td className={!this.fieldCheck(idx, name, 'name')? 'has-error': ''}>
-						<Input value={name} placeholder="请输入名称" onChange={e => this.fieldChange(e.target.value, item, 'name')} />
+						{
+							envType === 'operate'
+							?
+							<Input value={name} placeholder="请输入名称" onChange={e => this.fieldChange(e.target.value, item, 'name')} />
+							: name
+						}
 					</td>
 					<td className={!this.fieldCheck(idx, key, 'key')? 'has-error': ''}>
-						<Input value={key} placeholder="请输入key" onChange={e => this.fieldChange(e.target.value, item, 'key')} />
+						{
+							envType === 'operate'
+							?
+							<Input value={key} placeholder="请输入key" onChange={e => this.fieldChange(e.target.value, item, 'key')} />
+							: key
+						}
 					</td>
 					<td>
-						<Select value={type} onChange={val => this.fieldChange(val, item, 'type')}>
-							<Option value={1}>文本</Option>
-							<Option value={2}>媒体</Option>
-							<Option value={3}>日期</Option>
-							<Option value={4}>布尔值</Option>
-						</Select>
+						{
+							envType === 'operate'
+							?
+							<Select value={type} onChange={val => this.fieldChange(val, item, 'type')}>
+								<Option value={1}>文本</Option>
+								<Option value={2}>媒体</Option>
+								<Option value={3}>日期</Option>
+								<Option value={4}>布尔值</Option>
+							</Select>
+							: ({ 1: '文本', 2: '媒体', 3: '日期', 4: '布尔值', })[type]
+						}
 					</td>
-					<td>
-						<div className={'tcf-ctrl'}>
-							<a onClick={() => this.fieldMove(idx, -1)} disabled={!idx}>上移</a>
-							<a style={{ marginLeft: 10 }} onClick={() => this.fieldMove(idx, 1)} disabled={idx === len - 1}>下移</a>
-							<a style={{ marginLeft: 10 }} onClick={() => this.delField(item, idx)}>删除</a>
-						</div>
-					</td>
+					{
+						envType === 'operate'
+						?
+						<td>
+							<div className={'tcf-ctrl'}>
+								<a onClick={() => this.fieldMove(idx, -1)} disabled={!idx}>上移</a>
+								<a style={{ marginLeft: 10 }} onClick={() => this.fieldMove(idx, 1)} disabled={idx === len - 1}>下移</a>
+								<a style={{ marginLeft: 10 }} onClick={() => this.delField(item, idx)}>删除</a>
+							</div>
+						</td>
+						: null
+					}
 				</tr>
 			)
 		})
@@ -193,7 +213,12 @@ class TableModelEdit extends React.Component {
 						<th>名称</th>
 						<th>key</th>
 						<th>类型</th>
-						<th width={200}>操作</th>
+						{
+							envType === 'operate'
+							?
+							<th width={200}>操作</th>
+							: null
+						}
 					</tr>
 				</thead>
 				<tbody>{ tr }</tbody>
@@ -210,10 +235,20 @@ class TableModelEdit extends React.Component {
 				<br/>
 				<FormParent ref="form" data={{ title, key, data }} rules={rules}>
 					<FormItem required visible={isSubmit} {...formItemLayout} label="标题" rules={rules.title}>
-						<Input value={title} maxLength={32} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'title')} />
+						{
+							envType === 'operate'
+							?
+							<Input value={title} maxLength={32} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'title')} />
+							: title
+						}
 					</FormItem>
 					<FormItem required visible={isSubmit} {...formItemLayout} label="key" rules={rules.key}>
-						<Input value={key} maxLength={32} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'key')} />
+						{
+							envType === 'operate'
+							?
+							<Input value={key} maxLength={32} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'key')} />
+							: key
+						}
 					</FormItem>
 					<Item {...formItemLayout} label="自定义字段" wrapperCol={{sm: { span: 22 }}}>
 						<Button type="primary" size="small" onClick={this.addField} disabled={data.length > 12}>新增字段</Button>
@@ -227,7 +262,7 @@ class TableModelEdit extends React.Component {
 					</Item>
 				</FormParent>
 				<Divider/>
-				<Button type="primary" onClick={this.submit}>确定</Button>
+				{ envType === 'operate' && <Button type="primary" onClick={this.submit}>确定</Button> }
 				<Button style={{ marginLeft: 10 }} onClick={this.props.back}>取消</Button>
 			</div>
 		)
@@ -275,7 +310,7 @@ class TableModel extends React.Component {
 		let { data } = this.state
 		let { pageChange } = this.props
 		return (
-			<TableModelEdit data={data} dataUpdate={this.dataUpdate} back={() => pageChange('tables', {})} checkTitle={this.checkTitle} />
+			<TableModelEdit data={deepCopy(data)} dataUpdate={this.dataUpdate} back={() => pageChange('tables', {})} checkTitle={this.checkTitle} />
 		)
 	}
 }

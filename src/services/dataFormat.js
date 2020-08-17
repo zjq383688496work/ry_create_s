@@ -388,7 +388,7 @@ const dataFormat = {
 			// console.log(deepCopy(nowElements), deepCopy(orgElements))
 			var filter = this.elementsFilter(nowElements, orgElements)
 			var { nowElementsMap, orgElementsMap, filterMap } = filter
-			console.log('filter: ', filter)
+			// console.log('filter: ', filter)
 			Object.keys(nowElementsMap).forEach(_id => {
 				if (filterMap[_id]) {
 					// console.log(nowElementsMap[_id].name, orgElementsMap[_id].name)
@@ -417,18 +417,111 @@ const dataFormat = {
 				orgBanner  = orgData.banner,
 				orgVoice   = orgData.voice,
 				orgFeature = orgData.feature,
-				nowDb  = nowData.db,
-				orgDb  = orgData.db
+				nowDb      = nowData.data.db,
+				orgDb      = orgData.data.db
 			if (orgBanner) {
 				if (!nowBanner) nowData.banner = orgData
 				nowBanner.auth = orgBanner.auth
 			}
-
 			nowData.voice   = orgVoice
 			nowData.feature = orgFeature
-
 			if (orgDb && !nowDb) nowData.db = orgDb
+			else {
+				this.dbComp(nowDb, orgDb)
+			}
+		},
+		dbComp: function(now, org) {
+			let { data, field } = now
+			let { data: orgData, field: orgField } = org,
+				mergeData     = { ...deepCopy(orgData), ...deepCopy(data) },
+				removeID      = {},		// 删除id
+				compID        = [],		// 比较id
+				orgFieldIndex = {},		// 原始字段数据索引
+				nowFieldIndex = {}		// 当前字段数据索引
+			
+			// 查找删除的db
+			Object.keys(mergeData).forEach(id => {
+				if (!orgData[id]) removeID[id] = true
+			})
+			// 清除失效DB
+			field = now.field = field.filter(({ id, title, key }) => {
+				if (removeID[id]) {
+					console.log('清除DB: ', id, title, key, )
+					delete data[id]
+					return false
+				}
+				return true
+			})
+
+			// 查找新增的db
+			orgField.forEach(_field => {
+				let { id } = _field
+				if (data[id]) {
+					orgFieldIndex[id] = _field
+					return compID.push(id)
+				}
+				data[id] = deepCopy(orgData[id])
+				field.push(deepCopy(_field))
+			})
+
+			now.maxId = org.maxId
+
+			if (!compID.length) return
+
+			// 建立当前字段索引
+			field.forEach(_field => {
+				let { id } = _field
+				nowFieldIndex[id] = _field
+			})
+
+			// DB内容比对
+			compID.forEach(id => {
+				debugger
+				this.dbCompCon(nowFieldIndex[id], data[id], orgFieldIndex[id], orgData[id])
+			})
+		},
+		dbCompCon: function(nowField, nowData, orgField, orgData) {
+			let nowFieldList = nowField.data,
+				orgFieldList = orgField.data,
+				nowKeyIndex  = {},
+				orgKeyIndex  = {},
+				removeKey    = [],
+				addKey       = [],
+				orgDataIndex = {},	// 来源数据索引
+				mergeIndex
+			nowField.maxId = orgField.maxId
+
+			nowFieldList.forEach(_ => nowKeyIndex[_.key] = _)
+			orgFieldList.forEach(_ => orgKeyIndex[_.key] = _)
+			orgData.forEach(_ => orgDataIndex[_.id])
+
+			mergeIndex = { ...nowKeyIndex, ...orgKeyIndex }
+
+			// 查找删除的key
+			Object.keys(mergeIndex).forEach(key => {
+				if (nowKeyIndex[key] && orgKeyIndex[key]) return
+				// 需要删除
+				if (nowKeyIndex[key]) removeKey.push(key)
+				// 需要新增
+				if (orgKeyIndex[key]) addKey.push(key)
+			})
+
+			// 删除 & 新增数据
+			nowData.map(_ => {
+				let { id } = _
+
+				// 删除key
+				removeKey.forEach(key => delete _[key])
+				// 添加key
+				addKey.forEach(key => {
+					let org = orgDataIndex[id]
+					debugger
+					// _[key] = org? org[key]: 
+				})
+			})
+			debugger
 		}
+
 	}
 }
 module.exports = dataFormat

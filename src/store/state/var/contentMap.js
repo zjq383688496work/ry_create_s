@@ -72,7 +72,7 @@ module.exports = {
 		{ name: '基础数据', value: 'base' },
 		{ name: 'API',    value: 'api' },
 	] },
-	dbSource:      { name: '数据库选择', type: 'Db' },
+	dbSource:      { name: '数据库',   type: 'Db' },
 	delayOnly:     { name: '轮播时长',  type: 'Slider', min: 1, max: 30, step: 1 },
 	date:          { name: '播放时段',  type: 'Date', min: 0, max: 90 },
 	mapZoom:       { name: '缩放',     type: 'Radio', option: [
@@ -120,4 +120,11 @@ module.exports = {
 	offsetT:              { name: '偏移时间',  type: 'Number', min: 0, max: 1e3, step: 50 },
 	// 弹幕
 	requestCount:         { name: '请求数量', type: 'Number', min: 10, max: 200 },
+
+	// 高级视图
+	fixedX:               { name: '屏幕坐标X', type: 'Number', min: 0, max: 1920 },
+	fixedY:               { name: '屏幕坐标Y', type: 'Number', min: 0, max: 1920 },
+	relOptions:           { name: '关系配置',  type: 'Options' },
+	relComp:              { name: '组件',     type: 'Rel' },
+	relChildComp:         { name: '子组件',   type: 'Rel' },
 }

@@ -34,9 +34,10 @@ class EventTrigger extends React.Component {
 	render() {
 		let { data, content, editConfig } = this.props,
 			{ parentComp }  = editConfig.curData,
-			{ name } = parentComp,
+			name     = data.name,
+			pName    = parentComp.name,
 			{ url }  = content,
-			list     = eventList[name]
+			list     = eventList[pName] || eventList[name] || []
 		let selectNode = list.map(({ name, key }) => <Option key={key} value={key}>{ name }</Option>)
 		return (
 			<div>

@@ -99,6 +99,10 @@ module.exports = {
 		listByActivity:   1,
 	},
 	advancedIV: {
-		swiperBind: 1,
+		swiperBind:           1,
+		buttonFullScreenByIV: 1,
+		pageByIV:             1,
+		turnByIV:             1,
+		textBind:             1,
 	},
 }

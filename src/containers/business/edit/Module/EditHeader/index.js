@@ -3,7 +3,8 @@ import './index.less'
 import { hashHistory } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect }  from 'react-redux'
-import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate' 
+import ReviewTemplate from 'compEdit/EditCommon/ReviewTemplate'
+import DbModel from 'components/DbModel'
 const comp     = require('state/comp')
 const compC    = require('state/compChild')
 const compP    = require('state/compParent')
@@ -79,6 +80,11 @@ class Header extends React.Component {
 			components.forEach(component => this.formatEle(component))
 		})
 		return v
+	}
+	// 数据库
+	db = () => {
+		let { dbModal } = this.refs
+		dbModal && dbModal.show()
 	}
 	// 预览模板
 	review() {
@@ -247,7 +253,8 @@ class Header extends React.Component {
 		e.stopPropagation()
 	}
 	render() {
-		var { location } = this.props,
+		let { editConfig, location } = this.props,
+			{ data }  = editConfig.globalData,
 			{ query } = location,
 			loading = this.state.loading? (<div className="spin-mask"><Spin /></div>): false
 		return (
@@ -284,6 +291,12 @@ class Header extends React.Component {
 							</div>
 							: null
 						}
+						<div className="cl-item" onClick={this.db}>
+							<div className="cl-item-icon">
+								<img src={require(`images/icon/config.png`)}/>
+							</div>
+							数据库
+						</div>
 						<div className="cl-item" onClick={this.review.bind(this)}>
 							<div className="cl-item-icon">
 								<img src={require(`images/icon/preview.png`)}/>
@@ -313,7 +326,9 @@ class Header extends React.Component {
 				<ReviewTemplate 
 					ref="reviewModal"
 					editConfig={this.props.editConfig}
-					actions={this.props.actions} />
+					actions={this.props.actions}
+				/>
+				<DbModel ref="dbModal" db={data.db} />
 			</div>
 		)
 	}

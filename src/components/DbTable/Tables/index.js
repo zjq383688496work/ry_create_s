@@ -25,9 +25,9 @@ class Tables extends React.Component {
 			title: '操作',
 			render: (text, record, idx) => (
 				<div>
-					<a onClick={e => this.props.pageChange('addTable', { idx })}>编辑</a>
+					{ envType === 'operate' && <a onClick={e => this.props.pageChange('addTable', { idx })}>编辑</a> }
 					<a style={{ marginLeft: 10 }} onClick={e => this.props.pageChange('views', { idx })}>查看</a>
-					<a style={{ marginLeft: 10 }}>删除</a>
+					{ envType === 'operate' && <a style={{ marginLeft: 10 }}>删除</a> }
 				</div>
 			),
 		}
@@ -36,7 +36,7 @@ class Tables extends React.Component {
 		let { field } = this.state
 		return (
 			<div>
-				<Button type="primary" onClick={e => this.props.pageChange('addTable')}>新建</Button>
+				{ envType === 'operate' && <Button type="primary" onClick={e => this.props.pageChange('addTable')}>新建</Button> }
 				<Divider />
 				<Table
 					columns={this.columns}

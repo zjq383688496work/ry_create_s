@@ -1,51 +1,50 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const mb = authInit(require('state/comp/mediaBind'))
-const tb = authInit(require('state/comp/textBind'))
-const Media = extendRmSL(deepCopy(mb), {
+const a = authInit(require('state/comp/area'))
+
+const Point = extendRmSL(deepCopy(a), {
 	data: {
 		layout: {
-			top:  0,
-			left: 0,
-			width:  540,
-			height: 300
-		},
-	}
-})
-const Title = extendRmSL(deepCopy(tb), {
-	data: {
-		layout: {
-			top:  320,
-			left: 20,
-			width:  500,
-			height: 20
+			top:  5,
+			left: 5,
+			width:  8,
+			height: 8
 		},
 		style: {
-			text: {
-				textAlign:  'left',
-				fontSize:   13, 
-				lineHeight: 18,
-				color:      { type: 'custom', color: '#000' }
+			filterBox: {
+				opacity: 0.2,
+				borderRadius: {
+					topLeft:     8,
+					topRight:    8,
+					bottomRight: 8,
+					bottomLeft:  8
+				},
+				backgroundColor: { type: 'custom', color: '#cfad81' }
 			}
 		}
 	}
 })
-const Desc = extendRmSL(deepCopy(tb), {
+const PointAV = extendRmSL(deepCopy(a), {
 	data: {
 		layout: {
-			top:  400,
-			left: 20,
-			width:  500,
-			height: 48
+			top:  5,
+			left: 5,
+			width:  8,
+			height: 8
 		},
 		style: {
-			text: {
-				textAlign:  'left',
-				fontSize:   10, 
-				lineHeight: 16,
-				color:      { type: 'custom', color: '#aaa' }
+			filterBox: {
+				opacity: 1,
+				borderRadius: {
+					topLeft:     8,
+					topRight:    8,
+					bottomRight: 8,
+					bottomLeft:  8
+				},
+				backgroundColor: { type: 'custom', color: '#cfad81' }
 			}
 		}
-	}
+	},
+	feature: { active: true }
 })
 
 const data = {
@@ -53,8 +52,8 @@ const data = {
 		position: 'absolute',
 		top:  0,
 		left: 0,
-		width:  540,
-		height: 300,
+		width:  370,
+		height: 30
 	},
 	style: {
 		filterFlex: {
@@ -98,22 +97,8 @@ const data = {
 			}
 		}
 	},
-	// componentLayout: [ Point, PointAV ],
-	componentLayout: [ Media, Title, Desc ],
+	componentLayout: [ Point, PointAV ],
 	content: {
-		swiperOptions: {
-			direction: 'horizontal',
-			effect:  'slide',
-			autoplay: true,
-			speed: 500,
-			delay: 3000,
-			spaceBetween:   150,
-			slidesPerView:  2,
-			slidesPerGroup: 1,
-			slidesOffsetBefore: 0,
-			centeredSlides: true,
-			pagination: true
-		},
 	},
 	animation: {
 		className: '',		// 动画样式
@@ -125,7 +110,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'swiperBlockByIV',
+	name: 'pageByIV',
 	type: 'layout',
 	// 位置大小
 	data: deepCopy(data),
@@ -137,10 +122,6 @@ module.exports = {
 				name: '圆点',
 				data: deepCopy(data)
 			},
-			{
-				name: '文本',
-				data: {}
-			}
 		]
 	},
 	// 功能特性

@@ -46,8 +46,15 @@ const data = {
 		height:   30
 	},
 	content: {
-		bind:   '', 			// 绑定字段
-		router: {}				// 路由
+		text:    '',
+		text2:   '',
+		bind:    '', 			// 绑定字段
+		router:  {},				// 路由
+		remarks: { text: `绑定字段可以在文本中使用组合使用<br>
+				例:<br>
+				{{total}}: 总页数<br>
+				{{page}}:  当前页码<br>
+			`, color: 'red' }
 	},
 	type:'normal',
 	animation: {

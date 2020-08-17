@@ -55,6 +55,13 @@ class Views extends React.Component {
 			this.setState({ data })
 		}
 	}
+	// 字段上下移动
+	dataMove = (idx, offset) => {
+		let { data } = this.state
+		let newIdx = idx + offset;
+		[ data[idx], data[newIdx] ] = [ data[newIdx], data[idx] ];
+		this.setState({ data })
+	}
 	// 数据修改
 	dataChange = (val, item, key, idx) => {
 		let { data } = this.state,
@@ -147,8 +154,8 @@ class Views extends React.Component {
 					}
 					<td>
 						<div className={'tcf-ctrl'}>
-							<a disabled={!i}>上移</a>
-							<a style={{ marginLeft: 10 }} disabled={i === len - 1}>下移</a>
+							<a onClick={() => this.dataMove(i, -1)} disabled={!i}>上移</a>
+							<a style={{ marginLeft: 10 }} onClick={() => this.dataMove(i, 1)} disabled={i === len - 1}>下移</a>
 							<a style={{ marginLeft: 10 }} onClick={() => this.delData(item, i)}>删除</a>
 						</div>
 					</td>

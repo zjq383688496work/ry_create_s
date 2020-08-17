@@ -33,6 +33,9 @@ import WonderfulActivity from './WonderfulActivity'
 import ListByActivity2   from './ListByActivity2'
 import ListByStore       from './ListByStore'
 import ThemeColor        from './ThemeColor'
+
+import RelComp           from 'compEdit/EditCommon/RelComp'
+
 // import CatgByGoods       from './CatgByGoods'
 // import SwiperByGoods     from './SwiperByGoods'
 import { filterContent } from './filter'
@@ -50,7 +53,8 @@ var plMap  = {
 	// swiperByGoods: 'filterBox',
 	// resetByGoods:  'filterBox',
 	// goodsBar:      'filter',
-	listByStore2:  'filter',
+	listByStore2:    'filter',
+	swiperBlockByIV: 'filterBox',
 }
 
 import './index.less'
@@ -97,6 +101,7 @@ class EditContent extends React.Component {
 	}
 
 	onChange = (val, con, key, cfg, index) => {
+		debugger
 		let { data, actions, editConfig, from } = this.props
 		let { curData, globalData } = editConfig
 		let { content } = data.data
@@ -137,7 +142,6 @@ class EditContent extends React.Component {
 			return actions.updateComp(null, parentComp? parentComp: data)
 		}
 	}
-
 	urlCheck(val) {
 		var RP = /https?\:\/\/[-\w+&@#/%?=~_|!:,.;]+[-\w+&@#/%=~_|]/
 		if (val === '' || RP.test(val)) return ''
@@ -163,7 +167,7 @@ class EditContent extends React.Component {
 		return (
 			<InputNumber
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, con, key,cfg, index)}
+				value={val} onChange={v => this.onChange(v, con, key, cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -172,7 +176,7 @@ class EditContent extends React.Component {
 		return (
 			<Slider
 				min={cfg.min || 0} max={cfg.max || 100} step={cfg.step || 1}
-				value={val} onChange={v => this.onChange(v, con, key,cfg, index)}
+				value={val} onChange={v => this.onChange(v, con, key, cfg, index)}
 				style={{ width: '100%' }}
 			/>
 		)
@@ -417,6 +421,13 @@ class EditContent extends React.Component {
 			<div>{ childNode }</div>
 		)
 	}
+	// 关系
+	renderRel(cfg, con, val, key, index) {
+		let { data } = this.props
+		return (
+			<RelComp data={data} field={key} content={con} />
+		)
+	}
 	// DB
 	renderDb = (cfg, con, val, key, index) => {
 		let { db } = this.props.editConfig.globalData.data
@@ -431,12 +442,11 @@ class EditContent extends React.Component {
 				style={{ width: '100%' }}
 				onChange={v => this.onChange(v, con, key, cfg, index)}
 			>
-				<Option value={''}>无</Option>
+				<Option value={-1}>无</Option>
 				{ opts }
 			</Select>
 		)
 	}
-
 	renObj(data, content, index) {
 		var { from, editConfig } = this.props,
 			{ name } = data,

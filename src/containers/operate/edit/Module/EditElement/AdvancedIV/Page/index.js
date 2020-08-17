@@ -5,7 +5,7 @@ import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
 import * as Server from 'server'
 
-const numArr = Array.from(new Array(10), (_, i) => { return {name: `${i+1}`}})
+const numArr = Array.from(new Array(10), (_, i) => `${i+1}`)
 
 export default class PageByIV extends React.Component {
 	shouldComponentUpdate(newProps, newState) {
@@ -13,10 +13,8 @@ export default class PageByIV extends React.Component {
 	}
 	renderItem = (item, page, idx) => {
 		let { data } = this.props,
-			{ name } = item,
 			{ componentLayout, layout } = data.data,
-			// isAV = name === page,
-			isAV = !idx,
+			isAV = item == page,
 			cl   = []
 		componentLayout.map(_ => {
 			var { active } = _.feature
@@ -32,14 +30,12 @@ export default class PageByIV extends React.Component {
 		/>
 	}
 	renderList = e => {
-		let { body } = this.props.ioInput
 		let list = numArr
 		return list.map((_, i) => {
-			return <div key={i}>{this.renderItem(_, body.page, i)}</div>
+			return <div key={i}>{this.renderItem(_, 1, i)}</div>
 		})
 	}
 	render() {
-		return null
 		let dom = this.renderList()
 		return (
 			<section className={`e-page-by-iv scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>

@@ -15,6 +15,8 @@ module.exports = {
 	advancedIV:            authInit(require('./advancedIV')),
 	pageByIV:              authInit(require('./advancedIV/content/page')),
 	swiperBlockByIV:       authInit(require('./advancedIV/content/swiperBlock')),
+	turnByIV:              authInit(require('./advancedIV/content/turn')),
+	buttonFullScreenByIV:  authInit(require('./advancedIV/content/buttonFullScreen')),
 	bannerHorizontal:      authInit(require('./bannerHorizontal')),
 	bannerVertical:        authInit(require('./bannerVertical')),
 	bannerHorizontalIV:    authInit(require('./bannerHorizontalIV')),

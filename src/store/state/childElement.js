@@ -150,5 +150,16 @@ module.exports = {
 		picture:   1,
 		text:      1,
 		textBind:  1,
+	},
+	// 分页
+	pageByIV: {
+		area:     1,
+		picture:  1,
+		textBind: 1,
+	},
+	turnByIV: {
+		area:     1,
+		picture:  1,
+		text:     1,
 	}
 }

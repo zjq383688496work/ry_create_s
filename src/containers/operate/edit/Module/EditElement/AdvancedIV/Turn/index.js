@@ -3,7 +3,7 @@ import React from 'react'
 
 import Layout from 'compEdit/EditElement/Layout'
 
-export default class TurnByStore2 extends React.Component {
+export default class TurnByIV extends React.Component {
 	shouldComponentUpdate(newProps, newState) {
 		if (newProps.drag != undefined) return newProps.drag
 		return true
@@ -19,7 +19,7 @@ export default class TurnByStore2 extends React.Component {
 	}
 	render() {
 		return (
-			<section className={`e-turn-by-store2 scrollbar`}>
+			<section className={`e-turn-by-iv scrollbar`}>
 				{ this.renderItem() }
 			</section>
 		)

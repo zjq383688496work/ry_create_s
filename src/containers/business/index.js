@@ -97,7 +97,6 @@ class BusinessComponent extends React.Component {
 				// 	p.elements = p.elements.filter(_ => _.name != 'splitLine')
 				// })
 				dataFormat.get.pageEach(cfg.pageContent)
-
 				cfg.globalData.data = { ...globalData.data, ...cfg.globalData.data }
 				cfg.globalData = { ...globalData, ...cfg.globalData }
 				var newCfg = {

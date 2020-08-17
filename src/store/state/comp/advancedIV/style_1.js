@@ -1,6 +1,7 @@
 let { authInit, deepCopy, extendRmSL } = require('state/common')
 const page   = authInit(require('./content/page'))
 const swiper = authInit(require('./content/swiperBlock'))
+const full   = authInit(require('./content/buttonFullScreen'))
 
 const Page = extendRmSL(deepCopy(page), {
 	data: {
@@ -12,6 +13,8 @@ const Page = extendRmSL(deepCopy(page), {
 		}
 	}
 })
+
+const Full = extendRmSL(deepCopy(full), {})
 
 const Swiper = extendRmSL(deepCopy(swiper), {
 	data: {
@@ -59,7 +62,7 @@ module.exports = {
 	},
 	style: {},
 	content: {
-		dbSource: ''
+		dbSource: -1
 	},
 	animation: {
 		className: '',		// 动画样式
@@ -68,5 +71,5 @@ module.exports = {
 		duration: 1,		// 持续时间
 		iterationCount: 1	// 循环次数
 	},
-	components: [ Swiper, Page ]
+	components: [ Swiper, full, Page ]
 }
