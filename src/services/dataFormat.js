@@ -446,7 +446,7 @@ const dataFormat = {
 			// 清除失效DB
 			field = now.field = field.filter(({ id, title, key }) => {
 				if (removeID[id]) {
-					console.log('清除DB: ', id, title, key, )
+					console.log('清除DB: ', id, title, key)
 					delete data[id]
 					return false
 				}
@@ -465,6 +465,8 @@ const dataFormat = {
 			})
 
 			now.maxId = org.maxId
+
+			debugger
 
 			if (!compID.length) return
 
@@ -493,7 +495,7 @@ const dataFormat = {
 
 			nowFieldList.forEach(_ => nowKeyIndex[_.key] = _)
 			orgFieldList.forEach(_ => orgKeyIndex[_.key] = _)
-			orgData.forEach(_ => orgDataIndex[_.id])
+			orgData.forEach(_ => orgDataIndex[_.id] = _)
 
 			mergeIndex = { ...nowKeyIndex, ...orgKeyIndex }
 
