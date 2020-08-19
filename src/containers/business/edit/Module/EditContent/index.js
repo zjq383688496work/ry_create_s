@@ -27,7 +27,9 @@ import NavigationFloat   from 'compEdit/EditContent/NavigationFloat'
 import WonderfulActivity from 'compEdit/EditContent/WonderfulActivity'
 import CatgByGoods       from 'compEdit/EditContent/CatgByGoods'
 import SwiperByGoods     from 'compEdit/EditContent/SwiperByGoods'
-import * as variable from 'var'  
+import * as variable from 'var'
+
+import RelComp           from 'compEdit/EditCommon/RelComp'
 
 var conMap   = variable.contentMap,
 	fieldMap = variable.fieldMap,
@@ -235,7 +237,7 @@ class EditContent extends React.Component {
 		)
 	}
 	// 滑块
-	renderSlider(cfg,data, obj, val, key, index) {
+	renderSlider(cfg, data, obj, val, key, index) {
 		return (
 			<Row>
 				<Col span={12}>
@@ -257,7 +259,7 @@ class EditContent extends React.Component {
 		)
 	}
 	// 颜色
-	renderColor = (cfg, data, obj, val, key, index) => {
+	renderColor = (cfg, data, obj, val, key) => {
 		return (
 			<Color
 				data={data}
@@ -268,14 +270,14 @@ class EditContent extends React.Component {
 		)
 	}
 	// 开关
-	renderCheckbox(cfg, data, obj, val, key, index) {
+	renderCheckbox(cfg, data, obj, val, key) {
 		return (
 			<Checkbox
 				checked={val || cfg.defaultValue || false} onChange={v => this.onChange(v.target.checked, key, obj)}
 			/>
 		)
 	}
-	renderSwitch(cfg, data, obj, val, key, index) {
+	renderSwitch(cfg, data, obj, val, key) {
 		return (
 			<Switch
 				size="small"
@@ -295,7 +297,7 @@ class EditContent extends React.Component {
 		)
 	}
 	// 筛选框
-	renderRadio(cfg, data, obj, val, key, index) {
+	renderRadio(cfg, data, obj, val, key) {
 		let { option } = cfg
 		return (
 			<RadioGroup size="small" onChange={_ => this.onChange(_.target.value, key, obj)} value={val}>
@@ -304,7 +306,7 @@ class EditContent extends React.Component {
 		)
 	}
 	// 筛选框
-	renderRadioMix(cfg, data, obj, val, key, index) {
+	renderRadioMix(cfg, data, obj, val, key) {
 		let { option } = cfg
 		return (
 			<div className="sc-radio-group">
@@ -321,7 +323,18 @@ class EditContent extends React.Component {
 	}
 	// 绑定
 	renderBind = (cfg, data, obj, val, key, index) => {
+		let { db } = this.props
 		let map = fieldMap[data.name]
+		let { dbSource } = data.data.content
+		let dbData = db.data[dbSource]
+		if (dbData) {
+			let field = db.field.filter(_ => _.id === dbSource)[0]
+			if (field) {
+				if (!map) map = {}
+				field.data.forEach(_ => map[_.key] = _.name)
+			}
+		}
+		if (!map) return null
 		let opts = Object.keys(map).map((_, i) => {
 			return <Option key={i} value={_}>{map[_]}</Option>
 		})
@@ -346,7 +359,7 @@ class EditContent extends React.Component {
 			let v  = val[_],
 				cm = conMap[_],
 				fn = this[`render${cm.type}`]
-			let dom = fn.bind(this, cm, data, val, v, _)()
+			let dom = fn.bind(this, cm, data, val, v, _, index)()
 			return (
 				<div className="pgs-row" key={i}>
 					<div className="pgsr-name" style={{ width: 52 }}>{ cm.name }</div>
@@ -358,6 +371,32 @@ class EditContent extends React.Component {
 		return (
 			<div>{ childNode }</div>
 		) 
+	}
+	// 关系
+	renderRel(cfg, data, obj, val, key, index) {
+		let curComp = data.data.components[index]
+		return (
+			<RelComp data={data} field={key} curComp={curComp} content={obj} />
+		)
+	}
+	// DB
+	renderDb = (cfg, data, obj, val, key, index) => {
+		let { db } = this.props.editConfig.globalData.data
+		if (!db) return null
+		let { field = [] } = db
+		let opts = field.map((_, i) => {
+			return <Option key={i} value={_.id}>{_.title}</Option>
+		})
+		return (
+			<Select
+				value={val}
+				style={{ width: '100%' }}
+				onChange={v => this.onChange(v, key, obj)}
+			>
+				<Option value={-1}>无</Option>
+				{ opts }
+			</Select>
+		)
 	}
 	renObj(parent, data, content, index) {
 		var { from } = this.props
@@ -375,7 +414,7 @@ class EditContent extends React.Component {
 			}
 			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
-			let dom = this[`render${type}`].bind(this, cm,parent, content, val, p, index)()
+			let dom = render.bind(this, cm, parent, content, val, p, i)()
 			ci++
 			return (
 				<div className="pgs-row" key={i}>
@@ -446,7 +485,7 @@ class EditContent extends React.Component {
 			childNode,
 			activeKey,
 			chiObj
-		var compCon = compContent(compName, this.props, this.updateComp)
+		var compCon = compContent(compName, this.props, editConfig, this.updateComp)
 		if (content.length) {
 			childNode = content.map((_, i) => {
 				return (

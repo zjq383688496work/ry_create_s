@@ -3,6 +3,8 @@ import { Input } from 'antd'
 import DateSet from './dateSet'
 import './index.less'
 
+const maxDay = 180
+
 export default class DatePickerNew extends Component {
 	constructor(props) {
 		super(props)
@@ -23,7 +25,7 @@ export default class DatePickerNew extends Component {
 		let now = new Date(),
 			str = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`,
 			min = new Date(str).getTime(),
-			max = min + 90 * 86400000
+			max = min + maxDay * 86400000
 		return { min, max }
 	}
 	showDate = () => {

@@ -49,7 +49,8 @@ module.exports = {
 	style: {},
 	content: {
 		size: 12,
-		dataSource: 'base'
+		dataSource: 'base',
+		dbSource:   -1,
 	},
 	animation: {
 		className: '',		// 动画样式

@@ -72,6 +72,7 @@ class EditComponent extends React.Component {
 		let { editConfig, location } = this.props,
 			{ curComp, curData, curPage, globalData, pageList } = editConfig,
 			{ banner, theme } = globalData,
+			{ db }  = globalData.data,
 			colors  = theme.list[theme.idx].colors,
 			type    = curData.contentType,
 			isVoice = this.isVoice(),
@@ -82,9 +83,9 @@ class EditComponent extends React.Component {
 		} else if(type === 'comp') {
 			editTab = (
 				<Tabs defaultActiveKey="1" type="card">
-					<TabPane tab="内容" key="1"><EditContent   data={curComp} from={null}/></TabPane>
-					<TabPane tab="展示" key="2"><EditStyle     data={curComp} from={null}/></TabPane>
-					<TabPane tab="动画" key="3"><EditAnimation data={curComp} from={null}/></TabPane>
+					<TabPane tab="内容" key="1"><EditContent   data={curComp} db={db} from={null}/></TabPane>
+					<TabPane tab="展示" key="2"><EditStyle     data={curComp} db={db} from={null}/></TabPane>
+					<TabPane tab="动画" key="3"><EditAnimation data={curComp} db={db} from={null}/></TabPane>
 					{
 						statusAuth[curComp.name]
 						?

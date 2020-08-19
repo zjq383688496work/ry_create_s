@@ -27,9 +27,9 @@ class RelComp extends React.Component {
 		let { data, content, field, actions, editConfig } = this.props
 		let { curData } = editConfig
 		let { parentComp } = curData
-		if (!parentComp) return
+		if (envType === 'operate' && !parentComp) return
 		content[field] = val
-		return actions.updateComp(null, parentComp)
+		return actions.updateComp(null, parentComp || data)
 	}
 	get_relComp({ data }) {
 		return data.components
@@ -39,7 +39,9 @@ class RelComp extends React.Component {
 		if (!childComp) return
 		return childComp.data.componentLayout
 	}
-	renderOption(field, data, curData) {
+	renderOption = (field, data, curData) => {
+		let { curComp } = this.props
+		if (envType === 'business' && curComp) curData = curComp
 		let getFun = this[`get_${field}`]
 		if (!getFun) return null
 		let list =  getFun(data, curData) || []

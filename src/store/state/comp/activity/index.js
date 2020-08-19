@@ -69,7 +69,7 @@ const data = {
 	},
 	style: {},
 	content: {
-		
+		dbSource: -1,
 	},
 	animation: {
 		className: '',		// 动画样式

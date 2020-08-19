@@ -1,6 +1,7 @@
 import * as variable from 'var'
 const comp  = require('state/comp')
 const page  = require('state/page')
+const { typeDefMap } = require('components/DbTable/config')
 let compMap = variable.compMap.name
 let typeMap  = {
 	base:     1,
@@ -426,9 +427,7 @@ const dataFormat = {
 			nowData.voice   = orgVoice
 			nowData.feature = orgFeature
 			if (orgDb && !nowDb) nowData.db = orgDb
-			else {
-				this.dbComp(nowDb, orgDb)
-			}
+			else this.dbComp(nowDb, orgDb)
 		},
 		dbComp: function(now, org) {
 			let { data, field } = now
@@ -466,8 +465,6 @@ const dataFormat = {
 
 			now.maxId = org.maxId
 
-			debugger
-
 			if (!compID.length) return
 
 			// 建立当前字段索引
@@ -478,17 +475,20 @@ const dataFormat = {
 
 			// DB内容比对
 			compID.forEach(id => {
-				debugger
-				this.dbCompCon(nowFieldIndex[id], data[id], orgFieldIndex[id], orgData[id])
+				let orgField = orgFieldIndex[id],
+					orgFieldIdx = {}
+				orgField.data.forEach(_ => orgFieldIdx[_.key] = _)
+				this.dbCompCon(nowFieldIndex[id], data[id], orgField, orgData[id], orgFieldIdx)
 			})
 		},
-		dbCompCon: function(nowField, nowData, orgField, orgData) {
+		dbCompCon: function(nowField, nowData, orgField, orgData, orgFieldIndex) {
 			let nowFieldList = nowField.data,
 				orgFieldList = orgField.data,
 				nowKeyIndex  = {},
 				orgKeyIndex  = {},
-				removeKey    = [],
-				addKey       = [],
+				removeKey    = [],	// 需要删除的key
+				typeKey      = [],	// 类型改变的key
+				addKey       = [],	// 新增的key
 				orgDataIndex = {},	// 来源数据索引
 				mergeIndex
 			nowField.maxId = orgField.maxId
@@ -501,29 +501,50 @@ const dataFormat = {
 
 			// 查找删除的key
 			Object.keys(mergeIndex).forEach(key => {
-				if (nowKeyIndex[key] && orgKeyIndex[key]) return
+				let nowItem = nowKeyIndex[key],
+					orgItem = orgKeyIndex[key]
+
+				// 相同的
+				if (nowItem && orgItem) {
+					let nowType = nowItem.type,
+						orgType = orgItem.type
+					if (nowType === orgType) return
+					// 类型改变
+					nowItem.type = orgType
+					typeKey.push(key)
+					return
+				}
 				// 需要删除
-				if (nowKeyIndex[key]) removeKey.push(key)
+				if (nowItem) removeKey.push(key)
 				// 需要新增
-				if (orgKeyIndex[key]) addKey.push(key)
+				if (orgItem) {
+					nowKeyIndex[key] = orgItem
+					addKey.push(key)
+				}
 			})
 
 			// 删除 & 新增数据
-			nowData.map(_ => {
+			nowData.forEach(_ => {
 				let { id } = _
 
 				// 删除key
 				removeKey.forEach(key => delete _[key])
 				// 添加key
 				addKey.forEach(key => {
-					let org = orgDataIndex[id]
-					debugger
-					// _[key] = org? org[key]: 
+					let field = orgFieldIndex[key]
+					let org   = orgDataIndex[id]
+					_[key] = org? org[key]: typeDefMap[field.type].def()
+				})
+				// 改变类型key
+				typeKey.forEach(key => {
+					let field = orgFieldIndex[key]
+					let org   = orgDataIndex[id]
+					_[key] = org? org[key]: typeDefMap[field.type].def()
 				})
 			})
-			debugger
-		}
 
+			nowField.data = orgFieldList
+		}
 	}
 }
 module.exports = dataFormat

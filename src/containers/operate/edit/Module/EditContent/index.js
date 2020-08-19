@@ -101,7 +101,6 @@ class EditContent extends React.Component {
 	}
 
 	onChange = (val, con, key, cfg, index) => {
-		debugger
 		let { data, actions, editConfig, from } = this.props
 		let { curData, globalData } = editConfig
 		let { content } = data.data
@@ -380,10 +379,20 @@ class EditContent extends React.Component {
 	}
 	// 绑定
 	renderBind(cfg, con, val, key, index) {
-		let { data, editConfig } = this.props
+		let { data, db, editConfig } = this.props
 		let { parentComp } = editConfig.curData
-		if (!parentComp) return
+		if (!parentComp) return null
+		let { dbSource } = parentComp.data.content
+		let dbData = db.data[dbSource]
 		let map = fieldMap[parentComp.name]
+		if (dbData) {
+			let field = db.field.filter(_ => _.id === dbSource)[0]
+			if (field) {
+				if (!map) map = {}
+				debugger
+				field.data.forEach(_ => map[_.key] = _.name)
+			}
+		}
 		if (!map) return null
 		let opts = Object.keys(map).map((_, i) => {
 			return <Option key={i} value={_}>{map[_]}</Option>
@@ -425,7 +434,7 @@ class EditContent extends React.Component {
 	renderRel(cfg, con, val, key, index) {
 		let { data } = this.props
 		return (
-			<RelComp data={data} field={key} content={con} />
+			<RelComp data={data} field={key} content={con} index={index} />
 		)
 	}
 	// DB

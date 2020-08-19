@@ -132,6 +132,18 @@ class Views extends React.Component {
 			/>
 		)
 	}
+	// 店铺
+	render_shop = (item, { name, key }, idx) => {
+		if (envType === 'operate') return '商家后台操作'
+		debugger
+		return null
+	}
+	// 活动
+	render_activity = (item, { name, key }, idx) => {
+		if (envType === 'operate') return '商家后台操作'
+		debugger
+		return null
+	}
 	// 渲染数据列表
 	renderData = () => {
 		let { field: { data: fields }, data } = this.state,
@@ -145,7 +157,7 @@ class Views extends React.Component {
 						fields.map((field, l) => {
 							let { name, key, type } = field
 							let render = this[`render_${typeMap[type].key}`]
-							let comp   = item[key]
+							let comp   = ''
 							if (render) comp = render(item, field, i)
 							return (
 								<td key={`${i}_${l}`}>{ comp }</td>

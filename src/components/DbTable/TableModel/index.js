@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Alert, Row, Col, Form, Button, Input, Select, Divider, Table, Modal } from 'antd'
+import { Alert, Row, Col, Form, Button, Input, Select, Divider, Table, Modal, Collapse } from 'antd'
 
 // import './index.less'
 
@@ -8,9 +8,11 @@ import FormParent from 'components/FormParent'
 import FormItem   from 'components/FormItem'
 
 import { formItemLayout } from '../config'
+import { special } from './var'
 
 const { Item } = Form
 const { Option } = Select
+const { Panel } = Collapse
 
 const dataEmpty = () => ({ name: '', key: '', type: 1 })
 
@@ -156,7 +158,8 @@ class TableModelEdit extends React.Component {
 	}
 	// 渲染自定义字段
 	renderField = () => {
-		let { data } = this.state,
+		let { filterMap } = this.props,
+			{ data } = this.state,
 			len = data.length
 		let tr = data.map((item, idx) => {
 			let { name, key, type } = item
@@ -182,13 +185,15 @@ class TableModelEdit extends React.Component {
 						{
 							envType === 'operate'
 							?
-							<Select value={type} onChange={val => this.fieldChange(val, item, 'type')}>
+							<Select value={type} onChange={val => this.fieldChange(val, item, 'type')} disabled={filterMap[key]}>
 								<Option value={1}>文本</Option>
 								<Option value={2}>媒体</Option>
 								<Option value={3}>日期</Option>
 								<Option value={4}>布尔值</Option>
+								<Option value={5}>店铺</Option>
+								<Option value={6}>活动</Option>
 							</Select>
-							: ({ 1: '文本', 2: '媒体', 3: '日期', 4: '布尔值', })[type]
+							: ({ 1: '文本', 2: '媒体', 3: '日期', 4: '布尔值', 5: '店铺', 6: '活动', })[type]
 						}
 					</td>
 					{
@@ -225,6 +230,19 @@ class TableModelEdit extends React.Component {
 			</table>
 		)
 	}
+	// 特殊说明
+	specialRender() {
+		return special.map(({ header, data }, i) => {
+			let dataDom = data.map(({ name, type, desc }, j) => {
+				return <p key={j}>{name}: ({type}) {desc}</p>
+			})
+			return (
+				<Panel header={header} key={i}>
+					{ dataDom }
+				</Panel>
+			)
+		})
+	}
 	render() {
 		let { title, key, data, isSubmit } = this.state
 		let rules = this.rules()
@@ -252,12 +270,10 @@ class TableModelEdit extends React.Component {
 					</FormItem>
 					<Item {...formItemLayout} label="自定义字段" wrapperCol={{sm: { span: 22 }}}>
 						<Button type="primary" size="small" onClick={this.addField} disabled={data.length > 12}>新增字段</Button>
-						<div style={{ color: 'red', lineHeight: 1.5, fontSize: 12, padding: 10 }}>
-							特殊作用key: startData, 类型: 日期, 作用: 校验数据的开始日期, 未达到的数据不展示, 默认为空.<br/>
-							特殊作用key: endData, 类型: 日期, 作用: 校验数据的结束日期, 未达到的数据不展示, 默认为空.<br/>
-							特殊作用key: active, 类型: 布尔值, 作用: 不打开则不展示, 默认为关.<br/>
-							特殊作用key: media, 类型: 媒体, 作用: 视频全屏类型判断等操作.
-						</div>
+						<div style={{ color: 'red', lineHeight: 1.5, fontSize: 12, padding: 10 }}>特殊作用key</div>
+						<Collapse>
+							{ this.specialRender() }
+						</Collapse>
 						{ tableDom }
 					</Item>
 				</FormParent>
@@ -274,17 +290,28 @@ class TableModel extends React.Component {
 		super(props)
 
 		let { field, params } = props,
-			data  = { title: '', key: '', data: [dataEmpty()] },
-			update = false
+			data    = { title: '', key: '', data: [dataEmpty()] },
+			update  = false,
+			filterMap = {}
 		if (field && params.idx != undefined) {
-			data  = field[params.idx],
+			data   = field[params.idx],
 			update = true
 			if (!data.data.length) data.data.push(dataEmpty())
+			let list = props.data[data.id]
+			filterMap = this.getFilter(deepCopy(list))
 		}
 		this.state = {
 			data,
-			update
+			update,
+			filterMap
 		}
+	}
+	getFilter([ data ]) {
+		if (!data) return {}
+		delete data.id
+		let filter = {}
+		Object.keys(data).map(key => filter[key] = 1)
+		return filter
 	}
 	dataUpdate = data => {
 		let { fieldCreate, fieldUpdate, pageChange } = this.props,
@@ -307,10 +334,10 @@ class TableModel extends React.Component {
 		return true
 	}
 	render() {
-		let { data } = this.state
+		let { data, filterMap } = this.state
 		let { pageChange } = this.props
 		return (
-			<TableModelEdit data={deepCopy(data)} dataUpdate={this.dataUpdate} back={() => pageChange('tables', {})} checkTitle={this.checkTitle} />
+			<TableModelEdit filterMap={filterMap} data={deepCopy(data)} dataUpdate={this.dataUpdate} back={() => pageChange('tables', {})} checkTitle={this.checkTitle} />
 		)
 	}
 }

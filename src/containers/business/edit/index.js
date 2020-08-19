@@ -50,6 +50,7 @@ class EditComponent extends React.Component {
 			{ curComp, curData, globalData } = editConfig
 		setSwiperImgAndVideo(editConfig)
 		var { banner, theme } = globalData,
+			{ db } = globalData.data,
 			colors = theme.list[theme.idx].colors,
 			type = curData.contentType,
 			editTab
@@ -59,9 +60,9 @@ class EditComponent extends React.Component {
 		} else if(type === 'comp') {
 			editTab = (
 				<Tabs defaultActiveKey="1" type="card">
-					<TabPane tab="内容" key="1"><EditContent   data={curComp} /></TabPane>
-					<TabPane tab="展示" key="2"><EditStyle     data={curComp} /></TabPane>
-					<TabPane tab="动画" key="3"><EditAnimation data={curComp} /></TabPane>
+					<TabPane tab="内容" key="1"><EditContent   data={curComp} db={db} /></TabPane>
+					<TabPane tab="展示" key="2"><EditStyle     data={curComp} db={db} /></TabPane>
+					<TabPane tab="动画" key="3"><EditAnimation data={curComp} db={db} /></TabPane>
 					{
 						statusAuth[curComp.name]
 						?
