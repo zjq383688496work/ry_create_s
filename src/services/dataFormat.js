@@ -459,7 +459,7 @@ const dataFormat = {
 					orgFieldIndex[id] = _field
 					return compID.push(id)
 				}
-				data[id] = deepCopy(orgData[id])
+				data[id] = deepCopy(orgData[id] || [])
 				field.push(deepCopy(_field))
 			})
 

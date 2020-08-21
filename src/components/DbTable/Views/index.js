@@ -5,7 +5,8 @@ import { Row, Col, Form, Button, Divider, Input, Modal, DatePicker, Switch } fro
 import moment from 'moment'
 
 import { formItemView, typeMap } from '../config'
-import IV from 'compEdit/EditCommon/IV'
+import StoreListModal from 'compEdit/EditCommon/StoreListModal'
+import IV             from 'compEdit/EditCommon/IV'
 
 const { Item } = Form
 const dateFormat = 'YYYY-MM-DD'
@@ -92,9 +93,11 @@ class Views extends React.Component {
 	}
 	// 日期选择
 	render_date = (item, { name, key }, idx) => {
+		let date = item[key]
+		debugger
 		return (
 			<DatePicker
-				value={moment(item[key])}
+				value={moment(date)}
 				size="small"
 				onChange={(d, str) => this.dataChange(str, item, key, idx)}
 			/>
@@ -135,8 +138,11 @@ class Views extends React.Component {
 	// 店铺
 	render_shop = (item, { name, key }, idx) => {
 		if (envType === 'operate') return '商家后台操作'
-		debugger
-		return null
+		return (
+			<StoreListModal {...item[key]} onOk={(row, param) => {
+				this.dataChange({ id: row.id, name: row.name }, item, key, idx)
+			}} />
+		)
 	}
 	// 活动
 	render_activity = (item, { name, key }, idx) => {

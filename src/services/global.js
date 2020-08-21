@@ -23,6 +23,10 @@ module.exports = extend(window, {
 	},
 	// 深拷贝
 	deepCopy(obj) {
+		if (!obj) {
+			debugger
+			return obj
+		}
 		try {
 			return JSON.parse(JSON.stringify(obj))
 		} catch(e) {

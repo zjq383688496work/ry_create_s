@@ -177,7 +177,7 @@ class TableModelEdit extends React.Component {
 						{
 							envType === 'operate'
 							?
-							<Input value={key} placeholder="请输入key" onChange={e => this.fieldChange(e.target.value, item, 'key')} />
+							<Input value={key} placeholder="请输入key" onChange={e => this.fieldChange(e.target.value, item, 'key')} disabled={filterMap[key]} />
 							: key
 						}
 					</td>
@@ -191,9 +191,8 @@ class TableModelEdit extends React.Component {
 								<Option value={3}>日期</Option>
 								<Option value={4}>布尔值</Option>
 								<Option value={5}>店铺</Option>
-								<Option value={6}>活动</Option>
 							</Select>
-							: ({ 1: '文本', 2: '媒体', 3: '日期', 4: '布尔值', 5: '店铺', 6: '活动', })[type]
+							: ({ 1: '文本', 2: '媒体', 3: '日期', 4: '布尔值', 5: '店铺' })[type]
 						}
 					</td>
 					{
@@ -245,6 +244,7 @@ class TableModelEdit extends React.Component {
 	}
 	render() {
 		let { title, key, data, isSubmit } = this.state
+		let { update } = this.props
 		let rules = this.rules()
 		let tableDom = this.renderField()
 		return (
@@ -264,7 +264,7 @@ class TableModelEdit extends React.Component {
 						{
 							envType === 'operate'
 							?
-							<Input value={key} maxLength={32} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'key')} />
+							<Input value={key} maxLength={32} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'key')} disabled={!update} />
 							: key
 						}
 					</FormItem>
@@ -297,7 +297,7 @@ class TableModel extends React.Component {
 			data   = field[params.idx],
 			update = true
 			if (!data.data.length) data.data.push(dataEmpty())
-			let list = props.data[data.id]
+			let list = props.data[data.id] || []
 			filterMap = this.getFilter(deepCopy(list))
 		}
 		this.state = {
@@ -334,10 +334,10 @@ class TableModel extends React.Component {
 		return true
 	}
 	render() {
-		let { data, filterMap } = this.state
+		let { data, filterMap, update } = this.state
 		let { pageChange } = this.props
 		return (
-			<TableModelEdit filterMap={filterMap} data={deepCopy(data)} dataUpdate={this.dataUpdate} back={() => pageChange('tables', {})} checkTitle={this.checkTitle} />
+			<TableModelEdit update={update} filterMap={filterMap} data={deepCopy(data)} dataUpdate={this.dataUpdate} back={() => pageChange('tables', {})} checkTitle={this.checkTitle} />
 		)
 	}
 }

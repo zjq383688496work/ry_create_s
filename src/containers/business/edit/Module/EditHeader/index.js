@@ -112,7 +112,6 @@ class Header extends React.Component {
 			editConfig.pageList = CFG.pageList
 			dataFormat.sync.global(globalData, CFG.globalData)
 			dataFormat.sync.pageEach(pageContent, CFG.pageContent)
-			debugger
 			actions.updateConfig(editConfig)
 			_timeout(() => {
 				actions.selectPage(pageContent[router]? router: homepage)
