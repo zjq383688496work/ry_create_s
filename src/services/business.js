@@ -1,5 +1,5 @@
 const formatMap          = require('./formatMap')
-const { statusRemoveAuth }     = require('var')
+const { statusRemoveAuth, compVersionMap } = require('var')
 const formatPxMap        = formatMap.px
 const formatComplexMap   = formatMap.complex
 const formatComplexOrder = formatMap.complexOrder
@@ -170,8 +170,8 @@ module.exports = extend(window, {
 
 	// 获取数据源 根据ID
 	getTableById(id, { data }) {
-		if (!id) return
-		return data[id]
+		if (!id) return []
+		return data[id] || []
 	},
 	// 获取数据源 根据ID
 	getFieldById(id, { field }) {
@@ -182,6 +182,16 @@ module.exports = extend(window, {
 			obj = {}
 		data.forEach(_ => obj[_.key] = _.name)
 		return obj
+	},
+	// 获取模板支持的最低版本
+	getLowVersion(pages) {
+		let version = { value: '30000000' }
+		Object.values(pages).forEach(page => {
+			page.elements.forEach(element => {
+				getCompVersion(element, version)
+			})
+		})
+		return version.value
 	}
 })
 
@@ -212,6 +222,39 @@ function compIdCreateNode(comp, max) {
 	if (tabs) {
 		tabs.forEach(tab => {
 			compIdCreateNode(tab, max)
+		})
+	}
+}
+
+// 获取组件版本
+function getCompVersion(comp, version) {
+	let { name, data, feature } = comp,
+		{ components, componentLayout } = data,
+		{ status, tabs } = feature
+
+	let curVersion = compVersionMap[name]
+	if (curVersion > version.value) version.value = curVersion
+	if (components && !status) {
+		components.forEach(_ => {
+			getCompVersion(_, version)
+		})
+	}
+	if (componentLayout) {
+		componentLayout.forEach(_ => {
+			getCompVersion(_, version)
+		})
+	}
+	if (status) {
+		let list = Object.values(status.list)
+		list.forEach(({ components = [] }) => {
+			components.forEach(comp => {
+				getCompVersion(comp, version)
+			})
+		})
+	}
+	if (tabs) {
+		tabs.forEach(tab => {
+			getCompVersion(tab, version)
 		})
 	}
 }

@@ -17,4 +17,5 @@ module.exports = {
 	// statusManage:   require('./statusManage'),
 	languages:      require('./languages'),
 	tags:           require('./tags'),
+	compVersionMap: require('./compVersionMap'),
 }

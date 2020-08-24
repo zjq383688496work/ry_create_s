@@ -116,7 +116,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		// swiperByGoods:           <SwiperByGoods          {...props} />,
 		// catgByGoods:             <CatgByGoods            {...props} />,
 		// resetByGoods:            <ResetByGoods           {...props} />,
-		listByIV:            <ListByStore2           {...props} />,
+		listByStore2:            <ListByStore2           {...props} />,
 		recListByStore2:         <RecListByStore2        {...props} />,
 		catgByStore2:            <CatgByStore2           {...props} />,
 		catgSecByStore2:         <CatgSecByStore2        {...props} />,

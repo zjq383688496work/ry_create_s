@@ -17,7 +17,7 @@ import * as actions from 'actions'
 
 import { Input, message, Spin } from 'antd'
 import * as variable from 'var'
-let compMap    = variable.compMap.name
+let compMap       = variable.compMap.name
 let statusAddAuth = variable.statusAddAuth
  
 class Header extends React.Component {
@@ -25,7 +25,7 @@ class Header extends React.Component {
 		super(props)
 
 		this.state = {
-			name: tempCfg.name || '',
+			name:    tempCfg.name || '',
 			loading: false
 		}
 	}
@@ -170,6 +170,7 @@ class Header extends React.Component {
 			composeType:  composeType,
 			name:         this.state.name,
 			bannerAds:    bannerAds || 0,
+			appVersion:   getLowVersion(cfg.pageContent),
 		}
 		this.setState({ loading: true })
 		if (id) da.id = id
