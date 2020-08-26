@@ -1,7 +1,4 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const kongQi = authInit(require('./content/kongQi'))
-const feng = authInit(require('./content/feng'))
-const shiDu = authInit(require('./content/shiDu'))
 const w = authInit(require('./content/weather'))
  
 
@@ -124,26 +121,7 @@ const weather6 = extendRmSL(styleIdxChange(5, deepCopy(w)), {
 		} 
 	} 
 })
-const kq = extendRmSL(deepCopy(kongQi), {
-	data:{
-		layout:{
-			top:54,
-			left:16,
-			height:10,
-			width:10
-		}
-	}
-})
-const ff = extendRmSL(deepCopy(feng), {
-	data:{
-		layout:{
-			top:53.5,
-			left:196.5,
-			height:10,
-			width:10
-		}
-	}
-})
+
 
 const data = {
 	layout: {
@@ -171,8 +149,6 @@ const data = {
 		weather4,
 		weather5,
 		weather6,
-		kq, 
-		ff
 	]
 } 
 module.exports = data 

@@ -1,8 +1,5 @@
 
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const kongQi = authInit(require('./content/kongQi'))
-const feng = authInit(require('./content/feng'))
-const shiDu = authInit(require('./content/shiDu'))
 const line = authInit(require('./content/line'))
 const t = authInit(require('./content/time'))
 const w = authInit(require('./content/weather'))
@@ -191,22 +188,6 @@ const weather6 = extendRmSL(styleIdxChange(5, deepCopy(w)), {
 		} 
 	} 
 })
-const kq = extendRmSL(deepCopy(kongQi), {
-	data:{
-		layout:{
-			top:52,
-			left:167
-		}
-	}
-})
-const ff = extendRmSL(deepCopy(feng), {
-	data:{
-		layout:{
-			top:30.5,
-			left:167
-		}
-	}
-})
 // 店铺列表
 const data = {
 	layout: {
@@ -237,8 +218,6 @@ const data = {
 		weather4,
 		weather5,
 		weather6,
-		kq, 
-		ff,
 		line
 	]
 }

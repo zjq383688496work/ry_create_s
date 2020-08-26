@@ -1,7 +1,4 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const kongQi = authInit(require('./content/kongQi'))
-const feng = authInit(require('./content/feng'))
-const shiDu = authInit(require('./content/shiDu'))
 const t = authInit(require('./content/time'))
 const w = authInit(require('./content/weather'))
  
@@ -220,8 +217,6 @@ const data = {
 		weather4,
 		weather5,
 		weather6,
-		kongQi,
-		feng
 	]
 } 
  

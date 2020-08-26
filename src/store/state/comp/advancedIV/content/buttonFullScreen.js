@@ -51,7 +51,7 @@ const data = {
 	content: {
 		text:       '全屏',
 		text2:      '',
-		event:      {}, 			// 事件
+		event:      { url: '' }, 			// 事件
 		relOptions: {
 			relComp:      -1,
 			relChildComp: -1,

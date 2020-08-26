@@ -36,6 +36,9 @@ const dataFormat = {
 			plus: function(da, org, key, daParent) {
 				let dType = getAttr(da),
 					oType = getAttr(org)
+				// if (key === 'event') {
+				// 	debugger
+				// }
 				if (da === undefined || dType !== oType) {
 					daParent[key] = org; return
 				}
