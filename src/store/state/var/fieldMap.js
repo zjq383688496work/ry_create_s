@@ -54,9 +54,7 @@ var Map = {
 	activityCatg: {
 		name: '活动分类'
 	},
-	activityList: {
-		preview: '预览图',
-	},
+	activityList: {},
 	voice: {
 		keyword: '关键字',
 		result:  '对话内容',

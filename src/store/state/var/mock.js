@@ -99,9 +99,6 @@ var Item = {
 	},
 	storeActivityList: {
 		id:      1,
-		preview: 'http://rongyi.b0.rongyi.com/commodity/text/201805231508121878.png',
-		url:     'http://rongyi.b0.rongyi.com/commodity/text/201805231508121878.png',  
-		name:    `媒体1`,
 		router:  1,
 		bigPicType: 1,
 	}

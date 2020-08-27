@@ -23,7 +23,12 @@ export default class PictureBind extends React.Component {
 			{ bind } = data.data.content,
 			img = bind? item[bind] || '': '',
 			t = getAttr(img)
-		img = !typeMap[t]? img + '': t === 'String'? img: t === 'Array'? img[0] || '': compImgFormat(this.props, img)
+		if (!typeMap[t]) img += ''
+		else if (t === 'String') img = img
+		else if (t === 'Array')  img = img[0] || []
+		else img = compImgFormat(this.props, img)
+
+		// img = !typeMap[t]? img + '': t === 'String'? img: t === 'Array'? img[0] || '': compImgFormat(this.props, img)
 		return envType === 'business' && !img
 			?
 			false

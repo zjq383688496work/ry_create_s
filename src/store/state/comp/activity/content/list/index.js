@@ -10,7 +10,7 @@ const PIC = extendRmSL(deepCopy(pb), {
 			height: 120
 		},
 		content: {
-			bind: 'preview'
+			bind: ''
 		},
 		style: {
 		},
@@ -25,7 +25,7 @@ const PICACT = extendRmSL(deepCopy(pb), {
 			height: 116
 		},
 		content: {
-			bind: 'preview'
+			bind: ''
 		},
 		style: {
 		},

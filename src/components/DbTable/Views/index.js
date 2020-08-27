@@ -94,10 +94,9 @@ class Views extends React.Component {
 	// 日期选择
 	render_date = (item, { name, key }, idx) => {
 		let date = item[key]
-		debugger
 		return (
 			<DatePicker
-				value={moment(date)}
+				value={date? moment(date): ''}
 				size="small"
 				onChange={(d, str) => this.dataChange(str, item, key, idx)}
 			/>

@@ -441,6 +441,9 @@ const dataFormat = {
 				orgFieldIndex = {},		// 原始字段数据索引
 				nowFieldIndex = {}		// 当前字段数据索引
 			
+			this.dbCompletion(now)
+			this.dbCompletion(org)
+
 			// 查找删除的db
 			Object.keys(mergeData).forEach(id => {
 				if (!orgData[id]) removeID[id] = true
@@ -494,7 +497,7 @@ const dataFormat = {
 				addKey       = [],	// 新增的key
 				orgDataIndex = {},	// 来源数据索引
 				mergeIndex
-			nowField.maxId = orgField.maxId
+			// nowField.maxId = orgField.maxId
 
 			nowFieldList.forEach(_ => nowKeyIndex[_.key] = _)
 			orgFieldList.forEach(_ => orgKeyIndex[_.key] = _)
@@ -547,6 +550,13 @@ const dataFormat = {
 			})
 
 			nowField.data = orgFieldList
+		},
+		// db补全
+		dbCompletion: function({ data, field }) {
+			field.forEach(_field => {
+				let { id } = _field
+				if (!data[id]) data[id] = []
+			})
 		}
 	}
 }
