@@ -132,6 +132,8 @@ class Header extends React.Component {
 		let cfg = deepCopy(editConfig), cropWidth, cropHeight
 
 		let gd = cfg.globalData
+
+		let appVersion = getLowVersion(cfg.pageContent)
 		// 模板数据加入composeType
 		if (composeType === 'LANDSCAPE') {
 			gd.data.composeType = 'landscape'
@@ -143,7 +145,8 @@ class Header extends React.Component {
 			cropHeight = 960
 		}
 
-		if (gd.data.language) gd.data.language.default = 1
+		if (gd.data.language)   gd.data.language.default = 1
+		if (appVersion) gd.data.appVersion = appVersion
 
 		this.voiceInit(gd.voice)
 
@@ -170,7 +173,7 @@ class Header extends React.Component {
 			composeType:  composeType,
 			name:         this.state.name,
 			bannerAds:    bannerAds || 0,
-			appVersion:   getLowVersion(cfg.pageContent),
+			appVersion,
 		}
 		this.setState({ loading: true })
 		if (id) da.id = id

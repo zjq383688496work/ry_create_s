@@ -421,8 +421,11 @@ const dataFormat = {
 				orgBanner  = orgData.banner,
 				orgVoice   = orgData.voice,
 				orgFeature = orgData.feature,
+				appVersion = orgData.data.appVersion,
 				nowDb      = nowData.data.db,
 				orgDb      = orgData.data.db
+
+			if (appVersion) nowData.data.appVersion = appVersion
 			if (orgBanner) {
 				if (!nowBanner) nowData.banner = orgData
 				nowBanner.auth = orgBanner.auth

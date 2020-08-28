@@ -22,13 +22,14 @@ class DbModel extends React.Component {
 		// this.refs.db.pageChange('tables', {})
 	}
 	render() {
-		let { visible } = this.state
+		let { visible } = this.state,
+			width = parseInt(document.documentElement.clientWidth * .7)
 		return (
 			<Drawer
 				title="数据库管理"
 				visible={visible}
 				placement="right"
-				width={1000}
+				width={width}
 				onClose={this.handleClose}
 			>
 				<DbTable ref="db" db={this.props.db} />
