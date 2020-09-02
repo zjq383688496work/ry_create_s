@@ -12,35 +12,40 @@ export default class TextBind extends React.Component {
 	}
 	render() {
 		let props = this.props,
-			{ ioInput, type } = props,
+			{ ioInput } = props,
 			ipt = ioInput? ioInput: props,
 			{ data } = props,
 			{ item = {} } = ipt,
-			{ bind } = data.data.content,
-			text = bind? item[bind] || '文字': '',
+			{ text, bind } = data.data.content,
+			str  = bind? item[bind] || '文字': '',
+			type = getAttr(str),
 			dom
-		if (bind === 'categories') {
-			if (text && getAttr(text) === 'Array') {
-				var text1 = text[0]
-				text = text1 && getAttr(text1) === 'Object'? text1.name: ''
-			}
-		} else {
-			if (!typeMap[getAttr(text)]) text = ''
+
+		if ((!bind && !text) || !item) return null
+		if (bind) {
+			if (bind === 'categories' && str && type === 'Array') {
+				let text1 = str[0]
+				str = text1 && getAttr(text1) === 'Object'? text1.name: ''
+			} else if (!typeMap[type]) str = ''
 		}
-		text += ''
+
+		if (text) str = text.substitute(item)
+
+		if (!str) return null
 		if (bind !== 'recommendReason') {
-			dom = text ? <div
-				style={cssColorFormat(this.props, 'text')}
-				dangerouslySetInnerHTML={{__html: textBreak(text)}}
-			></div> : null
+			dom = (
+				<div
+					style={cssColorFormat(this.props, 'text')}
+					dangerouslySetInnerHTML={{__html: textBreak(str)}}
+				></div>
+			)
 		} else {
-			dom = text
-			?
-			<span
-				style={cssColorFormat(this.props, 'text')}
-				dangerouslySetInnerHTML={{__html: textBreak(text)}}
-			></span>
-			: null
+			dom = (
+				<span
+					style={cssColorFormat(this.props, 'text')}
+					dangerouslySetInnerHTML={{__html: textBreak(str)}}
+				></span>
+			)
 		}
 		return (
 			<div className={`e-text`}>

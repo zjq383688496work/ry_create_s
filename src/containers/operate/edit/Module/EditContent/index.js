@@ -389,7 +389,6 @@ class EditContent extends React.Component {
 			let field = db.field.filter(_ => _.id === dbSource)[0]
 			if (field) {
 				if (!map) map = {}
-				debugger
 				field.data.forEach(_ => map[_.key] = _.name)
 			}
 		}
