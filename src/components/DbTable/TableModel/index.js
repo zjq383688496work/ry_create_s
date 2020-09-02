@@ -264,7 +264,7 @@ class TableModelEdit extends React.Component {
 						{
 							envType === 'operate'
 							?
-							<Input value={key} maxLength={32} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'key')} disabled={!update} />
+							<Input value={key} maxLength={32} placeholder="请填写" onChange={e => this.mainChange(e.target.value, 'key')} disabled={update} />
 							: key
 						}
 					</FormItem>
