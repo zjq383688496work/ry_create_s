@@ -27,7 +27,7 @@ class Tables extends React.Component {
 				<div>
 					{ envType === 'operate' && <a onClick={e => this.props.pageChange('addTable', { idx })}>编辑</a> }
 					<a style={{ marginLeft: 10 }} onClick={e => this.props.pageChange('views', { idx })}>查看</a>
-					{ envType === 'operate' && <a style={{ marginLeft: 10 }}>删除</a> }
+					{ envType === 'operate' && <a onClick={e => this.props.removeTable({ idx })} style={{ marginLeft: 10 }}>删除</a> }
 				</div>
 			),
 		}

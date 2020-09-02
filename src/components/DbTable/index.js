@@ -8,6 +8,7 @@ import * as actions from 'actions'
 import Tables     from './Tables'
 import TableModel from './TableModel'
 import Views      from './Views'
+import { Modal }  from 'antd'
 // import TableModel from './TableModel'
 
 import { typeMap } from './config'
@@ -100,15 +101,33 @@ class DbTable extends React.Component {
 		globalData.data.db = { data, field, maxId }
 		actions.updateGlobal(globalData)
 	}
+	removeTable = ({ idx }) => {
+		Modal.confirm({
+			title:   '确认要删除该表吗?',
+			content: '删除表会连带删除删除表对应的所有数据哦',
+			onOk: () => {
+				let { data, field } = this.state,
+					{ actions, editConfig } = this.props,
+					{ id } = field.splice(idx, 1),
+					{ globalData } = editConfig
+				delete data[id]
+				globalData.data.db = { data, field }
+				actions.updateGlobal(globalData)
+			},
+			onCancel() {},
+			okText: '确认',
+			cancelText: '取消',
+		})
+	}
 	render() {
 		let { data, field, params, state } = this.state
-		let comp = compState(state, data, field, params, this.pageChange, this.fieldCreate, this.fieldUpdate)
+		let comp = compState(state, data, field, params, this.pageChange, this.fieldCreate, this.fieldUpdate, this.removeTable)
 		return comp
 	}
 }
 
-function compState(state, data, field, params, pageChange, fieldCreate, fieldUpdate) {
-	let props = { data, field, params, pageChange, fieldCreate, fieldUpdate }
+function compState(state, data, field, params, pageChange, fieldCreate, fieldUpdate, removeTable) {
+	let props = { data, field, params, pageChange, fieldCreate, fieldUpdate, removeTable }
 	let comp = {
 		tables:   <Tables     { ...props } />,		// 数据库列表
 		addTable: <TableModel { ...props } />,		// 数据模型

@@ -19,7 +19,7 @@ const Full = extendRmSL(deepCopy(full), {})
 const Swiper = extendRmSL(deepCopy(swiper), {
 	data: {
 		layout: {
-			width:  336,
+			// width:  540,
 			height: 344,
 		}
 	}
