@@ -6,8 +6,8 @@ import * as actions from 'actions'
 
 import ColorPicker from 'rc-color-picker'
 import ThemeManage from 'compEdit/EditCommon/ThemeManage'
-import BackMusic from 'compEdit/EditCommon/BackMusic'
-import Advert from 'compEdit/EditCommon/Advertisement'
+import BackMusic   from 'compEdit/EditCommon/BackMusic'
+import Advert      from 'compEdit/EditCommon/Advertisement'
 import LoadingConfig from 'compEdit/EditCommon/LoadingConfig'
 
 import { Collapse, Icon, Input, Select } from 'antd'
@@ -201,17 +201,18 @@ class EditTheme extends React.Component {
 				<BackMusic
 					data={editConfig.globalData}
 					action={'updateGlobal'}
-				/> 
+				/>
 				<Advert 
 					data={editConfig.globalData}
 					action={'updateGlobal'}
+					actions={actions}
 				/>
 				<LoadingConfig
 					data={editConfig.globalData}
 					action={'updateGlobal'}
 					actions={actions}
 				/>
-        {
+				{
 					tempCfg.bannerAds == 1 ? 
 					<Collapse defaultActiveKey={['0']}>
 						<Panel header={`banner广告`} key={0}>

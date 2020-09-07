@@ -105,7 +105,7 @@ export default class Advert extends React.Component {
 						<div className="pgs-row" key={0}>
 							<div className="pgsr-name">广告开关</div>
 							<div className="pgsr-ctrl">
-								{this.renderRadio.bind(this,advertSwitch,advert.switch.value,'switch')()}
+								{this.renderRadio.bind(this, advertSwitch, advert.switch.value, 'switch')()}
 							</div>
 							<div className="pgsr-auth">
 								<Checkbox checked={advert.switch.auth || false} onChange={_ => this.onChangeAuth(_.target.checked,'switch')} />
