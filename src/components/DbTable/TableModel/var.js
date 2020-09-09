@@ -15,7 +15,7 @@ module.exports = {
 				},
 				{
 					name: 'active',
-					type: '日期',
+					type: '布尔值',
 					desc: '数据是否有效, 可以配合 startDate endDate 使用, 默认为关.'
 				},
 				{
@@ -35,7 +35,7 @@ module.exports = {
 			data: [
 				{
 					name: 'media',
-					type: '布尔值',
+					type: '媒体',
 					desc: '活动素材来源.'
 				},
 			],
@@ -45,7 +45,7 @@ module.exports = {
 			data: [
 				{
 					name: 'media',
-					type: '布尔值',
+					type: '媒体',
 					desc: '视频全屏类型判断素材来源.'
 				},
 			],
