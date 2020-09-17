@@ -15,8 +15,9 @@ export default class ViewByActivity extends React.Component {
 	componentDidMount() {}
 	componentWillUnmount() {}
 
-	renderDom = ({ url }) => {
-		return <img src={url} />
+	renderDom = ({ media }) => {
+		if (!media) return null
+		return <img src={media} />
 	}
 	render() {
 		let { item } = this.props.ioInput

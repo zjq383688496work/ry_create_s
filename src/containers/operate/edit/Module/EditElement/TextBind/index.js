@@ -13,7 +13,7 @@ export default class TextBind extends React.Component {
 	render() {
 		let props = this.props,
 			{ ioInput } = props,
-			ipt = ioInput? ioInput: props,
+			ipt = ioInput || props,
 			{ data } = props,
 			{ item = {} } = ipt,
 			{ text, bind } = data.data.content,

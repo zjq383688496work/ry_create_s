@@ -7,9 +7,9 @@ import * as actions from 'actions'
 import Color       from 'compEdit/EditCommon/Color'
 import { Row, Col, Checkbox, Collapse, Icon, Input, InputNumber, Radio, Select, Switch, Slider } from 'antd'
 const  { TextArea } = Input
-const  { Panel }    = Collapse
-const RadioButton   = Radio.Button
-const RadioGroup    = Radio.Group
+const  { Panel }  = Collapse
+const RadioButton = Radio.Button
+const RadioGroup  = Radio.Group
 const Option = Select.Option
 
 import Banner            from './Banner'
@@ -563,7 +563,7 @@ class EditContent extends React.Component {
 					?
 					<Collapse defaultActiveKey={['0', '1']}>
 						<Panel header={`编辑布局`} key={0}>
-							<CompLayout props={this.props} db={db} parent={parentComp} layout={compLay} parentLayout={mockData.layout} styleName={plMap[compName]} updateComp={this.updateComp} />
+							<CompLayout props={this.props} db={db} parent={parentComp} data={da} layout={compLay} parentLayout={mockData.layout} styleName={plMap[compName]} updateComp={this.updateComp} />
 						</Panel>
 						<Panel header={`子元素`} key={1}>
 							<ChildElement name={compName} db={db} parent={parentComp} layout={compLay} updateComp={this.updateComp} language={language} globalData={globalData} />

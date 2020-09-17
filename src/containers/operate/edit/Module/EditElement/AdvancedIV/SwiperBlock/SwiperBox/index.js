@@ -71,16 +71,6 @@ export default class SwiperBox extends React.Component {
 				<Swiper {...opts} ref={node => { if (node) this.swiper = node.swiper }}>
 					{ children }
 				</Swiper>
-				{
-					options.pagination
-					?
-					<PageElement
-						current={this.state.current}
-						total={children.length}
-						props={props}
-					/>
-					: null
-				}
 			</div>
 		): null
 	}

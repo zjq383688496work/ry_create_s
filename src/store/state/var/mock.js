@@ -220,7 +220,7 @@ module.exports = {
 		storeBlock:      deepCopy(Item.store),
 		// swiperBind:      deepCopy(Item.store),
 		catgByActivity2: deepCopy(Item.storeActivityCatg),
-		listByActivity:  deepCopy(Item.storeActivityList),
+		// listByActivity:  deepCopy(Item.storeActivityList),
 		listByVoice:     deepCopy(Item.store),
 	}
 }

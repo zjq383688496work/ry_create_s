@@ -1,6 +1,4 @@
-
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-const line = authInit(require('./content/line'))
 const t = authInit(require('./content/time'))
 const w = authInit(require('./content/weather'))
  
@@ -218,7 +216,6 @@ const data = {
 		weather4,
 		weather5,
 		weather6,
-		line
 	]
 }
 module.exports = data 

@@ -87,8 +87,7 @@ export default class SwiperImgAndVideo extends React.Component {
 	}
 	render() {
 		let { data: props, editConfig } = this.props
-		if (envType === 'operate' && !props.editConfig) return null
-		if (envType === 'business' && editConfig) return null
+		if (!props.editConfig) return null
 		let { content } = props.data.data
 		return (
 			<div>

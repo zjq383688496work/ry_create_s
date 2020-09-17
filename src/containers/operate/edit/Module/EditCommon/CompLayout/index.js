@@ -2,6 +2,7 @@ import React from 'react'
 import './index.less'
 
 import { Checkbox, Icon, message, Modal } from 'antd'
+import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
 
 import Rnd from 'react-rnd'
 
@@ -41,7 +42,7 @@ export default class CompLayout extends React.Component {
 		super(props)
 		this.state = {
 			visible: false,
-			id: `lay_${rn(1e9)}`,
+			id:  `lay_${rn(1e9)}`,
 			idx: -1,
 			active: false
 		}
@@ -94,31 +95,50 @@ export default class CompLayout extends React.Component {
 		var { idx } = this.state
 		this.setState({ idx: i === idx? -1: i })
 	}
+	onSortEnd = (o, e) => {
+		let { layout, updateComp, data } = this.props
+		let eles = deepCopy(layout)
+		let old  = o.oldIndex
+		let next = o.newIndex
+		let item = eles[old]
+		if (old === next) return this.selectItem(next)
+		data.componentLayout = arrayMove(eles, old, next)
+		updateComp()
+		this.selectItem(next)
+	}
 	renderList = layout => {
-		var { idx } = this.state,
-			layoutMap  = {},
-			len = layout.length - 1,
-			layoutCopy = deepCopy(layout).reverse()
-		var list = layoutCopy.map(({ name }, i) => {
+		let { idx } = this.state,
+			layoutMap    = {},
+			layoutCopy   = deepCopy(layout)
+		let SortableItem = SortableElement(({ _: { name }, i }) => {
+			if (!i) layoutMap = {}
 			if (!layoutMap[name]) layoutMap[name] = 0
 			++layoutMap[name]
-			var index = layoutMap[name],
-				ii = len - i
+			let index = layoutMap[name]
 			return (
 				<dd
 					key={i}
-					className={`cl-dd${idx === ii? ' s-active': ''}`}
-					onClick={() => this.selectItem(ii)}
+					className={`cl-dd${idx === i? ' s-active': ''}`}
 				>
 					{compMap[name]}{index}
 				</dd>
 			)
 		})
+		let SortableList = SortableContainer(({ eles }) => {
+			return (
+				<dl>
+					<dt>图层列表</dt>
+					{
+						eles.map((_, i) => <SortableItem key={i} index={i} i={i} _={_} />)
+					}
+				</dl>
+			)
+		})
 		return (
-			<dl>
-				<dt>图层列表</dt>
-				{list}
-			</dl>
+			<SortableList
+				eles={layoutCopy}
+				onSortEnd={this.onSortEnd}
+			/>
 		)
 	}
 	render() {

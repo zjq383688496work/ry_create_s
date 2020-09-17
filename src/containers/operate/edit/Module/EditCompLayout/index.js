@@ -1,10 +1,3 @@
-/**
- * @Author: Liao Hui <liaohui>
- * @Date:   2018-01-25T11:52:09+08:00
- * @Last modified by:   Liao Hui
- * @Last modified time: 2018-04-19T14:29:30+08:00
- */
-
 import React from 'react'
 import './index.less'
 import { bindActionCreators } from 'redux'
@@ -68,42 +61,31 @@ class EditCompLayout extends React.Component {
 		let { multiComp }  = globalData
 		let { index, list, type } = multiComp
 		
-		var s = {}
+		var s  = {}
 		s[idx] = true
 		multiComp.index = s
 		multiComp.list  = [idx]
-		multiComp.type = 'parent'
+		multiComp.type  = 'parent'
 		delete multiComp.parentIdx
 		actions.updateGlobal(globalData)
 		console.log(JSON.stringify(multiComp.list))
 	}
-	/*selectCompCus = (e, data, idx) => {
-		e.stopPropagation()
-		let { actions, editConfig } = this.props
-		let { curData } = editConfig
-		let { cusCompIdx, contentType } = curData
-		// curData.compIdx    = idx
-		curData.cusCompIdx = idx
-		actions.updateCur(curData)	// 更新 当前数据
-		actions.selectComp(data)
-	}*/
 	onSortEnd = (o, e) => {
 		let { data, actions, editConfig } = this.props
 		let curData = editConfig.curData
-		let eles = deepCopy(data.elements).reverse()
-		let len  = eles.length - 1
+		let eles = deepCopy(data.elements)
 		let old  = o.oldIndex
 		let next = o.newIndex
 		let item = eles[old]
 		if (old === next) {
-			this.selectComp(e, item, len - next)
-			this.selectMulti(len - next)
+			this.selectComp(e, item, next)
+			this.selectMulti(next)
 			return
 		}
-		data.elements = arrayMove(eles, old, next).reverse()
+		data.elements = arrayMove(eles, old, next)
 
 		actions.updatePage(curData.pageGroupIdx, curData.pageIdx, data)
-		this.selectComp(e, item, len - next)
+		this.selectComp(e, item, next)
 	}
 	barHide = e => {
 		this.setState({ check: false })
@@ -111,39 +93,6 @@ class EditCompLayout extends React.Component {
 	barShow = e => {
 		this.setState({ check: true })
 	}
-	/*renderVoice = ({ data: { components } }) => {
-		if (!components.length) return
-		let { curData } = this.props.editConfig,
-			{ cusCompIdx = -1 } = curData
-		let { check } = this.state
-		let eles = deepCopy(components)
-		let map  = deepCopy(compNum)
-		let names = new Array(eles.length).fill().map((_, i) => {
-			let name = eles[i].name,
-				cn   = compMap[name]
-			++map[name]
-			return cn + map[name]
-		})
-		let ctrlNode = eles.map((_, i) => (
-			<li
-				key={i}
-				className={`pecl-li${cusCompIdx === i? ' s-active': ''}`}
-				onClick={e => cusCompIdx !== i && this.selectCompCus(e, _, i)}
-			>
-				<div className="pl-name">{ names[i] } - { _._id || _.name }</div>
-			</li>
-		))
-		return (
-			<div className={`pe-comp-layout${check? ' pe-comp-layout-open': ''}`}>
-				<div className="pecl-title">图层列表</div>
-				<a className="bar-open" onClick={this.barShow} title="展开图层列表"><Icon type="menu-unfold" /></a>
-				<a className="bar-close" onClick={this.barHide} title="关闭图层列表"><Icon type="menu-fold" /></a>
-				<div className="pecl-list">
-					<ul>{ ctrlNode }</ul>
-				</div>
-			</div>
-		)
-	}*/
 	render() {
 		let { data, editConfig } = this.props,
 			{ curComp, curData, globalData } = editConfig,
@@ -155,11 +104,6 @@ class EditCompLayout extends React.Component {
 		let eles = data.elements
 		if (!eles) return false
 		eles = deepCopy(eles)
-		// if (voice && (name === 'voice' || (parentComp && parentComp.name === 'voice'))) {
-		// 	return this.renderVoice(voice)
-		// }
-		let len  = eles.length - 1
-		eles.reverse()
 		let names = new Array(eles.length).fill().map((_, i) => {
 			let name = eles[i].name,
 				cn   = compMap[name]
@@ -169,12 +113,12 @@ class EditCompLayout extends React.Component {
 		let ctrlNode = eles.map((_, i) => (
 			<li key={i} className={`pecc-li`}>
 				<a onClick={e => this.copyComp(e, _)}><Icon type="copy"/></a>
-				<a onClick={e => this.removeComp(e, len - i)}><Icon type="delete"/></a>
+				<a onClick={e => this.removeComp(e, i)}><Icon type="delete"/></a>
 			</li>
 		))
-		let SortableItem = SortableElement(({ _: { _id, name }, i, l }) => {
+		let SortableItem = SortableElement(({ _: { _id, name }, i }) => {
 				return (
-					<li className={`pecl-li${(l - i) === editConfig.curData.compIdx? ' s-active': ''}`}>
+					<li className={`pecl-li${i === editConfig.curData.compIdx? ' s-active': ''}`}>
 						<div className="pl-name">{ names[i] } - { _id || name }</div>
 						<div className="pl-ctrl">
 							<a><Icon type="copy"/></a>
@@ -187,7 +131,7 @@ class EditCompLayout extends React.Component {
 		const SortableList = SortableContainer(({ eles }) => {
 			return (
 				<ul>
-					{ eles.map((_, i) => (<SortableItem key={i} index={i} l={len} i={i} _={_} />)) }
+					{ eles.map((_, i) => <SortableItem key={i} index={i} i={i} _={_} />) }
 				</ul>
 			)
 		})

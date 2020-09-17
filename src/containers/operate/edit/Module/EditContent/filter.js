@@ -35,9 +35,15 @@ export function setSwiperImgAndVideo(editConfig){
 			if (val.name === 'swiperImgAndVideo') {
 				let contentList = deepCopy(val.data.content)
 				if(getAttr(contentList) != 'Array') return
-				contentList.forEach(e=>{
-					!e.delayOnly && e.type=='image'? e.delayOnly = 5: null
-					!e.date? e.date = '': null
+				contentList.forEach(e => {
+					if (!e) return
+					let { date, delayOnly, type } = e
+					if (!delayOnly && type=='image') {
+						e.delayOnly = 5
+					}
+					if (!date) {
+						e.date = ''
+					}
 				})
 				val.data.content = contentList
 			}

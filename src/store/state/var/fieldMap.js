@@ -80,6 +80,6 @@ module.exports = {
 	storeDetails2:   deepCopy(Map.store),
 	// swiperBind:      deepCopy(Map.store),
 	catgByActivity2: deepCopy(Map.activityCatg),
-	listByActivity:  deepCopy(Map.activityList),
+	// listByActivity:  deepCopy(Map.activityList),
 	voice:           deepCopy(Map.voice)
 }

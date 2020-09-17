@@ -9,10 +9,11 @@ export default class ListByActivity extends React.Component {
 	constructor(props) {
 		super(props)
 	}
-	renderList = (idx, list) => {
+	renderList = (idx, list, types) => {
 		let { data } = this.props,
 			{ componentLayout, layout } = data.data
 		if (!list.length) return null
+
 		return list.map((_, i) => {
 			let cl   = [],
 				isAV = !i
@@ -26,8 +27,8 @@ export default class ListByActivity extends React.Component {
 		})
 	}
 	render() {
-		let { idx, list } = this.props.ioInput
-		let listDom = this.renderList(idx, list)
+		let { idx, list, types } = this.props.ioInput
+		let listDom = this.renderList(idx, list, types)
 		return ( 
 			<div className="e-list-by-activity">
 				{ listDom }

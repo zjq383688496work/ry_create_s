@@ -80,10 +80,6 @@ module.exports = {
 	time:                  authInit(require('./dateWeather/content/time')),
 	// 天气 
 	weather:               authInit(require('./dateWeather/content/weather')),
-	//天气图标
-	kongQi:                authInit(require('./dateWeather/content/kongQi')),
-	feng:                  authInit(require('./dateWeather/content/feng')),
-	shiDu:                 authInit(require('./dateWeather/content/shiDu')),
 	
 	/* 业务组件 */
 	// 店铺列表

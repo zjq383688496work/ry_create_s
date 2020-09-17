@@ -1,6 +1,5 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
 const w = authInit(require('./content/weather'))
-const l = authInit(require('./content/line'))
 
 //自定义
 const weather  = extendRmSL(styleIdxChange(8, deepCopy(w)), {
@@ -119,21 +118,6 @@ const weather6 = extendRmSL(styleIdxChange(5, deepCopy(w)), {
 		} 
 	} 
 })
-const line = extendRmSL(deepCopy(l), {
-	data:{
-		layout:{
-			top:15.5,
-			left:393,  
-			height:30,  
-			width:1
-		}, 
-		style:{ 
-			filterBox:{
-				backgroundColor: { type: 'custom', color: '#ACACAC' }
-			}    
-		} 
-	}
-})
 
 const data = {
 	layout: {
@@ -161,7 +145,6 @@ const data = {
 		weather4,
 		weather5,
 		weather6,
-		line
 	]
 }  
 module.exports = data 

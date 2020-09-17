@@ -40,20 +40,13 @@ export default class AdvancedIV extends React.Component {
 		let { data, db } = this.props,
 			{ ioInput }  = this.state,
 			{ content }  = data.data,
+			{ current }  = ioInput,
 			{ dbSource } = content
-		if (!db || !dbSource) return
-		let list   = db.data[dbSource],
-			fields = db.field.filter(_ => _.id === dbSource)
 
-		if (!list || !fields.length) return
-		let fieldList = fields[0].data
-		let field = {}
+		let { list, field } = getDB(dbSource, db)
+		let item = { ...list[0], page: current, total: list.length }
 
-		fieldList.forEach(({ key, name }) => {
-			field[key] = name
-		})
-
-		Object.assign(ioInput, { list, field })
+		Object.assign(ioInput, { list, field, item })
 		this.setState({ ioInput })
 	}
 

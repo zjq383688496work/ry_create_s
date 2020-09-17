@@ -4,7 +4,7 @@ import './index.less'
 import CustomO from 'compEdit/EditElement/Custom'
 import CustomB from 'compEditB/EditElement/Custom'
 import CustomV from 'view/Element/Custom'
-import * as Server from 'server'
+// import * as Server from 'server'
 
 let cusMap = {
 	operate:  CustomO,
@@ -38,12 +38,28 @@ export default class WonderfulActivity2 extends React.Component {
 	}
 
 	getData = e => {
-		let { ioInput } = this.state
-		Server.store.getActivityList(6, list => {
-			ioInput.list = list
-			ioInput.item = list[0]
-			this.setState({ ioInput })
+		let { data, db } = this.props,
+			{ ioInput }  = this.state,
+			{ content }  = data.data,
+			{ current }  = ioInput,
+			{ dbSource } = content
+		let { list, field, types } = getDB(dbSource, db)
+		list = deepCopy(list)
+		let mediaType = types[2]
+		list.forEach(item => {
+			Object.keys(mediaType).forEach(key => {
+				let { media } = item[key]
+				let { originalSizePreview, preview, url } = media
+				item[key] = originalSizePreview || preview || url || ''
+			})
 		})
+		Object.assign(ioInput, { list, field, item: list[0], types })
+		this.setState({ ioInput })
+		// Server.store.getActivityList(6, list => {
+		// 	ioInput.list = list
+		// 	ioInput.item = list[0]
+		// 	this.setState({ ioInput })
+		// })
 	}
 
 	render() {

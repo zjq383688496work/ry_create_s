@@ -70,18 +70,17 @@ class EditChildCompLayout extends React.Component {
 		let { data, actions, editConfig } = this.props
 		let curData = editConfig.curData
 		let { components } = data.data
-		let eles = deepCopy(components).reverse()
-		let len  = eles.length - 1
+		let eles = deepCopy(components)
 		let old  = o.oldIndex
 		let next = o.newIndex
 		let item = eles[old]
 		if (old === next) {
-			this.selectComp(e, len - next)
-			this.selectMulti(len - next)
+			this.selectComp(e, next)
+			this.selectMulti(next)
 			return
 		}
-		data.data.components = arrayMove(eles, old, next).reverse()
-		this.selectComp(e, len - next)
+		data.data.components = arrayMove(eles, old, next)
+		this.selectComp(e, next)
 	}
 	barHide = e => {
 		this.setState({ check: false })
@@ -101,16 +100,14 @@ class EditChildCompLayout extends React.Component {
 		let { check } = this.state
 		let parentName = compMap[name]
 		eles = deepCopy(eles)
-		let len = eles.length - 1
-		eles.reverse()
 		let ctrlNode = eles.map((_, i) => (
 			<li key={i} className={`pecc-li`}>
-				<a onClick={e => this.removeComp(e, len - i)}><Icon type="delete"/></a>
+				<a onClick={e => this.removeComp(e, i)}><Icon type="delete"/></a>
 			</li>
 		))
-		let SortableItem = SortableElement(({ _: { _id, name }, i, l }) => {
+		let SortableItem = SortableElement(({ _: { _id, name }, i }) => {
 				return (
-					<li className={`pecl-li${(l - i) === editConfig.curData.cusCompIdx? ' s-active': ''}`}>
+					<li className={`pecl-li${i === editConfig.curData.cusCompIdx? ' s-active': ''}`}>
 						<div className="pl-name">{ compMap[name] }</div>
 						<div className="pl-ctrl">
 							<a><Icon type="delete"/></a>
@@ -122,7 +119,7 @@ class EditChildCompLayout extends React.Component {
 		const SortableList = SortableContainer(({ eles }) => {
 			return (
 				<ul>
-					{ eles.map((_, i) => (<SortableItem key={i} index={i} l={len} i={i} _={_} />)) }
+					{ eles.map((_, i) => <SortableItem key={i} index={i} i={i} _={_} />) }
 				</ul>
 			)
 		})

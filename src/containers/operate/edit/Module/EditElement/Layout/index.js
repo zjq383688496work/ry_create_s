@@ -47,7 +47,6 @@ class Layout extends React.Component {
 	render() {
 		let { data = {}, layout, components, autoplay, styleObj = {}, editConfig } = this.props
 		let { language } = editConfig.globalData.data
-
 		let childNode = components.map((_, i) => {
 			let compName = _.name,
 				layout   = _.data.layout,

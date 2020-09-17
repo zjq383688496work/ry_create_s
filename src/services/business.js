@@ -155,12 +155,12 @@ module.exports = extend(window, {
 		if (statusRemoveAuth[name]) {
 			let { idx, list } = status,
 				curStatus = list[idx]
-			cs.forEach(comp => {
-				let { name: _name, _id } = comp
+			cs.forEach((comp, i) => {
+				let { name: _name, _id = i } = comp
 				if (_name === 'tabByTabs') {
 					feature.tabs = feature.tabs.filter(tb => tb._id != _id)
 				} else {
-					_data.components = curStatus.components = curStatus.components.filter(cp => _id != cp._id)
+					_data.components = curStatus.components = curStatus.components.filter((cp, j) => _id != (cp._id || j))
 				}
 			})
 		} else {
@@ -192,7 +192,26 @@ module.exports = extend(window, {
 			})
 		})
 		return version.value
-	}
+	},
+	// 获取db数据
+	getDB(id, db) {
+		let field = {},
+			types = {}
+		if (!db || !id) return { list: [], field, types }
+		let { data } = db,
+			list   = data[id],
+			fields = db.field.filter(_ => _.id === id)
+		if (!list || !fields.length) return { list: [], field, types }
+		let [{ data: fieldList }] = fields
+		fieldList.forEach(({ key, name, type }) => {
+			field[key] = name
+			if (!types[type]) types[type] = {}
+			types[type][key] = 1
+		})
+		// let media = types[2]
+		// debugger
+		return { list, field, types }
+	},
 })
 
 // 组件ID生成

@@ -106,12 +106,12 @@ class DbTable extends React.Component {
 			title:   '确认要删除该表吗?',
 			content: '删除表会连带删除删除表对应的所有数据哦',
 			onOk: () => {
-				let { data, field } = this.state,
+				let { data, field, maxId } = this.state,
 					{ actions, editConfig } = this.props,
 					{ id } = field.splice(idx, 1),
 					{ globalData } = editConfig
 				delete data[id]
-				globalData.data.db = { data, field }
+				Object.assign(globalData.data.db, { data, field })
 				actions.updateGlobal(globalData)
 			},
 			onCancel() {},

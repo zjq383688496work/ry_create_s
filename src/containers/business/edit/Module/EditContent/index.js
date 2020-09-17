@@ -142,9 +142,9 @@ class EditContent extends React.Component {
 		)
 	} 
 	// 日期范围
-	renderDate(cfg, data, obj, val, key, index){
+	renderDate(cfg, data, obj, val, key, index) {
 		let defaultValue = val ? JSON.parse(val) : ''
-		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value,key,obj,index)}></DatePickerRY>)
+		return (<DatePickerRY defaultValue={defaultValue} onChange={value=> this.onChange(value, key, obj, index)}></DatePickerRY>)
 	}
 	// 跳转路由
 	renderRouter(cfg, data, obj, val, key, index) {
@@ -414,7 +414,7 @@ class EditContent extends React.Component {
 			}
 			if (!auth || !render) return false
 			// 根据样式类型渲染对应组件
-			let dom = render.bind(this, cm, parent, content, val, p, i)()
+			let dom = render.bind(this, cm, parent, content, val, p, index)()
 			ci++
 			return (
 				<div className="pgs-row" key={i}>

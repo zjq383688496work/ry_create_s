@@ -1,5 +1,4 @@
 let { authInit, deepCopy, extendRmSL, styleIdxChange } = require('state/common')
-
 const t = authInit(require('./content/time'))
 const w = authInit(require('./content/weather'))
  
