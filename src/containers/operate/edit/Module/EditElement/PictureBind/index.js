@@ -27,7 +27,6 @@ export default class PictureBind extends React.Component {
 		else if (t === 'String') img = img
 		else if (t === 'Array')  img = img[0] || []
 		else img = compImgFormat(this.props, img)
-		// img = !typeMap[t]? img + '': t === 'String'? img: t === 'Array'? img[0] || '': compImgFormat(this.props, img)
 		return envType === 'business' && !img
 			?
 			false

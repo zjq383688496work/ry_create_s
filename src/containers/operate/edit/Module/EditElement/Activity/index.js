@@ -4,7 +4,6 @@ import './index.less'
 import CustomO from 'compEdit/EditElement/Custom'
 import CustomB from 'compEditB/EditElement/Custom'
 import CustomV from 'view/Element/Custom'
-// import * as Server from 'server'
 
 let cusMap = {
 	operate:  CustomO,
@@ -14,7 +13,6 @@ let cusMap = {
 export default class WonderfulActivity2 extends React.Component {
 	constructor(props) {
 		super(props)
-		// console.log("新精彩活动："+JSON.stringify(props));
 
 		let ioInput = {
 			list: [],
@@ -30,9 +28,6 @@ export default class WonderfulActivity2 extends React.Component {
 	}
 	componentDidMount() {}
 	componentWillUnmount() {}
-	// componentWillReceiveProps() {
-	// 	this.getData()
-	// }
 
 	ioOuter = ipt => {
 	}
@@ -55,11 +50,6 @@ export default class WonderfulActivity2 extends React.Component {
 		})
 		Object.assign(ioInput, { list, field, item: list[0], types })
 		this.setState({ ioInput })
-		// Server.store.getActivityList(6, list => {
-		// 	ioInput.list = list
-		// 	ioInput.item = list[0]
-		// 	this.setState({ ioInput })
-		// })
 	}
 
 	render() {
