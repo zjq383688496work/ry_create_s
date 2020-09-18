@@ -8,32 +8,9 @@
 	}
 }
 .e-swiperblock-by-iv.Style2 {
-	// position: relative;
-	// width:  100%;
-	// height: 100%;
 	.swiper-slide {
 		position: relative;
-		// transition: ~"filter ease .3s, transform ease .3s";
-		transition: transform ease .3s;
-		transform: scale3d(.8,.8,.8);
-		// filter: blur(4px);
-		transform-origin: 0 64%;
-		pointer-events: none;
-		.pg-layout-ele {
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			opacity: .6;
-			// .pg-layout-ele {
-			// }
-		}
-	}
-	.swiper-slide-active {
-		transform: scale3d(1,1,1);
-		// filter: blur(0);
-		z-index: 1;
-		.pg-layout-ele {
-			opacity: 1;
-		}
+		transition: transform ease .3s, opacity ease .3s;
+		opacity: 0;
 	}
 }

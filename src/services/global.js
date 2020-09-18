@@ -7,7 +7,7 @@ module.exports = extend(window, {
 	},
 	// 获取真实数据类型
 	getAttr(element) {
-		return Object.prototype.toString.call(element).match(/[A-Z][a-z]*/)[0]
+		return Object.prototype.toString.call(element).slice(8, -1)
 	},
 	// 获取真实数据类型
 	isEmptyObject(obj) {

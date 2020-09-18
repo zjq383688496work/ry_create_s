@@ -1,6 +1,6 @@
 import React from 'react'
 import Swiper from 'react-id-swiper'
-import './index.less'
+// import './index.less'
 
 export default class SwiperBox extends React.Component {
 	constructor(props) {
@@ -24,34 +24,47 @@ export default class SwiperBox extends React.Component {
 	}
 
 	componentWillMount() {}
-
 	componentDidMount() {}
-
 	componentWillUnmount() {}
 
+	swiperInit = node => {
+		if (!node) return
+		let { getSwiper, slideChange } = this.props
+		let swiper = this.swiper = node.swiper
+		// window.$swiper = swiper
+		if (getSwiper) getSwiper(swiper)
+		if (slideChange) slideChange()
+	}
+
 	optsFormat = len => {
-		let { options = {
-			direction: 'horizontal',
-			effect:  'slide',
-			autoplay: true,
-			loop:  true,
-			speed: 500,
-			delay: 3000
-		} } = this.props,
+		let me = this
+		let {
+				options = {
+					direction: 'horizontal',
+					effect:  'slide',
+					autoplay: true,
+					loop:  false,
+					speed: 500,
+					delay: 3000
+				},
+				slideChange,
+			} = this.props,
 			opts = deepCopy(options)
 		delete opts.pagination
 		if (len < 2) {
 			opts.autoplay = false
-			opts.loop = false
 			return opts
 		}
+		// opts.autoplay = false
 		let { autoplay, delay } = opts
 		if (autoplay) opts.autoplay = { delay, disableOnInteraction: false }
 		opts.containerClass  = `swiper-box swiper-container`
 		opts.on = {
-			slideChange: e => {
-				if (!this.swiper) return
-				this.setState({ current: this.swiper.realIndex })
+			slideChange: function() {
+				if (!me.swiper) return
+				let { realIndex } = me.swiper
+				if (slideChange) slideChange()
+				me.setState({ current: realIndex })
 			}
 		}
 		delete opts.delay
@@ -68,7 +81,7 @@ export default class SwiperBox extends React.Component {
 		?
 		(
 			<div className="swiper-box">
-				<Swiper {...opts} ref={node => { if (node) this.swiper = node.swiper }}>
+				<Swiper {...opts} ref={this.swiperInit}>
 					{ children }
 				</Swiper>
 			</div>

@@ -115,6 +115,10 @@ const data = {
 			offsetSStr:     '',
 			offsetR:        0,
 			offsetRStr:     '',
+			offsetO:        1,
+			offsetOStr:     '',
+			offsetZ:        1,
+			offsetZStr:     ''
 		},
 		remarks: { text: '缓冲配置: 慎用, 否则会有反效果, 不懂问开发, 仅在 <自定义缩放> 有效.', color: 'red' }
 	},
@@ -141,13 +145,9 @@ module.exports = {
 				data: deepCopy(data)
 			},
 			{
-				name: '普通缩放',
-				data: deepCopy(data)
-			},
-			{
 				name: '自定义缩放',
 				data: deepCopy(data)
-			}
+			},
 		]
 	},
 	// 功能特性

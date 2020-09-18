@@ -85,7 +85,7 @@ class DbTable extends React.Component {
 	}
 	// 表创建
 	fieldCreate = item => {
-		let { field, maxId } = this.state
+		let { field, maxId = 0 } = this.state
 		Object.assign(item, {
 			id: ++maxId,
 			maxId: 0

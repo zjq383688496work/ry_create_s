@@ -2,7 +2,8 @@ import React from 'react'
 import './index.less'
 
 import Layout from 'compEdit/EditElement/Layout'
-import SwiperBox from './SwiperBox'
+import SwiperBox  from './SwiperBox'
+import calcOffset from './util_offset'
 
 export default class SwiperBlockByIV extends React.Component {
 	constructor(props) {
@@ -15,7 +16,9 @@ export default class SwiperBlockByIV extends React.Component {
 		let s = init(props, state)
 		let { rebuild } = s
 		// 数据相等不渲染
-		if (!rebuild && rebuild === state.rebuild) return false
+		if (!rebuild && rebuild === state.rebuild) return
+		// this.slideChange()
+		this.$swiper = null
 		this.setState({ ...s })
 	}
 	shouldComponentUpdate(newProps, newState) {
@@ -25,16 +28,25 @@ export default class SwiperBlockByIV extends React.Component {
 		let { data, ioInput } = this.props,
 			{ list = [] } = ioInput,
 			{ content, componentLayout, layout } = data.data,
-			{ swiperOptions } = content
-		if (!state) return deepCopy({ list, swiperOptions, componentLayout, layout, rebuild: false })
+			{ swiperOptions, bufferOptions } = content
+		if (!state) return deepCopy({ list, swiperOptions, bufferOptions, componentLayout, layout, rebuild: false })
 		return deepCopy({
-			list, swiperOptions, componentLayout, layout,
-			rebuild: !(comObject(list, state.list) && comObject(swiperOptions, state.swiperOptions) && comObject(componentLayout, state.componentLayout) && comObject(layout, state.layout))
+			list, swiperOptions, bufferOptions, componentLayout, layout,
+			rebuild: !(comObject(list, state.list) && comObject(swiperOptions, state.swiperOptions) && comObject(bufferOptions, state.bufferOptions) && comObject(componentLayout, state.componentLayout) && comObject(layout, state.layout))
 		})
+	}
+	getSwiper = $swiper => {
+		this.$swiper = $swiper
+	}
+	slideChange = () => {
+		if (!this.$swiper) return
+		let { bufferOptions } = this.props.data.data.content
+		let { realIndex, slides } = this.$swiper
+		calcOffset(realIndex, slides, bufferOptions)
 	}
 	renderList = e => {
 		let { list = [], swiperOptions, componentLayout, layout, rebuild } = this.state
-		let slide = list.map((_, i) => {
+		let slide  = list.map((_, i) => {
 			return (
 				<div className="swiper-slide" key={i}>
 					<Layout data={_} layout={layout} components={componentLayout} styleObj={cssColorFormat(this.props, 'filterBox')} />
@@ -46,6 +58,8 @@ export default class SwiperBlockByIV extends React.Component {
 				props={this.props}
 				options={swiperOptions}
 				rebuild={rebuild}
+				getSwiper={this.getSwiper}
+				slideChange={this.slideChange}
 			>{ slide }</SwiperBox>
 		)
 	}

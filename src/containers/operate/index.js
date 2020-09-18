@@ -71,11 +71,7 @@ class OperateComponent extends React.Component {
 				let group  = cfg.pageList.group[0]
 				if (group.name === '默认') group.name = '页面跳转'
 				let cur = group.pages[0]
-				// Object.values(cfg.pageContent).forEach(p => {
-				// 	p.elements = p.elements.filter(_ => _.name != 'splitLine')
-				// })
 				dataFormat.get.pageEach(cfg.pageContent)
-
 				let newCfg = {
 					curComp: {},
 					curData: { ...curData, ...cur },

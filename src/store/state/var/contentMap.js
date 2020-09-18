@@ -118,6 +118,10 @@ module.exports = {
 	offsetR:              { name: '旋转',     type: 'Number', min: 0, max: 359, step: 1 },
 	offsetRStr:           { name: '旋转倍率',  type: 'Input',  min: 0, max: 100 },
 	offsetT:              { name: '偏移时间',  type: 'Number', min: 0, max: 1e3, step: 50 },
+	offsetO:              { name: '透明',     type: 'Number', min: 0, max: 1, step: .1 },
+	offsetOStr:           { name: '透明倍率',  type: 'Input',  min: 0, max: 100 },
+	offsetZ:              { name: 'Z轴',     type: 'Number', min: 1, max: 1, step: 1 },
+	offsetZStr:           { name: 'Z轴层次',  type: 'Input',  min: 0, max: 100 },
 	// 弹幕
 	requestCount:         { name: '请求数量', type: 'Number', min: 10, max: 200 },
 

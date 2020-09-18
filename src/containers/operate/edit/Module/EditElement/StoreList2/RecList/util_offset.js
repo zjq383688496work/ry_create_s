@@ -8,7 +8,7 @@ function calcOffset(list, props, _cols, _rows) {
 		{ width: cWidth, margin } = filter,
 		{ right, left } = margin,
 		rows = width / (cWidth + right + left) >> 0,
-		{ offsetX, offsetY, offsetS, offsetR, speed, delay } = bufferOptions,
+		{ offsetX, offsetY, offsetS, offsetR } = bufferOptions,
 		{ offsetXStr, offsetYStr, offsetSStr, offsetRStr }   = bufferOptions,
 		oxRange = getRange(offsetXStr, indexMultiple),
 		oyRange = getRange(offsetYStr, indexMultiple),
