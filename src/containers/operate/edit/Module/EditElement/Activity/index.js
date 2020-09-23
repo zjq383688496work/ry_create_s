@@ -43,7 +43,9 @@ export default class WonderfulActivity2 extends React.Component {
 		let mediaType = types[2]
 		list.forEach(item => {
 			Object.keys(mediaType).forEach(key => {
-				let { media } = item[key]
+				let med = item[key]
+				if (!med) return item[key] = ''
+				let { media } = med
 				let { originalSizePreview, preview, url } = media
 				item[key] = originalSizePreview || preview || url || ''
 			})
