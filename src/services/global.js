@@ -70,6 +70,7 @@ module.exports = extend(window, {
 	},
 	// 文本换行
 	textBreak(str = '') {
+		if (typeof str != 'string') return str
 		return str.replace(/\n|\r\n/g, '<br/>').replace(/ /g, '&nbsp;')
 	},
 	getEnv() {
