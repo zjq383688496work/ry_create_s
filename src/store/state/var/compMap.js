@@ -95,6 +95,8 @@ module.exports = {
 		pageByIV:                '分页',
 		buttonFullScreenByIV:    '全屏按钮',
 		turnByIV:                '翻页',
+		scrollList:              '滚动列表',
+		listByScroll:            '列表',
 	},
 	num: {
 		activity:              0,
@@ -193,5 +195,7 @@ module.exports = {
 		swiperBlockByIV:       0,
 		buttonFullScreenByIV:  0,
 		turnByIV:              0,
+		scrollList:            0,
+		listByScroll:          0,
 	}
 }

@@ -161,5 +161,12 @@ module.exports = {
 		area:     1,
 		picture:  1,
 		text:     1,
-	}
+	},
+	listByScroll: {
+		mediaBind: 1,
+		area:      1,
+		picture:   1,
+		text:      1,
+		textBind:  1,
+	},
 }

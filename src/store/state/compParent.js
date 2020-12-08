@@ -38,4 +38,5 @@ module.exports = {
 	buttonLanguage:     1,
 	biubiubiu:          1,
 	advancedIV:         1,
-}  
+	scrollList:         1,
+}

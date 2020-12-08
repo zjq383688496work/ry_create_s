@@ -278,6 +278,18 @@ module.exports = [
 			},
 		]
 	},
+	// 滚动列表
+	{
+		icon: 'list',
+		name: '滚动列表',
+		key:  'scrollList',
+		child: [
+			{
+				name: '列表',
+				key: 'listByScroll'
+			}
+		]
+	},
 	// 日期天气
 	{
 		icon: 'weather',

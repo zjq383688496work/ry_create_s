@@ -208,8 +208,6 @@ module.exports = extend(window, {
 			if (!types[type]) types[type] = {}
 			types[type][key] = 1
 		})
-		// let media = types[2]
-		// debugger
 		return { list, field, types }
 	},
 })

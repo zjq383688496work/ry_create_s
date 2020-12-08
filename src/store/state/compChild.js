@@ -105,4 +105,7 @@ module.exports = {
 		turnByIV:             1,
 		textBind:             1,
 	},
+	scrollList: {
+		listByScroll:     1,
+	},
 }

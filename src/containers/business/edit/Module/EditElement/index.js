@@ -41,6 +41,7 @@ import QrcodeHui          from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav          from 'compEdit/EditElement/QrcodeNav'
 import QrcodeBarrage      from 'compEdit/EditElement/QrcodeBarrage'
 import Tabs               from 'compEdit/EditElement/Tabs'
+import ScrollList         from 'compEdit/EditElement/ScrollList'
 
 import Banner             from 'compEdit/EditElement/Banner'
 
@@ -94,6 +95,7 @@ const compContent = (name, data, actions, type, idx, csn, contentEditable, langu
 		storeList2:         <StoreList2         {...props} />,
 		storeDetails2:      <StoreDetails2      {...props} />,
 		tabs:               <Tabs               {...props} />,
+		scrollList:         <ScrollList         {...props} />,
 	}
 	return render[name]
 }

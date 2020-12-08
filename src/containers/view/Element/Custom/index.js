@@ -58,6 +58,7 @@ import QrcodeNav       from 'compEdit/EditElement/QrcodeNav'
 import ButtonByActivity  from 'compEdit/EditElement/Activity/Button'
 import ViewByActivity    from 'compEdit/EditElement/Activity/View'
 import ListByActivity    from 'compEdit/EditElement/Activity/List'
+import ListByScroll      from 'compEdit/EditElement/ScrollList/List'
 
 const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioOuter, language) => {
 	var props  = { data, parent, editConfig, actions, type, ioInput, ioOuter, language }
@@ -113,6 +114,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		buttonByActivity:  <ButtonByActivity  {...props} />,
 		viewByActivity:    <ViewByActivity    {...props} />,
 		listByActivity:    <ListByActivity    {...props} />,
+		listByScroll:      <ListByScroll      {...props} />,
 	}
 	return render[name]
 }

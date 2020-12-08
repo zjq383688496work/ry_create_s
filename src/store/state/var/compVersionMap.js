@@ -84,4 +84,6 @@ module.exports = {
 	pageByIV:                 '30600000',
 	buttonFullScreenByIV:     '30600000',
 	turnByIV:                 '30600000',
+	scrollList:               '30603000',
+	listByScroll:             '30603000',
 }

@@ -177,4 +177,8 @@ module.exports = {
 	buttonByActivity:      authInit(require('./activity/content/button')),
 	viewByActivity:        authInit(require('./activity/content/view')),
 	listByActivity:        authInit(require('./activity/content/list')),
+
+	// 滚动列表
+	scrollList:            authInit(require('./scrollList')),
+	listByScroll:          authInit(require('./scrollList/content/list')),
 }

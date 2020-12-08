@@ -70,6 +70,7 @@ import PageByIV          from 'compEdit/EditElement/AdvancedIV/Page'
 import TurnByIV          from 'compEdit/EditElement/AdvancedIV/Turn'
 import SwiperBlockByIV   from 'compEdit/EditElement/AdvancedIV/SwiperBlock'
 import ButtonFullScreenByIV from 'compEdit/EditElement/AdvancedIV/ButtonFullScreen'
+import ListByScroll      from 'compEdit/EditElement/ScrollList/List'
 
 import * as variable from 'var'
 var animeMap = variable.animeCompMap,
@@ -139,6 +140,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		turnByIV:                <TurnByIV               {...props} />,
 		swiperBlockByIV:         <SwiperBlockByIV        {...props} />,
 		buttonFullScreenByIV:    <ButtonFullScreenByIV   {...props} />,
+		listByScroll:            <ListByScroll           {...props} />,
 	}
 	return render[name]
 }
