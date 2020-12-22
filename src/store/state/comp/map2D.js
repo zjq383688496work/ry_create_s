@@ -14,8 +14,13 @@ const data = {
 		text: {}
 	},
 	content: {
-		themeColor: { type: 'custom', color: '#cfad81' },
-		mapZoom: 'off'
+		themeColor:  { type: 'custom', color: '#cfad81' },
+		mapZoom: 'off',
+		strokeWidth: 2,
+		strokeColor: { type: 'custom', color: '#ff0055' },
+		publicRatio: 1,
+		peopleRatio: 1,
+		walkSpeed:   1,
 	},
 	animation: {
 		className: '',	// 动画样式

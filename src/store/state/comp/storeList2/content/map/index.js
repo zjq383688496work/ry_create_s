@@ -12,6 +12,11 @@ const data = {
 	style: {},
 	content: {
 		mapThemeColor: { type: 'custom', color: '#cfad81' },
+		strokeWidth: 2,
+		strokeColor: { type: 'custom', color: '#ff0055' },
+		publicRatio: 1,
+		peopleRatio: 1,
+		walkSpeed:   1,
 	},
 	animation: {
 		className: '',		// 动画样式

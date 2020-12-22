@@ -87,8 +87,8 @@ module.exports = [
 		child: [
 			{
 				icon: 'media',
-				name: '媒体',
-				key:  'swiperBind'
+				name: '轮播列表',
+				key:  'swiperBlockByIV'
 			},
 			{
 				icon: 'button',

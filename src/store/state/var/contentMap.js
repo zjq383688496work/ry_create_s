@@ -32,7 +32,7 @@ module.exports = {
 	appRouter:     { name: '应用跳转', type: 'Router' },
 	switch:        { name: '滑动开关', type: 'Checkbox' },
 	pageSwitch:    { name: '翻页开关', type: 'Checkbox' },
-	size:          { name: '显示数量', type: 'Number', min: 1, max: 20 },
+	size:          { name: '显示数量', type: 'Number', min: 1, max: 500, step: 1, },
 	file:          { name: '文档',     type: 'File' },
 	showTop:       { name: '滚动高度', type: 'Number', min: 0, max: 1000 },
 	centerX:       { name: '中点坐标X', type: 'Number', min: 0, max: 500 },
@@ -79,7 +79,12 @@ module.exports = {
 		{ name: '开启', value: 'on' },
 		{ name: '关闭', value: 'off' }
 	]},
-	positionH:     { name: '水平位置',     type: 'Radio', option: [
+	strokeWidth:   { name: '线路宽',   type: 'Number', min: 0, max: 50, step: 1 },
+	strokeColor:   { name: '线路颜色', type: 'Color' },
+	publicRatio:   { name: '设施倍率', type: 'Number', min: 0, max: 10, step: .1 },
+	peopleRatio:   { name: '人倍率',   type: 'Number', min: 0, max: 10, step: .1 },
+	walkSpeed:     { name: '步行速度', type: 'Number', min: .4, max: 10, step: .1 },
+	positionH:     { name: '水平位置', type: 'Radio', option: [
 		{ name: '左', value: 'left' },
 		{ name: '右', value: 'right' }
 	]},
