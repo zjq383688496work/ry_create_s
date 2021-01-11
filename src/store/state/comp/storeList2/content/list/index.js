@@ -143,6 +143,28 @@ const data = {
 				spread_dis: 0,
 				color:      { type: 'custom', color: '#000' }
 			}
+		},
+		'::-webkit-scrollbar': {
+			display: 'block',
+			width: 6,
+			backgroundColor: { type: 'custom', color: '#b3b3b3' },
+			borderRadius: {
+				topLeft:     6,
+				topRight:    6,
+				bottomLeft:  6,
+				bottomRight: 6
+			},
+		},
+		'::-webkit-scrollbar-thumb': {
+			backgroundColor: { type: 'custom', color: '#444444' },
+			borderWidth:     0,
+			borderColor:     { type: 'custom', color: '#444444' },
+			borderRadius: {
+				topLeft:     6,
+				topRight:    6,
+				bottomLeft:  6,
+				bottomRight: 6
+			},
 		}
 	},
 	componentLayout: [ LOGO, Name, Ico, Pos, Recom ],

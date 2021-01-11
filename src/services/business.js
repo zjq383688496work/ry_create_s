@@ -210,6 +210,50 @@ module.exports = extend(window, {
 		})
 		return { list, field, types }
 	},
+	// css驼峰转连字符(-)
+	cssHump2link(obj) {
+		let newObj = {}
+		Object.keys(obj).forEach(key => {
+			let val = obj[key]
+			let newKey = key.replace(/[A-Z]/g, str => {
+				return '-' + str.toLocaleLowerCase()
+			})
+			if (formatPxMap[key]) val += 'px'
+			newObj[newKey] = val
+		})
+		return newObj
+	},
+	// css转字符串拼接
+	css2str(obj) {
+		let arr = []
+		Object.keys(obj).forEach(key => {
+			let val = obj[key]
+			arr.push(`${key}: ${val}`)
+		})
+		return '{' + arr.join(';') + '}'
+	},
+	// 生成滚动条样式
+	cssScrollFormat(props, id = '') {
+		let { data, actions } = props
+		let { style } = data.data
+		let scroll = cssHump2link(cssColorFormat(props, '::-webkit-scrollbar'))
+		let thumb  = cssHump2link(cssColorFormat(props, '::-webkit-scrollbar-thumb'))
+		if (!scroll || !thumb) return {}
+		let scrollStr = css2str(scroll)
+		let thumbStr  = css2str(thumb)
+		let styleStr = `
+			#${id} {
+				overflow: auto;
+			}
+			#${id}::-webkit-scrollbar ${scrollStr}
+			#${id}::-webkit-scrollbar-thumb ${thumbStr}
+		`
+		return {
+			scroll,
+			thumb,
+			styleStr,
+		}
+	}
 })
 
 // 组件ID生成

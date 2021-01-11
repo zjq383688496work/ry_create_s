@@ -7,7 +7,10 @@ import * as Server from 'server'
 export default class ListByStore2 extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { list: [] }
+		this.state = {
+			id:   `listByStore2_${~~(Math.random() * 9e5)}`,
+			list: [],
+		}
 	}
 	componentWillMount() {
 		this.getData()
@@ -37,9 +40,16 @@ export default class ListByStore2 extends React.Component {
 		})
 	}
 	render() {
-		let dom = this.renderList()
+		let { id } = this.state
+		let dom    = this.renderList()
+		let { scroll, styleStr } = cssScrollFormat(this.props, id)
 		return (
-			<section className={`e-list-by-store2`}>
+			<section id={id} className={`e-list-by-store2`}>
+				{
+					scroll.display === 'block'
+					? <style>{styleStr}</style>
+					: null
+				}
 				{ dom }
 			</section>
 		)

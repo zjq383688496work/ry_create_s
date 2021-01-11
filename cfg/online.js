@@ -1,9 +1,3 @@
-/**
- * 线上环境
- * @Date:   2017-03-31 10:33:16
- * @Last modified time: 2017-09-11T16:26:06+08:00
- */
-
 'use strict';
 
 let path = require('path');
@@ -42,7 +36,7 @@ let config = Object.assign({}, baseConfig, {
         new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
             inject: 'body',
-            template: './src/index.html',
+            template: './src/index.v8.html',
             filename: 'index.html'
         })
     ],

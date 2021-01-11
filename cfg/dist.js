@@ -42,7 +42,7 @@ let config = Object.assign({}, baseConfig, {
         new webpack.NoErrorsPlugin(),
         new HtmlWebpackPlugin({
             inject: 'body',
-            template: './src/index.html',
+            template: './src/index.v8.html',
             filename: 'index.html'
         })
     ],
