@@ -114,7 +114,7 @@ export default class Fetch {
 			dist: 'manage.preview.rongyi.com'
 		})[ENV] || 'manage.w.rongyi.com'
 
-		var API = `http://${host}/api/screen/create`
+		var API = `http://${host}/api/screen/createV2`
 		return new Promise((resolve, reject) => {
 			Fetch.remote(API, {
 				method: 'POST',
