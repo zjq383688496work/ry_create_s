@@ -110,7 +110,7 @@ export default class Fetch {
 	static createCrop(config = {}) {
 		var host = ({
 			dev: 'localhost:4090',
-			qa: '186.rongyi.com',
+			qa: '186.rongyi.com:3000',
 			dist: 'manage.preview.rongyi.com'
 		})[ENV] || 'manage.w.rongyi.com'
 
