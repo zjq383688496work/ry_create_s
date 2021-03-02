@@ -190,7 +190,7 @@ class Header extends React.Component {
 			}).then(cover => {
 				Ajax.post(`/mcp-gateway/template/updateCoverImgUrl`, {
 					templateId: tempCfg.id,
-					coverImgUrl: cover.data
+					coverImgUrl: cover.url
 				}).then(() => {
 					this.setState({ loading: false })
 					message.success(`${query.id? '更新': '保存'}成功!`)
