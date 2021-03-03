@@ -3,6 +3,7 @@ import './index.less'
 
 import { Icon, Pagination } from 'antd'
 import Layout from 'compEdit/EditElement/Layout'
+import * as utils from '../utils'
 import * as Server from 'server'
 
 const letArr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(name => { return { name } })
@@ -50,6 +51,7 @@ export default class LetterByStore2 extends React.Component {
 	}
 	render() {
 		let { type } = this.props
+		if (!utils.isRander.bind(this)()) return false
 		let dom = this.renderList(type)
 		return (
 			<section className={`e-letter-by-store2 scrollbar`} style={cssColorFormat(this.props, 'filterBox')}>

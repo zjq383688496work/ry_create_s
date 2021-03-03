@@ -43,8 +43,9 @@ export default class ListByStore2 extends React.Component {
 		let { id } = this.state
 		let dom    = this.renderList()
 		let { scroll, styleStr } = cssScrollFormat(this.props, id)
+		let styleBox = cssColorFormat(this.props, 'filterBox')
 		return (
-			<section id={id} className={`e-list-by-store2`}>
+			<section id={id} className={`e-list-by-store2`} style={styleBox}>
 				{
 					scroll.display === 'block'
 					? <style>{styleStr}</style>

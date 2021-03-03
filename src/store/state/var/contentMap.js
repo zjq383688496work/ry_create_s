@@ -136,4 +136,9 @@ module.exports = {
 	relOptions:           { name: '关系配置',  type: 'Options' },
 	relComp:              { name: '组件',     type: 'Rel' },
 	relChildComp:         { name: '子组件',   type: 'Rel' },
+
+	// 店铺列表-筛选
+	visibleStatus:        { name: '可见状态',   type: 'Visible' },
+	visibleSwitch:        { name: '可见开关',   type: 'Switch' },
+	compChildBind:        { name: '组件关系',   type: 'CompChildBind' },
 }

@@ -109,7 +109,9 @@ const data = {
 	componentLayout: [ gName, gNameAV ],
 	content: {
 		rel: 0,
-		/*router: {}*/
+		visibleStatus: {},
+		router:        {},
+		remarks:       { text: '可见状态: 需要筛选 筛选开关 配合使用.', color: 'red' }
 	},
 	animation: {
 		className: '',		// 动画样式

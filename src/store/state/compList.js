@@ -239,6 +239,11 @@ module.exports = [
 				key:  'navByStore2'
 			},
 			{
+				icon: 'button',
+				name: '可见开关',
+				key:  'visibleByStore2'
+			},
+			{
 				icon: 'qrcode_hui',
 				name: '惠码',
 				key:  'qrcodeHui'

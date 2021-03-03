@@ -60,6 +60,7 @@ const data = {
 		filterBox: {
 			width:  540,
 			height: 300,
+			overflow: 'visible',
 			borderWidth:  0,
 			borderStyle: 'solid',
 			borderColor: { type: 'custom', color: 'rgba(255, 255, 255, 0)', rgb: '#fff', alpha: 0 },

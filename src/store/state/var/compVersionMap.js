@@ -71,6 +71,7 @@ module.exports = {
 	resetByStore2:            '30000000',
 	mapByStore2:              '30000000',
 	navByStore2:              '30300000',
+	visibleByStore2:          '30604000',
 	qrcode:                   '30000000',
 	qrcodeBind:               '30000000',
 	qrcodeHui:                '30000000',

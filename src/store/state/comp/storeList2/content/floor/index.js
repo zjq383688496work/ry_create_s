@@ -106,7 +106,6 @@ const data = {
 	componentLayout: [ gName, gNameAV ],
 	content: {
 		rel: 0,
-		/*router: {}*/
 	},
 	animation: {
 		className: '',		// 动画样式

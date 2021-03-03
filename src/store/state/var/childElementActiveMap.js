@@ -9,6 +9,7 @@ module.exports = {
 	letterByStore2:   1,
 	pageByStore2:     1,
 	turnByStore2:     1,
+	visibleByStore2:  1,
 	catgByActivity2:  1,
 	resetByActivity2: 1,
 	listByActivity:   1,

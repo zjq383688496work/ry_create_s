@@ -14,8 +14,9 @@ module.exports = {
 	statusAuth:            require('./statusAuth'),
 	statusRemoveAuth:      require('./statusRemoveAuth'),
 	statusAddAuth:         require('./statusAddAuth'),
-	// statusManage:   require('./statusManage'),
-	languages:      require('./languages'),
-	tags:           require('./tags'),
-	compVersionMap: require('./compVersionMap'),
+	// statusManage:    require('./statusManage'),
+	languages:       require('./languages'),
+	tags:            require('./tags'),
+	compVersionMap:  require('./compVersionMap'),
+	compChildRelMap: require('./compChildRelMap')
 }

@@ -242,9 +242,6 @@ module.exports = extend(window, {
 		let scrollStr = css2str(scroll)
 		let thumbStr  = css2str(thumb)
 		let styleStr = `
-			#${id} {
-				overflow: auto;
-			}
 			#${id}::-webkit-scrollbar ${scrollStr}
 			#${id}::-webkit-scrollbar-thumb ${thumbStr}
 		`

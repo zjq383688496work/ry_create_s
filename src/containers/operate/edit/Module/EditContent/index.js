@@ -16,6 +16,8 @@ import Banner            from './Banner'
 import LanguageChange    from './LanguageChange'
 import RouterJump        from 'compEdit/EditCommon/RouterJump'
 import StatusJump        from 'compEdit/EditCommon/StatusJump'
+import VisibleSwitch     from 'compEdit/EditCommon/VisibleSwitch'
+import CompChildBind     from 'compEdit/EditCommon/CompChildBind'
 import EventTrigger      from 'compEdit/EditCommon/EventTrigger'
 import AudioUploadComp   from 'compEdit/EditCommon/AudioUploadComp'
 import ImageUploadComp   from 'compEdit/EditCommon/ImageUploadComp'
@@ -202,6 +204,20 @@ class EditContent extends React.Component {
 		let { data, actions } = this.props
 		return (
 			<StatusJump data={data} content={val} actions={actions} />
+		)
+	}
+	// 可见状态切换
+	renderVisible(cfg, con, val, key, index) {
+		let { data, actions } = this.props
+		return (
+			<VisibleSwitch data={data} content={val} actions={actions} />
+		)
+	}
+	// 关联子组件
+	renderCompChildBind(cfg, con, val, key, index) {
+		let { data, actions } = this.props
+		return (
+			<CompChildBind data={data} content={val} actions={actions} />
 		)
 	}
 	// 事件触发

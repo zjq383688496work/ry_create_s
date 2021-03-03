@@ -101,8 +101,9 @@ const data = {
 	},
 	componentLayout: [ Name, NameAV ],
 	content: {
-		visibleStatus: {},
-		remarks:       { text: '可见状态: 需要筛选 可见开关 配合使用.', color: 'red' }
+		visibleSwitch: true,
+		compChildBind: {},
+		remarks:       { text: '可见开关: 需要与筛选类组件的 可见状态 配合使用.', color: 'red' }
 	},
 	animation: {
 		className: '',		// 动画样式
@@ -114,7 +115,7 @@ const data = {
 }
 
 module.exports = {
-	name: 'resetByStore2',
+	name: 'visibleByStore2',
 	type: 'layout',
 	// 位置大小
 	data: deepCopy(data),

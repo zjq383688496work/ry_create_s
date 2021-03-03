@@ -96,16 +96,16 @@ class RouterJump extends React.Component {
 		return actions.updateComp(null, parentComp? parentComp: data)
 	}
 
-	onChangeAuth(val, key) {
-		let { data, actions, editConfig, from } = this.props,
-			{ globalData } = editConfig
-		data.auth.content[key] = val
-		if(from && from === 'banner'){
-			globalData.banner = data
-			return actions.updateGlobal(globalData)
-		}
-		return actions.updateComp(null, data)
-	}
+	// onChangeAuth(val, key) {
+	// 	let { data, actions, editConfig, from } = this.props,
+	// 		{ globalData } = editConfig
+	// 	data.auth.content[key] = val
+	// 	if(from && from === 'banner'){
+	// 		globalData.banner = data
+	// 		return actions.updateGlobal(globalData)
+	// 	}
+	// 	return actions.updateComp(null, data)
+	// }
 
 	onSelect(newIdx) {
 		let { data, parentKey, action, idx, actions } = this.props

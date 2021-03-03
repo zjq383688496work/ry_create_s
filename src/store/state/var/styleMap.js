@@ -146,6 +146,21 @@ module.exports = {
 			{ name: '横向', value: 'row' },
 			{ name: '纵向', value: 'column' }
 		] },
-		textIndent: { name: '缩进', type: 'Number', min: 0, max: 200 }
+		textIndent: { name: '缩进', type: 'Number', min: 0, max: 200 },
+		overflow: { name: '边界溢出', type: 'Radio', option: [
+			{ name: '溢出', value: 'visible' },
+			{ name: '隐藏', value: 'hidden' },
+			{ name: '滚动', value: 'auto' }
+		] },
+		overflowX: { name: '横向溢出', type: 'Radio', option: [
+			{ name: '溢出', value: 'visible' },
+			{ name: '隐藏', value: 'hidden' },
+			{ name: '滚动', value: 'auto' }
+		] },
+		overflowY: { name: '纵向溢出', type: 'Radio', option: [
+			{ name: '溢出', value: 'visible' },
+			{ name: '隐藏', value: 'hidden' },
+			{ name: '滚动', value: 'auto' }
+		] },
 	}
 }

@@ -21,7 +21,7 @@ const LOGO = extendRmSL(deepCopy(pb), {
 					bottomLeft:  20
 				}
 			}
-		}, 
+		},
 		content: {
 			bind: 'logo'
 		}
@@ -117,6 +117,10 @@ const data = {
 		height: 300
 	},
 	style: {
+		filterBox: {
+			overflowX: 'visible',
+			overflowY: 'visible',
+		},
 		filter: {
 			width:  100,
 			height: 90,

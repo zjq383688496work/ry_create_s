@@ -47,6 +47,7 @@ const dataFormat = {
 					case 'Object':
 						switch(key) {
 							case 'router':
+							case 'compChildBind':
 								break
 							case 'feature':
 								Object.keys(org).map(_ => {
@@ -120,6 +121,7 @@ const dataFormat = {
 								})
 								break
 							case 'list':
+							case 'compChildBind':
 								break
 							default:
 								Object.keys(da).map(_ => {

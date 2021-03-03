@@ -143,6 +143,7 @@ module.exports = {
 	resetByStore2:         authInit(require('./storeList2/content/reset')),		// 重置
 	mapByStore2:           authInit(require('./storeList2/content/map')),		// 地图
 	navByStore2:           authInit(require('./storeList2/content/nav')),		// 导航
+	visibleByStore2:       authInit(require('./storeList2/content/visible')),	// 可见开关
 	// 店铺详情
 	storeDetails2:         authInit(require('./storeDetails2')),
 	storeBlock:            authInit(require('./storeDetails2/content/storeBlock')),	// 信息
