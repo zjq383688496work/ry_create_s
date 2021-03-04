@@ -23,6 +23,7 @@ var Map = {
 	store: {
 		logo:         'LOGO',
 		name:         '店铺名称',
+		enName:       '店铺英文名',
 		berthNumber:  '楼层名称',
 		buildNumber:  '楼栋名称',
 		description:  '店铺描述',

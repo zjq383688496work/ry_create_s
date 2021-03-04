@@ -53,6 +53,7 @@ import PageByStore2    from 'compEdit/EditElement/StoreList2/Page'
 import TurnByStore2    from 'compEdit/EditElement/StoreList2/Turn'
 import MapByStore2     from 'compEdit/EditElement/StoreList2/Map'
 import NavByStore2     from 'compEdit/EditElement/StoreList2/Nav'
+import VisibleByStore2 from 'compEdit/EditElement/StoreList2/Visible'
 import StoreBlock      from 'compEdit/EditElement/StoreDetails2/Block'
 import QrcodeHui       from 'compEdit/EditElement/QrcodeHui'
 import QrcodeNav       from 'compEdit/EditElement/QrcodeNav'
@@ -120,6 +121,7 @@ const compContent = (name, data, parent, editConfig, actions, type, ioInput, ioO
 		turnByStore2:            <TurnByStore2      {...props} />,
 		mapByStore2:             <MapByStore2       {...props} />,
 		navByStore2:             <NavByStore2       {...props} />,
+		visibleByStore2:         <VisibleByStore2   {...props} />,
 		storeBlock:              <StoreBlock        {...props} />,
 		qrcodeHui:               <QrcodeHui         {...props} />,
 		qrcodeNav:               <QrcodeNav         {...props} />,
