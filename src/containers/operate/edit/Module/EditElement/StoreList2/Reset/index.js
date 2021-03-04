@@ -1,6 +1,8 @@
 import React from 'react'
 import './index.less'
 
+import * as utils from '../utils'
+
 import Layout from 'compEdit/EditElement/Layout'
 
 export default class ResetByStore2 extends React.Component {
@@ -32,8 +34,8 @@ export default class ResetByStore2 extends React.Component {
 		return slide
 	}
 	render() {
+		if (!utils.isRander.bind(this)()) return false
 		let dom = this.renderDom()
-
 		return (
 			<section
 				className={`e-reset-by-store2`}
