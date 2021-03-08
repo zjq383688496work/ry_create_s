@@ -6,6 +6,6 @@ module.exports = {
 		// floorByStore2:   'only',
 		// buildByStore2:   'only',
 		letterByStore2:  'only',
-		resetByStore2:   'all',
+		resetByStore2:   'only',
 	}
 }
