@@ -57,6 +57,7 @@ module.exports = {
 		mapByStore2:     1,
 		navByStore2:     1,
 		visibleByStore2: 1,
+		pictureByStore2: 1,
 		qrcodeHui:       1,
 	},
 	storeDetails2: {

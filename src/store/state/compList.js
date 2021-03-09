@@ -244,6 +244,11 @@ module.exports = [
 				key:  'visibleByStore2'
 			},
 			{
+				icon: 'image',
+				name: '可见图片',
+				key:  'pictureByStore2'
+			},
+			{
 				icon: 'qrcode_hui',
 				name: '惠码',
 				key:  'qrcodeHui'

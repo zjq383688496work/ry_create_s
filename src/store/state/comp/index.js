@@ -144,6 +144,7 @@ module.exports = {
 	mapByStore2:           authInit(require('./storeList2/content/map')),		// 地图
 	navByStore2:           authInit(require('./storeList2/content/nav')),		// 导航
 	visibleByStore2:       authInit(require('./storeList2/content/visible')),	// 可见开关
+	pictureByStore2:       authInit(require('./storeList2/content/picture')),	// 可见图片
 	// 店铺详情
 	storeDetails2:         authInit(require('./storeDetails2')),
 	storeBlock:            authInit(require('./storeDetails2/content/storeBlock')),	// 信息

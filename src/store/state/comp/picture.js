@@ -23,7 +23,7 @@ const data = {
 		left:     0,
 		width:    120,
 		height:   120,
-		lockAspectRatio:true
+		lockAspectRatio: true
 	},
 	content: {
 		img:    { type: 'custom', img: '' },	// 图片url

@@ -7,5 +7,6 @@ module.exports = {
 		// buildByStore2:   'only',
 		letterByStore2:  'only',
 		resetByStore2:   'only',
+		pictureByStore2: 'only',
 	}
 }
