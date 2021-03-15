@@ -135,6 +135,7 @@ module.exports = {
 		// 	})
 		// },
 		store(num = 1) {
+			if (num > 20) num = 20
 			return Array.apply(null, { length: num }).map((_, i) => {
 				return {
 					...deepCopy(Item.store),
