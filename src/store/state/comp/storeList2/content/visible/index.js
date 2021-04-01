@@ -26,7 +26,7 @@ const Name = extendRmSL(deepCopy(t), {
 			}
 		},
 		content: {
-			text: '全部',
+			text: '点击显示',
 			text2: ''
 		}
 	}
@@ -55,7 +55,7 @@ const NameAV = extendRmSL(deepCopy(t), {
 			}
 		},
 		content: {
-			text: '全部',
+			text: '点击隐藏',
 			text2: ''
 		}
 	},
