@@ -220,7 +220,7 @@ class Views extends React.Component {
 						</Col>
 						<Col span={8}>
 							<Item {...formItemView} label="数据">
-								<Button type="primary" size="small" onClick={this.addData} disabled={data.length > 20}>新增数据</Button>
+								<Button type="primary" size="small" onClick={this.addData} disabled={data.length > 100}>新增数据</Button>
 							</Item>
 						</Col>
 					</Row>
