@@ -1520,7 +1520,7 @@ core-js@^2.4.0, core-js@^2.5.0:
 
 core-js@^2.5.5:
   version "2.5.5"
-  resolved "http://r.cnpmjs.org/core-js/download/core-js-2.5.5.tgz#b14dde936c640c0579a6b50cabcc132dd6127e3b"
+  resolved "https://r.cnpmjs.org/core-js/download/core-js-2.5.5.tgz#b14dde936c640c0579a6b50cabcc132dd6127e3b"
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -3589,7 +3589,7 @@ lodash@^4.0.0, lodash@^4.16.5, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, l
 
 lodash@^4.0.1:
   version "4.17.10"
-  resolved "http://r.cnpmjs.org/lodash/download/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
+  resolved "https://r.cnpmjs.org/lodash/download/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
 lodash@^4.2.0, lodash@^4.2.1:
   version "4.17.4"
@@ -3637,7 +3637,7 @@ map-cache@^0.2.0:
 
 material-colors@^1.2.1:
   version "1.2.5"
-  resolved "http://r.cnpmjs.org/material-colors/download/material-colors-1.2.5.tgz#5292593e6754cb1bcc2b98030e4e0d6a3afc9ea1"
+  resolved "https://r.cnpmjs.org/material-colors/download/material-colors-1.2.5.tgz#5292593e6754cb1bcc2b98030e4e0d6a3afc9ea1"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"
@@ -4613,8 +4613,9 @@ qs@6.5.0:
   resolved "http://registry.npm.taobao.org/qs/download/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
 
 qs@~6.4.0:
-  version "6.4.0"
-  resolved "http://registry.npm.taobao.org/qs/download/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.1.tgz#2bad97710a5b661c366b378b1e3a44a592ff45e6"
+  integrity sha512-LQy1Q1fcva/UsnP/6Iaa4lVeM49WiOitu2T4hZCyA/elLKu37L99qcBJk4VCCk+rdLvnMzfKyiN3SZTqdAZGSQ==
 
 query-string@^4.1.0, query-string@^4.2.2:
   version "4.3.4"
@@ -5176,7 +5177,7 @@ react-addons-test-utils@^15.0.0:
 
 react-color@^2.14.1:
   version "2.14.1"
-  resolved "http://r.cnpmjs.org/react-color/download/react-color-2.14.1.tgz#db8ad4f45d81e74896fc2e1c99508927c6d084e0"
+  resolved "https://r.cnpmjs.org/react-color/download/react-color-2.14.1.tgz#db8ad4f45d81e74896fc2e1c99508927c6d084e0"
   dependencies:
     lodash "^4.0.1"
     material-colors "^1.2.1"
@@ -5280,7 +5281,7 @@ react-router@^3.0.0:
 
 react-skylight@^0.5.1:
   version "0.5.1"
-  resolved "http://r.cnpmjs.org/react-skylight/download/react-skylight-0.5.1.tgz#bf7f9d7f2929a83fe16cac8edacdeda025218d40"
+  resolved "https://r.cnpmjs.org/react-skylight/download/react-skylight-0.5.1.tgz#bf7f9d7f2929a83fe16cac8edacdeda025218d40"
   dependencies:
     prop-types "^15.5.10"
 
@@ -5327,7 +5328,7 @@ react@15.6.2:
 
 reactcss@^1.2.0:
   version "1.2.3"
-  resolved "http://r.cnpmjs.org/reactcss/download/reactcss-1.2.3.tgz#c00013875e557b1cf0dfd9a368a1c3dab3b548dd"
+  resolved "https://r.cnpmjs.org/reactcss/download/reactcss-1.2.3.tgz#c00013875e557b1cf0dfd9a368a1c3dab3b548dd"
   dependencies:
     lodash "^4.0.1"
 
@@ -6105,7 +6106,7 @@ timers-browserify@^2.0.2:
 
 tinycolor2@^1.4.1:
   version "1.4.1"
-  resolved "http://r.cnpmjs.org/tinycolor2/download/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
+  resolved "https://r.cnpmjs.org/tinycolor2/download/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"
